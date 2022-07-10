@@ -2,7 +2,7 @@
 
 ## A super-tiny, lightweight microframework for PHP projects
 
-[![Coverage Status](https://coveralls.io/repos/github/ericfortmeyer/polar/badge.svg?branch=main)](https://coveralls.io/repos/github/ericfortmeyer/polar/badge.svg?branch=main)
+[![Coverage Status](https://coveralls.io/repos/github/ericfortmeyer/polar/badge.svg?branch=main)](https://coveralls.io/repos/github/ericfortmeyer/polar/badge.svg?branch=main)[![Latest Stable Version](http://poser.pugx.org/ericfortmeyer/polar/v)](https://packagist.org/packages/ericfortmeyer/polar) [![Total Downloads](http://poser.pugx.org/ericfortmeyer/polar/downloads)](https://packagist.org/packages/ericfortmeyer/polar) [![Latest Unstable Version](http://poser.pugx.org/ericfortmeyer/polar/v/unstable)](https://packagist.org/packages/ericfortmeyer/polar) [![License](http://poser.pugx.org/ericfortmeyer/polar/license)](https://packagist.org/packages/ericfortmeyer/polar)
 
 ### Objectives
 
