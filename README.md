@@ -104,4 +104,4 @@ class Person extends Model
 ```
 
 
-[API Documentation](https://ericfortmeyer.dev/projects/polar/api)
+[API Documentation](https://ericfortmeyer.github.io/polar-docs)
