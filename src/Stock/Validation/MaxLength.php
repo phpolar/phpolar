@@ -18,15 +18,9 @@ class MaxLength implements ValidationInterface
      */
     public $value;
 
-    /**
-     * @var integer
-     */
-    private $maxLength;
+    private int $maxLength;
 
-    /**
-     * @var string
-     */
-    private $errorMessage = "";
+    private string $errorMessage = "";
 
     public function __construct($value, int $maxLength = PHP_INT_MAX)
     {

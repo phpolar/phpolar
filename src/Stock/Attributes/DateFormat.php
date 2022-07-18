@@ -14,10 +14,7 @@ use Efortmeyer\Polar\Api\Attributes\AttributeInterface;
  */
 final class DateFormat implements AttributeInterface
 {
-    /**
-     * @var string
-     */
-    private $dateFormat;
+    private string $dateFormat;
 
     public function __construct(string $dateFormat)
     {

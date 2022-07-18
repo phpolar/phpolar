@@ -9,26 +9,13 @@ use Efortmeyer\Polar\Core\Attributes\Config\ConstructorArgs;
 
 class AttributeConfig implements AttributeConfigInterface
 {
-    /**
-     * @var ConstructorArgs
-     */
-    protected $constructorArgType;
+    protected ConstructorArgs $constructorArgType;
 
-    /**
-     * @var ConstructorArgs
-     */
-    protected $constructorArgTypeForDefault;
+    protected ConstructorArgs $constructorArgTypeForDefault;
 
-    /**
-     * @var ?string
-     */
-    protected $configuredType;
+    protected ?string $configuredType;
 
-    /**
-     * @var string The class name of the Attribute to use when the property has no configuration.
-     */
-    protected $defaultClassName;
-
+    protected string $defaultClassName;
 
     public function __construct(
         ConstructorArgs $constructorArgType,

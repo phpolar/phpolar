@@ -11,10 +11,7 @@ use Efortmeyer\Polar\Api\Attributes\AttributeInterface;
  */
 final class Input implements AttributeInterface
 {
-    /**
-     * @var string
-     */
-    private $type;
+    private string $type;
 
     public function __construct(string $type)
     {

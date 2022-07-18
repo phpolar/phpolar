@@ -9,8 +9,5 @@ namespace Efortmeyer\Polar\Stock;
  */
 final class TextAreaField extends Field
 {
-    /**
-     * @var string
-     */
-    public $formControlType = "textarea";
+    public string $formControlType = "textarea";
 }

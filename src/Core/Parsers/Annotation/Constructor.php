@@ -9,25 +9,13 @@ namespace Efortmeyer\Polar\Core\Parsers\Annotation;
  */
 abstract class Constructor
 {
-    /**
-     * @var string
-     */
-    private $qualifiedName;
+    private string $qualifiedName;
 
-    /**
-     * @var string
-     */
-    protected $unqualifiedName;
+    protected string $unqualifiedName;
 
-    /**
-     * @var string
-     */
-    private $defaultAttributeClassName;
+    private string $defaultAttributeClassName;
 
-    /**
-     * @var array
-     */
-    protected $argsForDefault;
+    protected array $argsForDefault;
 
     /**
      * @var ?mixed

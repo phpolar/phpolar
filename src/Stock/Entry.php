@@ -19,12 +19,9 @@ abstract class Entry
     /**
      * @var Field[]
      */
-    private $fields;
+    private array $fields;
 
-    /**
-     * @var AttributeConfigCollection $attributeConfigMap
-     */
-    private $attributeConfigMap;
+    private AttributeConfigCollection $attributeConfigMap;
 
     /**
      * @param AttributeConfigCollection $attributeConfigMap

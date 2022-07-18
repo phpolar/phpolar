@@ -13,10 +13,7 @@ use Efortmeyer\Polar\Core\Defaults;
  */
 final class DefaultColumn implements AttributeInterface
 {
-    /**
-     * @var string
-     */
-    private $text;
+    private string $text;
 
     public function __construct(string $text)
     {

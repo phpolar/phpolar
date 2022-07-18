@@ -30,35 +30,20 @@ use DateTimeInterface;
  */
 class Field
 {
-    /**
-     * @var string
-     */
-    public $label = "";
+    public string $label = "";
 
-    /**
-     * @var string
-     */
-    public $formControlType = "";
+    public string $formControlType = "";
 
-    /**
-     * @var string
-     */
-    public $column = "";
+    public string $column = "";
 
-    /**
-     * @var string
-     */
-    public $propertyName = "";
+    public string $propertyName = "";
 
-    /**
-     * @var string
-     */
-    public $format = "";
+    public string $format = "";
 
     /**
      * @var ValidationInterface[]
      */
-    public $validators = [];
+    public array $validators = [];
 
     /**
      * @var mixed

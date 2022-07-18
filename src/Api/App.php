@@ -26,30 +26,18 @@ final class App
      */
     public const FAVICON_PATH = "/favicon.ico";
 
-    /**
-     * @var CollectionStorageInterface
-     */
-    private $storage;
+    private CollectionStorageInterface $storage;
 
-    /**
-     * @var TemplateContext
-     */
-    private $page;
+    private TemplateContext $page;
 
-    /**
-     * @var string
-     */
-    private $requestUri;
+    private string $requestUri;
 
-    /**
-     * @var AppConfigInterface
-     */
-    private $appConfig;
+    private AppConfigInterface $appConfig;
 
     /**
      * @var array<string,Closure>
      */
-    private $routeMap;
+    private array $routeMap;
 
     private function __construct(
         string $requestUri,
