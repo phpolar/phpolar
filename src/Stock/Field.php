@@ -149,9 +149,7 @@ class Field
         return (bool) count(
             array_filter(
                 $attributes,
-                function ($attribute) {
-                    return $attribute instanceof Input && InputTypes::TEXT === $attribute();
-                }
+                fn ($attribute) => $attribute instanceof Input && InputTypes::TEXT === $attribute()
             )
         );
     }
@@ -164,9 +162,7 @@ class Field
         return (bool) count(
             array_filter(
                 $attributes,
-                function ($attribute) {
-                    return $attribute instanceof Input && InputTypes::TEXTAREA === $attribute();
-                }
+                fn ($attribute) => $attribute instanceof Input && InputTypes::TEXTAREA === $attribute()
             )
         );
     }
@@ -179,9 +175,7 @@ class Field
         return (bool) count(
             array_filter(
                 $attributes,
-                function ($attribute) {
-                    return $attribute instanceof Input && InputTypes::NUMBER === $attribute();
-                }
+                fn ($attribute) => $attribute instanceof Input && InputTypes::NUMBER === $attribute()
             )
         );
     }
@@ -194,9 +188,7 @@ class Field
         return (bool) count(
             array_filter(
                 $attributes,
-                function ($attribute) {
-                    return $attribute instanceof Input && InputTypes::DATE === $attribute();
-                }
+                fn ($attribute) => $attribute instanceof Input && InputTypes::DATE === $attribute()
             )
         );
     }
@@ -209,9 +201,7 @@ class Field
         return (bool) count(
             array_filter(
                 $attributes,
-                function ($attribute) {
-                    return $attribute instanceof AutomaticDateValue;
-                }
+                fn ($attribute) => $attribute instanceof AutomaticDateValue
             )
         );
     }

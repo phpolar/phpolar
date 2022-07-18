@@ -22,10 +22,7 @@ abstract class Model extends Entry implements Comparable
     {
         $properties = get_object_vars($this);
         $propertiesOfOtherObject = get_object_vars($other);
-        $matches = array_filter($properties, function ($value) use ($propertiesOfOtherObject) {
-            return in_array($value, $propertiesOfOtherObject);
-        });
-
+        $matches = array_filter($properties, fn ($value) => in_array($value, $propertiesOfOtherObject));
         return count($matches) === count($properties);
     }
 }

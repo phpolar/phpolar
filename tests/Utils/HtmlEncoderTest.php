@@ -86,9 +86,7 @@ class HtmlEncoderTest extends PolarTestCaseExtension
     public function numberTestCases()
     {
         return array_map(
-            function ($num) {
-                return [$num, $num];
-            },
+            fn ($num) => [$num, $num],
             array_merge(
                 range(-1, random_int(5, 20)),
                 range(-1.4, random_int(5, 10)),

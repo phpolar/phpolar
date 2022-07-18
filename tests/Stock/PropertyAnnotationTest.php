@@ -103,12 +103,9 @@ class PropertyAnnotationTest extends TestCase
         $config = new Collection();
         $config->add(new LabelKey(), $attributeConfig);
         $sut = new PropertyAnnotation($instance, $propertyName, $config);
-        $onlyDefaultLabel = function ($it) {
-            return $it instanceof DefaultLabel;
-        };
         $this->assertContainsOnlyInstancesOf(
             DefaultLabel::class,
-            array_filter($sut->parse(), $onlyDefaultLabel)
+            array_filter($sut->parse(), fn ($it) => $it instanceof DefaultLabel)
         );
     }
 
@@ -171,12 +168,9 @@ class PropertyAnnotationTest extends TestCase
         $config = new Collection();
         $config->add(new LabelKey(), $attributeConfig);
         $sut = new PropertyAnnotation($instance, $propertyName, $config);
-        $onlyDefaultLabel = function ($it) {
-            return $it instanceof DefaultLabel;
-        };
         $this->assertContainsOnlyInstancesOf(
             DefaultLabel::class,
-            array_filter($sut->parse(), $onlyDefaultLabel)
+            array_filter($sut->parse(), fn ($it) => $it instanceof DefaultLabel)
         );
     }
 

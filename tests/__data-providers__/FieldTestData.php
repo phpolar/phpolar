@@ -53,9 +53,7 @@ class FieldTestData
     {
         $text = uniqid();
         $dateTime = new DateTimeImmutable();
-        $getTestCase = function ($propName, $attribute) use ($text) {
-            return [$text, $propName, $attribute(), $attribute];
-        };
+        $getTestCase = fn ($propName, $attribute) => [$text, $propName, $attribute(), $attribute];
 
         return array_merge(
             array_map($getTestCase, ["label", "label"], [new Label($text), new DefaultLabel($text)]),
