@@ -6,7 +6,7 @@
         xsi:noNamespaceSchemaLocation="https://docs.phpdoc.org/latest/phpdoc.xsd"
 >
     <paths>
-        <output>api</output>
+        <output>../polar-api</output>
         <cache>.phpdoc/build/cache</cache>
     </paths>
     <version number="1.0.0">
