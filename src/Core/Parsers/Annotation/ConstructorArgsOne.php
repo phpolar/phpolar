@@ -11,7 +11,7 @@ final class ConstructorArgsOne extends Constructor
 {
     protected function getPattern(): string
     {
-        return "/@{$this->unqualifiedName}\(['\"]*(?P<argument>[^'\"]+)['\"]*\)/s";
+        return "/@{$this->unqualifiedName}\(['\"]*(?P<argument>[^\n'\"]+)['\"]*\)/s";
     }
 
     protected function getArgs(bool $hasAttribute, array $matches): array
