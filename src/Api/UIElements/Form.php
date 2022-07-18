@@ -16,20 +16,14 @@ use Efortmeyer\Polar\Api\UIElements\TextFormControl;
 
 class Form extends TemplateContext
 {
-    /**
-     * @var Banner
-     */
-    public $banner;
+    public Banner $banner;
 
     /**
      * @var FormControl[]
      */
-    private $formControls;
+    private array $formControls;
 
-    /**
-     * @var Model
-     */
-    private $model;
+    private Model $model;
 
 
     public function __construct(Model $model)

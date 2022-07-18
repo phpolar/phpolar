@@ -20,10 +20,7 @@ final class MaxLength implements AttributeInterface
      */
     private $value;
 
-    /**
-     * @var integer
-     */
-    private $maxLength;
+    private int $maxLength;
 
     public function __construct($value, int $maxLength)
     {

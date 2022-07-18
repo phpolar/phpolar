@@ -39,10 +39,7 @@ use Efortmeyer\Polar\Api\Attributes\Config\Key;
  */
 final class InMemoryAppConfig implements AppConfigInterface
 {
-    /**
-     * @var Collection
-     */
-    private $configCollection;
+    private Collection $configCollection;
 
     public function __construct()
     {

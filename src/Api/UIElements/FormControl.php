@@ -18,20 +18,11 @@ use RuntimeException;
 
 abstract class FormControl
 {
-    /**
-     * @var Field
-     */
-    protected $field;
+    protected Field $field;
 
-    /**
-     * @var string
-     */
-    protected $errorMessage = "";
+    protected string $errorMessage = "";
 
-    /**
-     * @var boolean
-     */
-    protected $hasErrors = true;
+    protected bool $hasErrors = true;
 
     /**
      * @var string

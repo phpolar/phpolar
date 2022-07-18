@@ -17,7 +17,7 @@ final class Collection
      * @var array<string,AttributeConfigInterface>
      * @internal
      */
-    private $internalArray = [];
+    private array $internalArray = [];
 
     /**
      * Adds a configuration to this registry.

@@ -6,10 +6,7 @@ namespace Efortmeyer\Polar\Api\Rendering\Files;
 
 abstract class File
 {
-    /**
-     * @var string
-     */
-    private $pathToFile;
+    private string $pathToFile;
 
     public function __construct(string $pathToFile)
     {

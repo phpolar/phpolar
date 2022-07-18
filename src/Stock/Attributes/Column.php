@@ -11,10 +11,7 @@ use Efortmeyer\Polar\Api\Attributes\AttributeInterface;
  */
 final class Column implements AttributeInterface
 {
-    /**
-     * @var string
-     */
-    private $text;
+    private string $text;
 
     public function __construct(string $text)
     {

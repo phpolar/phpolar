@@ -9,8 +9,5 @@ namespace Efortmeyer\Polar\Stock;
  */
 class DateField extends Field
 {
-    /**
-     * @var string
-     */
-    public $formControlType = "datetime-local";
+    public string $formControlType = "datetime-local";
 }
