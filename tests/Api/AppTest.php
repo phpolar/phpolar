@@ -57,9 +57,7 @@ class AppTest extends TestCase
     public function shouldSetPage()
     {
         $givenRootTemplate = $this->createStub(TemplateContext::class);
-        $templateFactory = function () use ($givenRootTemplate) {
-            return $givenRootTemplate;
-        };
+        $templateFactory = fn () => $givenRootTemplate;
         $routeConfig = [];
         $_SERVER["REQUEST_URI"] = "DOES NOT EXIST";
         $sut = App::configure($_SERVER["REQUEST_URI"], new InMemoryAppConfig());

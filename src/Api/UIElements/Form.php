@@ -63,9 +63,7 @@ class Form extends TemplateContext
     {
         return array_filter(
             $this->formControls,
-            function ($prop) {
-                return $prop instanceof TextFormControl;
-            }
+            fn ($prop) => $prop instanceof TextFormControl
         );
     }
 
@@ -76,9 +74,7 @@ class Form extends TemplateContext
     {
         return array_filter(
             $this->formControls,
-            function ($prop) {
-                return $prop instanceof TextAreaFormControl;
-            }
+            fn ($prop) => $prop instanceof TextAreaFormControl
         );
     }
 
@@ -89,9 +85,7 @@ class Form extends TemplateContext
     {
         return array_filter(
             $this->formControls,
-            function ($prop) {
-                return $prop instanceof DateFormControl;
-            }
+            fn ($prop) => $prop instanceof DateFormControl
         );
     }
 
@@ -102,9 +96,7 @@ class Form extends TemplateContext
     {
         return array_filter(
             $this->formControls,
-            function ($prop) {
-                return $prop instanceof HiddenFormControl;
-            }
+            fn ($prop) => $prop instanceof HiddenFormControl
         );
     }
 
@@ -112,9 +104,7 @@ class Form extends TemplateContext
     {
         return array_reduce(
             $this->formControls,
-            function (bool $previousError, FormControl $field) {
-                return $previousError || $field->isInvalid();
-            },
+            fn (bool $previousError, FormControl $field) => $previousError || $field->isInvalid(),
             false
         );
     }

@@ -18,9 +18,7 @@ class PolarTestCaseExtension extends TestCase
     {
         array_walk(
             $needles,
-            function ($needle,  $a, $haystack) use ($message) {
-                $this->assertStringContainsString($needle, $haystack, $message);
-            },
+            fn ($needle,  $a, $haystack) => $this->assertStringContainsString($needle, $haystack, $message),
             $haystack
         );
     }
@@ -34,9 +32,7 @@ class PolarTestCaseExtension extends TestCase
     {
         array_walk(
             $haystack,
-            function ($object,  $a, $needle) use ($message) {
-                $this->assertObjectEquals($needle, $object, "equals", $message);
-            },
+            fn ($object,  $a, $needle) => $this->assertObjectEquals($needle, $object, "equals", $message),
             $needle
         );
     }

@@ -18,9 +18,7 @@ class DateFormatTestData
     public static function testCases()
     {
         return array_map(
-            function (string $format) {
-                return [$format];
-            },
+            fn (string $format) => [$format],
             self::TEST_DATE_FORMATS
         );
     }
