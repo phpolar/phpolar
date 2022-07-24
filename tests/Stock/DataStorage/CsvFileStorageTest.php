@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Api\DataStorage;
+namespace Efortmeyer\Polar\Stock\DataStorage;
 
 use Efortmeyer\Polar\Api\Attributes\Config\Collection;
 use Efortmeyer\Polar\Api\Model;
@@ -14,7 +14,7 @@ use IteratorIterator;
 use RuntimeException;
 
 /**
- * @covers \Efortmeyer\Polar\Api\DataStorage\CsvFileStorage
+ * @covers \Efortmeyer\Polar\Stock\DataStorage\CsvFileStorage
  * @covers \Efortmeyer\Polar\Api\Attributes\Config\Collection
  * @covers \Efortmeyer\Polar\Api\Model
  *
