@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Utils;
+namespace Efortmeyer\Polar\Core\Rendering;
 
 use Closure;
 use Serializable;

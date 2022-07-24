@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Utils;
+namespace Efortmeyer\Polar\Core\Rendering;
 
 use Efortmeyer\Polar\Tests\Comparables\NestedXSSFix;
 use Efortmeyer\Polar\Tests\Comparables\NestedXSSFixEnd;
@@ -17,7 +17,7 @@ use stdClass;
 use Stringable;
 
 /**
- * @covers \Efortmeyer\Polar\Utils\HtmlEncoder
+ * @covers \Efortmeyer\Polar\Core\Rendering\HtmlEncoder
  *
  * @testdox Serialize::htmlEncode
  */

@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * @covers \Efortmeyer\Polar\Core\Rendering\Template
  *
- * @uses \Efortmeyer\Polar\Utils\HtmlEncoder
+ * @uses \Efortmeyer\Polar\Core\Rendering\HtmlEncoder
  * @uses \Efortmeyer\Polar\Api\Rendering\TemplateContext
  */
 class TemplateTest extends TestCase
