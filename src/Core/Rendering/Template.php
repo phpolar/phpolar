@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Efortmeyer\Polar\Core\Rendering;
 
 use Efortmeyer\Polar\Api\Rendering\TemplateContext;
-use Efortmeyer\Polar\Utils\HtmlEncoder;
 
 /**
  * Provides a way to bind a template context's variables

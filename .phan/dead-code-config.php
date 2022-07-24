@@ -340,10 +340,10 @@ return [
     // Thus, both first-party and third-party code being used by
     // your application should be included in this list.
     'directory_list' => [
-        'src/core',
-        'src/stock',
-        'src/api',
-        'src/utils',
+        'src/Core',
+        'src/Stock',
+        'src/Api',
+        'src/Utils',
     ],
 
     // A list of individual files to include in analysis
