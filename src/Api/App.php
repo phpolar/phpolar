@@ -9,6 +9,7 @@ use Efortmeyer\Polar\Api\Rendering\TemplateContext;
 use Efortmeyer\Polar\Api\DataStorage\CollectionStorageInterface;
 
 use Closure;
+use Efortmeyer\Polar\Stock\DataStorage\CsvFileStorage;
 
 /**
  * Integrates the libraries features
@@ -45,6 +46,7 @@ final class App
     ) {
         $this->requestUri = $requestUri;
         $this->appConfig = $appConfig;
+        $this->storage = new CsvFileStorage(date("Ym") . ".csv", $appConfig->getAll());
     }
 
     /**
