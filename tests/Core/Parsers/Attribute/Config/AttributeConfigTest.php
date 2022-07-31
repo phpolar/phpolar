@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Stock\Attributes\Config;
+namespace Efortmeyer\Polar\Core\Attributes\Config;
 
 use Efortmeyer\Polar\Core\Attributes\Config\ConstructorArgs;
 use Efortmeyer\Polar\Core\Attributes\Config\ConstructorArgsNone;
@@ -14,7 +14,7 @@ use Efortmeyer\Polar\Core\Attributes\Config\ConstructorArgsPropertyValueWithSeco
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \Efortmeyer\Polar\Stock\Attributes\Config\AttributeConfig
+ * @covers \Efortmeyer\Polar\Core\Attributes\Config\AttributeConfig
  * @testdox AttributeConfig
  */
 class AttributeConfigTest extends TestCase

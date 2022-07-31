@@ -8,8 +8,8 @@ use PHPUnit\Framework\TestCase;
 /**
  * @covers \Efortmeyer\Polar\Api\Model
  * @covers \Efortmeyer\Polar\Api\Attributes\Config\Collection
- * @covers \Efortmeyer\Polar\Stock\Entry
- * @covers \Efortmeyer\Polar\Stock\PropertyAnnotation
+ * @covers \Efortmeyer\Polar\Core\Entry
+ * @covers \Efortmeyer\Polar\Core\PropertyAnnotation
  *
  * @uses \Efortmeyer\Polar\Core\Parsers\Annotation\Token
  * @uses \Efortmeyer\Polar\Core\Parsers\Annotation\Constructor
@@ -17,7 +17,7 @@ use PHPUnit\Framework\TestCase;
  * @uses \Efortmeyer\Polar\Core\Parsers\Annotation\ConstructorArgsOne
  * @uses \Efortmeyer\Polar\Core\Parsers\Annotation\ConstructorArgsOneWithValue
  * @uses \Efortmeyer\Polar\Core\Parsers\Annotation\ConstructorArgsNone
- * @uses \Efortmeyer\Polar\Stock\Field
+ * @uses \Efortmeyer\Polar\Core\Fields\FieldMetadata
  * @uses \Efortmeyer\Polar\Stock\Attributes\Config\AttributeConfig
  * @uses \Efortmeyer\Polar\Stock\Attributes\DefaultColumn
  * @uses \Efortmeyer\Polar\Stock\Attributes\DefaultFormControl

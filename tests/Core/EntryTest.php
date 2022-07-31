@@ -2,21 +2,19 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Stock;
+namespace Efortmeyer\Polar\Core;
 
 use Efortmeyer\Polar\Api\Attributes\Config\Collection;
-use Efortmeyer\Polar\Stock\Attributes\Config\AttributeConfig;
-use Efortmeyer\Polar\Core\Attributes\Config\ConstructorArgsPropertyName;
+use Efortmeyer\Polar\Core\Attributes\AttributeCollection;
+use Efortmeyer\Polar\Core\Fields\FieldMetadata;
 use Efortmeyer\Polar\Stock\Attributes\Column;
-use Efortmeyer\Polar\Stock\Attributes\Config\ColumnKey;
-use Efortmeyer\Polar\Stock\Attributes\DefaultColumn;
-
+use Efortmeyer\Polar\Tests\Fakes\RequiredAttributes;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \Efortmeyer\Polar\Stock\Entry
+ * @covers \Efortmeyer\Polar\Core\Entry
+ * @covers \Efortmeyer\Polar\Core\PropertyAnnotation
  * @covers \Efortmeyer\Polar\Api\Attributes\Config\Collection
- * @covers \Efortmeyer\Polar\Stock\PropertyAnnotation
  *
  * @uses \Efortmeyer\Polar\Stock\Attributes\DefaultColumn
  * @uses \Efortmeyer\Polar\Stock\Attributes\Column
@@ -32,8 +30,8 @@ use PHPUnit\Framework\TestCase;
  * @uses \Efortmeyer\Polar\Stock\Attributes\TypeValidation
  * @uses \Efortmeyer\Polar\Stock\Attributes\MaxLength
  * @uses \Efortmeyer\Polar\Stock\Attributes\DefaultMaxLength
- * @uses \Efortmeyer\Polar\Stock\Field
- * @uses \Efortmeyer\Polar\Stock\TextField
+ * @uses \Efortmeyer\Polar\Core\Fields\FieldMetadata
+ * @uses \Efortmeyer\Polar\Core\Fields\TextField
  * @uses \Efortmeyer\Polar\Stock\Attributes\Config\AttributeConfig
  * @uses \Efortmeyer\Polar\Core\Parsers\Annotation\Token
  * @uses \Efortmeyer\Polar\Core\Parsers\Annotation\Constructor
@@ -43,18 +41,8 @@ class EntryTest extends TestCase
 {
     public static function config()
     {
-        $collection = new Collection();
-        $collection->add(
-            new ColumnKey(),
-            new class(
-                new ConstructorArgsPropertyName(),
-                DefaultColumn::class,
-                new ConstructorArgsPropertyName()
-            ) extends AttributeConfig
-            {
-            }
-        );
-        return [[$collection]];
+        $attributesConfigFile = $_SERVER["PWD"] . ATTRIBUTES_CONFIG_PATH;
+        return [[require $attributesConfigFile]];
     }
 
     /**
@@ -202,7 +190,7 @@ class EntryTest extends TestCase
              */
             public $property1 = "what";
         };
-        $expectedField = Field::create("property1", $sut->property1, []);
+        $expectedField = FieldMetadata::getFactory(new AttributeCollection(RequiredAttributes::get()))->create("property1", $sut->property1);
         $fields = $sut->getFields();
         foreach ($fields as $field) {
             $this->assertSame($expectedField->getValue(), $field->getValue());

@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Efortmeyer\Polar\Stock\Attributes;
 
-use Efortmeyer\Polar\Api\Attributes\AttributeInterface;
+use Efortmeyer\Polar\Core\Attributes\Attribute;
 
 /**
  * Configures the form label text of a property.
  */
-class Label implements AttributeInterface
+class Label extends Attribute
 {
     private string $labelText;
 
@@ -21,5 +21,10 @@ class Label implements AttributeInterface
     public function __invoke(): string
     {
         return $this->labelText;
+    }
+
+    public function isLabel(): bool
+    {
+        return true;
     }
 }

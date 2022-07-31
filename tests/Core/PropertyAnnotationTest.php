@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Stock;
+namespace Efortmeyer\Polar\Core;
 
-use Efortmeyer\Polar\Api\Attributes\Config\AttributeConfigInterface;
+use Efortmeyer\Polar\Core\Attributes\Config\AttributeConfigInterface;
 use Efortmeyer\Polar\Api\Attributes\Config\Collection;
+use Efortmeyer\Polar\Core\Attributes\Config\AttributeConfig;
 use Efortmeyer\Polar\Core\Attributes\Config\ConstructorArgsPropertyName;
 use Efortmeyer\Polar\Core\Attributes\Config\ConstructorArgs;
 use Efortmeyer\Polar\Core\Attributes\Config\ConstructorArgsNone;
 use Efortmeyer\Polar\Core\Attributes\Config\ConstructorArgsPropertyValue;
 use Efortmeyer\Polar\Core\Attributes\Config\ConstructorArgsPropertyValueWithSecondArg;
-use Efortmeyer\Polar\Stock\Attributes\Config\AttributeConfig;
 use Efortmeyer\Polar\Stock\Attributes\Config\LabelKey;
 use Efortmeyer\Polar\Stock\Attributes\Config\MaxLengthKey;
 use Efortmeyer\Polar\Stock\Attributes\DefaultLabel;
@@ -25,21 +25,20 @@ use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \Efortmeyer\Polar\Stock\PropertyAnnotation
+ * @covers \Efortmeyer\Polar\Core\PropertyAnnotation
  * @covers \Efortmeyer\Polar\Api\Attributes\Config\Collection
  *
- * @uses \Efortmeyer\Polar\Stock\Attributes\Config\LabelKey
- * @uses \Efortmeyer\Polar\Stock\Attributes\Config\MaxLengthKey
  * @uses \Efortmeyer\Polar\Core\Parsers\Annotation\Token
  * @uses \Efortmeyer\Polar\Core\Parsers\Annotation\Constructor
  * @uses \Efortmeyer\Polar\Core\Parsers\Annotation\ConstructorArgsOne
  * @uses \Efortmeyer\Polar\Core\Parsers\Annotation\ConstructorArgsOneWithValue
  * @uses \Efortmeyer\Polar\Core\Parsers\Annotation\ConstructorArgsNone
+ * @uses \Efortmeyer\Polar\Stock\Attributes\Config\LabelKey
+ * @uses \Efortmeyer\Polar\Stock\Attributes\Config\MaxLengthKey
  * @uses \Efortmeyer\Polar\Stock\Attributes\Label
  * @uses \Efortmeyer\Polar\Stock\Attributes\DefaultLabel
  * @uses \Efortmeyer\Polar\Stock\Attributes\MaxLength
  * @uses \Efortmeyer\Polar\Stock\Attributes\DefaultMaxLength
- * @testdox PropertyAnnotation
  */
 class PropertyAnnotationTest extends TestCase
 {
@@ -103,9 +102,8 @@ class PropertyAnnotationTest extends TestCase
         $config = new Collection();
         $config->add(new LabelKey(), $attributeConfig);
         $sut = new PropertyAnnotation($instance, $propertyName, $config);
-        $this->assertContainsOnlyInstancesOf(
-            DefaultLabel::class,
-            array_filter($sut->parse(), fn ($it) => $it instanceof DefaultLabel)
+        $this->assertTrue(
+            $sut->parse()->containsClass(DefaultLabel::class)
         );
     }
 
@@ -168,9 +166,8 @@ class PropertyAnnotationTest extends TestCase
         $config = new Collection();
         $config->add(new LabelKey(), $attributeConfig);
         $sut = new PropertyAnnotation($instance, $propertyName, $config);
-        $this->assertContainsOnlyInstancesOf(
-            DefaultLabel::class,
-            array_filter($sut->parse(), fn ($it) => $it instanceof DefaultLabel)
+        $this->assertTrue(
+            $sut->parse()->containsClass(DefaultLabel::class)
         );
     }
 
@@ -234,7 +231,9 @@ class PropertyAnnotationTest extends TestCase
         $config = new Collection();
         $config->add(new LabelKey(), $attributeConfig);
         $sut = new PropertyAnnotation($instance, $propertyName, $config);
-        $this->assertContainsOnlyInstancesOf(NoopValidate::class, $sut->parse());
+        $this->assertTrue(
+            $sut->parse()->containsClass(NoopValidate::class)
+        );
     }
 
     /**
@@ -294,10 +293,13 @@ class PropertyAnnotationTest extends TestCase
                 return false;
             }
         };
-        $config = new Collection();
+        $attributesConfigFile = $_SERVER["PWD"] . ATTRIBUTES_CONFIG_PATH;
+        $config = include $attributesConfigFile;
         $config->add(new LabelKey(), $attributeConfig);
         $sut = new PropertyAnnotation($instance, $propertyName, $config);
-        $this->assertContainsOnlyInstancesOf(Label::class, $sut->parse());
+        $this->assertTrue(
+            $sut->parse()->containsClass(Label::class)
+        );
     }
 
     /**
@@ -360,7 +362,9 @@ class PropertyAnnotationTest extends TestCase
         $config = new Collection();
         $config->add(new MaxLengthKey(), $attributeConfig);
         $sut = new PropertyAnnotation($instance, $propertyName, $config);
-        $this->assertContainsOnlyInstancesOf(MaxLength::class, $sut->parse());
+        $this->assertTrue(
+            $sut->parse()->containsClass(MaxLength::class)
+        );
     }
 
     /**

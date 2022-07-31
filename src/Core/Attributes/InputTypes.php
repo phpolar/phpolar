@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Stock\Attributes;
+namespace Efortmeyer\Polar\Core\Attributes;
 
 final class InputTypes
 {

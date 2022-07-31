@@ -24,9 +24,9 @@ use PHPUnit\Framework\TestCase;
  * @uses \Efortmeyer\Polar\Core\Parsers\Annotation\ConstructorArgsOneWithValue
  * @uses \Efortmeyer\Polar\Core\Parsers\Annotation\ConstructorArgsNone
  * @uses \Efortmeyer\Polar\Core\Parsers\Annotation\Token
- * @uses \Efortmeyer\Polar\Stock\Entry
- * @uses \Efortmeyer\Polar\Stock\Field
- * @uses \Efortmeyer\Polar\Stock\PropertyAnnotation
+ * @uses \Efortmeyer\Polar\Core\Entry
+ * @uses \Efortmeyer\Polar\Core\Fields\FieldMetadata
+ * @uses \Efortmeyer\Polar\Core\PropertyAnnotation
  * @uses \Efortmeyer\Polar\Stock\Attributes\Config\AttributeConfig
  * @uses \Efortmeyer\Polar\Stock\Attributes\DefaultColumn
  * @uses \Efortmeyer\Polar\Stock\Attributes\DefaultDateFormat
@@ -92,7 +92,7 @@ class FormTest extends TestCase
     /**
      * @test
      */
-    public function shouldSetBannerToErrorBannerWhenModelIsValid()
+    public function shouldSetBannerToErrorBannerWhenModelIsInvalid()
     {
         $model = new class(static::$attributesConfigMap) extends Model
         {
@@ -167,7 +167,6 @@ class FormTest extends TestCase
 
     /**
      * @test
-     * @group dt
      */
     public function shouldReturnHiddenFormControls()
     {
