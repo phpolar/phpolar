@@ -2,14 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Stock;
+namespace Efortmeyer\Polar\Core;
 
-use Efortmeyer\Polar\Api\Attributes\AttributeInterface;
-use Efortmeyer\Polar\Api\Attributes\Config\{
-    AttributeConfigInterface,
-    Collection as AttributeConfigCollection,
-};
+use Efortmeyer\Polar\Api\Attributes\Config\Collection as AttributeConfigCollection;
 use Efortmeyer\Polar\Core\Attributes\Config\{
+    AttributeConfig,
+    AttributeConfigInterface,
     ConstructorArgs,
     ConstructorArgsNone,
     ConstructorArgsOne as ConfigConstructorArgsOne,
@@ -23,10 +21,14 @@ use Efortmeyer\Polar\Core\Parsers\Annotation\{
     ConstructorArgsOneWithValue,
     TypeTag,
 };
-use Efortmeyer\Polar\Stock\Attributes\Config\AttributeConfig;
+
+use Efortmeyer\Polar\Core\Attributes\{
+    AttributeCollection,
+    Attribute,
+};
+use Efortmeyer\Polar\Stock\Attributes\TypeValidation;
 
 use Closure;
-use Efortmeyer\Polar\Stock\Attributes\TypeValidation;
 use InvalidArgumentException;
 use ReflectionClass;
 use ReflectionProperty;
@@ -67,16 +69,16 @@ final class PropertyAnnotation
     }
 
     /**
-     * Uses this property's annotations to create a list of attributes.
-     *
-     * @return AttributeInterface[]
+     * Uses this property's annotations to create a collection of attributes.
      */
-    public function parse(): array
+    public function parse(): AttributeCollection
     {
-        return $this->attributeConfigMap
-            ->filter(static::$onlyRequired)
-            ->map(static::$toAttribute)
-            ->toArray();
+        return new AttributeCollection(
+            $this->attributeConfigMap
+                ->filter(static::$onlyRequired)
+                ->map(static::$toAttribute)
+                ->toArray()
+        );
     }
 
     private function filterRequiredAttributes(AttributeConfigInterface $config): bool
@@ -84,7 +86,7 @@ final class PropertyAnnotation
         return $config->isConfiguredForClass() === true ? $this->propertyValue === null || is_a($this->propertyValue, $config->forType()) : true;
     }
 
-    private function mapToAttribute(string $attributeConfigKey, AttributeConfig $attributeConfig): AttributeInterface
+    private function mapToAttribute(string $attributeConfigKey, AttributeConfig $attributeConfig): Attribute
     {
         $reflectionClass = new ReflectionClass($attributeConfigKey);
         $unqualifiedClassName = $reflectionClass->getShortName();

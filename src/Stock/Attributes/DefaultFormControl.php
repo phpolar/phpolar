@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace Efortmeyer\Polar\Stock\Attributes;
 
-use Efortmeyer\Polar\Api\Attributes\AttributeInterface;
-use Efortmeyer\Polar\Core\Defaults;
+use Efortmeyer\Polar\Core\Attributes\Attribute;
 
 /**
  * Configures the default form control type.
  */
-final class DefaultFormControl implements AttributeInterface
+final class DefaultFormControl extends Attribute
 {
     public function __construct()
     {
@@ -19,5 +18,20 @@ final class DefaultFormControl implements AttributeInterface
     public function __invoke(): string
     {
         return Defaults::FORM_CONTROL_TYPE;
+    }
+
+    public function isInput(): bool
+    {
+        return true;
+    }
+
+    public function isFormControl(): bool
+    {
+        return true;
+    }
+
+    public function getFieldClassName(): string
+    {
+        return Defaults::FORM_CONTROL_FIELD_CLASS_NAME;
     }
 }

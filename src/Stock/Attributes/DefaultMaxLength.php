@@ -4,16 +4,15 @@ declare(strict_types=1);
 
 namespace Efortmeyer\Polar\Stock\Attributes;
 
-use Efortmeyer\Polar\Api\Attributes\AttributeInterface;
+use Efortmeyer\Polar\Core\Attributes\Attribute;
 use Efortmeyer\Polar\Api\Validation\ValidationInterface;
-use Efortmeyer\Polar\Core\Defaults;
 use Efortmeyer\Polar\Stock\Validation\MaxLength as ValidationMaxLength;
 
 /**
  * Use to validate that length of a field's value
  * is not over the default max length.
  */
-class DefaultMaxLength implements AttributeInterface
+class DefaultMaxLength extends Attribute
 {
     /**
      * The value to validate.
@@ -30,5 +29,10 @@ class DefaultMaxLength implements AttributeInterface
     public function __invoke(): ValidationInterface
     {
         return new ValidationMaxLength($this->value, Defaults::MAX_LENGTH);
+    }
+
+    public function isValidator(): bool
+    {
+        return true;
     }
 }

@@ -4,14 +4,12 @@ declare(strict_types=1);
 
 namespace Efortmeyer\Polar\Stock\Attributes;
 
-use Efortmeyer\Polar\Api\Attributes\AttributeInterface;
-
-use Efortmeyer\Polar\Core\Defaults;
+use Efortmeyer\Polar\Core\Attributes\Attribute;
 
 /**
  * Configures the default column format.
  */
-final class DefaultColumn implements AttributeInterface
+final class DefaultColumn extends Attribute
 {
     private string $text;
 
@@ -24,5 +22,10 @@ final class DefaultColumn implements AttributeInterface
     {
         $columnFormatter = Defaults::COLUMN_FORMATTER;
         return $columnFormatter($this->text);
+    }
+
+    public function isColumn(): bool
+    {
+        return true;
     }
 }

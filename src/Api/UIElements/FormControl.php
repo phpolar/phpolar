@@ -5,11 +5,10 @@ declare(strict_types=1);
 namespace Efortmeyer\Polar\Api\UIElements;
 
 use Efortmeyer\Polar\Api\Validation\ValidationInterface;
-
-use Efortmeyer\Polar\Stock\{
+use Efortmeyer\Polar\Core\Fields\{
+    FieldMetadata,
     AutomaticDateField,
     DateField,
-    Field,
     NumberField,
     TextAreaField,
     TextField,
@@ -18,7 +17,7 @@ use RuntimeException;
 
 abstract class FormControl
 {
-    protected Field $field;
+    protected FieldMetadata $field;
 
     protected string $errorMessage = "";
 
@@ -29,7 +28,7 @@ abstract class FormControl
      */
     protected const ERROR_STYLING = "border: 2px solid red";
 
-    private function __construct(Field $field)
+    private function __construct(FieldMetadata $field)
     {
         $this->field = $field;
         $this->setState();
@@ -39,7 +38,7 @@ abstract class FormControl
      * @api
      * @throws RuntimeException
      */
-    public static function create(Field $field): FormControl
+    public static function create(FieldMetadata $field): FormControl
     {
         switch (true)
         {

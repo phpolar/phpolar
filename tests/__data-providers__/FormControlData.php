@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace Efortmeyer\Polar\Tests\DataProviders;
 
-use Efortmeyer\Polar\Core\Defaults;
-use Efortmeyer\Polar\Stock\Field;
+use Efortmeyer\Polar\Api\UIElements\Messages;
+use Efortmeyer\Polar\Core\Attributes\AttributeCollection;
+use Efortmeyer\Polar\Core\Fields\FieldMetadata;
+use Efortmeyer\Polar\Tests\Fakes\RequiredAttributes;
 use PHPUnit\Framework\TestCase;
 
 class FormControlData extends TestCase
@@ -13,7 +15,7 @@ class FormControlData extends TestCase
     public static function fieldWithoutErrorsTestCases()
     {
         return [
-            [Field::create("", [])],
+            [FieldMetadata::getFactory(new AttributeCollection([RequiredAttributes::get()]))->create("", "")],
         ];
     }
 
@@ -23,8 +25,8 @@ class FormControlData extends TestCase
         $attributeStub->method("isValid")
             ->willReturn(false);
         $attributeStub->method("getErrorMessage")
-            ->willReturn(Defaults::ERROR_MESSAGE);
-        $field = Field::create("", []);
+            ->willReturn(Messages::ERROR_MESSAGE);
+        $field = FieldMetadata::getFactory(new AttributeCollection([RequiredAttributes::get()]))->create("", "");
         $field->validators[] = $attributeStub;
 
         return [

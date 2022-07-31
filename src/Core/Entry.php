@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Stock;
+namespace Efortmeyer\Polar\Core;
 
 use Efortmeyer\Polar\Api\Attributes\Config\Collection as AttributeConfigCollection;
-use Efortmeyer\Polar\Stock\Field;
-use Efortmeyer\Polar\Stock\PropertyAnnotation;
+use Efortmeyer\Polar\Core\Fields\FieldMetadata;
+use Efortmeyer\Polar\Stock\Attributes\AutomaticDateValue;
 use ReflectionClass;
 use ReflectionProperty;
 use RuntimeException;
@@ -17,7 +17,7 @@ use RuntimeException;
 abstract class Entry
 {
     /**
-     * @var Field[]
+     * @var FieldMetadata[]
      */
     private array $fields;
 
@@ -46,6 +46,15 @@ abstract class Entry
         );
     }
 
+    private function createFieldFromAnnotation(string $propertyName, $propertyValue): FieldMetadata
+    {
+        $annotation = new PropertyAnnotation($this, $propertyName, $this->attributeConfigMap);
+        $attributes = $annotation->parse();
+        $value = $attributes->containsClass(AutomaticDateValue::class) === true ? $attributes->getValueAttributeOrNull() : $propertyValue;
+        $field = FieldMetadata::getFactory($attributes)->create($propertyName, $value);
+        return $field;
+    }
+
     private function setValues(array $givenValues): void
     {
         $matchedValues = array_intersect_key(
@@ -57,13 +66,6 @@ abstract class Entry
         foreach ($matchedValues as $property => $value) {
             $this->$property = $value;
         }
-    }
-
-    private function createFieldFromAnnotation(string $propertyName, $propertyValue): Field
-    {
-        $annotation = new PropertyAnnotation($this, $propertyName, $this->attributeConfigMap);
-        $attributes = $annotation->parse();
-        return Field::create($propertyName, $propertyValue, $attributes);
     }
 
     /**
@@ -96,12 +98,12 @@ abstract class Entry
      */
     public function getFieldValues(): array
     {
-        return array_map(fn (Field $field) => $field->getValue(), $this->fields);
+        return array_map(fn (FieldMetadata $field) => $field->getValue(), $this->fields);
     }
 
     /**
      * Returns the field metadata
-     * @return Field[]
+     * @return FieldMetadata[]
      */
     public function getFields(): array
     {

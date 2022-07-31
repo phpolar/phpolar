@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace Efortmeyer\Polar\Tests\DataProviders;
 
-use Efortmeyer\Polar\Core\Defaults;
-use Efortmeyer\Polar\Stock\{
+use Efortmeyer\Polar\Core\Attributes\InputTypes;
+use Efortmeyer\Polar\Core\Fields\{
     AutomaticDateField,
     DateField,
+    FieldMetadata,
     NumberField,
     TextField,
     TextAreaField,
@@ -18,7 +19,6 @@ use Efortmeyer\Polar\Stock\Attributes\DefaultColumn;
 use Efortmeyer\Polar\Stock\Attributes\DefaultDateFormat;
 use Efortmeyer\Polar\Stock\Attributes\DefaultFormControl;
 use Efortmeyer\Polar\Stock\Attributes\DefaultLabel;
-use Efortmeyer\Polar\Stock\Attributes\InputTypes;
 use Efortmeyer\Polar\Stock\Attributes\Label;
 use Efortmeyer\Polar\Stock\Attributes\MaxLength;
 use Efortmeyer\Polar\Stock\Attributes\NoopValidate;
@@ -27,12 +27,16 @@ use Efortmeyer\Polar\Stock\Validation\MaxLength as ValidationMaxLength;
 use Efortmeyer\Polar\Stock\Validation\Noop;
 use Efortmeyer\Polar\Stock\Validation\ScalarTypes;
 use Efortmeyer\Polar\Stock\Validation\TypeValidation as ValidationTypeValidation;
-
-use DateTimeImmutable;
 use Efortmeyer\Polar\Stock\Attributes\AutomaticDateValue;
+use Efortmeyer\Polar\Stock\Attributes\Defaults;
 use Efortmeyer\Polar\Stock\Attributes\Input;
 
-class FieldTestData
+use DateTimeImmutable;
+use Efortmeyer\Polar\Core\Attributes\Attribute;
+use Efortmeyer\Polar\Core\Attributes\AttributeCollection;
+use Efortmeyer\Polar\Tests\Fakes\RequiredAttributes;
+
+class FieldMetadataTestData
 {
     private const BOOLEAN_VALUES = [true, false];
 
@@ -53,16 +57,43 @@ class FieldTestData
     {
         $text = uniqid();
         $dateTime = new DateTimeImmutable();
-        $getTestCase = fn ($propName, $attribute) => [$text, $propName, $attribute(), $attribute];
+        $getLabelTestCase = fn (string $propName, Attribute $attribute) => [
+            $propName,
+            $attribute(),
+            FieldMetadata::getFactory(new AttributeCollection([...RequiredAttributes::getWithoutLabel(), $attribute]))->create("testProperty", "")
+        ];
+        $getColumnTestCase = fn (string $propName, Attribute $attribute) => [
+            $propName,
+            $attribute(),
+            FieldMetadata::getFactory(new AttributeCollection([...RequiredAttributes::getWithoutColumn(), $attribute]))->create("testProperty", "")
+        ];
+        $getDateFormatTestCase = fn (string $propName, Attribute $attribute) => [
+            $propName,
+            $attribute(),
+            FieldMetadata::getFactory(new AttributeCollection([...RequiredAttributes::getWithoutDateFormat(), $attribute]))->create("testProperty", "")
+        ];
+        $getFormControlTestCase = fn (string $propName, Attribute $attribute) => [
+            $propName,
+            $attribute(),
+            FieldMetadata::getFactory(new AttributeCollection([...RequiredAttributes::getWithoutFormControl(), $attribute]))->create("testProperty", $text)
+        ];
+        $getAutomaticDateTestCase = fn ($propName, Attribute $attribute) => [
+            $propName,
+            $attribute(),
+            FieldMetadata::getFactory(new AttributeCollection([...RequiredAttributes::getWithoutFormControl(), $attribute]))->create("testProperty", null)
+        ];
 
-        return array_merge(
-            array_map($getTestCase, ["label", "label"], [new Label($text), new DefaultLabel($text)]),
-            array_map($getTestCase, ["column", "column"], [new Column($text), new DefaultColumn($text)]),
-            array_map($getTestCase, ["formControlType", "formControlType"], [new Input(Defaults::FORM_CONTROL_TYPE), new DefaultFormControl()]),
-            array_map($getTestCase, ["format", "format"], [new DateFormat(Defaults::DATE_FORMAT), new DefaultDateFormat($dateTime)]),
-            array_map($getTestCase, ["value"], [new AutomaticDateValue()]),
-
-        );
+        return [
+            $getLabelTestCase("label", new Label($text)),
+            $getLabelTestCase("label", new DefaultLabel($text)),
+            $getColumnTestCase("column", new Column($text)),
+            $getColumnTestCase("column", new DefaultColumn($text)),
+            $getDateFormatTestCase("dateFormat", new DateFormat(Defaults::DATE_FORMAT)),
+            $getDateFormatTestCase("dateFormat", new DefaultDateFormat($dateTime)),
+            $getFormControlTestCase("formControlType", new Input(Defaults::FORM_CONTROL_TYPE)),
+            $getFormControlTestCase("formControlType", new DefaultFormControl()),
+            $getAutomaticDateTestCase("value", new AutomaticDateValue()),
+        ];
     }
 
     public static function validatorTestCases()
@@ -89,7 +120,7 @@ class FieldTestData
             [TextAreaField::class, "", new Input(InputTypes::TEXTAREA)],
             [NumberField::class, "", new Input(InputTypes::NUMBER)],
             [DateField::class, "", new Input(InputTypes::DATE)],
-            [AutomaticDateField::class, "", new AutomaticDateValue(InputTypes::DATE)],
+            [AutomaticDateField::class, null, new AutomaticDateValue()],
         ];
     }
 }

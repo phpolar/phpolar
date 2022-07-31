@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Efortmeyer\Polar\Api\UIElements;
 
-use Efortmeyer\Polar\Core\Defaults;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -19,6 +18,6 @@ class SuccessBannerTest extends TestCase
     public function shouldGetSuccessMessageWithExpectedText()
     {
         $sut = new SuccessBanner();
-        $this->assertEquals(Defaults::SUCCESS_MESSAGE, $sut->getMessage());
+        $this->assertEquals(Messages::SUCCESS_MESSAGE, $sut->getMessage());
     }
 }

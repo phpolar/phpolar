@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Efortmeyer\Polar\Stock\Attributes;
 
-use Efortmeyer\Polar\Api\Attributes\AttributeInterface;
+use Efortmeyer\Polar\Core\Attributes\Attribute;
 
 /**
  * Configures the format a DateTime property.
@@ -12,7 +12,7 @@ use Efortmeyer\Polar\Api\Attributes\AttributeInterface;
  * The given format will be used when the
  * DateTime object is converted to a string.
  */
-final class DateFormat implements AttributeInterface
+final class DateFormat extends Attribute
 {
     private string $dateFormat;
 
@@ -24,5 +24,10 @@ final class DateFormat implements AttributeInterface
     public function __invoke(): string
     {
         return $this->dateFormat;
+    }
+
+    public function isDateFormat(): bool
+    {
+        return true;
     }
 }

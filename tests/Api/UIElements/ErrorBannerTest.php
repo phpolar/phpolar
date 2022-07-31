@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Efortmeyer\Polar\Api\UIElements;
 
-use Efortmeyer\Polar\Core\Defaults;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -19,6 +18,6 @@ class ErrorBannerTest extends TestCase
     public function shouldGetErrorMessage()
     {
         $sut = new ErrorBanner();
-        $this->assertEquals(Defaults::ERROR_MESSAGE, $sut->getMessage());
+        $this->assertEquals(Messages::ERROR_MESSAGE, $sut->getMessage());
     }
 }

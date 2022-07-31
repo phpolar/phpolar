@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Stock;
+namespace Efortmeyer\Polar\Core\Fields;
 
 /**
  * Represents a date field.
  */
-class DateField extends Field
+class DateField extends FieldMetadata
 {
     public string $formControlType = "datetime-local";
 }
