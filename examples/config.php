@@ -6,7 +6,7 @@ namespace Efortmeyer\Polar\Stock\Attributes;
 
 use Efortmeyer\Polar\Api\Attributes\Config\Collection;
 use Efortmeyer\Polar\Core\Attributes\Config\ConstructorArgsPropertyName;
-use Efortmeyer\Polar\Stock\Attributes\Config\AttributeConfig;
+use Efortmeyer\Polar\Core\Attributes\Config\AttributeConfig;
 
 use MyCustomAttributeConfigKey;
 

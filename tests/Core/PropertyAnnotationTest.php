@@ -28,7 +28,10 @@ use PHPUnit\Framework\TestCase;
  * @covers \Efortmeyer\Polar\Core\PropertyAnnotation
  * @covers \Efortmeyer\Polar\Api\Attributes\Config\Collection
  *
+ * @uses \Efortmeyer\Polar\Core\Attributes\AttributeCollection
+ * @uses \Efortmeyer\Polar\Core\Attributes\Config\AttributeConfig
  * @uses \Efortmeyer\Polar\Core\Parsers\Annotation\Token
+ * @uses \Efortmeyer\Polar\Core\Parsers\Annotation\TypeTag
  * @uses \Efortmeyer\Polar\Core\Parsers\Annotation\Constructor
  * @uses \Efortmeyer\Polar\Core\Parsers\Annotation\ConstructorArgsOne
  * @uses \Efortmeyer\Polar\Core\Parsers\Annotation\ConstructorArgsOneWithValue
@@ -37,6 +40,7 @@ use PHPUnit\Framework\TestCase;
  * @uses \Efortmeyer\Polar\Stock\Attributes\Config\MaxLengthKey
  * @uses \Efortmeyer\Polar\Stock\Attributes\Label
  * @uses \Efortmeyer\Polar\Stock\Attributes\DefaultLabel
+ * @uses \Efortmeyer\Polar\Stock\Attributes\DefaultColumn
  * @uses \Efortmeyer\Polar\Stock\Attributes\MaxLength
  * @uses \Efortmeyer\Polar\Stock\Attributes\DefaultMaxLength
  */

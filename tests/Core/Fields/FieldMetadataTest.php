@@ -14,6 +14,10 @@ use DateTimeImmutable;
 /**
  * @covers \Efortmeyer\Polar\Core\Fields\FieldMetadata
  *
+ * @uses \Efortmeyer\Polar\Core\Attributes\Attribute
+ * @uses \Efortmeyer\Polar\Core\Attributes\AttributeCollection
+ * @uses \Efortmeyer\Polar\Core\Fields\FieldMetadataConfig
+ * @uses \Efortmeyer\Polar\Core\Fields\FieldMetadataFactory
  * @uses \Efortmeyer\Polar\Core\Fields\TextField
  * @uses \Efortmeyer\Polar\Stock\Validation\MaxLength
  * @uses \Efortmeyer\Polar\Stock\Validation\Noop
@@ -24,7 +28,7 @@ use DateTimeImmutable;
  * @uses \Efortmeyer\Polar\Stock\Attributes\DateFormat
  * @uses \Efortmeyer\Polar\Stock\Attributes\DefaultFormControl
  * @uses \Efortmeyer\Polar\Stock\Attributes\Input
- * @uses \Efortmeyer\Polar\Stock\Attributes\InputTypes
+ * @uses \Efortmeyer\Polar\Core\Attributes\InputTypes
  * @uses \Efortmeyer\Polar\Stock\Attributes\DefaultLabel
  * @uses \Efortmeyer\Polar\Stock\Attributes\Label
  * @uses \Efortmeyer\Polar\Stock\Attributes\DefaultMaxLength

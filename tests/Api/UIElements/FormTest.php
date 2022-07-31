@@ -25,9 +25,13 @@ use PHPUnit\Framework\TestCase;
  * @uses \Efortmeyer\Polar\Core\Parsers\Annotation\ConstructorArgsNone
  * @uses \Efortmeyer\Polar\Core\Parsers\Annotation\Token
  * @uses \Efortmeyer\Polar\Core\Entry
+ * @uses \Efortmeyer\Polar\Core\Attributes\Attribute
+ * @uses \Efortmeyer\Polar\Core\Attributes\AttributeCollection
  * @uses \Efortmeyer\Polar\Core\Fields\FieldMetadata
+ * @uses \Efortmeyer\Polar\Core\Fields\FieldMetadataConfig
+ * @uses \Efortmeyer\Polar\Core\Fields\FieldMetadataFactory
  * @uses \Efortmeyer\Polar\Core\PropertyAnnotation
- * @uses \Efortmeyer\Polar\Stock\Attributes\Config\AttributeConfig
+ * @uses \Efortmeyer\Polar\Core\Attributes\Config\AttributeConfig
  * @uses \Efortmeyer\Polar\Stock\Attributes\DefaultColumn
  * @uses \Efortmeyer\Polar\Stock\Attributes\DefaultDateFormat
  * @uses \Efortmeyer\Polar\Stock\Attributes\DefaultFormControl
@@ -45,7 +49,7 @@ use PHPUnit\Framework\TestCase;
 class FormTest extends TestCase
 {
     /**
-     * @var <string, Efortmeyer\Polar\Stock\Attributes\Config\AttributeConfigInterface>[]
+     * @var <string, Efortmeyer\Polar\Core\Attributes\Config\AttributeConfigInterface>[]
      */
     protected static $attributesConfigMap;
 

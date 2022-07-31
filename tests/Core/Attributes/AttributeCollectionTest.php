@@ -18,6 +18,13 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \Efortmeyer\Polar\Core\Attributes\AttributeCollection
+ *
+ * @uses \Efortmeyer\Polar\Core\Attributes\Attribute
+ * @uses \Efortmeyer\Polar\Stock\Attributes\Input
+ * @uses \Efortmeyer\Polar\Stock\Attributes\DefaultColumn
+ * @uses \Efortmeyer\Polar\Stock\Attributes\DefaultLabel
+ * @uses \Efortmeyer\Polar\Stock\Attributes\DefaultMaxLength
+ * @uses \Efortmeyer\Polar\Stock\Attributes\DefaultDateFormat
  */
 class AttributeCollectionTest extends TestCase
 {
