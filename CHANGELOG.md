@@ -1,3 +1,16 @@
+## 1.3.0 (2022-08-01)
+
+### Feat
+
+- **App.php**: use in-memory configuration by default
+
+### Refactor
+
+- **Form.php**: move to root folder of Api namespace
+- **Comparable.php**: move to core
+- **Comparable.php**: move to core
+- **HtmlEncoder.php**: reduce cyclomatic complexity (#29)
+
 ## 1.2.0 (2022-07-31)
 
 ### Refactor
