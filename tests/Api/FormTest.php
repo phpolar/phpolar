@@ -2,14 +2,20 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Api\UIElements;
+namespace Efortmeyer\Polar\Api;
 
 use Efortmeyer\Polar\Api\Model;
+use Efortmeyer\Polar\Api\UIElements\DateFormControl;
+use Efortmeyer\Polar\Api\UIElements\ErrorBanner;
+use Efortmeyer\Polar\Api\UIElements\HiddenFormControl;
+use Efortmeyer\Polar\Api\UIElements\SuccessBanner;
+use Efortmeyer\Polar\Api\UIElements\TextAreaFormControl;
+use Efortmeyer\Polar\Api\UIElements\TextFormControl;
 use Efortmeyer\Polar\Tests\Mocks\StorageStub;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \Efortmeyer\Polar\Api\UIElements\Form
+ * @covers \Efortmeyer\Polar\Api\Form
  *
  * @uses \Efortmeyer\Polar\Api\Model
  * @uses \Efortmeyer\Polar\Api\UIElements\ErrorBanner
