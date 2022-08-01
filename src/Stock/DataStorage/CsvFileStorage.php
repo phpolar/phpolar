@@ -53,6 +53,11 @@ final class CsvFileStorage implements CollectionStorageInterface
         }
     }
 
+    public static function getDefaultName(): string
+    {
+        return date("Ym") . ".csv";
+    }
+
     /**
      * @return resource
      */

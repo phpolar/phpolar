@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Api;
+namespace Efortmeyer\Polar\Stock\AppConfig;
 
+use Efortmeyer\Polar\Api\AppConfigInterface;
 use Efortmeyer\Polar\Api\Attributes\Config\{
     Collection,
     Key,

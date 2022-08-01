@@ -24,6 +24,18 @@
             <directory suffix=".php">src</directory>
         </include>
         <exclude>
+            <file>src/Api/UIElements/HiddenFormControl.php</file>
+            <file>src/Api/UIElements/DateFormControl.php</file>
+            <file>src/Api/UIElements/NumberFormControl.php</file>
+            <file>src/Api/UIElements/TextFormControl.php</file>
+            <file>src/Api/UIElements/TextAreaFormControl.php</file>
+            <file>src/Api/DataStorage/CollectionStorageFactory.php</file>
+            <file>src/Api/Rendering/Files/HtmlFile.php</file>
+            <file>src/Api/Rendering/Files/IcoFile.php</file>
+            <file>src/Api/Rendering/TemplateContext.php</file>
+            <file>src/Core/Defaults.php</file>
+            <file>src/Core/Messages.php</file>
+            <file>src/Core/Rendering/ContentTypes.php</file>
             <file>src/Stock/Attributes/AutomaticDateValue.php</file>
             <file>src/Stock/Attributes/Config/ColumnKey.php</file>
             <file>src/Stock/Attributes/Config/DateFormatKey.php</file>
@@ -33,19 +45,7 @@
             <file>src/Stock/Attributes/Config/LabelKey.php</file>
             <file>src/Stock/Attributes/Config/TypeValidationKey.php</file>
             <file>src/Stock/Attributes/Config/AutomaticDateValueKey.php</file>
-            <file>src/Api/UIElements/HiddenFormControl.php</file>
-            <file>src/Api/UIElements/DateFormControl.php</file>
-            <file>src/Api/UIElements/NumberFormControl.php</file>
-            <file>src/Api/UIElements/TextFormControl.php</file>
-            <file>src/Api/UIElements/TextAreaFormControl.php</file>
-            <file>src/Api/DataStorage/CollectionStorageFactory.php</file>
-            <file>src/Api/InMemoryAppConfig.php</file>
-            <file>src/Api/Rendering/Files/HtmlFile.php</file>
-            <file>src/Api/Rendering/Files/IcoFile.php</file>
-            <file>src/Api/Rendering/TemplateContext.php</file>
-            <file>src/Core/Defaults.php</file>
-            <file>src/Core/Messages.php</file>
-            <file>src/Core/Rendering/ContentTypes.php</file>
+            <file>src/Stock/AppConfig/InMemoryAppConfig.php</file>
         </exclude>
     </coverage>
     <php>

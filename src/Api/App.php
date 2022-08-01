@@ -9,6 +9,7 @@ use Efortmeyer\Polar\Api\Rendering\TemplateContext;
 use Efortmeyer\Polar\Api\DataStorage\CollectionStorageInterface;
 
 use Closure;
+use Efortmeyer\Polar\Stock\AppConfig\InMemoryAppConfig;
 use Efortmeyer\Polar\Stock\DataStorage\CsvFileStorage;
 
 /**
@@ -17,14 +18,8 @@ use Efortmeyer\Polar\Stock\DataStorage\CsvFileStorage;
  */
 final class App
 {
-    /**
-     * @var string
-     */
     public const ROOT_PATH = "/";
 
-    /**
-     * @var string
-     */
     public const FAVICON_PATH = "/favicon.ico";
 
     private CollectionStorageInterface $storage;
@@ -41,12 +36,24 @@ final class App
     private array $routeMap;
 
     private function __construct(
-        string $requestUri,
-        AppConfigInterface $appConfig
+        string $requestUri
     ) {
         $this->requestUri = $requestUri;
-        $this->appConfig = $appConfig;
-        $this->storage = new CsvFileStorage(date("Ym") . ".csv", $appConfig->getAll());
+    }
+
+    /**
+     * Creates an app object using
+     * default configuration and
+     * storage
+     */
+    public static function create(
+        string $requestUri
+    ): self {
+        $app = new self($requestUri);
+        $appConfig = new InMemoryAppConfig();
+        $app->appConfig = $appConfig;
+        $app->storage = new CsvFileStorage(CsvFileStorage::getDefaultName(), $appConfig->getAll());
+        return $app;
     }
 
     /**
@@ -57,7 +64,9 @@ final class App
         string $requestUri,
         AppConfigInterface $appConfig
     ): self {
-        return new self($requestUri, $appConfig);
+        $app = new self($requestUri);
+        $app->appConfig = $appConfig;
+        return $app;
     }
 
     private static function notFoundHandler(): void

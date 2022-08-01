@@ -6,6 +6,8 @@ namespace Efortmeyer\Polar\Api;
 
 use Efortmeyer\Polar\Api\DataStorage\CollectionStorageFactory;
 use Efortmeyer\Polar\Api\Rendering\TemplateContext;
+use Efortmeyer\Polar\Stock\AppConfig\InMemoryAppConfig;
+use Efortmeyer\Polar\Stock\DataStorage\CsvFileStorage;
 use Efortmeyer\Polar\Tests\Mocks\StorageStub;
 use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
@@ -15,7 +17,7 @@ use ReflectionClass;
  * @covers \Efortmeyer\Polar\Api\App
  *
  * @uses \Efortmeyer\Polar\Api\Attributes\Config\Collection
- * @uses \Efortmeyer\Polar\Api\InMemoryAppConfig
+ * @uses \Efortmeyer\Polar\Stock\AppConfig\InMemoryAppConfig
  * @uses \Efortmeyer\Polar\Stock\DataStorage\CsvFileStorage
  * @uses \Efortmeyer\Polar\Core\Attributes\Config\AttributeConfig
  * @uses \Efortmeyer\Polar\Stock\Attributes\Config\InputKey
@@ -104,5 +106,23 @@ class AppTest extends TestCase
         $reflectionProperty->setAccessible(true);
         $storagePropertyValue = $reflectionProperty->getValue($sut);
         $this->assertEquals($givenStorage, $storagePropertyValue);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldSetAppConfigAndStorageWhenUsingDefaultCreation()
+    {
+        $_SERVER["REQUEST_URI"] = "DOES NOT EXIST";
+        $sut = App::create($_SERVER["REQUEST_URI"]);
+        $reflectionClass = new ReflectionClass($sut);
+        $reflectionProperty = $reflectionClass->getProperty("storage");
+        $reflectionProperty->setAccessible(true);
+        $storagePropertyValue = $reflectionProperty->getValue($sut);
+        $reflectionProperty = $reflectionClass->getProperty("appConfig");
+        $reflectionProperty->setAccessible(true);
+        $appConfigPropertyValue = $reflectionProperty->getValue($sut);
+        $this->assertInstanceOf(CsvFileStorage::class, $storagePropertyValue);
+        $this->assertInstanceOf(InMemoryAppConfig::class, $appConfigPropertyValue);
     }
 }
