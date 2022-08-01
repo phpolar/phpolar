@@ -27,9 +27,9 @@ use PHPUnit\Framework\TestCase;
 /**
  * @covers \Efortmeyer\Polar\Core\PropertyAnnotation
  * @covers \Efortmeyer\Polar\Api\Attributes\Config\Collection
+ * @covers \Efortmeyer\Polar\Core\Attributes\AttributeCollection
+ * @covers \Efortmeyer\Polar\Core\Attributes\Config\AttributeConfig
  *
- * @uses \Efortmeyer\Polar\Core\Attributes\AttributeCollection
- * @uses \Efortmeyer\Polar\Core\Attributes\Config\AttributeConfig
  * @uses \Efortmeyer\Polar\Core\Parsers\Annotation\Token
  * @uses \Efortmeyer\Polar\Core\Parsers\Annotation\TypeTag
  * @uses \Efortmeyer\Polar\Core\Parsers\Annotation\Constructor
