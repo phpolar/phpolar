@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Efortmeyer\Polar\Tests\Comparables;
 
-use Efortmeyer\Polar\Api\Comparable;
+use Efortmeyer\Polar\Core\Comparable;
 
 class NestedXSSHack implements Comparable
 {
