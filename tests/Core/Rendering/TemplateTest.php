@@ -22,13 +22,13 @@ class TemplateTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->inMemoryFile = fopen(FAKE_HTML_FILE_PATH, "c+");
+        $this->inMemoryFile = fopen(getcwd() . FAKE_HTML_FILE_PATH, "c+");
     }
 
     protected function tearDown(): void
     {
         fclose($this->inMemoryFile);
-        unlink(FAKE_HTML_FILE_PATH);
+        unlink(getcwd() . FAKE_HTML_FILE_PATH);
     }
 
     /**
@@ -48,7 +48,7 @@ class TemplateTest extends TestCase
         };
         fwrite($this->inMemoryFile, $fakeHtmlContent);
         $sut = new Template();
-        $sut->render($templateContext, FAKE_HTML_FILE_PATH);
+        $sut->render($templateContext, getcwd() . FAKE_HTML_FILE_PATH);
         $this->expectOutputRegex("/<h1>FAKE TITLE<\/h1>/");
     }
 
@@ -77,7 +77,7 @@ class TemplateTest extends TestCase
         };
         fwrite($this->inMemoryFile, $fakeHtmlContent);
         $sut = new Template();
-        $sut->render($templateContext, FAKE_HTML_FILE_PATH);
+        $sut->render($templateContext, getcwd() . FAKE_HTML_FILE_PATH);
         $this->expectOutputRegex("/<h1>{$sanitized}<\/h1>/");
         $this->expectOutputRegex("/(?!.*<h1>{$vulnerableStringPattern}<\/h1>(.*?))/s");
     }

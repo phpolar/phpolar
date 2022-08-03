@@ -26,7 +26,7 @@ final class CsvFileStorage implements CollectionStorageInterface
     /**
      * @var resource
      */
-    private static $readFile;
+    public static $readFile;
 
     private string $pathToFile;
 

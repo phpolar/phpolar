@@ -21,13 +21,13 @@ class FileTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->tempFile = fopen(FAKE_ICO_FILE_PATH, "c+");
+        $this->tempFile = fopen(getcwd() . FAKE_ICO_FILE_PATH, "c+");
     }
 
     protected function tearDown(): void
     {
         fclose($this->tempFile);
-        unlink(FAKE_ICO_FILE_PATH);
+        unlink(getcwd() . FAKE_ICO_FILE_PATH);
     }
 
     /**
@@ -37,7 +37,7 @@ class FileTest extends TestCase
     {
         $fakeIcoFileData = str_repeat("FAKE ", random_int(2, 100));
         fwrite($this->tempFile, $fakeIcoFileData);
-        $sut = new IcoFileMock(FAKE_ICO_FILE_PATH);
+        $sut = new IcoFileMock(getcwd() . FAKE_ICO_FILE_PATH);
         $sut->render();
         $this->expectOutputString($fakeIcoFileData);
     }
