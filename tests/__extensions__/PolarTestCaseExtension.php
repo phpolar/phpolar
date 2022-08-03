@@ -11,7 +11,7 @@ class PolarTestCaseExtension extends TestCase
 {
     protected static function getTestFileName(string $extension): string
     {
-        return implode(DIRECTORY_SEPARATOR, [$_SERVER["TMP"], uniqid() . $extension]);
+        return implode(DIRECTORY_SEPARATOR, [$_SERVER["TMP"] ?? "/tmp", uniqid() . $extension]);
     }
 
     /**
