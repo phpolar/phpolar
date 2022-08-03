@@ -9,6 +9,11 @@ use PHPUnit\Framework\TestCase;
 
 class PolarTestCaseExtension extends TestCase
 {
+    protected static function getTestFileName(string $extension): string
+    {
+        return implode(DIRECTORY_SEPARATOR, [$_SERVER["TMP"], uniqid() . $extension]);
+    }
+
     /**
      * Asserts that strings in an array contain a corresponding strings
      *

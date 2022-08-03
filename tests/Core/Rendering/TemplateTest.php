@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Efortmeyer\Polar\Core\Rendering;
 
 use Efortmeyer\Polar\Api\Rendering\TemplateContext;
+use Efortmeyer\Polar\Tests\Extensions\PolarTestCaseExtension;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -13,22 +14,25 @@ use PHPUnit\Framework\TestCase;
  * @uses \Efortmeyer\Polar\Core\Rendering\HtmlEncoder
  * @uses \Efortmeyer\Polar\Api\Rendering\TemplateContext
  */
-class TemplateTest extends TestCase
+class TemplateTest extends PolarTestCaseExtension
 {
     /**
      * @var resource
      */
     protected $inMemoryFile;
 
+    protected static $testFileName;
+
     protected function setUp(): void
     {
-        $this->inMemoryFile = fopen(getcwd() . FAKE_HTML_FILE_PATH, "c+");
+        self::$testFileName = self::getTestFileName(".html");
+        $this->inMemoryFile = fopen(self::$testFileName, "c+");
     }
 
     protected function tearDown(): void
     {
         fclose($this->inMemoryFile);
-        unlink(getcwd() . FAKE_HTML_FILE_PATH);
+        unlink(self::$testFileName);
     }
 
     /**
@@ -48,7 +52,7 @@ class TemplateTest extends TestCase
         };
         fwrite($this->inMemoryFile, $fakeHtmlContent);
         $sut = new Template();
-        $sut->render($templateContext, getcwd() . FAKE_HTML_FILE_PATH);
+        $sut->render($templateContext, self::$testFileName);
         $this->expectOutputRegex("/<h1>FAKE TITLE<\/h1>/");
     }
 
@@ -77,7 +81,7 @@ class TemplateTest extends TestCase
         };
         fwrite($this->inMemoryFile, $fakeHtmlContent);
         $sut = new Template();
-        $sut->render($templateContext, getcwd() . FAKE_HTML_FILE_PATH);
+        $sut->render($templateContext, self::$testFileName);
         $this->expectOutputRegex("/<h1>{$sanitized}<\/h1>/");
         $this->expectOutputRegex("/(?!.*<h1>{$vulnerableStringPattern}<\/h1>(.*?))/s");
     }

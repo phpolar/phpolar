@@ -71,7 +71,7 @@ class CsvFileStorageTest extends PolarTestCaseExtension
 
     protected function setUp(): void
     {
-        static::$fakeCsvFilePath = getcwd() . DIRECTORY_SEPARATOR . uniqid() . ".csv";
+        static::$fakeCsvFilePath = self::getTestFileName(".csv");
         $this->record = new class(static::$attributesConfigMap) extends Model
         {
             /**
@@ -129,7 +129,7 @@ class CsvFileStorageTest extends PolarTestCaseExtension
         // See https://www.php.net/manual/en/function.unlink
         unlink(static::$fakeCsvFilePath);
         $this->sut->__destruct();
-        $newFile = implode(DIRECTORY_SEPARATOR, [getcwd(), "tests", "__tmp__", uniqid() . ".csv"]);
+        $newFile = self::getTestFileName(".csv");
         $sut = new CsvFileStorage($newFile, static::$attributesConfigMap);
         $resultList = $sut->list(ModelSubclass::class);
         unlink($newFile);
