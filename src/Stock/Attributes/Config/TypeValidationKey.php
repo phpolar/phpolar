@@ -14,7 +14,7 @@ final class TypeValidationKey extends Key
         return TypeValidation::class;
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return TypeValidation::class;
     }

@@ -44,7 +44,7 @@ class FieldMetadata
         return FieldMetadataFactory::getInstance(new $className(), $attributes);
     }
 
-    public function getValue()
+    public function getValue(): mixed
     {
         return $this->value instanceof DateTimeInterface ? $this->value->format($this->dateFormat) : $this->value;
     }

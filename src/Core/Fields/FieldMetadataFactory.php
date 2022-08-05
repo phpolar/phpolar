@@ -44,7 +44,7 @@ final class FieldMetadataFactory
     /**
      * Create a Field.
      */
-    public function create(string $propertyName, $value): FieldMetadata
+    public function create(string $propertyName, mixed $value): FieldMetadata
     {
         $formControlAttribute = $this->config->formControlTypeAttribute;
         $labelAttribute = $this->config->labelAttribute;
