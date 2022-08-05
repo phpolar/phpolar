@@ -11,17 +11,10 @@ use Efortmeyer\Polar\Stock\Attributes\Input;
 class AttributeCollection
 {
     /**
-     * @var Attribute[]
+     * @param Attribute[] $internalArray
      */
-    private $internalArray = [];
-
-
-    /**
-     * @param Attribute[] $attributes
-     */
-    public function __construct(array $attributes)
+    public function __construct(private array $internalArray)
     {
-        $this->internalArray = $attributes;
     }
 
     public function containsClass(string $className): bool

@@ -11,11 +11,8 @@ use Efortmeyer\Polar\Core\Attributes\Attribute;
  */
 final class DefaultColumn extends Attribute
 {
-    private string $text;
-
-    public function __construct(string $text)
+    public function __construct(private string $text)
     {
-        $this->text = $text;
     }
 
     public function __invoke(): string

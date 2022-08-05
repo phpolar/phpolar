@@ -47,8 +47,6 @@ final class PropertyAnnotation
      */
     private $propertyValue;
 
-    private AttributeConfigCollection $attributeConfigMap;
-
     private static Closure $onlyRequired;
 
     private static Closure $toAttribute;
@@ -56,14 +54,13 @@ final class PropertyAnnotation
     public function __construct(
         object $instance,
         string $propertyName,
-        AttributeConfigCollection $attributeConfigMap
+        private AttributeConfigCollection $attributeConfigMap
     ) {
         $reflectionProperty = new ReflectionProperty($instance, $propertyName);
         $docComment = $reflectionProperty->getDocComment();
         $this->docComment = $docComment === false ? "" : $docComment;
         $this->propertyName = $reflectionProperty->getName();
         $this->propertyValue = $reflectionProperty->getValue($instance);
-        $this->attributeConfigMap = $attributeConfigMap;
         static::$onlyRequired = Closure::fromCallable([$this, "filterRequiredAttributes"]);
         static::$toAttribute = Closure::fromCallable([$this, "mapToAttribute"]);
     }

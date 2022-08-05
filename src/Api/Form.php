@@ -25,10 +25,7 @@ class Form extends TemplateContext
      */
     private array $formControls;
 
-    private Model $model;
-
-
-    public function __construct(Model $model)
+    public function __construct(private Model $model)
     {
         $this->model = $model;
         $this->formControls = array_map([FormControl::class, "create"], $model->getFields());

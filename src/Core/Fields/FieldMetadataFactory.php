@@ -8,19 +8,10 @@ use Efortmeyer\Polar\Core\Attributes\AttributeCollection;
 
 final class FieldMetadataFactory
 {
-    /**
-     * @var FieldMetadata
-     */
-    private $field;
+    private FieldMetadataConfig $config;
 
-    /**
-     * @var FieldMetadataConfig
-     */
-    private $config;
-
-    private function __construct(FieldMetadata $field, AttributeCollection $attributes)
+    private function __construct(private FieldMetadata $field, AttributeCollection $attributes)
     {
-        $this->field = $field;
         $this->config = FieldMetadataConfig::create($attributes);
     }
 

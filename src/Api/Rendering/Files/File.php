@@ -6,9 +6,7 @@ namespace Efortmeyer\Polar\Api\Rendering\Files;
 
 abstract class File
 {
-    private string $pathToFile;
-
-    public function __construct(string $pathToFile)
+    public function __construct(private string $pathToFile)
     {
         $this->pathToFile = $pathToFile;
     }
