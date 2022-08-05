@@ -4,7 +4,7 @@
     "type": "library",
     "license": "MIT",
     "require": {
-        "php": ">=7.4"
+        "php": ">=8"
     },
     "autoload": {
         "psr-4": {
@@ -14,10 +14,7 @@
             "Efortmeyer\\Polar\\Tests\\Fakes\\": "tests/__fakes__",
             "Efortmeyer\\Polar\\Tests\\Comparables\\": "tests/__comparables__",
             "Efortmeyer\\Polar\\Tests\\Extensions\\": "tests/__extensions__"
-        },
-        "files": [
-            "src/Core/Polyfill/autoload.php"
-        ]
+        }
     },
     "authors": [
         {
