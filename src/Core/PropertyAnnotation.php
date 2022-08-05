@@ -112,34 +112,23 @@ final class PropertyAnnotation
      */
     private function getArgsForDefault(string $defaultAttribute, ConstructorArgs $defaultConstructorArgType): array
     {
-        switch (true) {
-            case $defaultConstructorArgType instanceof ConstructorArgsPropertyName:
-                return [$this->propertyName];
-            case $defaultConstructorArgType instanceof ConstructorArgsPropertyValue:
-                return [$this->propertyValue];
-            case $defaultConstructorArgType instanceof ConstructorArgsNone:
-                return [];
-            default:
-                throw new InvalidArgumentException(
-                    "Invalid Attribute config for ${defaultAttribute}"
-                );
-        }
+        return match (true) {
+            $defaultConstructorArgType instanceof ConstructorArgsPropertyName => [$this->propertyName],
+            $defaultConstructorArgType instanceof ConstructorArgsPropertyValue => [$this->propertyValue],
+            $defaultConstructorArgType instanceof ConstructorArgsNone => [],
+            default => throw new InvalidArgumentException("Invalid Attribute config for ${defaultAttribute}")
+        };
     }
 
     private function getParserClassName(string $attributeConfigKey, ConstructorArgs $constructorArgType): string
     {
-        switch (true) {
-            case $constructorArgType instanceof ConstructorArgsPropertyName:
-            case $constructorArgType instanceof ConfigConstructorArgsOne:
-                return ConstructorArgsOne::class;
-            case $constructorArgType instanceof ConstructorArgsPropertyValueWithSecondArg:
-                return $attributeConfigKey === TypeValidation::class ? TypeTag::class : ConstructorArgsOneWithValue::class;
-            case $constructorArgType instanceof ConstructorArgsNone:
-                return AnnotationConstructorArgsNone::class;
-            default:
-                throw new InvalidArgumentException(
-                    "Invalid Attribute config for {$attributeConfigKey}"
-                );
-        }
+        return match (true) {
+            $constructorArgType instanceof ConstructorArgsPropertyName,
+            $constructorArgType instanceof ConfigConstructorArgsOne => ConstructorArgsOne::class,
+            $constructorArgType instanceof ConstructorArgsNone => AnnotationConstructorArgsNone::class,
+            $constructorArgType instanceof ConstructorArgsPropertyValueWithSecondArg =>
+                $attributeConfigKey === TypeValidation::class ? TypeTag::class : ConstructorArgsOneWithValue::class,
+            default => throw new InvalidArgumentException("Invalid Attribute config for {$attributeConfigKey}")
+        };
     }
 }
