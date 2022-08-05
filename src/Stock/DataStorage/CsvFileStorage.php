@@ -28,13 +28,10 @@ final class CsvFileStorage implements CollectionStorageInterface
      */
     public static $readFile;
 
-    private string $pathToFile;
-
     private static Collection $attributeConfigMap;
 
-    public function __construct(string $pathToFile, Collection $attributeConfigMap)
+    public function __construct(private string $pathToFile, Collection $attributeConfigMap)
     {
-        $this->pathToFile = $pathToFile;
         static::$attributeConfigMap = $attributeConfigMap;
     }
 

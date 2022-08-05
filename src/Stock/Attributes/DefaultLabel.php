@@ -11,11 +11,8 @@ use Efortmeyer\Polar\Core\Attributes\Attribute;
  */
 final class DefaultLabel extends Attribute
 {
-    private string $labelText;
-
-    public function __construct(string $labelText)
+    public function __construct(private string $labelText)
     {
-        $this->labelText = $labelText;
     }
 
     public function __invoke(): string

@@ -6,24 +6,12 @@ namespace Efortmeyer\Polar\Core\Attributes\Config;
 
 class AttributeConfig implements AttributeConfigInterface
 {
-    protected ConstructorArgs $constructorArgType;
-
-    protected ConstructorArgs $constructorArgTypeForDefault;
-
-    protected ?string $configuredType;
-
-    protected string $defaultClassName;
-
     public function __construct(
-        ConstructorArgs $constructorArgType,
-        string $defaultClassName,
-        ConstructorArgs $constructorArgTypeForDefault,
-        ?string $forType = null
+        protected ConstructorArgs $constructorArgType,
+        protected string $defaultClassName,
+        protected ConstructorArgs $constructorArgTypeForDefault,
+        protected ?string $configuredType = null
     ) {
-        $this->constructorArgType = $constructorArgType;
-        $this->defaultClassName = $defaultClassName;
-        $this->constructorArgTypeForDefault = $constructorArgTypeForDefault;
-        $this->configuredType = $forType;
     }
 
     public function getConstructorArgType(): ConstructorArgs

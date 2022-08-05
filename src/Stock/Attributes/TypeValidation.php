@@ -13,14 +13,8 @@ use Efortmeyer\Polar\Stock\Validation\TypeValidation as ValidationTypeValidation
  */
 final class TypeValidation extends Attribute
 {
-    private mixed $value;
-
-    private string $type;
-
-    public function __construct(mixed $value, string $type)
+    public function __construct(private mixed $value, private string $type)
     {
-        $this->value = $value;
-        $this->type = $type;
     }
 
     public function __invoke(): ValidationInterface

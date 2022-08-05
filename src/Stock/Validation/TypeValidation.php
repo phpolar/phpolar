@@ -13,18 +13,12 @@ use Serializable;
  */
 class TypeValidation implements ValidationInterface
 {
-    public mixed $value;
-
-    private string $type;
-
     private string $errorMessage = "";
 
     private bool $typeIsValid = false;
 
-    public function __construct(mixed $value, string $type)
+    public function __construct(public mixed $value, private string $type)
     {
-        $this->value = $value;
-        $this->type = $type;
         $this->setState();
     }
 

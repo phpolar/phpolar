@@ -13,14 +13,8 @@ use Efortmeyer\Polar\Stock\Validation\MaxLength as ValidationMaxLength;
  */
 final class MaxLength extends Attribute
 {
-    private mixed $value;
-
-    private int $maxLength;
-
-    public function __construct(mixed $value, int $maxLength)
+    public function __construct(private mixed $value, private int $maxLength)
     {
-        $this->value = $value;
-        $this->maxLength = $maxLength;
     }
 
     public function __invoke(): ValidationInterface

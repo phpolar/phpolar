@@ -26,8 +26,6 @@ final class App
 
     private TemplateContext $page;
 
-    private string $requestUri;
-
     private AppConfigInterface $appConfig;
 
     /**
@@ -35,9 +33,8 @@ final class App
      */
     private array $routeMap;
 
-    private function __construct(
-        string $requestUri
-    ) {
+    private function __construct(private string $requestUri)
+    {
         $this->requestUri = $requestUri;
     }
 

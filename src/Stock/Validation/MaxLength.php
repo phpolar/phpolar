@@ -12,17 +12,10 @@ use Efortmeyer\Polar\Stock\Attributes\Messages;
  */
 class MaxLength implements ValidationInterface
 {
-    public mixed $value;
-
-    private int $maxLength;
-
     private string $errorMessage = "";
 
-    public function __construct(mixed $value, int $maxLength = PHP_INT_MAX)
+    public function __construct(public mixed $value, private int $maxLength = PHP_INT_MAX)
     {
-        $this->value = $value;
-        $this->maxLength = $maxLength;
-
         if ($this->isValid() === false) {
             $this->handleError();
         }
