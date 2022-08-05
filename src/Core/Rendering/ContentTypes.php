@@ -9,13 +9,7 @@ namespace Efortmeyer\Polar\Core\Rendering;
  */
 final class ContentTypes
 {
-    /**
-     * @var string
-     */
     public const HTML = "text/html";
 
-    /**
-     * @var string
-     */
     public const ICO = "image/x-icon";
 }

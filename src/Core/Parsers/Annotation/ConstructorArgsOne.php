@@ -19,10 +19,7 @@ final class ConstructorArgsOne extends Constructor
         return $hasAttribute === true ? [$this->getArgOrCast($matches["argument"])] : $this->argsForDefault;
     }
 
-    /**
-     * @return string|int
-     */
-    private function getArgOrCast(string $argument)
+    private function getArgOrCast(string $argument): string|int
     {
         return is_numeric($argument) === true ? intval($argument) : $argument;
     }

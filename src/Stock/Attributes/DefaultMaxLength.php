@@ -14,14 +14,9 @@ use Efortmeyer\Polar\Stock\Validation\MaxLength as ValidationMaxLength;
  */
 class DefaultMaxLength extends Attribute
 {
-    /**
-     * The value to validate.
-     *
-     * @var mixed
-     */
-    private $value;
+    private mixed $value;
 
-    public function __construct($value)
+    public function __construct(mixed $value)
     {
         $this->value = $value;
     }

@@ -24,9 +24,6 @@ abstract class Entry
     private AttributeConfigCollection $attributeConfigMap;
 
     /**
-     * @param AttributeConfigCollection $attributeConfigMap
-     * @param array $storedValues
-     *
      * @throws RuntimeException
      */
     public function __construct(AttributeConfigCollection $attributeConfigMap, array $storedValues = [])
@@ -46,7 +43,7 @@ abstract class Entry
         );
     }
 
-    private function createFieldFromAnnotation(string $propertyName, $propertyValue): FieldMetadata
+    private function createFieldFromAnnotation(string $propertyName, mixed $propertyValue): FieldMetadata
     {
         $annotation = new PropertyAnnotation($this, $propertyName, $this->attributeConfigMap);
         $attributes = $annotation->parse();
@@ -93,8 +90,6 @@ abstract class Entry
 
     /**
      * Returns the values of the model's fields
-     *
-     * @return mixed[]
      */
     public function getFieldValues(): array
     {
@@ -103,6 +98,7 @@ abstract class Entry
 
     /**
      * Returns the field metadata
+     *
      * @return FieldMetadata[]
      */
     public function getFields(): array
