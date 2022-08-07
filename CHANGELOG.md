@@ -1,3 +1,9 @@
+## 1.4.0 (2022-08-06)
+
+### Feat
+
+- add support for php 8 attributes
+
 ## 1.3.1 (2022-08-05)
 
 ### Fix
