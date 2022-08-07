@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Efortmeyer\Polar\Api;
 
+use DateTimeImmutable;
 use Efortmeyer\Polar\Api\Model;
 use Efortmeyer\Polar\Api\UIElements\DateFormControl;
 use Efortmeyer\Polar\Api\UIElements\ErrorBanner;
@@ -11,6 +12,9 @@ use Efortmeyer\Polar\Api\UIElements\HiddenFormControl;
 use Efortmeyer\Polar\Api\UIElements\SuccessBanner;
 use Efortmeyer\Polar\Api\UIElements\TextAreaFormControl;
 use Efortmeyer\Polar\Api\UIElements\TextFormControl;
+use Efortmeyer\Polar\Core\Attributes\InputTypes;
+use Efortmeyer\Polar\Stock\Attributes\AutomaticDateValue;
+use Efortmeyer\Polar\Stock\Attributes\Input;
 use Efortmeyer\Polar\Tests\Mocks\StorageStub;
 use PHPUnit\Framework\TestCase;
 
@@ -140,6 +144,22 @@ class FormTest extends TestCase
     /**
      * @test
      */
+    public function shouldReturnTextFormControlsWhenConfiguredWithNativeAttribute()
+    {
+        $model = new class(static::$attributesConfigMap) extends Model
+        {
+            #[Input(InputTypes::TEXT)]
+            public string $property1 = "FAKE";
+        };
+        $storageStub = $this->createStub(StorageStub::class);
+        $sut = new Form($model);
+        $sut->submit($storageStub);
+        $this->assertContainsOnlyInstancesOf(TextFormControl::class, $sut->getTextInputs());
+    }
+
+    /**
+     * @test
+     */
     public function shouldReturnTextAreaFormControls()
     {
         $model = new class(static::$attributesConfigMap) extends Model
@@ -149,6 +169,22 @@ class FormTest extends TestCase
              * @Input(textarea)
              */
             public $property1 = "FAKE";
+        };
+        $storageStub = $this->createStub(StorageStub::class);
+        $sut = new Form($model);
+        $sut->submit($storageStub);
+        $this->assertContainsOnlyInstancesOf(TextAreaFormControl::class, $sut->getTextAreaInputs());
+    }
+
+    /**
+     * @test
+     */
+    public function shouldReturnTextAreaFormControlsWhenConfiguredWithNativeAttributes()
+    {
+        $model = new class(static::$attributesConfigMap) extends Model
+        {
+            #[Input(InputTypes::TEXTAREA)]
+            public string $property1 = "FAKE";
         };
         $storageStub = $this->createStub(StorageStub::class);
         $sut = new Form($model);
@@ -178,6 +214,22 @@ class FormTest extends TestCase
     /**
      * @test
      */
+    public function shouldReturnDateFormControlsWhenConfiguredWithNativeAttributes()
+    {
+        $model = new class(static::$attributesConfigMap) extends Model
+        {
+            #[Input(InputTypes::DATE)]
+            public DateTimeImmutable $property1;
+        };
+        $storageStub = $this->createStub(StorageStub::class);
+        $sut = new Form($model);
+        $sut->submit($storageStub);
+        $this->assertContainsOnlyInstancesOf(DateFormControl::class, $sut->getDateInputs());
+    }
+
+    /**
+     * @test
+     */
     public function shouldReturnHiddenFormControls()
     {
         $model = new class(static::$attributesConfigMap) extends Model
@@ -188,6 +240,23 @@ class FormTest extends TestCase
              * @AutomaticDateValue
              */
             public $property1;
+        };
+        $storageStub = $this->createStub(StorageStub::class);
+        $sut = new Form($model);
+        $sut->submit($storageStub);
+        $this->assertContainsOnlyInstancesOf(HiddenFormControl::class, $sut->getHiddenInputs());
+    }
+
+    /**
+     * @test
+     */
+    public function shouldReturnHiddenFormControlsWhenConfiguredWithNativeAttributes()
+    {
+        $model = new class(static::$attributesConfigMap) extends Model
+        {
+            #[Input(InputTypes::DATE)]
+            #[AutomaticDateValue]
+            public DateTimeImmutable $property1;
         };
         $storageStub = $this->createStub(StorageStub::class);
         $sut = new Form($model);

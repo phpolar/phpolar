@@ -5,8 +5,14 @@ declare(strict_types=1);
 namespace Efortmeyer\Polar\Core\Attributes;
 
 use Efortmeyer\Polar\Core\Fields\AutomaticDateField;
+use Efortmeyer\Polar\Stock\Attributes\Column;
+use Efortmeyer\Polar\Stock\Attributes\DateFormat;
+use Efortmeyer\Polar\Stock\Attributes\DefaultColumn;
+use Efortmeyer\Polar\Stock\Attributes\DefaultDateFormat;
 use Efortmeyer\Polar\Stock\Attributes\DefaultFormControl;
+use Efortmeyer\Polar\Stock\Attributes\DefaultLabel;
 use Efortmeyer\Polar\Stock\Attributes\Input;
+use Efortmeyer\Polar\Stock\Attributes\Label;
 
 class AttributeCollection
 {
@@ -27,6 +33,21 @@ class AttributeCollection
         );
     }
 
+    public function addDefaultsBasedOnMissingAttributes(string $propertyName): void
+    {
+        if ($this->containsClass(Label::class) === false) {
+            $this->internalArray[] = new DefaultLabel($propertyName);
+        }
+
+        if ($this->containsClass(Column::class) === false) {
+            $this->internalArray[] = new DefaultColumn($propertyName);
+        }
+
+        if ($this->containsClass(DateFormat::class) === false) {
+            $this->internalArray[] = new DefaultDateFormat();
+        }
+    }
+
     public function getValueAttributeOrNull(): ?Attribute
     {
         foreach ($this->internalArray as $attribute) {
@@ -36,6 +57,11 @@ class AttributeCollection
         }
         // attribute not found
         return null;
+    }
+
+    public function getValueAttributeOrElse(mixed $value): mixed
+    {
+        return $this->shouldGetValueAttribute() === true ? $this->getValueAttributeOrNull() : $value;
     }
 
     /**
@@ -113,5 +139,10 @@ class AttributeCollection
     public function getValidatorAttributes(): array
     {
         return array_filter($this->internalArray, fn (Attribute $attribute) => $attribute->isValidator() === true);
+    }
+
+    public function shouldGetValueAttribute(): bool
+    {
+        return count(array_filter($this->internalArray, fn (Attribute $attribute) => $attribute->isAutomaticDateInput() === true)) > 0;
     }
 }

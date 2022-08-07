@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace Efortmeyer\Polar\Core;
 
 use Efortmeyer\Polar\Api\Attributes\Config\Collection as AttributeConfigCollection;
+use Efortmeyer\Polar\Core\Attributes\AttributeCollection;
 use Efortmeyer\Polar\Core\Fields\FieldMetadata;
-use Efortmeyer\Polar\Stock\Attributes\AutomaticDateValue;
+use ReflectionAttribute;
 use ReflectionClass;
+use ReflectionObject;
 use ReflectionProperty;
 use RuntimeException;
 
@@ -30,22 +32,56 @@ abstract class Entry
             $this->setValues($storedValues);
         }
 
-        $properties = (new ReflectionClass($this))->getProperties(ReflectionProperty::IS_PUBLIC);
-
-        $this->fields = array_map(
-            [$this, "createFieldFromAnnotation"],
-            array_map(fn ($prop) => $prop->getName(), $properties),
-            array_map(fn ($prop) => $prop->getValue($this), $properties)
+        /**
+         * The annotations/attributes on the entry's properties
+         * are used to configure the fields.
+         */
+        $this->fields = array_merge(
+            $this->createFieldsFromNativeAttributes(),
+            $this->createFieldsFromAnnotations(),
         );
     }
 
-    private function createFieldFromAnnotation(string $propertyName, mixed $propertyValue): FieldMetadata
+    /**
+     * @return FieldMetadata[]
+     */
+    private function createFieldsFromAnnotations(): array
     {
-        $annotation = new PropertyAnnotation($this, $propertyName, $this->attributeConfigMap);
-        $attributes = $annotation->parse();
-        $value = $attributes->containsClass(AutomaticDateValue::class) === true ? $attributes->getValueAttributeOrNull() : $propertyValue;
-        $field = FieldMetadata::getFactory($attributes)->create($propertyName, $value);
-        return $field;
+        $properties = (new ReflectionClass($this))->getProperties(ReflectionProperty::IS_PUBLIC);
+        return array_map(
+            function (string $propertyName, mixed $propertyValue): FieldMetadata {
+                $annotation = new PropertyAnnotation($this, $propertyName, $this->attributeConfigMap);
+                $attributes = $annotation->parse();
+                return FieldMetadata::getFactory($attributes)->create($propertyName, $attributes->getValueAttributeOrElse($propertyValue));
+            },
+            array_map(fn (ReflectionProperty $prop) => $prop->getName(), $properties),
+            array_map(fn (ReflectionProperty $prop) => $prop->isInitialized($this) === true ? $prop->getValue($this) : $prop->getDefaultValue(), $properties)
+        );
+    }
+
+    /**
+     * @return FieldMetadata[]
+     */
+    private function createFieldsFromNativeAttributes(): array
+    {
+        return array_map(
+            function (ReflectionProperty $property): FieldMetadata {
+                $propertyName = $property->getName();
+                $propertyValue = $property->isInitialized($this) === true ? $property->getValue($this) : $property->getDefaultValue();
+                $attributes = new AttributeCollection(
+                    array_map(
+                        fn (ReflectionAttribute $attr) => $attr->newInstance(),
+                        $property->getAttributes()
+                    )
+                );
+                $attributes->addDefaultsBasedOnMissingAttributes($propertyName);
+                return FieldMetadata::getFactory($attributes)->create($propertyName, $attributes->getValueAttributeOrElse($propertyValue));
+            },
+            array_filter(
+                (new ReflectionObject($this))->getProperties(ReflectionProperty::IS_PUBLIC),
+                fn (ReflectionProperty $prop) => count($prop->getAttributes()) > 0
+            )
+        );
     }
 
     private function setValues(array $givenValues): void
