@@ -14,4 +14,12 @@ final class SerializableMock implements Serializable
     public function unserialize($data)
     {
     }
+    public function __serialize()
+    {
+        return "<a href='javascript:alert(document.cookie)'>hacked</a>";
+    }
+
+    public function __unserialize($data)
+    {
+    }
 }
