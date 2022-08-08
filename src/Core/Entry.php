@@ -21,7 +21,7 @@ abstract class Entry
     /**
      * @var FieldMetadata[]
      */
-    private array $fields;
+    private readonly array $fields;
 
     /**
      * @throws RuntimeException
