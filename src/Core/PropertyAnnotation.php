@@ -61,8 +61,8 @@ final class PropertyAnnotation
         $this->docComment = $docComment === false ? "" : $docComment;
         $this->propertyName = $reflectionProperty->getName();
         $this->propertyValue = $reflectionProperty->isInitialized($instance) === true ? $reflectionProperty->getValue($instance) : $reflectionProperty->getDefaultValue();
-        static::$onlyRequired = Closure::fromCallable([$this, "filterRequiredAttributes"]);
-        static::$toAttribute = Closure::fromCallable([$this, "mapToAttribute"]);
+        static::$onlyRequired = $this->filterRequiredAttributes(...);
+        static::$toAttribute = $this->mapToAttribute(...);
     }
 
     /**
