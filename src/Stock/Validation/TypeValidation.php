@@ -36,11 +36,11 @@ class TypeValidation implements ValidationInterface
     {
         // the functions will be used to validate their corresponding type
         $typeCheckMap = [
-            ScalarTypes::STRING    => "is_string",
-            ScalarTypes::INTEGER   => "is_int",
-            ScalarTypes::FLOAT     => "is_float",
-            ScalarTypes::DOUBLE    => "is_float",
-            ScalarTypes::BOOL      => "is_bool",
+            ScalarTypes::STRING    => is_string(...),
+            ScalarTypes::INTEGER   => is_int(...),
+            ScalarTypes::FLOAT     => is_float(...),
+            ScalarTypes::DOUBLE    => is_float(...),
+            ScalarTypes::BOOL      => is_bool(...),
             ScalarTypes::NULL      => fn ($value) => $value === null,
             Serializable::class    => fn ($value) => is_subclass_of($value, Serializable::class) === true,
         ];
