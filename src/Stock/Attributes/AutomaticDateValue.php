@@ -19,7 +19,12 @@ use Efortmeyer\Polar\Core\Fields\AutomaticDateField;
 #[GlobalAttribute(GlobalAttribute::TARGET_PROPERTY)]
 final class AutomaticDateValue extends Attribute
 {
-    public string $type = InputTypes::DATE;
+    public string $type;
+
+    public function __construct()
+    {
+        $this->type = InputTypes::Date->value;
+    }
 
     public function __invoke(): DateTimeImmutable
     {

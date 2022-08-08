@@ -90,7 +90,7 @@ class FieldMetadataTestData
             $getColumnTestCase("column", new DefaultColumn($text)),
             $getDateFormatTestCase("dateFormat", new DateFormat(Defaults::DATE_FORMAT)),
             $getDateFormatTestCase("dateFormat", new DefaultDateFormat($dateTime)),
-            $getFormControlTestCase("formControlType", new Input(Defaults::FORM_CONTROL_TYPE)),
+            $getFormControlTestCase("formControlType", new Input(InputTypes::Text)),
             $getFormControlTestCase("formControlType", new DefaultFormControl()),
             $getAutomaticDateTestCase("value", new AutomaticDateValue()),
         ];
@@ -103,7 +103,7 @@ class FieldMetadataTestData
         $maxLength = strlen($maxLengthVal);
 
         $maxLengthAttribute = new MaxLength($maxLengthVal, $maxLength);
-        $typeValidationAttribute = new TypeValidation($text, ScalarTypes::STRING);
+        $typeValidationAttribute = new TypeValidation($text, ScalarTypes::String->value);
         $noopAttribute = new NoopValidate();
 
         return [
@@ -116,10 +116,10 @@ class FieldMetadataTestData
     public static function fieldTypeTestCases()
     {
         return [
-            [TextField::class, "", new Input(InputTypes::TEXT)],
-            [TextAreaField::class, "", new Input(InputTypes::TEXTAREA)],
-            [NumberField::class, "", new Input(InputTypes::NUMBER)],
-            [DateField::class, "", new Input(InputTypes::DATE)],
+            [TextField::class, "", new Input(InputTypes::Text)],
+            [TextAreaField::class, "", new Input(InputTypes::Textarea)],
+            [NumberField::class, "", new Input(InputTypes::Number)],
+            [DateField::class, "", new Input(InputTypes::Date)],
             [AutomaticDateField::class, null, new AutomaticDateValue()],
         ];
     }

@@ -7,17 +7,17 @@ namespace Efortmeyer\Polar\Stock\Validation;
 /**
  * Contains a set of values representing scalar types.
  */
-final class ScalarTypes
+enum ScalarTypes: string
 {
-    public const STRING = "string";
+    case String = "string";
 
-    public const INTEGER = "int";
+    case Integer = "int";
 
-    public const FLOAT = "float";
+    case Float = "float";
 
-    public const DOUBLE = "double";
+    case Double = "double";
 
-    public const NULL = "null";
+    case Null = "null";
 
-    public const BOOL = "bool";
+    case Bool = "bool";
 }

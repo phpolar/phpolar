@@ -11,6 +11,6 @@ class IcoFile extends File
 {
     protected function getContentType(): string
     {
-        return ContentTypes::ICO;
+        return ContentTypes::ICO->value;
     }
 }

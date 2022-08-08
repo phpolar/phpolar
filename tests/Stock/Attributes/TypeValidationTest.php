@@ -24,7 +24,7 @@ class TypeValidationTest extends TestCase
     public function shouldCreateValidatorWithGivenType()
     {
         $givenValue = str_repeat("a", random_int(1, 100));
-        $givenType = ScalarTypes::STRING;
+        $givenType = ScalarTypes::String->value;
         $sut = new TypeValidation($givenValue, $givenType);
         $validator = $sut();
         $reflection = new ReflectionProperty($validator, "type");

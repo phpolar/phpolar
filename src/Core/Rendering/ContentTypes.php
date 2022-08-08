@@ -7,9 +7,9 @@ namespace Efortmeyer\Polar\Core\Rendering;
 /**
  * Contains a set of content types for files and streams.
  */
-final class ContentTypes
+enum ContentTypes: string
 {
-    public const HTML = "text/html";
+    case HTML = "text/html";
 
-    public const ICO = "image/x-icon";
+    case ICO = "image/x-icon";
 }
