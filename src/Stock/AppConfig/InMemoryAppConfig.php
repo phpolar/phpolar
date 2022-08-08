@@ -42,11 +42,8 @@ use DateTimeInterface;
  */
 final class InMemoryAppConfig implements AppConfigInterface
 {
-    private readonly Collection $configCollection;
-
-    public function __construct()
+    public function __construct(private readonly Collection $configCollection = new Collection())
     {
-        $this->configCollection = new Collection();
     }
 
     /**

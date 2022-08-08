@@ -8,7 +8,6 @@ abstract class File
 {
     public function __construct(private string $pathToFile)
     {
-        $this->pathToFile = $pathToFile;
     }
 
     abstract protected function getContentType(): string;
