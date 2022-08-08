@@ -60,7 +60,6 @@ final class CsvFileStorage implements CollectionStorageInterface
      */
     private static function openWriteFile(string $pathToFile)
     {
-        ini_set("auto_detect_line_endings", "1");
         $fileOpenResult = fopen($pathToFile, "a+");
         // @codeCoverageIgnoreStart
         if ($fileOpenResult === false) {
@@ -77,7 +76,6 @@ final class CsvFileStorage implements CollectionStorageInterface
      */
     private static function openReadFile(string $pathToFile)
     {
-        ini_set("auto_detect_line_endings", "1");
         if (file_exists($pathToFile) === false) {
             touch($pathToFile);
         }
