@@ -38,14 +38,14 @@ use ReflectionProperty;
  */
 final class PropertyAnnotation
 {
-    private string $docComment;
+    private readonly string $docComment;
 
-    private string $propertyName;
+    private readonly string $propertyName;
 
     /**
      * @var mixed
      */
-    private $propertyValue;
+    private readonly mixed $propertyValue;
 
     private static Closure $onlyRequired;
 

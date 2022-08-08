@@ -33,9 +33,8 @@ final class App
      */
     private array $routeMap;
 
-    private function __construct(private string $requestUri)
+    private function __construct(private readonly string $requestUri)
     {
-        $this->requestUri = $requestUri;
     }
 
     /**

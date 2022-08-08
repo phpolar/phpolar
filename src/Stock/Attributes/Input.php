@@ -15,7 +15,7 @@ use Efortmeyer\Polar\Core\Fields\TextField;
 #[GlobalAttribute(GlobalAttribute::TARGET_PROPERTY)]
 final class Input extends Attribute
 {
-    protected string $type;
+    protected readonly string $type;
 
     public function __construct(string $type)
     {

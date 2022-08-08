@@ -7,10 +7,10 @@ namespace Efortmeyer\Polar\Core\Attributes\Config;
 class AttributeConfig implements AttributeConfigInterface
 {
     public function __construct(
-        protected ConstructorArgs $constructorArgType,
-        protected string $defaultClassName,
-        protected ConstructorArgs $constructorArgTypeForDefault,
-        protected ?string $configuredType = null
+        protected readonly ConstructorArgs $constructorArgType,
+        protected readonly string $defaultClassName,
+        protected readonly ConstructorArgs $constructorArgTypeForDefault,
+        protected readonly ?string $configuredType = null
     ) {
     }
 
