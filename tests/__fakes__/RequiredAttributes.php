@@ -20,7 +20,7 @@ class RequiredAttributes
             new DefaultColumn(""),
             new DefaultDateFormat(),
             new DefaultMaxLength(""),
-            new Input(InputTypes::TEXT),
+            new Input(InputTypes::Text),
         ];
     }
 
@@ -30,7 +30,7 @@ class RequiredAttributes
             new DefaultLabel(""),
             new DefaultColumn(""),
             new DefaultMaxLength(""),
-            new Input(InputTypes::DATE),
+            new Input(InputTypes::Date),
         ];
     }
 
@@ -40,7 +40,7 @@ class RequiredAttributes
             new DefaultColumn(""),
             new DefaultDateFormat(),
             new DefaultMaxLength(""),
-            new Input(InputTypes::TEXT),
+            new Input(InputTypes::Text),
         ];
     }
 
@@ -50,7 +50,7 @@ class RequiredAttributes
             new DefaultLabel(""),
             new DefaultDateFormat(),
             new DefaultMaxLength(""),
-            new Input(InputTypes::TEXT),
+            new Input(InputTypes::Text),
         ];
     }
 
@@ -69,7 +69,7 @@ class RequiredAttributes
             new DefaultLabel(""),
             new DefaultColumn(""),
             new DefaultDateFormat(),
-            new Input(InputTypes::TEXT),
+            new Input(InputTypes::Text),
         ];
     }
 }

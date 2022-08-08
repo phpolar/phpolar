@@ -56,7 +56,7 @@ class FormControlTest extends TestCase
             new DefaultColumn(""),
             new DefaultDateFormat(),
             new DefaultMaxLength(""),
-            new Input(InputTypes::TEXT),
+            new Input(InputTypes::Text),
         ];
     }
 
@@ -69,7 +69,7 @@ class FormControlTest extends TestCase
             new DefaultMaxLength(""),
         ];
         return [
-            [FieldMetadata::getFactory(new AttributeCollection([...$requiredAttributes, new Input(InputTypes::TEXT)]))->create("testProperty", "")],
+            [FieldMetadata::getFactory(new AttributeCollection([...$requiredAttributes, new Input(InputTypes::Text)]))->create("testProperty", "")],
         ];
     }
 
@@ -102,19 +102,19 @@ class FormControlTest extends TestCase
         return [
             [
                 TextFormControl::class,
-                FieldMetadata::getFactory(new AttributeCollection([...$requiredAttributes, new Input(InputTypes::TEXT)]))->create("testProperty", ""),
+                FieldMetadata::getFactory(new AttributeCollection([...$requiredAttributes, new Input(InputTypes::Text)]))->create("testProperty", ""),
             ],
             [
                 TextAreaFormControl::class,
-                FieldMetadata::getFactory(new AttributeCollection([...$requiredAttributes, new Input(InputTypes::TEXTAREA)]))->create("testProperty", ""),
+                FieldMetadata::getFactory(new AttributeCollection([...$requiredAttributes, new Input(InputTypes::Textarea)]))->create("testProperty", ""),
             ],
             [
                 NumberFormControl::class,
-                FieldMetadata::getFactory(new AttributeCollection([...$requiredAttributes, new Input(InputTypes::NUMBER)]))->create("testProperty", ""),
+                FieldMetadata::getFactory(new AttributeCollection([...$requiredAttributes, new Input(InputTypes::Number)]))->create("testProperty", ""),
             ],
             [
                 DateFormControl::class,
-                FieldMetadata::getFactory(new AttributeCollection([...$requiredAttributes, new Input(InputTypes::DATE)]))->create("testProperty", null),
+                FieldMetadata::getFactory(new AttributeCollection([...$requiredAttributes, new Input(InputTypes::Date)]))->create("testProperty", null),
             ],
             [
                 HiddenFormControl::class,

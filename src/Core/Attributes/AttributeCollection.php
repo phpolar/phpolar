@@ -127,7 +127,7 @@ class AttributeCollection
     {
         foreach ($this->internalArray as $attribute) {
             if ($attribute->isFormControl() === true) {
-                return $attribute->isAutomaticDateInput() === true ? new Input(InputTypes::DATE) : $attribute;
+                return $attribute->isAutomaticDateInput() === true ? new Input(InputTypes::Date) : $attribute;
             }
         }
         throw new RequiredAttributeNotFoundException("Form control type not found");

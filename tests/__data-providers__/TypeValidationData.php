@@ -18,12 +18,12 @@ class TypeValidationData
     public static function valid()
     {
         return [
-            [str_repeat("a", random_int(1, 20)),                       ScalarTypes::STRING],
-            [random_int(1, 2000),                                      ScalarTypes::INTEGER],
-            [self::FLOAT_VALUES[array_rand(self::FLOAT_VALUES)],       ScalarTypes::FLOAT],
-            [self::FLOAT_VALUES[array_rand(self::FLOAT_VALUES)],       ScalarTypes::DOUBLE],
-            [self::BOOLEAN_VALUES[array_rand(self::BOOLEAN_VALUES)],   ScalarTypes::BOOL],
-            [null,                                                     ScalarTypes::NULL],
+            [str_repeat("a", random_int(1, 20)),                       ScalarTypes::String->value],
+            [random_int(1, 2000),                                      ScalarTypes::Integer->value],
+            [self::FLOAT_VALUES[array_rand(self::FLOAT_VALUES)],       ScalarTypes::Float->value],
+            [self::FLOAT_VALUES[array_rand(self::FLOAT_VALUES)],       ScalarTypes::Double->value],
+            [self::BOOLEAN_VALUES[array_rand(self::BOOLEAN_VALUES)],   ScalarTypes::Bool->value],
+            [null,                                                     ScalarTypes::Null->value],
             [new SerializableMock(),                                   Serializable::class],
         ];
     }
@@ -31,9 +31,9 @@ class TypeValidationData
     public static function invalid()
     {
         return [
-            [random_int(1, 2000),                ScalarTypes::STRING],
-            [str_repeat("a", random_int(1, 20)), ScalarTypes::INTEGER],
-            [str_repeat("a", random_int(1, 20)), ScalarTypes::BOOL],
+            [random_int(1, 2000),                ScalarTypes::String->value],
+            [str_repeat("a", random_int(1, 20)), ScalarTypes::Integer->value],
+            [str_repeat("a", random_int(1, 20)), ScalarTypes::Bool->value],
             [new stdClass(),                     Serializable::class],
             [new stdClass(),                     stdClass::class],
         ];

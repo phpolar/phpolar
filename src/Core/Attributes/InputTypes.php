@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Efortmeyer\Polar\Core\Attributes;
 
-final class InputTypes
+enum InputTypes: string
 {
-    public const TEXT = "text";
+    case Text = "text";
 
-    public const TEXTAREA = "textarea";
+    case Textarea = "textarea";
 
-    public const NUMBER = "number";
+    case Number = "number";
 
-    public const DATE = "datetime-local";
+    case Date = "datetime-local";
 }
