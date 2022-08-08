@@ -72,8 +72,7 @@ class HtmlEncoder
 
     private static function encodeArray(array $arr): array
     {
-        $encode = HtmlEncoder::encode(...);
-        return array_map($encode, $arr);
+        return array_map([HtmlEncoder::class, "encode"], $arr);
     }
 
     /**
