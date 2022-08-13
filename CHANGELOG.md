@@ -1,3 +1,9 @@
+## 1.3.2 (2022-08-13)
+
+### Fix
+
+- **File.php**: secure content type headers
+
 ## 1.3.1 (2022-08-05)
 
 ### Fix
