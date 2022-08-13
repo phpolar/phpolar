@@ -17,10 +17,13 @@ name: PHPMD
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - main
+      - 'releases/**'
   pull_request:
-    # The branches below must be a subset of the branches above
-    branches: [ "main" ]
+    branches:
+      - main
+      - 'releases/**'
   schedule:
     - cron: '19 7 * * 6'
 
