@@ -13,7 +13,7 @@ abstract class File
         $this->pathToFile = $pathToFile;
     }
 
-    abstract protected function getContentType(): string;
+    abstract protected function setContentTypeHeader(): void;
 
     /**
      * Displays the file.
@@ -34,7 +34,7 @@ abstract class File
     protected function printContentType(): void
     {
         if (headers_sent() === false) {
-            header("Content-Type: {$this->getContentType()}");
+            $this->setContentTypeHeader();
         }
     }
 }
