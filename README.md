@@ -1,4 +1,4 @@
-# Polar
+# <img src="brand.svg" alt="logo for polar framework" height="72px" width="156px"/>
 
 ## A super-tiny, lightweight microframework for PHP projects
 
