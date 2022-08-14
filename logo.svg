@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg">
+   <style>
+     .small { font: 100vh sans-serif; }
+     .flipped { transform-origin: 48% 50%; transform: scale(-1,1); }
+   </style>
+    <g fill="green">
+      <text x="0" y="78%" class="small">(</text>
+      <text x="82%" y="78%" class="small">)</text>
+    </g>
+    <g fill="rgb(105,133,255)">
+      <text x="46%" y="90%" class="small">E</text>
+      <text x="35%" y="90%" class="small flipped">F</text>
+    </g>
+</svg>
