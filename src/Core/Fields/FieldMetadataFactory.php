@@ -8,28 +8,8 @@ use Efortmeyer\Polar\Core\Attributes\AttributeCollection;
 
 final class FieldMetadataFactory
 {
-    private readonly FieldMetadataConfig $config;
-
-    private function __construct(private FieldMetadata $field, AttributeCollection $attributes)
+    public function __construct(private FieldMetadata $field, private FieldMetadataConfig $config)
     {
-        $this->config = FieldMetadataConfig::create($attributes);
-    }
-
-    /**
-     * Gets a factory instance.
-     *
-     * The purpose of this method is
-     * for the factory to only be created
-     * by a FieldMetadata instance.  A
-     * FieldMetadata instance can only
-     * be created by this factory.
-     *
-     * To create FieldMetadata,
-     * createFactory -> create field
-     */
-    public static function getInstance(FieldMetadata $field, AttributeCollection $attributes): FieldMetadataFactory
-    {
-        return new self($field, $attributes);
     }
 
     /**
@@ -37,9 +17,9 @@ final class FieldMetadataFactory
      */
     public function create(string $propertyName, mixed $value): FieldMetadata
     {
-        $formControlAttribute = $this->config->formControlTypeAttribute;
-        $labelAttribute = $this->config->labelAttribute;
-        $columnAttribute = $this->config->columnAttribute;
+        $formControlAttribute = $this->config->formControlTypeAttr;
+        $labelAttribute = $this->config->labelAttr;
+        $columnAttribute = $this->config->columnAttr;
 
         $this->field->propertyName = $propertyName;
         $this->field->value = $this->config->getAttributeValueOrElse($value);

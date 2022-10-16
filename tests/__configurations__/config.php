@@ -10,7 +10,7 @@ use Efortmeyer\Polar\Core\Attributes\Config\{
     ConstructorArgsOne,
     ConstructorArgsPropertyName,
     ConstructorArgsPropertyValue,
-    ConstructorArgsPropertyValueWithSecondArg,
+    ConstructorArgsPropValWithSndArg,
 };
 use Efortmeyer\Polar\Core\Attributes\Config\AttributeConfig;
 use Efortmeyer\Polar\Stock\Attributes\Config\ColumnKey;
@@ -59,7 +59,7 @@ $configCollection->add(
 $configCollection->add(
     new MaxLengthKey(),
     new class(
-        new ConstructorArgsPropertyValueWithSecondArg(),
+        new ConstructorArgsPropValWithSndArg(),
         DefaultMaxLength::class,
         new ConstructorArgsPropertyValue(),
     ) extends AttributeConfig
@@ -80,7 +80,7 @@ $configCollection->add(
 $configCollection->add(
     new TypeValidationKey(),
     new class(
-        new ConstructorArgsPropertyValueWithSecondArg(),
+        new ConstructorArgsPropValWithSndArg(),
         NoopValidate::class,
         new ConstructorArgsNone()
     ) extends AttributeConfig

@@ -9,7 +9,7 @@ class AttributeConfig implements AttributeConfigInterface
     public function __construct(
         protected readonly ConstructorArgs $constructorArgType,
         protected readonly string $defaultClassName,
-        protected readonly ConstructorArgs $constructorArgTypeForDefault,
+        protected readonly ConstructorArgs $defaultArgType,
         protected readonly ?string $configuredType = null
     ) {
     }
@@ -26,7 +26,7 @@ class AttributeConfig implements AttributeConfigInterface
 
     public function getConstructorArgTypeForDefault(): ConstructorArgs
     {
-        return $this->constructorArgTypeForDefault;
+        return $this->defaultArgType;
     }
 
     public function isConfiguredForClass(): bool

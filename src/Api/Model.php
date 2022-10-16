@@ -24,8 +24,8 @@ abstract class Model extends Entry implements Comparable
     public function equals(Comparable $other): bool
     {
         $properties = get_object_vars($this);
-        $propertiesOfOtherObject = get_object_vars($other);
-        $matches = array_filter($properties, fn ($value) => in_array($value, $propertiesOfOtherObject));
+        $propsOfOtherObj = get_object_vars($other);
+        $matches = array_filter($properties, fn ($value) => in_array($value, $propsOfOtherObj));
         return count($matches) === count($properties);
     }
 }

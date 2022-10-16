@@ -48,7 +48,7 @@ final class App
         $app = new self($requestUri);
         $appConfig = new InMemoryAppConfig();
         $app->appConfig = $appConfig;
-        $app->storage = new CsvFileStorage(CsvFileStorage::getDefaultName(), $appConfig->getAll());
+        $app->storage = new CsvFileStorage($appConfig->getAll(), date("Ym") . ".csv");
         return $app;
     }
 
@@ -114,13 +114,11 @@ final class App
      */
     public function run(): void
     {
-        if (isset($this->routeMap[$this->requestUri]) === true)
-        {
-            $this->routeMap[$this->requestUri]($this->page, $this->storage);
-        }
-        else
+        if (isset($this->routeMap[$this->requestUri]) === false)
         {
             static::notFoundHandler();
+            return;
         }
+        $this->routeMap[$this->requestUri]($this->page, $this->storage);
     }
 }

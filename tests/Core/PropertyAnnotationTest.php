@@ -11,7 +11,7 @@ use Efortmeyer\Polar\Core\Attributes\Config\ConstructorArgsPropertyName;
 use Efortmeyer\Polar\Core\Attributes\Config\ConstructorArgs;
 use Efortmeyer\Polar\Core\Attributes\Config\ConstructorArgsNone;
 use Efortmeyer\Polar\Core\Attributes\Config\ConstructorArgsPropertyValue;
-use Efortmeyer\Polar\Core\Attributes\Config\ConstructorArgsPropertyValueWithSecondArg;
+use Efortmeyer\Polar\Core\Attributes\Config\ConstructorArgsPropValWithSndArg;
 use Efortmeyer\Polar\Stock\Attributes\Config\LabelKey;
 use Efortmeyer\Polar\Stock\Attributes\Config\MaxLengthKey;
 use Efortmeyer\Polar\Stock\Attributes\DefaultLabel;
@@ -324,7 +324,7 @@ class PropertyAnnotationTest extends TestCase
          * @var Stub $configStub
          */
         $configStub = $this->createStub(AttributeConfig::class);
-        $configStub->method("getConstructorArgType")->willReturn(new ConstructorArgsPropertyValueWithSecondArg());
+        $configStub->method("getConstructorArgType")->willReturn(new ConstructorArgsPropValWithSndArg());
         $configStub->method("getConstructorArgTypeForDefault")->willReturn(new ConstructorArgsPropertyValue());
         $configStub->method("getClassNameForDefaultAttribute")->willReturn(DefaultMaxLength::class);
         $attributeConfig = new class($configStub) extends AttributeConfig {

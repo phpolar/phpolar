@@ -15,6 +15,9 @@ use Efortmeyer\Polar\Core\Fields\{
 };
 use RuntimeException;
 
+/**
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+ */
 abstract class FormControl
 {
     protected string $errorMessage = "";

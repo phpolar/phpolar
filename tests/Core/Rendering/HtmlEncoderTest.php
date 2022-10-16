@@ -148,7 +148,7 @@ class HtmlEncoderTest extends PolarTestCaseExtension
         $object->prop = $givenValue;
         $expectedObject = clone $object;
         $expectedObject->prop = $expectedResult;
-        $actualResult = HtmlEncoder::encodeProperties($object);
+        $actualResult = (new HtmlEncoder())->encodeProperties($object);
         $this->assertEquals($actualResult, $expectedObject);
     }
 
@@ -160,7 +160,7 @@ class HtmlEncoderTest extends PolarTestCaseExtension
     {
         $object = new stdClass();
         $object->prop = $givenValue;
-        $actualResult = HtmlEncoder::encodeProperties($object);
+        $actualResult = (new HtmlEncoder())->encodeProperties($object);
         $this->assertEquals($actualResult, $object);
     }
 
@@ -172,7 +172,7 @@ class HtmlEncoderTest extends PolarTestCaseExtension
     {
         $object = new stdClass();
         $object->prop = $givenValue;
-        $actualResult = HtmlEncoder::encodeProperties($object);
+        $actualResult = (new HtmlEncoder())->encodeProperties($object);
         $this->assertEquals($actualResult, $object);
     }
 
@@ -184,7 +184,7 @@ class HtmlEncoderTest extends PolarTestCaseExtension
     {
         $object = new stdClass();
         $object->prop = $givenValue;
-        $actualResult = HtmlEncoder::encodeProperties($object);
+        $actualResult = (new HtmlEncoder())->encodeProperties($object);
         $object->prop = $expectedResult;
         $this->assertEquals($object, $actualResult);
     }
@@ -197,7 +197,7 @@ class HtmlEncoderTest extends PolarTestCaseExtension
     {
         $object = new stdClass();
         $object->prop = $givenValue;
-        $actualResult = HtmlEncoder::encodeProperties($object);
+        $actualResult = (new HtmlEncoder())->encodeProperties($object);
         $object->prop = $expectedResult;
         $this->assertEquals($object, $actualResult);
     }
@@ -210,7 +210,7 @@ class HtmlEncoderTest extends PolarTestCaseExtension
     {
         $object = new stdClass();
         $object->prop = $givenValue;
-        $actualResult = HtmlEncoder::encodeProperties($object);
+        $actualResult = (new HtmlEncoder())->encodeProperties($object);
         $object->prop = "";
         $this->assertEquals($actualResult, $object);
     }
@@ -220,9 +220,9 @@ class HtmlEncoderTest extends PolarTestCaseExtension
      */
     public function shouldReturnObjectWhenGivenObjectWithoutProperties()
     {
-        $obj = new stdClass();
-        $actualResult = HtmlEncoder::encodeProperties($obj);
-        $this->assertEquals($actualResult, $obj);
+        $object = new stdClass();
+        $actualResult = (new HtmlEncoder())->encodeProperties($object);
+        $this->assertEquals($actualResult, $object);
     }
 
     /**
@@ -231,7 +231,7 @@ class HtmlEncoderTest extends PolarTestCaseExtension
      */
     public function shouldReturnSanitizedNestedPropertiesWhenGivenANestedObject(object $givenNestedObject, object $expectedResult)
     {
-        $actualResult = HtmlEncoder::encodeProperties($givenNestedObject);
+        $actualResult = (new HtmlEncoder())->encodeProperties($givenNestedObject);
         $this->assertObjectDeepEquals($expectedResult, $actualResult);
     }
 
@@ -243,7 +243,7 @@ class HtmlEncoderTest extends PolarTestCaseExtension
     {
         $object = new stdClass();
         $object->prop = $givenIterable;
-        $actualResult = HtmlEncoder::encodeProperties($object);
+        $actualResult = (new HtmlEncoder())->encodeProperties($object);
         $object->prop = $expectedResult;
         $this->assertEquals($object, $actualResult);
     }
