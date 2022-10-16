@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Efortmeyer\Polar\Core\Fields;
 
 use Efortmeyer\Polar\Api\Validation\ValidationInterface;
-use Efortmeyer\Polar\Core\Attributes\AttributeCollection;
 
 use DateTimeInterface;
 

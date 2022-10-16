@@ -28,7 +28,6 @@ use Efortmeyer\Polar\Core\Attributes\{
 };
 use Efortmeyer\Polar\Stock\Attributes\TypeValidation;
 
-use Closure;
 use InvalidArgumentException;
 use ReflectionClass;
 use ReflectionProperty;
