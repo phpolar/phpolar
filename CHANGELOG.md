@@ -1,3 +1,14 @@
+## 1.5.1 (2022-10-20)
+
+### Fix
+
+- properly configure fields when using native attributes
+
+### Refactor
+
+- remove unused imports, use phpstan in ci
+- fix phpmd errors, add pre-commit-config
+
 ## 1.5.0 (2022-08-08)
 
 ### Feat
