@@ -4,12 +4,19 @@ declare(strict_types=1);
 
 namespace Efortmeyer\Polar\Core;
 
+use DateTime;
+use DateTimeImmutable;
+use DateTimeInterface;
 use Efortmeyer\Polar\Api\Attributes\Config\Collection;
 use Efortmeyer\Polar\Core\Attributes\AttributeCollection;
-use Efortmeyer\Polar\Core\Fields\FieldMetadata;
+use Efortmeyer\Polar\Core\Attributes\InputTypes;
 use Efortmeyer\Polar\Core\Fields\FieldMetadataConfig;
 use Efortmeyer\Polar\Core\Fields\FieldMetadataFactory;
+use Efortmeyer\Polar\Stock\Attributes\AutomaticDateValue;
 use Efortmeyer\Polar\Stock\Attributes\Column;
+use Efortmeyer\Polar\Stock\Attributes\DateFormat;
+use Efortmeyer\Polar\Stock\Attributes\Input;
+use Efortmeyer\Polar\Stock\Attributes\Label;
 use Efortmeyer\Polar\Tests\Fakes\RequiredAttributes;
 use PHPUnit\Framework\TestCase;
 
@@ -68,8 +75,9 @@ class EntryTest extends TestCase
     /**
      * @test
      * @dataProvider config
+     * @group annotationTests
      */
-    public function shouldReturnTheColumnNamesOfAllFields(Collection $configCollection)
+    public function shouldReturnTheColumnNamesOfAllFieldsUsingAnnotations(Collection $configCollection)
     {
         $sut = new class($configCollection) extends Entry
         {
@@ -90,6 +98,38 @@ class EntryTest extends TestCase
     /**
      * @test
      * @dataProvider config
+     * @group attributeTests
+     */
+    public function shouldReturnTheColumnNamesOfAllFieldsUsingAttributes(Collection $configCollection)
+    {
+        $sut = new class($configCollection) extends Entry
+        {
+            #[Column("THIS IS A TEST")]
+            public string $property1 = "what";
+        };
+        $this->assertSame(["THIS IS A TEST"], $sut->getColumnNames());
+    }
+
+    /**
+     * @test
+     * @dataProvider config
+     * @group attributeTests
+     */
+    public function shouldConfigureColumnsWithAndWithoutAttributes(Collection $configCollection)
+    {
+        $sut = new class($configCollection) extends Entry
+        {
+            #[Column("THIS IS A TEST")]
+            public string $property1 = "what";
+
+            public string $property2 = "what";
+        };
+        $this->assertSame(["THIS IS A TEST", "Property2"], $sut->getColumnNames());
+    }
+
+    /**
+     * @test
+     * @dataProvider config
      */
     public function shouldReturnThePropertyNamesOfAllFields(Collection $configCollection)
     {
@@ -103,6 +143,28 @@ class EntryTest extends TestCase
             /**
              * @var mixed
              */
+            public $property2 = "huh?";
+        };
+        $this->assertSame(["property1", "property2"], $sut->getPropertyNames());
+    }
+
+    /**
+     * @test
+     * @dataProvider config
+     * @group attributeTests
+     */
+    public function shouldReturnThePropertyNamesOfAllFieldsWhenUsingAttributes(Collection $configCollection)
+    {
+        $sut = new class($configCollection) extends Entry
+        {
+            #[Column("SOMETHING")]
+            #[Label("SOMETHING ELSE")]
+            #[Input(InputTypes::Text)]
+            public $property1 = "what";
+
+            #[Column("SOMETHING")]
+            #[Label("SOMETHING ELSE")]
+            #[Input(InputTypes::Textarea)]
             public $property2 = "huh?";
         };
         $this->assertSame(["property1", "property2"], $sut->getPropertyNames());
@@ -149,6 +211,43 @@ class EntryTest extends TestCase
             public $property2 = "huh?";
         };
         $this->assertSame(["what", "huh?"], $sut->getFieldValues());
+    }
+
+    /**
+     * @test
+     * @dataProvider config
+     * @group attributeTests
+     */
+    public function shouldReturnTheValuesOfAllFieldsWhenConfiguredWithAttributes(Collection $configCollection)
+    {
+        $sut = new class($configCollection) extends Entry
+        {
+            #[Label("SOMETHING")]
+            #[Column("SOMETHING ELSE")]
+            public string $property1 = "what";
+
+            #[Column("ANYTHING")]
+            public string $property2 = "huh?";
+        };
+        $this->assertSame(["what", "huh?"], $sut->getFieldValues());
+    }
+
+    /**
+     * @test
+     * @dataProvider config
+     * @group attributeTests
+     */
+    public function shouldReturnTheValuesOfAllDateFieldsWhenConfiguredWithAttributes(Collection $configCollection)
+    {
+        $sut = new class($configCollection) extends Entry
+        {
+            #[Label("SOMETHING")]
+            #[Column("SOMETHING ELSE")]
+            #[DateFormat("Y/m/d")]
+            #[AutomaticDateValue]
+            public DateTimeInterface $property1;
+        };
+        $this->assertSame([date("Y/m/d")], $sut->getFieldValues());
     }
 
     /**
