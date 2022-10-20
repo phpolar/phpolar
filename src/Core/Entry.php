@@ -10,7 +10,6 @@ use Efortmeyer\Polar\Core\Fields\FieldMetadata;
 use Efortmeyer\Polar\Core\Fields\FieldMetadataConfig;
 use Efortmeyer\Polar\Core\Fields\FieldMetadataFactory;
 use ReflectionAttribute;
-use ReflectionClass;
 use ReflectionObject;
 use ReflectionProperty;
 use RuntimeException;
@@ -49,7 +48,11 @@ abstract class Entry
      */
     private function createFieldsFromAnnotations(): array
     {
-        $properties = (new ReflectionClass($this))->getProperties(ReflectionProperty::IS_PUBLIC);
+        $properties = array_filter(
+            (new ReflectionObject($this))->getProperties(ReflectionProperty::IS_PUBLIC),
+            fn (ReflectionProperty $prop) => count($prop->getAttributes()) === 0
+        );
+
         return array_map(
             function (string $propertyName, mixed $propertyValue): FieldMetadata {
                 $annotation = new PropertyAnnotation($this, $propertyName, $this->attributeConfigMap);
@@ -78,8 +81,8 @@ abstract class Entry
                         $property->getAttributes()
                     )
                 );
-                $className = $attributes->getFieldClassName();
                 $attributes->addDefaultsBasedOnMissingAttributes($propertyName);
+                $className = $attributes->getFieldClassName();
                 return (new FieldMetadataFactory(new $className(), new FieldMetadataConfig($attributes)))
                     ->create($propertyName, $attributes->getValueAttributeOrElse($propertyValue));
             },
