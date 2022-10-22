@@ -13,7 +13,7 @@ use Efortmeyer\Polar\Stock\Validation\TypeValidation as ValidationTypeValidation
  */
 final class TypeValidation extends Attribute
 {
-    public function __construct(protected mixed $value, private string $type)
+    public function __construct(protected mixed $value, private readonly string $type)
     {
     }
 
