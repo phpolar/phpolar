@@ -1,3 +1,9 @@
+## 1.6.0 (2022-10-22)
+
+### Feat
+
+- **Entry.php**: ensure order of fields is maintained
+
 ## 1.5.2 (2022-10-21)
 
 ### Fix
