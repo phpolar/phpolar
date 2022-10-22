@@ -17,6 +17,7 @@ use Efortmeyer\Polar\Stock\Attributes\Column;
 use Efortmeyer\Polar\Stock\Attributes\DateFormat;
 use Efortmeyer\Polar\Stock\Attributes\Input;
 use Efortmeyer\Polar\Stock\Attributes\Label;
+use Efortmeyer\Polar\Stock\Attributes\MaxLength;
 use Efortmeyer\Polar\Tests\Fakes\RequiredAttributes;
 use PHPUnit\Framework\TestCase;
 
@@ -248,6 +249,40 @@ class EntryTest extends TestCase
             public DateTimeInterface $property1;
         };
         $this->assertSame([date("Y/m/d")], $sut->getFieldValues());
+    }
+
+    /**
+     * @test
+     * @dataProvider config
+     * @group attributeTests
+     */
+    public function shouldUseTheValueOfThePropertyWhenConfiguredWithMaxLength(Collection $configCollection)
+    {
+        $sut = new class($configCollection) extends Entry
+        {
+            #[MaxLength(30)]
+            public string $property1 = "WHATEVER";
+        };
+        $this->assertSame(["WHATEVER"], $sut->getFieldValues());
+    }
+
+    /**
+     * @test
+     * @dataProvider config
+     * @group attributeTests
+     */
+    public function shouldUseTheValueOfThePropertyWhenCheckingMaxLength(Collection $configCollection)
+    {
+        $sut = new class($configCollection) extends Entry
+        {
+            #[MaxLength(3)]
+            public string $property1 = "WHATEVER";
+        };
+        foreach ($sut->getFields() as $field) {
+            foreach ($field->validators as $validator) {
+                $this->assertFalse($validator->isValid());
+            }
+        }
     }
 
     /**

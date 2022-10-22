@@ -10,7 +10,8 @@ use ReflectionProperty;
 /**
  * @covers \Efortmeyer\Polar\Stock\Attributes\MaxLength
  *
- * @uses \Efortmeyer\Polar\Stock\Validation\MaxLength
+ * @uses Efortmeyer\Polar\Core\Attributes\Attribute
+ * @uses Efortmeyer\Polar\Stock\Validation\MaxLength
  * @testdox MaxLength
  */
 class MaxLengthTest extends TestCase
@@ -22,8 +23,8 @@ class MaxLengthTest extends TestCase
     {
         $givenValue = str_repeat("a", random_int(1, 100));
         $givenMaxLength = strlen($givenValue);
-        $sut = new MaxLength($givenValue, $givenMaxLength);
-        $validator = $sut();
+        $sut = new MaxLength($givenMaxLength);
+        $validator = $sut->withValue($givenValue)->__invoke();
         $reflection = new ReflectionProperty($validator, "maxLength");
         $reflection->setAccessible(true);
         $actualValue = $reflection->getValue($validator);

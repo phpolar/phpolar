@@ -55,8 +55,8 @@ class FieldMetadataConfig
     /**
      * @return ValidationInterface[]
      */
-    public function getValidators(): array
+    public function getValidators(mixed $value): array
     {
-        return array_map(fn (Attribute $attribute) => $attribute(), $this->validatorAttributes);
+        return array_map(fn (Attribute $attribute) => $attribute->withValue($value)->__invoke(), $this->validatorAttributes);
     }
 }

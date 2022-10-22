@@ -16,7 +16,7 @@ final class ConstructorArgsOneWithValue extends Constructor
 
     protected function getArgs(bool $hasAttribute, array $matches): array
     {
-        return $hasAttribute === true ? [$this->value, $this->getArgOrCast($matches["argument"])] : $this->argsForDefault;
+        return $hasAttribute === true ? [$this->getArgOrCast($matches["argument"]), $this->value] : $this->argsForDefault;
     }
 
     private function getArgOrCast(string $argument): string|int
