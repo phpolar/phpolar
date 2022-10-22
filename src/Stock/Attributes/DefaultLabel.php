@@ -11,7 +11,7 @@ use Efortmeyer\Polar\Core\Attributes\Attribute;
  */
 final class DefaultLabel extends Attribute
 {
-    public function __construct(private string $labelText)
+    public function __construct(private readonly string $labelText)
     {
     }
 

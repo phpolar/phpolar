@@ -13,7 +13,7 @@ use Efortmeyer\Polar\Core\Attributes\Attribute;
 #[GlobalAttribute(GlobalAttribute::TARGET_PROPERTY)]
 final class Column extends Attribute
 {
-    public function __construct(private string $text)
+    public function __construct(private readonly string $text)
     {
     }
 

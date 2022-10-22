@@ -27,7 +27,7 @@ abstract class Entry
     /**
      * @throws RuntimeException
      */
-    public function __construct(private AttributeConfigCollection $attributeConfigMap, array $storedValues = [])
+    public function __construct(private readonly AttributeConfigCollection $attributeConfigMap, array $storedValues = [])
     {
         if (empty($storedValues) === false) {
             $this->setValues($storedValues);

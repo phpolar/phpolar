@@ -11,7 +11,7 @@ use Efortmeyer\Polar\Core\Attributes\Attribute;
  */
 final class DefaultColumn extends Attribute
 {
-    public function __construct(private string $text)
+    public function __construct(private readonly string $text)
     {
     }
 

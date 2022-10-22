@@ -14,7 +14,7 @@ class MaxLength implements ValidationInterface
 {
     private string $errorMessage = "";
 
-    public function __construct(public mixed $value, private int $maxLength = PHP_INT_MAX)
+    public function __construct(public readonly mixed $value, private readonly int $maxLength = PHP_INT_MAX)
     {
         if ($this->isValid() === false) {
             $this->handleError();

@@ -17,7 +17,7 @@ class TypeValidation implements ValidationInterface
 
     private bool $typeIsValid = false;
 
-    public function __construct(public mixed $value, private string $type)
+    public function __construct(public readonly mixed $value, private readonly string $type)
     {
         $this->setState();
     }
