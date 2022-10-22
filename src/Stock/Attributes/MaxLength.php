@@ -15,7 +15,7 @@ use Efortmeyer\Polar\Stock\Validation\MaxLength as ValidationMaxLength;
 #[GlobalAttribute(GlobalAttribute::TARGET_PROPERTY)]
 final class MaxLength extends Attribute
 {
-    public function __construct(private mixed $value, private int $maxLength)
+    public function __construct(private int $maxLength)
     {
     }
 

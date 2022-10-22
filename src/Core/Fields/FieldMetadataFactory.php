@@ -22,7 +22,7 @@ final class FieldMetadataFactory
         $this->field->propertyName = $propertyName;
         $this->field->value = $this->config->getAttributeValueOrElse($value);
         $this->field->dateFormat = $this->config->getDateFormatOrEmptyString();
-        $this->field->validators = $this->config->getValidators();
+        $this->field->validators = $this->config->getValidators($value);
         $this->field->label = (string) $labelAttribute();
         $this->field->column = (string) $columnAttribute();
         $this->field->formControlType = (string) $formControlAttribute();

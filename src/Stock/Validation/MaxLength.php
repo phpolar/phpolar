@@ -33,7 +33,7 @@ class MaxLength implements ValidationInterface
 
     private function isOversized(): bool
     {
-        return (strlen($this->value ?? "") > $this->maxLength);
+        return (strlen(is_scalar($this->value ?? "") === true ? (string) $this->value : "") > $this->maxLength);
     }
 
     private function handleError(): void

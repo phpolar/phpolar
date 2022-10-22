@@ -11,6 +11,8 @@ namespace Efortmeyer\Polar\Core\Attributes;
  */
 abstract class Attribute
 {
+    protected mixed $value;
+
     /**
      * Makes the Attribute callable.
      *
@@ -53,5 +55,12 @@ abstract class Attribute
     public function getFieldClassName(): string
     {
         return "";
+    }
+
+    public function withValue(mixed $value): self
+    {
+        $copy = clone $this;
+        $copy->value = $value;
+        return $copy;
     }
 }
