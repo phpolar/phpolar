@@ -10,8 +10,8 @@ use ReflectionProperty;
 /**
  * @covers \Efortmeyer\Polar\Stock\Attributes\MaxLength
  *
- * @uses \Efortmeyer\Polar\Core\Attributes\Attributes
- * @uses \Efortmeyer\Polar\Stock\Validation\MaxLength
+ * @uses Efortmeyer\Polar\Core\Attributes\Attribute
+ * @uses Efortmeyer\Polar\Stock\Validation\MaxLength
  * @testdox MaxLength
  */
 class MaxLengthTest extends TestCase
