@@ -37,60 +37,44 @@ abstract class Entry
          * The annotations/attributes on the entry's properties
          * are used to configure the fields.
          */
-        $this->fields = array_merge(
-            $this->createFieldsFromNativeAttributes(),
-            $this->createFieldsFromAnnotations(),
+        $this->fields = array_map(
+            $this->createField(...),
+            (new ReflectionObject($this))->getProperties(ReflectionProperty::IS_PUBLIC)
         );
     }
 
-    /**
-     * @return FieldMetadata[]
-     */
-    private function createFieldsFromAnnotations(): array
+    private function createField(ReflectionProperty $prop): FieldMetadata
     {
-        $properties = array_filter(
-            (new ReflectionObject($this))->getProperties(ReflectionProperty::IS_PUBLIC),
-            fn (ReflectionProperty $prop) => count($prop->getAttributes()) === 0
-        );
-
-        return array_map(
-            function (string $propertyName, mixed $propertyValue): FieldMetadata {
-                $annotation = new PropertyAnnotation($this, $propertyName, $this->attributeConfigMap);
-                $attributes = $annotation->parse();
-                $className = $attributes->getFieldClassName();
-                return (new FieldMetadataFactory(new $className(), new FieldMetadataConfig($attributes)))
-                    ->create($propertyName, $attributes->getValueAttributeOrElse($propertyValue));
-            },
-            array_map(fn (ReflectionProperty $prop) => $prop->getName(), $properties),
-            array_map(fn (ReflectionProperty $prop) => $prop->isInitialized($this) === true ? $prop->getValue($this) : $prop->getDefaultValue(), $properties)
-        );
+        $attributes = $prop->getAttributes();
+        $propName = $prop->getName();
+        $propValue = $prop->isInitialized($this) === true ? $prop->getValue($this) : $prop->getDefaultValue();
+        if (count($attributes) === 0) {
+            return $this->createFieldFromAnnotation($propName, $propValue);
+        }
+        return $this->createFieldFromNativeAttribute($propName, $propValue, $attributes);
     }
 
-    /**
-     * @return FieldMetadata[]
-     */
-    private function createFieldsFromNativeAttributes(): array
+    private function createFieldFromAnnotation(string $propName, mixed $propValue): FieldMetadata
     {
-        return array_map(
-            function (ReflectionProperty $property): FieldMetadata {
-                $propertyName = $property->getName();
-                $propertyValue = $property->isInitialized($this) === true ? $property->getValue($this) : $property->getDefaultValue();
-                $attributes = new AttributeCollection(
-                    array_map(
-                        fn (ReflectionAttribute $attr) => $attr->newInstance(),
-                        $property->getAttributes()
-                    )
-                );
-                $attributes->addDefaultsBasedOnMissingAttributes($propertyName);
-                $className = $attributes->getFieldClassName();
-                return (new FieldMetadataFactory(new $className(), new FieldMetadataConfig($attributes)))
-                    ->create($propertyName, $attributes->getValueAttributeOrElse($propertyValue));
-            },
-            array_filter(
-                (new ReflectionObject($this))->getProperties(ReflectionProperty::IS_PUBLIC),
-                fn (ReflectionProperty $prop) => count($prop->getAttributes()) > 0
+        $annotation = new PropertyAnnotation($this, $propName, $this->attributeConfigMap);
+        $attributes = $annotation->parse();
+        $className = $attributes->getFieldClassName();
+        return (new FieldMetadataFactory(new $className(), new FieldMetadataConfig($attributes)))
+            ->create($propName, $attributes->getValueAttributeOrElse($propValue));
+    }
+
+    private function createFieldFromNativeAttribute(string $propName, mixed $propValue, array $attributes): FieldMetadata
+    {
+        $attributes = new AttributeCollection(
+            array_map(
+                fn (ReflectionAttribute $attr) => $attr->newInstance(),
+                $attributes
             )
         );
+        $attributes->addDefaultsBasedOnMissingAttributes($propName);
+        $className = $attributes->getFieldClassName();
+        return (new FieldMetadataFactory(new $className(), new FieldMetadataConfig($attributes)))
+            ->create($propName, $attributes->getValueAttributeOrElse($propValue));
     }
 
     private function setValues(array $givenValues): void
