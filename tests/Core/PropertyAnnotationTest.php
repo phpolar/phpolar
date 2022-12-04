@@ -41,6 +41,7 @@ use PHPUnit\Framework\TestCase;
  * @uses \Efortmeyer\Polar\Stock\Attributes\Label
  * @uses \Efortmeyer\Polar\Stock\Attributes\DefaultLabel
  * @uses \Efortmeyer\Polar\Stock\Attributes\DefaultColumn
+ * @uses \Efortmeyer\Polar\Stock\Attributes\DefaultFormControl
  * @uses \Efortmeyer\Polar\Stock\Attributes\MaxLength
  * @uses \Efortmeyer\Polar\Stock\Attributes\DefaultMaxLength
  */

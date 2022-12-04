@@ -133,8 +133,9 @@ class HtmlEncoderTest extends PolarTestCaseExtension
 
     public function iterableTestCases()
     {
+        $table = get_html_translation_table(HTML_ENTITIES, ENT_QUOTES|ENT_HTML5);
         return [
-            [array_keys(get_html_translation_table()), array_values(get_html_translation_table())],
+            [array_keys($table), array_values($table)],
         ];
     }
 
