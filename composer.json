@@ -3,12 +3,24 @@
     "description": "A super-tiny, lightweight microframework for PHP projects",
     "type": "library",
     "license": "MIT",
-    "require": {
-        "php": ">=8.1"
+    "authors": [
+        {
+            "name": "Eric Fortmeyer",
+            "email": "e.fortmeyer01@gmail.com"
+        }
+    ],
+    "non-feature-branches": ["releases/php7-4"],
+    "minimum-stability": "stable",
+    "config": {
+        "sort-packages": true
     },
     "autoload": {
         "psr-4": {
-            "Efortmeyer\\Polar\\": "src/",
+            "Efortmeyer\\Polar\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
             "Efortmeyer\\Polar\\Tests\\DataProviders\\": "tests/__data-providers__",
             "Efortmeyer\\Polar\\Tests\\Mocks\\": "tests/__mocks__",
             "Efortmeyer\\Polar\\Tests\\Fakes\\": "tests/__fakes__",
@@ -16,13 +28,20 @@
             "Efortmeyer\\Polar\\Tests\\Extensions\\": "tests/__extensions__"
         }
     },
-    "authors": [
-        {
-            "name": "Eric Fortmeyer",
-            "email": "e.fortmeyer01@gmail.com"
-        }
-    ],
-    "minimum-stability": "stable",
+    "require": {
+        "php": ">=8.1"
+    },
+    "require-dev": {
+        "ext-ast": "*",
+        "ext-openssl": "*",
+        "ext-mbstring": "*",
+        "phan/phan": "^5.3",
+        "phpunit/phpunit": "^9.5",
+        "squizlabs/php_codesniffer": "^3.7",
+        "php-coveralls/php-coveralls": "^2.5",
+        "phpstan/phpstan": "^1.8",
+        "phpmd/phpmd": "^2.13"
+    },
     "scripts": {
         "analyze": "composer exec \"phpstan analyze src --level 1\"",
         "analyze-strict": "composer exec \"phan --no-progress-bar --strict-type-checking --analyze-twice --color --output-mode=text --color-scheme=light\"",
@@ -36,16 +55,5 @@
         "ci:lint-fix": "composer exec \"phpcbf\"",
         "ci:test": "XDEBUG_MODE=coverage composer exec \"phpunit --coverage-clover=build/logs/clover.xml\"",
         "ci:generate-coverage-badge": "composer exec \"php-coveralls -v\""
-    },
-    "require-dev": {
-        "ext-ast": "*",
-        "ext-openssl": "*",
-        "ext-mbstring": "*",
-        "phan/phan": "^5.3",
-        "phpunit/phpunit": "^9.5",
-        "squizlabs/php_codesniffer": "^3.7",
-        "php-coveralls/php-coveralls": "^2.5",
-        "phpstan/phpstan": "^1.8",
-        "phpmd/phpmd": "^2.13"
     }
 }
