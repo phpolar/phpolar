@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Tests\Comparables;
+namespace Phpolar\Phpolar\Tests\Comparables;
 
-use Efortmeyer\Polar\Core\Comparable;
+use Phpolar\Phpolar\Core\Comparable;
 
 class NestedXSSFixEnd implements Comparable
 {

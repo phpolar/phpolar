@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Core;
+namespace Phpolar\Phpolar\Core;
 
-use Efortmeyer\Polar\Api\Attributes\Config\Collection as AttributeConfigCollection;
-use Efortmeyer\Polar\Core\Attributes\Config\{
+use Phpolar\Phpolar\Api\Attributes\Config\Collection as AttributeConfigCollection;
+use Phpolar\Phpolar\Core\Attributes\Config\{
     AttributeConfig,
     AttributeConfigInterface,
     ConstructorArgs,
@@ -15,18 +15,18 @@ use Efortmeyer\Polar\Core\Attributes\Config\{
     ConstructorArgsPropertyValue,
     ConstructorArgsPropValWithSndArg,
 };
-use Efortmeyer\Polar\Core\Parsers\Annotation\{
+use Phpolar\Phpolar\Core\Parsers\Annotation\{
     ConstructorArgsOne,
     ConstructorArgsNone as AnnotationConstructorArgsNone,
     ConstructorArgsOneWithValue,
     TypeTag,
 };
 
-use Efortmeyer\Polar\Core\Attributes\{
+use Phpolar\Phpolar\Core\Attributes\{
     AttributeCollection,
     Attribute,
 };
-use Efortmeyer\Polar\Stock\Attributes\TypeValidation;
+use Phpolar\Phpolar\Stock\Attributes\TypeValidation;
 
 use InvalidArgumentException;
 use ReflectionClass;
@@ -69,7 +69,7 @@ final class PropertyAnnotation
             $this->attributeConfigMap
                 ->filter(
                     fn (AttributeConfigInterface $config) =>
-                        $config->isConfiguredForClass() === true ? $this->propertyValue === null || is_a($this->propertyValue, $config->forType()) : true
+                    $config->isConfiguredForClass() === true ? $this->propertyValue === null || is_a($this->propertyValue, $config->forType()) : true
                 )
                 ->map($this->mapToAttribute(...))
                 ->toArray()
@@ -92,7 +92,8 @@ final class PropertyAnnotation
             $unqualifiedClassName,
             $defaultAttribute,
             $argsForDefault,
-            $propertyValueArg)
+            $propertyValueArg
+        )
         )->toToken($this->docComment)
             ->newInstance();
     }
@@ -117,7 +118,7 @@ final class PropertyAnnotation
             $constructorArgType instanceof ConfigConstructorArgsOne => ConstructorArgsOne::class,
             $constructorArgType instanceof ConstructorArgsNone => AnnotationConstructorArgsNone::class,
             $constructorArgType instanceof ConstructorArgsPropValWithSndArg =>
-                $attributeConfigKey === TypeValidation::class ? TypeTag::class : ConstructorArgsOneWithValue::class,
+            $attributeConfigKey === TypeValidation::class ? TypeTag::class : ConstructorArgsOneWithValue::class,
             default => throw new InvalidArgumentException("Invalid Attribute config for {$attributeConfigKey}")
         };
     }

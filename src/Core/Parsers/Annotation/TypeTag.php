@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Core\Parsers\Annotation;
+namespace Phpolar\Phpolar\Core\Parsers\Annotation;
 
 /**
  * Use to parse a constructor for a type tag and keyword expression.

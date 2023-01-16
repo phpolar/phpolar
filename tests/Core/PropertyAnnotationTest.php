@@ -2,48 +2,48 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Core;
+namespace Phpolar\Phpolar\Core;
 
-use Efortmeyer\Polar\Core\Attributes\Config\AttributeConfigInterface;
-use Efortmeyer\Polar\Api\Attributes\Config\Collection;
-use Efortmeyer\Polar\Core\Attributes\Config\AttributeConfig;
-use Efortmeyer\Polar\Core\Attributes\Config\ConstructorArgsPropertyName;
-use Efortmeyer\Polar\Core\Attributes\Config\ConstructorArgs;
-use Efortmeyer\Polar\Core\Attributes\Config\ConstructorArgsNone;
-use Efortmeyer\Polar\Core\Attributes\Config\ConstructorArgsPropertyValue;
-use Efortmeyer\Polar\Core\Attributes\Config\ConstructorArgsPropValWithSndArg;
-use Efortmeyer\Polar\Stock\Attributes\Config\LabelKey;
-use Efortmeyer\Polar\Stock\Attributes\Config\MaxLengthKey;
-use Efortmeyer\Polar\Stock\Attributes\DefaultLabel;
-use Efortmeyer\Polar\Stock\Attributes\DefaultMaxLength;
-use Efortmeyer\Polar\Stock\Attributes\Label;
-use Efortmeyer\Polar\Stock\Attributes\MaxLength;
-use Efortmeyer\Polar\Stock\Attributes\NoopValidate;
+use Phpolar\Phpolar\Core\Attributes\Config\AttributeConfigInterface;
+use Phpolar\Phpolar\Api\Attributes\Config\Collection;
+use Phpolar\Phpolar\Core\Attributes\Config\AttributeConfig;
+use Phpolar\Phpolar\Core\Attributes\Config\ConstructorArgsPropertyName;
+use Phpolar\Phpolar\Core\Attributes\Config\ConstructorArgs;
+use Phpolar\Phpolar\Core\Attributes\Config\ConstructorArgsNone;
+use Phpolar\Phpolar\Core\Attributes\Config\ConstructorArgsPropertyValue;
+use Phpolar\Phpolar\Core\Attributes\Config\ConstructorArgsPropValWithSndArg;
+use Phpolar\Phpolar\Stock\Attributes\Config\LabelKey;
+use Phpolar\Phpolar\Stock\Attributes\Config\MaxLengthKey;
+use Phpolar\Phpolar\Stock\Attributes\DefaultLabel;
+use Phpolar\Phpolar\Stock\Attributes\DefaultMaxLength;
+use Phpolar\Phpolar\Stock\Attributes\Label;
+use Phpolar\Phpolar\Stock\Attributes\MaxLength;
+use Phpolar\Phpolar\Stock\Attributes\NoopValidate;
 
 use InvalidArgumentException;
 use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \Efortmeyer\Polar\Core\PropertyAnnotation
- * @covers \Efortmeyer\Polar\Api\Attributes\Config\Collection
- * @covers \Efortmeyer\Polar\Core\Attributes\AttributeCollection
- * @covers \Efortmeyer\Polar\Core\Attributes\Config\AttributeConfig
+ * @covers \Phpolar\Phpolar\Core\PropertyAnnotation
+ * @covers \Phpolar\Phpolar\Api\Attributes\Config\Collection
+ * @covers \Phpolar\Phpolar\Core\Attributes\AttributeCollection
+ * @covers \Phpolar\Phpolar\Core\Attributes\Config\AttributeConfig
  *
- * @uses \Efortmeyer\Polar\Core\Parsers\Annotation\Token
- * @uses \Efortmeyer\Polar\Core\Parsers\Annotation\TypeTag
- * @uses \Efortmeyer\Polar\Core\Parsers\Annotation\Constructor
- * @uses \Efortmeyer\Polar\Core\Parsers\Annotation\ConstructorArgsOne
- * @uses \Efortmeyer\Polar\Core\Parsers\Annotation\ConstructorArgsOneWithValue
- * @uses \Efortmeyer\Polar\Core\Parsers\Annotation\ConstructorArgsNone
- * @uses \Efortmeyer\Polar\Stock\Attributes\Config\LabelKey
- * @uses \Efortmeyer\Polar\Stock\Attributes\Config\MaxLengthKey
- * @uses \Efortmeyer\Polar\Stock\Attributes\Label
- * @uses \Efortmeyer\Polar\Stock\Attributes\DefaultLabel
- * @uses \Efortmeyer\Polar\Stock\Attributes\DefaultColumn
- * @uses \Efortmeyer\Polar\Stock\Attributes\DefaultFormControl
- * @uses \Efortmeyer\Polar\Stock\Attributes\DefaultMaxLength
- * @uses \Efortmeyer\Polar\Stock\Attributes\MaxLength
+ * @uses \Phpolar\Phpolar\Core\Parsers\Annotation\Token
+ * @uses \Phpolar\Phpolar\Core\Parsers\Annotation\TypeTag
+ * @uses \Phpolar\Phpolar\Core\Parsers\Annotation\Constructor
+ * @uses \Phpolar\Phpolar\Core\Parsers\Annotation\ConstructorArgsOne
+ * @uses \Phpolar\Phpolar\Core\Parsers\Annotation\ConstructorArgsOneWithValue
+ * @uses \Phpolar\Phpolar\Core\Parsers\Annotation\ConstructorArgsNone
+ * @uses \Phpolar\Phpolar\Stock\Attributes\Config\LabelKey
+ * @uses \Phpolar\Phpolar\Stock\Attributes\Config\MaxLengthKey
+ * @uses \Phpolar\Phpolar\Stock\Attributes\Label
+ * @uses \Phpolar\Phpolar\Stock\Attributes\DefaultLabel
+ * @uses \Phpolar\Phpolar\Stock\Attributes\DefaultColumn
+ * @uses \Phpolar\Phpolar\Stock\Attributes\DefaultFormControl
+ * @uses \Phpolar\Phpolar\Stock\Attributes\DefaultMaxLength
+ * @uses \Phpolar\Phpolar\Stock\Attributes\MaxLength
  */
 class PropertyAnnotationTest extends TestCase
 {
@@ -68,7 +68,8 @@ class PropertyAnnotationTest extends TestCase
         $configStub->method("getConstructorArgType")->willReturn(new ConstructorArgsPropertyName());
         $configStub->method("getConstructorArgTypeForDefault")->willReturn(new ConstructorArgsPropertyName());
         $configStub->method("getClassNameForDefaultAttribute")->willReturn(DefaultLabel::class);
-        $attributeConfig = new class($configStub) extends AttributeConfig {
+        $attributeConfig = new class($configStub) extends AttributeConfig
+        {
             /**
              * @var AttributeConfigInterface
              */
@@ -132,7 +133,8 @@ class PropertyAnnotationTest extends TestCase
         $configStub->method("getConstructorArgType")->willReturn(new ConstructorArgsPropertyName());
         $configStub->method("getConstructorArgTypeForDefault")->willReturn(new ConstructorArgsPropertyName());
         $configStub->method("getClassNameForDefaultAttribute")->willReturn(DefaultLabel::class);
-        $attributeConfig = new class($configStub) extends AttributeConfig {
+        $attributeConfig = new class($configStub) extends AttributeConfig
+        {
             /**
              * @var AttributeConfigInterface
              */
@@ -197,7 +199,8 @@ class PropertyAnnotationTest extends TestCase
         $configStub->method("getConstructorArgType")->willReturn(new ConstructorArgsNone());
         $configStub->method("getConstructorArgTypeForDefault")->willReturn(new ConstructorArgsNone());
         $configStub->method("getClassNameForDefaultAttribute")->willReturn(NoopValidate::class);
-        $attributeConfig = new class($configStub) extends AttributeConfig {
+        $attributeConfig = new class($configStub) extends AttributeConfig
+        {
             /**
              * @var AttributeConfigInterface
              */
@@ -262,7 +265,8 @@ class PropertyAnnotationTest extends TestCase
         $configStub->method("getConstructorArgType")->willReturn(new ConstructorArgsPropertyName());
         $configStub->method("getConstructorArgTypeForDefault")->willReturn(new ConstructorArgsPropertyName());
         $configStub->method("getClassNameForDefaultAttribute")->willReturn(DefaultLabel::class);
-        $attributeConfig = new class($configStub) extends AttributeConfig {
+        $attributeConfig = new class($configStub) extends AttributeConfig
+        {
             /**
              * @var AttributeConfigInterface
              */
@@ -328,7 +332,8 @@ class PropertyAnnotationTest extends TestCase
         $configStub->method("getConstructorArgType")->willReturn(new ConstructorArgsPropValWithSndArg());
         $configStub->method("getConstructorArgTypeForDefault")->willReturn(new ConstructorArgsPropertyValue());
         $configStub->method("getClassNameForDefaultAttribute")->willReturn(DefaultMaxLength::class);
-        $attributeConfig = new class($configStub) extends AttributeConfig {
+        $attributeConfig = new class($configStub) extends AttributeConfig
+        {
             /**
              * @var AttributeConfigInterface
              */
@@ -377,7 +382,8 @@ class PropertyAnnotationTest extends TestCase
      */
     public function shouldThrowInvalidArgumentExceptionWhenConstructorArgTypeForDefaultNotConfigured()
     {
-        $classNotConfigured = new class() {
+        $classNotConfigured = new class()
+        {
             /**
              * @var string
              */
@@ -389,9 +395,12 @@ class PropertyAnnotationTest extends TestCase
          */
         $configStub = $this->createStub(AttributeConfig::class);
         $configStub->method("getConstructorArgType")->willReturn(new ConstructorArgsPropertyName());
-        $configStub->method("getConstructorArgTypeForDefault")->willReturn(new class() extends ConstructorArgs {});
+        $configStub->method("getConstructorArgTypeForDefault")->willReturn(new class() extends ConstructorArgs
+        {
+        });
         $configStub->method("getClassNameForDefaultAttribute")->willReturn(DefaultLabel::class);
-        $attributeConfig = new class($configStub) extends AttributeConfig {
+        $attributeConfig = new class($configStub) extends AttributeConfig
+        {
             /**
              * @var AttributeConfigInterface
              */
@@ -439,7 +448,8 @@ class PropertyAnnotationTest extends TestCase
      */
     public function shouldThrowInvalidArgumentExceptionWhenConstructorArgTypeNotConfigured()
     {
-        $classNotConfigured = new class() {
+        $classNotConfigured = new class()
+        {
             /**
              * @var string
              */
@@ -450,10 +460,13 @@ class PropertyAnnotationTest extends TestCase
          * @var Stub $configStub
          */
         $configStub = $this->createStub(AttributeConfig::class);
-        $configStub->method("getConstructorArgType")->willReturn(new class() extends ConstructorArgs {});
+        $configStub->method("getConstructorArgType")->willReturn(new class() extends ConstructorArgs
+        {
+        });
         $configStub->method("getConstructorArgTypeForDefault")->willReturn(new ConstructorArgsPropertyName());
         $configStub->method("getClassNameForDefaultAttribute")->willReturn(DefaultLabel::class);
-        $attributeConfig = new class($configStub) extends AttributeConfig {
+        $attributeConfig = new class($configStub) extends AttributeConfig
+        {
             /**
              * @var AttributeConfigInterface
              */

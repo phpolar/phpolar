@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Tests\Mocks;
+namespace Phpolar\Phpolar\Tests\Mocks;
 
-use Efortmeyer\Polar\Core\Fields\FieldMetadata;
-use Efortmeyer\Polar\Core\Fields\FieldMetadataConfig;
+use Phpolar\Phpolar\Core\Fields\FieldMetadata;
+use Phpolar\Phpolar\Core\Fields\FieldMetadataConfig;
 
 final class UnknownFieldType extends FieldMetadata
 {

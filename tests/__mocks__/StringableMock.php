@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Tests\Mocks;
+namespace Phpolar\Phpolar\Tests\Mocks;
 
 use Stringable;
 

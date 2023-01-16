@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Core\Attributes;
+namespace Phpolar\Phpolar\Core\Attributes;
 
-use Efortmeyer\Polar\Core\Fields\AutomaticDateField;
-use Efortmeyer\Polar\Stock\Attributes\Column;
-use Efortmeyer\Polar\Stock\Attributes\DateFormat;
-use Efortmeyer\Polar\Stock\Attributes\DefaultColumn;
-use Efortmeyer\Polar\Stock\Attributes\DefaultDateFormat;
-use Efortmeyer\Polar\Stock\Attributes\DefaultFormControl;
-use Efortmeyer\Polar\Stock\Attributes\DefaultLabel;
-use Efortmeyer\Polar\Stock\Attributes\Input;
-use Efortmeyer\Polar\Stock\Attributes\Label;
+use Phpolar\Phpolar\Core\Fields\AutomaticDateField;
+use Phpolar\Phpolar\Stock\Attributes\Column;
+use Phpolar\Phpolar\Stock\Attributes\DateFormat;
+use Phpolar\Phpolar\Stock\Attributes\DefaultColumn;
+use Phpolar\Phpolar\Stock\Attributes\DefaultDateFormat;
+use Phpolar\Phpolar\Stock\Attributes\DefaultFormControl;
+use Phpolar\Phpolar\Stock\Attributes\DefaultLabel;
+use Phpolar\Phpolar\Stock\Attributes\Input;
+use Phpolar\Phpolar\Stock\Attributes\Label;
 
 /**
  *

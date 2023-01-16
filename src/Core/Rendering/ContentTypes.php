@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Core\Rendering;
+namespace Phpolar\Phpolar\Core\Rendering;
 
 /**
  * Contains a set of content types for files and streams.

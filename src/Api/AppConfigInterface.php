@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Api;
+namespace Phpolar\Phpolar\Api;
 
-use Efortmeyer\Polar\Api\Attributes\Config\Collection;
+use Phpolar\Phpolar\Api\Attributes\Config\Collection;
 
 /**
  * Provides support for configuring the app.

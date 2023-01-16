@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Api\UIElements;
+namespace Phpolar\Phpolar\Api\UIElements;
 
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \Efortmeyer\Polar\Api\UIElements\Banner
+ * @covers \Phpolar\Phpolar\Api\UIElements\Banner
  *
- * @uses \Efortmeyer\Polar\Api\UIElements\SuccessBanner
+ * @uses \Phpolar\Phpolar\Api\UIElements\SuccessBanner
  */
 class BannerTest extends TestCase
 {

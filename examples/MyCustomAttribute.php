@@ -1,6 +1,6 @@
 <?php
 
-use Efortmeyer\Polar\Api\Attributes\AttributeInterface;
+use Phpolar\Phpolar\Api\Attributes\AttributeInterface;
 
 /**
  * Converts the property name of a model

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Api\Attributes\Config;
+namespace Phpolar\Phpolar\Api\Attributes\Config;
 
-use Efortmeyer\Polar\Core\Attributes\Config\AttributeConfigInterface;
+use Phpolar\Phpolar\Core\Attributes\Config\AttributeConfigInterface;
 
 use Closure;
 

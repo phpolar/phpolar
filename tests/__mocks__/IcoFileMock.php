@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Tests\Mocks;
+namespace Phpolar\Phpolar\Tests\Mocks;
 
-use Efortmeyer\Polar\Api\Rendering\Files\IcoFile;
+use Phpolar\Phpolar\Api\Rendering\Files\IcoFile;
 
 class IcoFileMock extends IcoFile
 {

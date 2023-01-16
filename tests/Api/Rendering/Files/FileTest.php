@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Api\Rendering\Files;
+namespace Phpolar\Phpolar\Api\Rendering\Files;
 
-use Efortmeyer\Polar\Tests\Mocks\IcoFileMock;
-use Efortmeyer\Polar\Tests\Extensions\PolarTestCaseExtension;
+use Phpolar\Phpolar\Tests\Mocks\IcoFileMock;
+use Phpolar\Phpolar\Tests\Extensions\PhpolarTestCaseExtension;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \Efortmeyer\Polar\Api\Rendering\Files\File
+ * @covers \Phpolar\Phpolar\Api\Rendering\Files\File
  *
- * @uses \Efortmeyer\Polar\Api\Rendering\Files\IcoFile
+ * @uses \Phpolar\Phpolar\Api\Rendering\Files\IcoFile
  */
-class FileTest extends PolarTestCaseExtension
+class FileTest extends PhpolarTestCaseExtension
 {
     /**
      * @var resource

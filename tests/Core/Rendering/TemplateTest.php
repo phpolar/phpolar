@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Core\Rendering;
+namespace Phpolar\Phpolar\Core\Rendering;
 
-use Efortmeyer\Polar\Api\Rendering\TemplateContext;
-use Efortmeyer\Polar\Tests\Extensions\PolarTestCaseExtension;
+use Phpolar\Phpolar\Api\Rendering\TemplateContext;
+use Phpolar\Phpolar\Tests\Extensions\PhpolarTestCaseExtension;
 
 /**
- * @covers \Efortmeyer\Polar\Core\Rendering\Template
+ * @covers \Phpolar\Phpolar\Core\Rendering\Template
  *
- * @uses \Efortmeyer\Polar\Core\Rendering\HtmlEncoder
- * @uses \Efortmeyer\Polar\Api\Rendering\TemplateContext
+ * @uses \Phpolar\Phpolar\Core\Rendering\HtmlEncoder
+ * @uses \Phpolar\Phpolar\Api\Rendering\TemplateContext
  */
-class TemplateTest extends PolarTestCaseExtension
+class TemplateTest extends PhpolarTestCaseExtension
 {
     /**
      * @var resource

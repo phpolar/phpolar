@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Api;
+namespace Phpolar\Phpolar\Api;
 
-use Efortmeyer\Polar\Api\DataStorage\CollectionStorageInterface;
-use Efortmeyer\Polar\Api\Model;
-use Efortmeyer\Polar\Api\Rendering\TemplateContext;
-use Efortmeyer\Polar\Api\UIElements\Banner;
-use Efortmeyer\Polar\Api\UIElements\DateFormControl;
-use Efortmeyer\Polar\Api\UIElements\ErrorBanner;
-use Efortmeyer\Polar\Api\UIElements\FormControl;
-use Efortmeyer\Polar\Api\UIElements\HiddenFormControl;
-use Efortmeyer\Polar\Api\UIElements\SuccessBanner;
-use Efortmeyer\Polar\Api\UIElements\TextAreaFormControl;
-use Efortmeyer\Polar\Api\UIElements\TextFormControl;
+use Phpolar\Phpolar\Api\DataStorage\CollectionStorageInterface;
+use Phpolar\Phpolar\Api\Model;
+use Phpolar\Phpolar\Api\Rendering\TemplateContext;
+use Phpolar\Phpolar\Api\UIElements\Banner;
+use Phpolar\Phpolar\Api\UIElements\DateFormControl;
+use Phpolar\Phpolar\Api\UIElements\ErrorBanner;
+use Phpolar\Phpolar\Api\UIElements\FormControl;
+use Phpolar\Phpolar\Api\UIElements\HiddenFormControl;
+use Phpolar\Phpolar\Api\UIElements\SuccessBanner;
+use Phpolar\Phpolar\Api\UIElements\TextAreaFormControl;
+use Phpolar\Phpolar\Api\UIElements\TextFormControl;
 
 class Form extends TemplateContext
 {

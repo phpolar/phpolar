@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Core\Attributes;
+namespace Phpolar\Phpolar\Core\Attributes;
 
 enum InputTypes: string
 {

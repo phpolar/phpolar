@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Core;
+namespace Phpolar\Phpolar\Core;
 
-use Efortmeyer\Polar\Api\Attributes\Config\Collection as AttributeConfigCollection;
-use Efortmeyer\Polar\Core\Attributes\AttributeCollection;
-use Efortmeyer\Polar\Core\Fields\FieldMetadata;
-use Efortmeyer\Polar\Core\Fields\FieldMetadataConfig;
-use Efortmeyer\Polar\Core\Fields\FieldMetadataFactory;
+use Phpolar\Phpolar\Api\Attributes\Config\Collection as AttributeConfigCollection;
+use Phpolar\Phpolar\Core\Attributes\AttributeCollection;
+use Phpolar\Phpolar\Core\Fields\FieldMetadata;
+use Phpolar\Phpolar\Core\Fields\FieldMetadataConfig;
+use Phpolar\Phpolar\Core\Fields\FieldMetadataFactory;
 use ReflectionAttribute;
 use ReflectionObject;
 use ReflectionProperty;

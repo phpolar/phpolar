@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Stock\Attributes;
+namespace Phpolar\Phpolar\Stock\Attributes;
 
 use DateTime;
-use Efortmeyer\Polar\Core\Fields\TextField;
+use Phpolar\Phpolar\Core\Fields\TextField;
 
 /**
  * Holds default configuration values.

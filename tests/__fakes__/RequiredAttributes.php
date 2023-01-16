@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Tests\Fakes;
+namespace Phpolar\Phpolar\Tests\Fakes;
 
-use Efortmeyer\Polar\Core\Attributes\InputTypes;
-use Efortmeyer\Polar\Stock\Attributes\DefaultColumn;
-use Efortmeyer\Polar\Stock\Attributes\DefaultDateFormat;
-use Efortmeyer\Polar\Stock\Attributes\DefaultLabel;
-use Efortmeyer\Polar\Stock\Attributes\DefaultMaxLength;
-use Efortmeyer\Polar\Stock\Attributes\Input;
+use Phpolar\Phpolar\Core\Attributes\InputTypes;
+use Phpolar\Phpolar\Stock\Attributes\DefaultColumn;
+use Phpolar\Phpolar\Stock\Attributes\DefaultDateFormat;
+use Phpolar\Phpolar\Stock\Attributes\DefaultLabel;
+use Phpolar\Phpolar\Stock\Attributes\DefaultMaxLength;
+use Phpolar\Phpolar\Stock\Attributes\Input;
 
 class RequiredAttributes
 {

@@ -3,19 +3,19 @@
 declare(strict_types=1);
 
 
-namespace Efortmeyer\Polar\Core\Parsers\Annotation;
+namespace Phpolar\Phpolar\Core\Parsers\Annotation;
 
-use Efortmeyer\Polar\Stock\Attributes\NoopValidate;
-use Efortmeyer\Polar\Stock\Attributes\TypeValidation;
+use Phpolar\Phpolar\Stock\Attributes\NoopValidate;
+use Phpolar\Phpolar\Stock\Attributes\TypeValidation;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \Efortmeyer\Polar\Core\Parsers\Annotation\TypeTag
- * @covers \Efortmeyer\Polar\Core\Parsers\Annotation\Token
- * @covers \Efortmeyer\Polar\Core\Parsers\Annotation\Constructor
+ * @covers \Phpolar\Phpolar\Core\Parsers\Annotation\TypeTag
+ * @covers \Phpolar\Phpolar\Core\Parsers\Annotation\Token
+ * @covers \Phpolar\Phpolar\Core\Parsers\Annotation\Constructor
  *
- * @uses \Efortmeyer\Polar\Stock\Attributes\TypeValidation
- * @uses \Efortmeyer\Polar\Stock\Attributes\NoopValidate
+ * @uses \Phpolar\Phpolar\Stock\Attributes\TypeValidation
+ * @uses \Phpolar\Phpolar\Stock\Attributes\NoopValidate
  */
 class TypeTagTest extends TestCase
 {

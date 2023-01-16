@@ -3,19 +3,19 @@
 declare(strict_types=1);
 
 
-namespace Efortmeyer\Polar\Core\Parsers\Annotation;
+namespace Phpolar\Phpolar\Core\Parsers\Annotation;
 
-use Efortmeyer\Polar\Stock\Attributes\DefaultLabel;
-use Efortmeyer\Polar\Stock\Attributes\Label;
+use Phpolar\Phpolar\Stock\Attributes\DefaultLabel;
+use Phpolar\Phpolar\Stock\Attributes\Label;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \Efortmeyer\Polar\Core\Parsers\Annotation\ConstructorArgsOne
- * @covers \Efortmeyer\Polar\Core\Parsers\Annotation\Token
- * @covers \Efortmeyer\Polar\Core\Parsers\Annotation\Constructor
+ * @covers \Phpolar\Phpolar\Core\Parsers\Annotation\ConstructorArgsOne
+ * @covers \Phpolar\Phpolar\Core\Parsers\Annotation\Token
+ * @covers \Phpolar\Phpolar\Core\Parsers\Annotation\Constructor
  *
- * @uses \Efortmeyer\Polar\Stock\Attributes\Label
- * @uses \Efortmeyer\Polar\Stock\Attributes\DefaultLabel
+ * @uses \Phpolar\Phpolar\Stock\Attributes\Label
+ * @uses \Phpolar\Phpolar\Stock\Attributes\DefaultLabel
  * @testdox ConstructorArgsOne
  */
 class ConstructorArgsOneTest extends TestCase

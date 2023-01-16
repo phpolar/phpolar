@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Stock\DataStorage;
+namespace Phpolar\Phpolar\Stock\DataStorage;
 
-use Efortmeyer\Polar\Api\Model;
-use Efortmeyer\Polar\Api\Attributes\Config\Collection;
-use Efortmeyer\Polar\Api\DataStorage\CollectionStorageInterface;
+use Phpolar\Phpolar\Api\Model;
+use Phpolar\Phpolar\Api\Attributes\Config\Collection;
+use Phpolar\Phpolar\Api\DataStorage\CollectionStorageInterface;
 
 use InvalidArgumentException;
 use RuntimeException;
@@ -103,7 +103,7 @@ final class CsvFileStorage implements CollectionStorageInterface
         $headers = fgetcsv($file);
         // read
         while (
-             $headers !== false &&
+            $headers !== false &&
             ($data = fgetcsv($file)) !== false
         ) {
             // headers -> keys
@@ -124,8 +124,7 @@ final class CsvFileStorage implements CollectionStorageInterface
         $file = static::openWriteFile($this->pathToFile);
         if (count($row) === 0) {
             return;
-        }
-        else if (stream_get_contents($file) === "") {
+        } else if (stream_get_contents($file) === "") {
             fputcsv($file, $headers);
         }
         fputcsv($file, $row);

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Core\Fields;
+namespace Phpolar\Phpolar\Core\Fields;
 
-use Efortmeyer\Polar\Api\Validation\ValidationInterface;
-use Efortmeyer\Polar\Core\Attributes\{
+use Phpolar\Phpolar\Api\Validation\ValidationInterface;
+use Phpolar\Phpolar\Core\Attributes\{
     AttributeCollection,
     Attribute,
 };

@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Stock\Attributes;
+namespace Phpolar\Phpolar\Stock\Attributes;
 
 use Attribute as GlobalAttribute;
-use Efortmeyer\Polar\Core\Attributes\Attribute;
-use Efortmeyer\Polar\Core\Attributes\InputTypes;
-use Efortmeyer\Polar\Core\Fields\DateField;
-use Efortmeyer\Polar\Core\Fields\NumberField;
-use Efortmeyer\Polar\Core\Fields\TextAreaField;
-use Efortmeyer\Polar\Core\Fields\TextField;
+use Phpolar\Phpolar\Core\Attributes\Attribute;
+use Phpolar\Phpolar\Core\Attributes\InputTypes;
+use Phpolar\Phpolar\Core\Fields\DateField;
+use Phpolar\Phpolar\Core\Fields\NumberField;
+use Phpolar\Phpolar\Core\Fields\TextAreaField;
+use Phpolar\Phpolar\Core\Fields\TextField;
 
 #[GlobalAttribute(GlobalAttribute::TARGET_PROPERTY)]
 final class Input extends Attribute

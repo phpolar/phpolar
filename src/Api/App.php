@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Api;
+namespace Phpolar\Phpolar\Api;
 
-use Efortmeyer\Polar\Api\DataStorage\CollectionStorageFactory;
-use Efortmeyer\Polar\Api\Rendering\TemplateContext;
-use Efortmeyer\Polar\Api\DataStorage\CollectionStorageInterface;
+use Phpolar\Phpolar\Api\DataStorage\CollectionStorageFactory;
+use Phpolar\Phpolar\Api\Rendering\TemplateContext;
+use Phpolar\Phpolar\Api\DataStorage\CollectionStorageInterface;
 
 use Closure;
-use Efortmeyer\Polar\Stock\AppConfig\InMemoryAppConfig;
-use Efortmeyer\Polar\Stock\DataStorage\CsvFileStorage;
+use Phpolar\Phpolar\Stock\AppConfig\InMemoryAppConfig;
+use Phpolar\Phpolar\Stock\DataStorage\CsvFileStorage;
 
 /**
  * Integrates the libraries features
@@ -95,11 +95,11 @@ final class App
         return $this;
     }
 
-     /**
-      * Sets up data storage.
-      *
-      * @api
-      */
+    /**
+     * Sets up data storage.
+     *
+     * @api
+     */
     public function setUpStorage(CollectionStorageFactory $storageFactory): self
     {
         $this->storage = $storageFactory->getStorage($this->appConfig->getAll());
@@ -114,8 +114,7 @@ final class App
      */
     public function run(): void
     {
-        if (isset($this->routeMap[$this->requestUri]) === false)
-        {
+        if (isset($this->routeMap[$this->requestUri]) === false) {
             static::notFoundHandler();
             return;
         }

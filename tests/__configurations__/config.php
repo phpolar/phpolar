@@ -2,26 +2,26 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Stock\Attributes;
+namespace Phpolar\Phpolar\Stock\Attributes;
 
-use Efortmeyer\Polar\Api\Attributes\Config\Collection;
-use Efortmeyer\Polar\Core\Attributes\Config\{
+use Phpolar\Phpolar\Api\Attributes\Config\Collection;
+use Phpolar\Phpolar\Core\Attributes\Config\{
     ConstructorArgsNone,
     ConstructorArgsOne,
     ConstructorArgsPropertyName,
     ConstructorArgsPropertyValue,
     ConstructorArgsPropValWithSndArg,
 };
-use Efortmeyer\Polar\Core\Attributes\Config\AttributeConfig;
-use Efortmeyer\Polar\Stock\Attributes\Config\ColumnKey;
-use Efortmeyer\Polar\Stock\Attributes\Config\DateFormatKey;
-use Efortmeyer\Polar\Stock\Attributes\Config\LabelKey;
-use Efortmeyer\Polar\Stock\Attributes\Config\MaxLengthKey;
-use Efortmeyer\Polar\Stock\Attributes\Config\TypeValidationKey;
+use Phpolar\Phpolar\Core\Attributes\Config\AttributeConfig;
+use Phpolar\Phpolar\Stock\Attributes\Config\ColumnKey;
+use Phpolar\Phpolar\Stock\Attributes\Config\DateFormatKey;
+use Phpolar\Phpolar\Stock\Attributes\Config\LabelKey;
+use Phpolar\Phpolar\Stock\Attributes\Config\MaxLengthKey;
+use Phpolar\Phpolar\Stock\Attributes\Config\TypeValidationKey;
 
 use DateTimeInterface;
-use Efortmeyer\Polar\Stock\Attributes\Config\AutomaticDateValueKey;
-use Efortmeyer\Polar\Stock\Attributes\Config\InputKey;
+use Phpolar\Phpolar\Stock\Attributes\Config\AutomaticDateValueKey;
+use Phpolar\Phpolar\Stock\Attributes\Config\InputKey;
 
 $configCollection = new Collection();
 

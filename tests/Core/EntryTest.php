@@ -2,60 +2,60 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Core;
+namespace Phpolar\Phpolar\Core;
 
 use DateTime;
 use DateTimeImmutable;
 use DateTimeInterface;
-use Efortmeyer\Polar\Api\Attributes\Config\Collection;
-use Efortmeyer\Polar\Core\Attributes\AttributeCollection;
-use Efortmeyer\Polar\Core\Attributes\InputTypes;
-use Efortmeyer\Polar\Core\Fields\FieldMetadataConfig;
-use Efortmeyer\Polar\Core\Fields\FieldMetadataFactory;
-use Efortmeyer\Polar\Stock\Attributes\AutomaticDateValue;
-use Efortmeyer\Polar\Stock\Attributes\Column;
-use Efortmeyer\Polar\Stock\Attributes\DateFormat;
-use Efortmeyer\Polar\Stock\Attributes\Input;
-use Efortmeyer\Polar\Stock\Attributes\Label;
-use Efortmeyer\Polar\Stock\Attributes\MaxLength;
-use Efortmeyer\Polar\Tests\Fakes\RequiredAttributes;
+use Phpolar\Phpolar\Api\Attributes\Config\Collection;
+use Phpolar\Phpolar\Core\Attributes\AttributeCollection;
+use Phpolar\Phpolar\Core\Attributes\InputTypes;
+use Phpolar\Phpolar\Core\Fields\FieldMetadataConfig;
+use Phpolar\Phpolar\Core\Fields\FieldMetadataFactory;
+use Phpolar\Phpolar\Stock\Attributes\AutomaticDateValue;
+use Phpolar\Phpolar\Stock\Attributes\Column;
+use Phpolar\Phpolar\Stock\Attributes\DateFormat;
+use Phpolar\Phpolar\Stock\Attributes\Input;
+use Phpolar\Phpolar\Stock\Attributes\Label;
+use Phpolar\Phpolar\Stock\Attributes\MaxLength;
+use Phpolar\Phpolar\Tests\Fakes\RequiredAttributes;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \Efortmeyer\Polar\Core\Entry
- * @covers \Efortmeyer\Polar\Core\PropertyAnnotation
- * @covers \Efortmeyer\Polar\Api\Attributes\Config\Collection
+ * @covers \Phpolar\Phpolar\Core\Entry
+ * @covers \Phpolar\Phpolar\Core\PropertyAnnotation
+ * @covers \Phpolar\Phpolar\Api\Attributes\Config\Collection
  *
- * @covers \Efortmeyer\Polar\Core\Attributes\Attribute
- * @covers \Efortmeyer\Polar\Core\Attributes\AttributeCollection
- * @covers \Efortmeyer\Polar\Core\Fields\FieldMetadataConfig
- * @covers \Efortmeyer\Polar\Core\Fields\FieldMetadataFactory
- * @covers \Efortmeyer\Polar\Stock\Attributes\DefaultColumn
- * @covers \Efortmeyer\Polar\Stock\Attributes\DefaultDateFormat
- * @covers \Efortmeyer\Polar\Stock\Attributes\DefaultFormControl
- * @covers \Efortmeyer\Polar\Stock\Attributes\DefaultLabel
- * @covers \Efortmeyer\Polar\Stock\Attributes\NoopValidate
- * @covers \Efortmeyer\Polar\Stock\Attributes\Input
- * @covers \Efortmeyer\Polar\Stock\Attributes\Label
- * @covers \Efortmeyer\Polar\Stock\Attributes\MaxLength
- * @uses \Efortmeyer\Polar\Core\Attributes\InputTypes
- * @uses \Efortmeyer\Polar\Core\Attributes\Config\AttributeConfig
- * @uses \Efortmeyer\Polar\Core\Fields\FieldMetadata
- * @uses \Efortmeyer\Polar\Core\Fields\TextField
- * @uses \Efortmeyer\Polar\Core\Parsers\Annotation\Token
- * @uses \Efortmeyer\Polar\Core\Parsers\Annotation\Constructor
- * @uses \Efortmeyer\Polar\Core\Parsers\Annotation\ConstructorArgsNone
- * @uses \Efortmeyer\Polar\Core\Parsers\Annotation\ConstructorArgsOne
- * @uses \Efortmeyer\Polar\Core\Parsers\Annotation\ConstructorArgsOneWithValue
- * @uses \Efortmeyer\Polar\Core\Parsers\Annotation\TypeTag
- * @uses \Efortmeyer\Polar\Stock\Attributes\Column
- * @uses \Efortmeyer\Polar\Stock\Attributes\DateFormat
- * @uses \Efortmeyer\Polar\Stock\Attributes\DefaultMaxLength
- * @uses \Efortmeyer\Polar\Stock\Attributes\TypeValidation
- * @uses \Efortmeyer\Polar\Stock\Attributes\DefaultMaxLength
- * @uses \Efortmeyer\Polar\Stock\Validation\MaxLength
- * @uses \Efortmeyer\Polar\Stock\Validation\Noop
- * @uses \Efortmeyer\Polar\Stock\Validation\TypeValidation
+ * @covers \Phpolar\Phpolar\Core\Attributes\Attribute
+ * @covers \Phpolar\Phpolar\Core\Attributes\AttributeCollection
+ * @covers \Phpolar\Phpolar\Core\Fields\FieldMetadataConfig
+ * @covers \Phpolar\Phpolar\Core\Fields\FieldMetadataFactory
+ * @covers \Phpolar\Phpolar\Stock\Attributes\DefaultColumn
+ * @covers \Phpolar\Phpolar\Stock\Attributes\DefaultDateFormat
+ * @covers \Phpolar\Phpolar\Stock\Attributes\DefaultFormControl
+ * @covers \Phpolar\Phpolar\Stock\Attributes\DefaultLabel
+ * @covers \Phpolar\Phpolar\Stock\Attributes\NoopValidate
+ * @covers \Phpolar\Phpolar\Stock\Attributes\Input
+ * @covers \Phpolar\Phpolar\Stock\Attributes\Label
+ * @covers \Phpolar\Phpolar\Stock\Attributes\MaxLength
+ * @uses \Phpolar\Phpolar\Core\Attributes\InputTypes
+ * @uses \Phpolar\Phpolar\Core\Attributes\Config\AttributeConfig
+ * @uses \Phpolar\Phpolar\Core\Fields\FieldMetadata
+ * @uses \Phpolar\Phpolar\Core\Fields\TextField
+ * @uses \Phpolar\Phpolar\Core\Parsers\Annotation\Token
+ * @uses \Phpolar\Phpolar\Core\Parsers\Annotation\Constructor
+ * @uses \Phpolar\Phpolar\Core\Parsers\Annotation\ConstructorArgsNone
+ * @uses \Phpolar\Phpolar\Core\Parsers\Annotation\ConstructorArgsOne
+ * @uses \Phpolar\Phpolar\Core\Parsers\Annotation\ConstructorArgsOneWithValue
+ * @uses \Phpolar\Phpolar\Core\Parsers\Annotation\TypeTag
+ * @uses \Phpolar\Phpolar\Stock\Attributes\Column
+ * @uses \Phpolar\Phpolar\Stock\Attributes\DateFormat
+ * @uses \Phpolar\Phpolar\Stock\Attributes\DefaultMaxLength
+ * @uses \Phpolar\Phpolar\Stock\Attributes\TypeValidation
+ * @uses \Phpolar\Phpolar\Stock\Attributes\DefaultMaxLength
+ * @uses \Phpolar\Phpolar\Stock\Validation\MaxLength
+ * @uses \Phpolar\Phpolar\Stock\Validation\Noop
+ * @uses \Phpolar\Phpolar\Stock\Validation\TypeValidation
  */
 class EntryTest extends TestCase
 {

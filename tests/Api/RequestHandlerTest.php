@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Api;
+namespace Phpolar\Phpolar\Api;
 
-use Efortmeyer\Polar\Api\DataStorage\CollectionStorageInterface;
-use Efortmeyer\Polar\Api\Rendering\TemplateContext;
-use Efortmeyer\Polar\Core\Rendering\Template;
+use Phpolar\Phpolar\Api\DataStorage\CollectionStorageInterface;
+use Phpolar\Phpolar\Api\Rendering\TemplateContext;
+use Phpolar\Phpolar\Core\Rendering\Template;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \Efortmeyer\Polar\Api\RequestHandler
+ * @covers \Phpolar\Phpolar\Api\RequestHandler
  */
 class RequestHandlerTest extends TestCase
 {
@@ -21,7 +21,10 @@ class RequestHandlerTest extends TestCase
     {
         $sut = new class() extends RequestHandler
         {
-            public function testMethod() { return $this->getTemplateEngine(); }
+            public function testMethod()
+            {
+                return $this->getTemplateEngine();
+            }
             public function __invoke(TemplateContext $page, ?CollectionStorageInterface $storage = null): void
             {
                 // noop

@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Stock\Validation;
+namespace Phpolar\Phpolar\Stock\Validation;
 
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \Efortmeyer\Polar\Stock\Validation\TypeValidation
+ * @covers \Phpolar\Phpolar\Stock\Validation\TypeValidation
  * @testdox TypeValidation
  */
 class TypeValidationTest extends TestCase
 {
     /**
      * @test
-     * @dataProvider Efortmeyer\Polar\Tests\DataProviders\TypeValidationData::valid
+     * @dataProvider Phpolar\Phpolar\Tests\DataProviders\TypeValidationData::valid
      */
     public function shouldBeValidWhenValueIsValid($validValue, $givenTypeValidation)
     {
@@ -24,7 +24,7 @@ class TypeValidationTest extends TestCase
 
     /**
      * @test
-     * @dataProvider Efortmeyer\Polar\Tests\DataProviders\TypeValidationData::valid
+     * @dataProvider Phpolar\Phpolar\Tests\DataProviders\TypeValidationData::valid
      */
     public function shouldNotHaveErrorMessageWhenValueIsValid($validValue, $givenTypeValidation)
     {
@@ -34,7 +34,7 @@ class TypeValidationTest extends TestCase
 
     /**
      * @test
-     * @dataProvider Efortmeyer\Polar\Tests\DataProviders\TypeValidationData::invalid
+     * @dataProvider Phpolar\Phpolar\Tests\DataProviders\TypeValidationData::invalid
      */
     public function shouldBeInvalidWhenValueIsInvalid($invalidValue, $givenTypeValidation)
     {
@@ -44,7 +44,7 @@ class TypeValidationTest extends TestCase
 
     /**
      * @test
-     * @dataProvider Efortmeyer\Polar\Tests\DataProviders\TypeValidationData::invalid
+     * @dataProvider Phpolar\Phpolar\Tests\DataProviders\TypeValidationData::invalid
      */
     public function shouldHaveErrorMessageWhenValueIsInvalid($invalidValue, $givenTypeValidation)
     {

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Tests\DataProviders;
+namespace Phpolar\Phpolar\Tests\DataProviders;
 
-use Efortmeyer\Polar\Core\Attributes\InputTypes;
+use Phpolar\Phpolar\Core\Attributes\InputTypes;
 
 class InputTestData
 {

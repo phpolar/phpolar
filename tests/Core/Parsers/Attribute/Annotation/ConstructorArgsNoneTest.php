@@ -3,15 +3,15 @@
 declare(strict_types=1);
 
 
-namespace Efortmeyer\Polar\Core\Parsers\Annotation;
+namespace Phpolar\Phpolar\Core\Parsers\Annotation;
 
-use Efortmeyer\Polar\Stock\Attributes\NoopValidate;
+use Phpolar\Phpolar\Stock\Attributes\NoopValidate;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \Efortmeyer\Polar\Core\Parsers\Annotation\ConstructorArgsNone
- * @covers \Efortmeyer\Polar\Core\Parsers\Annotation\Token
- * @covers \Efortmeyer\Polar\Core\Parsers\Annotation\Constructor
+ * @covers \Phpolar\Phpolar\Core\Parsers\Annotation\ConstructorArgsNone
+ * @covers \Phpolar\Phpolar\Core\Parsers\Annotation\Token
+ * @covers \Phpolar\Phpolar\Core\Parsers\Annotation\Constructor
  *
  * @testdox ConstructorArgsNone
  */

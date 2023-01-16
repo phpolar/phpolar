@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Stock\Attributes;
+namespace Phpolar\Phpolar\Stock\Attributes;
 
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \Efortmeyer\Polar\Stock\Attributes\Column
+ * @covers \Phpolar\Phpolar\Stock\Attributes\Column
  */
 class ColumnTest extends TestCase
 {
     /**
      * @test
-     * @dataProvider Efortmeyer\Polar\Tests\DataProviders\ColumnTestData::text
+     * @dataProvider Phpolar\Phpolar\Tests\DataProviders\ColumnTestData::text
      */
     public function shouldReturnTheGivenText(string $givenText)
     {

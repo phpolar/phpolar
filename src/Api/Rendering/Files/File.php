@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Api\Rendering\Files;
+namespace Phpolar\Phpolar\Api\Rendering\Files;
 
 abstract class File
 {

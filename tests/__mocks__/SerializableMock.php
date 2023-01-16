@@ -1,6 +1,6 @@
 <?php
 
-namespace Efortmeyer\Polar\Tests\Mocks;
+namespace Phpolar\Phpolar\Tests\Mocks;
 
 use Serializable;
 

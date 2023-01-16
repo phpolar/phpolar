@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Stock\Attributes;
+namespace Phpolar\Phpolar\Stock\Attributes;
 
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \Efortmeyer\Polar\Stock\Attributes\DefaultFormControl
+ * @covers \Phpolar\Phpolar\Stock\Attributes\DefaultFormControl
  * @testdox DefaultFormControl
  */
 class DefaultFormControlTest extends TestCase
 {
     /**
      * @test
-     * @dataProvider Efortmeyer\Polar\Tests\DataProviders\DefaultFormControlTestData::testCases
+     * @dataProvider Phpolar\Phpolar\Tests\DataProviders\DefaultFormControlTestData::testCases
      */
     public function shouldReturnStringWithUpperCaseFirstCharacter(string $expectedType)
     {

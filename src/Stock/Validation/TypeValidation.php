@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Stock\Validation;
+namespace Phpolar\Phpolar\Stock\Validation;
 
-use Efortmeyer\Polar\Api\Validation\ValidationInterface;
-use Efortmeyer\Polar\Stock\Attributes\Messages;
+use Phpolar\Phpolar\Api\Validation\ValidationInterface;
+use Phpolar\Phpolar\Stock\Attributes\Messages;
 use Serializable;
 
 /**

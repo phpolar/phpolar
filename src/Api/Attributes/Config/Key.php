@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Api\Attributes\Config;
+namespace Phpolar\Phpolar\Api\Attributes\Config;
 
 use Stringable;
 

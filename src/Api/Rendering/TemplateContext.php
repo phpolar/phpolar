@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Api\Rendering;
+namespace Phpolar\Phpolar\Api\Rendering;
 
 /**
  * Represents an object used in a template.
