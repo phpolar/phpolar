@@ -1,4 +1,4 @@
-# Polar
+# <img src="./phpolar.svg" width="24" style="padding-right:8px" /> Polar
 
 ## A super-tiny, lightweight microframework for PHP projects
 
