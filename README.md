@@ -1,18 +1,22 @@
-# <img src="./phpolar.svg" width="24" style="padding-right:8px" /> Polar
+<p style="text-align:center">
+    <img width="240" src="./phpolar.svg" />
+</p>
+
+# Polar
 
 ## A super-tiny, lightweight microframework for PHP projects
 
-[![Coverage Status](https://coveralls.io/repos/github/ericfortmeyer/polar/badge.svg?branch=main)](https://coveralls.io/repos/github/ericfortmeyer/polar/badge.svg?branch=main) [![Latest Stable Version](http://poser.pugx.org/efortmeyer/polar/v)](https://packagist.org/packages/efortmeyer/polar) [![Total Downloads](http://poser.pugx.org/efortmeyer/polar/downloads)](https://packagist.org/packages/efortmeyer/polar) [![Latest Unstable Version](http://poser.pugx.org/efortmeyer/polar/v/unstable)](https://packagist.org/packages/efortmeyer/polar) [![License](http://poser.pugx.org/efortmeyer/polar/license)](https://packagist.org/packages/efortmeyer/polar) [![PHP Version Require](http://poser.pugx.org/efortmeyer/polar/require/php)](https://packagist.org/packages/efortmeyer/polar)
+[![Coverage Status](https://coveralls.io/repos/github/phpolar/phpolar/badge.svg?branch=main)](https://coveralls.io/repos/github/phpolar/phpolar/badge.svg?branch=main) [![Latest Stable Version](http://poser.pugx.org/phpolar/phpolar/v)][def] [![Total Downloads](http://poser.pugx.org/phpolar/phpolar/downloads)][def] [![Latest Unstable Version](http://poser.pugx.org/phpolar/phpolar/v/unstable)][def] [![License](http://poser.pugx.org/phpolar/phpolar/license)][def] [![PHP Version Require](http://poser.pugx.org/phpolar/phpolar/require/php)][def]
 
 ### Objectives
 
 1. Provide [attributes](#use-attributes-to-configure-models) so that objects can be declaratively configured for clean application development.
 1. Support using [pure PHP templates](#pure-php-templates) with automatic XSS mitigation.
 
-
 ### Pure PHP Templates
 
 #### Example 1
+
 ```php
 <!DOCTYPE html>
 <?php
@@ -50,6 +54,7 @@ $view = $this;
 ```
 
 ### Use Attributes to Configure Models
+
 ```php
 use Efortmeyer\Polar\Api\Model;
 
@@ -83,6 +88,7 @@ class Person extends Model
 ```
 
 ### Use Annotations to Configure Models
+
 ```php
 use Efortmeyer\Polar\Api\Model;
 
@@ -136,5 +142,6 @@ class Person extends Model
 }
 ```
 
-
 [API Documentation](https://ericfortmeyer.github.io/polar-docs)
+
+[def]: https://packagist.org/packages/phpolar/phpolar
