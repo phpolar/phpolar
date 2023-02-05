@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
-<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="SafeSuite" xsi:noNamespaceSchemaLocation="phpcs.xsd">
-    <description>The coding standard for SafeSuite.</description>
+<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="Phpolar" xsi:noNamespaceSchemaLocation="phpcs.xsd">
+    <description>The coding standard for Phpolar.</description>
 
     <file>src</file>
     <file>tests</file>

@@ -6,7 +6,7 @@ namespace Phpolar\Phpolar\Validation;
 
 use Attribute;
 
-use Phpolar\Phpolar\AbstractPropertyValueExtractor;
+use Phpolar\Phpolar\Core\AbstractPropertyValueExtractor;
 
 /**
  * Provides support for configuring the expected pattern of a property.

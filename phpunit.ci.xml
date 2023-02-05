@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.5/phpunit.xsd"
+         bootstrap="vendor/autoload.php"
+         cacheResultFile=".phpunit.cache/test-results"
+         executionOrder="depends,defects"
+         forceCoversAnnotation="false"
+         beStrictAboutCoversAnnotation="false"
+         beStrictAboutOutputDuringTests="false"
+         beStrictAboutTodoAnnotatedTests="false"
+         convertDeprecationsToExceptions="false"
+         failOnRisky="false"
+         failOnWarning="false"
+         colors="false"
+         verbose="false">
+    <testsuites>
+        <testsuite name="default">
+            <directory>tests/unit</directory>
+        </testsuite>
+        <testsuite name="unit">
+            <directory>tests/unit</directory>
+        </testsuite>
+    </testsuites>
+    <coverage cacheDirectory=".phpunit.cache/code-coverage"
+              processUncoveredFiles="true">
+        <include>
+            <directory suffix=".php">src</directory>
+        </include>
+        <exclude>
+            <file>src/Validation/Functions/getValidationAttributes.php</file>
+            <file>src/Validation/Functions/getErrorsFromAttributes.php</file>
+        </exclude>
+    </coverage>
+</phpunit>

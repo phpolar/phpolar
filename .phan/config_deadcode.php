@@ -353,6 +353,12 @@ return [
     'directory_list' => [
         'src',
         'vendor/psr',
+        'vendor/phpolar/csrf-protection/src',
+        'vendor/phpolar/http-codes/src',
+        'vendor/phpolar/http-response-extensions/src',
+        'vendor/phpolar/phpolar-core/src',
+        'vendor/phpolar/php-templating/src',
+        'vendor/phpolar/storage-driver/src',
     ],
 
     // A list of individual files to include in analysis

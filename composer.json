@@ -1,4 +1,5 @@
 {
+    "$schema": "https://getcomposer.org/schema.json",
     "name": "phpolar/phpolar",
     "description": "A super-tiny, lightweight microframework for PHP projects",
     "type": "library",
@@ -9,7 +10,9 @@
             "email": "e.fortmeyer01@gmail.com"
         }
     ],
-    "non-feature-branches": ["releases/php7-4"],
+    "non-feature-branches": [
+        "releases/php7-4"
+    ],
     "minimum-stability": "stable",
     "config": {
         "sort-packages": true
@@ -19,8 +22,7 @@
             "Phpolar\\Phpolar\\": "src/"
         },
         "files": [
-            "src/Validation/Functions/getValidationAttributes.php",
-            "src/Validation/Functions/getErrorsFromAttributes.php"
+            "src/Validation/Functions/getValidationAttributes.php"
         ]
     },
     "autoload-dev": {
@@ -32,7 +34,12 @@
     "require": {
         "php": ">=8.1",
         "ext-mbstring": "*",
-        "phpolar/csrf-protection": "^0.4.0",
+        "phpolar/csrf-protection": "^1.3",
+        "phpolar/http-response-extensions": "^0.1",
+        "phpolar/php-templating": "^0.3",
+        "phpolar/phpolar-core": "^0.2",
+        "phpolar/storage-driver": "^0.1",
+        "psr/container": "^2.0",
         "psr/http-message": "^1.0",
         "psr/http-server-handler": "^1.0",
         "psr/http-server-middleware": "^1.0"
@@ -47,31 +54,44 @@
         "phpstan/phpstan": "^1.8",
         "phpmd/phpmd": "^2.13"
     },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../phpolar-core"
+        }
+    ],
     "scripts": {
-        "analyze": "phpstan analyze src --level 9",
+        "analyze": "XDEBUG_MODE=off phpstan analyze src --level 9",
         "analyze:strict": "phan --no-progress-bar --strict-type-checking --analyze-twice --color --output-mode=text --color-scheme=light",
-        "analyze:dead-code": "@analyze-strict --color-scheme=light --config-file=.phan/config_deadcode.php",
-        "check": ["@lint -q", "@analyze -q", "@test --configuration=phpunit.dev.xml --testsuite unit"],
+        "analyze:dead-code": "@analyze:strict --color-scheme=light --config-file=.phan/config_deadcode.php",
+        "check": [
+            "@lint -q",
+            "@analyze -q",
+            "@test --configuration=phpunit.dev.xml --testsuite unit"
+        ],
         "ci:analyze": "composer exec \"@analyze\"",
         "ci:lint": "composer exec \"@lint\"",
         "ci:lint-fix": "composer exec \"@lint-fix\"",
-        "ci:test": "XDEBUG_MODE=coverage composer exec \"@test --coverage-clover=build/logs/clover.xml\"",
+        "ci:test": "XDEBUG_MODE=coverage composer exec \"@test --configuration=phpunit.dev.xml --coverage-clover=build/logs/clover.xml\"",
         "ci:generate-coverage-badge": "composer exec \"php-coveralls -v\"",
         "lint": "phpcs",
         "lint-fix": "phpcbf",
+        "semgrep": "semgrep --config auto -l php ./src",
         "start:test": [
             "Composer\\Config::disableProcessTimeout",
             "watch -n 30 -cx vendor/bin/phpunit --color=always --testsuite unit"
         ],
         "test": "phpunit --color=always",
         "test:acceptance": "@test --configuration=phpunit.dev.xml --testsuite acceptance",
+        "test:acceptance:report": "@test --configuration=phpunit.dev.xml --testsuite acceptance --testdox-text acceptance-test-results.md",
         "test:benchmark": "@test --configuration=phpunit.dev.xml --testsuite benchmark",
-        "test:coverage": "XDEBUG_MODE=coverage composer exec \"@test --coverage-text --testsuite unit\"",
+        "test:unit": "@test --configuration=phpunit.dev.xml --testsuite unit",
+        "test:coverage": "XDEBUG_MODE=coverage composer exec \"@test --configuration=phpunit.dev.xml --coverage-text --testsuite unit\"",
         "xdebug:on": [
-            "TEMP_FILE=\"$(sed --follow-symlink 's/;zend_extension=xdebug/zend_extension=xdebug/' \"$(php-config --ini-dir)/20-xdebug.ini\")\"; echo \"$TEMP_FILE\" > \"$(php-config --ini-dir)/20-xdebug.ini\""
+            "TEMP_FILE=\"$(sed --follow-symlink -E 's/^;(zend_extension=xdebug)/\\1/' \"$(php-config --ini-dir)/20-xdebug.ini\")\"; echo \"$TEMP_FILE\" > \"$(php-config --ini-dir)/20-xdebug.ini\""
         ],
         "xdebug:off": [
-            "TEMP_FILE=\"$(sed --follow-symlink 's/zend_extension=xdebug/;zend_extension=xdebug/' \"$(php-config --ini-dir)/20-xdebug.ini\")\"; echo \"$TEMP_FILE\" > \"$(php-config --ini-dir)/20-xdebug.ini\""
+            "TEMP_FILE=\"$(sed --follow-symlink -E 's/^(zend_extension=xdebug)/;\\1/' \"$(php-config --ini-dir)/20-xdebug.ini\")\"; echo \"$TEMP_FILE\" > \"$(php-config --ini-dir)/20-xdebug.ini\""
         ]
     }
 }
