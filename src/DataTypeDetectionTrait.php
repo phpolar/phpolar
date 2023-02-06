@@ -40,7 +40,7 @@ trait DataTypeDetectionTrait
         StorageDriverInterface $storageDriver,
     ): Stringable|DataTypeUnknown {
         $propertyTypeName = $propertyType->getName();
-        $typeName = TypeName::parse($propertyTypeName);
+        $typeName = parseTypeName($propertyTypeName);
         return match($typeName) {
             TypeName::Invalid => new DataTypeUnknown(),
             default => $storageDriver->getDataType($typeName),
@@ -58,7 +58,7 @@ trait DataTypeDetectionTrait
                         $storageDriver->getDataType(TypeName::T_DateTime),
                     default => new DataTypeUnknown(),
                 },
-                default => $storageDriver->getDataType(TypeName::parse(gettype($value))),
+                default => $storageDriver->getDataType(parseTypeName(gettype($value))),
             },
             default => new DataTypeUnknown(),
         };

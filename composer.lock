@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "532b3259a4188b809f382e48db9bfea4",
+    "content-hash": "f0b8ad9a1588cb452501fa6cf0f56b67",
     "packages": [
         {
             "name": "phpolar/csrf-protection",
@@ -130,16 +130,16 @@
         },
         {
             "name": "phpolar/http-response-extensions",
-            "version": "0.1.0",
+            "version": "0.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpolar/http-response-extensions.git",
-                "reference": "09dd9f730e1fe71f9c04ba798ce4c6ddc02e2886"
+                "reference": "f6433bce24a296c1d311f144cba7f9b1beddb0d9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpolar/http-response-extensions/zipball/09dd9f730e1fe71f9c04ba798ce4c6ddc02e2886",
-                "reference": "09dd9f730e1fe71f9c04ba798ce4c6ddc02e2886",
+                "url": "https://api.github.com/repos/phpolar/http-response-extensions/zipball/f6433bce24a296c1d311f144cba7f9b1beddb0d9",
+                "reference": "f6433bce24a296c1d311f144cba7f9b1beddb0d9",
                 "shasum": ""
             },
             "require": {
@@ -151,6 +151,7 @@
                 "phan/phan": "^5.4",
                 "php-coveralls/php-coveralls": "^2.5",
                 "phpmd/phpmd": "^2.13",
+                "phpolar/http-codes": "^0.0.6",
                 "phpstan/phpstan": "^1.9",
                 "phpunit/phpunit": "^9.5",
                 "squizlabs/php_codesniffer": "^3.7"
@@ -168,9 +169,9 @@
             "description": "Extends the functionality of PSR-7 HTTP Reponses.",
             "support": {
                 "issues": "https://github.com/phpolar/http-response-extensions/issues",
-                "source": "https://github.com/phpolar/http-response-extensions/tree/0.1.0"
+                "source": "https://github.com/phpolar/http-response-extensions/tree/0.1.1"
             },
-            "time": "2023-02-01T12:15:39+00:00"
+            "time": "2023-02-03T14:58:33+00:00"
         },
         {
             "name": "phpolar/php-templating",
@@ -229,14 +230,21 @@
         {
             "name": "phpolar/phpolar-core",
             "version": "0.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpolar/phpolar-core.git",
+                "reference": "e0396a80182c2e4b6597747dcffe7d3969739cab"
+            },
             "dist": {
-                "type": "path",
-                "url": "../phpolar-core",
-                "reference": "b7efb47297bf48f2a65071b83c8b3219b7a54adf"
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpolar/phpolar-core/zipball/e0396a80182c2e4b6597747dcffe7d3969739cab",
+                "reference": "e0396a80182c2e4b6597747dcffe7d3969739cab",
+                "shasum": ""
             },
             "require": {
                 "ext-mbstring": "*",
                 "php": ">=8.1",
+                "phpolar/http-response-extensions": "^0.1",
                 "psr/http-message": "^1.0.1",
                 "psr/http-server-handler": "^1.0.1",
                 "psr/http-server-middleware": "^1.0.1"
@@ -257,71 +265,7 @@
                     "Phpolar\\Phpolar\\Core\\": "src/"
                 }
             },
-            "scripts": {
-                "analyze": [
-                    "phpstan analyze src --level 9"
-                ],
-                "analyze:strict": [
-                    "phan --no-progress-bar --strict-type-checking --analyze-twice --color --output-mode=text --color-scheme=light"
-                ],
-                "analyze:dead-code": [
-                    "@analyze:strict --color-scheme=light --config-file=.phan/config_deadcode.php"
-                ],
-                "check": [
-                    "@lint -q",
-                    "@analyze -q",
-                    "@test --configuration=phpunit.dev.xml --testsuite unit"
-                ],
-                "ci:analyze": [
-                    "composer exec \"@analyze\""
-                ],
-                "ci:lint": [
-                    "composer exec \"@lint\""
-                ],
-                "ci:lint-fix": [
-                    "composer exec \"@lint-fix\""
-                ],
-                "ci:test": [
-                    "XDEBUG_MODE=coverage composer exec \"@test --configuration=phpunit.dev.xml --coverage-clover=build/logs/clover.xml\""
-                ],
-                "ci:generate-coverage-badge": [
-                    "composer exec \"php-coveralls -v\""
-                ],
-                "lint": [
-                    "phpcs"
-                ],
-                "lint-fix": [
-                    "phpcbf"
-                ],
-                "start:test": [
-                    "Composer\\Config::disableProcessTimeout",
-                    "watch -n 30 -cx vendor/bin/phpunit --color=always --testsuite unit"
-                ],
-                "test": [
-                    "phpunit --color=always"
-                ],
-                "test:acceptance": [
-                    "@test --configuration=phpunit.dev.xml --testsuite acceptance"
-                ],
-                "test:acceptance:report": [
-                    "@test --configuration=phpunit.dev.xml --testsuite acceptance --testdox-text acceptance-test-results.md"
-                ],
-                "test:benchmark": [
-                    "@test --configuration=phpunit.dev.xml --testsuite benchmark"
-                ],
-                "test:unit": [
-                    "@test --configuration=phpunit.dev.xml --testsuite unit"
-                ],
-                "test:coverage": [
-                    "XDEBUG_MODE=coverage composer exec \"@test --configuration=phpunit.dev.xml --coverage-text --testsuite unit\""
-                ],
-                "xdebug:on": [
-                    "TEMP_FILE=\"$(sed --follow-symlink -E 's/^;(zend_extension=xdebug)/\\1/' \"$(php-config --ini-dir)/20-xdebug.ini\")\"; echo \"$TEMP_FILE\" > \"$(php-config --ini-dir)/20-xdebug.ini\""
-                ],
-                "xdebug:off": [
-                    "TEMP_FILE=\"$(sed --follow-symlink -E 's/^(zend_extension=xdebug)/;\\1/' \"$(php-config --ini-dir)/20-xdebug.ini\")\"; echo \"$TEMP_FILE\" > \"$(php-config --ini-dir)/20-xdebug.ini\""
-                ]
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -332,22 +276,24 @@
                 }
             ],
             "description": "The internal, core components of the PHPolar Microframework",
-            "transport-options": {
-                "relative": true
-            }
+            "support": {
+                "issues": "https://github.com/phpolar/phpolar-core/issues",
+                "source": "https://github.com/phpolar/phpolar-core/tree/0.2.1"
+            },
+            "time": "2023-02-01T15:28:09+00:00"
         },
         {
             "name": "phpolar/storage-driver",
-            "version": "0.1.2",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpolar/storage-driver.git",
-                "reference": "ece2f7d28499f24bb11bc80d01405a47482ea1e2"
+                "reference": "21a7de833f177413064a367a17c75adf617c97b3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpolar/storage-driver/zipball/ece2f7d28499f24bb11bc80d01405a47482ea1e2",
-                "reference": "ece2f7d28499f24bb11bc80d01405a47482ea1e2",
+                "url": "https://api.github.com/repos/phpolar/storage-driver/zipball/21a7de833f177413064a367a17c75adf617c97b3",
+                "reference": "21a7de833f177413064a367a17c75adf617c97b3",
                 "shasum": ""
             },
             "require": {
@@ -359,6 +305,9 @@
             },
             "type": "library",
             "autoload": {
+                "files": [
+                    "src/Functions/parseTypeName.php"
+                ],
                 "psr-4": {
                     "Phpolar\\StorageDriver\\": "src/"
                 }
@@ -376,9 +325,9 @@
             "description": "Provides an interface for database storage driver implementations.",
             "support": {
                 "issues": "https://github.com/phpolar/storage-driver/issues",
-                "source": "https://github.com/phpolar/storage-driver/tree/0.1.2"
+                "source": "https://github.com/phpolar/storage-driver/tree/1.0.0"
             },
-            "time": "2023-01-25T07:47:55+00:00"
+            "time": "2023-02-06T04:46:21+00:00"
         },
         {
             "name": "psr/container",
@@ -2484,16 +2433,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "9.5.28",
+            "version": "9.6.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "954ca3113a03bf780d22f07bf055d883ee04b65e"
+                "reference": "e7b1615e3e887d6c719121c6d4a44b0ab9645555"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/954ca3113a03bf780d22f07bf055d883ee04b65e",
-                "reference": "954ca3113a03bf780d22f07bf055d883ee04b65e",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/e7b1615e3e887d6c719121c6d4a44b0ab9645555",
+                "reference": "e7b1615e3e887d6c719121c6d4a44b0ab9645555",
                 "shasum": ""
             },
             "require": {
@@ -2535,7 +2484,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "9.5-dev"
+                    "dev-master": "9.6-dev"
                 }
             },
             "autoload": {
@@ -2566,7 +2515,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/9.5.28"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/9.6.3"
             },
             "funding": [
                 {
@@ -2582,7 +2531,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-01-14T12:32:24+00:00"
+            "time": "2023-02-04T13:37:15+00:00"
         },
         {
             "name": "psr/http-client",
@@ -3167,16 +3116,16 @@
         },
         {
             "name": "sebastian/environment",
-            "version": "5.1.4",
+            "version": "5.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/environment.git",
-                "reference": "1b5dff7bb151a4db11d49d90e5408e4e938270f7"
+                "reference": "830c43a844f1f8d5b7a1f6d6076b784454d8b7ed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/environment/zipball/1b5dff7bb151a4db11d49d90e5408e4e938270f7",
-                "reference": "1b5dff7bb151a4db11d49d90e5408e4e938270f7",
+                "url": "https://api.github.com/repos/sebastianbergmann/environment/zipball/830c43a844f1f8d5b7a1f6d6076b784454d8b7ed",
+                "reference": "830c43a844f1f8d5b7a1f6d6076b784454d8b7ed",
                 "shasum": ""
             },
             "require": {
@@ -3218,7 +3167,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/environment/issues",
-                "source": "https://github.com/sebastianbergmann/environment/tree/5.1.4"
+                "source": "https://github.com/sebastianbergmann/environment/tree/5.1.5"
             },
             "funding": [
                 {
@@ -3226,7 +3175,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-04-03T09:37:03+00:00"
+            "time": "2023-02-03T06:03:51+00:00"
         },
         {
             "name": "sebastian/exporter",
@@ -3540,16 +3489,16 @@
         },
         {
             "name": "sebastian/recursion-context",
-            "version": "4.0.4",
+            "version": "4.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/recursion-context.git",
-                "reference": "cd9d8cf3c5804de4341c283ed787f099f5506172"
+                "reference": "e75bd0f07204fec2a0af9b0f3cfe97d05f92efc1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/recursion-context/zipball/cd9d8cf3c5804de4341c283ed787f099f5506172",
-                "reference": "cd9d8cf3c5804de4341c283ed787f099f5506172",
+                "url": "https://api.github.com/repos/sebastianbergmann/recursion-context/zipball/e75bd0f07204fec2a0af9b0f3cfe97d05f92efc1",
+                "reference": "e75bd0f07204fec2a0af9b0f3cfe97d05f92efc1",
                 "shasum": ""
             },
             "require": {
@@ -3588,10 +3537,10 @@
                 }
             ],
             "description": "Provides functionality to recursively process PHP variables",
-            "homepage": "http://www.github.com/sebastianbergmann/recursion-context",
+            "homepage": "https://github.com/sebastianbergmann/recursion-context",
             "support": {
                 "issues": "https://github.com/sebastianbergmann/recursion-context/issues",
-                "source": "https://github.com/sebastianbergmann/recursion-context/tree/4.0.4"
+                "source": "https://github.com/sebastianbergmann/recursion-context/tree/4.0.5"
             },
             "funding": [
                 {
@@ -3599,7 +3548,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-10-26T13:17:30+00:00"
+            "time": "2023-02-03T06:07:39+00:00"
         },
         {
             "name": "sebastian/resource-operations",
@@ -3658,16 +3607,16 @@
         },
         {
             "name": "sebastian/type",
-            "version": "3.2.0",
+            "version": "3.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/type.git",
-                "reference": "fb3fe09c5f0bae6bc27ef3ce933a1e0ed9464b6e"
+                "reference": "75e2c2a32f5e0b3aef905b9ed0b179b953b3d7c7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/type/zipball/fb3fe09c5f0bae6bc27ef3ce933a1e0ed9464b6e",
-                "reference": "fb3fe09c5f0bae6bc27ef3ce933a1e0ed9464b6e",
+                "url": "https://api.github.com/repos/sebastianbergmann/type/zipball/75e2c2a32f5e0b3aef905b9ed0b179b953b3d7c7",
+                "reference": "75e2c2a32f5e0b3aef905b9ed0b179b953b3d7c7",
                 "shasum": ""
             },
             "require": {
@@ -3702,7 +3651,7 @@
             "homepage": "https://github.com/sebastianbergmann/type",
             "support": {
                 "issues": "https://github.com/sebastianbergmann/type/issues",
-                "source": "https://github.com/sebastianbergmann/type/tree/3.2.0"
+                "source": "https://github.com/sebastianbergmann/type/tree/3.2.1"
             },
             "funding": [
                 {
@@ -3710,7 +3659,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-09-12T14:47:03+00:00"
+            "time": "2023-02-03T06:13:03+00:00"
         },
         {
             "name": "sebastian/version",

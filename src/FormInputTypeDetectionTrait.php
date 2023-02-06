@@ -45,7 +45,7 @@ trait FormInputTypeDetectionTrait
                    in_array("array", $propertyType->getTypes()) === false ? InputTypes::Text : InputTypes::Invalid;
         }
         if ($propertyType instanceof PropertyTypeNotDeclared) {
-            return $property->isInitialized($this) ? match (gettype($property->getValue($this))) {
+            return $property->isInitialized($this) === true ? match (gettype($property->getValue($this))) {
                     "string" => InputTypes::Text,
                     "integer", "double" => InputTypes::Number,
                     "boolean" => InputTypes::Checkbox,
