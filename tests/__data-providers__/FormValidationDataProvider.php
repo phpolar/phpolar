@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Phpolar\Phpolar\Tests\DataProviders;
 
-use Phpolar\Phpolar\AbstractModel;
+use Phpolar\Phpolar\Model\AbstractModel;
 use Phpolar\Phpolar\Validation\Max;
 use Phpolar\Phpolar\Validation\MaxLength;
 use Phpolar\Phpolar\Validation\Min;
