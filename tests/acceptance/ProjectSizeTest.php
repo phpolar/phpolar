@@ -4,29 +4,17 @@ declare(strict_types=1);
 
 namespace Phpolar\Phpolar;
 
+use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 
 use const \Phpolar\Phpolar\Tests\PROJECT_SIZE_THRESHOLD;
 
-/**
- * @runTestsInSeparateProcesses
- * @coversNothing
- */
 final class ProjectSizeTest extends TestCase
 {
-    public function thresholds()
-    {
-        return [
-            [(int) PROJECT_SIZE_THRESHOLD]
-        ];
-    }
-
-    /**
-     * @test
-     * @dataProvider thresholds()
-     * @testdox Source code total size shall be below $threshold bytes
-     */
-    public function shallBeBelowThreshold(int $threshold)
+    #[Test]
+    #[TestDox("Source code total size shall be below " . PROJECT_SIZE_THRESHOLD . " bytes")]
+    public function shallBeBelowThreshold()
     {
         $totalSize = mb_strlen(
             implode(
@@ -45,6 +33,6 @@ final class ProjectSizeTest extends TestCase
             )
         );
         $this->assertGreaterThan(0, $totalSize);
-        $this->assertLessThanOrEqual($threshold, $totalSize);
+        $this->assertLessThanOrEqual(PROJECT_SIZE_THRESHOLD, $totalSize);
     }
 }

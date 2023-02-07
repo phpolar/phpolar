@@ -10,14 +10,14 @@ final class PatternDataProvider
 
     public const PHONE_PATTERN = "/^\(?[[:digit:]]{3}\)?[[:space:]]?(-|.)?[[:digit:]]{3}(-|.)?[[:digit:]]{4}$/";
 
-    public function validEmails(): mixed
+    public static function validEmails(): mixed
     {
         return [
             ["test@somewhere.com"],
         ];
     }
 
-    public function validPhoneNumbers(): mixed
+    public static function validPhoneNumbers(): mixed
     {
         return [
             ["222-222-2222"],
@@ -27,7 +27,7 @@ final class PatternDataProvider
         ];
     }
 
-    public function invalidEmails(): mixed
+    public static function invalidEmails(): mixed
     {
         return [
             [null],

@@ -6,21 +6,22 @@ namespace Phpolar\Phpolar\Validation;
 
 use Phpolar\Phpolar\Model\ValidationTrait;
 use Phpolar\Phpolar\Model\FieldErrorMessageTrait;
+use Phpolar\Phpolar\Tests\DataProviders\RequiredDataProvider;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProviderExternal;
+use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \Phpolar\Phpolar\Validation\Required
- * @uses \Phpolar\Phpolar\Model\ValidationTrait
- * @uses \Phpolar\Phpolar\Model\FieldErrorMessageTrait
- * @uses \Phpolar\Phpolar\Validation\DefaultValidationError
- * @uses \Phpolar\Phpolar\Validation\AbstractValidationError
- */
-class RequiredTest extends TestCase
+#[CoversClass(Required::class)]
+#[UsesClass(ValidationTrait::class)]
+#[UsesClass(FieldErrorMessageTrait::class)]
+#[UsesClass(DefaultValidationError::class)]
+#[UsesClass(AbstractValidationError::class)]
+final class RequiredTest extends TestCase
 {
-    /**
-     * @test
-     * @dataProvider \Phpolar\Phpolar\Tests\DataProviders\RequiredDataProvider::nonEmptyVals()
-     */
+    #[Test]
+    #[DataProviderExternal(RequiredDataProvider::class, "nonEmptyVals")]
     public function shallBeValidIfPropIsSetWithNonEmptyVal(mixed $val)
     {
         $sut = new class($val)
@@ -41,9 +42,7 @@ class RequiredTest extends TestCase
         $this->assertEmpty($sut->getFieldErrorMessage("property"));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function shallBeInvalidIfPropIsNotSet()
     {
         $sut = new class()
@@ -59,10 +58,8 @@ class RequiredTest extends TestCase
         $this->assertNotEmpty($sut->getFieldErrorMessage("property"));
     }
 
-    /**
-     * @test
-     * @dataProvider \Phpolar\Phpolar\Tests\DataProviders\RequiredDataProvider::emptyVals()
-     */
+    #[Test]
+    #[DataProviderExternal(RequiredDataProvider::class, "emptyVals")]
     public function shallBeInvalidIfPropIsEmpty(mixed $emptyVals)
     {
         $sut = new class($emptyVals)

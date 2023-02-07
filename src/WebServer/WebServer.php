@@ -7,7 +7,7 @@ namespace Phpolar\Phpolar\WebServer;
 use Phpolar\CsrfProtection\Http\CsrfPostRoutingMiddlewareFactory;
 use Phpolar\CsrfProtection\Http\CsrfPreRoutingMiddleware;
 use Phpolar\Extensions\HttpResponse\ResponseExtension;
-use Phpolar\Phpolar\Http\Error401Handler;
+use Phpolar\Phpolar\WebServer\Http\Error401Handler;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;

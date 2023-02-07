@@ -4,38 +4,45 @@ declare(strict_types=1);
 
 namespace Phpolar\Phpolar\Model;
 
+use Phpolar\Phpolar\Tests\DataProviders\FormFieldErrorMessageDataProvider;
+use Phpolar\Phpolar\Validation\AbstractValidationError;
+use Phpolar\Phpolar\Validation\DefaultValidationError;
+use Phpolar\Phpolar\Validation\Max;
+use Phpolar\Phpolar\Validation\MaxLength;
+use Phpolar\Phpolar\Validation\Min;
+use Phpolar\Phpolar\Validation\MinLength;
+use Phpolar\Phpolar\Validation\Pattern;
+use Phpolar\Phpolar\Validation\Required;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\CoversFunction;
+use PHPUnit\Framework\Attributes\DataProviderExternal;
+use PHPUnit\Framework\Attributes\TestDox;
+use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \Phpolar\Phpolar\Model\FieldErrorMessageTrait
- * @uses \Phpolar\Phpolar\Validation\DefaultValidationError
- * @uses \Phpolar\Phpolar\Validation\AbstractValidationError
- * @uses \Phpolar\Phpolar\Validation\Max
- * @uses \Phpolar\Phpolar\Validation\MaxLength
- * @uses \Phpolar\Phpolar\Validation\Min
- * @uses \Phpolar\Phpolar\Validation\MinLength
- * @uses \Phpolar\Phpolar\Validation\Pattern
- * @uses \Phpolar\Phpolar\Validation\Required
- */
+#[CoversClass(FieldErrorMessageTrait::class)]
+#[CoversFunction("\\Phpolar\\Phpolar\\Validation\\Functions\\getValidationAttributes")]
+#[UsesClass(DefaultValidationError::class)]
+#[UsesClass(AbstractValidationError::class)]
+#[UsesClass(Max::class)]
+#[UsesClass(MaxLength::class)]
+#[UsesClass(Min::class)]
+#[UsesClass(MinLength::class)]
+#[UsesClass(Pattern::class)]
+#[UsesClass(Required::class)]
 final class FieldErrorMessageTraitTest extends TestCase
 {
-    /**
-     * @test
-     * @testdox Shall produce expected error message when property validation fails
-     * @dataProvider \Phpolar\Phpolar\Tests\DataProviders\FormFieldErrorMessageDataProvider::invalidPropertyTestCases()
-     */
-    public function a(string $expectedMessage, object $model)
+    #[TestDox("Shall produce expected error message when property validation fails")]
+    #[DataProviderExternal(FormFieldErrorMessageDataProvider::class, "invalidPropertyTestCases")]
+    public function test1(string $expectedMessage, object $model)
     {
         $fieldName = "prop";
         $this->assertSame($expectedMessage, $model->getFieldErrorMessage($fieldName));
     }
 
-    /**
-     * @test
-     * @testdox Shall return an empty string when the property is valid
-     * @dataProvider \Phpolar\Phpolar\Tests\DataProviders\FormFieldErrorMessageDataProvider::validPropertyTestCases()
-     */
-    public function b(string $expectedMessage, object $model)
+    #[TestDox("Shall return an empty string when the property is valid")]
+    #[DataProviderExternal(FormFieldErrorMessageDataProvider::class, "validPropertyTestCases")]
+    public function test2(string $expectedMessage, object $model)
     {
         $fieldName = "prop";
         $this->assertSame($expectedMessage, $model->getFieldErrorMessage($fieldName));

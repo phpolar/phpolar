@@ -10,7 +10,7 @@ final class MaxLengthDataProvider
 
     public const NUM_MAX_LEN = 19 - 1; // PHP_INT_MAX length is 19
 
-    public function strAboveMax(): array
+    public static function strAboveMax(): array
     {
         return array_map(
             self::getRandomStrAboveMaxLenTestCase(...),
@@ -18,7 +18,7 @@ final class MaxLengthDataProvider
         );
     }
 
-    public function strBelowMax(): array
+    public static function strBelowMax(): array
     {
         return array_map(
             self::getRandomStrBelowMaxLenTestCase(...),
@@ -29,7 +29,7 @@ final class MaxLengthDataProvider
     /**
      * @return int[]|float[]
      */
-    public function numberAboveMax(): array
+    public static function numberAboveMax(): array
     {
         return array_map(
             self::getRandomNumAboveMaxLenTestCase(...),
@@ -40,7 +40,7 @@ final class MaxLengthDataProvider
     /**
      * @return int[]|float[]
      */
-    public function numberBelowMax(): array
+    public static function numberBelowMax(): array
     {
         return array_map(
             self::getRandomNumBelowMaxLenTestCase(...),
@@ -48,24 +48,24 @@ final class MaxLengthDataProvider
         );
     }
 
-    private function getRandomStrBelowMaxLenTestCase(): array
+    private static function getRandomStrBelowMaxLenTestCase(): array
     {
         return [str_repeat(chr(random_int(32, 126)), self::MAX_LEN - random_int(0, self::MAX_LEN - 1))];
     }
 
-    private function getRandomStrAboveMaxLenTestCase(): array
+    private static function getRandomStrAboveMaxLenTestCase(): array
     {
         return [str_repeat(chr(random_int(32, 126)), self::MAX_LEN + random_int(1, 20))];
     }
 
-    private function getRandomNumBelowMaxLenTestCase(): array
+    private static function getRandomNumBelowMaxLenTestCase(): array
     {
         return [
             random_int((int) substr((string) PHP_INT_MIN, 0, min(self::MAX_LEN, self::NUM_MAX_LEN)), (int) str_repeat("9", min(self::MAX_LEN, self::NUM_MAX_LEN)))
         ];
     }
 
-    private function getRandomNumAboveMaxLenTestCase(): array
+    private static function getRandomNumAboveMaxLenTestCase(): array
     {
         return [
             random_int((int) str_repeat("1", max(self::MAX_LEN + 1, self::NUM_MAX_LEN)), (int) substr((string) PHP_INT_MAX, 0, max(self::MAX_LEN + 1, self::NUM_MAX_LEN)))

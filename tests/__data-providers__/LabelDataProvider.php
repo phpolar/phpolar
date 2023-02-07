@@ -9,7 +9,7 @@ use Phpolar\Phpolar\Model\Label;
 
 final class LabelDataProvider
 {
-    public function getUnconfiguredPropertyTestCases(): array
+    public static function getUnconfiguredPropertyTestCases(): array
     {
         return [
             [
@@ -23,7 +23,7 @@ final class LabelDataProvider
         ];
     }
 
-    public function getLabelTestCases(): array
+    public static function getLabelTestCases(): array
     {
         return [
             [
@@ -57,7 +57,7 @@ final class LabelDataProvider
     }
 
 
-    public function getConfiguredLabelTestCases(): array
+    public static function getConfiguredLabelTestCases(): array
     {
         return [
             [

@@ -4,22 +4,25 @@ declare(strict_types=1);
 
 namespace Phpolar\Phpolar;
 
+use Phpolar\Phpolar\Model\Column;
+use Phpolar\Phpolar\Model\Size;
+use Phpolar\Phpolar\Model\ColumnNameTrait;
+use Phpolar\Phpolar\Model\DataTypeDetectionTrait;
+use Phpolar\Phpolar\Model\SizeConfigurationTrait;
 use Phpolar\Phpolar\Tests\Stubs\EntityNameConfigured;
 use Phpolar\StorageDriver\StorageDriverInterface;
 use Phpolar\StorageDriver\TypeName;
+use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 use Stringable;
 
-/**
- * @runTestsInSeparateProcesses
- * @coversNothing
- */
+use const \Phpolar\Phpolar\Tests\ENTITY_NAME_TEST_CASE;
+
 final class ConfigurableStorageEntryTest extends TestCase
 {
-    /**
-     * @test
-     * @testdox Should configure column names
-     */
+    #[Test]
+    #[TestDox("Should configure column names")]
     public function criterion1()
     {
         $model1 = new class()
@@ -57,10 +60,8 @@ final class ConfigurableStorageEntryTest extends TestCase
         }
     }
 
-    /**
-     * @test
-     * @testdox Should detect data types
-     */
+    #[Test]
+    #[TestDox("Should detect data types")]
     public function criterion2()
     {
         $model = new class()
@@ -88,10 +89,8 @@ final class ConfigurableStorageEntryTest extends TestCase
         $this->assertSame($expectedColumnDataTypeString, (string) $actual);
     }
 
-    /**
-     * @test
-     * @testdox Should allow configuration of size
-     */
+    #[Test]
+    #[TestDox("Should allow configuration of size")]
     public function criterion3()
     {
         $entity = new class()
@@ -105,9 +104,8 @@ final class ConfigurableStorageEntryTest extends TestCase
         $this->assertSame(5, $actual);
     }
 
-    /**
-     * @testdox Should have optional table name configuration
-     */
+    #[Test]
+    #[TestDox("Should have optional table name configuration")]
     public function criterion4()
     {
         $entity = new EntityNameConfigured();

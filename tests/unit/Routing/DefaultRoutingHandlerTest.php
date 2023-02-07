@@ -10,19 +10,17 @@ use Phpolar\Phpolar\Tests\Stubs\RequestStub;
 use Phpolar\Phpolar\Tests\Stubs\ResponseFactoryStub;
 use Phpolar\Phpolar\Tests\Stubs\StreamFactoryStub;
 use Phpolar\Phpolar\Tests\Stubs\UriStub;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \Phpolar\Phpolar\Routing\DefaultRoutingHandler
- * @uses \Phpolar\Phpolar\Routing\RouteRegistry
- */
+#[CoversClass(DefaultRoutingHandler::class)]
+#[CoversClass(RouteRegistry::class)]
 final class DefaultRoutingHandlerTest extends TestCase
 {
-    /**
-     * @testdox Shall respond with "Not Found" if the route is not registered
-     */
+    #[TestDox("Shall respond with \"Not Found\" if the route is not registered")]
     public function test1()
     {
         $responseFactory = new ResponseFactoryStub();
@@ -38,9 +36,7 @@ final class DefaultRoutingHandlerTest extends TestCase
         $this->assertSame(ResponseCode::NOT_FOUND, $response->getStatusCode());
     }
 
-    /**
-     * @testdox Shall call the registered route handler
-     */
+    #[TestDox("Shall call the registered route handler")]
     public function test2()
     {
         $responseFactory = new ResponseFactoryStub();
@@ -61,9 +57,7 @@ final class DefaultRoutingHandlerTest extends TestCase
         $this->assertSame(ResponseCode::OK, $response->getStatusCode());
     }
 
-    /**
-     * @testdox Shall create the response stream
-     */
+    #[TestDox("Shall create the response stream")]
     public function test3()
     {
         $responseContent = uniqid();

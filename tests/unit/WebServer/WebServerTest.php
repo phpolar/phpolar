@@ -8,7 +8,9 @@ use Phpolar\CsrfProtection\Http\CsrfPostRoutingMiddleware;
 use Phpolar\CsrfProtection\Http\CsrfPostRoutingMiddlewareFactory;
 use Phpolar\CsrfProtection\Http\CsrfPreRoutingMiddleware;
 use Phpolar\HttpCodes\ResponseCode;
-use Phpolar\Phpolar\Http\Error401Handler;
+use Phpolar\Phpolar\Routing\RouteRegistry;
+use Phpolar\Phpolar\Tests\Stubs\ContainerStub;
+use Phpolar\Phpolar\WebServer\Http\Error401Handler;
 use Phpolar\Phpolar\Tests\Stubs\RequestStub;
 use Phpolar\Phpolar\Tests\Stubs\ResponseFactoryStub;
 use Phpolar\Phpolar\Tests\Stubs\StreamFactoryStub;
@@ -16,6 +18,10 @@ use Phpolar\PhpTemplating\Binder;
 use Phpolar\PhpTemplating\Dispatcher;
 use Phpolar\PhpTemplating\StreamContentStrategy;
 use Phpolar\PhpTemplating\TemplateEngine;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
+use PHPUnit\Framework\Attributes\TestDox;
+use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
@@ -26,12 +32,10 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-/**
- * @runTestsInSeparateProcesses
- * @covers \Phpolar\Phpolar\WebServer\WebServer
- * @covers \Phpolar\Phpolar\WebServer\MiddlewareProcessingQueue
- * @uses \Phpolar\Phpolar\Routing\RouteRegistry
- */
+#[RunTestsInSeparateProcesses]
+#[CoversClass(WebServer::class)]
+#[CoversClass(MiddlewareProcessingQueue::class)]
+#[UsesClass(RouteRegistry::class)]
 final class WebServerTest extends TestCase
 {
     const RESPONSE_CONTENT = "it worked!";
@@ -49,7 +53,7 @@ final class WebServerTest extends TestCase
         $templateEngine = new TemplateEngine(new StreamContentStrategy(), new Binder(), new Dispatcher());
         $errorHandler = new Error401Handler($responseFactory, $streamFactory, $templateEngine);
         $middlewareQueue = new MiddlewareProcessingQueue();
-        return new class(
+        return new ContainerStub(
             $responseFactory,
             $streamFactory,
             $handler,
@@ -57,51 +61,11 @@ final class WebServerTest extends TestCase
             $templateEngine,
             $middlewareQueue,
             $csrfPreRoutingMiddleware,
-            $csrfPostRoutingMiddlewareFactory,
-        ) implements ContainerInterface
-        {
-            /**
-             * @var array<string,object>
-             */
-            private static array $deps = [];
-
-            public function __construct(
-                ResponseFactoryInterface $responseFactory,
-                StreamFactoryInterface $streamFactory,
-                RequestHandlerInterface $handler,
-                Error401Handler $error401Handler,
-                TemplateEngine $templateEngine,
-                MiddlewareProcessingQueue $middlewareProcessingQueue,
-                ?CsrfPreRoutingMiddleware $csrfPreRoutingMiddleware = null,
-                ?CsrfPostRoutingMiddlewareFactory $csrfPostRoutingMiddlewareFactory = null,
-            )
-            {
-                self::$deps[WebServer::PRIMARY_REQUEST_HANDLER] = $handler;
-                self::$deps[ResponseFactoryInterface::class] = $responseFactory;
-                self::$deps[StreamFactoryInterface::class] = $streamFactory;
-                self::$deps[Error401Handler::class] = $error401Handler;
-                self::$deps[TemplateEngine::class] = $templateEngine;
-                self::$deps[MiddlewareProcessingQueue::class] = $middlewareProcessingQueue;
-                self::$deps[CsrfPreRoutingMiddleware::class] = $csrfPreRoutingMiddleware ?? new CsrfPreRoutingMiddleware($responseFactory, $streamFactory);
-                self::$deps[CsrfPostRoutingMiddlewareFactory::class] = $csrfPostRoutingMiddlewareFactory ?? new CsrfPostRoutingMiddlewareFactory($responseFactory, $streamFactory);
-
-            }
-
-            public function has(string $id): bool
-            {
-                return array_key_exists($id, self::$deps);
-            }
-
-            public function get(string $id)
-            {
-                return self::$deps[$id];
-            }
-        };
+            $csrfPostRoutingMiddlewareFactory
+        );
     }
 
-    /**
-     * @testdox Shall use the given routing handler to handle requests
-     */
+    #[TestDox("Shall use the given routing handler to handle requests")]
     public function test1()
     {
         $responseFactory = new ResponseFactoryStub();
@@ -127,9 +91,7 @@ final class WebServerTest extends TestCase
         $this->assertTrue($handler->wasUsed);
     }
 
-    /**
-     * @testdox Shall set the HTTP response code
-     */
+    #[TestDox("Shall set the HTTP response code")]
     public function test2()
     {
         $responseFactory = new ResponseFactoryStub();
@@ -155,9 +117,7 @@ final class WebServerTest extends TestCase
         $this->assertSame(WebServerTest::RESPONSE_STATUS, http_response_code());
     }
 
-    /**
-     * @testdox Shall set the HTTP headers
-     */
+    #[TestDox("Shall set the HTTP headers")]
     public function test3()
     {
         $responseFactory = new ResponseFactoryStub();
@@ -186,9 +146,7 @@ final class WebServerTest extends TestCase
         );
     }
 
-    /**
-     * @testdox Shall allow for configuring the server to use CSRF middleware (2)
-     */
+    #[TestDox("Shall allow for configuring the server to use CSRF middleware (2)")]
     public function test4()
     {
         $responseFactory = new ResponseFactoryStub();
@@ -227,9 +185,7 @@ final class WebServerTest extends TestCase
     }
 
 
-    /**
-     * @testdox Shall allow for configuring the server to use CSRF middleware (2)
-     */
+    #[TestDox("Shall allow for configuring the server to use CSRF middleware (2)")]
     public function test5()
     {
         $responseFactory = new ResponseFactoryStub();

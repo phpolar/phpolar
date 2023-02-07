@@ -5,19 +5,16 @@ declare(strict_types=1);
 namespace Phpolar\Phpolar\Model;
 
 use Phpolar\Phpolar\Core\SizeNotConfigured;
-use Phpolar\Phpolar\Model\Size;
 use Phpolar\Phpolar\Validation\MaxLength;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \Phpolar\Phpolar\Model\SizeConfigurationTrait
- * @covers \Phpolar\Phpolar\Model\Size
- */
+#[CoversClass(Size::class)]
+#[CoversClass(SizeConfigurationTrait::class)]
 final class SizeConfigurationTraitTest extends TestCase
 {
-    /**
-     * @testdox Shall return the given argument as size
-     */
+    #[TestDox("Shall return the given argument as size")]
     public function test1()
     {
         $entity = new class()
@@ -31,9 +28,7 @@ final class SizeConfigurationTraitTest extends TestCase
         $this->assertSame(5, $actual);
     }
 
-    /**
-     * @testdox Shall return the given max length as size
-     */
+    #[TestDox("Shall return the given max length as size")]
     public function test2()
     {
         $entity = new class()
@@ -47,9 +42,7 @@ final class SizeConfigurationTraitTest extends TestCase
         $this->assertSame(5, $actual);
     }
 
-    /**
-     * @testdox Shall give Size attribute configuration preference over MaxLength configuration
-     */
+    #[TestDox("Shall give Size attribute configuration preference over MaxLength configuration")]
     public function test3()
     {
         $entity = new class()
@@ -64,9 +57,7 @@ final class SizeConfigurationTraitTest extends TestCase
         $this->assertSame(5, $actual);
     }
 
-    /**
-     * @testdox Shall return SizeNotConfigured instance when Size attribute does not exist
-     */
+    #[TestDox("Shall return SizeNotConfigured instance when Size attribute does not exist")]
     public function test4()
     {
         $entity = new class()

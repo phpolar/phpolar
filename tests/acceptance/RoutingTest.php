@@ -10,16 +10,14 @@ use Phpolar\Phpolar\Tests\Stubs\MemoryStreamStub;
 use Phpolar\Phpolar\Tests\Stubs\ResponseStub;
 use Phpolar\Phpolar\Tests\Stubs\RequestStub;
 use Phpolar\Phpolar\Tests\Stubs\UriStub;
+use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Message\StreamInterface;
 
-/**
- * @coversNothing
- * @runTestsInSeparateProcesses
- */
 final class RoutingTest extends TestCase
 {
     protected function getResponseFactory(): ResponseFactoryInterface
@@ -50,10 +48,8 @@ final class RoutingTest extends TestCase
         };
     }
 
-    /**
-     * @test
-     * @testdox Shall invoke the handler registered to the given route
-     */
+    #[Test]
+    #[TestDox("Shall invoke the handler registered to the given route")]
     public function criterion_1()
     {
         $givenRoute = "/";
@@ -82,10 +78,8 @@ final class RoutingTest extends TestCase
         $this->assertSame($expectedResponse, $response->getBody()->getContents());
     }
 
-    /**
-     * @test
-     * @testdox Shall return a "not found" response when the given route has not been registered
-     */
+    #[Test]
+    #[TestDox("Shall return a \"not found\" response when the given route has not been registered")]
     public function criterion_2()
     {
         $givenRoute = "an_unregistered_route";

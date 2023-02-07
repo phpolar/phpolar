@@ -7,21 +7,21 @@ namespace Phpolar\Phpolar\Validation;
 use Phpolar\Phpolar\Model\ValidationTrait;
 use Phpolar\Phpolar\Model\FieldErrorMessageTrait;
 use Phpolar\Phpolar\Tests\DataProviders\MinLengthDataProvider;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProviderExternal;
+use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \Phpolar\Phpolar\Validation\MinLength
- * @uses \Phpolar\Phpolar\Model\ValidationTrait
- * @uses \Phpolar\Phpolar\Model\FieldErrorMessageTrait
- * @uses \Phpolar\Phpolar\Validation\DefaultValidationError
- * @uses \Phpolar\Phpolar\Validation\AbstractValidationError
- */
-class MinLengthTest extends TestCase
+#[CoversClass(MinLength::class)]
+#[UsesClass(ValidationTrait::class)]
+#[UsesClass(FieldErrorMessageTrait::class)]
+#[UsesClass(DefaultValidationError::class)]
+#[UsesClass(AbstractValidationError::class)]
+final class MinLengthTest extends TestCase
 {
-    /**
-     * @test
-     * @dataProvider Phpolar\Phpolar\Tests\DataProviders\MinLengthDataProvider::strAboveMin()
-     */
+    #[Test]
+    #[DataProviderExternal(MinLengthDataProvider::class, "strAboveMin")]
     public function shallBeValidIfPropIsGteMinLen(string $valAboveMin)
     {
         $sut = new class($valAboveMin)
@@ -40,10 +40,8 @@ class MinLengthTest extends TestCase
         $this->assertTrue($sut->isValid());
     }
 
-    /**
-     * @test
-     * @dataProvider Phpolar\Phpolar\Tests\DataProviders\MinLengthDataProvider::strBelowMin()
-     */
+    #[Test]
+    #[DataProviderExternal(MinLengthDataProvider::class, "strBelowMin")]
     public function shallBeInvalidIfPropIsLtMinLen(string $valBelowMin)
     {
         $sut = new class($valBelowMin)
@@ -61,10 +59,9 @@ class MinLengthTest extends TestCase
 
         $this->assertFalse($sut->isValid());
     }
-    /**
-     * @test
-     * @dataProvider Phpolar\Phpolar\Tests\DataProviders\MinLengthDataProvider::numberAboveMin
-     */
+
+    #[Test]
+    #[DataProviderExternal(MinLengthDataProvider::class, "numberAboveMin")]
     public function shallBeValidIfNumericPropIsGteMinLen(int|float $valAboveMin)
     {
         $sut = new class($valAboveMin)
@@ -85,10 +82,8 @@ class MinLengthTest extends TestCase
         $this->assertEmpty($sut->getFieldErrorMessage("property"));
     }
 
-    /**
-     * @test
-     * @dataProvider Phpolar\Phpolar\Tests\DataProviders\MinLengthDataProvider::numberBelowMin
-     */
+    #[Test]
+    #[DataProviderExternal(MinLengthDataProvider::class, "numberBelowMin")]
     public function shallBeInvalidIfNumericPropIsLtMinLen(int|float $valBelowMin)
     {
         $sut = new class($valBelowMin)

@@ -14,7 +14,7 @@ use Phpolar\Phpolar\Validation\Required;
 
 final class FormFieldErrorMessageDataProvider
 {
-    public function invalidPropertyTestCases()
+    public static function invalidPropertyTestCases()
     {
         yield [
             "Value is greater than the maximum",
@@ -74,7 +74,7 @@ final class FormFieldErrorMessageDataProvider
         ];
     }
 
-    public function validPropertyTestCases()
+    public static function validPropertyTestCases()
     {
         yield [
             "",
