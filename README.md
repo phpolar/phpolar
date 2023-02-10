@@ -169,6 +169,6 @@ class Person extends Model
 }
 ```
 
-[API Documentation](https://ericfortmeyer.github.io/polar-docs)
+[API Documentation](https://phpolar.github.io/phpolar/)
 
 [def]: https://packagist.org/packages/phpolar/phpolar
