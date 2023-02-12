@@ -30,29 +30,26 @@ trait FormInputTypeDetectionTrait
             return InputTypes::Hidden;
         }
         $propertyType = $property->getType() ?? new PropertyTypeNotDeclared();
-        if ($propertyType instanceof ReflectionNamedType) {
-            return match ($propertyType->getName()) {
+        return match (true) {
+            $propertyType instanceof ReflectionNamedType => match ($propertyType->getName()) {
                 "string" => InputTypes::Text,
                 "int", "float" => InputTypes::Number,
                 "bool" => InputTypes::Checkbox,
                 "DateTimeInterface", "DateTimeImmutable", "DateTime" =>
                 InputTypes::Date,
                 default => InputTypes::Invalid,
-            };
-        }
-        if ($propertyType instanceof ReflectionUnionType) {
-            return in_array("string", $propertyType->getTypes()) === true &&
-                   in_array("array", $propertyType->getTypes()) === false ? InputTypes::Text : InputTypes::Invalid;
-        }
-        if ($propertyType instanceof PropertyTypeNotDeclared) {
-            return $property->isInitialized($this) === true ? match (gettype($property->getValue($this))) {
+            },
+            $propertyType instanceof ReflectionUnionType =>
+                in_array("string", $propertyType->getTypes()) === true &&
+                in_array("array", $propertyType->getTypes()) === false ? InputTypes::Text : InputTypes::Invalid,
+                $propertyType instanceof PropertyTypeNotDeclared =>
+                $property->isInitialized($this) === true ? match (gettype($property->getValue($this))) {
                     "string" => InputTypes::Text,
                     "integer", "double" => InputTypes::Number,
                     "boolean" => InputTypes::Checkbox,
                     "object" => $property->getValue($this) instanceof DateTimeInterface ? InputTypes::Date : InputTypes::Invalid,
                     default => InputTypes::Invalid,
-            } : InputTypes::Invalid;
-        }
-        return InputTypes::Invalid;
+                } : InputTypes::Invalid,
+        };
     }
 }

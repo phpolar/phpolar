@@ -19,9 +19,6 @@ final class Min extends AbstractPropertyValueExtractor implements ValidatorInter
 
     public function isValid(): bool
     {
-        return $this->min <= match (true) {
-            is_int($this->val) || is_float($this->val) => $this->val,
-            default => $this->min,
-        };
+        return is_int($this->val) === true || is_float($this->val) === true ? $this->val >= $this->min : true;
     }
 }

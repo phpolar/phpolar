@@ -68,7 +68,7 @@ final class MaxLengthDataProvider
     private static function getRandomNumAboveMaxLenTestCase(): array
     {
         return [
-            random_int((int) str_repeat("1", max(self::MAX_LEN + 1, self::NUM_MAX_LEN)), (int) substr((string) PHP_INT_MAX, 0, max(self::MAX_LEN + 1, self::NUM_MAX_LEN)))
+            (int) str_repeat("1", self::MAX_LEN + 1),
         ];
     }
 }

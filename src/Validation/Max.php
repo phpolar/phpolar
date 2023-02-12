@@ -19,9 +19,6 @@ final class Max extends AbstractPropertyValueExtractor implements ValidatorInter
 
     public function isValid(): bool
     {
-        return $this->max >= match (true) {
-            is_int($this->val) || is_float($this->val) => $this->val,
-            default => $this->max,
-        };
+        return is_int($this->val) === true || is_float($this->val) === true ? $this->val <= $this->max : true;
     }
 }
