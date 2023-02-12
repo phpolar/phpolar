@@ -31,8 +31,7 @@ final class ContainerStub implements ContainerInterface
         MiddlewareProcessingQueue $middlewareProcessingQueue,
         ?CsrfPreRoutingMiddleware $csrfPreRoutingMiddleware = null,
         ?CsrfPostRoutingMiddlewareFactory $csrfPostRoutingMiddlewareFactory = null,
-    )
-    {
+    ) {
         self::$deps[WebServer::PRIMARY_REQUEST_HANDLER] = $handler;
         self::$deps[ResponseFactoryInterface::class] = $responseFactory;
         self::$deps[StreamFactoryInterface::class] = $streamFactory;
@@ -41,7 +40,6 @@ final class ContainerStub implements ContainerInterface
         self::$deps[MiddlewareProcessingQueue::class] = $middlewareProcessingQueue;
         self::$deps[CsrfPreRoutingMiddleware::class] = $csrfPreRoutingMiddleware ?? new CsrfPreRoutingMiddleware($responseFactory, $streamFactory);
         self::$deps[CsrfPostRoutingMiddlewareFactory::class] = $csrfPostRoutingMiddlewareFactory ?? new CsrfPostRoutingMiddlewareFactory($responseFactory, $streamFactory);
-
     }
 
     public function has(string $id): bool

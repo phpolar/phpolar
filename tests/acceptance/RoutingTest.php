@@ -22,7 +22,7 @@ final class RoutingTest extends TestCase
 {
     protected function getResponseFactory(): ResponseFactoryInterface
     {
-        return new class() implements ResponseFactoryInterface {
+        return new class () implements ResponseFactoryInterface {
             public function createResponse(int $code = 200, string $reasonPhrase = ''): ResponseInterface
             {
                 return new ResponseStub($code, $reasonPhrase);
@@ -32,7 +32,7 @@ final class RoutingTest extends TestCase
 
     protected function getStreamFactory(): StreamFactoryInterface
     {
-        return new class() implements StreamFactoryInterface {
+        return new class () implements StreamFactoryInterface {
             public function createStream(string $content = ''): StreamInterface
             {
                 return new MemoryStreamStub($content);
@@ -50,12 +50,12 @@ final class RoutingTest extends TestCase
 
     #[Test]
     #[TestDox("Shall invoke the handler registered to the given route")]
-    public function criterion_1()
+    public function criterion1()
     {
         $givenRoute = "/";
         $expectedResponse = "<h1>Found!</h1>";
         $routeRegistry = new RouteRegistry();
-        $indexHandler = new class($expectedResponse) extends AbstractRequestHandler {
+        $indexHandler = new class ($expectedResponse) extends AbstractRequestHandler {
             public function __construct(private string $responseTemplate)
             {
             }
@@ -80,7 +80,7 @@ final class RoutingTest extends TestCase
 
     #[Test]
     #[TestDox("Shall return a \"not found\" response when the given route has not been registered")]
-    public function criterion_2()
+    public function criterion2()
     {
         $givenRoute = "an_unregistered_route";
         $expectedStatusCode = ResponseCode::NOT_FOUND;

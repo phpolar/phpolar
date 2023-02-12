@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Phpolar\Phpolar\Model;;
+namespace Phpolar\Phpolar\Model;
 
 use Phpolar\Phpolar\Core\PropertyTypeNotDeclared;
 use DateTime;

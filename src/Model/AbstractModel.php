@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Phpolar\Phpolar\Model;;
+namespace Phpolar\Phpolar\Model;
+
+;
 
 /**
  * Provides support for configuring the properties
@@ -10,13 +12,13 @@ namespace Phpolar\Phpolar\Model;;
  */
 abstract class AbstractModel
 {
-    use ValidationTrait,
-        FieldErrorMessageTrait,
-        LabelFormatTrait,
-        ColumnNameTrait,
-        DataTypeDetectionTrait,
-        EntityNameConfigurationTrait,
-        SizeConfigurationTrait,
-        FormInputTypeDetectionTrait,
-        FormControlTypeDetectionTrait;
+    use ValidationTrait;
+    use FieldErrorMessageTrait;
+    use LabelFormatTrait;
+    use ColumnNameTrait;
+    use DataTypeDetectionTrait;
+    use EntityNameConfigurationTrait;
+    use SizeConfigurationTrait;
+    use FormInputTypeDetectionTrait;
+    use FormControlTypeDetectionTrait;
 }

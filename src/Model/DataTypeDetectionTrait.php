@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Phpolar\Phpolar\Model;;
+namespace Phpolar\Phpolar\Model;
 
 use Phpolar\StorageDriver\DataTypeUnknown;
 use Phpolar\StorageDriver\StorageDriverInterface;
@@ -41,7 +41,7 @@ trait DataTypeDetectionTrait
     ): Stringable|DataTypeUnknown {
         $propertyTypeName = $propertyType->getName();
         $typeName = parseTypeName($propertyTypeName);
-        return match($typeName) {
+        return match ($typeName) {
             TypeName::Invalid => new DataTypeUnknown(),
             default => $storageDriver->getDataType($typeName),
         };

@@ -24,7 +24,7 @@ final class PatternTest extends TestCase
     #[DataProviderExternal(PatternDataProvider::class, "validEmails")]
     public function shallBeValidEmailBasedOnPattern(string $val)
     {
-        $sut = new class($val)
+        $sut = new class ($val)
         {
             use ValidationTrait;
             use FieldErrorMessageTrait;
@@ -46,7 +46,7 @@ final class PatternTest extends TestCase
     #[DataProviderExternal(PatternDataProvider::class, "validPhoneNumbers")]
     public function shallBeValidPhoneNumberBasedOnPattern(string $val)
     {
-        $sut = new class($val)
+        $sut = new class ($val)
         {
             use ValidationTrait;
             use FieldErrorMessageTrait;
@@ -67,7 +67,7 @@ final class PatternTest extends TestCase
     #[Test]
     public function shallBeInvalidIfPropIsNotSet()
     {
-        $sut = new class()
+        $sut = new class ()
         {
             use ValidationTrait;
             use FieldErrorMessageTrait;
@@ -84,7 +84,7 @@ final class PatternTest extends TestCase
     #[DataProviderExternal(PatternDataProvider::class, "invalidEmails")]
     public function shallBeInvalidIfPropDoesNotMatchPattern(mixed $val)
     {
-        $sut = new class($val)
+        $sut = new class ($val)
         {
             use ValidationTrait;
             use FieldErrorMessageTrait;

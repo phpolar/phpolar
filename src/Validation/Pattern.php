@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Phpolar\Phpolar\Validation;
 
 use Attribute;
-
 use Phpolar\Phpolar\Core\AbstractPropertyValueExtractor;
 
 /**

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Phpolar\Phpolar\Model;;
+namespace Phpolar\Phpolar\Model;
 
 use Attribute;
 use Phpolar\Phpolar\Core\AbstractPropertyNameExtractor;
@@ -16,7 +16,7 @@ use Phpolar\Phpolar\Core\LabelFormatConfig;
 #[Attribute(Attribute::TARGET_PROPERTY)]
 final class Label extends AbstractPropertyNameExtractor
 {
-    public function __construct(private string|LabelFormatConfig $arg = LabelFormatConfig::Default)
+    public function __construct(private string|LabelFormatConfig $arg = LabelFormatConfig::T_Default)
     {
     }
 
@@ -28,7 +28,7 @@ final class Label extends AbstractPropertyNameExtractor
     public function getLabel(): string
     {
         return match ($this->arg) {
-            LabelFormatConfig::Default => (new DefaultLabelFormat($this->propName))->getLabel(),
+            LabelFormatConfig::T_Default => (new DefaultLabelFormat($this->propName))->getLabel(),
             default => (string) $this->arg
         };
     }

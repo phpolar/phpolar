@@ -20,7 +20,7 @@ final class FormValidationDataProvider
             [
                 true,
                 Max::class,
-                new class() extends AbstractModel
+                new class () extends AbstractModel
                 {
                     #[Max(50)]
                     public int $prop = 50;
@@ -29,7 +29,7 @@ final class FormValidationDataProvider
             [
                 false,
                 Max::class,
-                new class() extends AbstractModel
+                new class () extends AbstractModel
                 {
                     #[Max(50)]
                     public int $prop = 51;
@@ -38,7 +38,7 @@ final class FormValidationDataProvider
             [
                 true,
                 MaxLength::class,
-                new class() extends AbstractModel
+                new class () extends AbstractModel
                 {
                     #[MaxLength(10)]
                     public string $prop = "9012345678";
@@ -47,7 +47,7 @@ final class FormValidationDataProvider
             [
                 false,
                 MaxLength::class,
-                new class() extends AbstractModel
+                new class () extends AbstractModel
                 {
                     #[MaxLength(10)]
                     public string $prop = "9123456780a";
@@ -56,7 +56,7 @@ final class FormValidationDataProvider
             [
                 true,
                 Min::class,
-                new class() extends AbstractModel
+                new class () extends AbstractModel
                 {
                     #[Min(5)]
                     public int $prop = 5;
@@ -65,7 +65,7 @@ final class FormValidationDataProvider
             [
                 false,
                 Min::class,
-                new class() extends AbstractModel
+                new class () extends AbstractModel
                 {
                     #[Min(5)]
                     public int $prop = 4;
@@ -74,7 +74,7 @@ final class FormValidationDataProvider
             [
                 true,
                 MinLength::class,
-                new class() extends AbstractModel
+                new class () extends AbstractModel
                 {
                     #[MinLength(10)]
                     public string $prop = "9812345670";
@@ -83,7 +83,7 @@ final class FormValidationDataProvider
             [
                 false,
                 MinLength::class,
-                new class() extends AbstractModel
+                new class () extends AbstractModel
                 {
                     #[MinLength(10)]
                     public string $prop = "123456780";
@@ -92,7 +92,7 @@ final class FormValidationDataProvider
             [
                 true,
                 Pattern::class,
-                new class() extends AbstractModel
+                new class () extends AbstractModel
                 {
                     #[Pattern("/^[[:alpha:]]+$/")]
                     public string $prop = "abc";
@@ -101,7 +101,7 @@ final class FormValidationDataProvider
             [
                 false,
                 Pattern::class,
-                new class() extends AbstractModel
+                new class () extends AbstractModel
                 {
                     #[Pattern("/^[[:alnum:]]+$/")]
                     public string $prop = "abcd1234$$;%";
@@ -110,7 +110,7 @@ final class FormValidationDataProvider
             [
                 true,
                 Pattern::class,
-                new class() extends AbstractModel
+                new class () extends AbstractModel
                 {
                     #[Required]
                     public string $prop = "abc";
@@ -119,7 +119,7 @@ final class FormValidationDataProvider
             [
                 false,
                 Pattern::class,
-                new class() extends AbstractModel
+                new class () extends AbstractModel
                 {
                     #[Required]
                     public string $prop;

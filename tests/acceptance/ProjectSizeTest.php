@@ -8,7 +8,7 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 
-use const \Phpolar\Phpolar\Tests\PROJECT_SIZE_THRESHOLD;
+use const Phpolar\Phpolar\Tests\PROJECT_SIZE_THRESHOLD;
 
 final class ProjectSizeTest extends TestCase
 {

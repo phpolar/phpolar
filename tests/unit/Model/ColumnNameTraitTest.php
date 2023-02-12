@@ -15,7 +15,7 @@ final class ColumnNameTraitTest extends TestCase
     #[TestDox("Shall return title cased property name when not configured")]
     public function test1()
     {
-        $entity = new class()
+        $entity = new class ()
         {
             use ColumnNameTrait;
 
@@ -27,7 +27,7 @@ final class ColumnNameTraitTest extends TestCase
     #[TestDox("Shall return title cased property name when column name not supplied")]
     public function test2()
     {
-        $entity = new class()
+        $entity = new class ()
         {
             use ColumnNameTrait;
 
@@ -40,7 +40,7 @@ final class ColumnNameTraitTest extends TestCase
     #[TestDox("Shall return configured column name")]
     public function test3()
     {
-        $entity = new class()
+        $entity = new class ()
         {
             use ColumnNameTrait;
 

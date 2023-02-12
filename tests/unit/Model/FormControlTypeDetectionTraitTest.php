@@ -18,7 +18,7 @@ final class FormControlTypeDetectionTraitTest extends TestCase
     #[TestDox("Shall detect form control types")]
     public function test1()
     {
-        $model = new class()
+        $model = new class ()
         {
             use FormControlTypeDetectionTrait;
 
@@ -57,7 +57,7 @@ final class FormControlTypeDetectionTraitTest extends TestCase
         };
         $model->dateNotDeclaredProp1 = new DateTime();
         $model->dateNotDeclaredProp2 = new DateTimeImmutable();
-        $myDateImpl = new class() extends DateTimeImmutable
+        $myDateImpl = new class () extends DateTimeImmutable
         {
         };
         $model->dateNotDeclaredProp3 = $myDateImpl;

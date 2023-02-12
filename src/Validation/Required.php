@@ -6,7 +6,6 @@ namespace Phpolar\Phpolar\Validation;
 
 use Attribute;
 use ReflectionProperty;
-
 use Phpolar\Phpolar\Core\PropertyValueSetterInterface;
 
 /**

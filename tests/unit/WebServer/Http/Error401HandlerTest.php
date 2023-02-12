@@ -27,7 +27,7 @@ final class Error401HandlerTest extends TestCase
     {
         $responseFactory = new ResponseFactoryStub();
         $streamFactory = new StreamFactoryStub();
-        $renderingAlgo = new class() implements TemplatingStrategyInterface {
+        $renderingAlgo = new class () implements TemplatingStrategyInterface {
             public function getAlgorithm(): Closure
             {
                 return fn() => new FileNotFound();
@@ -80,7 +80,7 @@ final class Error401HandlerTest extends TestCase
     {
         $responseFactory = new ResponseFactoryStub();
         $streamFactory = new StreamFactoryStub();
-        $renderingAlgo = new class() implements TemplatingStrategyInterface {
+        $renderingAlgo = new class () implements TemplatingStrategyInterface {
             public function getAlgorithm(): Closure
             {
                 return fn() => Error401HandlerTest::FAKE_TEMPLATE;

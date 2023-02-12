@@ -35,5 +35,4 @@ abstract class AbstractValidationError
             default => throw new ValidatorWithNoErrorMessageException($validatorClassName)
         };
     }
-
 }

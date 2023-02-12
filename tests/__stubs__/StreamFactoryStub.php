@@ -8,7 +8,8 @@ use Exception;
 use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Message\StreamInterface;
 
-class StreamFactoryStub implements StreamFactoryInterface {
+class StreamFactoryStub implements StreamFactoryInterface
+{
     public function createStream(string $content = ''): StreamInterface
     {
         return new MemoryStreamStub($content);

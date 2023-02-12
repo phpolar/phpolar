@@ -24,7 +24,7 @@ final class RequiredTest extends TestCase
     #[DataProviderExternal(RequiredDataProvider::class, "nonEmptyVals")]
     public function shallBeValidIfPropIsSetWithNonEmptyVal(mixed $val)
     {
-        $sut = new class($val)
+        $sut = new class ($val)
         {
             use ValidationTrait;
             use FieldErrorMessageTrait;
@@ -45,7 +45,7 @@ final class RequiredTest extends TestCase
     #[Test]
     public function shallBeInvalidIfPropIsNotSet()
     {
-        $sut = new class()
+        $sut = new class ()
         {
             use ValidationTrait;
             use FieldErrorMessageTrait;
@@ -62,7 +62,7 @@ final class RequiredTest extends TestCase
     #[DataProviderExternal(RequiredDataProvider::class, "emptyVals")]
     public function shallBeInvalidIfPropIsEmpty(mixed $emptyVals)
     {
-        $sut = new class($emptyVals)
+        $sut = new class ($emptyVals)
         {
             use ValidationTrait;
 

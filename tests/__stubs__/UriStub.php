@@ -18,9 +18,7 @@ final class UriStub implements UriInterface
         private string $host = "",
         private int $port = 0,
         private string $query = "",
-    )
-    {
-
+    ) {
     }
     private static function t(): never
     {

@@ -6,7 +6,6 @@ namespace Phpolar\Phpolar\Tests\Stubs;
 
 use Phpolar\Phpolar\Model\EntityNameConfigurationTrait;
 
-
 final class EntityNameNotConfigured
 {
     use EntityNameConfigurationTrait;
