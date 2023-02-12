@@ -12,12 +12,14 @@
 /phpcs.xml                  export-ignore
 /phpdoc.xml                 export-ignore
 /phpunit.xml                export-ignore
+/phpunit.acceptance.xml     export-ignore
 /phpunit.ci.xml             export-ignore
 /phpunit.dev.xml            export-ignore
 /.pre-commit-config.yaml    export-ignore
 /README.md                  export-ignore
 /SECURITY.md                export-ignore
 /tests                      export-ignore
+/.vscode                    export-ignore
 *.png                       export-ignore
 *.svg                       export-ignore
 
