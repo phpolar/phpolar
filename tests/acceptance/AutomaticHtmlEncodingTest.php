@@ -41,6 +41,7 @@ final class AutomaticHtmlEncodingTest extends TestCase
         <a alert&lpar;&apos;hacked&apos;&rpar;&semi;>HACK</a>
         <a href=&num; alert&lpar;&apos;hacked&apos;&rpar;&semi;>HACK</a>
         <img src=&sol; alert&lpar;&apos;hacked&apos;&rpar;&semi; />
+
         HTML;
         $this->expectOutputString($mitigated);
         $templatingEngine->render("tests/__templates__/hack.php", new HtmlSafeContext($objWithHacks));

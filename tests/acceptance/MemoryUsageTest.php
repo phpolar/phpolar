@@ -144,9 +144,17 @@ final class MemoryUsageTest extends TestCase
                 $saved = new FakeModel();
                 $saved->myInput = "something else";
                 $storage = new class () extends AbstractStorage {
+                    function commit(): void
+                    {
+                        // no op
+                    }
+                    function load(): void
+                    {
+                        // no op
+                    }
                 };
                 $key = new ItemKey(uniqid());
-                $storage->storeByKey($key, Item::unit($saved));
+                $storage->storeByKey($key, new Item($saved));
                 $modelList = new ModelList();
                 $modelList->add($saved);
                 return $this->templateEngine->apply(

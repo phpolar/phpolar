@@ -42,6 +42,7 @@ final class FormInputTypeDetectionTraitTest extends TestCase
             public string | int | bool $unionProp;
             public string | int | bool | array $invalidUnionProp1;
             public int | bool | array $invalidUnionProp2;
+            public Closure & DateTime $invalidIntersectionProp;
             public $noValueNotDeclaredProp;
             public $strNotDeclaredProp = "str";
             public $numNotDeclaredProp = 2;
@@ -68,6 +69,7 @@ final class FormInputTypeDetectionTraitTest extends TestCase
         $model->nullNotDeclaredProp = null;
         $model->funcNotDeclaredProp = fn () => null;
         $this->assertInstanceOf(InputTypes::Text::class, $model->getInputType("unionProp"));
+        $this->assertInstanceOf(InputTypes::Invalid::class, $model->getInputType("invalidIntersectionProp"));
         $this->assertInstanceOf(InputTypes::Invalid::class, $model->getInputType("invalidUnionProp1"));
         $this->assertInstanceOf(InputTypes::Invalid::class, $model->getInputType("invalidUnionProp2"));
         $this->assertInstanceOf(InputTypes::Number::class, $model->getInputType("numProp"));

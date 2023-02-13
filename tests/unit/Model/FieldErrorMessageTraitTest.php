@@ -13,6 +13,7 @@ use Phpolar\Phpolar\Validation\Min;
 use Phpolar\Phpolar\Validation\MinLength;
 use Phpolar\Phpolar\Validation\Pattern;
 use Phpolar\Phpolar\Validation\Required;
+use PHPUnit\Framework\Attributes\BackupGlobals;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\CoversFunction;
 use PHPUnit\Framework\Attributes\DataProviderExternal;
