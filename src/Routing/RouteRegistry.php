@@ -11,44 +11,23 @@ namespace Phpolar\Phpolar\Routing;
 class RouteRegistry
 {
     /**
-     * @var array<string,AbstractRequestHandler> Stores actions for `GET` requests.
+     * @var array<string,AbstractRequestHandler> Associates routes with an action.
      */
-    private array $registryForGet = [];
+    private array $registry = [];
 
     /**
-     * @var array<string,AbstractRequestHandler> Stores actions for `POST` requests.
+     * Associates a request handler to a route.
      */
-    private array $registryForPost = [];
-
-    /**
-     * Associates a request handler to a `GET` request.
-     */
-    public function addGet(string $route, AbstractRequestHandler $handler): void
+    public function add(string $route, AbstractRequestHandler $handler): void
     {
-        $this->registryForGet[$route] = $handler;
+        $this->registry[$route] = $handler;
     }
 
     /**
-     * Associates a request handler to a `POST` request.
+     * Retrieves the registered request handler.
      */
-    public function addPost(string $route, AbstractRequestHandler $handler): void
+    public function get(string $route): AbstractRequestHandler|RouteNotRegistered
     {
-        $this->registryForPost[$route] = $handler;
-    }
-
-    /**
-     * Retrieves the registered handler for a `GET` request.
-     */
-    public function fromGet(string $route): AbstractRequestHandler|RouteNotRegistered
-    {
-        return $this->registryForGet[$route] ?? new RouteNotRegistered();
-    }
-
-    /**
-     * Retrieves the registered handler for a `POST` request.
-     */
-    public function fromPost(string $route): AbstractRequestHandler|RouteNotRegistered
-    {
-        return $this->registryForPost[$route] ?? new RouteNotRegistered();
+        return $this->registry[$route] ?? new RouteNotRegistered();
     }
 }
