@@ -12,7 +12,6 @@ use Phpolar\Phpolar\Routing\RouteRegistry;
 use Phpolar\Phpolar\WebServer\Http\Error401Handler;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Server\RequestHandlerInterface;
 
 /**
  * Represents a server that handles and responds to request.
