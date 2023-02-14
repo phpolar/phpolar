@@ -11,7 +11,7 @@ class DateFormatTestData
     private const TEST_DATE_FORMATS = [
         DateTime::RSS,
         DateTime::W3C,
-        DateTime::ISO8601,
+        DateTime::ATOM,
         DateTime::COOKIE,
     ];
 
