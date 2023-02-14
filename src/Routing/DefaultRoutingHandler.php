@@ -40,7 +40,7 @@ class DefaultRoutingHandler implements RequestHandlerInterface
          */
         $streamFactory = $this->container->get(StreamFactoryInterface::class);
         $route = $request->getUri()->getPath();
-        $handler = $this->routeRegistry->get($route);
+        $handler = $this->routeRegistry->fromGet($route);
         if ($handler instanceof RouteNotRegistered) {
             return $responseFactory->createResponse(ResponseCode::NOT_FOUND, "Not Found");
         }

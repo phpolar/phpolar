@@ -93,7 +93,7 @@ final class RoutingTest extends TestCase
                 return $this->responseTemplate;
             }
         };
-        $routeRegistry->add($givenRoute, $indexHandler);
+        $routeRegistry->addGet($givenRoute, $indexHandler);
         $routingHandler = new DefaultRoutingHandler(
             routeRegistry: $routeRegistry,
             container: $this->getContainer(),
