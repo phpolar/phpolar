@@ -102,7 +102,7 @@ final class WebServer
     public function receive(ServerRequestInterface $request): void
     {
         /**
-         * @var RequestHandlerInterface
+         * @var \Psr\Http\Server\RequestHandlerInterface $primaryHandler
          */
         $primaryHandler = $this->useRoutes === true ? new DefaultRoutingHandler($this->routes, $this->container) : $this->container->get(self::PRIMARY_REQUEST_HANDLER);
         $result = $this->middlewareQueue->dequeuePreRoutingMiddleware($request);
