@@ -34,6 +34,8 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseFactoryInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 
 use const Phpolar\Phpolar\Tests\PROJECT_MEMORY_USAGE_THRESHOLD;
@@ -45,10 +47,10 @@ use const Phpolar\Phpolar\Tests\LIST_TPL_PATH;
 final class MemoryUsageTest extends TestCase
 {
     protected function getContainer(
-        RequestHandlerInterface $handler,
         ResponseFactoryInterface $responseFactory,
         StreamFactoryInterface $streamFactory,
         TemplateEngine $templateEngine,
+        ?RequestHandlerInterface $handler = null,
     ): ContainerInterface {
         $errorHandler = new Error401Handler($responseFactory, $streamFactory, $templateEngine);
         $middlewareQueue = new MiddlewareProcessingQueue();
@@ -57,12 +59,12 @@ final class MemoryUsageTest extends TestCase
         return new ContainerStub(
             $responseFactory,
             $streamFactory,
-            $handler,
             $errorHandler,
             $templateEngine,
             $middlewareQueue,
             $csrfPreRouting,
             $csrfPostRouting,
+            $handler,
         );
     }
 
@@ -110,13 +112,25 @@ final class MemoryUsageTest extends TestCase
                 );
             }
         };
+        $requestHandler = new class ($responseFactory, $streamFactory, $routeHandler) implements RequestHandlerInterface {
+            public function __construct(
+                private ResponseFactoryInterface $responseFactory,
+                private StreamFactoryInterface $streamFactroy,
+                private AbstractRequestHandler $routeHandler
+            ) {
+            }
+            public function handle(ServerRequestInterface $request): ResponseInterface
+            {
+                return $this->responseFactory->createResponse()
+                    ->withBody($this->streamFactroy->createStream($this->routeHandler->handle()));
+            }
+        };
         $routeRegistry->add(TEST_GET_ROUTE, $routeHandler);
-        $routingHandler = new DefaultRoutingHandler($responseFactory, $streamFactory, $routeRegistry);
         $container = $this->getContainer(
-            $routingHandler,
             $responseFactory,
             $streamFactory,
             $templateEngine,
+            $requestHandler,
         );
         $app = WebServer::createApp($container);
         $app->useCsrfMiddleware();
@@ -132,8 +146,6 @@ final class MemoryUsageTest extends TestCase
         $streamFactory = new StreamFactoryStub();
         $templateEngine = new TemplateEngine(new StreamContentStrategy(), new Binder(), new Dispatcher());
         $routeRegistry = new RouteRegistry();
-        $csrfPreRouting = new CsrfPreRoutingMiddleware($responseFactory, $streamFactory);
-        $csrfPostRouting = new CsrfPostRoutingMiddlewareFactory($responseFactory, $streamFactory);
         $routeHandler = new class ($templateEngine) extends AbstractRequestHandler {
             public function __construct(private TemplateEngine $templateEngine)
             {
@@ -164,16 +176,13 @@ final class MemoryUsageTest extends TestCase
             }
         };
         $routeRegistry->add(TEST_POST_ROUTE, $routeHandler);
-        $routingHandler = new DefaultRoutingHandler($responseFactory, $streamFactory, $routeRegistry);
         $container = $this->getContainer(
-            $routingHandler,
             $responseFactory,
             $streamFactory,
             $templateEngine,
-            $csrfPreRouting,
-            $csrfPostRouting,
         );
         $app = WebServer::createApp($container);
+        $app->useRoutes($routeRegistry);
         $app->useCsrfMiddleware();
         $app->receive((new RequestStub("POST"))->withUri(new UriStub(TEST_POST_ROUTE)));
 

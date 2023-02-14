@@ -6,6 +6,7 @@ namespace Phpolar\Phpolar\Tests\Stubs;
 
 use Phpolar\CsrfProtection\Http\CsrfPostRoutingMiddlewareFactory;
 use Phpolar\CsrfProtection\Http\CsrfPreRoutingMiddleware;
+use Phpolar\Phpolar\Routing\AbstractRequestHandler;
 use Phpolar\Phpolar\WebServer\Http\Error401Handler;
 use Phpolar\Phpolar\WebServer\MiddlewareProcessingQueue;
 use Phpolar\Phpolar\WebServer\WebServer;
@@ -25,12 +26,12 @@ final class ContainerStub implements ContainerInterface
     public function __construct(
         ResponseFactoryInterface $responseFactory,
         StreamFactoryInterface $streamFactory,
-        RequestHandlerInterface $handler,
         Error401Handler $error401Handler,
         TemplateEngine $templateEngine,
         MiddlewareProcessingQueue $middlewareProcessingQueue,
         ?CsrfPreRoutingMiddleware $csrfPreRoutingMiddleware = null,
         ?CsrfPostRoutingMiddlewareFactory $csrfPostRoutingMiddlewareFactory = null,
+        ?RequestHandlerInterface $handler = null,
     ) {
         self::$deps[WebServer::PRIMARY_REQUEST_HANDLER] = $handler;
         self::$deps[ResponseFactoryInterface::class] = $responseFactory;
