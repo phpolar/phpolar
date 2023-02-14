@@ -109,7 +109,7 @@ final class DefaultRoutingHandlerTest extends TestCase
          * @var Stub&RouteRegistry $routeRegistryStub
          */
         $routeRegistryStub = $this->createStub(RouteRegistry::class);
-        $routeRegistryStub->method("fromGet")->willReturn($registeredRouteHandler);
+        $routeRegistryStub->method("get")->willReturn($registeredRouteHandler);
         $sut = new DefaultRoutingHandler($routeRegistryStub, $container);
         $request = (new RequestStub())->withUri(new UriStub(uniqid()));
         $response = $sut->handle($request);

@@ -29,7 +29,7 @@ class RouteRegistry
     }
 
     /**
-     * Associates a request handler to a `POST` request.
+     * Retrieves the registered request handler.
      */
     public function addPost(string $route, AbstractRouteDelegate $handler): void
     {

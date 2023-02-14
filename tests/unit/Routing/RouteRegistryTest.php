@@ -9,13 +9,12 @@ use Phpolar\Phpolar\Tests\Stubs\ContainerConfigurationStub;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\MockObject\MockObject;
-use PHPUnit\Framework\MockObject\Stub\Stub;
 use PHPUnit\Framework\TestCase;
 
 #[CoversClass(RouteRegistry::class)]
 final class RouteRegistryTest extends TestCase
 {
-    #[TestDox("Shall retrieve the request handlers associated with a GET request")]
+    #[TestDox("Shall retrieve the request handlers associated with a route")]
     public function test1()
     {
         $givenRoute = "/";
@@ -30,23 +29,8 @@ final class RouteRegistryTest extends TestCase
         $registeredHandler->handle(new ConfigurableContainerStub(new ContainerConfigurationStub()));
     }
 
-    #[TestDox("Shall retrieve the request handlers associated with a POST request")]
-    public function test2()
-    {
-        $givenRoute = "/";
-        /**
-         * @var MockObject&AbstractRouteDelegate $handlerSpy
-         */
-        $handlerSpy = $this->getMockForAbstractClass(AbstractRouteDelegate::class);
-        $handlerSpy->expects($this->once())->method("handle")->willReturn("");
-        $sut = new RouteRegistry();
-        $sut->addPost($givenRoute, $handlerSpy);
-        $registeredHandler = $sut->fromPost($givenRoute);
-        $registeredHandler->handle(new ConfigurableContainerStub(new ContainerConfigurationStub()));
-    }
-
     #[TestDox("Shall return a RouteNotRegistered instance when a route is not associated with any handlers.")]
-    public function test3()
+    public function test2()
     {
         $sut = new RouteRegistry();
         $result1 = $sut->fromGet("an_unregistered_route");
