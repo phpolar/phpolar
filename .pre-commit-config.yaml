@@ -16,7 +16,7 @@ repos:
   - repo: https://github.com/commitizen-tools/commitizen
     rev: v2.35.0
     hooks:
-      - id: commitizen
+    -   id: commitizen
   - repo: https://github.com/digitalpulp/pre-commit-php.git
     rev: 1.4.0
     hooks:

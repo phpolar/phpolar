@@ -1,5 +1,4 @@
 {
-    "$schema": "https://getcomposer.org/schema.json",
     "name": "phpolar/phpolar",
     "description": "A super-tiny, lightweight microframework for PHP projects",
     "type": "library",
@@ -29,8 +28,10 @@
     "autoload-dev": {
         "psr-4": {
             "Phpolar\\Phpolar\\Tests\\DataProviders\\": "tests/__data-providers__",
-            "Phpolar\\Phpolar\\Tests\\Stubs\\": "tests/__stubs__",
-            "Phpolar\\Phpolar\\Tests\\Fakes\\": "tests/__fakes__"
+            "Phpolar\\Phpolar\\Tests\\Mocks\\": "tests/__mocks__",
+            "Phpolar\\Phpolar\\Tests\\Fakes\\": "tests/__fakes__",
+            "Phpolar\\Phpolar\\Tests\\Comparables\\": "tests/__comparables__",
+            "Phpolar\\Phpolar\\Tests\\Extensions\\": "tests/__extensions__"
         }
     },
     "require": {
@@ -50,12 +51,13 @@
     "require-dev": {
         "ext-ast": "*",
         "ext-openssl": "*",
+        "ext-mbstring": "*",
         "phan/phan": "^5.3",
+        "phpunit/phpunit": "^9.5",
+        "squizlabs/php_codesniffer": "^3.7",
         "php-coveralls/php-coveralls": "^2.5",
-        "phpmd/phpmd": "^2.13",
         "phpstan/phpstan": "^1.8",
-        "phpunit/phpunit": "^10.0",
-        "squizlabs/php_codesniffer": "^3.7"
+        "phpmd/phpmd": "^2.13"
     },
     "scripts": {
         "analyze": "XDEBUG_MODE=off phpstan analyze src --level 9",
