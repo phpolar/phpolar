@@ -8,6 +8,7 @@ use ArrayAccess;
 use Phpolar\Extensions\HttpResponse\ResponseExtension;
 use Phpolar\Phpolar\Routing\RouteRegistry;
 use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 
 /**
  * Represents a server that handles and responds to request.

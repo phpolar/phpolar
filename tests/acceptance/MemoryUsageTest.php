@@ -168,7 +168,7 @@ final class MemoryUsageTest extends TestCase
                     {
                         // no op
                     }
-                    public function load(): void
+                    function load(): void
                     {
                         // no op
                     }
