@@ -48,20 +48,4 @@ final class FieldErrorMessageTraitTest extends TestCase
         $fieldName = "prop";
         $this->assertSame($expectedMessage, $model->getFieldErrorMessage($fieldName));
     }
-
-    #[TestDox("Shall return true when property validation fails")]
-    #[DataProviderExternal(FormFieldErrorMessageDataProvider::class, "invalidPropertyTestCases")]
-    public function test3(string $expectedMessage, object $model)
-    {
-        $fieldName = "prop";
-        $this->assertTrue($model->hasError($fieldName));
-    }
-
-    #[TestDox("Shall return false when the property is valid")]
-    #[DataProviderExternal(FormFieldErrorMessageDataProvider::class, "validPropertyTestCases")]
-    public function test4(string $expectedMessage, object $model)
-    {
-        $fieldName = "prop";
-        $this->assertFalse($model->hasError($fieldName));
-    }
 }

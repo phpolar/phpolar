@@ -47,31 +47,19 @@ trait FieldErrorMessageTrait
      */
     public function getFieldErrorMessage(string $fieldName, string $stringToAppend = ""): string
     {
-        $this->setErrorMsgsOnce();
-        return $this->hasError($fieldName) === true ? ($this->errorMessages[$fieldName] . $stringToAppend) : "";
-    }
-
-    /**
-     * Determines if a property is
-     * not valid.
-     *
-     * @api
-     */
-    public function hasError(string $fieldName): bool
-    {
-        $this->setErrorMsgsOnce();
-        return isset($this->errorMessages[$fieldName]);
-    }
-
-    private function setErrorMsgsOnce(): void
-    {
         if (
-            (new ReflectionProperty($this, "checked"))->isInitialized($this) === true &&
-                $this->checked === true
+            (new ReflectionProperty($this, "checked"))->isInitialized($this) === false ||
+                $this->checked === false
         ) {
-            return;
+            $this->checked = true;
+            $this->setErrorMessages();
         }
-        $this->checked = true;
+        $hasError = isset($this->errorMessages[$fieldName]);
+        return $hasError === true ? ($this->errorMessages[$fieldName] . $stringToAppend) : "";
+    }
+
+    private function setErrorMessages(): void
+    {
         $props = (new ReflectionObject($this))->getProperties(ReflectionProperty::IS_PUBLIC);
         array_walk(
             $props,
