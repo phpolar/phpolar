@@ -1,18 +1,15 @@
 <?xml version="1.0"?>
-<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="Phpolar" xsi:noNamespaceSchemaLocation="phpcs.xsd">
-    <description>The coding standard for Phpolar.</description>
+<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="SafeSuite" xsi:noNamespaceSchemaLocation="phpcs.xsd">
+    <description>The coding standard for SafeSuite.</description>
 
     <file>src</file>
     <file>tests</file>
 
     <arg name="basepath" value="."/>
     <arg name="extensions" value="php"/>
-    <arg name="no-colors"/>
-    <arg name="cache"/>
-    <arg name="parallel" value="20"/>
-    <arg value="nq"/>
-
-    <ini name="memory_limit" value="64M"/>
+    <arg name="colors"/>
+    <arg name="parallel" value="75"/>
+    <arg value="np"/>
 
     <!-- Don't hide tokenizer exceptions -->
     <rule ref="Internal.Tokenizer.Exception">
@@ -40,7 +37,6 @@
     <rule ref="PSR12.Classes.OpeningBraceSpace"/>
     <rule ref="PSR12.Classes.ClosingBrace"/>
     <rule ref="PSR12.Classes.ClassInstantiation"/>
-    <rule ref="PSR12" />
 
     <rule ref="Generic.Files.OneClassPerFile">
         <properties>

@@ -2,7 +2,7 @@
     <img width="240" src="./phpolar.svg" />
 </p>
 
-# PHPolar
+# Polar
 
 ## A super-tiny, lightweight microframework for PHP projects
 
@@ -20,13 +20,8 @@
 ```php
 <!DOCTYPE html>
 <?php
-
-namespace MyApp;
-
-use Phpolar\Phpolar\FormControlTypes;
-
 /**
- * @var PersonForm
+ * @var Page $view
  */
 $view = $this;
 ?>
@@ -53,28 +48,10 @@ $view = $this;
     <body style="text-align:center">
         <h1><?= $view->title ?></h1>
         <div class="container">
-            <form action="<?= $view->action ?>" method="post">
-                <?php foreach ($view as $propName => $propVal): ?>
-                    <label><?= $view->getLabel($propName) ?></label>
-                    <?php switch ($view->getFormControlType($propName)): ?>
-                        <?php case FormControlTypes::Input: ?>
-                            <input type="text" value="<?= $propVal ?>" />
-                        <?php case FormControlTypes::Select: ?>
-                            <select>
-                                <?php foreach ($propVal as $name => $item): ?>
-                                    <option value="<?= $item ?>"><?= $name ?></option>
-                                <?php endforeach ?>
-                            </select>
-                    <?php endswitch ?>
-                <?php endforeach ?>
-            </form>
         </div>
     </body>
 </html>
 ```
-<select>
-    <option value=>
-</select>
 
 ### Use Attributes to Configure Models
 
@@ -83,10 +60,6 @@ use Efortmeyer\Polar\Api\Model;
 
 class Person extends Model
 {
-    public string $title = "Person Form";
-
-    public string $action = "somewhere";
-
     #[MaxLength(20)]
     public string $firstName;
 
@@ -169,6 +142,6 @@ class Person extends Model
 }
 ```
 
-[API Documentation](https://phpolar.github.io/phpolar/)
+[API Documentation](https://ericfortmeyer.github.io/polar-docs)
 
 [def]: https://packagist.org/packages/phpolar/phpolar

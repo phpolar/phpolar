@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.5/phpunit.xsd"
+         bootstrap="vendor/autoload.php"
+         cacheResultFile=".phpunit.cache/test-results"
+         executionOrder="depends,defects"
+         forceCoversAnnotation="true"
+         beStrictAboutCoversAnnotation="true"
+         beStrictAboutOutputDuringTests="true"
+         beStrictAboutTodoAnnotatedTests="true"
+         convertDeprecationsToExceptions="true"
+         failOnRisky="true"
+         failOnWarning="true"
+         colors="true"
+         verbose="false">
+    <testsuites>
+        <testsuite name="default">
+            <directory>tests</directory>
+        </testsuite>
+    </testsuites>
+    <coverage cacheDirectory=".phpunit.cache/code-coverage"
+              processUncoveredFiles="true">
+        <include>
+            <directory suffix=".php">src</directory>
+        </include>
+        <exclude>
+            <file>src/Api/UIElements/HiddenFormControl.php</file>
+            <file>src/Api/UIElements/DateFormControl.php</file>
+            <file>src/Api/UIElements/NumberFormControl.php</file>
+            <file>src/Api/UIElements/TextFormControl.php</file>
+            <file>src/Api/UIElements/TextAreaFormControl.php</file>
+            <file>src/Api/DataStorage/CollectionStorageFactory.php</file>
+            <file>src/Api/Rendering/Files/HtmlFile.php</file>
+            <file>src/Api/Rendering/Files/IcoFile.php</file>
+            <file>src/Api/Rendering/TemplateContext.php</file>
+            <file>src/Core/Defaults.php</file>
+            <file>src/Core/Messages.php</file>
+            <file>src/Core/Rendering/ContentTypes.php</file>
+            <file>src/Stock/Attributes/AutomaticDateValue.php</file>
+            <file>src/Stock/Attributes/Config/ColumnKey.php</file>
+            <file>src/Stock/Attributes/Config/DateFormatKey.php</file>
+            <file>src/Stock/Attributes/Config/InputKey.php</file>
+            <file>src/Stock/Attributes/Config/InputTypes.php</file>
+            <file>src/Stock/Attributes/Config/MaxLengthKey.php</file>
+            <file>src/Stock/Attributes/Config/LabelKey.php</file>
+            <file>src/Stock/Attributes/Config/TypeValidationKey.php</file>
+            <file>src/Stock/Attributes/Config/AutomaticDateValueKey.php</file>
+            <file>src/Stock/AppConfig/InMemoryAppConfig.php</file>
+        </exclude>
+    </coverage>
+    <php>
+        <const name="FAKE_ICO_FILE_PATH" value="/tests/__tmp__/TEST_CASE.ico" />
+        <const name="FAKE_HTML_FILE_PATH" value="/tests/__tmp__/TEST_CASE.html" />
+        <const name="ATTRIBUTES_CONFIG_PATH" value="/tests/__configurations__/config.php" />
+    </php>
+</phpunit>
