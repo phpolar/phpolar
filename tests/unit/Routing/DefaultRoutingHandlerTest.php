@@ -15,22 +15,46 @@ use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
+use Psr\Container\ContainerInterface;
+use Psr\Http\Message\ResponseFactoryInterface;
+use Psr\Http\Message\StreamFactoryInterface;
 
 #[CoversClass(DefaultRoutingHandler::class)]
 #[CoversClass(RouteRegistry::class)]
 final class DefaultRoutingHandlerTest extends TestCase
 {
+    public function getContainer(?StreamFactoryInterface $streamFactory = null): ContainerInterface
+    {
+        return new class ($streamFactory) implements ContainerInterface {
+            public function __construct(private ?StreamFactoryInterface $streamFactory)
+            {
+            }
+            public function has(string $id): bool
+            {
+                return true;
+            }
+            public function get(string $id)
+            {
+                if ($id === ResponseFactoryInterface::class) {
+                    return new ResponseFactoryStub();
+                }
+                if ($id === StreamFactoryInterface::class) {
+                    return $this->streamFactory ?? new StreamFactoryStub();
+                }
+            }
+        };
+    }
+
     #[TestDox("Shall respond with \"Not Found\" if the route is not registered")]
     public function test1()
     {
-        $responseFactory = new ResponseFactoryStub();
-        $streamFactory = new StreamFactoryStub();
+        $container = $this->getContainer();
         /**
          * @var Stub&RouteRegistry $routeRegistryStub
          */
         $routeRegistryStub = $this->createStub(RouteRegistry::class);
         $routeRegistryStub->method("get")->willReturn(new RouteNotRegistered());
-        $sut = new DefaultRoutingHandler($responseFactory, $streamFactory, $routeRegistryStub);
+        $sut = new DefaultRoutingHandler($routeRegistryStub, $container);
         $request = (new RequestStub())->withUri(new UriStub(uniqid()));
         $response = $sut->handle($request);
         $this->assertSame(ResponseCode::NOT_FOUND, $response->getStatusCode());
@@ -39,8 +63,7 @@ final class DefaultRoutingHandlerTest extends TestCase
     #[TestDox("Shall call the registered route handler")]
     public function test2()
     {
-        $responseFactory = new ResponseFactoryStub();
-        $streamFactory = new StreamFactoryStub();
+        $container = $this->getContainer();
         /**
          * @var MockObject $registeredRouteHandler
          */
@@ -51,7 +74,7 @@ final class DefaultRoutingHandlerTest extends TestCase
          */
         $routeRegistryStub = $this->createStub(RouteRegistry::class);
         $routeRegistryStub->method("get")->willReturn($registeredRouteHandler);
-        $sut = new DefaultRoutingHandler($responseFactory, $streamFactory, $routeRegistryStub);
+        $sut = new DefaultRoutingHandler($routeRegistryStub, $container);
         $request = (new RequestStub())->withUri(new UriStub(uniqid()));
         $response = $sut->handle($request);
         $this->assertSame(ResponseCode::OK, $response->getStatusCode());
@@ -61,12 +84,12 @@ final class DefaultRoutingHandlerTest extends TestCase
     public function test3()
     {
         $responseContent = uniqid();
-        $responseFactory = new ResponseFactoryStub();
         /**
          * @var MockObject&StreamFactoryStub
          */
         $streamFactoryStub = $this->createMock(StreamFactoryStub::class);
         $streamFactoryStub->expects($this->once())->method("createStream")->with($responseContent)->willReturn(new MemoryStreamStub($responseContent));
+        $container = $this->getContainer($streamFactoryStub);
         /**
          * @var Stub $registeredRouteHandler
          */
@@ -77,7 +100,7 @@ final class DefaultRoutingHandlerTest extends TestCase
          */
         $routeRegistryStub = $this->createStub(RouteRegistry::class);
         $routeRegistryStub->method("get")->willReturn($registeredRouteHandler);
-        $sut = new DefaultRoutingHandler($responseFactory, $streamFactoryStub, $routeRegistryStub);
+        $sut = new DefaultRoutingHandler($routeRegistryStub, $container);
         $request = (new RequestStub())->withUri(new UriStub(uniqid()));
         $response = $sut->handle($request);
         $this->assertSame(ResponseCode::OK, $response->getStatusCode());

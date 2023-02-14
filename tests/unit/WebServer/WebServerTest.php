@@ -31,6 +31,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use ReflectionObject;
 
 #[RunTestsInSeparateProcesses]
 #[CoversClass(WebServer::class)]
@@ -56,12 +57,12 @@ final class WebServerTest extends TestCase
         return new ContainerStub(
             $responseFactory,
             $streamFactory,
-            $handler,
             $errorHandler,
             $templateEngine,
             $middlewareQueue,
             $csrfPreRoutingMiddleware,
-            $csrfPostRoutingMiddlewareFactory
+            $csrfPostRoutingMiddlewareFactory,
+            $handler,
         );
     }
 
@@ -238,5 +239,24 @@ final class WebServerTest extends TestCase
         $server->useCsrfMiddleware();
         $server->receive($request);
         $this->assertSame(ResponseCode::OK, http_response_code());
+    }
+
+    #[TestDox("Shall add given routes to default route handler")]
+    public function test6()
+    {
+        $givenRoutes = new RouteRegistry();
+        $handlerStub = $this->createStub(RequestHandlerInterface::class);
+        $container = $this->getContainer($handlerStub);
+        $sut = WebServer::createApp($container);
+        $reflectionObj = new ReflectionObject($sut);
+        $useRoutesProp = $reflectionObj->getProperty("useRoutes");
+        $useRoutesProp->setAccessible(true);
+        $routesProp = $reflectionObj->getProperty("routes");
+        $routesProp->setAccessible(true);
+        $this->assertFalse($useRoutesProp->getValue($sut));
+        $this->assertFalse($routesProp->isInitialized($sut));
+        $sut->useRoutes($givenRoutes);
+        $this->assertTrue($useRoutesProp->getValue($sut));
+        $this->assertInstanceOf(RouteRegistry::class, $routesProp->getValue($sut));
     }
 }
