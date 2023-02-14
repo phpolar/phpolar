@@ -12,7 +12,6 @@ use Phpolar\Phpolar\Routing\RouteRegistry;
 use Phpolar\Phpolar\WebServer\Http\Error401Handler;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Server\RequestHandlerInterface;
 
 /**
  * Represents a server that handles and responds to request.
@@ -103,7 +102,7 @@ final class WebServer
     public function receive(ServerRequestInterface $request): void
     {
         /**
-         * @var RequestHandlerInterface
+         * @var \Psr\Http\Server\RequestHandlerInterface $primaryHandler
          */
         $primaryHandler = $this->useRoutes === true ? new DefaultRoutingHandler($this->routes, $this->container) : $this->container->get(self::PRIMARY_REQUEST_HANDLER);
         $result = $this->middlewareQueue->dequeuePreRoutingMiddleware($request);
