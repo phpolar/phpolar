@@ -6,7 +6,7 @@ namespace Phpolar\Phpolar;
 
 use Phpolar\CsrfProtection\Http\CsrfPostRoutingMiddlewareFactory;
 use Phpolar\CsrfProtection\Http\CsrfPreRoutingMiddleware;
-use Phpolar\Phpolar\Routing\AbstractRequestHandler;
+use Phpolar\Phpolar\Routing\AbstractRouteDelegate;
 use Phpolar\Phpolar\Routing\DefaultRoutingHandler;
 use Phpolar\Phpolar\Routing\RouteRegistry;
 use Phpolar\Phpolar\Storage\AbstractStorage;
@@ -98,7 +98,7 @@ final class MemoryUsageTest extends TestCase
         $templateEngine = new TemplateEngine(new StreamContentStrategy(), new Binder(), new Dispatcher());
         $routeRegistry = new RouteRegistry();
         $context = new HtmlSafeContext(new FakeModel());
-        $routeHandler = new class ($templateEngine, $context) extends AbstractRequestHandler
+        $routeHandler = new class ($templateEngine, $context) extends AbstractRouteDelegate
         {
             public function __construct(private TemplateEngine $templateEngine, private HtmlSafeContext $context)
             {
@@ -116,7 +116,7 @@ final class MemoryUsageTest extends TestCase
             public function __construct(
                 private ResponseFactoryInterface $responseFactory,
                 private StreamFactoryInterface $streamFactroy,
-                private AbstractRequestHandler $routeHandler
+                private AbstractRouteDelegate $routeHandler
             ) {
             }
             public function handle(ServerRequestInterface $request): ResponseInterface
@@ -146,7 +146,7 @@ final class MemoryUsageTest extends TestCase
         $streamFactory = new StreamFactoryStub();
         $templateEngine = new TemplateEngine(new StreamContentStrategy(), new Binder(), new Dispatcher());
         $routeRegistry = new RouteRegistry();
-        $routeHandler = new class ($templateEngine) extends AbstractRequestHandler {
+        $routeHandler = new class ($templateEngine) extends AbstractRouteDelegate {
             public function __construct(private TemplateEngine $templateEngine)
             {
             }

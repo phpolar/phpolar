@@ -15,6 +15,7 @@ use Phpolar\PhpTemplating\TemplateEngine;
 use Phpolar\PhpTemplating\TemplatingStrategyInterface;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\TestDox;
+use PHPUnit\Framework\MockObject\Stub\Stub;
 use PHPUnit\Framework\TestCase;
 
 #[CoversClass(Error401Handler::class)]
@@ -45,37 +46,37 @@ final class Error401HandlerTest extends TestCase
         $this->assertSame(Error401Handler::DEFAULT_ERROR_MSG, $sut->handle(new RequestStub())->getBody()->getContents());
     }
 
-    // /**
-    //  * @tesdox Shall return default error message if the a bind error occurs.
-    //  */
-    // public function test1b()
-    // {
-    //     $responseFactory = new ResponseFactoryStub();
-    //     $streamFactory = new StreamFactoryStub();
-    //     $renderingAlgo = new class() implements TemplatingStrategyInterface {
-    //         public function getAlgorithm(): Closure
-    //         {
-    //             return fn() => "";
-    //         }
-    //     };
-    //     /**
-    //      * @var Stub&Binder $binderStub
-    //      */
-    //     $binderStub = $this->createStub(Binder::class);
-    //     $binderStub->method("bind")->willReturn(false);
-    //     $sut = new Error401Handler(
-    //         $responseFactory,
-    //         $streamFactory,
-    //         new TemplateEngine(
-    //             $renderingAlgo,
-    //             $binderStub,
-    //             new Dispatcher(),
-    //         )
-    //     );
-    //     $this->assertSame(Error401Handler::DEFAULT_ERROR_MSG, $sut->handle(new RequestStub())->getBody()->getContents());
-    // }
+    /**
+     * @tesdox Shall return default error message if the a bind error occurs.
+     */
+    public function test1b()
+    {
+        $responseFactory = new ResponseFactoryStub();
+        $streamFactory = new StreamFactoryStub();
+        $renderingAlgo = new class () implements TemplatingStrategyInterface {
+            public function getAlgorithm(): Closure
+            {
+                return fn() => "";
+            }
+        };
+        /**
+         * @var Stub&Binder $binderStub
+         */
+        $binderStub = $this->createStub(Binder::class);
+        $binderStub->method("bind")->willReturn(false);
+        $sut = new Error401Handler(
+            $responseFactory,
+            $streamFactory,
+            new TemplateEngine(
+                $renderingAlgo,
+                $binderStub,
+                new Dispatcher(),
+            )
+        );
+        $this->assertSame(Error401Handler::DEFAULT_ERROR_MSG, $sut->handle(new RequestStub())->getBody()->getContents());
+    }
 
-    #[TestDox("Shall return the default error message if the error template file exists.")]
+    #[TestDox("Shall return the template engine results if file exists.")]
     public function test2()
     {
         $responseFactory = new ResponseFactoryStub();
@@ -95,6 +96,10 @@ final class Error401HandlerTest extends TestCase
                 new Dispatcher(),
             )
         );
-        $this->assertSame(Error401HandlerTest::FAKE_TEMPLATE, $sut->handle(new RequestStub())->getBody()->getContents());
+        $prevCwd = getcwd();
+        chdir("tests/__templates__");
+        $responseBodyContents = $sut->handle(new RequestStub())->getBody()->getContents();
+        chdir($prevCwd);
+        $this->assertSame(Error401HandlerTest::FAKE_TEMPLATE, $responseBodyContents);
     }
 }

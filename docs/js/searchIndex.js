@@ -76,6 +76,11 @@ Search.appendIndex(
             "summary": "Provides\u0020an\u0020interface\u0020for\nretrieving\u0020a\u0020fields\u0020error\u0020message.",
             "url": "classes/Phpolar-Phpolar-Model-FieldErrorMessageTrait.html#method_getFieldErrorMessage"
         },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Model\\FieldErrorMessageTrait\u003A\u003AhasError\u0028\u0029",
+            "name": "hasError",
+            "summary": "Determines\u0020if\u0020a\u0020property\u0020is\nnot\u0020valid.",
+            "url": "classes/Phpolar-Phpolar-Model-FieldErrorMessageTrait.html#method_hasError"
+        },                {
             "fqsen": "\\Phpolar\\Phpolar\\Model\\FormControlTypeDetectionTrait",
             "name": "FormControlTypeDetectionTrait",
             "summary": "Adds\u0020support\u0020for\u0020detecting\u0020the\u0020form\u0020control\u0020type\u0020based\u0020on\u0020the\u0020type\u0020declaration\u0020of\u0020the\u0020property.",
@@ -181,15 +186,15 @@ Search.appendIndex(
             "summary": "Determines\u0020if\u0020the\u0020configured\u0020properties\u0020of\u0020an\u0020object\nare\u0020valid.",
             "url": "classes/Phpolar-Phpolar-Model-ValidationTrait.html#method_isValid"
         },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Routing\\AbstractRequestHandler",
-            "name": "AbstractRequestHandler",
+            "fqsen": "\\Phpolar\\Phpolar\\Routing\\AbstractRouteDelegate",
+            "name": "AbstractRouteDelegate",
             "summary": "Defines\u0020what\u0020should\u0020be\u0020done\u0020when\u0020a\u0020request\u0020is\u0020received.",
-            "url": "classes/Phpolar-Phpolar-Routing-AbstractRequestHandler.html"
+            "url": "classes/Phpolar-Phpolar-Routing-AbstractRouteDelegate.html"
         },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Routing\\AbstractRequestHandler\u003A\u003Ahandle\u0028\u0029",
+            "fqsen": "\\Phpolar\\Phpolar\\Routing\\AbstractRouteDelegate\u003A\u003Ahandle\u0028\u0029",
             "name": "handle",
             "summary": "Execute\u0020the\u0020defined\u0020action\u0020associated\u0020with\u0020a\u0020given\u0020route.",
-            "url": "classes/Phpolar-Phpolar-Routing-AbstractRequestHandler.html#method_handle"
+            "url": "classes/Phpolar-Phpolar-Routing-AbstractRouteDelegate.html#method_handle"
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\Routing\\DefaultRoutingHandler",
             "name": "DefaultRoutingHandler",
@@ -216,15 +221,25 @@ Search.appendIndex(
             "summary": "Contains\u0020route\u0020paths\u0020and\u0020their\u0020associated\nrequest\u0020handlers.",
             "url": "classes/Phpolar-Phpolar-Routing-RouteRegistry.html"
         },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Routing\\RouteRegistry\u003A\u003Aadd\u0028\u0029",
-            "name": "add",
-            "summary": "Associates\u0020a\u0020request\u0020handler\u0020to\u0020a\u0020route.",
-            "url": "classes/Phpolar-Phpolar-Routing-RouteRegistry.html#method_add"
+            "fqsen": "\\Phpolar\\Phpolar\\Routing\\RouteRegistry\u003A\u003AaddGet\u0028\u0029",
+            "name": "addGet",
+            "summary": "Associates\u0020a\u0020request\u0020handler\u0020to\u0020a\u0020\u0060GET\u0060\u0020request.",
+            "url": "classes/Phpolar-Phpolar-Routing-RouteRegistry.html#method_addGet"
         },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Routing\\RouteRegistry\u003A\u003Aget\u0028\u0029",
-            "name": "get",
-            "summary": "Retrieves\u0020the\u0020registered\u0020request\u0020handler.",
-            "url": "classes/Phpolar-Phpolar-Routing-RouteRegistry.html#method_get"
+            "fqsen": "\\Phpolar\\Phpolar\\Routing\\RouteRegistry\u003A\u003AaddPost\u0028\u0029",
+            "name": "addPost",
+            "summary": "Associates\u0020a\u0020request\u0020handler\u0020to\u0020a\u0020\u0060POST\u0060\u0020request.",
+            "url": "classes/Phpolar-Phpolar-Routing-RouteRegistry.html#method_addPost"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Routing\\RouteRegistry\u003A\u003AfromGet\u0028\u0029",
+            "name": "fromGet",
+            "summary": "Retrieves\u0020the\u0020registered\u0020handler\u0020for\u0020a\u0020\u0060GET\u0060\u0020request.",
+            "url": "classes/Phpolar-Phpolar-Routing-RouteRegistry.html#method_fromGet"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Routing\\RouteRegistry\u003A\u003AfromPost\u0028\u0029",
+            "name": "fromPost",
+            "summary": "Retrieves\u0020the\u0020registered\u0020handler\u0020for\u0020a\u0020\u0060POST\u0060\u0020request.",
+            "url": "classes/Phpolar-Phpolar-Routing-RouteRegistry.html#method_fromPost"
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\Validation\\AbstractValidationError",
             "name": "AbstractValidationError",
@@ -431,6 +446,11 @@ Search.appendIndex(
             "summary": "Configures\u0020the\u0020server\u0020for\u0020CSRF\u0020attack\u0020mitigation.",
             "url": "classes/Phpolar-Phpolar-WebServer-WebServer.html#method_useCsrfMiddleware"
         },                {
+            "fqsen": "\\Phpolar\\Phpolar\\WebServer\\WebServer\u003A\u003AuseRoutes\u0028\u0029",
+            "name": "useRoutes",
+            "summary": "Configures\u0020the\u0020web\u0020server\u0020with\u0020associated\nroutes\u0020and\u0020handlers.",
+            "url": "classes/Phpolar-Phpolar-WebServer-WebServer.html#method_useRoutes"
+        },                {
             "fqsen": "\\Phpolar\\Phpolar\\WebServer\\WebServer\u003A\u003APRIMARY_REQUEST_HANDLER",
             "name": "PRIMARY_REQUEST_HANDLER",
             "summary": "",
@@ -438,7 +458,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\WebServer\\WebServerConfigurationException",
             "name": "WebServerConfigurationException",
-            "summary": "",
+            "summary": "Represents\u0020the\u0020scenario\u0020when\u0020the\u0020web\u0020server\u0020is\nnot\u0020configured\u0020as\u0020expected.",
             "url": "classes/Phpolar-Phpolar-WebServer-WebServerConfigurationException.html"
         },                {
             "fqsen": "\\",

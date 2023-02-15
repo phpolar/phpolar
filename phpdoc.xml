@@ -9,7 +9,7 @@
         <output>docs</output>
         <cache>.phpdoc/build/cache</cache>
     </paths>
-    <version number="1.0.0">
+    <version number="1.6.5">
         <api format="php">
             <source dsn="./src"></source>
           <default-package-name>Phpolar</default-package-name>

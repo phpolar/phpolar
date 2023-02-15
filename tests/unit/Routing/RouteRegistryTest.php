@@ -18,9 +18,9 @@ final class RouteRegistryTest extends TestCase
     {
         $givenRoute = "/";
         /**
-         * @var MockObject&AbstractRequestHandler $handlerSpy
+         * @var MockObject&AbstractRouteDelegate $handlerSpy
          */
-        $handlerSpy = $this->getMockForAbstractClass(AbstractRequestHandler::class);
+        $handlerSpy = $this->getMockForAbstractClass(AbstractRouteDelegate::class);
         $handlerSpy->expects($this->once())->method("handle")->willReturn("");
         $sut = new RouteRegistry();
         $sut->addGet($givenRoute, $handlerSpy);
@@ -33,9 +33,9 @@ final class RouteRegistryTest extends TestCase
     {
         $givenRoute = "/";
         /**
-         * @var MockObject&AbstractRequestHandler $handlerSpy
+         * @var MockObject&AbstractRouteDelegate $handlerSpy
          */
-        $handlerSpy = $this->getMockForAbstractClass(AbstractRequestHandler::class);
+        $handlerSpy = $this->getMockForAbstractClass(AbstractRouteDelegate::class);
         $handlerSpy->expects($this->once())->method("handle")->willReturn("");
         $sut = new RouteRegistry();
         $sut->addPost($givenRoute, $handlerSpy);
@@ -58,9 +58,9 @@ final class RouteRegistryTest extends TestCase
     {
         $givenRoute = "/";
         /**
-         * @var Stub&AbstractRequestHandler $handlerSpy
+         * @var Stub&AbstractRouteDelegate $handlerSpy
          */
-        $handlerSpy = $this->createStub(AbstractRequestHandler::class);
+        $handlerSpy = $this->createStub(AbstractRouteDelegate::class);
         $sut = new RouteRegistry();
         $sut->addGet($givenRoute, $handlerSpy);
         $result = $sut->fromPost($givenRoute);
@@ -72,9 +72,9 @@ final class RouteRegistryTest extends TestCase
     {
         $givenRoute = "/";
         /**
-         * @var Stub&AbstractRequestHandler $handlerSpy
+         * @var Stub&AbstractRouteDelegate $handlerSpy
          */
-        $handlerSpy = $this->createStub(AbstractRequestHandler::class);
+        $handlerSpy = $this->createStub(AbstractRouteDelegate::class);
         $sut = new RouteRegistry();
         $sut->addPost($givenRoute, $handlerSpy);
         $result = $sut->fromGet($givenRoute);
