@@ -175,16 +175,16 @@
         },
         {
             "name": "phpolar/php-templating",
-            "version": "0.3.1",
+            "version": "0.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpolar/php-templating.git",
-                "reference": "67f1ae2794dbd4b56892693eba6f7c8b5272ab40"
+                "reference": "aef3c2f30aeddb2b6dd8460b42d9ac3ea15dd36e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpolar/php-templating/zipball/67f1ae2794dbd4b56892693eba6f7c8b5272ab40",
-                "reference": "67f1ae2794dbd4b56892693eba6f7c8b5272ab40",
+                "url": "https://api.github.com/repos/phpolar/php-templating/zipball/aef3c2f30aeddb2b6dd8460b42d9ac3ea15dd36e",
+                "reference": "aef3c2f30aeddb2b6dd8460b42d9ac3ea15dd36e",
                 "shasum": ""
             },
             "require": {
@@ -224,9 +224,9 @@
             ],
             "support": {
                 "issues": "https://github.com/phpolar/php-templating/issues",
-                "source": "https://github.com/phpolar/php-templating/tree/0.3.1"
+                "source": "https://github.com/phpolar/php-templating/tree/0.3.2"
             },
-            "time": "2023-02-06T14:44:42+00:00"
+            "time": "2023-02-13T04:27:37+00:00"
         },
         {
             "name": "phpolar/phpolar-core",
