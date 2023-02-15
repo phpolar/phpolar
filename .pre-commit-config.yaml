@@ -5,8 +5,9 @@ repos:
     rev: v4.3.0
     hooks:
       - id: trailing-whitespace
-        exclude: (docs|\.phan)
+        exclude: (docs|\.phan|tests/__templates__)
       - id: end-of-file-fixer
+        exclude: (docs|tests/__templates__)
       - id: check-json
         exclude: (.vscode)
       - id: check-xml

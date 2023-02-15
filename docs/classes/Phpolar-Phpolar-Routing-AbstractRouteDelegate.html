@@ -92,23 +92,37 @@
                     <ul class="phpdocumentor-breadcrumbs">
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/phpolar.html">Phpolar</a></li>
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/phpolar-phpolar.html">Phpolar</a></li>
-            <li class="phpdocumentor-breadcrumb"><a href="namespaces/phpolar-phpolar-model.html">Model</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/phpolar-phpolar-routing.html">Routing</a></li>
     </ul>
 
-    <article class="phpdocumentor-element -trait">
+    <article class="phpdocumentor-element -class">
         <h2 class="phpdocumentor-content__title">
-    FieldErrorMessageTrait
+    AbstractRouteDelegate
+
+    
+            <div class="phpdocumentor-element__package">
+            in package
+            <ul class="phpdocumentor-breadcrumbs">
+                                    <li class="phpdocumentor-breadcrumb"><a href="packages/Phpolar.html">Phpolar</a></li>
+                            </ul>
+        </div>
+    
+    
     </h2>
 
         <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="Model/FieldErrorMessageTrait.php"><a href="files/model-fielderrormessagetrait.html"><abbr title="Model/FieldErrorMessageTrait.php">FieldErrorMessageTrait.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="Routing/AbstractRouteDelegate.php"><a href="files/routing-abstractroutedelegate.html"><abbr title="Routing/AbstractRouteDelegate.php">AbstractRouteDelegate.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">19</span>
+    <span class="phpdocumentor-element-found-in__line">15</span>
 
     </aside>
 
-            <p class="phpdocumentor-summary">Provides support for displaying form field error messages.</p>
+            <p class="phpdocumentor-summary">Defines what should be done when a request is received.</p>
 
+    <section class="phpdocumentor-description"><p>This is expected to return the content of the
+response body.</p>
+<p>This is <strong>NOT</strong> a PSR-15 request handler.</p>
+</section>
 
 
 
@@ -124,20 +138,11 @@
 
 <dl class="phpdocumentor-table-of-contents">
                         <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Phpolar-Phpolar-Model-FieldErrorMessageTrait.html#method_getFieldErrorMessage">getFieldErrorMessage()</a>
+    <a href="classes/Phpolar-Phpolar-Routing-AbstractRouteDelegate.html#method_handle">handle()</a>
     <span>
                                 &nbsp;: string    </span>
 </dt>
-<dd>Provides an interface for
-retrieving a fields error message.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Phpolar-Phpolar-Model-FieldErrorMessageTrait.html#method_hasError">hasError()</a>
-    <span>
-                                &nbsp;: bool    </span>
-</dt>
-<dd>Determines if a property is
-not valid.</dd>
+<dd>Execute the defined action associated with a given route.</dd>
 
         </dl>
 
@@ -145,121 +150,46 @@ not valid.</dd>
 
         
 
+        
+
             <section class="phpdocumentor-methods">
         <h3 class="phpdocumentor-elements__header" id="methods">
             Methods
-            <a href="classes/Phpolar-Phpolar-Model-FieldErrorMessageTrait.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/Phpolar-Phpolar-Routing-AbstractRouteDelegate.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
         </h3>
                     <article
         class="phpdocumentor-element
             -method
             -public
-                                                        "
+                        -abstract                                "
 >
-    <h4 class="phpdocumentor-element__name" id="method_getFieldErrorMessage">
-        getFieldErrorMessage()
-        <a href="classes/Phpolar-Phpolar-Model-FieldErrorMessageTrait.html#method_getFieldErrorMessage" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_handle">
+        handle()
+        <a href="classes/Phpolar-Phpolar-Routing-AbstractRouteDelegate.html#method_handle" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="Model/FieldErrorMessageTrait.php"><a href="files/model-fielderrormessagetrait.html"><abbr title="Model/FieldErrorMessageTrait.php">FieldErrorMessageTrait.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="Routing/AbstractRouteDelegate.php"><a href="files/routing-abstractroutedelegate.html"><abbr title="Routing/AbstractRouteDelegate.php">AbstractRouteDelegate.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">48</span>
+    <span class="phpdocumentor-element-found-in__line">22</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Provides an interface for
-retrieving a fields error message.</p>
+        <p class="phpdocumentor-summary">Execute the defined action associated with a given route.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getFieldErrorMessage</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$fieldName</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$stringToAppend</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&quot;&quot;</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+    <span class="phpdocumentor-signature__abstract">abstract</span>                <span class="phpdocumentor-signature__name">handle</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
     
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$fieldName</span>
-                : <span class="phpdocumentor-signature__argument__return-type">string</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
-            </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$stringToAppend</span>
-                : <span class="phpdocumentor-signature__argument__return-type">string</span>
-                 = <span class="phpdocumentor-signature__argument__default-value">&quot;&quot;</span>            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
-            </dd>
-            </dl>
-
     
-    <h5 class="phpdocumentor-tag-list__heading" id="tags">
-        Tags
-        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
-    </h5>
-    <dl class="phpdocumentor-tag-list">
-                                    <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">throws</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
-                                                                <span class="phpdocumentor-tag-link"><abbr title="\Phpolar\Phpolar\Core\Validation\Exception\ValidatorWithNoErrorMessageException">ValidatorWithNoErrorMessageException</abbr></span>
-                                                            
-                                             
-                                    </dd>
-                        </dl>
+    
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
     <span class="phpdocumentor-signature__response_type">string</span>
             &mdash;
-        
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_hasError">
-        hasError()
-        <a href="classes/Phpolar-Phpolar-Model-FieldErrorMessageTrait.html#method_hasError" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="Model/FieldErrorMessageTrait.php"><a href="files/model-fielderrormessagetrait.html"><abbr title="Model/FieldErrorMessageTrait.php">FieldErrorMessageTrait.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">60</span>
+            <section class="phpdocumentor-description"><p>The content of the response body.</p>
+</section>
 
-    </aside>
-
-        <p class="phpdocumentor-summary">Determines if a property is
-not valid.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">hasError</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$fieldName</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
-
-    
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$fieldName</span>
-                : <span class="phpdocumentor-signature__argument__return-type">string</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
-            </dd>
-            </dl>
-
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">bool</span>
-            &mdash;
-        
     
 </article>
             </section>
@@ -340,7 +270,7 @@ not valid.</p>
 </section>
             </div>
         </div>
-        <a href="classes/Phpolar-Phpolar-Model-FieldErrorMessageTrait.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+        <a href="classes/Phpolar-Phpolar-Routing-AbstractRouteDelegate.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
     </main>
 

@@ -67,7 +67,7 @@ final class DefaultRoutingHandlerTest extends TestCase
         /**
          * @var MockObject $registeredRouteHandler
          */
-        $registeredRouteHandler = $this->createMock(AbstractRequestHandler::class);
+        $registeredRouteHandler = $this->createMock(AbstractRouteDelegate::class);
         $registeredRouteHandler->expects($this->once())->method("handle");
         /**
          * @var Stub&RouteRegistry $routeRegistryStub
@@ -93,7 +93,7 @@ final class DefaultRoutingHandlerTest extends TestCase
         /**
          * @var Stub $registeredRouteHandler
          */
-        $registeredRouteHandler = $this->createStub(AbstractRequestHandler::class);
+        $registeredRouteHandler = $this->createStub(AbstractRouteDelegate::class);
         $registeredRouteHandler->method("handle")->willReturn($responseContent);
         /**
          * @var Stub&RouteRegistry $routeRegistryStub

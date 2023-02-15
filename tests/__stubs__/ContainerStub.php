@@ -6,7 +6,7 @@ namespace Phpolar\Phpolar\Tests\Stubs;
 
 use Phpolar\CsrfProtection\Http\CsrfPostRoutingMiddlewareFactory;
 use Phpolar\CsrfProtection\Http\CsrfPreRoutingMiddleware;
-use Phpolar\Phpolar\Routing\AbstractRequestHandler;
+use Phpolar\Phpolar\Routing\AbstractRouteDelegate;
 use Phpolar\Phpolar\WebServer\Http\Error401Handler;
 use Phpolar\Phpolar\WebServer\MiddlewareProcessingQueue;
 use Phpolar\Phpolar\WebServer\WebServer;

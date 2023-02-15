@@ -19,7 +19,7 @@ final class Error401Handler implements RequestHandlerInterface
 {
     public const DEFAULT_ERROR_MSG = "<h1>An error occured</h1>";
 
-    public const DEFAULT_FORBIDDEN_TPL_PATH = "templates/401.phtml";
+    public const DEFAULT_FORBIDDEN_TPL_PATH = "src/templates/401.phtml";
 
     public function __construct(
         private ResponseFactoryInterface $responseFactory,
