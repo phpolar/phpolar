@@ -12,15 +12,10 @@
          beStrictAboutCoverageMetadata="true">
   <testsuites>
     <testsuite name="default">
-      <directory>tests/unit</directory>
-      <directory>tests/acceptance</directory>
+      <directory>tests/uni</directory>
+      <directory>tests/acceptanc</directory>
     </testsuite>
   </testsuites>
-  <coverage pathCoverage="true">
-    <include>
-      <directory suffix=".php">src</directory>
-    </include>
-  </coverage>
   <php>
     <const name="Phpolar\Phpolar\Tests\ENTITY_NAME_TEST_CASE" value="FAKE NAME"/>
   </php>

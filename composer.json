@@ -19,7 +19,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Phpolar\\Phpolar\\": "src/"
+            "Phpolar\\Phpolar\\": "src/",
+            "Phpolar\\Phpolar\\Config\\": "config/"
         },
         "files": [
             "src/Validation/Functions/getValidationAttributes.php"

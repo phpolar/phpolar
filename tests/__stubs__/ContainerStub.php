@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Phpolar\Phpolar\Tests\Stubs;
 
+use ArrayAccess;
 use Phpolar\CsrfProtection\Http\CsrfPostRoutingMiddlewareFactory;
 use Phpolar\CsrfProtection\Http\CsrfPreRoutingMiddleware;
 use Phpolar\Phpolar\Routing\AbstractRouteDelegate;
@@ -16,7 +17,7 @@ use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-final class ContainerStub implements ContainerInterface
+final class ContainerStub implements ContainerInterface, ArrayAccess
 {
     /**
      * @var array<string,object>
@@ -51,5 +52,23 @@ final class ContainerStub implements ContainerInterface
     public function get(string $id)
     {
         return self::$deps[$id];
+    }
+
+    public function offsetExists(mixed $offset): bool
+    {
+        return true;
+    }
+
+    public function offsetGet(mixed $offset): mixed
+    {
+        return null;
+    }
+
+    public function offsetSet(mixed $offset, mixed $value): void
+    {
+    }
+
+    public function offsetUnset(mixed $offset): void
+    {
     }
 }
