@@ -342,6 +342,7 @@ return [
     // your application should be included in this list.
     'directory_list' => [
         'src',
+        'config',
         'vendor/psr',
         'vendor/phpolar/csrf-protection/src',
         'vendor/phpolar/http-codes/src',

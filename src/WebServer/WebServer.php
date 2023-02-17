@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace Phpolar\Phpolar\WebServer;
 
-use Phpolar\CsrfProtection\Http\CsrfPostRoutingMiddlewareFactory;
-use Phpolar\CsrfProtection\Http\CsrfPreRoutingMiddleware;
+use ArrayAccess;
 use Phpolar\Extensions\HttpResponse\ResponseExtension;
 use Phpolar\Phpolar\Routing\DefaultRoutingHandler;
 use Phpolar\Phpolar\Routing\RouteRegistry;
@@ -34,34 +33,18 @@ final class WebServer
 
     private bool $useRoutes = false;
 
-    /**
-     * Dependencies/services required
-     * by the web server.
-     *
-     * @var string[]
-     */
-    private const REQUIRED_DEPS = [
-        MiddlewareProcessingQueue::class,
-        Error401Handler::class,
-    ];
+    private ContainerManager $containerManager;
 
     /**
-     * CSRF dependencies required
-     * by the web server.
+     * Prevent creation of multiple instances.
      *
-     * @var string[]
+     * @param ContainerInterface&ArrayAccess<string,mixed> $container
      */
-    private const REQUIRED_CSRF_DEPS = [
-        CsrfPreRoutingMiddleware::class,
-        CsrfPostRoutingMiddlewareFactory::class,
-    ];
-
-    /**
-     * Prevent creation of multiple instances
-     */
-    private function __construct(private ContainerInterface $container)
+    private function __construct(private ContainerInterface & ArrayAccess $container)
     {
-        self::checkContainer($container, self::REQUIRED_DEPS);
+        $this->containerManager = new ContainerManager($container);
+        $this->containerManager->setUpContainer();
+        $this->containerManager->checkRequiredDeps();
         /**
          * @var MiddlewareProcessingQueue
          */
@@ -70,28 +53,11 @@ final class WebServer
     }
 
     /**
-     * @param ContainerInterface $container
-     * @param string[] $depsToCheck
-     * @throws WebServerConfigurationException
-     */
-    private static function checkContainer(ContainerInterface $container, array $depsToCheck): void
-    {
-        array_walk(
-            $depsToCheck,
-            static fn (string $dep) => $container->has($dep)
-                || throw new WebServerConfigurationException(
-                    sprintf(
-                        "Required dependency %s has not been added to the container.",
-                        $dep
-                    )
-                )
-        );
-    }
-
-    /**
      * Creates a singleton server.
+     *
+     * @param ContainerInterface&ArrayAccess<string,mixed> $container
      */
-    public static function createApp(ContainerInterface $container): WebServer
+    public static function createApp(ContainerInterface & ArrayAccess $container): WebServer
     {
         return new self($container);
     }
@@ -125,15 +91,9 @@ final class WebServer
      */
     public function useCsrfMiddleware(): WebServer
     {
-        self::checkContainer($this->container, self::REQUIRED_CSRF_DEPS);
-        /**
-         * @var CsrfPreRoutingMiddleware
-         */
-        $csrfPreRouting = $this->container->get(CsrfPreRoutingMiddleware::class);
-        /**
-         * @var CsrfPostRoutingMiddlewareFactory
-         */
-        $csrfPostRouting = $this->container->get(CsrfPostRoutingMiddlewareFactory::class);
+        $this->containerManager->checkRequiredCsrfDeps();
+        $csrfPreRouting = $this->containerManager->getCsrfPreRoutingMiddleware();
+        $csrfPostRouting = $this->containerManager->getCsrfPostRoutingMiddlewareFactory();
         /**
          * @var Error401Handler
          */

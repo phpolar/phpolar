@@ -29,10 +29,10 @@ repos:
       - id: php-unit
       - id: php-stan
         files: \.(php)$
-        exclude: (examples|test)
+        exclude: (examples|test|config)
   - repo: https://gitlab.com/daverona/pre-commit/php
     rev: 0.6.0 # use the most recent version
     hooks:
       # Hooks using native
       - id: phpmd # static analyzer for PHP code
-        exclude: (examples|test|src\/WebServer\/Http\/Error401Handler\.php)
+        exclude: (examples|test|config|src\/WebServer\/Http\/Error401Handler\.php)
