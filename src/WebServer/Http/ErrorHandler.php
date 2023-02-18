@@ -37,7 +37,7 @@ final class ErrorHandler implements RequestHandlerInterface
          */
         $responseFactory = $container->get(ResponseFactoryInterface::class);
         /**
-         * @var StreamFactoryInterface $streamFactoryInterface
+         * @var StreamFactoryInterface $streamFactory
          */
         $streamFactory = $container->get(StreamFactoryInterface::class);
         /**
