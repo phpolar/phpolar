@@ -6,10 +6,7 @@ namespace Phpolar\Phpolar\WebServer;
 
 use ArrayAccess;
 use Phpolar\Extensions\HttpResponse\ResponseExtension;
-use Phpolar\Phpolar\Routing\DefaultRoutingHandler;
 use Phpolar\Phpolar\Routing\RouteRegistry;
-use Phpolar\Phpolar\WebServer\Http\Error401Handler;
-use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
 /**
@@ -31,46 +28,52 @@ final class WebServer
      */
     private RouteRegistry $routes;
 
-    private bool $useRoutes = false;
+    private bool $shouldUseRoutes = false;
 
     private ContainerManager $containerManager;
 
     /**
      * Prevent creation of multiple instances.
      *
-     * @param ContainerInterface&ArrayAccess<string,mixed> $container
+     * @param AbstractContainerFactory $containerFac
+     * @param ArrayAccess<string,mixed> $containerConfig
      */
-    private function __construct(private ContainerInterface & ArrayAccess $container)
-    {
-        $this->containerManager = new ContainerManager($container);
-        $this->containerManager->setUpContainer();
-        $this->containerManager->checkRequiredDeps();
-        /**
-         * @var MiddlewareProcessingQueue
-         */
-        $middlewareQueue = $this->container->get(MiddlewareProcessingQueue::class);
-        $this->middlewareQueue = $middlewareQueue;
+    private function __construct(
+        AbstractContainerFactory $containerFac,
+        ArrayAccess $containerConfig,
+    ) {
+        $this->containerManager = new ContainerManager($containerFac, $containerConfig);
+        $this->middlewareQueue = $this->containerManager->getMiddlewareQueue();
+        $this->routes = new RouteRegistry();
     }
 
     /**
-     * Creates a singleton server.
+     * Creates a singleton web server application.  This framework targets the
+     * *stateless, single-threaded, server-side application use case*.  Therefore,
+     * only a single instance is created on each request.  If the provided
+     * factory used to create the dependency injection container is stateless,
+     * caching this instance should be considered for performance reasons.
      *
-     * @param ContainerInterface&ArrayAccess<string,mixed> $container
+     * @param AbstractContainerFactory $containerFactory Adds support for configuring
+     * a **PSR-11** dependency injection container before the app is initialized, afterwards,
+     * or both.
+     *
+     * @param ArrayAccess<string,mixed> $containerConfig The framework will configure some
+     * services/dependencies after the application is initialized.
      */
-    public static function createApp(ContainerInterface & ArrayAccess $container): WebServer
-    {
-        return new self($container);
+    public static function createApp(
+        AbstractContainerFactory $containerFactory,
+        ArrayAccess $containerConfig,
+    ): WebServer {
+        return new self($containerFactory, $containerConfig);
     }
 
     /**
-     * Handle and respond to requests from clients
+     * Handle and respond to requests from clients.
      */
     public function receive(ServerRequestInterface $request): void
     {
-        /**
-         * @var \Psr\Http\Server\RequestHandlerInterface $primaryHandler
-         */
-        $primaryHandler = $this->useRoutes === true ? new DefaultRoutingHandler($this->routes, $this->container) : $this->container->get(self::PRIMARY_REQUEST_HANDLER);
+        $primaryHandler = $this->containerManager->getPrimaryRequestHandler($this->shouldUseRoutes, $this->routes);
         $result = $this->middlewareQueue->dequeuePreRoutingMiddleware($request);
         if ($result instanceof AbortProcessingRequest) {
             return;
@@ -91,13 +94,9 @@ final class WebServer
      */
     public function useCsrfMiddleware(): WebServer
     {
-        $this->containerManager->checkRequiredCsrfDeps();
         $csrfPreRouting = $this->containerManager->getCsrfPreRoutingMiddleware();
         $csrfPostRouting = $this->containerManager->getCsrfPostRoutingMiddlewareFactory();
-        /**
-         * @var Error401Handler
-         */
-        $errorHandler = $this->container->get(Error401Handler::class);
+        $errorHandler = $this->containerManager->getErrorHandler();
         $this->middlewareQueue->addCsrfMiddleware($csrfPreRouting, $csrfPostRouting, $errorHandler);
         return $this;
     }
@@ -109,7 +108,7 @@ final class WebServer
     public function useRoutes(RouteRegistry $routes): WebServer
     {
         $this->routes = $routes;
-        $this->useRoutes = true;
+        $this->shouldUseRoutes = true;
         return $this;
     }
 }
