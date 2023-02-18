@@ -12,6 +12,7 @@ use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 
 #[CoversClass(AbstractContainerFactory::class)]
+#[CoversClass(ContainerFactory::class)]
 final class AbstractContainerFactoryTest extends TestCase
 {
     #[TestCase("Shall configure the PSR-11 container with the given configuration")]
@@ -20,8 +21,7 @@ final class AbstractContainerFactoryTest extends TestCase
         $configuration = new ContainerConfigurationStub();
         $configuration["test_case"] = "what?";
         $factory = static fn (ArrayAccess $config) => new ConfigurableContainerStub($config);
-        $sut = new class ($factory) extends AbstractContainerFactory {
-        };
+        $sut = new ContainerFactory($factory);
         $container = $sut->getContainer($configuration);
         $this->assertInstanceOf(ContainerInterface::class, $container);
         $this->assertSame($configuration["test_case"], $container->get("test_case"));
