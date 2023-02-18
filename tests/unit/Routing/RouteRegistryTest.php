@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Phpolar\Phpolar\Routing;
 
+use Phpolar\Phpolar\Tests\Stubs\ConfigurableContainerStub;
+use Phpolar\Phpolar\Tests\Stubs\ContainerConfigurationStub;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -25,7 +27,7 @@ final class RouteRegistryTest extends TestCase
         $sut = new RouteRegistry();
         $sut->addGet($givenRoute, $handlerSpy);
         $registeredHandler = $sut->fromGet($givenRoute);
-        $registeredHandler->handle();
+        $registeredHandler->handle(new ConfigurableContainerStub(new ContainerConfigurationStub()));
     }
 
     #[TestDox("Shall retrieve the request handlers associated with a POST request")]
@@ -40,7 +42,7 @@ final class RouteRegistryTest extends TestCase
         $sut = new RouteRegistry();
         $sut->addPost($givenRoute, $handlerSpy);
         $registeredHandler = $sut->fromPost($givenRoute);
-        $registeredHandler->handle();
+        $registeredHandler->handle(new ConfigurableContainerStub(new ContainerConfigurationStub()));
     }
 
     #[TestDox("Shall return a RouteNotRegistered instance when a route is not associated with any handlers.")]
