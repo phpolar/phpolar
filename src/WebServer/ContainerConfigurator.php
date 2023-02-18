@@ -6,8 +6,6 @@ namespace Phpolar\Phpolar\WebServer;
 
 use ArrayAccess;
 use Phpolar\Phpolar\Config\Globs;
-use Phpolar\Phpolar\WebServer\WebServerConfigurationException;
-use Psr\Container\ContainerInterface;
 
 /**
  * Configures a dependency injection container.
@@ -54,24 +52,6 @@ final class ContainerConfigurator
                     $containerConfig,
                 );
             },
-        );
-    }
-
-    /**
-     * @param string[] $depsToCheck
-     * @throws WebServerConfigurationException
-     */
-    public function checkContainer(ContainerInterface $container, array $depsToCheck): void
-    {
-        array_walk(
-            $depsToCheck,
-            fn (string $dep) => $container->has($dep)
-                || throw new WebServerConfigurationException(
-                    sprintf(
-                        "Required dependency %s has not been added to the container.",
-                        $dep
-                    )
-                )
         );
     }
 }

@@ -16,6 +16,10 @@ final class WebServer
 {
     public const PRIMARY_REQUEST_HANDLER = "PRIMARY_REQUEST_HANDLER";
 
+    public const ERROR_HANDLER_401 = "ERROR_HANDLER_401";
+
+    public const ERROR_HANDLER_404 = "ERROR_HANDLER_404";
+
     private MiddlewareProcessingQueue $middlewareQueue;
 
     /**
@@ -96,7 +100,7 @@ final class WebServer
     {
         $csrfPreRouting = $this->containerManager->getCsrfPreRoutingMiddleware();
         $csrfPostRouting = $this->containerManager->getCsrfPostRoutingMiddlewareFactory();
-        $errorHandler = $this->containerManager->getErrorHandler();
+        $errorHandler = $this->containerManager->get401ErrorHandler();
         $this->middlewareQueue->addCsrfMiddleware($csrfPreRouting, $csrfPostRouting, $errorHandler);
         return $this;
     }
