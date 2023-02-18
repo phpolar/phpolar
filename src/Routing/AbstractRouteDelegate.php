@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Phpolar\Phpolar\Routing;
 
+use Psr\Container\ContainerInterface;
+
 /**
  * Defines what should be done when a request is received.
  *
@@ -19,5 +21,5 @@ abstract class AbstractRouteDelegate
      *
      * @return string The content of the response body.
      */
-    abstract public function handle(): string;
+    abstract public function handle(ContainerInterface $container): string;
 }

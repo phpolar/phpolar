@@ -13,7 +13,7 @@ final class ConfigurableContainerStub implements ContainerInterface
     /**
      * @param ArrayAccess<string,mixed> $config
      */
-    public function __construct(private ArrayAccess &$config)
+    public function __construct(private ArrayAccess $config)
     {
     }
 
