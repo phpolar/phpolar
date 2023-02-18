@@ -15,6 +15,7 @@ use Phpolar\Phpolar\Tests\Stubs\ConfigurableContainerStub;
 use Phpolar\Phpolar\Tests\Stubs\ContainerConfigurationStub;
 use Phpolar\Phpolar\Tests\Stubs\RequestStub;
 use Phpolar\Phpolar\Tests\Stubs\ResponseFactoryStub;
+use Phpolar\Phpolar\Tests\Stubs\ResponseStub;
 use Phpolar\Phpolar\Tests\Stubs\StreamFactoryStub;
 use Phpolar\PhpTemplating\Binder;
 use Phpolar\PhpTemplating\Dispatcher;
@@ -48,7 +49,7 @@ final class WebServerTest extends TestCase
     const HEADER_VALUE = "bytes 21010-47021/47022";
 
     protected function getContainerFactory(
-        ArrayAccess &$config,
+        ArrayAccess $config,
         RequestHandlerInterface $handler,
         ?CsrfPreRoutingMiddleware $csrfPreRoutingMiddleware = null,
         ?CsrfPostRoutingMiddlewareFactory $csrfPostRoutingMiddlewareFactory = null,
@@ -109,7 +110,9 @@ final class WebServerTest extends TestCase
     #[TestDox("Shall set the HTTP response code")]
     public function test2()
     {
+        $this->expectOutputRegex("/Internal Server Error/");
         $responseFactory = new ResponseFactoryStub();
+        ;
         $streamFactory = new StreamFactoryStub();
         $request = new RequestStub();
         $handler = new class ($responseFactory, $streamFactory) implements RequestHandlerInterface {
@@ -124,7 +127,7 @@ final class WebServerTest extends TestCase
                 $this->wasUsed = true;
                 return $this->responseFactory->createResponse()
                     ->withBody($this->streamFactory->createStream())
-                    ->withStatus(WebServerTest::RESPONSE_STATUS);
+                    ->withStatus(WebServerTest::RESPONSE_STATUS, "Internal Server Error");
             }
         };
         $config = new ContainerConfigurationStub();
@@ -294,5 +297,21 @@ final class WebServerTest extends TestCase
         $app = WebServer::createApp($nonConfiguredContainerFac, new ContainerConfigurationStub());
         $app->receive(new RequestStub());
         $this->expectOutputString(WebServerTest::RESPONSE_CONTENT);
+    }
+
+    #[TestDox("Shall process the 404 error handler if the request path does not exist")]
+    public function test9()
+    {
+        $this->expectOutputString("<h1>Not Found</h1>");
+        $config = new ContainerConfigurationStub();
+        /**
+         * @var Stub&RequestHandlerInterface $handlerStub
+         */
+        $handlerStub = $this->createStub(RequestHandlerInterface::class);
+        $handlerStub->method("handle")->willReturn((new ResponseStub(404, "Not Found")));
+        $container = $this->getContainerFactory($config, $handlerStub);
+        $sut = WebServer::createApp($container, $config);
+        $sut->receive(new RequestStub("GET", "/non-existing-route"));
+        $this->assertSame(ResponseCode::NOT_FOUND, http_response_code());
     }
 }

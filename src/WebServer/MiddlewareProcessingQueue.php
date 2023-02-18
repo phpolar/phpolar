@@ -7,7 +7,8 @@ namespace Phpolar\Phpolar\WebServer;
 use Phpolar\CsrfProtection\Http\CsrfPostRoutingMiddlewareFactory;
 use Phpolar\CsrfProtection\Http\CsrfPreRoutingMiddleware;
 use Phpolar\Extensions\HttpResponse\ResponseExtension;
-use Phpolar\HttpCodes\ResponseCode;
+use Phpolar\Phpolar\WebServer\Http\ErrorHandler;
+use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -29,7 +30,7 @@ final class MiddlewareProcessingQueue
 
     private RequestHandlerInterface $errorHandler;
 
-    public function __construct()
+    public function __construct(private ContainerInterface $container)
     {
     }
 
@@ -62,7 +63,7 @@ final class MiddlewareProcessingQueue
             $this->preRoutingMiddleware,
         );
         foreach ($preRoutingResponses as $preRoutingResponse) {
-            if ($preRoutingResponse->getStatusCode() >= ResponseCode::BAD_REQUEST) {
+            if ($preRoutingResponse->getStatusCode() >= 400) {
                 ResponseExtension::extend($preRoutingResponse)->send();
                 return new AbortProcessingRequest();
             }
@@ -78,7 +79,18 @@ final class MiddlewareProcessingQueue
         ServerRequestInterface $request,
         ResponseInterface $response,
     ): ResponseInterface {
-            return $this->useCsrfProtection === false ? $response : $this->csrfPostRouting->getMiddleware($response)
-            ->process($request, $this->errorHandler);
+        if ($response->getStatusCode() >= 400) {
+            $errorHandler = new ErrorHandler(
+                $response->getStatusCode(),
+                $response->getReasonPhrase(),
+                $this->container,
+            );
+            return $errorHandler->handle($request);
+        }
+        if ($this->useCsrfProtection === true) {
+            $this->csrfPostRouting->getMiddleware($response)
+                ->process($request, $this->errorHandler);
+        }
+        return $response;
     }
 }

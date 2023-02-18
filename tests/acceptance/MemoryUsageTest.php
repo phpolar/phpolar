@@ -17,7 +17,7 @@ use Phpolar\Phpolar\Tests\Fakes\FakeModel;
 use Phpolar\Phpolar\Tests\Fakes\ModelList;
 use Phpolar\Phpolar\Tests\Stubs\ContainerStub;
 use Phpolar\Phpolar\Tests\Stubs\RequestStub;
-use Phpolar\Phpolar\WebServer\Http\Error401Handler;
+use Phpolar\Phpolar\WebServer\Http\ErrorHandler;
 use Phpolar\Phpolar\Tests\Stubs\ResponseFactoryStub;
 use Phpolar\Phpolar\Tests\Stubs\StreamFactoryStub;
 use Phpolar\Phpolar\Tests\Stubs\UriStub;
@@ -52,7 +52,7 @@ final class MemoryUsageTest extends TestCase
         TemplateEngine $templateEngine,
         ?RequestHandlerInterface $handler = null,
     ): ContainerInterface {
-        $errorHandler = new Error401Handler($responseFactory, $streamFactory, $templateEngine);
+        $errorHandler = new ErrorHandler($responseFactory, $streamFactory, $templateEngine);
         $middlewareQueue = new MiddlewareProcessingQueue();
         $csrfPreRouting = new CsrfPreRoutingMiddleware($responseFactory, $streamFactory);
         $csrfPostRouting = new CsrfPostRoutingMiddlewareFactory($responseFactory, $streamFactory);
@@ -112,7 +112,8 @@ final class MemoryUsageTest extends TestCase
                 );
             }
         };
-        $requestHandler = new class ($responseFactory, $streamFactory, $routeHandler) implements RequestHandlerInterface {
+        $requestHandler = new class ($responseFactory, $streamFactory, $routeHandler) implements RequestHandlerInterface
+        {
             public function __construct(
                 private ResponseFactoryInterface $responseFactory,
                 private StreamFactoryInterface $streamFactroy,
@@ -146,7 +147,8 @@ final class MemoryUsageTest extends TestCase
         $streamFactory = new StreamFactoryStub();
         $templateEngine = new TemplateEngine(new StreamContentStrategy(), new Binder(), new Dispatcher());
         $routeRegistry = new RouteRegistry();
-        $routeHandler = new class ($templateEngine) extends AbstractRouteDelegate {
+        $routeHandler = new class ($templateEngine) extends AbstractRouteDelegate
+        {
             public function __construct(private TemplateEngine $templateEngine)
             {
             }
@@ -155,7 +157,8 @@ final class MemoryUsageTest extends TestCase
             {
                 $saved = new FakeModel();
                 $saved->myInput = "something else";
-                $storage = new class () extends AbstractStorage {
+                $storage = new class () extends AbstractStorage
+                {
                     public function commit(): void
                     {
                         // no op
