@@ -23,22 +23,18 @@ use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 
-$userSuppliedDeps = [
-    ResponseFactoryInterface::class => static fn (ContainerInterface $container) => $container->get(ResponseFactoryInterface::class),
-    StreamFactoryInterface::class => static fn (ContainerInterface $container) => $container->get(StreamFactoryInterface::class),
-];
-
-$localDeps = [
+return [
+    Binder::class => new Binder(),
+    Dispatcher::class => new Dispatcher(),
+    Error401Handler::class => static fn (ContainerInterface $container) => new Error401Handler(
+        $container->get(ResponseFactoryInterface::class),
+        $container->get(StreamFactoryInterface::class),
+        $container->get(TemplateEngine::class),
+    ),
+    MiddlewareProcessingQueue::class => static fn () => new MiddlewareProcessingQueue(),
     TemplateEngine::class => static fn (ContainerInterface $container) =>  new TemplateEngine(
         $container->get(TemplatingStrategyInterface::class),
         $container->get(Binder::class),
         $container->get(Dispatcher::class),
     ),
-    MiddlewareProcessingQueue::class => static fn () => new MiddlewareProcessingQueue(),
-    Error401Handler::class => static fn (ContainerInterface $container) => new Error401Handler(
-        $container->get(ResponseFactoryInterface::class),
-        $container->get(StreamFactoryInterface::class),
-        $container->get(TemplateEngine::class),
-    )
 ];
-return array_merge($userSuppliedDeps, $localDeps);

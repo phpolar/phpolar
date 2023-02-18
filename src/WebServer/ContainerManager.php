@@ -5,12 +5,13 @@ declare(strict_types=1);
 namespace Phpolar\Phpolar\WebServer;
 
 use ArrayAccess;
-use Closure;
 use Phpolar\CsrfProtection\Http\CsrfPostRoutingMiddlewareFactory;
-use Phpolar\Phpolar\Config\Globs;
 use Phpolar\CsrfProtection\Http\CsrfPreRoutingMiddleware;
+use Phpolar\Phpolar\Routing\DefaultRoutingHandler;
+use Phpolar\Phpolar\Routing\RouteRegistry;
 use Phpolar\Phpolar\WebServer\Http\Error401Handler;
 use Psr\Container\ContainerInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 
 /**
  * Manages the dependency injection container.
@@ -21,77 +22,21 @@ use Psr\Container\ContainerInterface;
 final class ContainerManager
 {
     /**
-     * Dependencies/services required
-     * by the web server.
-     *
-     * @var string[]
+     * The PSR-11 dependency injection container.
      */
-    private const REQUIRED_DEPS = [
-        MiddlewareProcessingQueue::class,
-        Error401Handler::class,
-    ];
+    private ContainerInterface $container;
 
     /**
-     * CSRF dependencies required
-     * by the web server.
-     *
-     * @var string[]
+     * @param AbstractContainerFactory $containerFac
+     * @param ArrayAccess<string,mixed> $containerConfig
      */
-    private const REQUIRED_CSRF_DEPS = [
-        CsrfPreRoutingMiddleware::class,
-        CsrfPostRoutingMiddlewareFactory::class,
-    ];
-
-    /**
-     * @param ContainerInterface&ArrayAccess<string,mixed> $container
-     */
-    public function __construct(private ContainerInterface & ArrayAccess $container)
-    {
-    }
-
-    /**
-     * @param Closure $depFactory
-     * @param string $depId
-     */
-    private function addDependency(Closure $depFactory, string $depId): void
-    {
-        $this->container[$depId] = $depFactory;
-    }
-
-    /**
-     * Verify if the container has been
-     * configured with required dependencies.
-     */
-    public function checkRequiredDeps(): void
-    {
-        $this->checkContainer(self::REQUIRED_DEPS);
-    }
-
-    /**
-     * Verify if the container has been
-     * configured with CSRF mitigation dependencies.
-     */
-    public function checkRequiredCsrfDeps(): void
-    {
-        $this->checkContainer(self::REQUIRED_CSRF_DEPS);
-    }
-
-    /**
-     * @param string[] $depsToCheck
-     * @throws WebServerConfigurationException
-     */
-    private function checkContainer(array $depsToCheck): void
-    {
-        array_walk(
-            $depsToCheck,
-            fn (string $dep) => $this->container->has($dep)
-                || throw new WebServerConfigurationException(
-                    sprintf(
-                        "Required dependency %s has not been added to the container.",
-                        $dep
-                    )
-                )
-        );
+    public function __construct(
+        AbstractContainerFactory $containerFac,
+        ArrayAccess $containerConfig
+    ) {
+        $configurator = new ContainerConfigurator();
+        $configurator->configureContainer($containerConfig);
+        $this->container = $containerFac->getContainer($containerConfig);
     }
 
     /**
@@ -118,6 +63,9 @@ final class ContainerManager
         return $middleware;
     }
 
+    /**
+     * Retrieves a 401 response error handler.
+     */
     public function getErrorHandler(): Error401Handler
     {
         /**
@@ -128,28 +76,32 @@ final class ContainerManager
     }
 
     /**
-     * Add services/dependencies to the provided container.
+     * Retrieves the middleware processing queue
      */
-    public function setUpContainer(): void
+    public function getMiddlewareQueue(): MiddlewareProcessingQueue
     {
-        if (file_exists(Globs::FrameworkDeps->value) === true) {
-            $frameworkDeps = require Globs::FrameworkDeps->value;
-            array_walk(
-                $frameworkDeps,
-                $this->addDependency(...),
-            );
-        }
-        $globResult = glob(Globs::CustomDeps->value, GLOB_BRACE);
-        $customDepConfigs = $globResult === false ? [] : $globResult;
-        array_walk(
-            $customDepConfigs,
-            function (string $filename) {
-                $customDepConfs = require_once $filename;
-                array_walk(
-                    $customDepConfs,
-                    $this->addDependency(...),
-                );
-            },
-        );
+        /**
+         * @var MiddlewareProcessingQueue
+         */
+        $middlewareQueue = $this->container->get(MiddlewareProcessingQueue::class);
+        return $middlewareQueue;
+    }
+
+    /**
+     * Retrieves the primary request handler.
+     *
+     * This is usually the request handler that takes
+     * care of routing a successful request.  However,
+     * the user can add any PSR-15 request handler to
+     * the dependency injection container according to
+     * the requirements of the application.
+     */
+    public function getPrimaryRequestHandler(bool $useRoutes, RouteRegistry $routes): RequestHandlerInterface
+    {
+        /**
+         * @var RequestHandlerInterface $handler
+         */
+        $handler = $useRoutes === true ? new DefaultRoutingHandler($routes, $this->container) : $this->container->get(WebServer::PRIMARY_REQUEST_HANDLER);
+        return $handler;
     }
 }
