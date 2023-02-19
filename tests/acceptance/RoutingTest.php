@@ -88,7 +88,7 @@ final class RoutingTest extends TestCase
             {
             }
 
-            public function handle(): string
+            public function handle(ContainerInterface $container): string
             {
                 return $this->responseTemplate;
             }

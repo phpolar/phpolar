@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Phpolar\Phpolar;
 
+use ArrayAccess;
 use Phpolar\CsrfProtection\Http\CsrfPostRoutingMiddlewareFactory;
 use Phpolar\CsrfProtection\Http\CsrfPreRoutingMiddleware;
 use Phpolar\Phpolar\Routing\AbstractRouteDelegate;
@@ -15,12 +16,15 @@ use Phpolar\Phpolar\Storage\ItemKey;
 use Phpolar\Phpolar\Storage\Key;
 use Phpolar\Phpolar\Tests\Fakes\FakeModel;
 use Phpolar\Phpolar\Tests\Fakes\ModelList;
+use Phpolar\Phpolar\Tests\Stubs\ConfigurableContainerStub;
+use Phpolar\Phpolar\Tests\Stubs\ContainerConfigurationStub;
 use Phpolar\Phpolar\Tests\Stubs\ContainerStub;
 use Phpolar\Phpolar\Tests\Stubs\RequestStub;
 use Phpolar\Phpolar\WebServer\Http\ErrorHandler;
 use Phpolar\Phpolar\Tests\Stubs\ResponseFactoryStub;
 use Phpolar\Phpolar\Tests\Stubs\StreamFactoryStub;
 use Phpolar\Phpolar\Tests\Stubs\UriStub;
+use Phpolar\Phpolar\WebServer\ContainerFactory;
 use Phpolar\Phpolar\WebServer\MiddlewareProcessingQueue;
 use Phpolar\Phpolar\WebServer\WebServer;
 use Phpolar\PhpTemplating\Binder;
@@ -52,20 +56,20 @@ final class MemoryUsageTest extends TestCase
         TemplateEngine $templateEngine,
         ?RequestHandlerInterface $handler = null,
     ): ContainerInterface {
-        $errorHandler = new ErrorHandler($responseFactory, $streamFactory, $templateEngine);
-        $middlewareQueue = new MiddlewareProcessingQueue();
-        $csrfPreRouting = new CsrfPreRoutingMiddleware($responseFactory, $streamFactory);
-        $csrfPostRouting = new CsrfPostRoutingMiddlewareFactory($responseFactory, $streamFactory);
-        return new ContainerStub(
-            $responseFactory,
-            $streamFactory,
-            $errorHandler,
-            $templateEngine,
-            $middlewareQueue,
-            $csrfPreRouting,
-            $csrfPostRouting,
-            $handler,
-        );
+        $config = new ContainerConfigurationStub();
+        if ($handler !== null) {
+            $config[RequestHandlerInterface::class] = $handler;
+        }
+        $config[ContainerInterface::class] = static fn (ArrayAccess $conf) => new ConfigurableContainerStub($conf);
+        $config[ResponseFactoryInterface::class] = $responseFactory;
+        $config[StreamFactoryInterface::class] = $streamFactory;
+        $config[TemplateEngine::class] = $templateEngine;
+        $config[MiddlewareProcessingQueue::class] = static fn (ArrayAccess $conf) => new MiddlewareProcessingQueue($conf[ContainerInterface::class]);
+        $config[CsrfPreRoutingMiddleware::class] = new CsrfPreRoutingMiddleware($responseFactory, $streamFactory);
+        $config[CsrfPostRoutingMiddlewareFactory::class] = new CsrfPostRoutingMiddlewareFactory($responseFactory, $streamFactory);
+        $container = new ConfigurableContainerStub($config);
+        $config[WebServer::ERROR_HANDLER_401] = static fn (ArrayAccess $conf) => new ErrorHandler(401, "Unauthorized", $conf[ContainerInterface::class]);
+        return $container;
     }
 
     #[Test]
@@ -104,7 +108,7 @@ final class MemoryUsageTest extends TestCase
             {
             }
 
-            public function handle(): string
+            public function handle(ContainerInterface $container): string
             {
                 return $this->templateEngine->apply(
                     FORM_TPL_PATH,
@@ -123,17 +127,18 @@ final class MemoryUsageTest extends TestCase
             public function handle(ServerRequestInterface $request): ResponseInterface
             {
                 return $this->responseFactory->createResponse()
-                    ->withBody($this->streamFactroy->createStream($this->routeHandler->handle()));
+                    ->withBody($this->streamFactroy->createStream($this->routeHandler->handle(new ConfigurableContainerStub(new ContainerConfigurationStub()))));
             }
         };
-        $routeRegistry->add(TEST_GET_ROUTE, $routeHandler);
+        $routeRegistry->addGet(TEST_GET_ROUTE, $routeHandler);
         $container = $this->getContainer(
             $responseFactory,
             $streamFactory,
             $templateEngine,
             $requestHandler,
         );
-        $app = WebServer::createApp($container);
+        $app = WebServer::createApp(new ContainerFactory(static fn () => $container), new ContainerConfigurationStub());
+        $app->useRoutes($routeRegistry);
         $app->useCsrfMiddleware();
         $app->receive((new RequestStub("GET"))->withUri(new UriStub(TEST_GET_ROUTE)));
 
@@ -153,7 +158,7 @@ final class MemoryUsageTest extends TestCase
             {
             }
 
-            public function handle(): string
+            public function handle(ContainerInterface $container): string
             {
                 $saved = new FakeModel();
                 $saved->myInput = "something else";
@@ -178,13 +183,13 @@ final class MemoryUsageTest extends TestCase
                 );
             }
         };
-        $routeRegistry->add(TEST_POST_ROUTE, $routeHandler);
+        $routeRegistry->addPost(TEST_POST_ROUTE, $routeHandler);
         $container = $this->getContainer(
             $responseFactory,
             $streamFactory,
             $templateEngine,
         );
-        $app = WebServer::createApp($container);
+        $app = WebServer::createApp(new ContainerFactory(static fn () => $container), new ContainerConfigurationStub());
         $app->useRoutes($routeRegistry);
         $app->useCsrfMiddleware();
         $app->receive((new RequestStub("POST"))->withUri(new UriStub(TEST_POST_ROUTE)));
