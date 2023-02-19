@@ -19,6 +19,7 @@ final class RequestStub implements ServerRequestInterface
         private array $queryParams = [],
         private array|object $parsedBody = []
     ) {
+        $this->uri = new UriStub($url);
     }
 
     private static function t()

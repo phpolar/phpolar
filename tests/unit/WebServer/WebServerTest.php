@@ -10,6 +10,7 @@ use Phpolar\CsrfProtection\Http\CsrfPostRoutingMiddleware;
 use Phpolar\CsrfProtection\Http\CsrfPostRoutingMiddlewareFactory;
 use Phpolar\CsrfProtection\Http\CsrfPreRoutingMiddleware;
 use Phpolar\HttpCodes\ResponseCode;
+use Phpolar\Phpolar\Routing\AbstractRouteDelegate;
 use Phpolar\Phpolar\Routing\RouteRegistry;
 use Phpolar\Phpolar\Tests\Stubs\ConfigurableContainerStub;
 use Phpolar\Phpolar\Tests\Stubs\ContainerConfigurationStub;
@@ -22,6 +23,7 @@ use Phpolar\PhpTemplating\Dispatcher;
 use Phpolar\PhpTemplating\StreamContentStrategy;
 use Phpolar\PhpTemplating\TemplatingStrategyInterface;
 use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\Attributes\UsesClass;
@@ -268,7 +270,7 @@ final class WebServerTest extends TestCase
     }
 
     #[TestDox("Shall add given routes to default route handler")]
-    public function test6()
+    public function test6a()
     {
         $givenRoutes = new RouteRegistry();
         $handlerStub = $this->createStub(RequestHandlerInterface::class);
@@ -284,6 +286,39 @@ final class WebServerTest extends TestCase
         $sut->useRoutes($givenRoutes);
         $this->assertTrue($useRoutesProp->getValue($sut));
         $this->assertEquals($givenRoutes, $routesProp->getValue($sut));
+    }
+
+    #[TestDox("Shall respond to POST requests")]
+    #[Group("me")]
+    public function test6b()
+    {
+        $expectedResponse = "<h1>Responding to POST request!</h1>";
+        $this->expectOutputString($expectedResponse);
+        $givenPath = "/some-path";
+        $request = new RequestStub("POST", $givenPath);
+        $givenRoutes = new RouteRegistry();
+        $givenRoutes->addPost(
+            $givenPath,
+            new class ($expectedResponse) extends AbstractRouteDelegate {
+                public function __construct(private string $expectedResponse)
+                {
+                }
+                public function handle(ContainerInterface $container): string
+                {
+                    return $this->expectedResponse;
+                }
+            },
+        );
+        $config = new ContainerConfigurationStub();
+        $config[ContainerInterface::class] = static fn (ArrayAccess $conf) => new ConfigurableContainerStub($conf);
+        $config[ResponseFactoryInterface::class] = new ResponseFactoryStub();
+        $config[StreamFactoryInterface::class] = new StreamFactoryStub();
+        $config[TemplatingStrategyInterface::class] = new StreamContentStrategy();
+        $containerFac = new ContainerFactory(static fn (ArrayAccess $conf) => new ConfigurableContainerStub($conf));
+        $sut = WebServer::createApp($containerFac, $config);
+        $sut->useRoutes($givenRoutes);
+        $sut->receive($request);
+        $this->assertSame(ResponseCode::OK, http_response_code());
     }
 
     #[TestDox("Shall add required services to the provided dependency injection container")]
