@@ -34,6 +34,7 @@ final class PatternTest extends TestCase
 
             public function __construct(mixed $prop)
             {
+                $this->isPosted = true;
                 $this->property = $prop;
             }
         };
@@ -56,6 +57,7 @@ final class PatternTest extends TestCase
 
             public function __construct(mixed $prop)
             {
+                $this->isPosted = true;
                 $this->property = $prop;
             }
         };
@@ -74,6 +76,11 @@ final class PatternTest extends TestCase
 
             #[Pattern(PatternDataProvider::PHONE_PATTERN)]
             public mixed $property;
+
+            public function __construct()
+            {
+                $this->isPosted = true;
+            }
         };
 
         $this->assertFalse($sut->isValid());
@@ -94,6 +101,7 @@ final class PatternTest extends TestCase
 
             public function __construct(mixed $invalidVal)
             {
+                $this->isPosted = true;
                 $this->property = $invalidVal;
             }
         };
