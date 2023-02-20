@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Phpolar\Phpolar\Routing;
 
+use Generator;
 use Phpolar\HttpCodes\ResponseCode;
 use Phpolar\Phpolar\Tests\Stubs\MemoryStreamStub;
 use Phpolar\Phpolar\Tests\Stubs\RequestStub;
@@ -11,6 +12,7 @@ use Phpolar\Phpolar\Tests\Stubs\ResponseFactoryStub;
 use Phpolar\Phpolar\Tests\Stubs\StreamFactoryStub;
 use Phpolar\Phpolar\Tests\Stubs\UriStub;
 use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\MockObject\Stub;
@@ -45,23 +47,31 @@ final class DefaultRoutingHandlerTest extends TestCase
         };
     }
 
-    #[TestDox("Shall respond with \"Not Found\" if the route is not registered")]
-    public function test1()
+    public static function requestMethods(): Generator
+    {
+        yield ["GET", "fromGet"];
+        yield ["POST", "fromPost"];
+    }
+
+    #[TestDox("Shall respond with \"Not Found\" if the route is not registered for %s requests")]
+    #[DataProvider("requestMethods")]
+    public function test1(string $requestMethod, string $routeMethodName)
     {
         $container = $this->getContainer();
         /**
          * @var Stub&RouteRegistry $routeRegistryStub
          */
         $routeRegistryStub = $this->createStub(RouteRegistry::class);
-        $routeRegistryStub->method("fromGet")->willReturn(new RouteNotRegistered());
+        $routeRegistryStub->method($routeMethodName)->willReturn(new RouteNotRegistered());
         $sut = new DefaultRoutingHandler($routeRegistryStub, $container);
-        $request = (new RequestStub())->withUri(new UriStub(uniqid()));
+        $request = (new RequestStub($requestMethod))->withUri(new UriStub(uniqid()));
         $response = $sut->handle($request);
         $this->assertSame(ResponseCode::NOT_FOUND, $response->getStatusCode());
     }
 
-    #[TestDox("Shall call the registered route handler")]
-    public function test2()
+    #[TestDox("Shall call the registered route handler for %s requests")]
+    #[DataProvider("requestMethods")]
+    public function test2(string $requestMethod, string $routeMethodName)
     {
         $container = $this->getContainer();
         /**
@@ -73,9 +83,9 @@ final class DefaultRoutingHandlerTest extends TestCase
          * @var Stub&RouteRegistry $routeRegistryStub
          */
         $routeRegistryStub = $this->createStub(RouteRegistry::class);
-        $routeRegistryStub->method("fromGet")->willReturn($registeredRouteHandler);
+        $routeRegistryStub->method($routeMethodName)->willReturn($registeredRouteHandler);
         $sut = new DefaultRoutingHandler($routeRegistryStub, $container);
-        $request = (new RequestStub())->withUri(new UriStub(uniqid()));
+        $request = (new RequestStub($requestMethod))->withUri(new UriStub(uniqid()));
         $response = $sut->handle($request);
         $this->assertSame(ResponseCode::OK, $response->getStatusCode());
     }
