@@ -35,6 +35,7 @@ final class MaxTest extends TestCase
 
             public function __construct(int|float $prop)
             {
+                $this->isPosted = true;
                 $this->property = $prop;
             }
         };
@@ -57,6 +58,7 @@ final class MaxTest extends TestCase
 
             public function __construct(int|float $prop)
             {
+                $this->isPosted = true;
                 $this->property = $prop;
             }
         };
@@ -78,6 +80,7 @@ final class MaxTest extends TestCase
 
             public function __construct(mixed $prop)
             {
+                $this->isPosted = true;
                 $this->property = $prop;
             }
         };

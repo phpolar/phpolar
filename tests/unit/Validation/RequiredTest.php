@@ -34,6 +34,7 @@ final class RequiredTest extends TestCase
 
             public function __construct(mixed $prop)
             {
+                $this->isPosted = true;
                 $this->property = $prop;
             }
         };
@@ -52,6 +53,11 @@ final class RequiredTest extends TestCase
 
             #[Required]
             public mixed $property;
+
+            public function __construct()
+            {
+                $this->isPosted = true;
+            }
         };
 
         $this->assertFalse($sut->isValid());
