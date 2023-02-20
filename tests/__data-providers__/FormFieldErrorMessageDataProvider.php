@@ -20,7 +20,7 @@ final class FormFieldErrorMessageDataProvider
             "Value is greater than the maximum",
             new class () extends AbstractModel
             {
-                protected bool $isPosted = true;
+                protected bool $shouldValidate = true;
 
                 #[Max(50)]
                 public int $prop = 51;
@@ -30,7 +30,7 @@ final class FormFieldErrorMessageDataProvider
             "Value is greater than the maximum",
             new class () extends AbstractModel
             {
-                protected bool $isPosted = true;
+                protected bool $shouldValidate = true;
 
                 #[Max(50)]
                 public int $prop = 51;
@@ -40,7 +40,7 @@ final class FormFieldErrorMessageDataProvider
             "Maximum length validation failed",
             new class () extends AbstractModel
             {
-                protected bool $isPosted = true;
+                protected bool $shouldValidate = true;
                 #[MaxLength(10)]
                 public string $prop = "9123456780a";
             },
@@ -49,7 +49,7 @@ final class FormFieldErrorMessageDataProvider
             "Value is less than the minimum",
             new class () extends AbstractModel
             {
-                protected bool $isPosted = true;
+                protected bool $shouldValidate = true;
                 #[Min(5)]
                 public int $prop = 4;
             }
@@ -58,7 +58,7 @@ final class FormFieldErrorMessageDataProvider
             "Minimum length validation failed",
             new class () extends AbstractModel
             {
-                protected bool $isPosted = true;
+                protected bool $shouldValidate = true;
                 #[MinLength(10)]
                 public string $prop = "123456780";
             },
@@ -67,7 +67,7 @@ final class FormFieldErrorMessageDataProvider
             "Pattern validation failed",
             new class () extends AbstractModel
             {
-                protected bool $isPosted = true;
+                protected bool $shouldValidate = true;
                 #[Pattern("/^[[:alnum:]]+$/")]
                 public string $prop = "abcd1234$$;%";
             },
@@ -76,7 +76,7 @@ final class FormFieldErrorMessageDataProvider
             "Required value",
             new class () extends AbstractModel
             {
-                protected bool $isPosted = true;
+                protected bool $shouldValidate = true;
                 #[Required]
                 public string $prop;
             },
@@ -88,7 +88,7 @@ final class FormFieldErrorMessageDataProvider
         yield [
             new class () extends AbstractModel
             {
-                protected bool $isPosted = false;
+                protected bool $shouldValidate = false;
 
                 #[Max(50)]
                 public int $prop = 51;
@@ -97,7 +97,7 @@ final class FormFieldErrorMessageDataProvider
         yield [
             new class () extends AbstractModel
             {
-                protected bool $isPosted = false;
+                protected bool $shouldValidate = false;
 
                 #[Max(50)]
                 public int $prop = 51;
@@ -106,7 +106,7 @@ final class FormFieldErrorMessageDataProvider
         yield [
             new class () extends AbstractModel
             {
-                protected bool $isPosted = false;
+                protected bool $shouldValidate = false;
                 #[MaxLength(10)]
                 public string $prop = "9123456780a";
             },
@@ -114,7 +114,7 @@ final class FormFieldErrorMessageDataProvider
         yield [
             new class () extends AbstractModel
             {
-                protected bool $isPosted = false;
+                protected bool $shouldValidate = false;
                 #[Min(5)]
                 public int $prop = 4;
             }
@@ -122,7 +122,7 @@ final class FormFieldErrorMessageDataProvider
         yield [
             new class () extends AbstractModel
             {
-                protected bool $isPosted = false;
+                protected bool $shouldValidate = false;
                 #[MinLength(10)]
                 public string $prop = "123456780";
             },
@@ -130,7 +130,7 @@ final class FormFieldErrorMessageDataProvider
         yield [
             new class () extends AbstractModel
             {
-                protected bool $isPosted = false;
+                protected bool $shouldValidate = false;
                 #[Pattern("/^[[:alnum:]]+$/")]
                 public string $prop = "abcd1234$$;%";
             },
@@ -138,7 +138,7 @@ final class FormFieldErrorMessageDataProvider
         yield [
             new class () extends AbstractModel
             {
-                protected bool $isPosted = false;
+                protected bool $shouldValidate = false;
                 #[Required]
                 public string $prop;
             },
@@ -151,7 +151,7 @@ final class FormFieldErrorMessageDataProvider
             "",
             new class () extends AbstractModel
             {
-                protected bool $isPosted = true;
+                protected bool $shouldValidate = true;
                 #[Required]
                 public string $prop = "REQUIRED PROP IS SET";
             }

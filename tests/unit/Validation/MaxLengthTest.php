@@ -36,7 +36,7 @@ final class MaxLengthTest extends TestCase
 
             public function __construct(string $prop)
             {
-                $this->isPosted = true;
+                $this->shouldValidate = true;
                 $this->property = $prop;
             }
         };
@@ -59,7 +59,7 @@ final class MaxLengthTest extends TestCase
 
             public function __construct(string $prop)
             {
-                $this->isPosted = true;
+                $this->shouldValidate = true;
                 $this->property = $prop;
             }
         };
@@ -82,7 +82,7 @@ final class MaxLengthTest extends TestCase
 
             public function __construct(int|float $prop)
             {
-                $this->isPosted = true;
+                $this->shouldValidate = true;
                 $this->property = $prop;
             }
         };
@@ -105,7 +105,7 @@ final class MaxLengthTest extends TestCase
 
             public function __construct(int|float $prop)
             {
-                $this->isPosted = true;
+                $this->shouldValidate = true;
                 $this->property = $prop;
             }
         };
@@ -127,7 +127,7 @@ final class MaxLengthTest extends TestCase
 
             public function __construct(mixed $prop)
             {
-                $this->isPosted = true;
+                $this->shouldValidate = true;
                 $this->property = $prop;
             }
         };

@@ -65,10 +65,23 @@ final class FieldErrorMessageTraitTest extends TestCase
         $this->assertFalse($model->hasError($fieldName));
     }
 
+    #[TestDox("Shall have errors when the model is posted and the property is invalid")]
+    public function test5a()
+    {
+        $model = new class () extends AbstractModel
+        {
+            #[Required]
+            public string $prop;
+        };
+        $model->isPosted();
+        $this->assertTrue($model->hasError("prop"));
+    }
+
     #[TestDox("Shall not have errors when the model is not posted/submitted")]
     #[DataProviderExternal(FormFieldErrorMessageDataProvider::class, "invalidPropertyNotPostedTestCases")]
-    public function test5(object $model)
+    public function test5b(object $model)
     {
+
         $fieldName = "prop";
         $this->assertFalse($model->hasError($fieldName));
     }

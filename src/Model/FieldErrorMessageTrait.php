@@ -38,13 +38,11 @@ trait FieldErrorMessageTrait
     protected bool $checked;
 
     /**
-     * Determines if the model is being
-     * created or updated.
-     *
-     * Validation is usually not desired
-     * when viewing the model.
+     * Validation is usually only desired
+     * when the user attempts to
+     * create or edit a model.
      */
-    protected bool $isPosted = false;
+    protected bool $shouldValidate = false;
 
     /**
      * Provides an interface for
@@ -68,11 +66,19 @@ trait FieldErrorMessageTrait
      */
     public function hasError(string $fieldName): bool
     {
-        if ($this->isPosted === false) {
+        if ($this->shouldValidate === false) {
             return false;
         }
         $this->setErrorMsgsOnce();
         return isset($this->errorMessages[$fieldName]);
+    }
+
+    /**
+     * Changes the posted state of the model.
+     */
+    public function isPosted(): void
+    {
+        $this->shouldValidate = true;
     }
 
     private function setErrorMsgsOnce(): void
