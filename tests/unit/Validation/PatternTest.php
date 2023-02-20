@@ -34,7 +34,7 @@ final class PatternTest extends TestCase
 
             public function __construct(mixed $prop)
             {
-                $this->isPosted = true;
+                $this->shouldValidate = true;
                 $this->property = $prop;
             }
         };
@@ -57,7 +57,7 @@ final class PatternTest extends TestCase
 
             public function __construct(mixed $prop)
             {
-                $this->isPosted = true;
+                $this->shouldValidate = true;
                 $this->property = $prop;
             }
         };
@@ -79,7 +79,7 @@ final class PatternTest extends TestCase
 
             public function __construct()
             {
-                $this->isPosted = true;
+                $this->shouldValidate = true;
             }
         };
 
@@ -101,7 +101,7 @@ final class PatternTest extends TestCase
 
             public function __construct(mixed $invalidVal)
             {
-                $this->isPosted = true;
+                $this->shouldValidate = true;
                 $this->property = $invalidVal;
             }
         };
