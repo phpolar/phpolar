@@ -8,6 +8,14 @@
 
 [![Coverage Status](https://coveralls.io/repos/github/phpolar/phpolar/badge.svg?branch=main)](https://coveralls.io/repos/github/phpolar/phpolar/badge.svg?branch=main) [![Latest Stable Version](http://poser.pugx.org/phpolar/phpolar/v)][def] [![Total Downloads](http://poser.pugx.org/phpolar/phpolar/downloads)][def] [![Latest Unstable Version](http://poser.pugx.org/phpolar/phpolar/v/unstable)][def] [![License](http://poser.pugx.org/phpolar/phpolar/license)][def] [![PHP Version Require](http://poser.pugx.org/phpolar/phpolar/require/php)][def]
 
+### Quick start
+
+```bash
+# create an example application
+
+composer create-project phpolar/skeleton <target-directory>
+```
+
 ### Objectives
 
 1. Provide [attributes](#use-attributes-to-configure-models) so that objects can be declaratively configured for clean application development.
@@ -111,61 +119,6 @@ class Person extends Model
 
     #[DateFormat("Y-m-d h:i:s a")]
     public DateTimeImmutable $modifiedOn;
-}
-```
-
-### Use Annotations to Configure Models
-
-```php
-use Efortmeyer\Polar\Api\Model;
-
-class Person extends Model
-{
-    /**
-     * @var string
-     * @MaxLength(20)
-     */
-    public $firstName;
-
-    /**
-     * @var string
-     * @MaxLength(20)
-     */
-    public $lastName;
-
-    /**
-     * @var string
-     * @Column("Residential Address")
-     * @Label("Residential Address")
-     * @MaxLength(200)
-     */
-    public $address1;
-
-    /**
-     * @var string
-     * @Column("Business Address")
-     * @Label("Business Address")
-     * @MaxLength(200)
-     */
-    public $address2;
-
-    /**
-     * @var DateTimeImmutable
-     * @DateFormat(Y-m-d)
-     */
-    public $dateOfBirth;
-
-    /**
-     * @var DateTimeImmutable
-     * @DateFormat("Y-m-d h:i:s a")
-     */
-    public $enteredOn;
-
-    /**
-     * @var DateTimeImmutable
-     * @DateFormat("Y-m-d h:i:s a")
-     */
-    public $modifiedOn;
 }
 ```
 
