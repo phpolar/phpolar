@@ -94,5 +94,8 @@
         "xdebug:off": [
             "TEMP_FILE=\"$(sed --follow-symlink -E 's/^(zend_extension=xdebug)/;\\1/' \"$(php-config --ini-dir)/20-xdebug.ini\")\"; echo \"$TEMP_FILE\" > \"$(php-config --ini-dir)/20-xdebug.ini\""
         ]
-    }
+    },
+    "bin": [
+        "bin/launch"
+    ]
 }
