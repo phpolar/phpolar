@@ -88,7 +88,7 @@ final class MiddlewareProcessingQueue
             return $errorHandler->handle($request);
         }
         if ($this->useCsrfProtection === true) {
-            $this->csrfPostRouting->getMiddleware($response)
+            return $this->csrfPostRouting->getMiddleware($response)
                 ->process($request, $this->errorHandler);
         }
         return $response;
