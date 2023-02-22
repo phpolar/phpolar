@@ -92,12 +92,12 @@
                     <ul class="phpdocumentor-breadcrumbs">
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/phpolar.html">Phpolar</a></li>
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/phpolar-phpolar.html">Phpolar</a></li>
-            <li class="phpdocumentor-breadcrumb"><a href="namespaces/phpolar-phpolar-routing.html">Routing</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/phpolar-phpolar-webserver.html">WebServer</a></li>
     </ul>
 
     <article class="phpdocumentor-element -class">
         <h2 class="phpdocumentor-content__title">
-    AbstractRouteDelegate
+    ContainerConfigurator
 
     
             <div class="phpdocumentor-element__package">
@@ -111,18 +111,14 @@
     </h2>
 
         <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="Routing/AbstractRouteDelegate.php"><a href="files/routing-abstractroutedelegate.html"><abbr title="Routing/AbstractRouteDelegate.php">AbstractRouteDelegate.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="WebServer/ContainerConfigurator.php"><a href="files/webserver-containerconfigurator.html"><abbr title="WebServer/ContainerConfigurator.php">ContainerConfigurator.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">17</span>
+    <span class="phpdocumentor-element-found-in__line">13</span>
 
     </aside>
 
-            <p class="phpdocumentor-summary">Defines what should be done when a request is received.</p>
+            <p class="phpdocumentor-summary">Configures a dependency injection container.</p>
 
-    <section class="phpdocumentor-description"><p>This is expected to return the content of the
-response body.</p>
-<p>This is <strong>NOT</strong> a PSR-15 request handler.</p>
-</section>
 
 
 
@@ -138,11 +134,11 @@ response body.</p>
 
 <dl class="phpdocumentor-table-of-contents">
                         <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Phpolar-Phpolar-Routing-AbstractRouteDelegate.html#method_handle">handle()</a>
+    <a href="classes/Phpolar-Phpolar-WebServer-ContainerConfigurator.html#method_configureContainer">configureContainer()</a>
     <span>
-                                &nbsp;: string    </span>
+                                &nbsp;: void    </span>
 </dt>
-<dd>Execute the defined action associated with a given route.</dd>
+<dd>Add services/dependencies to the provided container.</dd>
 
         </dl>
 
@@ -155,52 +151,49 @@ response body.</p>
             <section class="phpdocumentor-methods">
         <h3 class="phpdocumentor-elements__header" id="methods">
             Methods
-            <a href="classes/Phpolar-Phpolar-Routing-AbstractRouteDelegate.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/Phpolar-Phpolar-WebServer-ContainerConfigurator.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
         </h3>
                     <article
         class="phpdocumentor-element
             -method
             -public
-                        -abstract                                "
+                                                        "
 >
-    <h4 class="phpdocumentor-element__name" id="method_handle">
-        handle()
-        <a href="classes/Phpolar-Phpolar-Routing-AbstractRouteDelegate.html#method_handle" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_configureContainer">
+        configureContainer()
+        <a href="classes/Phpolar-Phpolar-WebServer-ContainerConfigurator.html#method_configureContainer" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="Routing/AbstractRouteDelegate.php"><a href="files/routing-abstractroutedelegate.html"><abbr title="Routing/AbstractRouteDelegate.php">AbstractRouteDelegate.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="WebServer/ContainerConfigurator.php"><a href="files/webserver-containerconfigurator.html"><abbr title="WebServer/ContainerConfigurator.php">ContainerConfigurator.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">24</span>
+    <span class="phpdocumentor-element-found-in__line">33</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Execute the defined action associated with a given route.</p>
+        <p class="phpdocumentor-summary">Add services/dependencies to the provided container.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-    <span class="phpdocumentor-signature__abstract">abstract</span>                <span class="phpdocumentor-signature__name">handle</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Container\ContainerInterface">ContainerInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$container</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+                    <span class="phpdocumentor-signature__name">configureContainer</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\ArrayAccess">ArrayAccess</abbr>&lt;string, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$containerConfig</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$container</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Container\ContainerInterface">ContainerInterface</abbr></span>
+                <span class="phpdocumentor-signature__argument__name">$containerConfig</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\ArrayAccess">ArrayAccess</abbr>&lt;string, mixed&gt;</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
+                
             </dd>
             </dl>
 
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">string</span>
+    <span class="phpdocumentor-signature__response_type">void</span>
             &mdash;
-            <section class="phpdocumentor-description"><p>The content of the response body.</p>
-</section>
-
+        
     
 </article>
             </section>
@@ -281,7 +274,7 @@ response body.</p>
 </section>
             </div>
         </div>
-        <a href="classes/Phpolar-Phpolar-Routing-AbstractRouteDelegate.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+        <a href="classes/Phpolar-Phpolar-WebServer-ContainerConfigurator.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
     </main>
 
