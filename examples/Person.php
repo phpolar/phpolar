@@ -1,52 +1,40 @@
 <?php
 
-use Phpolar\Phpolar\Api\Model;
+use Phpolar\Phpolar\AbstractModel;
+use Phpolar\Phpolar\Column;
+use Phpolar\Phpolar\Hidden;
+use Phpolar\Phpolar\Label;
+use Phpolar\Phpolar\Validation\MaxLength;
+use Phpolar\Phpolar\Validation\Required;
 
-class Person extends Model
+class Person extends AbstractModel
 {
-    /**
-     * @var string
-     * @MaxLength(20)
-     */
-    public $firstName;
+    public string $title = "Person Form";
 
-    /**
-     * @var string
-     * @MaxLength(20)
-     */
-    public $lastName;
+    public string $action = "somewhere";
 
-    /**
-     * @var string
-     * @Column("Residential Address")
-     * @Label("Residential Address")
-     * @MaxLength(200)
-     */
-    public $address1;
+    #[MaxLength(20)]
+    public string $firstName;
 
-    /**
-     * @var string
-     * @Column("Business Address")
-     * @Label("Business Address")
-     * @MaxLength(200)
-     */
-    public $address2;
+    #[MaxLength(20)]
+    public string $lastName;
 
-    /**
-     * @var DateTimeImmutable
-     * @DateFormat(Y-m-d)
-     */
-    public $dateOfBirth;
+    #[Column("Residential Address")]
+    #[Label("Residential Address")]
+    #[MaxLength(200)]
+    public string $address1;
 
-    /**
-     * @var DateTimeImmutable
-     * @DateFormat("Y-m-d h:i:s a")
-     */
-    public $enteredOn;
+    #[Column("Business Address")]
+    #[Label("Business Address")]
+    #[MaxLength(200)]
+    #[Required]
+    public string $address2;
 
-    /**
-     * @var DateTimeImmutable
-     * @DateFormat("Y-m-d h:i:s a")
-     */
-    public $modifiedOn;
+    public DateTimeImmutable $dateOfBirth;
+
+    #[Hidden]
+    public DateTimeImmutable $enteredOn;
+
+    #[Hidden]
+    public DateTimeImmutable $modifiedOn;
 }

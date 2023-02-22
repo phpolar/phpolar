@@ -1,34 +1,38 @@
 # See https://pre-commit.com for more information
 # See https://pre-commit.com/hooks.html for more hooks
 repos:
--   repo: https://github.com/pre-commit/pre-commit-hooks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.3.0
     hooks:
-    -   id: trailing-whitespace
-    -   id: end-of-file-fixer
-    -   id: check-json
-    -   id: check-xml
-    -   id: check-yaml
-    -   id: check-added-large-files
--   repo: https://github.com/commitizen-tools/commitizen
+      - id: trailing-whitespace
+        exclude: (docs|\.phan|tests/__templates__)
+      - id: end-of-file-fixer
+        exclude: (docs|tests/__templates__)
+      - id: check-json
+        exclude: (.vscode)
+      - id: check-xml
+      - id: check-yaml
+      - id: check-added-large-files
+  - repo: https://github.com/commitizen-tools/commitizen
     rev: v2.35.0
     hooks:
-    -   id: commitizen
--   repo: https://github.com/digitalpulp/pre-commit-php.git
+      - id: commitizen
+  - repo: https://github.com/digitalpulp/pre-commit-php.git
     rev: 1.4.0
     hooks:
-    - id: php-lint
-    - id: php-cs
-      files: \.(php)$
-      exclude: (examples|test)
-      args: ["--standard=PSR1/,./phpcs.xml", "-p"]
-    - id: php-unit
-    - id: php-stan
-      files: \.(php)$
-      exclude: (examples|test)
--   repo: https://gitlab.com/daverona/pre-commit/php
-    rev: 0.6.0          # use the most recent version
+      - id: php-lint
+        exclude: (tests\/__data-providers__)
+      - id: php-cs
+        files: \.(php)$
+        exclude: (examples|test|\.phan)
+        args: ["--standard=PSR1,PSR12,./phpcs.xml", "-p"]
+      - id: php-unit
+      - id: php-stan
+        files: \.(php)$
+        exclude: (examples|test|config)
+  - repo: https://gitlab.com/daverona/pre-commit/php
+    rev: 0.6.0 # use the most recent version
     hooks:
-    # Hooks using native
-    - id: phpmd         # static analyzer for PHP code
-      exclude: (examples|test|ScalarTypes\.php$)
+      # Hooks using native
+      - id: phpmd # static analyzer for PHP code
+        exclude: (examples|test|config|src\/WebServer\/Http\/ErrorHandler\.php)

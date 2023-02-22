@@ -1,21 +1,14 @@
 <?php
 
+namespace MyApp;
+
 class Page
 {
-    /**
-     * @var string
-     */
-    public $title;
+    public string $title;
 
-    /**
-     * @var string
-     */
-    public $backgroundColor = "#fff";
+    public string $backgroundColor = "#fff";
 
-    /**
-     * @var string
-     */
-    public $font = "Arial";
+    public string $font = "Arial";
 
     public function __construct(string $title)
     {
