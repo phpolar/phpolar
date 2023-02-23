@@ -17,10 +17,10 @@ use Phpolar\HttpCodes\ResponseCode;
 use Phpolar\Phpolar\WebServer\Http\ErrorHandler;
 use Phpolar\Phpolar\WebServer\MiddlewareProcessingQueue;
 use Phpolar\Phpolar\WebServer\WebServer;
-use Phpolar\PhpTemplating\Binder;
-use Phpolar\PhpTemplating\Dispatcher;
-use Phpolar\PhpTemplating\TemplateEngine;
-use Phpolar\PhpTemplating\TemplatingStrategyInterface;
+use Phpolar\PurePhp\Binder;
+use Phpolar\PurePhp\Dispatcher;
+use Phpolar\PurePhp\TemplateEngine;
+use Phpolar\PurePhp\TemplatingStrategyInterface;
 use Psr\Container\ContainerInterface;
 
 return [

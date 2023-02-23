@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Phpolar\Phpolar;
 
-use Phpolar\PhpTemplating\Binder;
-use Phpolar\PhpTemplating\Dispatcher;
-use Phpolar\PhpTemplating\FileRenderingStrategy;
-use Phpolar\PhpTemplating\HtmlSafeContext;
-use Phpolar\PhpTemplating\TemplateEngine;
+use Phpolar\PurePhp\Binder;
+use Phpolar\PurePhp\Dispatcher;
+use Phpolar\PurePhp\FileRenderingStrategy;
+use Phpolar\PurePhp\HtmlSafeContext;
+use Phpolar\PurePhp\TemplateEngine;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
