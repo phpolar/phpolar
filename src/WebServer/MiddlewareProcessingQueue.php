@@ -64,8 +64,7 @@ final class MiddlewareProcessingQueue
         );
         foreach ($preRoutingResponses as $preRoutingResponse) {
             if ($preRoutingResponse->getStatusCode() >= 400) {
-                ResponseExtension::extend($preRoutingResponse)->send();
-                return new AbortProcessingRequest();
+                return new AbortProcessingRequest($preRoutingResponse);
             }
         }
         return new ContinueProcessingRequest();

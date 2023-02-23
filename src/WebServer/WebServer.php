@@ -78,6 +78,7 @@ final class WebServer
         $primaryHandler = $this->containerManager->getPrimaryRequestHandler($this->shouldUseRoutes, $this->routes);
         $result = $this->middlewareQueue->dequeuePreRoutingMiddleware($request);
         if ($result instanceof AbortProcessingRequest) {
+            ResponseExtension::extend($result->getResponse())->send();
             return;
         }
         $routingResponse = $primaryHandler->handle($request);
