@@ -20,14 +20,14 @@ final class RouteRegistryTest extends TestCase
     {
         $givenRoute = "/";
         /**
-         * @var MockObject&AbstractRouteDelegate $handlerSpy
+         * @var MockObject&AbstractContentDelegate $handlerSpy
          */
-        $handlerSpy = $this->getMockForAbstractClass(AbstractRouteDelegate::class);
-        $handlerSpy->expects($this->once())->method("handle")->willReturn("");
+        $handlerSpy = $this->getMockForAbstractClass(AbstractContentDelegate::class);
+        $handlerSpy->expects($this->once())->method("getResponseContent")->willReturn("");
         $sut = new RouteRegistry();
         $sut->addGet($givenRoute, $handlerSpy);
         $registeredHandler = $sut->fromGet($givenRoute);
-        $registeredHandler->handle(new ConfigurableContainerStub(new ContainerConfigurationStub()));
+        $registeredHandler->getResponseContent(new ConfigurableContainerStub(new ContainerConfigurationStub()));
     }
 
     #[TestDox("Shall retrieve the request handlers associated with a POST request")]
@@ -35,14 +35,14 @@ final class RouteRegistryTest extends TestCase
     {
         $givenRoute = "/";
         /**
-         * @var MockObject&AbstractRouteDelegate $handlerSpy
+         * @var MockObject&AbstractContentDelegate $handlerSpy
          */
-        $handlerSpy = $this->getMockForAbstractClass(AbstractRouteDelegate::class);
-        $handlerSpy->expects($this->once())->method("handle")->willReturn("");
+        $handlerSpy = $this->getMockForAbstractClass(AbstractContentDelegate::class);
+        $handlerSpy->expects($this->once())->method("getResponseContent")->willReturn("");
         $sut = new RouteRegistry();
         $sut->addPost($givenRoute, $handlerSpy);
         $registeredHandler = $sut->fromPost($givenRoute);
-        $registeredHandler->handle(new ConfigurableContainerStub(new ContainerConfigurationStub()));
+        $registeredHandler->getResponseContent(new ConfigurableContainerStub(new ContainerConfigurationStub()));
     }
 
     #[TestDox("Shall return a RouteNotRegistered instance when a route is not associated with any handlers.")]
@@ -60,9 +60,9 @@ final class RouteRegistryTest extends TestCase
     {
         $givenRoute = "/";
         /**
-         * @var Stub&AbstractRouteDelegate $handlerSpy
+         * @var Stub&AbstractContentDelegate $handlerSpy
          */
-        $handlerSpy = $this->createStub(AbstractRouteDelegate::class);
+        $handlerSpy = $this->createStub(AbstractContentDelegate::class);
         $sut = new RouteRegistry();
         $sut->addGet($givenRoute, $handlerSpy);
         $result = $sut->fromPost($givenRoute);
@@ -74,9 +74,9 @@ final class RouteRegistryTest extends TestCase
     {
         $givenRoute = "/";
         /**
-         * @var Stub&AbstractRouteDelegate $handlerSpy
+         * @var Stub&AbstractContentDelegate $handlerSpy
          */
-        $handlerSpy = $this->createStub(AbstractRouteDelegate::class);
+        $handlerSpy = $this->createStub(AbstractContentDelegate::class);
         $sut = new RouteRegistry();
         $sut->addPost($givenRoute, $handlerSpy);
         $result = $sut->fromGet($givenRoute);

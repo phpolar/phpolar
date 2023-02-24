@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Phpolar\Phpolar\Routing;
 
 use Exception;
-use Phan\Language\Element\ConstantInterface;
 use Phpolar\HttpCodes\ResponseCode;
 use Phpolar\Phpolar\Tests\Stubs\MemoryStreamStub;
 use Phpolar\Phpolar\Tests\Stubs\ResponseStub;
@@ -83,12 +82,12 @@ final class RoutingTest extends TestCase
         $givenRoute = "/";
         $expectedResponse = "<h1>Found!</h1>";
         $routeRegistry = new RouteRegistry();
-        $indexHandler = new class ($expectedResponse) extends AbstractRouteDelegate {
+        $indexHandler = new class ($expectedResponse) extends AbstractContentDelegate {
             public function __construct(private string $responseTemplate)
             {
             }
 
-            public function handle(ContainerInterface $container): string
+            public function getResponseContent(ContainerInterface $container): string
             {
                 return $this->responseTemplate;
             }
