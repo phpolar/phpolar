@@ -7,7 +7,7 @@ namespace Phpolar\Phpolar;
 use ArrayAccess;
 use Phpolar\CsrfProtection\Http\CsrfPostRoutingMiddlewareFactory;
 use Phpolar\CsrfProtection\Http\CsrfPreRoutingMiddleware;
-use Phpolar\Phpolar\Routing\AbstractRouteDelegate;
+use Phpolar\Phpolar\Routing\AbstractContentDelegate;
 use Phpolar\Phpolar\Routing\DefaultRoutingHandler;
 use Phpolar\Phpolar\Routing\RouteRegistry;
 use Phpolar\Phpolar\Storage\AbstractStorage;
@@ -102,13 +102,13 @@ final class MemoryUsageTest extends TestCase
         $templateEngine = new TemplateEngine(new StreamContentStrategy(), new Binder(), new Dispatcher());
         $routeRegistry = new RouteRegistry();
         $context = new HtmlSafeContext(new FakeModel());
-        $routeHandler = new class ($templateEngine, $context) extends AbstractRouteDelegate
+        $routeHandler = new class ($templateEngine, $context) extends AbstractContentDelegate
         {
             public function __construct(private TemplateEngine $templateEngine, private HtmlSafeContext $context)
             {
             }
 
-            public function handle(ContainerInterface $container): string
+            public function getResponseContent(ContainerInterface $container): string
             {
                 return $this->templateEngine->apply(
                     FORM_TPL_PATH,
@@ -121,13 +121,13 @@ final class MemoryUsageTest extends TestCase
             public function __construct(
                 private ResponseFactoryInterface $responseFactory,
                 private StreamFactoryInterface $streamFactroy,
-                private AbstractRouteDelegate $routeHandler
+                private AbstractContentDelegate $routeHandler
             ) {
             }
             public function handle(ServerRequestInterface $request): ResponseInterface
             {
                 return $this->responseFactory->createResponse()
-                    ->withBody($this->streamFactroy->createStream($this->routeHandler->handle(new ConfigurableContainerStub(new ContainerConfigurationStub()))));
+                    ->withBody($this->streamFactroy->createStream($this->routeHandler->getResponseContent(new ConfigurableContainerStub(new ContainerConfigurationStub()))));
             }
         };
         $routeRegistry->addGet(TEST_GET_ROUTE, $routeHandler);
@@ -152,13 +152,13 @@ final class MemoryUsageTest extends TestCase
         $streamFactory = new StreamFactoryStub();
         $templateEngine = new TemplateEngine(new StreamContentStrategy(), new Binder(), new Dispatcher());
         $routeRegistry = new RouteRegistry();
-        $routeHandler = new class ($templateEngine) extends AbstractRouteDelegate
+        $routeHandler = new class ($templateEngine) extends AbstractContentDelegate
         {
             public function __construct(private TemplateEngine $templateEngine)
             {
             }
 
-            public function handle(ContainerInterface $container): string
+            public function getResponseContent(ContainerInterface $container): string
             {
                 $saved = new FakeModel();
                 $saved->myInput = "something else";

@@ -10,7 +10,7 @@ use Phpolar\CsrfProtection\Http\CsrfPostRoutingMiddleware;
 use Phpolar\CsrfProtection\Http\CsrfPostRoutingMiddlewareFactory;
 use Phpolar\CsrfProtection\Http\CsrfPreRoutingMiddleware;
 use Phpolar\HttpCodes\ResponseCode;
-use Phpolar\Phpolar\Routing\AbstractRouteDelegate;
+use Phpolar\Phpolar\Routing\AbstractContentDelegate;
 use Phpolar\Phpolar\Routing\RouteRegistry;
 use Phpolar\Phpolar\Tests\Stubs\ConfigurableContainerStub;
 use Phpolar\Phpolar\Tests\Stubs\ContainerConfigurationStub;
@@ -23,7 +23,6 @@ use Phpolar\PurePhp\Dispatcher;
 use Phpolar\PurePhp\StreamContentStrategy;
 use Phpolar\PurePhp\TemplatingStrategyInterface;
 use PHPUnit\Framework\Attributes\CoversClass;
-use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\Attributes\UsesClass;
@@ -298,11 +297,11 @@ final class WebServerTest extends TestCase
         $givenRoutes = new RouteRegistry();
         $givenRoutes->addPost(
             $givenPath,
-            new class ($expectedResponse) extends AbstractRouteDelegate {
+            new class ($expectedResponse) extends AbstractContentDelegate {
                 public function __construct(private string $expectedResponse)
                 {
                 }
-                public function handle(ContainerInterface $container): string
+                public function getResponseContent(ContainerInterface $container): string
                 {
                     return $this->expectedResponse;
                 }
