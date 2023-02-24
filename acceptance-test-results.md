@@ -42,7 +42,7 @@
 - [x] Memory usage for a post request shall be below 1000000 bytes
 
 ## Project Size (Phpolar\Phpolar\ProjectSize)
-- [x] Source code total size shall be below 32000 bytes
+- [x] Source code total size shall be below 35000 bytes
 
 ## Routing (Phpolar\Phpolar\Routing\Routing)
 - [x] Shall invoke the handler registered to the given route

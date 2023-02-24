@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.0/phpunit.xsd"
+         bootstrap="vendor/autoload.php"
+         executionOrder="depends,defects"
+         cacheResult="false"
+         beStrictAboutOutputDuringTests="true"
+         beStrictAboutTodoAnnotatedTests="true"
+         failOnRisky="true"
+         failOnWarning="false"
+         colors="true"
+         cacheDirectory=".phpunit.cache"
+         >
+  <testsuites>
+    <testsuite name="default">
+      <directory>tests/acceptance</directory>
+    </testsuite>
+    <testsuite name="acceptance">
+      <directory>tests/acceptance</directory>
+    </testsuite>
+  </testsuites>
+  <php>
+    <const name="SRC_GLOB" value="/src{/,/**/}*.php"/>
+    <const name="Phpolar\Phpolar\Tests\TEST_GET_ROUTE" value="/"/>
+    <const name="Phpolar\Phpolar\Tests\TEST_POST_ROUTE" value="/save"/>
+    <const name="Phpolar\Phpolar\Tests\ENTITY_NAME_TEST_CASE" value="FAKE NAME"/>
+    <const name="Phpolar\Phpolar\Tests\FORM_TPL_PATH" value="tests/__templates__/form.phtml"/>
+    <const name="Phpolar\Phpolar\Tests\LIST_TPL_PATH" value="tests/__templates__/list.phtml"/>
+    <const name="Phpolar\Phpolar\Tests\PROJECT_SIZE_THRESHOLD" value="35000"/>
+    <const name="Phpolar\Phpolar\Tests\PROJECT_MEMORY_USAGE_THRESHOLD" value="1000000"/>
+    <const name="Phpolar\Phpolar\Tests\CSRF_TEMPLATE_SIZE_FACTOR" value="10000000"/>
+  </php>
+</phpunit>

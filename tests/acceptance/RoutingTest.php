@@ -10,6 +10,10 @@ use Phpolar\Phpolar\Tests\Stubs\MemoryStreamStub;
 use Phpolar\Phpolar\Tests\Stubs\ResponseStub;
 use Phpolar\Phpolar\Tests\Stubs\RequestStub;
 use Phpolar\Phpolar\Tests\Stubs\UriStub;
+use Phpolar\PurePhp\Binder;
+use Phpolar\PurePhp\Dispatcher;
+use Phpolar\PurePhp\StreamContentStrategy;
+use Phpolar\PurePhp\TemplateEngine;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
@@ -42,6 +46,9 @@ final class RoutingTest extends TestCase
 
                 if ($id === StreamFactoryInterface::class) {
                     return $this->streamFactory;
+                }
+                if ($id === TemplateEngine::class) {
+                    return new TemplateEngine(new StreamContentStrategy(), new Binder(), new Dispatcher());
                 }
             }
         };
@@ -117,5 +124,6 @@ final class RoutingTest extends TestCase
         $response = $routingHandler->handle($requestStub);
         $this->assertSame($expectedStatusCode, $response->getStatusCode());
         $this->assertSame("Not Found", $response->getReasonPhrase());
+        $this->assertSame("<h1>Not Found</h1>", $response->getBody()->getContents());
     }
 }
