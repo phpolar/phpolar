@@ -32,6 +32,8 @@ final class WebServer
 
     private bool $shouldUseRoutes = false;
 
+    private bool $shouldUseAuth = false;
+
     private ContainerManager $containerManager;
 
     /**
@@ -87,6 +89,27 @@ final class WebServer
     }
 
     /**
+     * Configures session based authentication.
+     *
+     * @param array<string,mixed> $options
+     * @codeCoverageIgnore
+     */
+    public function useAuthentication(
+        array $options = [
+            "cookie_httponly" => true,
+            "cookie_samesite" => "Strict",
+            "cookie_secure" => true,
+            "cookie_path" => true,
+            "use_strict_mode" => true,
+            "referer_check" => true,
+        ]
+    ): WebServer {
+        session_status() !== PHP_SESSION_ACTIVE && session_start($options);
+        $this->shouldUseAuth = true;
+        return $this;
+    }
+
+    /**
      * Configures the server for CSRF attack mitigation.
      *
      * The server will not process the request if the
@@ -97,6 +120,12 @@ final class WebServer
      */
     public function useCsrfMiddleware(): WebServer
     {
+        /**
+         * @codeCoverageIgnore
+         */
+        if ($this->shouldUseAuth === false) {
+            $this->useAuthentication();
+        }
         $csrfPreRouting = $this->containerManager->getCsrfPreRoutingMiddleware();
         $csrfPostRouting = $this->containerManager->getCsrfPostRoutingMiddlewareFactory();
         $errorHandler = $this->containerManager->get401ErrorHandler();
