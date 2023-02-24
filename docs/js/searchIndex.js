@@ -196,15 +196,15 @@ Search.appendIndex(
             "summary": "Determines\u0020if\u0020the\u0020configured\u0020properties\u0020of\u0020an\u0020object\nare\u0020valid.",
             "url": "classes/Phpolar-Phpolar-Model-ValidationTrait.html#method_isValid"
         },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Routing\\AbstractRouteDelegate",
-            "name": "AbstractRouteDelegate",
+            "fqsen": "\\Phpolar\\Phpolar\\Routing\\AbstractContentDelegate",
+            "name": "AbstractContentDelegate",
             "summary": "Defines\u0020what\u0020should\u0020be\u0020done\u0020when\u0020a\u0020request\u0020is\u0020received.",
-            "url": "classes/Phpolar-Phpolar-Routing-AbstractRouteDelegate.html"
+            "url": "classes/Phpolar-Phpolar-Routing-AbstractContentDelegate.html"
         },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Routing\\AbstractRouteDelegate\u003A\u003Ahandle\u0028\u0029",
-            "name": "handle",
-            "summary": "Execute\u0020the\u0020defined\u0020action\u0020associated\u0020with\u0020a\u0020given\u0020route.",
-            "url": "classes/Phpolar-Phpolar-Routing-AbstractRouteDelegate.html#method_handle"
+            "fqsen": "\\Phpolar\\Phpolar\\Routing\\AbstractContentDelegate\u003A\u003AgetResponseContent\u0028\u0029",
+            "name": "getResponseContent",
+            "summary": "Returns\u0020the\u0020content\u0020of\u0020the\u0020response\u0020body.",
+            "url": "classes/Phpolar-Phpolar-Routing-AbstractContentDelegate.html#method_getResponseContent"
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\Routing\\DefaultRoutingHandler",
             "name": "DefaultRoutingHandler",
@@ -380,6 +380,16 @@ Search.appendIndex(
             "name": "AbortProcessingRequest",
             "summary": "Use\u0020to\u0020notify\u0020the\u0020web\u0020server\u0020that\u0020the\u0020request\u0020shall\u0020not\u0020be\u0020processed",
             "url": "classes/Phpolar-Phpolar-WebServer-AbortProcessingRequest.html"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\WebServer\\AbortProcessingRequest\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Phpolar-Phpolar-WebServer-AbortProcessingRequest.html#method___construct"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\WebServer\\AbortProcessingRequest\u003A\u003AgetResponse\u0028\u0029",
+            "name": "getResponse",
+            "summary": "Retrieves\u0020the\u0020response.",
+            "url": "classes/Phpolar-Phpolar-WebServer-AbortProcessingRequest.html#method_getResponse"
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\WebServer\\AbstractContainerFactory",
             "name": "AbstractContainerFactory",
