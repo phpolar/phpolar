@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Phpolar\Phpolar\Routing;
 
 use Phpolar\HttpCodes\ResponseCode;
+use Phpolar\Phpolar\WebServer\Http\ErrorHandler;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -42,7 +43,7 @@ class DefaultRoutingHandler implements RequestHandlerInterface
         $route = $request->getUri()->getPath();
         $handler = strtoupper($request->getMethod()) === "GET" ? $this->routeRegistry->fromGet($route) : $this->routeRegistry->fromPost($route);
         if ($handler instanceof RouteNotRegistered) {
-            return $responseFactory->createResponse(ResponseCode::NOT_FOUND, "Not Found");
+            return (new ErrorHandler(ResponseCode::NOT_FOUND, "Not Found", $this->container))->handle($request);
         }
         $responseContent = $handler->handle($this->container);
         $responseStream = $streamFactory->createStream($responseContent);

@@ -11,6 +11,10 @@ use Phpolar\Phpolar\Tests\Stubs\RequestStub;
 use Phpolar\Phpolar\Tests\Stubs\ResponseFactoryStub;
 use Phpolar\Phpolar\Tests\Stubs\StreamFactoryStub;
 use Phpolar\Phpolar\Tests\Stubs\UriStub;
+use Phpolar\PurePhp\Binder;
+use Phpolar\PurePhp\Dispatcher;
+use Phpolar\PurePhp\StreamContentStrategy;
+use Phpolar\PurePhp\TemplateEngine;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\TestDox;
@@ -42,6 +46,9 @@ final class DefaultRoutingHandlerTest extends TestCase
                 }
                 if ($id === StreamFactoryInterface::class) {
                     return $this->streamFactory ?? new StreamFactoryStub();
+                }
+                if ($id === TemplateEngine::class) {
+                    return new TemplateEngine(new StreamContentStrategy(), new Binder(), new Dispatcher());
                 }
             }
         };
