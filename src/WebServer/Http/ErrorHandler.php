@@ -56,7 +56,10 @@ final class ErrorHandler implements RequestHandlerInterface
      */
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        return $this->responseFactory->createResponse($this->responseCode)->withBody(
+        return $this->responseFactory->createResponse(
+            $this->responseCode,
+            $this->reasonPhrase,
+        )->withBody(
             $this->streamFactory->createStream(
                 $this->getResponseContent()
             )

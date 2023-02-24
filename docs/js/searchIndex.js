@@ -526,6 +526,11 @@ Search.appendIndex(
             "summary": "Handle\u0020and\u0020respond\u0020to\u0020requests\u0020from\u0020clients.",
             "url": "classes/Phpolar-Phpolar-WebServer-WebServer.html#method_receive"
         },                {
+            "fqsen": "\\Phpolar\\Phpolar\\WebServer\\WebServer\u003A\u003AuseAuthentication\u0028\u0029",
+            "name": "useAuthentication",
+            "summary": "Configures\u0020session\u0020based\u0020authentication.",
+            "url": "classes/Phpolar-Phpolar-WebServer-WebServer.html#method_useAuthentication"
+        },                {
             "fqsen": "\\Phpolar\\Phpolar\\WebServer\\WebServer\u003A\u003AuseCsrfMiddleware\u0028\u0029",
             "name": "useCsrfMiddleware",
             "summary": "Configures\u0020the\u0020server\u0020for\u0020CSRF\u0020attack\u0020mitigation.",
