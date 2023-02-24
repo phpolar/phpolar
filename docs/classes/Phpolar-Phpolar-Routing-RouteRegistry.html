@@ -151,14 +151,14 @@ request handlers.</p>
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Phpolar-Phpolar-Routing-RouteRegistry.html#method_fromGet">fromGet()</a>
     <span>
-                                &nbsp;: <a href="classes/Phpolar-Phpolar-Routing-AbstractRouteDelegate.html"><abbr title="\Phpolar\Phpolar\Routing\AbstractRouteDelegate">AbstractRouteDelegate</abbr></a>|<a href="classes/Phpolar-Phpolar-Routing-RouteNotRegistered.html"><abbr title="\Phpolar\Phpolar\Routing\RouteNotRegistered">RouteNotRegistered</abbr></a>    </span>
+                                &nbsp;: <a href="classes/Phpolar-Phpolar-Routing-AbstractContentDelegate.html"><abbr title="\Phpolar\Phpolar\Routing\AbstractContentDelegate">AbstractContentDelegate</abbr></a>|<a href="classes/Phpolar-Phpolar-Routing-RouteNotRegistered.html"><abbr title="\Phpolar\Phpolar\Routing\RouteNotRegistered">RouteNotRegistered</abbr></a>    </span>
 </dt>
 <dd>Retrieves the registered handler for a `GET` request.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Phpolar-Phpolar-Routing-RouteRegistry.html#method_fromPost">fromPost()</a>
     <span>
-                                &nbsp;: <a href="classes/Phpolar-Phpolar-Routing-AbstractRouteDelegate.html"><abbr title="\Phpolar\Phpolar\Routing\AbstractRouteDelegate">AbstractRouteDelegate</abbr></a>|<a href="classes/Phpolar-Phpolar-Routing-RouteNotRegistered.html"><abbr title="\Phpolar\Phpolar\Routing\RouteNotRegistered">RouteNotRegistered</abbr></a>    </span>
+                                &nbsp;: <a href="classes/Phpolar-Phpolar-Routing-AbstractContentDelegate.html"><abbr title="\Phpolar\Phpolar\Routing\AbstractContentDelegate">AbstractContentDelegate</abbr></a>|<a href="classes/Phpolar-Phpolar-Routing-RouteNotRegistered.html"><abbr title="\Phpolar\Phpolar\Routing\RouteNotRegistered">RouteNotRegistered</abbr></a>    </span>
 </dt>
 <dd>Retrieves the registered handler for a `POST` request.</dd>
 
@@ -196,7 +196,7 @@ request handlers.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">addGet</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$route</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Phpolar-Phpolar-Routing-AbstractRouteDelegate.html"><abbr title="\Phpolar\Phpolar\Routing\AbstractRouteDelegate">AbstractRouteDelegate</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$handler</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+                    <span class="phpdocumentor-signature__name">addGet</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$route</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Phpolar-Phpolar-Routing-AbstractContentDelegate.html"><abbr title="\Phpolar\Phpolar\Routing\AbstractContentDelegate">AbstractContentDelegate</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$handler</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
@@ -211,7 +211,7 @@ request handlers.</p>
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$handler</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Phpolar-Phpolar-Routing-AbstractRouteDelegate.html"><abbr title="\Phpolar\Phpolar\Routing\AbstractRouteDelegate">AbstractRouteDelegate</abbr></a></span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Phpolar-Phpolar-Routing-AbstractContentDelegate.html"><abbr title="\Phpolar\Phpolar\Routing\AbstractContentDelegate">AbstractContentDelegate</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"></section>
@@ -248,7 +248,7 @@ request handlers.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">addPost</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$route</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Phpolar-Phpolar-Routing-AbstractRouteDelegate.html"><abbr title="\Phpolar\Phpolar\Routing\AbstractRouteDelegate">AbstractRouteDelegate</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$handler</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+                    <span class="phpdocumentor-signature__name">addPost</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$route</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Phpolar-Phpolar-Routing-AbstractContentDelegate.html"><abbr title="\Phpolar\Phpolar\Routing\AbstractContentDelegate">AbstractContentDelegate</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$handler</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
@@ -263,7 +263,7 @@ request handlers.</p>
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$handler</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Phpolar-Phpolar-Routing-AbstractRouteDelegate.html"><abbr title="\Phpolar\Phpolar\Routing\AbstractRouteDelegate">AbstractRouteDelegate</abbr></a></span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Phpolar-Phpolar-Routing-AbstractContentDelegate.html"><abbr title="\Phpolar\Phpolar\Routing\AbstractContentDelegate">AbstractContentDelegate</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"></section>
@@ -300,7 +300,7 @@ request handlers.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">fromGet</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$route</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Phpolar-Phpolar-Routing-AbstractRouteDelegate.html"><abbr title="\Phpolar\Phpolar\Routing\AbstractRouteDelegate">AbstractRouteDelegate</abbr></a>|<a href="classes/Phpolar-Phpolar-Routing-RouteNotRegistered.html"><abbr title="\Phpolar\Phpolar\Routing\RouteNotRegistered">RouteNotRegistered</abbr></a></span></code>
+                    <span class="phpdocumentor-signature__name">fromGet</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$route</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Phpolar-Phpolar-Routing-AbstractContentDelegate.html"><abbr title="\Phpolar\Phpolar\Routing\AbstractContentDelegate">AbstractContentDelegate</abbr></a>|<a href="classes/Phpolar-Phpolar-Routing-RouteNotRegistered.html"><abbr title="\Phpolar\Phpolar\Routing\RouteNotRegistered">RouteNotRegistered</abbr></a></span></code>
 
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
@@ -318,7 +318,7 @@ request handlers.</p>
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><a href="classes/Phpolar-Phpolar-Routing-AbstractRouteDelegate.html"><abbr title="\Phpolar\Phpolar\Routing\AbstractRouteDelegate">AbstractRouteDelegate</abbr></a>|<a href="classes/Phpolar-Phpolar-Routing-RouteNotRegistered.html"><abbr title="\Phpolar\Phpolar\Routing\RouteNotRegistered">RouteNotRegistered</abbr></a></span>
+    <span class="phpdocumentor-signature__response_type"><a href="classes/Phpolar-Phpolar-Routing-AbstractContentDelegate.html"><abbr title="\Phpolar\Phpolar\Routing\AbstractContentDelegate">AbstractContentDelegate</abbr></a>|<a href="classes/Phpolar-Phpolar-Routing-RouteNotRegistered.html"><abbr title="\Phpolar\Phpolar\Routing\RouteNotRegistered">RouteNotRegistered</abbr></a></span>
             &mdash;
         
     
@@ -344,7 +344,7 @@ request handlers.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">fromPost</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$route</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Phpolar-Phpolar-Routing-AbstractRouteDelegate.html"><abbr title="\Phpolar\Phpolar\Routing\AbstractRouteDelegate">AbstractRouteDelegate</abbr></a>|<a href="classes/Phpolar-Phpolar-Routing-RouteNotRegistered.html"><abbr title="\Phpolar\Phpolar\Routing\RouteNotRegistered">RouteNotRegistered</abbr></a></span></code>
+                    <span class="phpdocumentor-signature__name">fromPost</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$route</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Phpolar-Phpolar-Routing-AbstractContentDelegate.html"><abbr title="\Phpolar\Phpolar\Routing\AbstractContentDelegate">AbstractContentDelegate</abbr></a>|<a href="classes/Phpolar-Phpolar-Routing-RouteNotRegistered.html"><abbr title="\Phpolar\Phpolar\Routing\RouteNotRegistered">RouteNotRegistered</abbr></a></span></code>
 
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
@@ -362,7 +362,7 @@ request handlers.</p>
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><a href="classes/Phpolar-Phpolar-Routing-AbstractRouteDelegate.html"><abbr title="\Phpolar\Phpolar\Routing\AbstractRouteDelegate">AbstractRouteDelegate</abbr></a>|<a href="classes/Phpolar-Phpolar-Routing-RouteNotRegistered.html"><abbr title="\Phpolar\Phpolar\Routing\RouteNotRegistered">RouteNotRegistered</abbr></a></span>
+    <span class="phpdocumentor-signature__response_type"><a href="classes/Phpolar-Phpolar-Routing-AbstractContentDelegate.html"><abbr title="\Phpolar\Phpolar\Routing\AbstractContentDelegate">AbstractContentDelegate</abbr></a>|<a href="classes/Phpolar-Phpolar-Routing-RouteNotRegistered.html"><abbr title="\Phpolar\Phpolar\Routing\RouteNotRegistered">RouteNotRegistered</abbr></a></span>
             &mdash;
         
     
