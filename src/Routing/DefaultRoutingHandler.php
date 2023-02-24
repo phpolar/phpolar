@@ -45,7 +45,7 @@ class DefaultRoutingHandler implements RequestHandlerInterface
         if ($handler instanceof RouteNotRegistered) {
             return (new ErrorHandler(ResponseCode::NOT_FOUND, "Not Found", $this->container))->handle($request);
         }
-        $responseContent = $handler->handle($this->container);
+        $responseContent = $handler->getResponseContent($this->container);
         $responseStream = $streamFactory->createStream($responseContent);
         $response = $responseFactory->createResponse();
         return $response->withBody($responseStream);
