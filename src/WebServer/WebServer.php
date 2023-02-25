@@ -89,12 +89,12 @@ final class WebServer
     }
 
     /**
-     * Configures session based authentication.
+     * Configures a session.
      *
      * @param array<string,mixed> $options
      * @codeCoverageIgnore
      */
-    public function useAuthentication(
+    public function useSession(
         array $options = [
             "cookie_httponly" => true,
             "cookie_samesite" => "Strict",
@@ -124,7 +124,7 @@ final class WebServer
          * @codeCoverageIgnore
          */
         if ($this->shouldUseAuth === false) {
-            $this->useAuthentication();
+            $this->useSession();
         }
         $csrfPreRouting = $this->containerManager->getCsrfPreRoutingMiddleware();
         $csrfPostRouting = $this->containerManager->getCsrfPostRoutingMiddlewareFactory();
