@@ -20,6 +20,9 @@ use Psr\Http\Server\RequestHandlerInterface;
 class PrimaryHandler implements RequestHandlerInterface, MiddlewareQueueInterface
 {
     /**
+     * A collection of middleware to
+     * be processed in FIFO order.
+     *
      * @var MiddlewareInterface[]
      */
     private array $middlewareQueue = [];
