@@ -11,6 +11,7 @@ use Phpolar\Phpolar\Tests\Stubs\RequestStub;
 use Phpolar\Phpolar\Tests\Stubs\ResponseFactoryStub;
 use Phpolar\Phpolar\Tests\Stubs\StreamFactoryStub;
 use Phpolar\Phpolar\Tests\Stubs\UriStub;
+use Phpolar\Phpolar\WebServer\Http\ErrorHandler;
 use Phpolar\PurePhp\Binder;
 use Phpolar\PurePhp\Dispatcher;
 use Phpolar\PurePhp\StreamContentStrategy;
@@ -25,9 +26,9 @@ use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 
-#[CoversClass(DefaultRoutingHandler::class)]
+#[CoversClass(RoutingHandler::class)]
 #[CoversClass(RouteRegistry::class)]
-final class DefaultRoutingHandlerTest extends TestCase
+final class RoutingHandlerTest extends TestCase
 {
     public function getContainer(?StreamFactoryInterface $streamFactory = null): ContainerInterface
     {
@@ -56,31 +57,33 @@ final class DefaultRoutingHandlerTest extends TestCase
 
     public static function requestMethods(): Generator
     {
-        yield ["GET", "fromGet"];
-        yield ["POST", "fromPost"];
+        yield ["GET"];
+        yield ["POST"];
     }
 
-    #[TestDox("Shall respond with \"Not Found\" if the route is not registered for %s requests")]
+    #[TestDox("Shall respond with \"Not Found\" if the route is not registered for \$requestMethod requests")]
     #[DataProvider("requestMethods")]
-    public function test1(string $requestMethod, string $routeMethodName)
+    public function test1(string $requestMethod)
     {
-        $container = $this->getContainer();
         /**
          * @var Stub&RouteRegistry $routeRegistryStub
          */
         $routeRegistryStub = $this->createStub(RouteRegistry::class);
-        $routeRegistryStub->method($routeMethodName)->willReturn(new RouteNotRegistered());
-        $sut = new DefaultRoutingHandler($routeRegistryStub, $container);
+        $routeRegistryStub->method("match")->willReturn(new RouteNotRegistered());
+        $container = $this->getContainer();
+        $responseFactory = $container->get(ResponseFactoryInterface::class);
+        $streamFactory = $container->get(StreamFactoryInterface::class);
+        $errorHandler = new ErrorHandler(404, "Not Found", $container);
+        $sut = new RoutingHandler($routeRegistryStub, $responseFactory, $streamFactory, $errorHandler, $container);
         $request = (new RequestStub($requestMethod))->withUri(new UriStub(uniqid()));
         $response = $sut->handle($request);
         $this->assertSame(ResponseCode::NOT_FOUND, $response->getStatusCode());
     }
 
-    #[TestDox("Shall call the registered route handler for %s requests")]
+    #[TestDox("Shall call the registered route handler for \$requestMethod requests")]
     #[DataProvider("requestMethods")]
-    public function test2(string $requestMethod, string $routeMethodName)
+    public function test2(string $requestMethod)
     {
-        $container = $this->getContainer();
         /**
          * @var MockObject $registeredRouteHandler
          */
@@ -90,8 +93,12 @@ final class DefaultRoutingHandlerTest extends TestCase
          * @var Stub&RouteRegistry $routeRegistryStub
          */
         $routeRegistryStub = $this->createStub(RouteRegistry::class);
-        $routeRegistryStub->method($routeMethodName)->willReturn($registeredRouteHandler);
-        $sut = new DefaultRoutingHandler($routeRegistryStub, $container);
+        $routeRegistryStub->method("match")->willReturn($registeredRouteHandler);
+        $container = $this->getContainer();
+        $responseFactory = $container->get(ResponseFactoryInterface::class);
+        $streamFactory = $container->get(StreamFactoryInterface::class);
+        $errorHandler = new ErrorHandler(404, "Not Found", $container);
+        $sut = new RoutingHandler($routeRegistryStub, $responseFactory, $streamFactory, $errorHandler, $container);
         $request = (new RequestStub($requestMethod))->withUri(new UriStub(uniqid()));
         $response = $sut->handle($request);
         $this->assertSame(ResponseCode::OK, $response->getStatusCode());
@@ -106,7 +113,6 @@ final class DefaultRoutingHandlerTest extends TestCase
          */
         $streamFactoryStub = $this->createMock(StreamFactoryStub::class);
         $streamFactoryStub->expects($this->once())->method("createStream")->with($responseContent)->willReturn(new MemoryStreamStub($responseContent));
-        $container = $this->getContainer($streamFactoryStub);
         /**
          * @var Stub $registeredRouteHandler
          */
@@ -116,8 +122,12 @@ final class DefaultRoutingHandlerTest extends TestCase
          * @var Stub&RouteRegistry $routeRegistryStub
          */
         $routeRegistryStub = $this->createStub(RouteRegistry::class);
-        $routeRegistryStub->method("fromGet")->willReturn($registeredRouteHandler);
-        $sut = new DefaultRoutingHandler($routeRegistryStub, $container);
+        $routeRegistryStub->method("match")->willReturn($registeredRouteHandler);
+        $container = $this->getContainer($streamFactoryStub);
+        $responseFactory = $container->get(ResponseFactoryInterface::class);
+        $streamFactory = $container->get(StreamFactoryInterface::class);
+        $errorHandler = new ErrorHandler(404, "Not Found", $container);
+        $sut = new RoutingHandler($routeRegistryStub, $responseFactory, $streamFactory, $errorHandler, $container);
         $request = (new RequestStub())->withUri(new UriStub(uniqid()));
         $response = $sut->handle($request);
         $this->assertSame(ResponseCode::OK, $response->getStatusCode());

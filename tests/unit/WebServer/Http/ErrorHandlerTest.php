@@ -6,6 +6,7 @@ namespace Phpolar\Phpolar\WebServer\Http;
 
 use Closure;
 use Phpolar\HttpCodes\ResponseCode;
+use Phpolar\Phpolar\Config\Formats;
 use Phpolar\Phpolar\Tests\Stubs\ConfigurableContainerStub;
 use Phpolar\Phpolar\Tests\Stubs\ContainerConfigurationStub;
 use Phpolar\Phpolar\Tests\Stubs\RequestStub;
@@ -18,7 +19,7 @@ use Phpolar\PurePhp\TemplateEngine;
 use Phpolar\PurePhp\TemplatingStrategyInterface;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\TestDox;
-use PHPUnit\Framework\MockObject\Stub\Stub;
+use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\StreamFactoryInterface;
@@ -52,12 +53,10 @@ final class ErrorHandlerTest extends TestCase
             "Not Found",
             $container
         );
-        $this->assertSame("<h1>Not Found</h1>", $sut->handle(new RequestStub())->getBody()->getContents());
+        $this->assertSame(sprintf(Formats::ErrorText->value, "Not Found"), $sut->handle(new RequestStub())->getBody()->getContents());
     }
 
-    /**
-     * @tesdox Shall return default error message if the a bind error occurs.
-     */
+    #[TestDox("Shall return default error message if the a bind error occurs")]
     public function test1b()
     {
         $renderingAlgo = new class () implements TemplatingStrategyInterface
