@@ -40,12 +40,11 @@ abstract class AbstractModel
                     $val = $data[$propName];
                     if (gettype($val) === "string") {
                         $type = $prop->getType();
+                        // @codeCoverageIgnoreStart
                         if ($type instanceof ReflectionIntersectionType) {
-                            throw new TypeError(
-                                "Cannot automatically set values when intersection types are declared.
-                                 Set the values manually."
-                            );
+                            // Parser will catch
                         }
+                        // @codeCoverageIgnoreEnd
                         $casted = match (true) {
                             $type instanceof ReflectionNamedType => match ($type->getName()) {
                                 "int" => (int) $val,
@@ -55,7 +54,7 @@ abstract class AbstractModel
                                 default => throw new TypeError(
                                     "Cannot automatically set string source values to non-scalar
                                      target properties.  Set the property manually."
-                                ), // @codeCoverageIgnore
+                                ),
                             },
                             default => $val,
                         };
