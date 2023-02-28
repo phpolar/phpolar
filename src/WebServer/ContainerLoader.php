@@ -19,32 +19,29 @@ final class ContainerLoader
     public function __construct(private ArrayAccess $containerConfig)
     {
         $globRes1 = glob(Globs::FrameworkDeps->value, GLOB_BRACE);
-        array_walk(
-            $globRes1,
-            function (string $filename): void {
-                $frameworkDeps = require $filename;
-                array_walk(
-                    $frameworkDeps,
-                    self::addDependency(...),
-                    $this->containerConfig,
-                );
-            },
+        $globRes2 = glob(Globs::CustomDeps->value, GLOB_BRACE);
+        $frameworkDepConfs = $globRes1 === false ? [] : $globRes1;
+        $customDepConfs = $globRes2 === false ? [] : $globRes2;
+        $configFiles = array_merge(
+            $frameworkDepConfs,
+            $customDepConfs,
         );
-        $globResult = glob(Globs::CustomDeps->value, GLOB_BRACE);
-        $customDepConfigs = $globResult === false ? [] : $globResult;
         array_walk(
-            $customDepConfigs,
-            function (string $filename) {
-                $customDepConfs = require_once $filename;
-                if (is_array($customDepConfs) === false) {
-                    return;
-                }
-                array_walk(
-                    $customDepConfs,
-                    self::addDependency(...),
-                    $this->containerConfig,
-                );
-            },
+            $configFiles,
+            $this->addDepsFromFile(...),
+        );
+    }
+
+    private function addDepsFromFile(string $filename): void
+    {
+        $confs = require_once $filename;
+        if (is_array($confs) === false) {
+            return;
+        }
+        array_walk(
+            $confs,
+            self::addDependency(...),
+            $this->containerConfig,
         );
     }
 
