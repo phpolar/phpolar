@@ -31,17 +31,17 @@ class PrimaryHandler implements RequestHandlerInterface, MiddlewareQueueInterfac
     /**
      * Gets the next middleware from the processing queue.
      */
-    private function dequeue(): MiddlewareInterface
+    private function dequeue(): MiddlewareInterface|null
     {
         return array_shift($this->middlewareQueue);
     }
 
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        if (count($this->middlewareQueue) === 0) {
+        $nextMiddleware = $this->dequeue();
+        if ($nextMiddleware === null) {
             return $this->fallbackHandler->handle($request);
         }
-        $nextMiddleware = $this->dequeue();
         return $nextMiddleware->process($request, $this);
     }
 
