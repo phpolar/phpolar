@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Phpolar\Phpolar\Routing;
 
+use Psr\Http\Message\ServerRequestInterface;
+
 /**
  * Contains route paths and their associated
  * request handlers.
@@ -21,34 +23,24 @@ class RouteRegistry
     private array $registryForPost = [];
 
     /**
-     * Associates a request handler to a `GET` request.
+     * Associates a request handler to a request.
      */
-    public function addGet(string $route, AbstractContentDelegate $handler): void
+    public function add(string $method, string $route, AbstractContentDelegate $handler): void
     {
-        $this->registryForGet[$route] = $handler;
-    }
-
-    /**
-     * Associates a request handler to a `POST` request.
-     */
-    public function addPost(string $route, AbstractContentDelegate $handler): void
-    {
+        if (strtoupper($method) === "GET") {
+            $this->registryForGet[$route] = $handler;
+            return;
+        }
         $this->registryForPost[$route] = $handler;
     }
 
     /**
-     * Retrieves the registered handler for a `GET` request.
+     * Retrieves the registered handler for a request.
      */
-    public function fromGet(string $route): AbstractContentDelegate|RouteNotRegistered
+    public function match(ServerRequestInterface $request): AbstractContentDelegate|RouteNotRegistered
     {
-        return $this->registryForGet[$route] ?? new RouteNotRegistered();
-    }
-
-    /**
-     * Retrieves the registered handler for a `POST` request.
-     */
-    public function fromPost(string $route): AbstractContentDelegate|RouteNotRegistered
-    {
-        return $this->registryForPost[$route] ?? new RouteNotRegistered();
+        $method = $request->getMethod();
+        $route = $request->getUri()->getPath();
+        return strtoupper($method) === "GET" ? ($this->registryForGet[$route] ?? new RouteNotRegistered()) : ($this->registryForPost[$route] ?? new RouteNotRegistered());
     }
 }
