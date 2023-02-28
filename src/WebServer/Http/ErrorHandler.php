@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Phpolar\Phpolar\WebServer\Http;
 
+use Phpolar\Phpolar\Config\Formats;
 use Phpolar\PurePhp\TemplateEngine;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
@@ -17,10 +18,6 @@ use Psr\Http\Server\RequestHandlerInterface;
  */
 final class ErrorHandler implements RequestHandlerInterface
 {
-    public const DEFAULT_ERROR_MSG = "<h1>%s</h1>";
-
-    public const DEFAULT_FORBIDDEN_TPL_PATH = "src/templates/%s.phtml";
-
     private ResponseFactoryInterface $responseFactory;
 
     private StreamFactoryInterface $streamFactory;
@@ -68,7 +65,7 @@ final class ErrorHandler implements RequestHandlerInterface
 
     private function getResponseContent(): string
     {
-        $result = $this->templateEngine->apply(sprintf(self::DEFAULT_FORBIDDEN_TPL_PATH, $this->responseCode));
-        return is_string($result) === false ? sprintf(self::DEFAULT_ERROR_MSG, $this->reasonPhrase) : $result;
+        $result = $this->templateEngine->apply(sprintf(Formats::ErrorTemplates->value, $this->responseCode));
+        return is_string($result) === false ? sprintf(Formats::ErrorText->value, $this->reasonPhrase) : $result;
     }
 }

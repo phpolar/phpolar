@@ -10,6 +10,7 @@ use Phpolar\Phpolar\Tests\Stubs\MemoryStreamStub;
 use Phpolar\Phpolar\Tests\Stubs\ResponseStub;
 use Phpolar\Phpolar\Tests\Stubs\RequestStub;
 use Phpolar\Phpolar\Tests\Stubs\UriStub;
+use Phpolar\Phpolar\WebServer\Http\ErrorHandler;
 use Phpolar\PurePhp\Binder;
 use Phpolar\PurePhp\Dispatcher;
 use Phpolar\PurePhp\StreamContentStrategy;
@@ -99,10 +100,14 @@ final class RoutingTest extends TestCase
                 return $this->responseTemplate;
             }
         };
-        $routeRegistry->addGet($givenRoute, $indexHandler);
-        $routingHandler = new DefaultRoutingHandler(
+        $container = $this->getContainer();
+        $routeRegistry->add("GET", $givenRoute, $indexHandler);
+        $routingHandler = new RoutingHandler(
             routeRegistry: $routeRegistry,
-            container: $this->getContainer(),
+            responseFactory: $this->getResponseFactory(),
+            streamFactory: $this->getStreamFactory(),
+            errorHandler: new ErrorHandler(0, "", $container),
+            container: $container,
         );
         $requestStub = (new RequestStub("GET"))->withUri(new UriStub($givenRoute));
         $response = $routingHandler->handle($requestStub);
@@ -116,9 +121,13 @@ final class RoutingTest extends TestCase
         $givenRoute = "an_unregistered_route";
         $expectedStatusCode = ResponseCode::NOT_FOUND;
         $routeRegistry = new RouteRegistry();
-        $routingHandler = new DefaultRoutingHandler(
+        $container = $this->getContainer();
+        $routingHandler = new RoutingHandler(
             routeRegistry: $routeRegistry,
-            container: $this->getContainer(),
+            responseFactory: $this->getResponseFactory(),
+            streamFactory: $this->getStreamFactory(),
+            errorHandler: new ErrorHandler(404, "Not Found", $container),
+            container: $container,
         );
         $requestStub = (new RequestStub("GET"))->withUri(new UriStub($givenRoute));
         $response = $routingHandler->handle($requestStub);

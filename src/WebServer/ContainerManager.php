@@ -5,13 +5,12 @@ declare(strict_types=1);
 namespace Phpolar\Phpolar\WebServer;
 
 use ArrayAccess;
-use Phpolar\CsrfProtection\Http\CsrfPostRoutingMiddlewareFactory;
-use Phpolar\CsrfProtection\Http\CsrfPreRoutingMiddleware;
-use Phpolar\Phpolar\Routing\DefaultRoutingHandler;
+use Phpolar\CsrfProtection\Http\CsrfRequestCheckMiddleware;
+use Phpolar\CsrfProtection\Http\CsrfResponseFilterMiddleware;
 use Phpolar\Phpolar\Routing\RouteRegistry;
-use Phpolar\Phpolar\WebServer\Http\ErrorHandler;
+use Phpolar\Phpolar\Routing\RoutingMiddleware;
+use Phpolar\Phpolar\WebServer\Http\PrimaryHandler;
 use Psr\Container\ContainerInterface;
-use Psr\Http\Server\RequestHandlerInterface;
 
 /**
  * Manages the dependency injection container.
@@ -26,6 +25,8 @@ final class ContainerManager
      */
     private ContainerInterface $container;
 
+    private ContainerLoader $containerLoader;
+
     /**
      * @param AbstractContainerFactory $containerFac
      * @param ArrayAccess<string,mixed> $containerConfig
@@ -34,74 +35,63 @@ final class ContainerManager
         AbstractContainerFactory $containerFac,
         ArrayAccess $containerConfig
     ) {
-        $configurator = new ContainerConfigurator();
-        $configurator->configureContainer($containerConfig);
+        $this->containerLoader = new ContainerLoader($containerConfig);
         $this->container = $containerFac->getContainer($containerConfig);
-    }
-
-    /**
-     * Retrieves the CSRF post-routing middleware.
-     */
-    public function getCsrfPostRoutingMiddlewareFactory(): CsrfPostRoutingMiddlewareFactory
-    {
-        /**
-         * @var CsrfPostRoutingMiddlewareFactory $factory
-         */
-        $factory = $this->container->get(CsrfPostRoutingMiddlewareFactory::class);
-        return $factory;
     }
 
     /**
      * Retrieves the CSRF pre-routing middleware.
      */
-    public function getCsrfPreRoutingMiddleware(): CsrfPreRoutingMiddleware
+    public function getCsrfPreRoutingMiddleware(): CsrfRequestCheckMiddleware
     {
         /**
-         * @var CsrfPreRoutingMiddleware $middleware
+         * @var CsrfRequestCheckMiddleware $middleware
          */
-        $middleware = $this->container->get(CsrfPreRoutingMiddleware::class);
+        $middleware = $this->container->get(CsrfRequestCheckMiddleware::class);
         return $middleware;
     }
 
     /**
-     * Retrieves a 401 error handler.
+     * Retrieves the CSRF post-routing middleware
      */
-    public function get401ErrorHandler(): ErrorHandler
+    public function getCsrfPostRoutingMiddleware(): CsrfResponseFilterMiddleware
     {
         /**
-         * @var ErrorHandler $handler
+         * @var CsrfResponseFilterMiddleware $middleware
          */
-        $handler = $this->container->get(WebServer::ERROR_HANDLER_401);
-        return $handler;
+        $middleware = $this->container->get(CsrfResponseFilterMiddleware::class);
+        return $middleware;
     }
 
     /**
      * Retrieves the middleware processing queue
      */
-    public function getMiddlewareQueue(): MiddlewareProcessingQueue
+    public function getPrimaryHandler(): PrimaryHandler
     {
         /**
-         * @var MiddlewareProcessingQueue
+         * @var PrimaryHandler
          */
-        $middlewareQueue = $this->container->get(MiddlewareProcessingQueue::class);
-        return $middlewareQueue;
+        $handler = $this->container->get(PrimaryHandler::class);
+        return $handler;
     }
 
     /**
-     * Retrieves the primary request handler.
-     *
-     * This is usually the request handler that takes
-     * care of routing a successful request.  However,
-     * the user can add any PSR-15 request handler to
-     * the dependency injection container according to
-     * the requirements of the application.
+     * Adds routes to the container.
      */
-    public function getPrimaryRequestHandler(bool $useRoutes, RouteRegistry $routes): RequestHandlerInterface
+    public function loadRoutes(RouteRegistry $routes): void
+    {
+        $this->containerLoader->loadRoutes($routes);
+    }
+
+    /**
+     * Retrieves the routing middleware.
+     */
+    public function getRoutingMiddleware(): RoutingMiddleware
     {
         /**
-         * @var RequestHandlerInterface $handler
+         * @var RoutingMiddleware $routingMiddleware
          */
-        $handler = $useRoutes === true ? new DefaultRoutingHandler($routes, $this->container) : $this->container->get(WebServer::PRIMARY_REQUEST_HANDLER);
-        return $handler;
+        $routingMiddleware = $this->container->get(RoutingMiddleware::class);
+        return $routingMiddleware;
     }
 }

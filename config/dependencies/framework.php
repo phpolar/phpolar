@@ -14,27 +14,34 @@
 declare(strict_types=1);
 
 use Phpolar\HttpCodes\ResponseCode;
+use Phpolar\Phpolar\Routing\RouteRegistry;
+use Phpolar\Phpolar\Routing\RoutingHandler;
+use Phpolar\Phpolar\Routing\RoutingMiddleware;
 use Phpolar\Phpolar\WebServer\Http\ErrorHandler;
-use Phpolar\Phpolar\WebServer\MiddlewareProcessingQueue;
+use Phpolar\Phpolar\WebServer\Http\PrimaryHandler;
 use Phpolar\Phpolar\WebServer\WebServer;
-use Phpolar\PurePhp\Binder;
-use Phpolar\PurePhp\Dispatcher;
-use Phpolar\PurePhp\TemplateEngine;
-use Phpolar\PurePhp\TemplatingStrategyInterface;
 use Psr\Container\ContainerInterface;
+use Psr\Http\Message\ResponseFactoryInterface;
+use Psr\Http\Message\StreamFactoryInterface;
 
 return [
-    Binder::class => new Binder(),
-    Dispatcher::class => new Dispatcher(),
     WebServer::ERROR_HANDLER_401 => static fn (ArrayAccess $config) => new ErrorHandler(
         ResponseCode::UNAUTHORIZED,
         "Unauthorized",
         $config[ContainerInterface::class],
     ),
-    MiddlewareProcessingQueue::class => static fn (ArrayAccess $config) => new MiddlewareProcessingQueue($config[ContainerInterface::class]),
-    TemplateEngine::class => static fn (ArrayAccess $config) =>  new TemplateEngine(
-        $config[TemplatingStrategyInterface::class],
-        $config[Binder::class],
-        $config[Dispatcher::class],
+    WebServer::ERROR_HANDLER_404 => static fn (ArrayAccess $config) => new ErrorHandler(
+        ResponseCode::NOT_FOUND,
+        "Not Found",
+        $config[ContainerInterface::class],
     ),
+    RoutingHandler::class => static fn (ArrayAccess $config) => new RoutingHandler(
+        $config[RouteRegistry::class],
+        $config[ResponseFactoryInterface::class],
+        $config[StreamFactoryInterface::class],
+        $config[WebServer::ERROR_HANDLER_401],
+        $config[ContainerInterface::class],
+    ),
+    PrimaryHandler::class => static fn (ArrayAccess $config) => new PrimaryHandler($config[WebServer::ERROR_HANDLER_404]),
+    RoutingMiddleware::class => static fn (ArrayAccess $config) => new RoutingMiddleware($config[RoutingHandler::class])
 ];

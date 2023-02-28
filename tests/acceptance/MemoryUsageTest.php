@@ -5,10 +5,17 @@ declare(strict_types=1);
 namespace Phpolar\Phpolar;
 
 use ArrayAccess;
-use Phpolar\CsrfProtection\Http\CsrfPostRoutingMiddlewareFactory;
-use Phpolar\CsrfProtection\Http\CsrfPreRoutingMiddleware;
+use Phpolar\CsrfProtection\CsrfTokenGenerator;
+use Phpolar\CsrfProtection\Http\CsrfRequestCheckMiddleware;
+use Phpolar\CsrfProtection\Http\CsrfResponseFilterMiddleware;
+use Phpolar\CsrfProtection\Http\ResponseFilterStrategyInterface;
+use Phpolar\CsrfProtection\Storage\AbstractTokenStorage;
+use Phpolar\CsrfProtection\Storage\SessionTokenStorage;
+use Phpolar\HttpCodes\ResponseCode;
 use Phpolar\Phpolar\Routing\AbstractContentDelegate;
 use Phpolar\Phpolar\Routing\RouteRegistry;
+use Phpolar\Phpolar\Routing\RoutingHandler;
+use Phpolar\Phpolar\Routing\RoutingMiddleware;
 use Phpolar\Phpolar\Storage\AbstractStorage;
 use Phpolar\Phpolar\Storage\Item;
 use Phpolar\Phpolar\Storage\ItemKey;
@@ -22,7 +29,7 @@ use Phpolar\Phpolar\Tests\Stubs\ResponseFactoryStub;
 use Phpolar\Phpolar\Tests\Stubs\StreamFactoryStub;
 use Phpolar\Phpolar\Tests\Stubs\UriStub;
 use Phpolar\Phpolar\WebServer\ContainerFactory;
-use Phpolar\Phpolar\WebServer\MiddlewareProcessingQueue;
+use Phpolar\Phpolar\WebServer\Http\PrimaryHandler;
 use Phpolar\Phpolar\WebServer\WebServer;
 use Phpolar\PurePhp\Binder;
 use Phpolar\PurePhp\Dispatcher;
@@ -31,14 +38,16 @@ use Phpolar\PurePhp\StreamContentStrategy;
 use Phpolar\PurePhp\TemplateEngine;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\Attributes\TestDox;
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 
+use const Phpolar\CsrfProtection\REQUEST_ID_KEY;
 use const Phpolar\Phpolar\Tests\PROJECT_MEMORY_USAGE_THRESHOLD;
 use const Phpolar\Phpolar\Tests\TEST_GET_ROUTE;
 use const Phpolar\Phpolar\Tests\TEST_POST_ROUTE;
@@ -47,150 +56,51 @@ use const Phpolar\Phpolar\Tests\LIST_TPL_PATH;
 
 final class MemoryUsageTest extends TestCase
 {
-    protected function getContainer(
-        ResponseFactoryInterface $responseFactory,
-        StreamFactoryInterface $streamFactory,
-        TemplateEngine $templateEngine,
-        ?RequestHandlerInterface $handler = null,
-    ): ContainerInterface {
+    protected function getContainerFactory(RouteRegistry $routes): ContainerFactory
+    {
         $config = new ContainerConfigurationStub();
-        if ($handler !== null) {
-            $config[RequestHandlerInterface::class] = $handler;
-        }
-        $config[ContainerInterface::class] = static fn (ArrayAccess $conf) => new ConfigurableContainerStub($conf);
-        $config[ResponseFactoryInterface::class] = $responseFactory;
-        $config[StreamFactoryInterface::class] = $streamFactory;
-        $config[TemplateEngine::class] = $templateEngine;
-        $config[MiddlewareProcessingQueue::class] = static fn (ArrayAccess $conf) => new MiddlewareProcessingQueue($conf[ContainerInterface::class]);
-        $config[CsrfPreRoutingMiddleware::class] = new CsrfPreRoutingMiddleware($responseFactory, $streamFactory);
-        $config[CsrfPostRoutingMiddlewareFactory::class] = new CsrfPostRoutingMiddlewareFactory($responseFactory, $streamFactory);
-        $container = new ConfigurableContainerStub($config);
+        $config[RouteRegistry::class] = $routes;
+        $config[RoutingMiddleware::class] = static fn (ArrayAccess $config) => new RoutingMiddleware($config[RoutingHandler::class]);
+        $config[RoutingHandler::class] = static fn (ArrayAccess $config) => new RoutingHandler($config[RouteRegistry::class], $config[ResponseFactoryInterface::class], $config[StreamFactoryInterface::class], $config[WebServer::ERROR_HANDLER_401], $config[ContainerInterface::class]);
+        $config[PrimaryHandler::class] = static fn (ArrayAccess $config) => new PrimaryHandler($config[WebServer::ERROR_HANDLER_404]);
+        $config[WebServer::ERROR_HANDLER_404] = static fn (ArrayAccess $config) => new ErrorHandler(ResponseCode::NOT_FOUND, "Not Found", $config[ContainerInterface::class]);
         $config[WebServer::ERROR_HANDLER_401] = static fn (ArrayAccess $conf) => new ErrorHandler(401, "Unauthorized", $conf[ContainerInterface::class]);
-        return $container;
+        $config[ContainerInterface::class] = static fn (ArrayAccess $conf) => new ConfigurableContainerStub($conf);
+        $config[ResponseFactoryInterface::class] = new ResponseFactoryStub();
+        $config[StreamFactoryInterface::class] = new StreamFactoryStub();
+        $config[TemplateEngine::class] = new TemplateEngine(new StreamContentStrategy(), new Binder(), new Dispatcher());
+        $config[TemplatingStrategyInterface::class] = new StreamContentStrategy();
+        $config[ContainerInterface::class] = new ConfigurableContainerStub($config);
+        $config[CsrfRequestCheckMiddleware::class] = static fn (ArrayAccess $config) => new CsrfRequestCheckMiddleware($config[RequestHandlerInterface::class]);
+        $config[CsrfResponseFilterMiddleware::class] = static fn (ArrayAccess $config) => new CsrfResponseFilterMiddleware($config[AbstractTokenStorage::class], $config[CsrfTokenGenerator::class], $config[ResponseFilterStrategyInterface::class]);
+        $config[CsrfTokenGenerator::class] = new CsrfTokenGenerator();
+        $config[AbstractTokenStorage::class] = new SessionTokenStorage([REQUEST_ID_KEY => ""]);
+        $config[ResponseFilterStrategyInterface::class] = $this->createStub(ResponseFilterStrategyInterface::class);
+        $container = new ConfigurableContainerStub($config);
+        return new ContainerFactory(static fn () => $container);
     }
 
-    #[Test]
-    #[TestDox("Memory usage for a get request shall be below " . PROJECT_MEMORY_USAGE_THRESHOLD . " bytes")]
-    public function shallBeBelowThreshold1()
+    #[TestDox("Memory usage shall be below \$threshold bytes")]
+    public function test1(int|string $threshold = PROJECT_MEMORY_USAGE_THRESHOLD)
     {
+        $this->expectOutputString("content");
+        $request = new RequestStub("GET", "/");
+        $config = new ContainerConfigurationStub();
+        $routes = new RouteRegistry();
+        /**
+         * @var Stub&AbstractContentDelegate $contentDelStub
+         */
+        $contentDelStub = $this->createStub(AbstractContentDelegate::class);
+        $contentDelStub->method("getResponseContent")->willReturn("content");
+        $routes->add("GET", "/", $contentDelStub);
+        $config[RouteRegistry::class] = $routes;
+        $containerFac = $this->getContainerFactory($routes);
         $totalUsed = -memory_get_usage();
-        $this->handleGetRequest();
+        $server = WebServer::createApp($containerFac, $config);
+        $server->useRoutes($routes);
+        $server->receive($request);
         $totalUsed += memory_get_usage();
         $this->assertGreaterThan(0, $totalUsed);
         $this->assertLessThanOrEqual((int) PROJECT_MEMORY_USAGE_THRESHOLD, $totalUsed);
-    }
-
-    #[Test]
-    #[TestDox("Memory usage for a post request shall be below " . PROJECT_MEMORY_USAGE_THRESHOLD . " bytes")]
-    public function shallBeBelowThreshold2()
-    {
-        $totalUsed = -memory_get_usage();
-        $this->handlePostRequest();
-        $totalUsed += memory_get_usage();
-        $this->assertGreaterThan(0, $totalUsed);
-        $this->assertLessThanOrEqual((int) PROJECT_MEMORY_USAGE_THRESHOLD, $totalUsed);
-    }
-
-    private function handleGetRequest(): self
-    {
-        $this->expectOutputRegex("/<form/");
-        $responseFactory = new ResponseFactoryStub();
-        $streamFactory = new StreamFactoryStub();
-        $templateEngine = new TemplateEngine(new StreamContentStrategy(), new Binder(), new Dispatcher());
-        $routeRegistry = new RouteRegistry();
-        $context = new HtmlSafeContext(new FakeModel());
-        $routeHandler = new class ($templateEngine, $context) extends AbstractContentDelegate
-        {
-            public function __construct(private TemplateEngine $templateEngine, private HtmlSafeContext $context)
-            {
-            }
-
-            public function getResponseContent(ContainerInterface $container): string
-            {
-                return $this->templateEngine->apply(
-                    FORM_TPL_PATH,
-                    $this->context,
-                );
-            }
-        };
-        $requestHandler = new class ($responseFactory, $streamFactory, $routeHandler) implements RequestHandlerInterface
-        {
-            public function __construct(
-                private ResponseFactoryInterface $responseFactory,
-                private StreamFactoryInterface $streamFactroy,
-                private AbstractContentDelegate $routeHandler
-            ) {
-            }
-            public function handle(ServerRequestInterface $request): ResponseInterface
-            {
-                return $this->responseFactory->createResponse()
-                    ->withBody($this->streamFactroy->createStream($this->routeHandler->getResponseContent(new ConfigurableContainerStub(new ContainerConfigurationStub()))));
-            }
-        };
-        $routeRegistry->addGet(TEST_GET_ROUTE, $routeHandler);
-        $container = $this->getContainer(
-            $responseFactory,
-            $streamFactory,
-            $templateEngine,
-            $requestHandler,
-        );
-        $app = WebServer::createApp(new ContainerFactory(static fn () => $container), new ContainerConfigurationStub());
-        $app->useRoutes($routeRegistry);
-        $app->useCsrfMiddleware();
-        $app->receive((new RequestStub("GET"))->withUri(new UriStub(TEST_GET_ROUTE)));
-
-        return $this;
-    }
-
-    private function handlePostRequest(): self
-    {
-        $this->expectOutputRegex("/<ul/");
-        $responseFactory = new ResponseFactoryStub();
-        $streamFactory = new StreamFactoryStub();
-        $templateEngine = new TemplateEngine(new StreamContentStrategy(), new Binder(), new Dispatcher());
-        $routeRegistry = new RouteRegistry();
-        $routeHandler = new class ($templateEngine) extends AbstractContentDelegate
-        {
-            public function __construct(private TemplateEngine $templateEngine)
-            {
-            }
-
-            public function getResponseContent(ContainerInterface $container): string
-            {
-                $saved = new FakeModel();
-                $saved->myInput = "something else";
-                $storage = new class () extends AbstractStorage
-                {
-                    public function commit(): void
-                    {
-                        // no op
-                    }
-                    public function load(): void
-                    {
-                        // no op
-                    }
-                };
-                $key = new ItemKey(uniqid());
-                $storage->storeByKey($key, new Item($saved));
-                $modelList = new ModelList();
-                $modelList->add($saved);
-                return $this->templateEngine->apply(
-                    LIST_TPL_PATH,
-                    new HtmlSafeContext($modelList)
-                );
-            }
-        };
-        $routeRegistry->addPost(TEST_POST_ROUTE, $routeHandler);
-        $container = $this->getContainer(
-            $responseFactory,
-            $streamFactory,
-            $templateEngine,
-        );
-        $app = WebServer::createApp(new ContainerFactory(static fn () => $container), new ContainerConfigurationStub());
-        $app->useRoutes($routeRegistry);
-        $app->useCsrfMiddleware();
-        $app->receive((new RequestStub("POST"))->withUri(new UriStub(TEST_POST_ROUTE)));
-
-        return $this;
     }
 }

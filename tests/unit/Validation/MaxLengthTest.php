@@ -10,7 +10,6 @@ use Phpolar\Phpolar\Core\Validation\DefaultErrorMessages;
 use Phpolar\Phpolar\Tests\DataProviders\MaxLengthDataProvider;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProviderExternal;
-use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\TestCase;
@@ -22,9 +21,9 @@ use PHPUnit\Framework\TestCase;
 #[UsesClass(DefaultValidationError::class)]
 final class MaxLengthTest extends TestCase
 {
-    #[Test]
+    #[TestDox("Shall be valid if prop is LTE maxlength with value \$valBelowMax")]
     #[DataProviderExternal(MaxLengthDataProvider::class, "strBelowMax")]
-    public function shallBeValidIfPropIsLteMaxLen(string $valBelowMax)
+    public function test1(string $valBelowMax)
     {
         $sut = new class ($valBelowMax)
         {
@@ -45,9 +44,9 @@ final class MaxLengthTest extends TestCase
         $this->assertEmpty($sut->getFieldErrorMessage("property"));
     }
 
-    #[Test]
+    #[TestDox("Shall be invalid if prop is GT maxlength with value \$valAboveMax")]
     #[DataProviderExternal(MaxLengthDataProvider::class, "strAboveMax")]
-    public function shallBeInvalidIfPropIsGtMaxLen(string $valAboveMax)
+    public function test2(string $valAboveMax)
     {
         $sut = new class ($valAboveMax)
         {
@@ -68,9 +67,9 @@ final class MaxLengthTest extends TestCase
         $this->assertNotEmpty($sut->getFieldErrorMessage("property"));
     }
 
-    #[Test]
+    #[TestDox("Shall be valid if numeric prop is LTE maxlength with value \$valBelowMax")]
     #[DataProviderExternal(MaxLengthDataProvider::class, "numberBelowMax")]
-    public function shallBeValidIfNumericPropIsLteMaxLen(int|float $valBelowMax)
+    public function test3(int|float $valBelowMax)
     {
         $sut = new class ($valBelowMax)
         {
@@ -91,9 +90,9 @@ final class MaxLengthTest extends TestCase
         $this->assertEmpty($sut->getFieldErrorMessage("property"));
     }
 
-    #[Test]
+    #[TestDox("Shall be invalid if numeric prop is GT max length with value \$valAboveMax")]
     #[DataProviderExternal(MaxLengthDataProvider::class, "numberAboveMax")]
-    public function shallBeInvalidIfNumericPropIsGtMaxLen(int|float $valAboveMax)
+    public function test4(int|float $valAboveMax)
     {
         $sut = new class ($valAboveMax)
         {

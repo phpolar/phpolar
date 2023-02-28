@@ -9,7 +9,6 @@ use Phpolar\Phpolar\Model\FieldErrorMessageTrait;
 use Phpolar\Phpolar\Tests\DataProviders\MaxDataProvider;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProviderExternal;
-use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\TestCase;
@@ -21,9 +20,9 @@ use PHPUnit\Framework\TestCase;
 #[UsesClass(DefaultValidationError::class)]
 final class MaxTest extends TestCase
 {
-    #[Test]
+    #[TestDox("Shall be valid if numeric prop is LTE max with value \$valBelowMax")]
     #[DataProviderExternal(MaxDataProvider::class, "numberBelowMax")]
-    public function shallBeValidIfNumericPropIsLteMax(int|float $valBelowMax)
+    public function test1(int|float $valBelowMax)
     {
         $sut = new class ($valBelowMax)
         {
@@ -44,9 +43,9 @@ final class MaxTest extends TestCase
         $this->assertEmpty($sut->getFieldErrorMessage("property"));
     }
 
-    #[Test]
+    #[TestDox("Shall be invalid if numeric prop is GTE max with value \$valAboveMax")]
     #[DataProviderExternal(MaxDataProvider::class, "numberAboveMax")]
-    public function shallBeInvalidIfNumericPropIsGtMax(int|float $valAboveMax)
+    public function test2(int|float $valAboveMax)
     {
         $sut = new class ($valAboveMax)
         {

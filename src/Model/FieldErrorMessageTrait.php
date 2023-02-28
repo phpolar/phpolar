@@ -81,11 +81,26 @@ trait FieldErrorMessageTrait
         $this->shouldValidate = true;
     }
 
+    /**
+     * Selects one of the provided validation
+     * strings based on the state of the model
+     *
+     * @param string $invalidAttr The HTML attribute that denotes invalid state
+     * @param string $validAttr The HTML attribute that denotes valid state
+     *
+     * @return string The selected HTML attribute that corresponds with the state of the model
+     */
+    public function selectValAttr(string $propName, string $invalidAttr, string $validAttr): string
+    {
+        return $this->shouldValidate === false ? "" : ($this->hasError($propName) === true ? $invalidAttr : $validAttr);
+    }
+
+
     private function setErrorMsgsOnce(): void
     {
         if (
             (new ReflectionProperty($this, "checked"))->isInitialized($this) === true &&
-                $this->checked === true
+            $this->checked === true
         ) {
             return;
         }
