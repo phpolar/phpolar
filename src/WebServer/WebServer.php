@@ -7,34 +7,22 @@ namespace Phpolar\Phpolar\WebServer;
 use ArrayAccess;
 use Phpolar\Extensions\HttpResponse\ResponseExtension;
 use Phpolar\Phpolar\Routing\RouteRegistry;
+use Phpolar\Phpolar\WebServer\Http\MiddlewareQueueInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\MiddlewareInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 
 /**
  * Represents a server that handles and responds to request.
  */
 final class WebServer
 {
-    public const PRIMARY_REQUEST_HANDLER = "PRIMARY_REQUEST_HANDLER";
-
     public const ERROR_HANDLER_401 = "ERROR_HANDLER_401";
-
-    private MiddlewareProcessingQueue $middlewareQueue;
-
-    /**
-     * A lookup table used to
-     * route requests to handlers.
-     *
-     * A custom routing handler can
-     * be provided, in which case
-     * this will likely be ignored.
-     */
-    private RouteRegistry $routes;
-
-    private bool $shouldUseRoutes = false;
-
-    private bool $shouldUseAuth = false;
+    public const ERROR_HANDLER_404 = "ERROR_HANDLER_404";
 
     private ContainerManager $containerManager;
+
+    private RequestHandlerInterface&MiddlewareQueueInterface $primaryHandler;
 
     /**
      * Prevent creation of multiple instances.
@@ -47,8 +35,7 @@ final class WebServer
         ArrayAccess $containerConfig,
     ) {
         $this->containerManager = new ContainerManager($containerFac, $containerConfig);
-        $this->middlewareQueue = $this->containerManager->getMiddlewareQueue();
-        $this->routes = new RouteRegistry();
+        $this->primaryHandler = $this->containerManager->getPrimaryHandler();
     }
 
     /**
@@ -74,25 +61,25 @@ final class WebServer
 
     /**
      * Handle and respond to requests from clients.
+     *
+     * If `useRoutes` is not called before this method,
+     * a 401 "Not Found" response will be produced.
      */
     public function receive(ServerRequestInterface $request): void
     {
-        $primaryHandler = $this->containerManager->getPrimaryRequestHandler($this->shouldUseRoutes, $this->routes);
-        $result = $this->middlewareQueue->dequeuePreRoutingMiddleware($request);
-        if ($result instanceof AbortProcessingRequest) {
-            ResponseExtension::extend($result->getResponse())->send();
-            return;
-        }
-        $routingResponse = $primaryHandler->handle($request);
-        $finalResponse = $this->middlewareQueue->dequeuePostRoutingMiddleware($request, $routingResponse);
-        ResponseExtension::extend($finalResponse)->send();
+        $response = $this->primaryHandler->handle($request);
+        ResponseExtension::extend($response)->send();
+    }
+
+    private function queueMiddleware(MiddlewareInterface $middleware): void
+    {
+        $this->primaryHandler->queue($middleware);
     }
 
     /**
      * Configures a session.
      *
      * @param array<string,mixed> $options
-     * @codeCoverageIgnore
      */
     public function useSession(
         array $options = [
@@ -104,8 +91,7 @@ final class WebServer
             "referer_check" => true,
         ]
     ): WebServer {
-        session_status() !== PHP_SESSION_ACTIVE && session_start($options);
-        $this->shouldUseAuth = true;
+        session_status() !== PHP_SESSION_ACTIVE && session_start($options); // @codeCoverageIgnore
         return $this;
     }
 
@@ -116,20 +102,26 @@ final class WebServer
      * CSRF check fails.  The current response
      * will be set up for CSRF detection.
      *
+     * Must be called directly before the
+     * `useRoutes` method is called.
+     *
      * @throws WebServerConfigurationException
      */
-    public function useCsrfMiddleware(): WebServer
-    {
-        /**
-         * @codeCoverageIgnore
-         */
-        if ($this->shouldUseAuth === false) {
-            $this->useSession();
-        }
+    public function useCsrfMiddleware(
+        array $sessionOpts = [
+            "cookie_httponly" => true,
+            "cookie_samesite" => "Strict",
+            "cookie_secure" => true,
+            "cookie_path" => true,
+            "use_strict_mode" => true,
+            "referer_check" => true,
+        ]
+    ): WebServer {
+        $this->useSession($sessionOpts);
         $csrfPreRouting = $this->containerManager->getCsrfPreRoutingMiddleware();
-        $csrfPostRouting = $this->containerManager->getCsrfPostRoutingMiddlewareFactory();
-        $errorHandler = $this->containerManager->get401ErrorHandler();
-        $this->middlewareQueue->addCsrfMiddleware($csrfPreRouting, $csrfPostRouting, $errorHandler);
+        $csrfPostRouting = $this->containerManager->getCsrfPostRoutingMiddleware();
+        $this->queueMiddleware($csrfPreRouting);
+        $this->queueMiddleware($csrfPostRouting);
         return $this;
     }
 
@@ -139,8 +131,9 @@ final class WebServer
      */
     public function useRoutes(RouteRegistry $routes): WebServer
     {
-        $this->routes = $routes;
-        $this->shouldUseRoutes = true;
+        $this->containerManager->loadRoutes($routes);
+        $routingMiddleware = $this->containerManager->getRoutingMiddleware();
+        $this->queueMiddleware($routingMiddleware);
         return $this;
     }
 }
