@@ -113,7 +113,7 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="WebServer/ContainerManager.php"><a href="files/webserver-containermanager.html"><abbr title="WebServer/ContainerManager.php">ContainerManager.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">22</span>
+    <span class="phpdocumentor-element-found-in__line">21</span>
 
     </aside>
 
@@ -144,39 +144,39 @@ and handles errors.</p>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Phpolar-Phpolar-WebServer-ContainerManager.html#method_get401ErrorHandler">get401ErrorHandler()</a>
+    <a href="classes/Phpolar-Phpolar-WebServer-ContainerManager.html#method_getCsrfPostRoutingMiddleware">getCsrfPostRoutingMiddleware()</a>
     <span>
-                                &nbsp;: <a href="classes/Phpolar-Phpolar-WebServer-Http-ErrorHandler.html"><abbr title="\Phpolar\Phpolar\WebServer\Http\ErrorHandler">ErrorHandler</abbr></a>    </span>
+                                &nbsp;: <abbr title="\Phpolar\CsrfProtection\Http\CsrfResponseFilterMiddleware">CsrfResponseFilterMiddleware</abbr>    </span>
 </dt>
-<dd>Retrieves a 401 error handler.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Phpolar-Phpolar-WebServer-ContainerManager.html#method_getCsrfPostRoutingMiddlewareFactory">getCsrfPostRoutingMiddlewareFactory()</a>
-    <span>
-                                &nbsp;: <abbr title="\Phpolar\CsrfProtection\Http\CsrfPostRoutingMiddlewareFactory">CsrfPostRoutingMiddlewareFactory</abbr>    </span>
-</dt>
-<dd>Retrieves the CSRF post-routing middleware.</dd>
+<dd>Retrieves the CSRF post-routing middleware</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Phpolar-Phpolar-WebServer-ContainerManager.html#method_getCsrfPreRoutingMiddleware">getCsrfPreRoutingMiddleware()</a>
     <span>
-                                &nbsp;: <abbr title="\Phpolar\CsrfProtection\Http\CsrfPreRoutingMiddleware">CsrfPreRoutingMiddleware</abbr>    </span>
+                                &nbsp;: <abbr title="\Phpolar\CsrfProtection\Http\CsrfRequestCheckMiddleware">CsrfRequestCheckMiddleware</abbr>    </span>
 </dt>
 <dd>Retrieves the CSRF pre-routing middleware.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Phpolar-Phpolar-WebServer-ContainerManager.html#method_getMiddlewareQueue">getMiddlewareQueue()</a>
+    <a href="classes/Phpolar-Phpolar-WebServer-ContainerManager.html#method_getPrimaryHandler">getPrimaryHandler()</a>
     <span>
-                                &nbsp;: <a href="classes/Phpolar-Phpolar-WebServer-MiddlewareProcessingQueue.html"><abbr title="\Phpolar\Phpolar\WebServer\MiddlewareProcessingQueue">MiddlewareProcessingQueue</abbr></a>    </span>
+                                &nbsp;: <a href="classes/Phpolar-Phpolar-WebServer-Http-PrimaryHandler.html"><abbr title="\Phpolar\Phpolar\WebServer\Http\PrimaryHandler">PrimaryHandler</abbr></a>    </span>
 </dt>
 <dd>Retrieves the middleware processing queue</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Phpolar-Phpolar-WebServer-ContainerManager.html#method_getPrimaryRequestHandler">getPrimaryRequestHandler()</a>
+    <a href="classes/Phpolar-Phpolar-WebServer-ContainerManager.html#method_getRoutingMiddleware">getRoutingMiddleware()</a>
     <span>
-                                &nbsp;: <abbr title="\Psr\Http\Server\RequestHandlerInterface">RequestHandlerInterface</abbr>    </span>
+                                &nbsp;: <a href="classes/Phpolar-Phpolar-Routing-RoutingMiddleware.html"><abbr title="\Phpolar\Phpolar\Routing\RoutingMiddleware">RoutingMiddleware</abbr></a>    </span>
 </dt>
-<dd>Retrieves the primary request handler.</dd>
+<dd>Retrieves the routing middleware.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Phpolar-Phpolar-WebServer-ContainerManager.html#method_loadRoutes">loadRoutes()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Adds routes to the container.</dd>
 
         </dl>
 
@@ -204,7 +204,7 @@ and handles errors.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="WebServer/ContainerManager.php"><a href="files/webserver-containermanager.html"><abbr title="WebServer/ContainerManager.php">ContainerManager.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">33</span>
+    <span class="phpdocumentor-element-found-in__line">34</span>
 
     </aside>
 
@@ -246,62 +246,29 @@ and handles errors.</p>
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_get401ErrorHandler">
-        get401ErrorHandler()
-        <a href="classes/Phpolar-Phpolar-WebServer-ContainerManager.html#method_get401ErrorHandler" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_getCsrfPostRoutingMiddleware">
+        getCsrfPostRoutingMiddleware()
+        <a href="classes/Phpolar-Phpolar-WebServer-ContainerManager.html#method_getCsrfPostRoutingMiddleware" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="WebServer/ContainerManager.php"><a href="files/webserver-containermanager.html"><abbr title="WebServer/ContainerManager.php">ContainerManager.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">69</span>
+    <span class="phpdocumentor-element-found-in__line">57</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Retrieves a 401 error handler.</p>
+        <p class="phpdocumentor-summary">Retrieves the CSRF post-routing middleware</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">get401ErrorHandler</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Phpolar-Phpolar-WebServer-Http-ErrorHandler.html"><abbr title="\Phpolar\Phpolar\WebServer\Http\ErrorHandler">ErrorHandler</abbr></a></span></code>
+                    <span class="phpdocumentor-signature__name">getCsrfPostRoutingMiddleware</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Phpolar\CsrfProtection\Http\CsrfResponseFilterMiddleware">CsrfResponseFilterMiddleware</abbr></span></code>
 
     
     
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><a href="classes/Phpolar-Phpolar-WebServer-Http-ErrorHandler.html"><abbr title="\Phpolar\Phpolar\WebServer\Http\ErrorHandler">ErrorHandler</abbr></a></span>
-            &mdash;
-        
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_getCsrfPostRoutingMiddlewareFactory">
-        getCsrfPostRoutingMiddlewareFactory()
-        <a href="classes/Phpolar-Phpolar-WebServer-ContainerManager.html#method_getCsrfPostRoutingMiddlewareFactory" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="WebServer/ContainerManager.php"><a href="files/webserver-containermanager.html"><abbr title="WebServer/ContainerManager.php">ContainerManager.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">45</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Retrieves the CSRF post-routing middleware.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getCsrfPostRoutingMiddlewareFactory</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Phpolar\CsrfProtection\Http\CsrfPostRoutingMiddlewareFactory">CsrfPostRoutingMiddlewareFactory</abbr></span></code>
-
-    
-    
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><abbr title="\Phpolar\CsrfProtection\Http\CsrfPostRoutingMiddlewareFactory">CsrfPostRoutingMiddlewareFactory</abbr></span>
+    <span class="phpdocumentor-signature__response_type"><abbr title="\Phpolar\CsrfProtection\Http\CsrfResponseFilterMiddleware">CsrfResponseFilterMiddleware</abbr></span>
             &mdash;
         
     
@@ -319,7 +286,7 @@ and handles errors.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="WebServer/ContainerManager.php"><a href="files/webserver-containermanager.html"><abbr title="WebServer/ContainerManager.php">ContainerManager.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">57</span>
+    <span class="phpdocumentor-element-found-in__line">45</span>
 
     </aside>
 
@@ -327,14 +294,14 @@ and handles errors.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getCsrfPreRoutingMiddleware</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Phpolar\CsrfProtection\Http\CsrfPreRoutingMiddleware">CsrfPreRoutingMiddleware</abbr></span></code>
+                    <span class="phpdocumentor-signature__name">getCsrfPreRoutingMiddleware</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Phpolar\CsrfProtection\Http\CsrfRequestCheckMiddleware">CsrfRequestCheckMiddleware</abbr></span></code>
 
     
     
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><abbr title="\Phpolar\CsrfProtection\Http\CsrfPreRoutingMiddleware">CsrfPreRoutingMiddleware</abbr></span>
+    <span class="phpdocumentor-signature__response_type"><abbr title="\Phpolar\CsrfProtection\Http\CsrfRequestCheckMiddleware">CsrfRequestCheckMiddleware</abbr></span>
             &mdash;
         
     
@@ -345,9 +312,75 @@ and handles errors.</p>
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_getMiddlewareQueue">
-        getMiddlewareQueue()
-        <a href="classes/Phpolar-Phpolar-WebServer-ContainerManager.html#method_getMiddlewareQueue" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_getPrimaryHandler">
+        getPrimaryHandler()
+        <a href="classes/Phpolar-Phpolar-WebServer-ContainerManager.html#method_getPrimaryHandler" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="WebServer/ContainerManager.php"><a href="files/webserver-containermanager.html"><abbr title="WebServer/ContainerManager.php">ContainerManager.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">69</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Retrieves the middleware processing queue</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getPrimaryHandler</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Phpolar-Phpolar-WebServer-Http-PrimaryHandler.html"><abbr title="\Phpolar\Phpolar\WebServer\Http\PrimaryHandler">PrimaryHandler</abbr></a></span></code>
+
+    
+    
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type"><a href="classes/Phpolar-Phpolar-WebServer-Http-PrimaryHandler.html"><abbr title="\Phpolar\Phpolar\WebServer\Http\PrimaryHandler">PrimaryHandler</abbr></a></span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getRoutingMiddleware">
+        getRoutingMiddleware()
+        <a href="classes/Phpolar-Phpolar-WebServer-ContainerManager.html#method_getRoutingMiddleware" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="WebServer/ContainerManager.php"><a href="files/webserver-containermanager.html"><abbr title="WebServer/ContainerManager.php">ContainerManager.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">89</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Retrieves the routing middleware.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getRoutingMiddleware</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Phpolar-Phpolar-Routing-RoutingMiddleware.html"><abbr title="\Phpolar\Phpolar\Routing\RoutingMiddleware">RoutingMiddleware</abbr></a></span></code>
+
+    
+    
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type"><a href="classes/Phpolar-Phpolar-Routing-RoutingMiddleware.html"><abbr title="\Phpolar\Phpolar\Routing\RoutingMiddleware">RoutingMiddleware</abbr></a></span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_loadRoutes">
+        loadRoutes()
+        <a href="classes/Phpolar-Phpolar-WebServer-ContainerManager.html#method_loadRoutes" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="WebServer/ContainerManager.php"><a href="files/webserver-containermanager.html"><abbr title="WebServer/ContainerManager.php">ContainerManager.php</abbr></a></abbr>
@@ -356,62 +389,15 @@ and handles errors.</p>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Retrieves the middleware processing queue</p>
+        <p class="phpdocumentor-summary">Adds routes to the container.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getMiddlewareQueue</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Phpolar-Phpolar-WebServer-MiddlewareProcessingQueue.html"><abbr title="\Phpolar\Phpolar\WebServer\MiddlewareProcessingQueue">MiddlewareProcessingQueue</abbr></a></span></code>
+                    <span class="phpdocumentor-signature__name">loadRoutes</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Phpolar-Phpolar-Routing-RouteRegistry.html"><abbr title="\Phpolar\Phpolar\Routing\RouteRegistry">RouteRegistry</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$routes</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     
-    
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><a href="classes/Phpolar-Phpolar-WebServer-MiddlewareProcessingQueue.html"><abbr title="\Phpolar\Phpolar\WebServer\MiddlewareProcessingQueue">MiddlewareProcessingQueue</abbr></a></span>
-            &mdash;
-        
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_getPrimaryRequestHandler">
-        getPrimaryRequestHandler()
-        <a href="classes/Phpolar-Phpolar-WebServer-ContainerManager.html#method_getPrimaryRequestHandler" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="WebServer/ContainerManager.php"><a href="files/webserver-containermanager.html"><abbr title="WebServer/ContainerManager.php">ContainerManager.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">99</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Retrieves the primary request handler.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getPrimaryRequestHandler</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$useRoutes</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Phpolar-Phpolar-Routing-RouteRegistry.html"><abbr title="\Phpolar\Phpolar\Routing\RouteRegistry">RouteRegistry</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$routes</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Psr\Http\Server\RequestHandlerInterface">RequestHandlerInterface</abbr></span></code>
-
-        <section class="phpdocumentor-description"><p>This is usually the request handler that takes
-care of routing a successful request.  However,
-the user can add any PSR-15 request handler to
-the dependency injection container according to
-the requirements of the application.</p>
-</section>
-
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$useRoutes</span>
-                : <span class="phpdocumentor-signature__argument__return-type">bool</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
-            </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$routes</span>
                 : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Phpolar-Phpolar-Routing-RouteRegistry.html"><abbr title="\Phpolar\Phpolar\Routing\RouteRegistry">RouteRegistry</abbr></a></span>
@@ -425,7 +411,7 @@ the requirements of the application.</p>
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><abbr title="\Psr\Http\Server\RequestHandlerInterface">RequestHandlerInterface</abbr></span>
+    <span class="phpdocumentor-signature__response_type">void</span>
             &mdash;
         
     
