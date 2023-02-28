@@ -105,6 +105,8 @@ final class WebServer
      * Must be called directly before the
      * `useRoutes` method is called.
      *
+     * @param array<string,bool|int|float|string> $sessionOpts
+     *
      * @throws WebServerConfigurationException
      */
     public function useCsrfMiddleware(
