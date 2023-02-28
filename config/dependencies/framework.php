@@ -25,16 +25,25 @@ use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 
 return [
+    /**
+     * @suppress PhanUnreferencedClosure
+     */
     WebServer::ERROR_HANDLER_401 => static fn (ArrayAccess $config) => new ErrorHandler(
         ResponseCode::UNAUTHORIZED,
         "Unauthorized",
         $config[ContainerInterface::class],
     ),
+    /**
+     * @suppress PhanUnreferencedClosure
+     */
     WebServer::ERROR_HANDLER_404 => static fn (ArrayAccess $config) => new ErrorHandler(
         ResponseCode::NOT_FOUND,
         "Not Found",
         $config[ContainerInterface::class],
     ),
+    /**
+     * @suppress PhanUnreferencedClosure
+     */
     RoutingHandler::class => static fn (ArrayAccess $config) => new RoutingHandler(
         $config[RouteRegistry::class],
         $config[ResponseFactoryInterface::class],
@@ -42,6 +51,12 @@ return [
         $config[WebServer::ERROR_HANDLER_401],
         $config[ContainerInterface::class],
     ),
+    /**
+     * @suppress PhanUnreferencedClosure
+     */
     PrimaryHandler::class => static fn (ArrayAccess $config) => new PrimaryHandler($config[WebServer::ERROR_HANDLER_404]),
+    /**
+     * @suppress PhanUnreferencedClosure
+     */
     RoutingMiddleware::class => static fn (ArrayAccess $config) => new RoutingMiddleware($config[RoutingHandler::class])
 ];

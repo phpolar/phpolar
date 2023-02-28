@@ -286,7 +286,6 @@ return [
     // This is useful for excluding hopelessly unanalyzable
     // files that can't be removed for whatever reason.
     'exclude_file_list' => [
-        'src/config/dependencies/framework.php',
     ],
 
     // A directory list that defines files that will be excluded
@@ -359,7 +358,7 @@ return [
         'vendor/phpolar/http-codes/src',
         'vendor/phpolar/http-response-extensions/src',
         'vendor/phpolar/phpolar-core/src',
-        'vendor/phpolar/php-templating/src',
+        'vendor/phpolar/pure-php/src',
         'vendor/phpolar/storage-driver/src',
     ],
 
@@ -367,6 +366,8 @@ return [
     // with a path relative to the root directory of the
     // project.
     'file_list' => [
-        'config/Globs.php'
+        'config/Globs.php',
+        'config/Formats.php',
+        'config/dependencies/framework.php'
     ],
 ];

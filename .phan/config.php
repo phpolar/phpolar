@@ -348,7 +348,7 @@ return [
         'vendor/phpolar/http-codes/src',
         'vendor/phpolar/http-response-extensions/src',
         'vendor/phpolar/phpolar-core/src',
-        'vendor/phpolar/php-templating/src',
+        'vendor/phpolar/pure-php/src',
         'vendor/phpolar/storage-driver/src',
     ],
 
