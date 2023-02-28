@@ -2,14 +2,13 @@
 
 declare(strict_types=1);
 
+namespace Phpolar\Phpolar\Routing;
+
 use Phpolar\HttpCodes\ResponseCode;
-use Phpolar\Phpolar\Routing\RoutingHandler;
-use Phpolar\Phpolar\Routing\RoutingMiddleware;
 use Phpolar\Phpolar\Tests\Stubs\RequestStub;
 use Phpolar\Phpolar\Tests\Stubs\ResponseStub;
 use Phpolar\Phpolar\Tests\Stubs\StreamFactoryStub;
 use PHPUnit\Framework\Attributes\CoversClass;
-use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\MockObject\Stub;
@@ -17,7 +16,6 @@ use PHPUnit\Framework\TestCase;
 use Psr\Http\Server\RequestHandlerInterface;
 
 #[CoversClass(RoutingMiddleware::class)]
-#[Group("me")]
 final class RoutingMiddlewareTest extends TestCase
 {
     #[TestDox("Shall process the routing request handler")]
