@@ -100,7 +100,7 @@ final class RoutingTest extends TestCase
             }
         };
         $routeRegistry->addGet($givenRoute, $indexHandler);
-        $routingHandler = new DefaultRoutingHandler(
+        $routingHandler = new RoutingHandler(
             routeRegistry: $routeRegistry,
             container: $this->getContainer(),
         );
@@ -116,7 +116,7 @@ final class RoutingTest extends TestCase
         $givenRoute = "an_unregistered_route";
         $expectedStatusCode = ResponseCode::NOT_FOUND;
         $routeRegistry = new RouteRegistry();
-        $routingHandler = new DefaultRoutingHandler(
+        $routingHandler = new RoutingHandler(
             routeRegistry: $routeRegistry,
             container: $this->getContainer(),
         );

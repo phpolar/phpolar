@@ -5,13 +5,18 @@ declare(strict_types=1);
 namespace Phpolar\Phpolar\Tests\Stubs;
 
 use ArrayAccess;
+use Countable;
 
-final class ContainerConfigurationStub implements ArrayAccess
+final class ContainerConfigurationStub implements ArrayAccess, Countable
 {
     private array $values = [];
     private array $raw = [];
     private array $keys = [];
     private array $frozen = [];
+    public function count(): int
+    {
+        return count($this->values);
+    }
     public function offsetExists(mixed $offset): bool
     {
         return isset($this->keys[$offset]);

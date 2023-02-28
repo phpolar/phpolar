@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Phpolar\Phpolar\Model;
 
 use ArrayAccess;
+use Closure;
 use DateTimeInterface;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\TestDox;

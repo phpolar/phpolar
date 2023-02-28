@@ -6,21 +6,28 @@ namespace Phpolar\Phpolar\WebServer;
 
 use ArrayAccess;
 use Closure;
-use Phpolar\CsrfProtection\Http\CsrfPostRoutingMiddleware;
-use Phpolar\CsrfProtection\Http\CsrfPostRoutingMiddlewareFactory;
-use Phpolar\CsrfProtection\Http\CsrfPreRoutingMiddleware;
+use Phpolar\CsrfProtection\CsrfTokenGenerator;
+use Phpolar\CsrfProtection\Http\CsrfProtectionRequestHandler;
+use Phpolar\CsrfProtection\Http\CsrfRequestCheckMiddleware;
+use Phpolar\CsrfProtection\Http\CsrfResponseFilterMiddleware;
+use Phpolar\CsrfProtection\Http\ResponseFilterStrategyInterface;
+use Phpolar\CsrfProtection\Storage\AbstractTokenStorage;
 use Phpolar\HttpCodes\ResponseCode;
 use Phpolar\Phpolar\Routing\AbstractContentDelegate;
 use Phpolar\Phpolar\Routing\RouteRegistry;
+use Phpolar\Phpolar\Routing\RoutingMiddleware;
 use Phpolar\Phpolar\Tests\Stubs\ConfigurableContainerStub;
 use Phpolar\Phpolar\Tests\Stubs\ContainerConfigurationStub;
 use Phpolar\Phpolar\Tests\Stubs\RequestStub;
 use Phpolar\Phpolar\Tests\Stubs\ResponseFactoryStub;
 use Phpolar\Phpolar\Tests\Stubs\ResponseStub;
 use Phpolar\Phpolar\Tests\Stubs\StreamFactoryStub;
+use Phpolar\Phpolar\WebServer\Http\ErrorHandler;
+use Phpolar\Phpolar\WebServer\Http\PrimaryHandler;
 use Phpolar\PurePhp\Binder;
 use Phpolar\PurePhp\Dispatcher;
 use Phpolar\PurePhp\StreamContentStrategy;
+use Phpolar\PurePhp\TemplateEngine;
 use Phpolar\PurePhp\TemplatingStrategyInterface;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
@@ -35,11 +42,9 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use ReflectionObject;
 
 #[RunTestsInSeparateProcesses]
 #[CoversClass(WebServer::class)]
-#[CoversClass(MiddlewareProcessingQueue::class)]
 #[CoversClass(ContainerManager::class)]
 #[UsesClass(RouteRegistry::class)]
 final class WebServerTest extends TestCase
@@ -51,21 +56,24 @@ final class WebServerTest extends TestCase
 
     protected function getContainerFactory(
         ArrayAccess $config,
-        RequestHandlerInterface $handler,
-        ?CsrfPreRoutingMiddleware $csrfPreRoutingMiddleware = null,
-        ?CsrfPostRoutingMiddlewareFactory $csrfPostRoutingMiddlewareFactory = null,
+        PrimaryHandler|Closure $handler,
+        CsrfRequestCheckMiddleware|Closure|null $csrfPreRoutingMiddleware = null,
+        CsrfResponseFilterMiddleware|Closure|null $csrfPostRoutingMiddleware = null,
     ): AbstractContainerFactory {
-        $responseFactory = new ResponseFactoryStub();
-        $streamFactory = new StreamFactoryStub();
         $config[TemplatingStrategyInterface::class] = new StreamContentStrategy();
+        $config[TemplateEngine::class] = static fn (ArrayAccess $config) => new TemplateEngine($config[TemplatingStrategyInterface::class], $config[Binder::class], $config[Dispatcher::class]);
         $config[Binder::class] = new Binder();
         $config[ContainerInterface::class] = new ConfigurableContainerStub($config);
         $config[Dispatcher::class] = new Dispatcher();
-        $config[WebServer::PRIMARY_REQUEST_HANDLER] = $handler;
-        $config[ResponseFactoryInterface::class] = $responseFactory;
-        $config[StreamFactoryInterface::class] = $streamFactory;
-        $config[CsrfPreRoutingMiddleware::class] = $csrfPreRoutingMiddleware ?? new CsrfPreRoutingMiddleware($responseFactory, $streamFactory);
-        $config[CsrfPostRoutingMiddlewareFactory::class] = $csrfPostRoutingMiddlewareFactory ?? new CsrfPostRoutingMiddlewareFactory($responseFactory, $streamFactory);
+        $config[ResponseFactoryInterface::class] = new ResponseFactoryStub();
+        $config[StreamFactoryInterface::class] = new StreamFactoryStub();
+        $config[PrimaryHandler::class] = $handler;
+        $config[WebServer::ERROR_HANDLER_404] = static fn (ArrayAccess $config) => new ErrorHandler(ResponseCode::NOT_FOUND, "Not Found", $config[ContainerInterface::class]);
+        $config[CsrfRequestCheckMiddleware::class] = $csrfPreRoutingMiddleware;
+        $config[CsrfResponseFilterMiddleware::class] = $csrfPostRoutingMiddleware;
+        $config[CsrfTokenGenerator::class] = $this->createStub(CsrfTokenGenerator::class);
+        $config[AbstractTokenStorage::class] = $this->createStub(AbstractTokenStorage::class);
+        $config[ResponseFilterStrategyInterface::class] = $this->createStub(ResponseFilterStrategyInterface::class);
 
         $containerFac = static fn (ArrayAccess $container): ContainerInterface =>
         new ConfigurableContainerStub($container);
@@ -85,267 +93,154 @@ final class WebServerTest extends TestCase
         };
     }
 
-    #[TestDox("Shall use the given routing handler to handle requests")]
+    #[TestDox("Shall delegate request processing to the routing middleware")]
     public function test1()
     {
         $responseFactory = new ResponseFactoryStub();
         $streamFactory = new StreamFactoryStub();
         $request = new RequestStub();
-        $handler = new class ($responseFactory, $streamFactory) implements RequestHandlerInterface {
-            public bool $wasUsed = false;
-            public function __construct(
-                private ResponseFactoryInterface $responseFactory,
-                private StreamFactoryInterface $streamFactory,
-            ) {
-            }
-            public function handle(ServerRequestInterface $request): ResponseInterface
-            {
-                $this->wasUsed = true;
-                return $this->responseFactory->createResponse()->withBody(
-                    $this->streamFactory->createStream()
-                );
-            }
-        };
+        /**
+         * @var MockObject&RoutingMiddleware $routingMiddlewareSpy
+         */
+        $routingMiddlewareSpy = $this->createMock(RoutingMiddleware::class);
+        $routingMiddlewareSpy
+            ->expects($this->once())
+            ->method("process")
+            ->willReturn(
+                $responseFactory->createResponse(ResponseCode::OK)
+                    ->withBody($streamFactory->createStream())
+            );
         $config = new ContainerConfigurationStub();
-        $container = $this->getContainerFactory($config, $handler);
-        $server = WebServer::createApp($container, $config);
+        $routes = new RouteRegistry();
+        $config[RouteRegistry::class] = $routes;
+        $config[RoutingMiddleware::class] = $routingMiddlewareSpy;
+        $config[CsrfProtectionRequestHandler::class] = static fn (ArrayAccess $config) =>
+            new CsrfProtectionRequestHandler(
+                $config[ResponseFactoryInterface::class],
+                $config[AbstractTokenStorage::class],
+                "",
+                "",
+            );
+        $handler = static fn (ArrayAccess $config) => new PrimaryHandler($config[WebServer::ERROR_HANDLER_404]);
+        $containerFac = $this->getContainerFactory($config, $handler);
+        // do not use the container config file
+        chdir(__DIR__);
+        $server = WebServer::createApp($containerFac, $config);
+        $server->useRoutes($routes);
         $server->receive($request);
-        $this->assertTrue($handler->wasUsed);
+        $this->assertSame(ResponseCode::OK, http_response_code());
     }
 
-    #[TestDox("Shall set the HTTP response code")]
+    #[TestDox("Shall allow for configuring the server to use CSRF middleware (2)")]
     public function test2()
     {
-        $this->expectOutputRegex("/Internal Server Error/");
-        $responseFactory = new ResponseFactoryStub();
-        ;
-        $streamFactory = new StreamFactoryStub();
-        $request = new RequestStub();
-        $handler = new class ($responseFactory, $streamFactory) implements RequestHandlerInterface {
-            public bool $wasUsed = false;
-            public function __construct(
-                private ResponseFactoryInterface $responseFactory,
-                private StreamFactoryInterface $streamFactory,
-            ) {
-            }
-            public function handle(ServerRequestInterface $request): ResponseInterface
-            {
-                $this->wasUsed = true;
-                return $this->responseFactory->createResponse()
-                    ->withBody($this->streamFactory->createStream())
-                    ->withStatus(WebServerTest::RESPONSE_STATUS, "Internal Server Error");
-            }
-        };
-        $config = new ContainerConfigurationStub();
-        $server = WebServer::createApp($this->getContainerFactory($config, $handler), $config);
-        $server->receive($request);
-        $this->assertSame(WebServerTest::RESPONSE_STATUS, http_response_code());
-    }
-
-    #[TestDox("Shall set the HTTP headers")]
-    public function test3()
-    {
         $responseFactory = new ResponseFactoryStub();
         $streamFactory = new StreamFactoryStub();
         $request = new RequestStub();
-        $handler = new class ($responseFactory, $streamFactory) implements RequestHandlerInterface {
-            public bool $wasUsed = false;
-            public function __construct(
-                private ResponseFactoryInterface $responseFactory,
-                private StreamFactoryInterface $streamFactory,
-            ) {
-            }
-            public function handle(ServerRequestInterface $request): ResponseInterface
+        $csrfPreRoutingMiddleware = static fn (ArrayAccess $config) => new class ($config[CsrfProtectionRequestHandler::class]) extends CsrfRequestCheckMiddleware {
+            public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
             {
-                $this->wasUsed = true;
-                return $this->responseFactory->createResponse()
-                    ->withBody($this->streamFactory->createStream())
-                    ->withHeader(WebServerTest::HEADER_KEY, WebServerTest::HEADER_VALUE);
-            }
-        };
-        $config = new ContainerConfigurationStub();
-        $server = WebServer::createApp($this->getContainerFactory($config, $handler), $config);
-        $server->receive($request);
-        $this->assertContains(
-            sprintf("%s: %s", WebServerTest::HEADER_KEY, WebServerTest::HEADER_VALUE),
-            \xdebug_get_headers()
-        );
-    }
-
-    #[TestDox("Shall allow for configuring the server to use CSRF middleware (2)")]
-    public function test4()
-    {
-        $responseFactory = new ResponseFactoryStub();
-        $streamFactory = new StreamFactoryStub();
-        $request = new RequestStub();
-        $handler = new class ($responseFactory, $streamFactory) implements RequestHandlerInterface {
-            public bool $wasUsed = false;
-            public function __construct(
-                private ResponseFactoryInterface $responseFactory,
-                private StreamFactoryInterface $streamFactory,
-            ) {
-            }
-            public function handle(ServerRequestInterface $request): ResponseInterface
-            {
-                $this->wasUsed = true;
-                return $this->responseFactory->createResponse()
-                    ->withBody($this->streamFactory->createStream())
-                    ->withHeader(WebServerTest::HEADER_KEY, WebServerTest::HEADER_VALUE);
+                return $handler->handle($request);
             }
         };
         /**
-         * @var MockObject&CsrfPreRoutingMiddleware $csrfPreRoutingMiddlewareSpy
+         * @var MockObject&CsrfResponseFilterMiddleware $csrfPostRoutingMiddlewareSpy
          */
-        $csrfPreRoutingMiddlewareSpy = $this->createMock(CsrfPreRoutingMiddleware::class);
-        $csrfPreRoutingMiddlewareSpy
-            ->expects($this->once())
-            ->method("process")
-            ->willReturn(
-                $responseFactory->createResponse(ResponseCode::BAD_REQUEST)
-                    ->withBody($streamFactory->createStream())
-            );
-        $config = new ContainerConfigurationStub();
-        $server = WebServer::createApp($this->getContainerFactory($config, $handler, $csrfPreRoutingMiddlewareSpy, null), $config);
-        $server->useCsrfMiddleware();
-        $server->receive($request);
-        $this->assertSame(ResponseCode::BAD_REQUEST, http_response_code());
-    }
-
-
-    #[TestDox("Shall allow for configuring the server to use CSRF middleware (2)")]
-    public function test5()
-    {
-        $responseFactory = new ResponseFactoryStub();
-        $streamFactory = new StreamFactoryStub();
-        $request = new RequestStub();
-        $handler = new class ($responseFactory, $streamFactory) implements RequestHandlerInterface {
-            public bool $wasUsed = false;
-            public function __construct(
-                private ResponseFactoryInterface $responseFactory,
-                private StreamFactoryInterface $streamFactory,
-            ) {
-            }
-            public function handle(ServerRequestInterface $request): ResponseInterface
-            {
-                $this->wasUsed = true;
-                return $this->responseFactory->createResponse()
-                    ->withBody($this->streamFactory->createStream())
-                    ->withHeader(WebServerTest::HEADER_KEY, WebServerTest::HEADER_VALUE);
-            }
-        };
+        $csrfPostRoutingMiddleware = static fn (ArrayAccess $config) =>
+            new class (
+                $config[AbstractTokenStorage::class],
+                $config[CsrfTokenGenerator::class],
+                $config[ResponseFilterStrategyInterface::class],
+            ) extends CsrfResponseFilterMiddleware {
+                public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
+                {
+                    $response = $handler->handle($request);
+                    // do something with it...
+                    return $response;
+                }
+            };
         /**
-         * @var MockObject&CsrfPreRoutingMiddleware $csrfPreRoutingMiddlewareSpy
+         * @var MockObject&RoutingMiddleware $routingMiddlewareSpy
          */
-        $csrfPreRoutingMiddlewareSpy = $this->createMock(CsrfPreRoutingMiddleware::class);
-        $csrfPreRoutingMiddlewareSpy
-            ->expects($this->once())
-            ->method("process")
-            ->willReturn(
-                $responseFactory->createResponse(ResponseCode::OK)
-                    ->withBody($streamFactory->createStream(self::RESPONSE_CONTENT))
-            );
-        /**
-         * @var MockObject&CsrfPostRoutingMiddleware $csrfPostRoutingMiddlewareSpy
-         */
-        $csrfPostRoutingMiddlewareSpy = $this->createMock(CsrfPostRoutingMiddleware::class);
-        $csrfPostRoutingMiddlewareSpy
+        $routingMiddlewareSpy = $this->createMock(RoutingMiddleware::class);
+        $routingMiddlewareSpy
             ->expects($this->once())
             ->method("process")
             ->willReturn(
                 $responseFactory->createResponse(ResponseCode::OK)
                     ->withBody($streamFactory->createStream())
             );
-
-        /**
-         * @var Stub&CsrfPostRoutingMiddlewareFactory $csrfPostRoutingMiddlewareSpyFactoryStub
-         */
-        $csrfPostRoutingMiddlewareSpyFactoryStub = $this->createStub(CsrfPostRoutingMiddlewareFactory::class);
-        $csrfPostRoutingMiddlewareSpyFactoryStub->method("getMiddleware")->willReturn($csrfPostRoutingMiddlewareSpy);
         $config = new ContainerConfigurationStub();
-        $server = WebServer::createApp($this->getContainerFactory($config, $handler, $csrfPreRoutingMiddlewareSpy, $csrfPostRoutingMiddlewareSpyFactoryStub), $config);
+        $routes = new RouteRegistry();
+        $config[RouteRegistry::class] = $routes;
+        $config[RoutingMiddleware::class] = $routingMiddlewareSpy;
+        $config[CsrfProtectionRequestHandler::class] = static fn (ArrayAccess $config) =>
+            new CsrfProtectionRequestHandler(
+                $config[ResponseFactoryInterface::class],
+                $config[AbstractTokenStorage::class],
+                "",
+                "",
+            );
+        $handler = static fn (ArrayAccess $config) => new PrimaryHandler($config[WebServer::ERROR_HANDLER_404]);
+        $containerFac = $this->getContainerFactory($config, $handler, $csrfPreRoutingMiddleware, $csrfPostRoutingMiddleware);
+        // do not use the container config file
+        chdir(__DIR__);
+        $server = WebServer::createApp($containerFac, $config);
         $server->useCsrfMiddleware();
+        $server->useRoutes($routes);
         $server->receive($request);
         $this->assertSame(ResponseCode::OK, http_response_code());
     }
 
     #[TestDox("Shall add given routes to default route handler")]
-    public function test6a()
+    public function test3()
     {
+        $expectedContent = "EXPECTED CONTENT";
         $givenRoutes = new RouteRegistry();
-        $handlerStub = $this->createStub(RequestHandlerInterface::class);
+        /**
+         * @var Stub&AbstractContentDelegate $handlerStub
+         */
+        $handlerStub = $this->createStub(AbstractContentDelegate::class);
+        $handlerStub->method("getResponseContent")->willReturn($expectedContent);
+        $givenRoutes->add("GET", "/", $handlerStub);
+        $givenRequest = new RequestStub("GET", "/");
+        $handlerStub = $this->createStub(PrimaryHandler::class);
         $config = new ContainerConfigurationStub();
-        $container = $this->getContainerFactory($config, $handlerStub);
-        $sut = WebServer::createApp($container, $config);
-        $reflectionObj = new ReflectionObject($sut);
-        $useRoutesProp = $reflectionObj->getProperty("shouldUseRoutes");
-        $useRoutesProp->setAccessible(true);
-        $routesProp = $reflectionObj->getProperty("routes");
-        $routesProp->setAccessible(true);
-        $this->assertFalse($useRoutesProp->getValue($sut));
-        $sut->useRoutes($givenRoutes);
-        $this->assertTrue($useRoutesProp->getValue($sut));
-        $this->assertEquals($givenRoutes, $routesProp->getValue($sut));
-    }
-
-    #[TestDox("Shall respond to POST requests")]
-    public function test6b()
-    {
-        $expectedResponse = "<h1>Responding to POST request!</h1>";
-        $this->expectOutputString($expectedResponse);
-        $givenPath = "/some-path";
-        $request = new RequestStub("POST", $givenPath);
-        $givenRoutes = new RouteRegistry();
-        $givenRoutes->addPost(
-            $givenPath,
-            new class ($expectedResponse) extends AbstractContentDelegate {
-                public function __construct(private string $expectedResponse)
-                {
-                }
-                public function getResponseContent(ContainerInterface $container): string
-                {
-                    return $this->expectedResponse;
-                }
-            },
-        );
-        $config = new ContainerConfigurationStub();
-        $config[ContainerInterface::class] = static fn (ArrayAccess $conf) => new ConfigurableContainerStub($conf);
-        $config[ResponseFactoryInterface::class] = new ResponseFactoryStub();
-        $config[StreamFactoryInterface::class] = new StreamFactoryStub();
-        $config[TemplatingStrategyInterface::class] = new StreamContentStrategy();
-        $containerFac = new ContainerFactory(static fn (ArrayAccess $conf) => new ConfigurableContainerStub($conf));
+        $containerFac = $this->getContainerFactory($config, $handlerStub);
+        $container = $containerFac->getContainer($config);
         $sut = WebServer::createApp($containerFac, $config);
         $sut->useRoutes($givenRoutes);
-        $sut->receive($request);
-        $this->assertSame(ResponseCode::OK, http_response_code());
-    }
-
-    #[TestDox("Shall add required services to the provided dependency injection container")]
-    public function test7()
-    {
-        $nonConfiguredContainer = $this->getNonConfiguredContainer();
-        WebServer::createApp($nonConfiguredContainer, new ContainerConfigurationStub());
-        $this->expectNotToPerformAssertions();
+        /**
+         * @var RouteRegistry $configuredRoutes
+         */
+        $configuredRoutes = $config[RouteRegistry::class];
+        $configuredHandler = $configuredRoutes->match($givenRequest);
+        $this->assertSame($expectedContent, $configuredHandler->getResponseContent($container));
     }
 
     #[TestDox("Shall add custom services to the provided dependency injection container")]
-    public function test8()
+    public function test4()
     {
+        $config = new ContainerConfigurationStub();
+        $config[TemplatingStrategyInterface::class] = $this->createStub(TemplatingStrategyInterface::class);
+        $config[StreamFactoryInterface::class] = $this->createStub(StreamFactoryInterface::class);
+        $config[ResponseFactoryInterface::class] = $this->createStub(ResponseFactoryInterface::class);
         $nonConfiguredContainerFac = $this->getNonConfiguredContainer();
         chdir("tests/__fakes__/");
-        $app = WebServer::createApp($nonConfiguredContainerFac, new ContainerConfigurationStub());
+        $app = WebServer::createApp($nonConfiguredContainerFac, $config);
         $app->receive(new RequestStub());
         $this->expectOutputString(WebServerTest::RESPONSE_CONTENT);
     }
 
     #[TestDox("Shall process the 404 error handler if the request path does not exist")]
-    public function test9()
+    public function test5()
     {
         $this->expectOutputString("<h1>Not Found</h1>");
         $config = new ContainerConfigurationStub();
         /**
-         * @var Stub&RequestHandlerInterface $handlerStub
+         * @var Stub&PrimaryHandler $handlerStub
          */
-        $handlerStub = $this->createStub(RequestHandlerInterface::class);
+        $handlerStub = $this->createStub(PrimaryHandler::class);
         $handlerStub->method("handle")->willReturn((new ResponseStub(404, "Not Found")));
         $container = $this->getContainerFactory($config, $handlerStub);
         $sut = WebServer::createApp($container, $config);
