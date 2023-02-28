@@ -16,7 +16,6 @@ use Phpolar\Phpolar\Validation\Required;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\CoversFunction;
 use PHPUnit\Framework\Attributes\DataProviderExternal;
-use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\TestCase;
@@ -31,7 +30,6 @@ use PHPUnit\Framework\TestCase;
 #[UsesClass(MinLength::class)]
 #[UsesClass(Pattern::class)]
 #[UsesClass(Required::class)]
-#[Group("me")]
 final class FieldErrorMessageTraitTest extends TestCase
 {
     #[TestDox("Shall produce expected error message when property validation fails")]
