@@ -229,7 +229,7 @@ final class WebServerTest extends TestCase
         chdir("tests/__fakes__/");
         $app = WebServer::createApp($nonConfiguredContainerFac, $config);
         $app->receive(new RequestStub());
-        $this->expectOutputString(WebServerTest::RESPONSE_CONTENT);
+        $this->expectOutputString("<h1>Not Found</h1>");
     }
 
     #[TestDox("Shall process the 404 error handler if the request path does not exist")]
