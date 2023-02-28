@@ -91,6 +91,11 @@ Search.appendIndex(
             "summary": "Changes\u0020the\u0020posted\u0020state\u0020of\u0020the\u0020model.",
             "url": "classes/Phpolar-Phpolar-Model-FieldErrorMessageTrait.html#method_isPosted"
         },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Model\\FieldErrorMessageTrait\u003A\u003AselectValAttr\u0028\u0029",
+            "name": "selectValAttr",
+            "summary": "Selects\u0020one\u0020of\u0020the\u0020provided\u0020validation\nstrings\u0020based\u0020on\u0020the\u0020state\u0020of\u0020the\u0020model",
+            "url": "classes/Phpolar-Phpolar-Model-FieldErrorMessageTrait.html#method_selectValAttr"
+        },                {
             "fqsen": "\\Phpolar\\Phpolar\\Model\\FormControlTypeDetectionTrait",
             "name": "FormControlTypeDetectionTrait",
             "summary": "Adds\u0020support\u0020for\u0020detecting\u0020the\u0020form\u0020control\u0020type\u0020based\u0020on\u0020the\u0020type\u0020declaration\u0020of\u0020the\u0020property.",
@@ -206,21 +211,6 @@ Search.appendIndex(
             "summary": "Returns\u0020the\u0020content\u0020of\u0020the\u0020response\u0020body.",
             "url": "classes/Phpolar-Phpolar-Routing-AbstractContentDelegate.html#method_getResponseContent"
         },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Routing\\DefaultRoutingHandler",
-            "name": "DefaultRoutingHandler",
-            "summary": "Handles\u0020request\u0020routing\u0020for\u0020the\u0020application.",
-            "url": "classes/Phpolar-Phpolar-Routing-DefaultRoutingHandler.html"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Routing\\DefaultRoutingHandler\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/Phpolar-Phpolar-Routing-DefaultRoutingHandler.html#method___construct"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Routing\\DefaultRoutingHandler\u003A\u003Ahandle\u0028\u0029",
-            "name": "handle",
-            "summary": "Locates\u0020and\u0020executes\u0020the\u0020registered\u0020route\u0020handler.",
-            "url": "classes/Phpolar-Phpolar-Routing-DefaultRoutingHandler.html#method_handle"
-        },                {
             "fqsen": "\\Phpolar\\Phpolar\\Routing\\RouteNotRegistered",
             "name": "RouteNotRegistered",
             "summary": "Represents\u0020the\u0020scenario\u0020when\u0020a\u0020handler\u0020is\u0020not\u0020associated\u0020with\u0020a\u0020given\u0020route.",
@@ -231,25 +221,45 @@ Search.appendIndex(
             "summary": "Contains\u0020route\u0020paths\u0020and\u0020their\u0020associated\nrequest\u0020handlers.",
             "url": "classes/Phpolar-Phpolar-Routing-RouteRegistry.html"
         },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Routing\\RouteRegistry\u003A\u003AaddGet\u0028\u0029",
-            "name": "addGet",
-            "summary": "Associates\u0020a\u0020request\u0020handler\u0020to\u0020a\u0020\u0060GET\u0060\u0020request.",
-            "url": "classes/Phpolar-Phpolar-Routing-RouteRegistry.html#method_addGet"
+            "fqsen": "\\Phpolar\\Phpolar\\Routing\\RouteRegistry\u003A\u003Aadd\u0028\u0029",
+            "name": "add",
+            "summary": "Associates\u0020a\u0020request\u0020handler\u0020to\u0020a\u0020request.",
+            "url": "classes/Phpolar-Phpolar-Routing-RouteRegistry.html#method_add"
         },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Routing\\RouteRegistry\u003A\u003AaddPost\u0028\u0029",
-            "name": "addPost",
-            "summary": "Associates\u0020a\u0020request\u0020handler\u0020to\u0020a\u0020\u0060POST\u0060\u0020request.",
-            "url": "classes/Phpolar-Phpolar-Routing-RouteRegistry.html#method_addPost"
+            "fqsen": "\\Phpolar\\Phpolar\\Routing\\RouteRegistry\u003A\u003Amatch\u0028\u0029",
+            "name": "match",
+            "summary": "Retrieves\u0020the\u0020registered\u0020handler\u0020for\u0020a\u0020request.",
+            "url": "classes/Phpolar-Phpolar-Routing-RouteRegistry.html#method_match"
         },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Routing\\RouteRegistry\u003A\u003AfromGet\u0028\u0029",
-            "name": "fromGet",
-            "summary": "Retrieves\u0020the\u0020registered\u0020handler\u0020for\u0020a\u0020\u0060GET\u0060\u0020request.",
-            "url": "classes/Phpolar-Phpolar-Routing-RouteRegistry.html#method_fromGet"
+            "fqsen": "\\Phpolar\\Phpolar\\Routing\\RoutingHandler",
+            "name": "RoutingHandler",
+            "summary": "Handles\u0020request\u0020routing\u0020for\u0020the\u0020application.",
+            "url": "classes/Phpolar-Phpolar-Routing-RoutingHandler.html"
         },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Routing\\RouteRegistry\u003A\u003AfromPost\u0028\u0029",
-            "name": "fromPost",
-            "summary": "Retrieves\u0020the\u0020registered\u0020handler\u0020for\u0020a\u0020\u0060POST\u0060\u0020request.",
-            "url": "classes/Phpolar-Phpolar-Routing-RouteRegistry.html#method_fromPost"
+            "fqsen": "\\Phpolar\\Phpolar\\Routing\\RoutingHandler\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Phpolar-Phpolar-Routing-RoutingHandler.html#method___construct"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Routing\\RoutingHandler\u003A\u003Ahandle\u0028\u0029",
+            "name": "handle",
+            "summary": "Locates\u0020and\u0020executes\u0020the\u0020registered\u0020route\u0020handler.",
+            "url": "classes/Phpolar-Phpolar-Routing-RoutingHandler.html#method_handle"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Routing\\RoutingMiddleware",
+            "name": "RoutingMiddleware",
+            "summary": "Takes\u0020care\u0020of\u0020routing\u0020requests\u0020to\u0020handlers",
+            "url": "classes/Phpolar-Phpolar-Routing-RoutingMiddleware.html"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Routing\\RoutingMiddleware\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Phpolar-Phpolar-Routing-RoutingMiddleware.html#method___construct"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Routing\\RoutingMiddleware\u003A\u003Aprocess\u0028\u0029",
+            "name": "process",
+            "summary": "Handle\u0020routing\u0020a\u0020request.",
+            "url": "classes/Phpolar-Phpolar-Routing-RoutingMiddleware.html#method_process"
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\Validation\\AbstractValidationError",
             "name": "AbstractValidationError",
@@ -376,21 +386,6 @@ Search.appendIndex(
             "summary": "Use\u0020to\u0020determine\u0020if\u0020a\u0020configuration\u0020is\u0020valid.",
             "url": "classes/Phpolar-Phpolar-Validation-ValidatorInterface.html#method_isValid"
         },                {
-            "fqsen": "\\Phpolar\\Phpolar\\WebServer\\AbortProcessingRequest",
-            "name": "AbortProcessingRequest",
-            "summary": "Use\u0020to\u0020notify\u0020the\u0020web\u0020server\u0020that\u0020the\u0020request\u0020shall\u0020not\u0020be\u0020processed",
-            "url": "classes/Phpolar-Phpolar-WebServer-AbortProcessingRequest.html"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\WebServer\\AbortProcessingRequest\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/Phpolar-Phpolar-WebServer-AbortProcessingRequest.html#method___construct"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\WebServer\\AbortProcessingRequest\u003A\u003AgetResponse\u0028\u0029",
-            "name": "getResponse",
-            "summary": "Retrieves\u0020the\u0020response.",
-            "url": "classes/Phpolar-Phpolar-WebServer-AbortProcessingRequest.html#method_getResponse"
-        },                {
             "fqsen": "\\Phpolar\\Phpolar\\WebServer\\AbstractContainerFactory",
             "name": "AbstractContainerFactory",
             "summary": "This\u0020allows\u0020for\u0020configuring\u0020the\u0020container\nbefore\u0020the\u0020server\u0020is\u0020initialized,\u0020afterwards,\u0020or\u0020both.",
@@ -406,20 +401,25 @@ Search.appendIndex(
             "summary": "Retrieve\u0020the\u0020configured\u0020PSR\u002D11\u0020container.",
             "url": "classes/Phpolar-Phpolar-WebServer-AbstractContainerFactory.html#method_getContainer"
         },                {
-            "fqsen": "\\Phpolar\\Phpolar\\WebServer\\ContainerConfigurator",
-            "name": "ContainerConfigurator",
-            "summary": "Configures\u0020a\u0020dependency\u0020injection\u0020container.",
-            "url": "classes/Phpolar-Phpolar-WebServer-ContainerConfigurator.html"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\WebServer\\ContainerConfigurator\u003A\u003AconfigureContainer\u0028\u0029",
-            "name": "configureContainer",
-            "summary": "Add\u0020services\/dependencies\u0020to\u0020the\u0020provided\u0020container.",
-            "url": "classes/Phpolar-Phpolar-WebServer-ContainerConfigurator.html#method_configureContainer"
-        },                {
             "fqsen": "\\Phpolar\\Phpolar\\WebServer\\ContainerFactory",
             "name": "ContainerFactory",
             "summary": "A\u0020container\u0020factory\u0020implementation.",
             "url": "classes/Phpolar-Phpolar-WebServer-ContainerFactory.html"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\WebServer\\ContainerLoader",
+            "name": "ContainerLoader",
+            "summary": "Configures\u0020a\u0020dependency\u0020injection\u0020container.",
+            "url": "classes/Phpolar-Phpolar-WebServer-ContainerLoader.html"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\WebServer\\ContainerLoader\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Phpolar-Phpolar-WebServer-ContainerLoader.html#method___construct"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\WebServer\\ContainerLoader\u003A\u003AloadRoutes\u0028\u0029",
+            "name": "loadRoutes",
+            "summary": "Add\u0020routes\u0020to\u0020container.",
+            "url": "classes/Phpolar-Phpolar-WebServer-ContainerLoader.html#method_loadRoutes"
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\WebServer\\ContainerManager",
             "name": "ContainerManager",
@@ -431,35 +431,30 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Phpolar-Phpolar-WebServer-ContainerManager.html#method___construct"
         },                {
-            "fqsen": "\\Phpolar\\Phpolar\\WebServer\\ContainerManager\u003A\u003AgetCsrfPostRoutingMiddlewareFactory\u0028\u0029",
-            "name": "getCsrfPostRoutingMiddlewareFactory",
-            "summary": "Retrieves\u0020the\u0020CSRF\u0020post\u002Drouting\u0020middleware.",
-            "url": "classes/Phpolar-Phpolar-WebServer-ContainerManager.html#method_getCsrfPostRoutingMiddlewareFactory"
-        },                {
             "fqsen": "\\Phpolar\\Phpolar\\WebServer\\ContainerManager\u003A\u003AgetCsrfPreRoutingMiddleware\u0028\u0029",
             "name": "getCsrfPreRoutingMiddleware",
             "summary": "Retrieves\u0020the\u0020CSRF\u0020pre\u002Drouting\u0020middleware.",
             "url": "classes/Phpolar-Phpolar-WebServer-ContainerManager.html#method_getCsrfPreRoutingMiddleware"
         },                {
-            "fqsen": "\\Phpolar\\Phpolar\\WebServer\\ContainerManager\u003A\u003Aget401ErrorHandler\u0028\u0029",
-            "name": "get401ErrorHandler",
-            "summary": "Retrieves\u0020a\u0020401\u0020error\u0020handler.",
-            "url": "classes/Phpolar-Phpolar-WebServer-ContainerManager.html#method_get401ErrorHandler"
+            "fqsen": "\\Phpolar\\Phpolar\\WebServer\\ContainerManager\u003A\u003AgetCsrfPostRoutingMiddleware\u0028\u0029",
+            "name": "getCsrfPostRoutingMiddleware",
+            "summary": "Retrieves\u0020the\u0020CSRF\u0020post\u002Drouting\u0020middleware",
+            "url": "classes/Phpolar-Phpolar-WebServer-ContainerManager.html#method_getCsrfPostRoutingMiddleware"
         },                {
-            "fqsen": "\\Phpolar\\Phpolar\\WebServer\\ContainerManager\u003A\u003AgetMiddlewareQueue\u0028\u0029",
-            "name": "getMiddlewareQueue",
+            "fqsen": "\\Phpolar\\Phpolar\\WebServer\\ContainerManager\u003A\u003AgetPrimaryHandler\u0028\u0029",
+            "name": "getPrimaryHandler",
             "summary": "Retrieves\u0020the\u0020middleware\u0020processing\u0020queue",
-            "url": "classes/Phpolar-Phpolar-WebServer-ContainerManager.html#method_getMiddlewareQueue"
+            "url": "classes/Phpolar-Phpolar-WebServer-ContainerManager.html#method_getPrimaryHandler"
         },                {
-            "fqsen": "\\Phpolar\\Phpolar\\WebServer\\ContainerManager\u003A\u003AgetPrimaryRequestHandler\u0028\u0029",
-            "name": "getPrimaryRequestHandler",
-            "summary": "Retrieves\u0020the\u0020primary\u0020request\u0020handler.",
-            "url": "classes/Phpolar-Phpolar-WebServer-ContainerManager.html#method_getPrimaryRequestHandler"
+            "fqsen": "\\Phpolar\\Phpolar\\WebServer\\ContainerManager\u003A\u003AloadRoutes\u0028\u0029",
+            "name": "loadRoutes",
+            "summary": "Adds\u0020routes\u0020to\u0020the\u0020container.",
+            "url": "classes/Phpolar-Phpolar-WebServer-ContainerManager.html#method_loadRoutes"
         },                {
-            "fqsen": "\\Phpolar\\Phpolar\\WebServer\\ContinueProcessingRequest",
-            "name": "ContinueProcessingRequest",
-            "summary": "Use\u0020to\u0020notify\u0020the\u0020web\u0020server\u0020that\u0020the\u0020request\u0020can\u0020be\u0020processed",
-            "url": "classes/Phpolar-Phpolar-WebServer-ContinueProcessingRequest.html"
+            "fqsen": "\\Phpolar\\Phpolar\\WebServer\\ContainerManager\u003A\u003AgetRoutingMiddleware\u0028\u0029",
+            "name": "getRoutingMiddleware",
+            "summary": "Retrieves\u0020the\u0020routing\u0020middleware.",
+            "url": "classes/Phpolar-Phpolar-WebServer-ContainerManager.html#method_getRoutingMiddleware"
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\WebServer\\Http\\ErrorHandler",
             "name": "ErrorHandler",
@@ -476,40 +471,35 @@ Search.appendIndex(
             "summary": "Return\u0020a\u0020401\u0020response.",
             "url": "classes/Phpolar-Phpolar-WebServer-Http-ErrorHandler.html#method_handle"
         },                {
-            "fqsen": "\\Phpolar\\Phpolar\\WebServer\\Http\\ErrorHandler\u003A\u003ADEFAULT_ERROR_MSG",
-            "name": "DEFAULT_ERROR_MSG",
-            "summary": "",
-            "url": "classes/Phpolar-Phpolar-WebServer-Http-ErrorHandler.html#constant_DEFAULT_ERROR_MSG"
+            "fqsen": "\\Phpolar\\Phpolar\\WebServer\\Http\\MiddlewareQueueInterface",
+            "name": "MiddlewareQueueInterface",
+            "summary": "Based\u0020on\u0020\u005Bthis\u0020suggestion\u005D\u0028https\u003A\/\/www.php\u002Dfig.org\/psr\/psr\u002D15\/meta\/\u0023queue\u002Dbased\u002Drequest\u002Dhandler\u0029\nthis\u0020\u005BPSR\u002D15\u0020request\u0020handler\u005D\u0028https\u003A\/\/www.php\u002Dfig.org\/psr\/psr\u002D15\/\u002321\u002Dpsrhttpserverrequesthandlerinterface\u0029\nprocess\u0020\u005BPSR\u002D15\u0020middleware\u005D\u0028https\u003A\/\/www.php\u002Dfig.org\/psr\/psr\u002D15\/\u002322\u002Dpsrhttpservermiddlewareinterface\u0029\nthat\u0020has\u0020been\u0020added\u0020to\u0020the\u0020queue.",
+            "url": "classes/Phpolar-Phpolar-WebServer-Http-MiddlewareQueueInterface.html"
         },                {
-            "fqsen": "\\Phpolar\\Phpolar\\WebServer\\Http\\ErrorHandler\u003A\u003ADEFAULT_FORBIDDEN_TPL_PATH",
-            "name": "DEFAULT_FORBIDDEN_TPL_PATH",
-            "summary": "",
-            "url": "classes/Phpolar-Phpolar-WebServer-Http-ErrorHandler.html#constant_DEFAULT_FORBIDDEN_TPL_PATH"
+            "fqsen": "\\Phpolar\\Phpolar\\WebServer\\Http\\MiddlewareQueueInterface\u003A\u003Aqueue\u0028\u0029",
+            "name": "queue",
+            "summary": "Adds\u0020the\u0020provided\u0020\u005BPSR\u002D15\u0020middleware\u005D\u0028https\u003A\/\/www.php\u002Dfig.org\/psr\/psr\u002D15\/\u002322\u002Dpsrhttpservermiddlewareinterface\u0029\nto\u0020the\u0020processing\u0020queue.",
+            "url": "classes/Phpolar-Phpolar-WebServer-Http-MiddlewareQueueInterface.html#method_queue"
         },                {
-            "fqsen": "\\Phpolar\\Phpolar\\WebServer\\MiddlewareProcessingQueue",
-            "name": "MiddlewareProcessingQueue",
-            "summary": "Handles\u0020middleware\u0020processing\u0020for\u0020HTTP\u0020requests",
-            "url": "classes/Phpolar-Phpolar-WebServer-MiddlewareProcessingQueue.html"
+            "fqsen": "\\Phpolar\\Phpolar\\WebServer\\Http\\PrimaryHandler",
+            "name": "PrimaryHandler",
+            "summary": "The\u0020HTTP\u0020Server\u0020request\u0020handling\u0020starting\u0020point\nfor\u0020the\u0020application.",
+            "url": "classes/Phpolar-Phpolar-WebServer-Http-PrimaryHandler.html"
         },                {
-            "fqsen": "\\Phpolar\\Phpolar\\WebServer\\MiddlewareProcessingQueue\u003A\u003A__construct\u0028\u0029",
+            "fqsen": "\\Phpolar\\Phpolar\\WebServer\\Http\\PrimaryHandler\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
             "summary": "",
-            "url": "classes/Phpolar-Phpolar-WebServer-MiddlewareProcessingQueue.html#method___construct"
+            "url": "classes/Phpolar-Phpolar-WebServer-Http-PrimaryHandler.html#method___construct"
         },                {
-            "fqsen": "\\Phpolar\\Phpolar\\WebServer\\MiddlewareProcessingQueue\u003A\u003AaddCsrfMiddleware\u0028\u0029",
-            "name": "addCsrfMiddleware",
-            "summary": "Adds\u0020support\u0020for\u0020CSRF\u0020mitigation.",
-            "url": "classes/Phpolar-Phpolar-WebServer-MiddlewareProcessingQueue.html#method_addCsrfMiddleware"
+            "fqsen": "\\Phpolar\\Phpolar\\WebServer\\Http\\PrimaryHandler\u003A\u003Ahandle\u0028\u0029",
+            "name": "handle",
+            "summary": "",
+            "url": "classes/Phpolar-Phpolar-WebServer-Http-PrimaryHandler.html#method_handle"
         },                {
-            "fqsen": "\\Phpolar\\Phpolar\\WebServer\\MiddlewareProcessingQueue\u003A\u003AdequeuePreRoutingMiddleware\u0028\u0029",
-            "name": "dequeuePreRoutingMiddleware",
-            "summary": "Processes\u0020all\u0020middleware\u0020configured\u0020to\u0020be\u0020processed\nbefore\u0020request\u0020route\u0020handling.",
-            "url": "classes/Phpolar-Phpolar-WebServer-MiddlewareProcessingQueue.html#method_dequeuePreRoutingMiddleware"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\WebServer\\MiddlewareProcessingQueue\u003A\u003AdequeuePostRoutingMiddleware\u0028\u0029",
-            "name": "dequeuePostRoutingMiddleware",
-            "summary": "Process\u0020all\u0020middleware\u0020configured\u0020to\u0020be\u0020processed\nafter\u0020request\u0020route\u0020handling.",
-            "url": "classes/Phpolar-Phpolar-WebServer-MiddlewareProcessingQueue.html#method_dequeuePostRoutingMiddleware"
+            "fqsen": "\\Phpolar\\Phpolar\\WebServer\\Http\\PrimaryHandler\u003A\u003Aqueue\u0028\u0029",
+            "name": "queue",
+            "summary": "Adds\u0020the\u0020provided\u0020\u005BPSR\u002D15\u0020middleware\u005D\u0028https\u003A\/\/www.php\u002Dfig.org\/psr\/psr\u002D15\/\u002322\u002Dpsrhttpservermiddlewareinterface\u0029\nto\u0020the\u0020processing\u0020queue.",
+            "url": "classes/Phpolar-Phpolar-WebServer-Http-PrimaryHandler.html#method_queue"
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\WebServer\\WebServer",
             "name": "WebServer",
@@ -526,10 +516,10 @@ Search.appendIndex(
             "summary": "Handle\u0020and\u0020respond\u0020to\u0020requests\u0020from\u0020clients.",
             "url": "classes/Phpolar-Phpolar-WebServer-WebServer.html#method_receive"
         },                {
-            "fqsen": "\\Phpolar\\Phpolar\\WebServer\\WebServer\u003A\u003AuseAuthentication\u0028\u0029",
-            "name": "useAuthentication",
-            "summary": "Configures\u0020session\u0020based\u0020authentication.",
-            "url": "classes/Phpolar-Phpolar-WebServer-WebServer.html#method_useAuthentication"
+            "fqsen": "\\Phpolar\\Phpolar\\WebServer\\WebServer\u003A\u003AuseSession\u0028\u0029",
+            "name": "useSession",
+            "summary": "Configures\u0020a\u0020session.",
+            "url": "classes/Phpolar-Phpolar-WebServer-WebServer.html#method_useSession"
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\WebServer\\WebServer\u003A\u003AuseCsrfMiddleware\u0028\u0029",
             "name": "useCsrfMiddleware",
@@ -541,15 +531,15 @@ Search.appendIndex(
             "summary": "Configures\u0020the\u0020web\u0020server\u0020with\u0020associated\nroutes\u0020and\u0020handlers.",
             "url": "classes/Phpolar-Phpolar-WebServer-WebServer.html#method_useRoutes"
         },                {
-            "fqsen": "\\Phpolar\\Phpolar\\WebServer\\WebServer\u003A\u003APRIMARY_REQUEST_HANDLER",
-            "name": "PRIMARY_REQUEST_HANDLER",
-            "summary": "",
-            "url": "classes/Phpolar-Phpolar-WebServer-WebServer.html#constant_PRIMARY_REQUEST_HANDLER"
-        },                {
             "fqsen": "\\Phpolar\\Phpolar\\WebServer\\WebServer\u003A\u003AERROR_HANDLER_401",
             "name": "ERROR_HANDLER_401",
             "summary": "",
             "url": "classes/Phpolar-Phpolar-WebServer-WebServer.html#constant_ERROR_HANDLER_401"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\WebServer\\WebServer\u003A\u003AERROR_HANDLER_404",
+            "name": "ERROR_HANDLER_404",
+            "summary": "",
+            "url": "classes/Phpolar-Phpolar-WebServer-WebServer.html#constant_ERROR_HANDLER_404"
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\WebServer\\WebServerConfigurationException",
             "name": "WebServerConfigurationException",

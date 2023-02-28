@@ -113,7 +113,7 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="WebServer/WebServer.php"><a href="files/webserver-webserver.html"><abbr title="WebServer/WebServer.php">WebServer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">15</span>
+    <span class="phpdocumentor-element-found-in__line">18</span>
 
     </aside>
 
@@ -141,9 +141,9 @@
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
-    <a href="classes/Phpolar-Phpolar-WebServer-WebServer.html#constant_PRIMARY_REQUEST_HANDLER">PRIMARY_REQUEST_HANDLER</a>
+    <a href="classes/Phpolar-Phpolar-WebServer-WebServer.html#constant_ERROR_HANDLER_404">ERROR_HANDLER_404</a>
     <span>
-        &nbsp;= &quot;PRIMARY_REQUEST_HANDLER&quot;                            </span>
+        &nbsp;= &quot;ERROR_HANDLER_404&quot;                            </span>
 </dt>
 <dd></dd>
 
@@ -166,13 +166,6 @@ caching this instance should be considered for performance reasons.</dd>
 <dd>Handle and respond to requests from clients.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Phpolar-Phpolar-WebServer-WebServer.html#method_useAuthentication">useAuthentication()</a>
-    <span>
-                                &nbsp;: <a href="classes/Phpolar-Phpolar-WebServer-WebServer.html"><abbr title="\Phpolar\Phpolar\WebServer\WebServer">WebServer</abbr></a>    </span>
-</dt>
-<dd>Configures session based authentication.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Phpolar-Phpolar-WebServer-WebServer.html#method_useCsrfMiddleware">useCsrfMiddleware()</a>
     <span>
                                 &nbsp;: <a href="classes/Phpolar-Phpolar-WebServer-WebServer.html"><abbr title="\Phpolar\Phpolar\WebServer\WebServer">WebServer</abbr></a>    </span>
@@ -186,6 +179,13 @@ caching this instance should be considered for performance reasons.</dd>
 </dt>
 <dd>Configures the web server with associated
 routes and handlers.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Phpolar-Phpolar-WebServer-WebServer.html#method_useSession">useSession()</a>
+    <span>
+                                &nbsp;: <a href="classes/Phpolar-Phpolar-WebServer-WebServer.html"><abbr title="\Phpolar\Phpolar\WebServer\WebServer">WebServer</abbr></a>    </span>
+</dt>
+<dd>Configures a session.</dd>
 
         </dl>
 
@@ -206,7 +206,7 @@ routes and handlers.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="WebServer/WebServer.php"><a href="files/webserver-webserver.html"><abbr title="WebServer/WebServer.php">WebServer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">19</span>
+    <span class="phpdocumentor-element-found-in__line">20</span>
 
     </aside>
 
@@ -227,15 +227,15 @@ routes and handlers.</dd>
 
 </article>
                     <article class="phpdocumentor-element -constant -public ">
-    <h4 class="phpdocumentor-element__name" id="constant_PRIMARY_REQUEST_HANDLER">
-        PRIMARY_REQUEST_HANDLER
-        <a href="classes/Phpolar-Phpolar-WebServer-WebServer.html#constant_PRIMARY_REQUEST_HANDLER" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="constant_ERROR_HANDLER_404">
+        ERROR_HANDLER_404
+        <a href="classes/Phpolar-Phpolar-WebServer-WebServer.html#constant_ERROR_HANDLER_404" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
 
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="WebServer/WebServer.php"><a href="files/webserver-webserver.html"><abbr title="WebServer/WebServer.php">WebServer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">17</span>
+    <span class="phpdocumentor-element-found-in__line">21</span>
 
     </aside>
 
@@ -243,8 +243,8 @@ routes and handlers.</dd>
     <code class="phpdocumentor-signature phpdocumentor-code ">
     <span class="phpdocumentor-signature__visibility">public</span>
         <span class="phpdocumentor-signature__type">mixed</span>
-    <span class="phpdocumentor-signature__name">PRIMARY_REQUEST_HANDLER</span>
-    = <span class="phpdocumentor-signature__default-value">&quot;PRIMARY_REQUEST_HANDLER&quot;</span>
+    <span class="phpdocumentor-signature__name">ERROR_HANDLER_404</span>
+    = <span class="phpdocumentor-signature__default-value">&quot;ERROR_HANDLER_404&quot;</span>
 </code>
 
 
@@ -277,7 +277,7 @@ routes and handlers.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="WebServer/WebServer.php"><a href="files/webserver-webserver.html"><abbr title="WebServer/WebServer.php">WebServer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">68</span>
+    <span class="phpdocumentor-element-found-in__line">55</span>
 
     </aside>
 
@@ -338,7 +338,7 @@ services/dependencies after the application is initialized.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="WebServer/WebServer.php"><a href="files/webserver-webserver.html"><abbr title="WebServer/WebServer.php">WebServer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">78</span>
+    <span class="phpdocumentor-element-found-in__line">68</span>
 
     </aside>
 
@@ -348,7 +348,10 @@ services/dependencies after the application is initialized.</p>
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">receive</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\ServerRequestInterface">ServerRequestInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$request</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
-    
+        <section class="phpdocumentor-description"><p>If <code class="prettyprint">useRoutes</code> is not called before this method,
+a 401 &quot;Not Found&quot; response will be produced.</p>
+</section>
+
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
@@ -375,62 +378,6 @@ services/dependencies after the application is initialized.</p>
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_useAuthentication">
-        useAuthentication()
-        <a href="classes/Phpolar-Phpolar-WebServer-WebServer.html#method_useAuthentication" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="WebServer/WebServer.php"><a href="files/webserver-webserver.html"><abbr title="WebServer/WebServer.php">WebServer.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">97</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Configures session based authentication.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">useAuthentication</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type">array&lt;string, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$options</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">[&quot;cookie_httponly&quot; =&gt; true, &quot;cookie_samesite&quot; =&gt; &quot;Strict&quot;, &quot;cookie_secure&quot; =&gt; true, &quot;cookie_path&quot; =&gt; true, &quot;use_strict_mode&quot; =&gt; true, &quot;referer_check&quot; =&gt; true]</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Phpolar-Phpolar-WebServer-WebServer.html"><abbr title="\Phpolar\Phpolar\WebServer\WebServer">WebServer</abbr></a></span></code>
-
-    
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$options</span>
-                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string, mixed&gt;</span>
-                 = <span class="phpdocumentor-signature__argument__default-value">[&quot;cookie_httponly&quot; =&gt; true, &quot;cookie_samesite&quot; =&gt; &quot;Strict&quot;, &quot;cookie_secure&quot; =&gt; true, &quot;cookie_path&quot; =&gt; true, &quot;use_strict_mode&quot; =&gt; true, &quot;referer_check&quot; =&gt; true]</span>            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
-            </dl>
-
-    
-    <h5 class="phpdocumentor-tag-list__heading" id="tags">
-        Tags
-        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
-    </h5>
-    <dl class="phpdocumentor-tag-list">
-                                    <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">codeCoverageIgnore</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
-                                                                                
-                                             
-                                    </dd>
-                        </dl>
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><a href="classes/Phpolar-Phpolar-WebServer-WebServer.html"><abbr title="\Phpolar\Phpolar\WebServer\WebServer">WebServer</abbr></a></span>
-            &mdash;
-        
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
     <h4 class="phpdocumentor-element__name" id="method_useCsrfMiddleware">
         useCsrfMiddleware()
         <a href="classes/Phpolar-Phpolar-WebServer-WebServer.html#method_useCsrfMiddleware" class="headerlink"><i class="fas fa-link"></i></a>
@@ -438,7 +385,7 @@ services/dependencies after the application is initialized.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="WebServer/WebServer.php"><a href="files/webserver-webserver.html"><abbr title="WebServer/WebServer.php">WebServer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">121</span>
+    <span class="phpdocumentor-element-found-in__line">110</span>
 
     </aside>
 
@@ -446,14 +393,27 @@ services/dependencies after the application is initialized.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">useCsrfMiddleware</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Phpolar-Phpolar-WebServer-WebServer.html"><abbr title="\Phpolar\Phpolar\WebServer\WebServer">WebServer</abbr></a></span></code>
+                    <span class="phpdocumentor-signature__name">useCsrfMiddleware</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$sessionOpts</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">[&quot;cookie_httponly&quot; =&gt; true, &quot;cookie_samesite&quot; =&gt; &quot;Strict&quot;, &quot;cookie_secure&quot; =&gt; true, &quot;cookie_path&quot; =&gt; true, &quot;use_strict_mode&quot; =&gt; true, &quot;referer_check&quot; =&gt; true]</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Phpolar-Phpolar-WebServer-WebServer.html"><abbr title="\Phpolar\Phpolar\WebServer\WebServer">WebServer</abbr></a></span></code>
 
         <section class="phpdocumentor-description"><p>The server will not process the request if the
 CSRF check fails.  The current response
 will be set up for CSRF detection.</p>
+<p>Must be called directly before the
+<code class="prettyprint">useRoutes</code> method is called.</p>
 </section>
 
-    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$sessionOpts</span>
+                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">[&quot;cookie_httponly&quot; =&gt; true, &quot;cookie_samesite&quot; =&gt; &quot;Strict&quot;, &quot;cookie_secure&quot; =&gt; true, &quot;cookie_path&quot; =&gt; true, &quot;use_strict_mode&quot; =&gt; true, &quot;referer_check&quot; =&gt; true]</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"></section>
+
+            </dd>
+            </dl>
+
     
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
         Tags
@@ -489,7 +449,7 @@ will be set up for CSRF detection.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="WebServer/WebServer.php"><a href="files/webserver-webserver.html"><abbr title="WebServer/WebServer.php">WebServer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">140</span>
+    <span class="phpdocumentor-element-found-in__line">132</span>
 
     </aside>
 
@@ -510,6 +470,49 @@ routes and handlers.</p>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"></section>
 
+            </dd>
+            </dl>
+
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type"><a href="classes/Phpolar-Phpolar-WebServer-WebServer.html"><abbr title="\Phpolar\Phpolar\WebServer\WebServer">WebServer</abbr></a></span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_useSession">
+        useSession()
+        <a href="classes/Phpolar-Phpolar-WebServer-WebServer.html#method_useSession" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="WebServer/WebServer.php"><a href="files/webserver-webserver.html"><abbr title="WebServer/WebServer.php">WebServer.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">84</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Configures a session.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">useSession</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type">array&lt;string, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$options</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">[&quot;cookie_httponly&quot; =&gt; true, &quot;cookie_samesite&quot; =&gt; &quot;Strict&quot;, &quot;cookie_secure&quot; =&gt; true, &quot;cookie_path&quot; =&gt; true, &quot;use_strict_mode&quot; =&gt; true, &quot;referer_check&quot; =&gt; true]</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Phpolar-Phpolar-WebServer-WebServer.html"><abbr title="\Phpolar\Phpolar\WebServer\WebServer">WebServer</abbr></a></span></code>
+
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$options</span>
+                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string, mixed&gt;</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">[&quot;cookie_httponly&quot; =&gt; true, &quot;cookie_samesite&quot; =&gt; &quot;Strict&quot;, &quot;cookie_secure&quot; =&gt; true, &quot;cookie_path&quot; =&gt; true, &quot;use_strict_mode&quot; =&gt; true, &quot;referer_check&quot; =&gt; true]</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
             </dd>
             </dl>
 
