@@ -4,7 +4,7 @@
 
 | Version  | Supported          |
 | -------- | ------------------ |
-| > 1.1.0  | :white_check_mark: |
+| > 1.6.5  | :white_check_mark: |
 | < php7-4 | :x:                |
 
 ## Reporting a Vulnerability
