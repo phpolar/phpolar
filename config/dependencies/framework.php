@@ -48,7 +48,7 @@ return [
         $config[RouteRegistry::class],
         $config[ResponseFactoryInterface::class],
         $config[StreamFactoryInterface::class],
-        $config[WebServer::ERROR_HANDLER_401],
+        $config[WebServer::ERROR_HANDLER_404],
         $config[ContainerInterface::class],
     ),
     /**
