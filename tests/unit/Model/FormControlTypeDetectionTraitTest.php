@@ -8,7 +8,6 @@ use Closure;
 use DateTime;
 use DateTimeImmutable;
 use DateTimeInterface;
-use Phan\Language\Element\Clazz;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
