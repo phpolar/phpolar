@@ -16,15 +16,16 @@ use TypeError;
  */
 abstract class AbstractModel
 {
-    use ValidationTrait;
-    use FieldErrorMessageTrait;
-    use LabelFormatTrait;
     use ColumnNameTrait;
     use DataTypeDetectionTrait;
     use EntityNameConfigurationTrait;
-    use SizeConfigurationTrait;
+    use FieldErrorMessageTrait;
     use FormInputTypeDetectionTrait;
     use FormControlTypeDetectionTrait;
+    use LabelFormatTrait;
+    use PrimaryKeyTrait;
+    use SizeConfigurationTrait;
+    use ValidationTrait;
 
     /**
      * @param array<string|int,mixed>|object $data
