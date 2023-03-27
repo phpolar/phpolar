@@ -31,10 +31,11 @@ class RouteRegistry
     {
         if (strtoupper($method) === "GET") {
             $this->registryForGet[$route] = $handler;
-            $this->containsParamRoutes = $this->containsParamRoutes || preg_match(ROUTE_PARAM_PATTERN, $route) === 1;
-            return;
         }
-        $this->registryForPost[$route] = $handler;
+        if (strtoupper($method) === "POST") {
+            $this->registryForPost[$route] = $handler;
+        }
+        $this->containsParamRoutes = $this->containsParamRoutes || preg_match(ROUTE_PARAM_PATTERN, $route) === 1;
     }
 
     /**
@@ -44,15 +45,24 @@ class RouteRegistry
     {
         $method = $request->getMethod();
         $route = $request->getUri()->getPath();
-        return strtoupper($method) === "GET" ? $this->matchGetRoute($route) : ($this->registryForPost[$route] ?? new RouteNotRegistered());
+        return strtoupper($method) === "GET" ? $this->matchGetRoute($route) : $this->matchPostRoute($route);
     }
 
     private function matchGetRoute(string $route): AbstractContentDelegate | ResolvedRoute | RouteNotRegistered
     {
-        return $this->registryForGet[$route] ?? $this->matchAnyParameterizedRoute($route);
+        return $this->registryForGet[$route] ?? $this->matchAnyParameterizedRoute($this->registryForGet, $route);
     }
 
-    private function matchAnyParameterizedRoute(string $path): ResolvedRoute | RouteNotRegistered
+    private function matchPostRoute(string $route): AbstractContentDelegate | ResolvedRoute | RouteNotRegistered
+    {
+        return $this->registryForPost[$route] ?? $this->matchAnyParameterizedRoute($this->registryForPost, $route);
+    }
+
+    /**
+     * @param array<string,AbstractContentDelegate> $registry
+     * @param string $path
+     */
+    private function matchAnyParameterizedRoute(array $registry, string $path): ResolvedRoute | RouteNotRegistered
     {
         if ($this->containsParamRoutes === false) {
             return new RouteNotRegistered();
@@ -61,7 +71,7 @@ class RouteRegistry
         /**
          * @var string[]
          */
-        $registeredRoutes = array_keys($this->registryForGet);
+        $registeredRoutes = array_keys($registry);
         // @codeCoverageIgnoreStart
         foreach ($registeredRoutes as $registeredRoute) {
             $regRouteParts = explode("/", ltrim($registeredRoute, "/"));
@@ -78,9 +88,9 @@ class RouteRegistry
                 $matched[] = $regRouteParts[$i];
             }
             $routeToTest = "/" . implode("/", $matched);
-            if (isset($this->registryForGet[$routeToTest]) === true) {
+            if (isset($registry[$routeToTest]) === true) {
                 return new ResolvedRoute(
-                    $this->registryForGet[$routeToTest],
+                    $registry[$routeToTest],
                     new RouteParamMap($routeToTest, $path)
                 );
             }
