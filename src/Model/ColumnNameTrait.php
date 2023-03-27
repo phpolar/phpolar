@@ -10,8 +10,6 @@ use ReflectionProperty;
 
 /**
  * Provides support for configuring column names of records.
- *
- * @api
  */
 trait ColumnNameTrait
 {
