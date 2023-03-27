@@ -26,7 +26,6 @@ use Psr\Http\Message\StreamFactoryInterface;
 final class ContainerLoaderTest extends TestCase
 {
     #[TestDox("Shall load configuration from framework dependency files into container")]
-    #[Group("me")]
     public function test1()
     {
         $containerConfig = new ContainerConfigurationStub();
