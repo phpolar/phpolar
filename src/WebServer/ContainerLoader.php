@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace Phpolar\Phpolar\WebServer;
 
 use ArrayAccess;
+use Closure;
 use Phpolar\Phpolar\Config\Globs;
 use Phpolar\Phpolar\Routing\RouteRegistry;
+use Psr\Container\ContainerInterface;
 
 /**
  * Configures a dependency injection container.
@@ -14,48 +16,46 @@ use Phpolar\Phpolar\Routing\RouteRegistry;
 final class ContainerLoader
 {
     /**
-     * @param ArrayAccess<string,mixed> $containerConfig
+     * Setting up this closure
+     * to avoid the readonly property
+     * static analyzer
      */
-    public function __construct(private ArrayAccess $containerConfig)
-    {
-        $globRes1 = glob(Globs::FrameworkDeps->value, GLOB_BRACE);
-        $globRes2 = glob(Globs::CustomDeps->value, GLOB_BRACE);
-        $frameworkDepConfs = $globRes1 === false ? [] : $globRes1;
-        $customDepConfs = $globRes2 === false ? [] : $globRes2;
-        $configFiles = array_merge(
-            $frameworkDepConfs,
-            $customDepConfs,
-        );
-        array_walk(
-            $configFiles,
-            $this->addDepsFromFile(...),
-        );
-    }
-
-    private function addDepsFromFile(string $filename): void
-    {
-        $confs = require_once $filename;
-        if (is_array($confs) === false) {
-            return;
-        }
-        array_walk(
-            $confs,
-            self::addDependency(...),
-            $this->containerConfig,
-        );
-    }
+    private Closure $loadConfig;
 
     /**
-     * @param mixed $configured
-     * @param string $depId
      * @param ArrayAccess<string,mixed> $containerConfig
      */
-    private static function addDependency(
-        mixed $configured,
-        string $depId,
+    public function __construct(
         ArrayAccess $containerConfig,
-    ): void {
-        $containerConfig[$depId] = $configured;
+        ContainerInterface $container,
+    ) {
+        $frameworkDepFiles = glob(Globs::FrameworkDeps->value, GLOB_BRACE);
+        $customDepFiles = glob(Globs::CustomDeps->value, GLOB_BRACE);
+
+        if ($frameworkDepFiles === false || $customDepFiles === false) {
+            return; // @codeCoverageIgnore
+        }
+        $validConfs = array_merge(
+            ...array_filter(
+                array_map(
+                    static fn (string $configFile) => require_once $configFile,
+                    array_merge(
+                        $frameworkDepFiles,
+                        $customDepFiles,
+                    ),
+                ),
+                is_array(...)
+            )
+        );
+        array_walk(
+            $validConfs,
+            static fn (mixed $configured, string $depId) =>
+            /**
+             * @suppress PhanUnreferencedClosure
+             */
+            $containerConfig[$depId] = $configured instanceof Closure ? static fn () => $configured($container) : $configured
+        );
+        $this->loadConfig = static fn (string $depId, mixed $configuredDep) => $containerConfig[$depId] = $configuredDep;
     }
 
     /**
@@ -63,6 +63,6 @@ final class ContainerLoader
      */
     public function loadRoutes(RouteRegistry $routes): void
     {
-        self::addDependency($routes, RouteRegistry::class, $this->containerConfig);
+        ($this->loadConfig)(RouteRegistry::class, $routes);
     }
 }

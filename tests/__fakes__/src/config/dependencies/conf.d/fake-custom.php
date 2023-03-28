@@ -1,7 +1,6 @@
 <?php
 
 use Phpolar\HttpCodes\ResponseCode;
-use Phpolar\Phpolar\Tests\Stubs\ConfigurableContainerStub;
 use Phpolar\Phpolar\Tests\Stubs\ResponseFactoryStub;
 use Phpolar\Phpolar\Tests\Stubs\StreamFactoryStub;
 use Phpolar\Phpolar\WebServer\Http\ErrorHandler;
@@ -17,19 +16,18 @@ use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 
 return [
-    PrimaryHandler::class => static fn (ArrayAccess $config) => new PrimaryHandler($config[WebServer::ERROR_HANDLER_404]),
-    WebServer::ERROR_HANDLER_401 => static fn (ArrayAccess $config) => new ErrorHandler(
+    PrimaryHandler::class => static fn (ContainerInterface $container) => new PrimaryHandler($container->get(WebServer::ERROR_HANDLER_404)),
+    WebServer::ERROR_HANDLER_401 => static fn (ContainerInterface $container) => new ErrorHandler(
         ResponseCode::UNAUTHORIZED,
         "Unauthorized",
-        $config[ContainerInterface::class],
+        $container,
     ),
-    WebServer::ERROR_HANDLER_404 => static fn (ArrayAccess $config) => new ErrorHandler(
+    WebServer::ERROR_HANDLER_404 => static fn (ContainerInterface $container) => new ErrorHandler(
         ResponseCode::NOT_FOUND,
         "Not Found",
-        $config[ContainerInterface::class],
+        $container,
     ),
-    TemplateEngine::class => static fn (ArrayAccess $config) => new TemplateEngine($config[TemplatingStrategyInterface::class], new Binder(), new Dispatcher()),
-    ContainerInterface::class => static fn (ArrayAccess $config) => new ConfigurableContainerStub($config),
+    TemplateEngine::class => static fn (ContainerInterface $container) => new TemplateEngine($container->get(TemplatingStrategyInterface::class), new Binder(), new Dispatcher()),
     TemplatingStrategyInterface::class => new StreamContentStrategy(),
     ResponseFactoryInterface::class => new ResponseFactoryStub(),
     StreamFactoryInterface::class => new StreamFactoryStub(),
