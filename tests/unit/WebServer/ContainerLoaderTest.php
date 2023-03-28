@@ -16,6 +16,7 @@ use Phpolar\PurePhp\TemplateEngine;
 use Phpolar\PurePhp\TemplatingStrategyInterface;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
@@ -23,6 +24,7 @@ use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 
 #[CoversClass(ContainerLoader::class)]
+#[RunTestsInSeparateProcesses]
 final class ContainerLoaderTest extends TestCase
 {
     #[TestDox("Shall load configuration from framework dependency files into container")]
@@ -35,9 +37,10 @@ final class ContainerLoaderTest extends TestCase
         $containerConfig[ContainerInterface::class] = new ConfigurableContainerStub($containerConfig);
         $containerConfig[ResponseFactoryInterface::class] = $this->createStub(ResponseFactoryInterface::class);
         $containerConfig[StreamFactoryInterface::class] = $this->createStub(StreamFactoryInterface::class);
-        new ContainerLoader($containerConfig);
-        $this->assertNotEmpty($containerConfig[RoutingMiddleware::class]);
-        $this->assertNotEmpty($containerConfig[WebServer::ERROR_HANDLER_401]);
+        $container = new ConfigurableContainerStub($containerConfig);
+        new ContainerLoader($containerConfig, $container);
+        $this->assertNotEmpty($container->get(RoutingMiddleware::class));
+        $this->assertNotEmpty($container->get(WebServer::ERROR_HANDLER_401));
     }
 
     #[TestDox("Shall load custom configuration from files into container")]
@@ -46,9 +49,10 @@ final class ContainerLoaderTest extends TestCase
         $dir = getcwd();
         chdir("tests/__fakes__");
         $containerConfig = new ContainerConfigurationStub();
-        new ContainerLoader($containerConfig);
+        $container = new ConfigurableContainerStub($containerConfig);
+        new ContainerLoader($containerConfig, $container);
         chdir($dir);
-        $this->assertNotEmpty($containerConfig[PrimaryHandler::class]);
+        $this->assertNotEmpty($container->get(PrimaryHandler::class));
     }
 
     #[TestDox("Shall not load the container if the files do not exist")]
@@ -57,7 +61,8 @@ final class ContainerLoaderTest extends TestCase
         $dir = getcwd();
         chdir(__DIR__);
         $containerConfig = new ContainerConfigurationStub();
-        new ContainerLoader($containerConfig);
+        $container = new ConfigurableContainerStub($containerConfig);
+        new ContainerLoader($containerConfig, $container);
         chdir($dir);
         $this->assertCount(0, $containerConfig);
     }
@@ -66,8 +71,9 @@ final class ContainerLoaderTest extends TestCase
     public function test4()
     {
         $containerConfig = new ContainerConfigurationStub();
-        $sut = new ContainerLoader($containerConfig);
+        $container = new ConfigurableContainerStub($containerConfig);
+        $sut = new ContainerLoader($containerConfig, $container);
         $sut->loadRoutes(new RouteRegistry());
-        $this->assertNotEmpty($containerConfig[RouteRegistry::class]);
+        $this->assertNotEmpty($container->get(RouteRegistry::class));
     }
 }
