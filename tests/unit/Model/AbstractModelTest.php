@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Phpolar\Phpolar\Model;
 
 use ArrayAccess;
+use DateTime;
+use DateTimeImmutable;
 use DateTimeInterface;
 use TypeError;
 use PHPUnit\Framework\Attributes\CoversClass;
@@ -147,17 +149,56 @@ final class AbstractModelTest extends TestCase
             "prop2" => "1.0",
             "prop3" => "1",
             "prop4" => "my string",
+            "date" => "now",
+            "dateImm" => "yesterday",
+            "dateInt" => "100 years ago",
         ];
         $model = new class ($stringVals) extends AbstractModel {
             public int $prop1;
             public float $prop2;
             public bool $prop3;
             public string $prop4;
+            public DateTime $date;
+            public DateTimeImmutable $dateImm;
+            public DateTimeInterface $dateInt;
         };
         $this->assertSame(1, $model->prop1);
         $this->assertSame(1.0, $model->prop2);
         $this->assertTrue($model->prop3);
         $this->assertSame("my string", $model->prop4);
+        $this->assertInstanceOf(DateTime::class, $model->date);
+        $this->assertInstanceOf(DateTimeImmutable::class, $model->dateImm);
+        $this->assertInstanceOf(DateTimeInterface::class, $model->dateInt);
+    }
+
+    #[TestDox("Shall convert given string values from source array to the declared type of the target model")]
+    public function test6bb()
+    {
+        $stringVals = (object) [
+            "prop1" => "1",
+            "prop2" => "1.0",
+            "prop3" => "1",
+            "prop4" => "my string",
+            "date" => "now",
+            "dateImm" => "yesterday",
+            "dateInt" => "100 years ago",
+        ];
+        $model = new class ($stringVals) extends AbstractModel {
+            public int $prop1;
+            public float $prop2;
+            public bool $prop3;
+            public string $prop4;
+            public DateTime $date;
+            public DateTimeImmutable $dateImm;
+            public DateTimeInterface $dateInt;
+        };
+        $this->assertSame(1, $model->prop1);
+        $this->assertSame(1.0, $model->prop2);
+        $this->assertTrue($model->prop3);
+        $this->assertSame("my string", $model->prop4);
+        $this->assertInstanceOf(DateTime::class, $model->date);
+        $this->assertInstanceOf(DateTimeImmutable::class, $model->dateImm);
+        $this->assertInstanceOf(DateTimeInterface::class, $model->dateInt);
     }
 
     #[TestDox("Shall throw an exception when intersection type is declared")]
@@ -251,5 +292,21 @@ final class AbstractModelTest extends TestCase
         new class ($stringVals) extends AbstractModel {
             public array $prop1;
         };
+    }
+
+    #[TestDox("Shall support iteration over non-initialized public properties")]
+    public function testa()
+    {
+        $sut = new class extends AbstractModel {
+            public string $name;
+            public string $address;
+        };
+        $iterated = false;
+        foreach ($sut as $propName => $propVal) {
+            $this->assertContains($propName, ["name", "address"]);
+            $this->assertNull($propVal);
+            $iterated = true;
+        }
+        $this->assertTrue($iterated, "Did not iterate over the object.");
     }
 }
