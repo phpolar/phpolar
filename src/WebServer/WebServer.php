@@ -19,15 +19,19 @@ final class WebServer
     public const ERROR_HANDLER_401 = "ERROR_HANDLER_401";
     public const ERROR_HANDLER_404 = "ERROR_HANDLER_404";
 
-    private RequestHandlerInterface&MiddlewareQueueInterface $primaryHandler;
+    private static RequestHandlerInterface&MiddlewareQueueInterface $primaryHandler;
+    private static ContainerManager $containerManager;
+    private static ?WebServer $instance = null;
+
 
     /**
      * Prevent creation of multiple instances.
      */
     private function __construct(
-        private ContainerManager $containerManager,
+        ContainerManager $containerManager,
     ) {
-        $this->primaryHandler = $this->containerManager->getPrimaryHandler();
+        self::$containerManager = $containerManager;
+        self::$primaryHandler = self::$containerManager->getPrimaryHandler();
     }
 
     /**
@@ -38,7 +42,7 @@ final class WebServer
     public static function createApp(
         ContainerManager $containerManager,
     ): WebServer {
-        return new self($containerManager);
+        return self::$instance = self::$instance ?? new self($containerManager);
     }
 
     /**
@@ -49,13 +53,13 @@ final class WebServer
      */
     public function receive(ServerRequestInterface $request): void
     {
-        $response = $this->primaryHandler->handle($request);
+        $response = self::$primaryHandler->handle($request);
         ResponseExtension::extend($response)->send();
     }
 
-    private function queueMiddleware(MiddlewareInterface $middleware): void
+    private static function queueMiddleware(MiddlewareInterface $middleware): void
     {
-        $this->primaryHandler->queue($middleware);
+        self::$primaryHandler->queue($middleware);
     }
 
     /**
@@ -102,8 +106,8 @@ final class WebServer
         ]
     ): WebServer {
         $this->useSession($sessionOpts);
-        $csrfPreRouting = $this->containerManager->getCsrfPreRoutingMiddleware();
-        $csrfPostRouting = $this->containerManager->getCsrfPostRoutingMiddleware();
+        $csrfPreRouting = self::$containerManager->getCsrfPreRoutingMiddleware();
+        $csrfPostRouting = self::$containerManager->getCsrfPostRoutingMiddleware();
         $this->queueMiddleware($csrfPreRouting);
         $this->queueMiddleware($csrfPostRouting);
         return $this;
@@ -115,9 +119,9 @@ final class WebServer
      */
     public function useRoutes(RouteRegistry $routes): WebServer
     {
-        $this->containerManager->loadRoutes($routes);
-        $routingMiddleware = $this->containerManager->getRoutingMiddleware();
-        $this->queueMiddleware($routingMiddleware);
+        self::$containerManager->loadRoutes($routes);
+        $routingMiddleware = self::$containerManager->getRoutingMiddleware();
+        self::queueMiddleware($routingMiddleware);
         return $this;
     }
 }
