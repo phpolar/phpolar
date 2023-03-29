@@ -92,24 +92,36 @@
                     <ul class="phpdocumentor-breadcrumbs">
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/phpolar.html">Phpolar</a></li>
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/phpolar-phpolar.html">Phpolar</a></li>
-            <li class="phpdocumentor-breadcrumb"><a href="namespaces/phpolar-phpolar-model.html">Model</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/phpolar-phpolar-routing.html">Routing</a></li>
     </ul>
 
-    <article class="phpdocumentor-element -trait">
+    <article class="phpdocumentor-element -class">
         <h2 class="phpdocumentor-content__title">
-    FormInputTypeDetectionTrait
+    ResolvedRoute
+
+    
+            <div class="phpdocumentor-element__package">
+            in package
+            <ul class="phpdocumentor-breadcrumbs">
+                                    <li class="phpdocumentor-breadcrumb"><a href="packages/Phpolar.html">Phpolar</a></li>
+                            </ul>
+        </div>
+    
+    
     </h2>
 
         <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="Model/FormInputTypeDetectionTrait.php"><a href="files/model-forminputtypedetectiontrait.html"><abbr title="Model/FormInputTypeDetectionTrait.php">FormInputTypeDetectionTrait.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="Routing/ResolvedRoute.php"><a href="files/routing-resolvedroute.html"><abbr title="Routing/ResolvedRoute.php">ResolvedRoute.php</abbr></a></abbr>
     :
     <span class="phpdocumentor-element-found-in__line">17</span>
 
     </aside>
 
-            <p class="phpdocumentor-summary">Adds support for detecting the form input type based on the type declaration of the property.</p>
+            <p class="phpdocumentor-summary">Represents a route with route parameters.</p>
 
-    <section class="phpdocumentor-description"><p>If the property type is not declared, the type of the value of the property will be used.</p>
+    <section class="phpdocumentor-description"><p><strong>Example</strong>: <code class="prettyprint">/some/path/{id}</code></p>
+<p>Contains the delegate for the route
+along with a map of the route parameters.</p>
 </section>
 
 
@@ -125,12 +137,26 @@
 </h3>
 
 <dl class="phpdocumentor-table-of-contents">
-                        <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Phpolar-Phpolar-Model-FormInputTypeDetectionTrait.html#method_getInputType">getInputType()</a>
+                    <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a href="classes/Phpolar-Phpolar-Routing-ResolvedRoute.html#property_delegate">$delegate</a>
     <span>
-                                &nbsp;: <a href="classes/Phpolar-Phpolar-Model-InputTypes.html"><abbr title="\Phpolar\Phpolar\Model\InputTypes">InputTypes</abbr></a>    </span>
+                        &nbsp;: <a href="classes/Phpolar-Phpolar-Routing-AbstractContentDelegate.html"><abbr title="\Phpolar\Phpolar\Routing\AbstractContentDelegate">AbstractContentDelegate</abbr></a>            </span>
 </dt>
-<dd>Uses the type declaration of the property to determine the input type of the field.</dd>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a href="classes/Phpolar-Phpolar-Routing-ResolvedRoute.html#property_routeParamMap">$routeParamMap</a>
+    <span>
+                        &nbsp;: <abbr title="\Phpolar\Phpolar\Core\Routing\RouteParamMap">RouteParamMap</abbr>            </span>
+</dt>
+<dd></dd>
+
+                <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Phpolar-Phpolar-Routing-ResolvedRoute.html#method___construct">__construct()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+<dd></dd>
 
         </dl>
 
@@ -138,10 +164,86 @@
 
         
 
+        
+    <section class="phpdocumentor-properties">
+        <h3 class="phpdocumentor-elements__header" id="properties">
+            Properties
+            <a href="classes/Phpolar-Phpolar-Routing-ResolvedRoute.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
+        </h3>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_delegate">
+        $delegate
+        <a href="classes/Phpolar-Phpolar-Routing-ResolvedRoute.html#property_delegate" class="headerlink"><i class="fas fa-link"></i></a>
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="Routing/ResolvedRoute.php"><a href="files/routing-resolvedroute.html"><abbr title="Routing/ResolvedRoute.php">ResolvedRoute.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">20</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type"><a href="classes/Phpolar-Phpolar-Routing-AbstractContentDelegate.html"><abbr title="\Phpolar\Phpolar\Routing\AbstractContentDelegate">AbstractContentDelegate</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$delegate</span>
+    </code>
+
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_routeParamMap">
+        $routeParamMap
+        <a href="classes/Phpolar-Phpolar-Routing-ResolvedRoute.html#property_routeParamMap" class="headerlink"><i class="fas fa-link"></i></a>
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="Routing/ResolvedRoute.php"><a href="files/routing-resolvedroute.html"><abbr title="Routing/ResolvedRoute.php">ResolvedRoute.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">21</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type"><abbr title="\Phpolar\Phpolar\Core\Routing\RouteParamMap">RouteParamMap</abbr></span>
+    <span class="phpdocumentor-signature__name">$routeParamMap</span>
+    </code>
+
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
+    
+
+</article>
+            </section>
+
             <section class="phpdocumentor-methods">
         <h3 class="phpdocumentor-elements__header" id="methods">
             Methods
-            <a href="classes/Phpolar-Phpolar-Model-FormInputTypeDetectionTrait.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/Phpolar-Phpolar-Routing-ResolvedRoute.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
         </h3>
                     <article
         class="phpdocumentor-element
@@ -149,29 +251,37 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_getInputType">
-        getInputType()
-        <a href="classes/Phpolar-Phpolar-Model-FormInputTypeDetectionTrait.html#method_getInputType" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method___construct">
+        __construct()
+        <a href="classes/Phpolar-Phpolar-Routing-ResolvedRoute.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="Model/FormInputTypeDetectionTrait.php"><a href="files/model-forminputtypedetectiontrait.html"><abbr title="Model/FormInputTypeDetectionTrait.php">FormInputTypeDetectionTrait.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="Routing/ResolvedRoute.php"><a href="files/routing-resolvedroute.html"><abbr title="Routing/ResolvedRoute.php">ResolvedRoute.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">24</span>
+    <span class="phpdocumentor-element-found-in__line">19</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Uses the type declaration of the property to determine the input type of the field.</p>
-
+    
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getInputType</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$propName</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Phpolar-Phpolar-Model-InputTypes.html"><abbr title="\Phpolar\Phpolar\Model\InputTypes">InputTypes</abbr></a></span></code>
+                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Phpolar-Phpolar-Routing-AbstractContentDelegate.html"><abbr title="\Phpolar\Phpolar\Routing\AbstractContentDelegate">AbstractContentDelegate</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$delegate</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Phpolar\Phpolar\Core\Routing\RouteParamMap">RouteParamMap</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$routeParamMap</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
 
-    
+        <section class="phpdocumentor-description"></section>
+
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$propName</span>
-                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                <span class="phpdocumentor-signature__argument__name">$delegate</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Phpolar-Phpolar-Routing-AbstractContentDelegate.html"><abbr title="\Phpolar\Phpolar\Routing\AbstractContentDelegate">AbstractContentDelegate</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"></section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$routeParamMap</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Phpolar\Phpolar\Core\Routing\RouteParamMap">RouteParamMap</abbr></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"></section>
@@ -182,7 +292,7 @@
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><a href="classes/Phpolar-Phpolar-Model-InputTypes.html"><abbr title="\Phpolar\Phpolar\Model\InputTypes">InputTypes</abbr></a></span>
+    <span class="phpdocumentor-signature__response_type">mixed</span>
             &mdash;
         
     
@@ -265,7 +375,7 @@
 </section>
             </div>
         </div>
-        <a href="classes/Phpolar-Phpolar-Model-FormInputTypeDetectionTrait.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+        <a href="classes/Phpolar-Phpolar-Routing-ResolvedRoute.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
     </main>
 

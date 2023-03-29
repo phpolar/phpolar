@@ -13,6 +13,7 @@ use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
 #[CoversClass(RoutingMiddleware::class)]
@@ -65,6 +66,7 @@ final class RoutingMiddlewareTest extends TestCase
             new ResponseStub(ResponseCode::OK)
         );
         $sut = new RoutingMiddleware($routingHandlerStub, new StreamFactoryStub());
-        $sut->process(new RequestStub(), $nextHandlerSpy);
+        $response = $sut->process(new RequestStub(), $nextHandlerSpy);
+        $this->assertInstanceOf(ResponseInterface::class, $response);
     }
 }

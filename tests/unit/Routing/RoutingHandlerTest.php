@@ -6,6 +6,8 @@ namespace Phpolar\Phpolar\Routing;
 
 use Generator;
 use Phpolar\HttpCodes\ResponseCode;
+use Phpolar\Phpolar\Core\Routing\RouteNotRegistered;
+use Phpolar\Phpolar\Core\Routing\RouteParamMap;
 use Phpolar\Phpolar\Tests\Stubs\MemoryStreamStub;
 use Phpolar\Phpolar\Tests\Stubs\RequestStub;
 use Phpolar\Phpolar\Tests\Stubs\ResponseFactoryStub;
@@ -18,7 +20,6 @@ use Phpolar\PurePhp\StreamContentStrategy;
 use Phpolar\PurePhp\TemplateEngine;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
-use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\MockObject\Stub;

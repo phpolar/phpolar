@@ -7,6 +7,7 @@ namespace Phpolar\Phpolar\WebServer;
 use ArrayAccess;
 use Phpolar\CsrfProtection\Http\CsrfRequestCheckMiddleware;
 use Phpolar\CsrfProtection\Http\CsrfResponseFilterMiddleware;
+use Phpolar\Phpolar\Core\ContainerLoader;
 use Phpolar\Phpolar\Routing\RouteRegistry;
 use Phpolar\Phpolar\Routing\RoutingMiddleware;
 use Phpolar\Phpolar\WebServer\Http\PrimaryHandler;
@@ -25,7 +26,7 @@ final class ContainerManager
      */
     private ContainerInterface $container;
 
-    private ContainerLoader $containerLoader;
+    private RouteLoader $routeLoader;
 
     /**
      * @param AbstractContainerFactory $containerFac
@@ -36,7 +37,8 @@ final class ContainerManager
         ArrayAccess $containerConfig
     ) {
         $this->container = $containerFac->getContainer($containerConfig);
-        $this->containerLoader = new ContainerLoader($containerConfig, $this->container);
+        (new ContainerLoader())->load($containerConfig, $this->container);
+        $this->routeLoader = new RouteLoader($containerConfig);
     }
 
     /**
@@ -80,7 +82,7 @@ final class ContainerManager
      */
     public function loadRoutes(RouteRegistry $routes): void
     {
-        $this->containerLoader->loadRoutes($routes);
+        $this->routeLoader->loadRoutes($routes);
     }
 
     /**

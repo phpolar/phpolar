@@ -8,7 +8,7 @@ use Closure;
 use DateTime;
 use DateTimeImmutable;
 use DateTimeInterface;
-use Phpolar\Phpolar\Core\InputTypes;
+use Phpolar\Phpolar\Model\InputTypes;
 use Phpolar\Phpolar\Model\AbstractModel;
 use Phpolar\Phpolar\Model\FormControlTypes;
 use Phpolar\Phpolar\Model\FormControlTypeDetectionTrait;
@@ -48,7 +48,7 @@ final class ConfigurableFormFieldTest extends TestCase
     }
 
     #[Test]
-    #[TestDox("Shall support configurable form validation")]
+    #[TestDox("Shall support configurable form validation for \$validationType")]
     #[DataProviderExternal(FormValidationDataProvider::class, "getTestCases")]
     public function criterion2(bool $expected, string $validationType, AbstractModel $model)
     {
@@ -56,7 +56,7 @@ final class ConfigurableFormFieldTest extends TestCase
     }
 
     #[Test]
-    #[TestDox("Shall support configurable form validation alerts")]
+    #[TestDox("Shall support configurable form validation alerts with message: \"\$expectedMessage\"")]
     #[DataProviderExternal(FormFieldErrorMessageDataProvider::class, "invalidPropertyTestCases")]
     public function criterion3(string $expectedMessage, object $model)
     {
@@ -106,7 +106,7 @@ final class ConfigurableFormFieldTest extends TestCase
     #[TestWith(["number", "numProp"])]
     #[TestWith(["checkbox", "checkboxProp"])]
     #[TestWith(["text", "strProp"])]
-    #[TestDox("Shall support converting detected input types to string")]
+    #[TestDox("Shall support converting detected \$expected input types to string")]
     public function criterion5(string $expected, string $propName)
     {
         $model = new class ()

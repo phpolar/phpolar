@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Phpolar\Phpolar\Model;
 
-use Phpolar\Phpolar\Core\InputTypes;
 use DateTimeInterface;
 use ReflectionNamedType;
 use ReflectionProperty;
