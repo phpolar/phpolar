@@ -113,7 +113,7 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="WebServer/WebServer.php"><a href="files/webserver-webserver.html"><abbr title="WebServer/WebServer.php">WebServer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">18</span>
+    <span class="phpdocumentor-element-found-in__line">17</span>
 
     </aside>
 
@@ -154,9 +154,7 @@
 </dt>
 <dd>Creates a singleton web server application.  This framework targets the
 *stateless, single-threaded, server-side application use case*.  Therefore,
-only a single instance is created on each request.  If the provided
-factory used to create the dependency injection container is stateless,
-caching this instance should be considered for performance reasons.</dd>
+only a single instance is created on each request.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Phpolar-Phpolar-WebServer-WebServer.html#method_receive">receive()</a>
@@ -206,7 +204,7 @@ routes and handlers.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="WebServer/WebServer.php"><a href="files/webserver-webserver.html"><abbr title="WebServer/WebServer.php">WebServer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">20</span>
+    <span class="phpdocumentor-element-found-in__line">19</span>
 
     </aside>
 
@@ -235,7 +233,7 @@ routes and handlers.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="WebServer/WebServer.php"><a href="files/webserver-webserver.html"><abbr title="WebServer/WebServer.php">WebServer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">21</span>
+    <span class="phpdocumentor-element-found-in__line">20</span>
 
     </aside>
 
@@ -277,42 +275,27 @@ routes and handlers.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="WebServer/WebServer.php"><a href="files/webserver-webserver.html"><abbr title="WebServer/WebServer.php">WebServer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">55</span>
+    <span class="phpdocumentor-element-found-in__line">42</span>
 
     </aside>
 
         <p class="phpdocumentor-summary">Creates a singleton web server application.  This framework targets the
 *stateless, single-threaded, server-side application use case*.  Therefore,
-only a single instance is created on each request.  If the provided
-factory used to create the dependency injection container is stateless,
-caching this instance should be considered for performance reasons.</p>
+only a single instance is created on each request.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">createApp</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Phpolar-Phpolar-WebServer-AbstractContainerFactory.html"><abbr title="\Phpolar\Phpolar\WebServer\AbstractContainerFactory">AbstractContainerFactory</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$containerFactory</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\ArrayAccess">ArrayAccess</abbr>&lt;string, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$containerConfig</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Phpolar-Phpolar-WebServer-WebServer.html"><abbr title="\Phpolar\Phpolar\WebServer\WebServer">WebServer</abbr></a></span></code>
+            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">createApp</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Phpolar-Phpolar-WebServer-ContainerManager.html"><abbr title="\Phpolar\Phpolar\WebServer\ContainerManager">ContainerManager</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$containerManager</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Phpolar-Phpolar-WebServer-WebServer.html"><abbr title="\Phpolar\Phpolar\WebServer\WebServer">WebServer</abbr></a></span></code>
 
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$containerFactory</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Phpolar-Phpolar-WebServer-AbstractContainerFactory.html"><abbr title="\Phpolar\Phpolar\WebServer\AbstractContainerFactory">AbstractContainerFactory</abbr></a></span>
+                <span class="phpdocumentor-signature__argument__name">$containerManager</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Phpolar-Phpolar-WebServer-ContainerManager.html"><abbr title="\Phpolar\Phpolar\WebServer\ContainerManager">ContainerManager</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>Adds support for configuring
-a <strong>PSR-11</strong> dependency injection container before the app is initialized, afterwards,
-or both.</p>
-</section>
-
-            </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$containerConfig</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\ArrayAccess">ArrayAccess</abbr>&lt;string, mixed&gt;</span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>The framework will configure some
-services/dependencies after the application is initialized.</p>
-</section>
+                    <section class="phpdocumentor-description"></section>
 
             </dd>
             </dl>
@@ -338,7 +321,7 @@ services/dependencies after the application is initialized.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="WebServer/WebServer.php"><a href="files/webserver-webserver.html"><abbr title="WebServer/WebServer.php">WebServer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">68</span>
+    <span class="phpdocumentor-element-found-in__line">54</span>
 
     </aside>
 
@@ -385,7 +368,7 @@ a 401 &quot;Not Found&quot; response will be produced.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="WebServer/WebServer.php"><a href="files/webserver-webserver.html"><abbr title="WebServer/WebServer.php">WebServer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">112</span>
+    <span class="phpdocumentor-element-found-in__line">98</span>
 
     </aside>
 
@@ -448,7 +431,7 @@ will be set up for CSRF detection.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="WebServer/WebServer.php"><a href="files/webserver-webserver.html"><abbr title="WebServer/WebServer.php">WebServer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">134</span>
+    <span class="phpdocumentor-element-found-in__line">120</span>
 
     </aside>
 
@@ -493,7 +476,7 @@ routes and handlers.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="WebServer/WebServer.php"><a href="files/webserver-webserver.html"><abbr title="WebServer/WebServer.php">WebServer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">84</span>
+    <span class="phpdocumentor-element-found-in__line">70</span>
 
     </aside>
 

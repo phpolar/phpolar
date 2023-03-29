@@ -354,7 +354,6 @@ return [
     // with a path relative to the root directory of the
     // project.
     'file_list' => [
-        'config/Globs.php',
         'config/Formats.php',
         'config/dependencies/framework.php'
     ],

@@ -95,7 +95,7 @@
     </ul>
 
     <article class="phpdocumentor-element -namespace">
-        <h2 class="phpdocumentor-content__title">Routing</h2>
+        <h2 class="phpdocumentor-content__title">Model</h2>
 
         
 
@@ -106,19 +106,48 @@
 
 <dl class="phpdocumentor-table-of-contents">
     
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Phpolar-Phpolar-Routing-AbstractContentDelegate.html"><abbr title="\Phpolar\Phpolar\Routing\AbstractContentDelegate">AbstractContentDelegate</abbr></a></dt>
-        <dd>Defines what should be done when a request is received.</dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Phpolar-Phpolar-Routing-ResolvedRoute.html"><abbr title="\Phpolar\Phpolar\Routing\ResolvedRoute">ResolvedRoute</abbr></a></dt>
-        <dd>Represents a route with route parameters.</dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Phpolar-Phpolar-Routing-RouteRegistry.html"><abbr title="\Phpolar\Phpolar\Routing\RouteRegistry">RouteRegistry</abbr></a></dt>
-        <dd>Contains route paths and their associated
-request handlers.</dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Phpolar-Phpolar-Routing-RoutingHandler.html"><abbr title="\Phpolar\Phpolar\Routing\RoutingHandler">RoutingHandler</abbr></a></dt>
-        <dd>Handles request routing for the application.</dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Phpolar-Phpolar-Routing-RoutingMiddleware.html"><abbr title="\Phpolar\Phpolar\Routing\RoutingMiddleware">RoutingMiddleware</abbr></a></dt>
-        <dd>Takes care of routing requests to handlers</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Phpolar-Phpolar-Model-AbstractModel.html"><abbr title="\Phpolar\Phpolar\Model\AbstractModel">AbstractModel</abbr></a></dt>
+        <dd>Provides support for configuring the properties
+of an object for validation, formatting, and storage.</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Phpolar-Phpolar-Model-Column.html"><abbr title="\Phpolar\Phpolar\Model\Column">Column</abbr></a></dt>
+        <dd>Provides support for configuring the text for column names in records.</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Phpolar-Phpolar-Model-EntityName.html"><abbr title="\Phpolar\Phpolar\Model\EntityName">EntityName</abbr></a></dt>
+        <dd>Allows for optional configuring of the name of an entity.</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Phpolar-Phpolar-Model-Hidden.html"><abbr title="\Phpolar\Phpolar\Model\Hidden">Hidden</abbr></a></dt>
+        <dd>Use to denote a class&#039;s property as a hidden form input.</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Phpolar-Phpolar-Model-Label.html"><abbr title="\Phpolar\Phpolar\Model\Label">Label</abbr></a></dt>
+        <dd>Provides support for automatic formatting
+and configuring the text for form field labels.</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Phpolar-Phpolar-Model-PrimaryKey.html"><abbr title="\Phpolar\Phpolar\Model\PrimaryKey">PrimaryKey</abbr></a></dt>
+        <dd>Provides support for configuring properties as primary keys.</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Phpolar-Phpolar-Model-Size.html"><abbr title="\Phpolar\Phpolar\Model\Size">Size</abbr></a></dt>
+        <dd>Provides support for configuring the size of a column.</dd>
     
+            <dt class="phpdocumentor-table-of-contents__entry -trait"><a href="classes/Phpolar-Phpolar-Model-ColumnNameTrait.html"><abbr title="\Phpolar\Phpolar\Model\ColumnNameTrait">ColumnNameTrait</abbr></a></dt>
+        <dd>Provides support for configuring column names of records.</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -trait"><a href="classes/Phpolar-Phpolar-Model-DataTypeDetectionTrait.html"><abbr title="\Phpolar\Phpolar\Model\DataTypeDetectionTrait">DataTypeDetectionTrait</abbr></a></dt>
+        <dd>Provides support for configuring column parameters used to create tables.</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -trait"><a href="classes/Phpolar-Phpolar-Model-EntityNameConfigurationTrait.html"><abbr title="\Phpolar\Phpolar\Model\EntityNameConfigurationTrait">EntityNameConfigurationTrait</abbr></a></dt>
+        <dd>Allows for configuring the name of entity.</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -trait"><a href="classes/Phpolar-Phpolar-Model-FieldErrorMessageTrait.html"><abbr title="\Phpolar\Phpolar\Model\FieldErrorMessageTrait">FieldErrorMessageTrait</abbr></a></dt>
+        <dd>Provides support for displaying form field error messages.</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -trait"><a href="classes/Phpolar-Phpolar-Model-FormControlTypeDetectionTrait.html"><abbr title="\Phpolar\Phpolar\Model\FormControlTypeDetectionTrait">FormControlTypeDetectionTrait</abbr></a></dt>
+        <dd>Adds support for detecting the form control type based on the type declaration of the property.</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -trait"><a href="classes/Phpolar-Phpolar-Model-FormInputTypeDetectionTrait.html"><abbr title="\Phpolar\Phpolar\Model\FormInputTypeDetectionTrait">FormInputTypeDetectionTrait</abbr></a></dt>
+        <dd>Adds support for detecting the form input type based on the type declaration of the property.</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -trait"><a href="classes/Phpolar-Phpolar-Model-LabelFormatTrait.html"><abbr title="\Phpolar\Phpolar\Model\LabelFormatTrait">LabelFormatTrait</abbr></a></dt>
+        <dd>Provides support for configuring form field labels.</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -trait"><a href="classes/Phpolar-Phpolar-Model-PrimaryKeyTrait.html"><abbr title="\Phpolar\Phpolar\Model\PrimaryKeyTrait">PrimaryKeyTrait</abbr></a></dt>
+        <dd>Provides support for configuring properties as primary keys.</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -trait"><a href="classes/Phpolar-Phpolar-Model-SizeConfigurationTrait.html"><abbr title="\Phpolar\Phpolar\Model\SizeConfigurationTrait">SizeConfigurationTrait</abbr></a></dt>
+        <dd>Allows for configuring the size of an entity</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -trait"><a href="classes/Phpolar-Phpolar-Model-ValidationTrait.html"><abbr title="\Phpolar\Phpolar\Model\ValidationTrait">ValidationTrait</abbr></a></dt>
+        <dd>Use to add support for validating the properties of an object.</dd>
     
+            <dt class="phpdocumentor-table-of-contents__entry -enum"><a href="classes/Phpolar-Phpolar-Model-FormControlTypes.html"><abbr title="\Phpolar\Phpolar\Model\FormControlTypes">FormControlTypes</abbr></a></dt>
+        <dd>Contains most form control types.</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -enum"><a href="classes/Phpolar-Phpolar-Model-InputTypes.html"><abbr title="\Phpolar\Phpolar\Model\InputTypes">InputTypes</abbr></a></dt>
+        <dd>Contains most form field input types.</dd>
     </dl>
 
 
@@ -140,7 +169,7 @@ request handlers.</dd>
 </section>
             </div>
         </div>
-        <a href="namespaces/phpolar-phpolar-routing.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+        <a href="namespaces/phpolar-phpolar-model.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
     </main>
 
