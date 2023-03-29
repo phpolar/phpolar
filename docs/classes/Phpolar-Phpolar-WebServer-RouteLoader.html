@@ -92,25 +92,34 @@
                     <ul class="phpdocumentor-breadcrumbs">
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/phpolar.html">Phpolar</a></li>
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/phpolar-phpolar.html">Phpolar</a></li>
-            <li class="phpdocumentor-breadcrumb"><a href="namespaces/phpolar-phpolar-model.html">Model</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/phpolar-phpolar-webserver.html">WebServer</a></li>
     </ul>
 
-    <article class="phpdocumentor-element -trait">
+    <article class="phpdocumentor-element -class">
         <h2 class="phpdocumentor-content__title">
-    FormInputTypeDetectionTrait
+    RouteLoader
+
+    
+            <div class="phpdocumentor-element__package">
+            in package
+            <ul class="phpdocumentor-breadcrumbs">
+                                    <li class="phpdocumentor-breadcrumb"><a href="packages/Phpolar.html">Phpolar</a></li>
+                            </ul>
+        </div>
+    
+    
     </h2>
 
         <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="Model/FormInputTypeDetectionTrait.php"><a href="files/model-forminputtypedetectiontrait.html"><abbr title="Model/FormInputTypeDetectionTrait.php">FormInputTypeDetectionTrait.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="WebServer/RouteLoader.php"><a href="files/webserver-routeloader.html"><abbr title="WebServer/RouteLoader.php">RouteLoader.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">17</span>
+    <span class="phpdocumentor-element-found-in__line">15</span>
 
     </aside>
 
-            <p class="phpdocumentor-summary">Adds support for detecting the form input type based on the type declaration of the property.</p>
+            <p class="phpdocumentor-summary">Adds the route registry to the
+dependency injection container.</p>
 
-    <section class="phpdocumentor-description"><p>If the property type is not declared, the type of the value of the property will be used.</p>
-</section>
 
 
 
@@ -126,11 +135,18 @@
 
 <dl class="phpdocumentor-table-of-contents">
                         <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Phpolar-Phpolar-Model-FormInputTypeDetectionTrait.html#method_getInputType">getInputType()</a>
+    <a href="classes/Phpolar-Phpolar-WebServer-RouteLoader.html#method___construct">__construct()</a>
     <span>
-                                &nbsp;: <a href="classes/Phpolar-Phpolar-Model-InputTypes.html"><abbr title="\Phpolar\Phpolar\Model\InputTypes">InputTypes</abbr></a>    </span>
+                                &nbsp;: mixed    </span>
 </dt>
-<dd>Uses the type declaration of the property to determine the input type of the field.</dd>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Phpolar-Phpolar-WebServer-RouteLoader.html#method_loadRoutes">loadRoutes()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Add routes to container.</dd>
 
         </dl>
 
@@ -138,10 +154,12 @@
 
         
 
+        
+
             <section class="phpdocumentor-methods">
         <h3 class="phpdocumentor-elements__header" id="methods">
             Methods
-            <a href="classes/Phpolar-Phpolar-Model-FormInputTypeDetectionTrait.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/Phpolar-Phpolar-WebServer-RouteLoader.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
         </h3>
                     <article
         class="phpdocumentor-element
@@ -149,29 +167,71 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_getInputType">
-        getInputType()
-        <a href="classes/Phpolar-Phpolar-Model-FormInputTypeDetectionTrait.html#method_getInputType" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method___construct">
+        __construct()
+        <a href="classes/Phpolar-Phpolar-WebServer-RouteLoader.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="Model/FormInputTypeDetectionTrait.php"><a href="files/model-forminputtypedetectiontrait.html"><abbr title="Model/FormInputTypeDetectionTrait.php">FormInputTypeDetectionTrait.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="WebServer/RouteLoader.php"><a href="files/webserver-routeloader.html"><abbr title="WebServer/RouteLoader.php">RouteLoader.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">24</span>
+    <span class="phpdocumentor-element-found-in__line">27</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Uses the type declaration of the property to determine the input type of the field.</p>
-
+    
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getInputType</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$propName</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Phpolar-Phpolar-Model-InputTypes.html"><abbr title="\Phpolar\Phpolar\Model\InputTypes">InputTypes</abbr></a></span></code>
+                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\ArrayAccess">ArrayAccess</abbr>&lt;string, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$containerConfig</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
 
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$propName</span>
-                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                <span class="phpdocumentor-signature__argument__name">$containerConfig</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\ArrayAccess">ArrayAccess</abbr>&lt;string, mixed&gt;</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">mixed</span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_loadRoutes">
+        loadRoutes()
+        <a href="classes/Phpolar-Phpolar-WebServer-RouteLoader.html#method_loadRoutes" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="WebServer/RouteLoader.php"><a href="files/webserver-routeloader.html"><abbr title="WebServer/RouteLoader.php">RouteLoader.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">36</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Add routes to container.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">loadRoutes</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Phpolar-Phpolar-Routing-RouteRegistry.html"><abbr title="\Phpolar\Phpolar\Routing\RouteRegistry">RouteRegistry</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$routes</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$routes</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Phpolar-Phpolar-Routing-RouteRegistry.html"><abbr title="\Phpolar\Phpolar\Routing\RouteRegistry">RouteRegistry</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"></section>
@@ -182,7 +242,7 @@
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><a href="classes/Phpolar-Phpolar-Model-InputTypes.html"><abbr title="\Phpolar\Phpolar\Model\InputTypes">InputTypes</abbr></a></span>
+    <span class="phpdocumentor-signature__response_type">void</span>
             &mdash;
         
     
@@ -265,7 +325,7 @@
 </section>
             </div>
         </div>
-        <a href="classes/Phpolar-Phpolar-Model-FormInputTypeDetectionTrait.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+        <a href="classes/Phpolar-Phpolar-WebServer-RouteLoader.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
     </main>
 

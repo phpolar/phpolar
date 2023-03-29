@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Phpolar\Phpolar\Routing;
 
+use Phpolar\Phpolar\Core\Routing\RouteParamMap;
+
 /**
  * Represents a route with route parameters.
  *

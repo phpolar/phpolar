@@ -23,8 +23,7 @@
             "Phpolar\\Phpolar\\Config\\": "config/"
         },
         "files": [
-            "src/Validation/Functions/getValidationAttributes.php",
-            "src/Routing/constants.php"
+            "src/Validation/Functions/getValidationAttributes.php"
         ]
     },
     "autoload-dev": {
@@ -39,7 +38,7 @@
         "ext-mbstring": "*",
         "phpolar/csrf-protection": "^2.0",
         "phpolar/http-response-extensions": "^0.1",
-        "phpolar/phpolar-core": "^0.2",
+        "phpolar/phpolar-core": "^2.0",
         "phpolar/phpolar-storage": "^1.0",
         "phpolar/pure-php": "^1.0",
         "phpolar/storage-driver": "^1.0",
