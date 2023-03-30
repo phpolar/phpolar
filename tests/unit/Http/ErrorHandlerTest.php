@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Phpolar\Phpolar\WebServer\Http;
+namespace Phpolar\Phpolar\Http;
 
 use Closure;
 use Phpolar\HttpCodes\ResponseCode;

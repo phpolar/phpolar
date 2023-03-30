@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Phpolar\Phpolar\Routing;
 
+use Psr\Http\Message\ServerRequestInterface;
 use Phpolar\Phpolar\Core\Routing\RouteNotRegistered;
 use Phpolar\Phpolar\Core\Routing\RouteParamMap;
-use Psr\Http\Message\ServerRequestInterface;
 
 use const Phpolar\Phpolar\Core\Routing\ROUTE_PARAM_PATTERN;
 

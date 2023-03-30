@@ -92,16 +92,13 @@
                     <ul class="phpdocumentor-breadcrumbs">
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/phpolar.html">Phpolar</a></li>
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/phpolar-phpolar.html">Phpolar</a></li>
-            <li class="phpdocumentor-breadcrumb"><a href="namespaces/phpolar-phpolar-validation.html">Validation</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/phpolar-phpolar-dependencyinjection.html">DependencyInjection</a></li>
     </ul>
 
     <article class="phpdocumentor-element -class">
         <h2 class="phpdocumentor-content__title">
-    Pattern
+    ClosureContainerFactory
 
-        <span class="phpdocumentor-element__extends">
-        extends <abbr title="\Phpolar\Phpolar\Core\AbstractPropertyValueExtractor">AbstractPropertyValueExtractor</abbr>
-    </span>
     
             <div class="phpdocumentor-element__package">
             in package
@@ -112,18 +109,19 @@
     
             <span class="phpdocumentor-element__implements">
             implements
-                            <a href="classes/Phpolar-Phpolar-Validation-ValidatorInterface.html"><abbr title="\Phpolar\Phpolar\Validation\ValidatorInterface">ValidatorInterface</abbr></a>                    </span>
+                            <a href="classes/Phpolar-Phpolar-DependencyInjection-ContainerFactoryInterface.html"><abbr title="\Phpolar\Phpolar\DependencyInjection\ContainerFactoryInterface">ContainerFactoryInterface</abbr></a>                    </span>
     
     </h2>
 
         <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="Validation/Pattern.php"><a href="files/validation-pattern.html"><abbr title="Validation/Pattern.php">Pattern.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="DependencyInjection/ClosureContainerFactory.php"><a href="files/dependencyinjection-closurecontainerfactory.html"><abbr title="DependencyInjection/ClosureContainerFactory.php">ClosureContainerFactory.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">13</span>
+    <span class="phpdocumentor-element-found-in__line">15</span>
 
     </aside>
 
-            <p class="phpdocumentor-summary">Provides support for configuring the expected pattern of a property.</p>
+            <p class="phpdocumentor-summary">Creates a container using the provided
+closure.</p>
 
 
 
@@ -137,8 +135,9 @@
 </h3>
 
 <dl class="phpdocumentor-table-of-contents">
-            <dt class="phpdocumentor-table-of-contents__entry -interface"><a href="classes/Phpolar-Phpolar-Validation-ValidatorInterface.html"><abbr title="\Phpolar\Phpolar\Validation\ValidatorInterface">ValidatorInterface</abbr></a></dt>
-        <dd>Unifies validation configuration objects with a standard api.</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -interface"><a href="classes/Phpolar-Phpolar-DependencyInjection-ContainerFactoryInterface.html"><abbr title="\Phpolar\Phpolar\DependencyInjection\ContainerFactoryInterface">ContainerFactoryInterface</abbr></a></dt>
+        <dd>Provides a means to configure the dependency injection
+before the server is initialized, afterwards, or both.</dd>
     
     
     
@@ -152,18 +151,18 @@
 
 <dl class="phpdocumentor-table-of-contents">
                         <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Phpolar-Phpolar-Validation-Pattern.html#method___construct">__construct()</a>
+    <a href="classes/Phpolar-Phpolar-DependencyInjection-ClosureContainerFactory.html#method___construct">__construct()</a>
     <span>
                                 &nbsp;: mixed    </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Phpolar-Phpolar-Validation-Pattern.html#method_isValid">isValid()</a>
+    <a href="classes/Phpolar-Phpolar-DependencyInjection-ClosureContainerFactory.html#method_getContainer">getContainer()</a>
     <span>
-                                &nbsp;: bool    </span>
+                                &nbsp;: <abbr title="\Psr\Container\ContainerInterface">ContainerInterface</abbr>    </span>
 </dt>
-<dd>Use to determine if a configuration is valid.</dd>
+<dd>Retrieve the configured PSR-11 container.</dd>
 
         </dl>
 
@@ -176,7 +175,7 @@
             <section class="phpdocumentor-methods">
         <h3 class="phpdocumentor-elements__header" id="methods">
             Methods
-            <a href="classes/Phpolar-Phpolar-Validation-Pattern.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/Phpolar-Phpolar-DependencyInjection-ClosureContainerFactory.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
         </h3>
                     <article
         class="phpdocumentor-element
@@ -186,30 +185,31 @@
 >
     <h4 class="phpdocumentor-element__name" id="method___construct">
         __construct()
-        <a href="classes/Phpolar-Phpolar-Validation-Pattern.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Phpolar-Phpolar-DependencyInjection-ClosureContainerFactory.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="Validation/Pattern.php"><a href="files/validation-pattern.html"><abbr title="Validation/Pattern.php">Pattern.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="DependencyInjection/ClosureContainerFactory.php"><a href="files/dependencyinjection-closurecontainerfactory.html"><abbr title="DependencyInjection/ClosureContainerFactory.php">ClosureContainerFactory.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">16</span>
+    <span class="phpdocumentor-element-found-in__line">21</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$pattern</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Closure">Closure</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$psr11Factory</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$pattern</span>
-                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                <span class="phpdocumentor-signature__argument__name">$psr11Factory</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Closure">Closure</abbr></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
+                    <section class="phpdocumentor-description"><p>Creates the PSR-11 container.
+This allows the user to decide which implementation to use.</p>
+</section>
 
             </dd>
             </dl>
@@ -228,29 +228,46 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_isValid">
-        isValid()
-        <a href="classes/Phpolar-Phpolar-Validation-Pattern.html#method_isValid" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_getContainer">
+        getContainer()
+        <a href="classes/Phpolar-Phpolar-DependencyInjection-ClosureContainerFactory.html#method_getContainer" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="Validation/Pattern.php"><a href="files/validation-pattern.html"><abbr title="Validation/Pattern.php">Pattern.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="DependencyInjection/ClosureContainerFactory.php"><a href="files/dependencyinjection-closurecontainerfactory.html"><abbr title="DependencyInjection/ClosureContainerFactory.php">ClosureContainerFactory.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">20</span>
+    <span class="phpdocumentor-element-found-in__line">32</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Use to determine if a configuration is valid.</p>
+        <p class="phpdocumentor-summary">Retrieve the configured PSR-11 container.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">isValid</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+                    <span class="phpdocumentor-signature__name">getContainer</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\ArrayAccess">ArrayAccess</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$containerConfig</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Psr\Container\ContainerInterface">ContainerInterface</abbr></span></code>
 
-    
-    
+        <section class="phpdocumentor-description"><p>The framework will configure its own dependency and any userland
+dependencies located in <code class="prettyprint">src/config/dependencies/conf.d/</code> relative to the project
+root.</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$containerConfig</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\ArrayAccess">ArrayAccess</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The service/dependency configuration
+for the container.</p>
+</section>
+
+            </dd>
+            </dl>
+
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">bool</span>
+    <span class="phpdocumentor-signature__response_type"><abbr title="\Psr\Container\ContainerInterface">ContainerInterface</abbr></span>
             &mdash;
         
     
@@ -333,7 +350,7 @@
 </section>
             </div>
         </div>
-        <a href="classes/Phpolar-Phpolar-Validation-Pattern.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+        <a href="classes/Phpolar-Phpolar-DependencyInjection-ClosureContainerFactory.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
     </main>
 

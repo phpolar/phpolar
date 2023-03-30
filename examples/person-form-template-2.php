@@ -3,7 +3,7 @@
 
 namespace MyApp;
 
-use Phpolar\Phpolar\FormControlTypes;
+use Phpolar\Phpolar\Model\FormControlTypes;
 
 /**
  * @var Person
