@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "625423f3586504fa29dcafce7ef9ef07",
+    "content-hash": "bdc0635f6bf875498c32cc641ae2d48d",
     "packages": [
         {
             "name": "phpolar/csrf-protection",
@@ -174,16 +174,16 @@
         },
         {
             "name": "phpolar/phpolar-core",
-            "version": "2.0.0",
+            "version": "2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpolar/phpolar-core.git",
-                "reference": "cba70efff443b050d98c33861cd19dadd5540e86"
+                "reference": "8d97bb10e7c796ec51dca65cb32c606b112b370e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpolar/phpolar-core/zipball/cba70efff443b050d98c33861cd19dadd5540e86",
-                "reference": "cba70efff443b050d98c33861cd19dadd5540e86",
+                "url": "https://api.github.com/repos/phpolar/phpolar-core/zipball/8d97bb10e7c796ec51dca65cb32c606b112b370e",
+                "reference": "8d97bb10e7c796ec51dca65cb32c606b112b370e",
                 "shasum": ""
             },
             "require": {
@@ -225,9 +225,9 @@
             "description": "The internal, core components of the PHPolar Microframework",
             "support": {
                 "issues": "https://github.com/phpolar/phpolar-core/issues",
-                "source": "https://github.com/phpolar/phpolar-core/tree/2.0.0"
+                "source": "https://github.com/phpolar/phpolar-core/tree/2.1.0"
             },
-            "time": "2023-03-29T02:51:49+00:00"
+            "time": "2023-03-30T14:26:12+00:00"
         },
         {
             "name": "phpolar/phpolar-storage",
