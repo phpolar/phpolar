@@ -6,7 +6,7 @@ namespace Phpolar\Phpolar\Http;
 
 use Closure;
 use Phpolar\HttpCodes\ResponseCode;
-use Phpolar\Phpolar\Config\Formats;
+use Phpolar\Phpolar\Core\Formats;
 use Phpolar\Phpolar\Tests\Stubs\ConfigurableContainerStub;
 use Phpolar\Phpolar\Tests\Stubs\ContainerConfigurationStub;
 use Phpolar\Phpolar\Tests\Stubs\RequestStub;
