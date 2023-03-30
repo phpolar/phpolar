@@ -5,7 +5,7 @@ use Phpolar\Phpolar\Tests\Stubs\ResponseFactoryStub;
 use Phpolar\Phpolar\Tests\Stubs\StreamFactoryStub;
 use Phpolar\Phpolar\Http\ErrorHandler;
 use Phpolar\Phpolar\Http\PrimaryHandler;
-use Phpolar\Phpolar\WebServer;
+use Phpolar\Phpolar\App;
 use Phpolar\PurePhp\Binder;
 use Phpolar\PurePhp\Dispatcher;
 use Phpolar\PurePhp\StreamContentStrategy;
@@ -16,13 +16,13 @@ use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 
 return [
-    PrimaryHandler::class => static fn (ContainerInterface $container) => new PrimaryHandler($container->get(WebServer::ERROR_HANDLER_404)),
-    WebServer::ERROR_HANDLER_401 => static fn (ContainerInterface $container) => new ErrorHandler(
+    PrimaryHandler::class => static fn (ContainerInterface $container) => new PrimaryHandler($container->get(App::ERROR_HANDLER_404)),
+    App::ERROR_HANDLER_401 => static fn (ContainerInterface $container) => new ErrorHandler(
         ResponseCode::UNAUTHORIZED,
         "Unauthorized",
         $container,
     ),
-    WebServer::ERROR_HANDLER_404 => static fn (ContainerInterface $container) => new ErrorHandler(
+    App::ERROR_HANDLER_404 => static fn (ContainerInterface $container) => new ErrorHandler(
         ResponseCode::NOT_FOUND,
         "Not Found",
         $container,
