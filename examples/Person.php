@@ -1,6 +1,11 @@
 <?php
 
-use Phpolar\Phpolar\Api\Model;
+use Phpolar\Phpolar\Model\AbstractModel;
+use Phpolar\Phpolar\Model\Column;
+use Phpolar\Phpolar\Model\Hidden;
+use Phpolar\Phpolar\Model\Label;
+use Phpolar\Phpolar\Validation\MaxLength;
+use Phpolar\Phpolar\Validation\Required;
 
 class Person extends Model
 {

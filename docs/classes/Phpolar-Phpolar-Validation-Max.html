@@ -92,13 +92,16 @@
                     <ul class="phpdocumentor-breadcrumbs">
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/phpolar.html">Phpolar</a></li>
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/phpolar-phpolar.html">Phpolar</a></li>
-            <li class="phpdocumentor-breadcrumb"><a href="namespaces/phpolar-phpolar-routing.html">Routing</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/phpolar-phpolar-validation.html">Validation</a></li>
     </ul>
 
     <article class="phpdocumentor-element -class">
         <h2 class="phpdocumentor-content__title">
-    RoutingHandler
+    Max
 
+        <span class="phpdocumentor-element__extends">
+        extends <abbr title="\Phpolar\Phpolar\Core\AbstractPropertyValueExtractor">AbstractPropertyValueExtractor</abbr>
+    </span>
     
             <div class="phpdocumentor-element__package">
             in package
@@ -109,18 +112,18 @@
     
             <span class="phpdocumentor-element__implements">
             implements
-                            <abbr title="\Psr\Http\Server\RequestHandlerInterface">RequestHandlerInterface</abbr>                    </span>
+                            <a href="classes/Phpolar-Phpolar-Validation-ValidatorInterface.html"><abbr title="\Phpolar\Phpolar\Validation\ValidatorInterface">ValidatorInterface</abbr></a>                    </span>
     
     </h2>
 
         <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="Routing/RoutingHandler.php"><a href="files/routing-routinghandler.html"><abbr title="Routing/RoutingHandler.php">RoutingHandler.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="Validation/Max.php"><a href="files/validation-max.html"><abbr title="Validation/Max.php">Max.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">20</span>
+    <span class="phpdocumentor-element-found-in__line">13</span>
 
     </aside>
 
-            <p class="phpdocumentor-summary">Handles request routing for the application.</p>
+            <p class="phpdocumentor-summary">Provides support for configuring the max value of a property.</p>
 
 
 
@@ -134,8 +137,8 @@
 </h3>
 
 <dl class="phpdocumentor-table-of-contents">
-            <dt class="phpdocumentor-table-of-contents__entry -interface"><abbr title="\Psr\Http\Server\RequestHandlerInterface">RequestHandlerInterface</abbr></dt>
-        <dd></dd>
+            <dt class="phpdocumentor-table-of-contents__entry -interface"><a href="classes/Phpolar-Phpolar-Validation-ValidatorInterface.html"><abbr title="\Phpolar\Phpolar\Validation\ValidatorInterface">ValidatorInterface</abbr></a></dt>
+        <dd>Unifies validation configuration objects with a standard api.</dd>
     
     
     
@@ -149,18 +152,18 @@
 
 <dl class="phpdocumentor-table-of-contents">
                         <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Phpolar-Phpolar-Routing-RoutingHandler.html#method___construct">__construct()</a>
+    <a href="classes/Phpolar-Phpolar-Validation-Max.html#method___construct">__construct()</a>
     <span>
                                 &nbsp;: mixed    </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Phpolar-Phpolar-Routing-RoutingHandler.html#method_handle">handle()</a>
+    <a href="classes/Phpolar-Phpolar-Validation-Max.html#method_isValid">isValid()</a>
     <span>
-                                &nbsp;: <abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr>    </span>
+                                &nbsp;: bool    </span>
 </dt>
-<dd>Locates and executes the registered route handler.</dd>
+<dd>Use to determine if a configuration is valid.</dd>
 
         </dl>
 
@@ -173,7 +176,7 @@
             <section class="phpdocumentor-methods">
         <h3 class="phpdocumentor-elements__header" id="methods">
             Methods
-            <a href="classes/Phpolar-Phpolar-Routing-RoutingHandler.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/Phpolar-Phpolar-Validation-Max.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
         </h3>
                     <article
         class="phpdocumentor-element
@@ -183,59 +186,27 @@
 >
     <h4 class="phpdocumentor-element__name" id="method___construct">
         __construct()
-        <a href="classes/Phpolar-Phpolar-Routing-RoutingHandler.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Phpolar-Phpolar-Validation-Max.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="Routing/RoutingHandler.php"><a href="files/routing-routinghandler.html"><abbr title="Routing/RoutingHandler.php">RoutingHandler.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="Validation/Max.php"><a href="files/validation-max.html"><abbr title="Validation/Max.php">Max.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">22</span>
+    <span class="phpdocumentor-element-found-in__line">16</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Phpolar-Phpolar-Routing-RouteRegistry.html"><abbr title="\Phpolar\Phpolar\Routing\RouteRegistry">RouteRegistry</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$routeRegistry</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\ResponseFactoryInterface">ResponseFactoryInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$responseFactory</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\StreamFactoryInterface">StreamFactoryInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$streamFactory</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Phpolar-Phpolar-Http-ErrorHandler.html"><abbr title="\Phpolar\Phpolar\Http\ErrorHandler">ErrorHandler</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$errorHandler</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Container\ContainerInterface">ContainerInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$container</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int|float&nbsp;</span><span class="phpdocumentor-signature__argument__name">$max</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
 
         <section class="phpdocumentor-description"></section>
 
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$routeRegistry</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Phpolar-Phpolar-Routing-RouteRegistry.html"><abbr title="\Phpolar\Phpolar\Routing\RouteRegistry">RouteRegistry</abbr></a></span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
-            </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$responseFactory</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\ResponseFactoryInterface">ResponseFactoryInterface</abbr></span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
-            </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$streamFactory</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\StreamFactoryInterface">StreamFactoryInterface</abbr></span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
-            </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$errorHandler</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Phpolar-Phpolar-Http-ErrorHandler.html"><abbr title="\Phpolar\Phpolar\Http\ErrorHandler">ErrorHandler</abbr></a></span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
-            </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$container</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Container\ContainerInterface">ContainerInterface</abbr></span>
+                <span class="phpdocumentor-signature__argument__name">$max</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int|float</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"></section>
@@ -257,43 +228,29 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_handle">
-        handle()
-        <a href="classes/Phpolar-Phpolar-Routing-RoutingHandler.html#method_handle" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_isValid">
+        isValid()
+        <a href="classes/Phpolar-Phpolar-Validation-Max.html#method_isValid" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="Routing/RoutingHandler.php"><a href="files/routing-routinghandler.html"><abbr title="Routing/RoutingHandler.php">RoutingHandler.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="Validation/Max.php"><a href="files/validation-max.html"><abbr title="Validation/Max.php">Max.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">37</span>
+    <span class="phpdocumentor-element-found-in__line">20</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Locates and executes the registered route handler.</p>
+        <p class="phpdocumentor-summary">Use to determine if a configuration is valid.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">handle</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\ServerRequestInterface">ServerRequestInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$request</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr></span></code>
+                    <span class="phpdocumentor-signature__name">isValid</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
 
-        <section class="phpdocumentor-description"><p>If a handler for the route cannot be located,
-a &quot;Not Found&quot; response will be returned.</p>
-</section>
-
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$request</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\ServerRequestInterface">ServerRequestInterface</abbr></span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
-            </dd>
-            </dl>
-
+    
+    
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr></span>
+    <span class="phpdocumentor-signature__response_type">bool</span>
             &mdash;
         
     
@@ -376,7 +333,7 @@ a &quot;Not Found&quot; response will be returned.</p>
 </section>
             </div>
         </div>
-        <a href="classes/Phpolar-Phpolar-Routing-RoutingHandler.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+        <a href="classes/Phpolar-Phpolar-Validation-Max.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
     </main>
 

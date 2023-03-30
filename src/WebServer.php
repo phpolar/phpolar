@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Phpolar\Phpolar\WebServer;
+namespace Phpolar\Phpolar;
 
 use Phpolar\Extensions\HttpResponse\ResponseExtension;
+use Phpolar\Phpolar\DependencyInjection\ContainerManager;
 use Phpolar\Phpolar\Routing\RouteRegistry;
-use Phpolar\Phpolar\WebServer\Http\MiddlewareQueueInterface;
+use Phpolar\Phpolar\Http\PrimaryHandler;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
-use Psr\Http\Server\RequestHandlerInterface;
 
 /**
  * Represents a server that handles and responds to request.
@@ -19,7 +19,7 @@ final class WebServer
     public const ERROR_HANDLER_401 = "ERROR_HANDLER_401";
     public const ERROR_HANDLER_404 = "ERROR_HANDLER_404";
 
-    private static RequestHandlerInterface&MiddlewareQueueInterface $primaryHandler;
+    private static PrimaryHandler $primaryHandler;
     private static ContainerManager $containerManager;
     private static ?WebServer $instance = null;
 
@@ -42,7 +42,7 @@ final class WebServer
     public static function createApp(
         ContainerManager $containerManager,
     ): WebServer {
-        return self::$instance = self::$instance ?? new self($containerManager);
+        return self::$instance ??= new self($containerManager);
     }
 
     /**
@@ -92,8 +92,6 @@ final class WebServer
      * `useRoutes` method is called.
      *
      * @param array<string,bool|int|float|string> $sessionOpts
-     *
-     * @throws WebServerConfigurationException
      */
     public function useCsrfMiddleware(
         array $sessionOpts = [

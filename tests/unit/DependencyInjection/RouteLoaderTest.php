@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Phpolar\Phpolar\WebServer;
+namespace Phpolar\Phpolar\DependencyInjection;
 
 use Phpolar\Phpolar\Routing\RouteRegistry;
 use Phpolar\Phpolar\Tests\Stubs\ConfigurableContainerStub;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Phpolar\Phpolar\WebServer;
+namespace Phpolar\Phpolar;
 
 use ArrayAccess;
 use Closure;
@@ -13,6 +13,8 @@ use Phpolar\CsrfProtection\Http\CsrfResponseFilterMiddleware;
 use Phpolar\CsrfProtection\Http\ResponseFilterStrategyInterface;
 use Phpolar\CsrfProtection\Storage\AbstractTokenStorage;
 use Phpolar\HttpCodes\ResponseCode;
+use Phpolar\Phpolar\DependencyInjection\ClosureContainerFactory;
+use Phpolar\Phpolar\DependencyInjection\ContainerManager;
 use Phpolar\Phpolar\Routing\AbstractContentDelegate;
 use Phpolar\Phpolar\Routing\RouteRegistry;
 use Phpolar\Phpolar\Routing\RoutingMiddleware;
@@ -22,8 +24,8 @@ use Phpolar\Phpolar\Tests\Stubs\RequestStub;
 use Phpolar\Phpolar\Tests\Stubs\ResponseFactoryStub;
 use Phpolar\Phpolar\Tests\Stubs\ResponseStub;
 use Phpolar\Phpolar\Tests\Stubs\StreamFactoryStub;
-use Phpolar\Phpolar\WebServer\Http\ErrorHandler;
-use Phpolar\Phpolar\WebServer\Http\PrimaryHandler;
+use Phpolar\Phpolar\Http\ErrorHandler;
+use Phpolar\Phpolar\Http\PrimaryHandler;
 use Phpolar\PurePhp\Binder;
 use Phpolar\PurePhp\Dispatcher;
 use Phpolar\PurePhp\StreamContentStrategy;
@@ -59,7 +61,7 @@ final class WebServerTest extends TestCase
         PrimaryHandler|Closure $handler,
         CsrfRequestCheckMiddleware|Closure|null $csrfPreRoutingMiddleware = null,
         CsrfResponseFilterMiddleware|Closure|null $csrfPostRoutingMiddleware = null,
-    ): AbstractContainerFactory {
+    ): ClosureContainerFactory {
         $config[TemplatingStrategyInterface::class] = new StreamContentStrategy();
         $config[TemplateEngine::class] = static fn (ArrayAccess $config) => new TemplateEngine($config[TemplatingStrategyInterface::class], $config[Binder::class], $config[Dispatcher::class]);
         $config[Binder::class] = new Binder();
@@ -78,18 +80,18 @@ final class WebServerTest extends TestCase
         $containerFac = static fn (ArrayAccess $container): ContainerInterface =>
         new ConfigurableContainerStub($container);
 
-        return new class ($containerFac) extends AbstractContainerFactory {
+        return new class ($containerFac) extends ClosureContainerFactory {
         };
     }
 
-    private function getNonConfiguredContainer(): AbstractContainerFactory
+    private function getNonConfiguredContainer(): ClosureContainerFactory
     {
         $containerFac = static function (ArrayAccess $config): ContainerInterface {
             $container = new ConfigurableContainerStub($config);
             $config[ContainerInterface::class] = $container;
             return $container;
         };
-        return new class ($containerFac) extends AbstractContainerFactory {
+        return new class ($containerFac) extends ClosureContainerFactory {
         };
     }
 

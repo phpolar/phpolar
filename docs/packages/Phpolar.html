@@ -103,14 +103,25 @@
 </h3>
 
 <dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -interface"><a href="classes/Phpolar-Phpolar-DependencyInjection-ContainerFactoryInterface.html"><abbr title="\Phpolar\Phpolar\DependencyInjection\ContainerFactoryInterface">ContainerFactoryInterface</abbr></a></dt>
+        <dd>Provides a means to configure the dependency injection
+before the server is initialized, afterwards, or both.</dd>
             <dt class="phpdocumentor-table-of-contents__entry -interface"><a href="classes/Phpolar-Phpolar-Validation-ValidatorInterface.html"><abbr title="\Phpolar\Phpolar\Validation\ValidatorInterface">ValidatorInterface</abbr></a></dt>
-        <dd>Unifies configuration objects with a standard api.</dd>
-            <dt class="phpdocumentor-table-of-contents__entry -interface"><a href="classes/Phpolar-Phpolar-WebServer-Http-MiddlewareQueueInterface.html"><abbr title="\Phpolar\Phpolar\WebServer\Http\MiddlewareQueueInterface">MiddlewareQueueInterface</abbr></a></dt>
-        <dd>Based on [this suggestion](https://www.php-fig.org/psr/psr-15/meta/#queue-based-request-handler)
-this [PSR-15 request handler](https://www.php-fig.org/psr/psr-15/#21-psrhttpserverrequesthandlerinterface)
-process [PSR-15 middleware](https://www.php-fig.org/psr/psr-15/#22-psrhttpservermiddlewareinterface)
-that has been added to the queue.</dd>
+        <dd>Unifies validation configuration objects with a standard api.</dd>
     
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Phpolar-Phpolar-DependencyInjection-ClosureContainerFactory.html"><abbr title="\Phpolar\Phpolar\DependencyInjection\ClosureContainerFactory">ClosureContainerFactory</abbr></a></dt>
+        <dd>Creates a container using the provided
+closure.</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Phpolar-Phpolar-DependencyInjection-ContainerManager.html"><abbr title="\Phpolar\Phpolar\DependencyInjection\ContainerManager">ContainerManager</abbr></a></dt>
+        <dd>Manages the dependency injection container.</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Phpolar-Phpolar-DependencyInjection-RouteLoader.html"><abbr title="\Phpolar\Phpolar\DependencyInjection\RouteLoader">RouteLoader</abbr></a></dt>
+        <dd>Adds the route registry to the
+dependency injection container.</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Phpolar-Phpolar-Http-ErrorHandler.html"><abbr title="\Phpolar\Phpolar\Http\ErrorHandler">ErrorHandler</abbr></a></dt>
+        <dd>Handles 401 errors.</dd>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Phpolar-Phpolar-Http-PrimaryHandler.html"><abbr title="\Phpolar\Phpolar\Http\PrimaryHandler">PrimaryHandler</abbr></a></dt>
+        <dd>The HTTP Server request handling starting point
+for the application.</dd>
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Phpolar-Phpolar-Model-AbstractModel.html"><abbr title="\Phpolar\Phpolar\Model\AbstractModel">AbstractModel</abbr></a></dt>
         <dd>Provides support for configuring the properties
 of an object for validation, formatting, and storage.</dd>
@@ -155,26 +166,8 @@ validators with errors.</dd>
         <dd>Provides support for configuring the expected pattern of a property.</dd>
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Phpolar-Phpolar-Validation-Required.html"><abbr title="\Phpolar\Phpolar\Validation\Required">Required</abbr></a></dt>
         <dd>Provides support for marking a property as requiring a value.</dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Phpolar-Phpolar-WebServer-AbstractContainerFactory.html"><abbr title="\Phpolar\Phpolar\WebServer\AbstractContainerFactory">AbstractContainerFactory</abbr></a></dt>
-        <dd>This allows for configuring the container
-before the server is initialized, afterwards, or both.</dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Phpolar-Phpolar-WebServer-ContainerFactory.html"><abbr title="\Phpolar\Phpolar\WebServer\ContainerFactory">ContainerFactory</abbr></a></dt>
-        <dd>A container factory implementation.</dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Phpolar-Phpolar-WebServer-ContainerManager.html"><abbr title="\Phpolar\Phpolar\WebServer\ContainerManager">ContainerManager</abbr></a></dt>
-        <dd>Manages the dependency injection container.</dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Phpolar-Phpolar-WebServer-Http-ErrorHandler.html"><abbr title="\Phpolar\Phpolar\WebServer\Http\ErrorHandler">ErrorHandler</abbr></a></dt>
-        <dd>Handles 401 errors.</dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Phpolar-Phpolar-WebServer-Http-PrimaryHandler.html"><abbr title="\Phpolar\Phpolar\WebServer\Http\PrimaryHandler">PrimaryHandler</abbr></a></dt>
-        <dd>The HTTP Server request handling starting point
-for the application.</dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Phpolar-Phpolar-WebServer-RouteLoader.html"><abbr title="\Phpolar\Phpolar\WebServer\RouteLoader">RouteLoader</abbr></a></dt>
-        <dd>Adds the route registry to the
-dependency injection container.</dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Phpolar-Phpolar-WebServer-WebServer.html"><abbr title="\Phpolar\Phpolar\WebServer\WebServer">WebServer</abbr></a></dt>
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Phpolar-Phpolar-WebServer.html"><abbr title="\Phpolar\Phpolar\WebServer">WebServer</abbr></a></dt>
         <dd>Represents a server that handles and responds to request.</dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Phpolar-Phpolar-WebServer-WebServerConfigurationException.html"><abbr title="\Phpolar\Phpolar\WebServer\WebServerConfigurationException">WebServerConfigurationException</abbr></a></dt>
-        <dd>Represents the scenario when the web server is
-not configured as expected.</dd>
     
             <dt class="phpdocumentor-table-of-contents__entry -trait"><a href="classes/Phpolar-Phpolar-Model-ColumnNameTrait.html"><abbr title="\Phpolar\Phpolar\Model\ColumnNameTrait">ColumnNameTrait</abbr></a></dt>
         <dd>Provides support for configuring column names of records.</dd>

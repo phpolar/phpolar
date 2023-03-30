@@ -13,7 +13,7 @@ use Phpolar\Phpolar\Tests\Stubs\RequestStub;
 use Phpolar\Phpolar\Tests\Stubs\ResponseFactoryStub;
 use Phpolar\Phpolar\Tests\Stubs\StreamFactoryStub;
 use Phpolar\Phpolar\Tests\Stubs\UriStub;
-use Phpolar\Phpolar\WebServer\Http\ErrorHandler;
+use Phpolar\Phpolar\Http\ErrorHandler;
 use Phpolar\PurePhp\Binder;
 use Phpolar\PurePhp\Dispatcher;
 use Phpolar\PurePhp\StreamContentStrategy;

@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Phpolar\Phpolar\WebServer;
+namespace Phpolar\Phpolar\DependencyInjection;
 
 use ArrayAccess;
 use Phpolar\CsrfProtection\Http\CsrfRequestCheckMiddleware;
 use Phpolar\CsrfProtection\Http\CsrfResponseFilterMiddleware;
 use Phpolar\Phpolar\Core\ContainerLoader;
+use Phpolar\Phpolar\Http\PrimaryHandler;
 use Phpolar\Phpolar\Routing\RouteRegistry;
 use Phpolar\Phpolar\Routing\RoutingMiddleware;
-use Phpolar\Phpolar\WebServer\Http\PrimaryHandler;
 use Psr\Container\ContainerInterface;
 
 /**
@@ -29,11 +29,11 @@ final class ContainerManager
     private RouteLoader $routeLoader;
 
     /**
-     * @param AbstractContainerFactory $containerFac
+     * @param ContainerFactoryInterface $containerFac
      * @param ArrayAccess<string,mixed> $containerConfig
      */
     public function __construct(
-        AbstractContainerFactory $containerFac,
+        ContainerFactoryInterface $containerFac,
         ArrayAccess $containerConfig
     ) {
         $this->container = $containerFac->getContainer($containerConfig);

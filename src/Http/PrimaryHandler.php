@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Phpolar\Phpolar\WebServer\Http;
+namespace Phpolar\Phpolar\Http;
 
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -17,7 +17,7 @@ use Psr\Http\Server\RequestHandlerInterface;
  * [queue-based handler](https://www.php-fig.org/psr/psr-15/meta/#queue-based-request-handler)
  * that processes [PSR-15 middleware](https://www.php-fig.org/psr/psr-15/#22-psrhttpservermiddlewareinterface).
  */
-class PrimaryHandler implements RequestHandlerInterface, MiddlewareQueueInterface
+class PrimaryHandler implements RequestHandlerInterface
 {
     /**
      * A collection of middleware to
@@ -48,6 +48,10 @@ class PrimaryHandler implements RequestHandlerInterface, MiddlewareQueueInterfac
         return $nextMiddleware->process($request, $this);
     }
 
+    /**
+     * Load the provided middleware
+     * on the queue for processing.
+     */
     public function queue(MiddlewareInterface $middleware): void
     {
         $this->middlewareQueue[] = $middleware;
