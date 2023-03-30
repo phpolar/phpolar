@@ -35,4 +35,4 @@ repos:
     hooks:
       # Hooks using native
       - id: phpmd # static analyzer for PHP code
-        exclude: (examples|tests|config|src\/WebServer\/Http\/ErrorHandler\.php$)
+        exclude: (examples|tests|config|src\/Http\/ErrorHandler\.php$)

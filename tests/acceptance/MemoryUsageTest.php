@@ -12,6 +12,9 @@ use Phpolar\CsrfProtection\Http\ResponseFilterStrategyInterface;
 use Phpolar\CsrfProtection\Storage\AbstractTokenStorage;
 use Phpolar\CsrfProtection\Storage\SessionTokenStorage;
 use Phpolar\HttpCodes\ResponseCode;
+use Phpolar\Phpolar\DependencyInjection\ClosureContainerFactory;
+use Phpolar\Phpolar\DependencyInjection\ContainerFactoryInterface;
+use Phpolar\Phpolar\DependencyInjection\ContainerManager;
 use Phpolar\Phpolar\Routing\AbstractContentDelegate;
 use Phpolar\Phpolar\Routing\RouteRegistry;
 use Phpolar\Phpolar\Routing\RoutingHandler;
@@ -19,31 +22,29 @@ use Phpolar\Phpolar\Routing\RoutingMiddleware;
 use Phpolar\Phpolar\Tests\Stubs\ConfigurableContainerStub;
 use Phpolar\Phpolar\Tests\Stubs\ContainerConfigurationStub;
 use Phpolar\Phpolar\Tests\Stubs\RequestStub;
-use Phpolar\Phpolar\WebServer\Http\ErrorHandler;
+use Phpolar\Phpolar\Http\ErrorHandler;
+use Phpolar\Phpolar\Http\PrimaryHandler;
 use Phpolar\Phpolar\Tests\Stubs\ResponseFactoryStub;
 use Phpolar\Phpolar\Tests\Stubs\StreamFactoryStub;
-use Phpolar\Phpolar\WebServer\ContainerFactory;
-use Phpolar\Phpolar\WebServer\ContainerManager;
-use Phpolar\Phpolar\WebServer\Http\PrimaryHandler;
-use Phpolar\Phpolar\WebServer\WebServer;
+use Phpolar\Phpolar\WebServer;
 use Phpolar\PurePhp\Binder;
 use Phpolar\PurePhp\Dispatcher;
 use Phpolar\PurePhp\StreamContentStrategy;
 use Phpolar\PurePhp\TemplateEngine;
 use Psr\Container\ContainerInterface;
+use Psr\Http\Message\ResponseFactoryInterface;
+use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
-use Psr\Http\Message\ResponseFactoryInterface;
-use Psr\Http\Message\StreamFactoryInterface;
 
 use const Phpolar\CsrfProtection\REQUEST_ID_KEY;
 use const Phpolar\Phpolar\Tests\PROJECT_MEMORY_USAGE_THRESHOLD;
 
 final class MemoryUsageTest extends TestCase
 {
-    protected function getContainerFactory(RouteRegistry $routes): ContainerFactory
+    protected function getContainerFactory(RouteRegistry $routes): ContainerFactoryInterface
     {
         $config = new ContainerConfigurationStub();
         $config[RouteRegistry::class] = $routes;
@@ -64,7 +65,7 @@ final class MemoryUsageTest extends TestCase
         $config[AbstractTokenStorage::class] = new SessionTokenStorage([REQUEST_ID_KEY => ""]);
         $config[ResponseFilterStrategyInterface::class] = $this->createStub(ResponseFilterStrategyInterface::class);
         $container = new ConfigurableContainerStub($config);
-        return new ContainerFactory(static fn () => $container);
+        return new ClosureContainerFactory(static fn () => $container);
     }
 
     #[TestDox("Memory usage shall be below \$threshold bytes")]
