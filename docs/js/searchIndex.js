@@ -1,6 +1,46 @@
 Search.appendIndex(
     [
                 {
+            "fqsen": "\\Phpolar\\Phpolar\\App",
+            "name": "App",
+            "summary": "Represents\u0020a\u0020server\u0020that\u0020handles\u0020and\u0020responds\u0020to\u0020request.",
+            "url": "classes/Phpolar-Phpolar-App.html"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\App\u003A\u003Acreate\u0028\u0029",
+            "name": "create",
+            "summary": "Creates\u0020a\u0020singleton\u0020web\u0020server\u0020application.\u0020\u0020This\u0020framework\u0020targets\u0020the\n\u002Astateless,\u0020single\u002Dthreaded,\u0020server\u002Dside\u0020application\u0020use\u0020case\u002A.\u0020\u0020Therefore,\nonly\u0020a\u0020single\u0020instance\u0020is\u0020created\u0020on\u0020each\u0020request.",
+            "url": "classes/Phpolar-Phpolar-App.html#method_create"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\App\u003A\u003Areceive\u0028\u0029",
+            "name": "receive",
+            "summary": "Handle\u0020and\u0020respond\u0020to\u0020requests\u0020from\u0020clients.",
+            "url": "classes/Phpolar-Phpolar-App.html#method_receive"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\App\u003A\u003AuseSession\u0028\u0029",
+            "name": "useSession",
+            "summary": "Configures\u0020a\u0020session.",
+            "url": "classes/Phpolar-Phpolar-App.html#method_useSession"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\App\u003A\u003AuseCsrfMiddleware\u0028\u0029",
+            "name": "useCsrfMiddleware",
+            "summary": "Configures\u0020the\u0020server\u0020for\u0020CSRF\u0020attack\u0020mitigation.",
+            "url": "classes/Phpolar-Phpolar-App.html#method_useCsrfMiddleware"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\App\u003A\u003AuseRoutes\u0028\u0029",
+            "name": "useRoutes",
+            "summary": "Configures\u0020the\u0020web\u0020server\u0020with\u0020associated\nroutes\u0020and\u0020handlers.",
+            "url": "classes/Phpolar-Phpolar-App.html#method_useRoutes"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\App\u003A\u003AERROR_HANDLER_401",
+            "name": "ERROR_HANDLER_401",
+            "summary": "",
+            "url": "classes/Phpolar-Phpolar-App.html#constant_ERROR_HANDLER_401"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\App\u003A\u003AERROR_HANDLER_404",
+            "name": "ERROR_HANDLER_404",
+            "summary": "",
+            "url": "classes/Phpolar-Phpolar-App.html#constant_ERROR_HANDLER_404"
+        },                {
             "fqsen": "\\Phpolar\\Phpolar\\DependencyInjection\\ClosureContainerFactory",
             "name": "ClosureContainerFactory",
             "summary": "Creates\u0020a\u0020container\u0020using\u0020the\u0020provided\nclosure.",
@@ -198,7 +238,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\Model\\FieldErrorMessageTrait\u003A\u003AhasError\u0028\u0029",
             "name": "hasError",
-            "summary": "Determines\u0020if\u0020a\u0020property\u0020is\nnot\u0020valid.",
+            "summary": "Determines\u0020if\u0020a\u0020property\u0020is\u0020not\u0020valid.",
             "url": "classes/Phpolar-Phpolar-Model-FieldErrorMessageTrait.html#method_hasError"
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\Model\\FieldErrorMessageTrait\u003A\u003AisPosted\u0028\u0029",
@@ -446,175 +486,30 @@ Search.appendIndex(
             "summary": "Handle\u0020routing\u0020a\u0020request.",
             "url": "classes/Phpolar-Phpolar-Routing-RoutingMiddleware.html#method_process"
         },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Validation\\AbstractValidationError",
-            "name": "AbstractValidationError",
-            "summary": "Provides\u0020a\u0020way\u0020to\u0020get\u0020error\u0020messages\u0020from\nvalidators\u0020with\u0020errors.",
-            "url": "classes/Phpolar-Phpolar-Validation-AbstractValidationError.html"
+            "fqsen": "\\Phpolar\\Phpolar\\Validation\\Functions\\getMessageGetters\u0028\u0029",
+            "name": "getMessageGetters",
+            "summary": "Provides\u0020a\u0020way\u0020of\u0020retrieving\u0020only\u0020the\u0020validator\u0020attributes\u0020of\u0020a\u0020property.",
+            "url": "namespaces/phpolar-phpolar-validation-functions.html#function_getMessageGetters"
         },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Validation\\AbstractValidationError\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/Phpolar-Phpolar-Validation-AbstractValidationError.html#method___construct"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Validation\\AbstractValidationError\u003A\u003AgetMessage\u0028\u0029",
-            "name": "getMessage",
-            "summary": "Return\u0020the\u0020error\u0020message.",
-            "url": "classes/Phpolar-Phpolar-Validation-AbstractValidationError.html#method_getMessage"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Validation\\DefaultValidationError",
-            "name": "DefaultValidationError",
-            "summary": "Represents\u0020a\u0020validation\u0020error.",
-            "url": "classes/Phpolar-Phpolar-Validation-DefaultValidationError.html"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Validation\\Functions\\getValidationAttributes\u0028\u0029",
-            "name": "getValidationAttributes",
-            "summary": "Provides\u0020a\u0020way\u0020of\u0020retrieving\u0020only\u0020the\u0020validation\u0020attributes\u0020of\u0020a\u0020property.",
-            "url": "namespaces/phpolar-phpolar-validation-functions.html#function_getValidationAttributes"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Validation\\Max",
-            "name": "Max",
-            "summary": "Provides\u0020support\u0020for\u0020configuring\u0020the\u0020max\u0020value\u0020of\u0020a\u0020property.",
-            "url": "classes/Phpolar-Phpolar-Validation-Max.html"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Validation\\Max\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/Phpolar-Phpolar-Validation-Max.html#method___construct"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Validation\\Max\u003A\u003AisValid\u0028\u0029",
-            "name": "isValid",
-            "summary": "Use\u0020to\u0020determine\u0020if\u0020a\u0020configuration\u0020is\u0020valid.",
-            "url": "classes/Phpolar-Phpolar-Validation-Max.html#method_isValid"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Validation\\MaxLength",
-            "name": "MaxLength",
-            "summary": "Provides\u0020support\u0020for\u0020configuring\u0020the\u0020max\u0020length\u0020of\u0020a\u0020property.",
-            "url": "classes/Phpolar-Phpolar-Validation-MaxLength.html"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Validation\\MaxLength\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/Phpolar-Phpolar-Validation-MaxLength.html#method___construct"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Validation\\MaxLength\u003A\u003AisValid\u0028\u0029",
-            "name": "isValid",
-            "summary": "Use\u0020to\u0020determine\u0020if\u0020a\u0020configuration\u0020is\u0020valid.",
-            "url": "classes/Phpolar-Phpolar-Validation-MaxLength.html#method_isValid"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Validation\\Min",
-            "name": "Min",
-            "summary": "Provides\u0020support\u0020for\u0020configuring\u0020the\u0020min\u0020value\u0020of\u0020a\u0020property.",
-            "url": "classes/Phpolar-Phpolar-Validation-Min.html"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Validation\\Min\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/Phpolar-Phpolar-Validation-Min.html#method___construct"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Validation\\Min\u003A\u003AisValid\u0028\u0029",
-            "name": "isValid",
-            "summary": "Use\u0020to\u0020determine\u0020if\u0020a\u0020configuration\u0020is\u0020valid.",
-            "url": "classes/Phpolar-Phpolar-Validation-Min.html#method_isValid"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Validation\\MinLength",
-            "name": "MinLength",
-            "summary": "Provides\u0020support\u0020for\u0020configuring\u0020the\u0020minimum\u0020length\u0020of\u0020a\u0020property.",
-            "url": "classes/Phpolar-Phpolar-Validation-MinLength.html"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Validation\\MinLength\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/Phpolar-Phpolar-Validation-MinLength.html#method___construct"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Validation\\MinLength\u003A\u003AisValid\u0028\u0029",
-            "name": "isValid",
-            "summary": "Use\u0020to\u0020determine\u0020if\u0020a\u0020configuration\u0020is\u0020valid.",
-            "url": "classes/Phpolar-Phpolar-Validation-MinLength.html#method_isValid"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Validation\\Pattern",
-            "name": "Pattern",
-            "summary": "Provides\u0020support\u0020for\u0020configuring\u0020the\u0020expected\u0020pattern\u0020of\u0020a\u0020property.",
-            "url": "classes/Phpolar-Phpolar-Validation-Pattern.html"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Validation\\Pattern\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/Phpolar-Phpolar-Validation-Pattern.html#method___construct"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Validation\\Pattern\u003A\u003AisValid\u0028\u0029",
-            "name": "isValid",
-            "summary": "Use\u0020to\u0020determine\u0020if\u0020a\u0020configuration\u0020is\u0020valid.",
-            "url": "classes/Phpolar-Phpolar-Validation-Pattern.html#method_isValid"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Validation\\Required",
-            "name": "Required",
-            "summary": "Provides\u0020support\u0020for\u0020marking\u0020a\u0020property\u0020as\u0020requiring\u0020a\u0020value.",
-            "url": "classes/Phpolar-Phpolar-Validation-Required.html"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Validation\\Required\u003A\u003AisValid\u0028\u0029",
-            "name": "isValid",
-            "summary": "Use\u0020to\u0020determine\u0020if\u0020a\u0020configuration\u0020is\u0020valid.",
-            "url": "classes/Phpolar-Phpolar-Validation-Required.html#method_isValid"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Validation\\Required\u003A\u003AwithPropVal\u0028\u0029",
-            "name": "withPropVal",
-            "summary": "",
-            "url": "classes/Phpolar-Phpolar-Validation-Required.html#method_withPropVal"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Validation\\ValidatorInterface",
-            "name": "ValidatorInterface",
-            "summary": "Unifies\u0020validation\u0020configuration\u0020objects\u0020with\u0020a\u0020standard\u0020api.",
-            "url": "classes/Phpolar-Phpolar-Validation-ValidatorInterface.html"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Validation\\ValidatorInterface\u003A\u003AisValid\u0028\u0029",
-            "name": "isValid",
-            "summary": "Use\u0020to\u0020determine\u0020if\u0020a\u0020configuration\u0020is\u0020valid.",
-            "url": "classes/Phpolar-Phpolar-Validation-ValidatorInterface.html#method_isValid"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\WebServer",
-            "name": "WebServer",
-            "summary": "Represents\u0020a\u0020server\u0020that\u0020handles\u0020and\u0020responds\u0020to\u0020request.",
-            "url": "classes/Phpolar-Phpolar-WebServer.html"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\WebServer\u003A\u003AcreateApp\u0028\u0029",
-            "name": "createApp",
-            "summary": "Creates\u0020a\u0020singleton\u0020web\u0020server\u0020application.\u0020\u0020This\u0020framework\u0020targets\u0020the\n\u002Astateless,\u0020single\u002Dthreaded,\u0020server\u002Dside\u0020application\u0020use\u0020case\u002A.\u0020\u0020Therefore,\nonly\u0020a\u0020single\u0020instance\u0020is\u0020created\u0020on\u0020each\u0020request.",
-            "url": "classes/Phpolar-Phpolar-WebServer.html#method_createApp"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\WebServer\u003A\u003Areceive\u0028\u0029",
-            "name": "receive",
-            "summary": "Handle\u0020and\u0020respond\u0020to\u0020requests\u0020from\u0020clients.",
-            "url": "classes/Phpolar-Phpolar-WebServer.html#method_receive"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\WebServer\u003A\u003AuseSession\u0028\u0029",
-            "name": "useSession",
-            "summary": "Configures\u0020a\u0020session.",
-            "url": "classes/Phpolar-Phpolar-WebServer.html#method_useSession"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\WebServer\u003A\u003AuseCsrfMiddleware\u0028\u0029",
-            "name": "useCsrfMiddleware",
-            "summary": "Configures\u0020the\u0020server\u0020for\u0020CSRF\u0020attack\u0020mitigation.",
-            "url": "classes/Phpolar-Phpolar-WebServer.html#method_useCsrfMiddleware"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\WebServer\u003A\u003AuseRoutes\u0028\u0029",
-            "name": "useRoutes",
-            "summary": "Configures\u0020the\u0020web\u0020server\u0020with\u0020associated\nroutes\u0020and\u0020handlers.",
-            "url": "classes/Phpolar-Phpolar-WebServer.html#method_useRoutes"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\WebServer\u003A\u003AERROR_HANDLER_401",
-            "name": "ERROR_HANDLER_401",
-            "summary": "",
-            "url": "classes/Phpolar-Phpolar-WebServer.html#constant_ERROR_HANDLER_401"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\WebServer\u003A\u003AERROR_HANDLER_404",
-            "name": "ERROR_HANDLER_404",
-            "summary": "",
-            "url": "classes/Phpolar-Phpolar-WebServer.html#constant_ERROR_HANDLER_404"
+            "fqsen": "\\Phpolar\\Phpolar\\Validation\\Functions\\getValidators\u0028\u0029",
+            "name": "getValidators",
+            "summary": "Provides\u0020a\u0020way\u0020of\u0020retrieving\u0020only\u0020the\u0020validator\u0020attributes\u0020of\u0020a\u0020property.",
+            "url": "namespaces/phpolar-phpolar-validation-functions.html#function_getValidators"
         },                {
             "fqsen": "\\",
             "name": "\\",
             "summary": "",
             "url": "namespaces/default.html"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar",
+            "name": "Phpolar",
+            "summary": "",
+            "url": "namespaces/phpolar-phpolar.html"
+        },                {
+            "fqsen": "\\Phpolar",
+            "name": "Phpolar",
+            "summary": "",
+            "url": "namespaces/phpolar.html"
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\DependencyInjection",
             "name": "DependencyInjection",
@@ -636,24 +531,14 @@ Search.appendIndex(
             "summary": "",
             "url": "namespaces/phpolar-phpolar-routing.html"
         },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Validation",
-            "name": "Validation",
-            "summary": "",
-            "url": "namespaces/phpolar-phpolar-validation.html"
-        },                {
             "fqsen": "\\Phpolar\\Phpolar\\Validation\\Functions",
             "name": "Functions",
             "summary": "",
             "url": "namespaces/phpolar-phpolar-validation-functions.html"
         },                {
-            "fqsen": "\\Phpolar\\Phpolar",
-            "name": "Phpolar",
+            "fqsen": "\\Phpolar\\Phpolar\\Validation",
+            "name": "Validation",
             "summary": "",
-            "url": "namespaces/phpolar-phpolar.html"
-        },                {
-            "fqsen": "\\Phpolar",
-            "name": "Phpolar",
-            "summary": "",
-            "url": "namespaces/phpolar.html"
+            "url": "namespaces/phpolar-phpolar-validation.html"
         }            ]
 );

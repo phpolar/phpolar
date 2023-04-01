@@ -22,7 +22,8 @@
             "Phpolar\\Phpolar\\Config\\": "config/"
         },
         "files": [
-            "src/Validation/Functions/getValidationAttributes.php"
+            "src/Validation/Functions/getValidators.php",
+            "src/Validation/Functions/getMessageGetters.php"
         ]
     },
     "autoload-dev": {
@@ -43,6 +44,7 @@
         "phpolar/phpolar-storage": "^1.0",
         "phpolar/pure-php": "^1.0",
         "phpolar/storage-driver": "^1.0",
+        "phpolar/validator": "^1.0",
         "psr/container": "^2.0",
         "psr/http-message": "^1.0",
         "psr/http-server-handler": "^1.0",

@@ -342,6 +342,7 @@ return [
         'src',
         'config',
         'vendor/psr',
+        'vendor/phpolar/validator/src',
         'vendor/phpolar/csrf-protection/src',
         'vendor/phpolar/http-codes/src',
         'vendor/phpolar/http-response-extensions/src',
