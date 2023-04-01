@@ -6,7 +6,6 @@ namespace Phpolar\Phpolar\Model;
 
 use Phpolar\Phpolar\Core\SizeNotConfigured;
 use Phpolar\Phpolar\Model\Size;
-use Phpolar\Phpolar\Validation\MaxLength;
 use ReflectionProperty;
 
 /**
@@ -23,12 +22,8 @@ trait SizeConfigurationTrait
     {
         $property = new ReflectionProperty($this, $propName);
         $sizeAttrs = $property->getAttributes(Size::class);
-        $maxLenAttrs = $property->getAttributes(MaxLength::class);
         return match (count($sizeAttrs)) {
-            0 => match (count($maxLenAttrs)) {
-                0 => new SizeNotConfigured(),
-                default => $maxLenAttrs[0]->getArguments()[0],
-            },
+            0 => new SizeNotConfigured(),
             default => $sizeAttrs[0]->newInstance()->getSize(),
         };
     }

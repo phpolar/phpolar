@@ -49,7 +49,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 #[CoversClass(App::class)]
 #[CoversClass(ContainerManager::class)]
 #[UsesClass(RouteRegistry::class)]
-final class WebServerTest extends TestCase
+final class AppTest extends TestCase
 {
     public const RESPONSE_CONTENT = "it worked!";
     const RESPONSE_STATUS = 500;
