@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Phpolar\Phpolar\Model;
 
 use Phpolar\Phpolar\Core\SizeNotConfigured;
-use Phpolar\Phpolar\Validation\MaxLength;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
@@ -35,7 +34,7 @@ final class SizeConfigurationTraitTest extends TestCase
         {
             use SizeConfigurationTrait;
 
-            #[MaxLength(5)]
+            #[Size(5)]
             public $someProp;
         };
         $actual = $entity->getSize("someProp");
@@ -50,7 +49,6 @@ final class SizeConfigurationTraitTest extends TestCase
             use SizeConfigurationTrait;
 
             #[Size(5)]
-            #[MaxLength(8)]
             public $someProp;
         };
         $actual = $entity->getSize("someProp");

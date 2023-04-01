@@ -106,9 +106,9 @@
             <dt class="phpdocumentor-table-of-contents__entry -interface"><a href="classes/Phpolar-Phpolar-DependencyInjection-ContainerFactoryInterface.html"><abbr title="\Phpolar\Phpolar\DependencyInjection\ContainerFactoryInterface">ContainerFactoryInterface</abbr></a></dt>
         <dd>Provides a means to configure the dependency injection
 before the server is initialized, afterwards, or both.</dd>
-            <dt class="phpdocumentor-table-of-contents__entry -interface"><a href="classes/Phpolar-Phpolar-Validation-ValidatorInterface.html"><abbr title="\Phpolar\Phpolar\Validation\ValidatorInterface">ValidatorInterface</abbr></a></dt>
-        <dd>Unifies validation configuration objects with a standard api.</dd>
     
+            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Phpolar-Phpolar-App.html"><abbr title="\Phpolar\Phpolar\App">App</abbr></a></dt>
+        <dd>Represents a server that handles and responds to request.</dd>
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Phpolar-Phpolar-DependencyInjection-ClosureContainerFactory.html"><abbr title="\Phpolar\Phpolar\DependencyInjection\ClosureContainerFactory">ClosureContainerFactory</abbr></a></dt>
         <dd>Creates a container using the provided
 closure.</dd>
@@ -149,25 +149,6 @@ request handlers.</dd>
         <dd>Handles request routing for the application.</dd>
             <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Phpolar-Phpolar-Routing-RoutingMiddleware.html"><abbr title="\Phpolar\Phpolar\Routing\RoutingMiddleware">RoutingMiddleware</abbr></a></dt>
         <dd>Takes care of routing requests to handlers</dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Phpolar-Phpolar-Validation-AbstractValidationError.html"><abbr title="\Phpolar\Phpolar\Validation\AbstractValidationError">AbstractValidationError</abbr></a></dt>
-        <dd>Provides a way to get error messages from
-validators with errors.</dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Phpolar-Phpolar-Validation-DefaultValidationError.html"><abbr title="\Phpolar\Phpolar\Validation\DefaultValidationError">DefaultValidationError</abbr></a></dt>
-        <dd>Represents a validation error.</dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Phpolar-Phpolar-Validation-Max.html"><abbr title="\Phpolar\Phpolar\Validation\Max">Max</abbr></a></dt>
-        <dd>Provides support for configuring the max value of a property.</dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Phpolar-Phpolar-Validation-MaxLength.html"><abbr title="\Phpolar\Phpolar\Validation\MaxLength">MaxLength</abbr></a></dt>
-        <dd>Provides support for configuring the max length of a property.</dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Phpolar-Phpolar-Validation-Min.html"><abbr title="\Phpolar\Phpolar\Validation\Min">Min</abbr></a></dt>
-        <dd>Provides support for configuring the min value of a property.</dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Phpolar-Phpolar-Validation-MinLength.html"><abbr title="\Phpolar\Phpolar\Validation\MinLength">MinLength</abbr></a></dt>
-        <dd>Provides support for configuring the minimum length of a property.</dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Phpolar-Phpolar-Validation-Pattern.html"><abbr title="\Phpolar\Phpolar\Validation\Pattern">Pattern</abbr></a></dt>
-        <dd>Provides support for configuring the expected pattern of a property.</dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Phpolar-Phpolar-Validation-Required.html"><abbr title="\Phpolar\Phpolar\Validation\Required">Required</abbr></a></dt>
-        <dd>Provides support for marking a property as requiring a value.</dd>
-            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Phpolar-Phpolar-WebServer.html"><abbr title="\Phpolar\Phpolar\WebServer">WebServer</abbr></a></dt>
-        <dd>Represents a server that handles and responds to request.</dd>
     
             <dt class="phpdocumentor-table-of-contents__entry -trait"><a href="classes/Phpolar-Phpolar-Model-ColumnNameTrait.html"><abbr title="\Phpolar\Phpolar\Model\ColumnNameTrait">ColumnNameTrait</abbr></a></dt>
         <dd>Provides support for configuring column names of records.</dd>
@@ -200,11 +181,18 @@ validators with errors.</dd>
 
 <dl class="phpdocumentor-table-of-contents">
                             <dt class="phpdocumentor-table-of-contents__entry -function -">
-    <a href="namespaces/phpolar-phpolar-validation-functions.html#function_getValidationAttributes">getValidationAttributes()</a>
+    <a href="namespaces/phpolar-phpolar-validation-functions.html#function_getMessageGetters">getMessageGetters()</a>
     <span>
-                                &nbsp;: array&lt;string|int, <a href="classes/Phpolar-Phpolar-Validation-ValidatorInterface.html"><abbr title="\Phpolar\Phpolar\Validation\ValidatorInterface">ValidatorInterface</abbr></a>&gt;    </span>
+                                &nbsp;: array&lt;string|int, <abbr title="\Phpolar\Validator\MessageGetterInterface">MessageGetterInterface</abbr>&gt;    </span>
 </dt>
-<dd>Provides a way of retrieving only the validation attributes of a property.</dd>
+<dd>Provides a way of retrieving only the validator attributes of a property.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/phpolar-phpolar-validation-functions.html#function_getValidators">getValidators()</a>
+    <span>
+                                &nbsp;: array&lt;string|int, <abbr title="\Phpolar\Validator\ValidatorInterface">ValidatorInterface</abbr>&gt;    </span>
+</dt>
+<dd>Provides a way of retrieving only the validator attributes of a property.</dd>
 
     </dl>
 
@@ -216,22 +204,22 @@ validators with errors.</dd>
             <a href="packages/Phpolar.html#functions" class="headerlink"><i class="fas fa-link"></i></a>
         </h3>
                     <article class="phpdocumentor-element -function - ">
-    <h4 class="phpdocumentor-element__name" id="function_getValidationAttributes">
-        getValidationAttributes()
-        <a href="namespaces/phpolar-phpolar-validation-functions.html#function_getValidationAttributes" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="function_getMessageGetters">
+        getMessageGetters()
+        <a href="namespaces/phpolar-phpolar-validation-functions.html#function_getMessageGetters" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="Validation/Functions/getValidationAttributes.php"><a href="files/validation-functions-getvalidationattributes.html"><abbr title="Validation/Functions/getValidationAttributes.php">getValidationAttributes.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="Validation/Functions/getMessageGetters.php"><a href="files/validation-functions-getmessagegetters.html"><abbr title="Validation/Functions/getMessageGetters.php">getMessageGetters.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">24</span>
+    <span class="phpdocumentor-element-found-in__line">18</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Provides a way of retrieving only the validation attributes of a property.</p>
+        <p class="phpdocumentor-summary">Provides a way of retrieving only the validator attributes of a property.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility"></span>
-                    <span class="phpdocumentor-signature__name">getValidationAttributes</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\ReflectionProperty">ReflectionProperty</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$prop</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">object&nbsp;</span><span class="phpdocumentor-signature__argument__name">$obj</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, <a href="classes/Phpolar-Phpolar-Validation-ValidatorInterface.html"><abbr title="\Phpolar\Phpolar\Validation\ValidatorInterface">ValidatorInterface</abbr></a>&gt;</span></code>
+                    <span class="phpdocumentor-signature__name">getMessageGetters</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\ReflectionProperty">ReflectionProperty</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$prop</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">object&nbsp;</span><span class="phpdocumentor-signature__argument__name">$obj</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, <abbr title="\Phpolar\Validator\MessageGetterInterface">MessageGetterInterface</abbr>&gt;</span></code>
 
         <section class="phpdocumentor-description"><p>Returns only validation attributes.</p>
 </section>
@@ -259,7 +247,56 @@ validators with errors.</dd>
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">array&lt;string|int, <a href="classes/Phpolar-Phpolar-Validation-ValidatorInterface.html"><abbr title="\Phpolar\Phpolar\Validation\ValidatorInterface">ValidatorInterface</abbr></a>&gt;</span>
+    <span class="phpdocumentor-signature__response_type">array&lt;string|int, <abbr title="\Phpolar\Validator\MessageGetterInterface">MessageGetterInterface</abbr>&gt;</span>
+            &mdash;
+        
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_getValidators">
+        getValidators()
+        <a href="namespaces/phpolar-phpolar-validation-functions.html#function_getValidators" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="Validation/Functions/getValidators.php"><a href="files/validation-functions-getvalidators.html"><abbr title="Validation/Functions/getValidators.php">getValidators.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">18</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Provides a way of retrieving only the validator attributes of a property.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                    <span class="phpdocumentor-signature__name">getValidators</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\ReflectionProperty">ReflectionProperty</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$prop</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">object&nbsp;</span><span class="phpdocumentor-signature__argument__name">$obj</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, <abbr title="\Phpolar\Validator\ValidatorInterface">ValidatorInterface</abbr>&gt;</span></code>
+
+        <section class="phpdocumentor-description"><p>Returns only validation attributes.</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$prop</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\ReflectionProperty">ReflectionProperty</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"></section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$obj</span>
+                : <span class="phpdocumentor-signature__argument__return-type">object</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"></section>
+
+            </dd>
+            </dl>
+
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">array&lt;string|int, <abbr title="\Phpolar\Validator\ValidatorInterface">ValidatorInterface</abbr>&gt;</span>
             &mdash;
         
     
