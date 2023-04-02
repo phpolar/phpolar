@@ -1,31 +1,3 @@
-## 2.0.0-alpha (2023-02-22)
-
-### BREAKING CHANGE
-
-- Issue #58
-
-### Feat
-
-- **RouteRegistry**: add routing based on request methods
-- **FieldErrorMessageTrait**: add haserror method
-- **WebServer**: add useroutes method
-- **FieldErrorMessageTrait**: add support for appending to the field error message
-- add phpolar-storage, use phpunit 10 😀
-- rewrite project
-- add validation attributes
-
-### Fix
-
-- do not initialize the checked property
-- exclude unnecessary files from dist
-- exclude unnecessary files from dist
-- upgrade library, use remote repo instead of local
-
-### Refactor
-
-- create model and webserver namespaces
-- remove classes
-
 ## 1.6.5 (2023-01-16)
 
 ### Fix
