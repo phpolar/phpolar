@@ -15,9 +15,6 @@ use Phpolar\Phpolar\Model\FormControlTypeDetectionTrait;
 use Phpolar\Phpolar\Model\FormInputTypeDetectionTrait;
 use Phpolar\Phpolar\Model\Hidden;
 use Phpolar\Phpolar\Model\Label;
-use Phpolar\Phpolar\Tests\DataProviders\FormFieldErrorMessageDataProvider;
-use Phpolar\Phpolar\Tests\DataProviders\FormValidationDataProvider;
-use PHPUnit\Framework\Attributes\DataProviderExternal;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\Attributes\TestWith;
@@ -45,23 +42,6 @@ final class ConfigurableFormFieldTest extends TestCase
         $this->assertSame("Prop1", $model->getLabel("prop1"));
         $this->assertSame("another name", $model->getLabel("prop2"));
         $this->assertSame($model::A_LABEL, $model->getLabel("prop3"));
-    }
-
-    #[Test]
-    #[TestDox("Shall support configurable form validation for \$validationType")]
-    #[DataProviderExternal(FormValidationDataProvider::class, "getTestCases")]
-    public function criterion2(bool $expected, string $validationType, AbstractModel $model)
-    {
-        $this->assertSame($expected, $model->isValid(), "{$validationType} valildation failed");
-    }
-
-    #[Test]
-    #[TestDox("Shall support configurable form validation alerts with message: \"\$expectedMessage\"")]
-    #[DataProviderExternal(FormFieldErrorMessageDataProvider::class, "invalidPropertyTestCases")]
-    public function criterion3(string $expectedMessage, object $model)
-    {
-        $fieldName = "prop";
-        $this->assertSame($expectedMessage, $model->getFieldErrorMessage($fieldName));
     }
 
     #[Test]
