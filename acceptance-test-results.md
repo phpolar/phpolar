@@ -4,17 +4,6 @@
 - [x] Should prevent cross-site scripting injection
 
 ## Configurable Form Field (Phpolar\Phpolar\ConfigurableFormField)
-- [x] Shall support configurable form validation for Phpolar\Phpolar\Validation\Max
-- [x] Shall support configurable form validation for Phpolar\Phpolar\Validation\MaxLength
-- [x] Shall support configurable form validation for Phpolar\Phpolar\Validation\Min
-- [x] Shall support configurable form validation for Phpolar\Phpolar\Validation\MinLength
-- [x] Shall support configurable form validation for Phpolar\Phpolar\Validation\Pattern
-- [x] Shall support configurable form validation alerts with message: "Value is greater than the maximum"
-- [x] Shall support configurable form validation alerts with message: "Maximum length validation failed"
-- [x] Shall support configurable form validation alerts with message: "Value is less than the minimum"
-- [x] Shall support configurable form validation alerts with message: "Minimum length validation failed"
-- [x] Shall support configurable form validation alerts with message: "Pattern validation failed"
-- [x] Shall support configurable form validation alerts with message: "Required value"
 - [x] Shall support converting detected datetime-local input types to string
 - [x] Shall support converting detected number input types to string
 - [x] Shall support converting detected checkbox input types to string
@@ -30,10 +19,10 @@
 - [x] Should have optional table name configuration
 
 ## Memory Usage (Phpolar\Phpolar\MemoryUsage)
-- [x] Memory usage shall be below 800000 bytes
+- [x] Memory usage shall be below 650000 bytes
 
 ## Project Size (Phpolar\Phpolar\ProjectSize)
-- [x] Source code total size shall be below 30000 bytes
+- [x] Source code total size shall be below 25000 bytes
 
 ## Routing (Phpolar\Phpolar\Routing\Routing)
 - [x] Shall invoke the handler registered to the given route
