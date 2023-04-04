@@ -360,6 +360,7 @@ return [
         'vendor/phpolar/phpolar-core/src',
         'vendor/phpolar/pure-php/src',
         'vendor/phpolar/storage-driver/src',
+        'vendor/phpolar/validator/src',
     ],
 
     // A list of individual files to include in analysis

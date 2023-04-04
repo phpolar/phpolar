@@ -6,6 +6,7 @@ namespace Phpolar\Phpolar\Routing;
 
 use Phpolar\Phpolar\Core\Routing\RouteNotRegistered;
 use Phpolar\Phpolar\Http\ErrorHandler;
+use Phpolar\Phpolar\ModelParamResolver;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -40,7 +41,7 @@ class RoutingHandler implements RequestHandlerInterface
         return match (true) {
             $matchResult instanceof RouteNotRegistered => $this->errorHandler->handle($request),
             $matchResult instanceof ResolvedRoute => $this->handleResolvedRoute($matchResult),
-            default => $this->handleDelegate($matchResult),
+            default => $this->handleDelegate($matchResult, $request),
         };
     }
 
@@ -51,9 +52,15 @@ class RoutingHandler implements RequestHandlerInterface
         return $response->withBody($responseStream);
     }
 
-    private function handleDelegate(AbstractContentDelegate $delegate): ResponseInterface
+    private function handleDelegate(AbstractContentDelegate $delegate, ServerRequestInterface $request): ResponseInterface
     {
-        $responseContent = $delegate->getResponseContent($this->container);
+        $reflectionMethod = new ReflectionMethod($delegate, "getResponseContent");
+        $resolver = new ModelParamResolver($reflectionMethod, $request);
+        $modelParams = $resolver->resolve();
+        /**
+         * @var string $responseContent
+         */
+        $responseContent = empty($modelParams) === false ? $reflectionMethod->invokeArgs($delegate, array_merge([$this->container], $modelParams)) : $delegate->getResponseContent($this->container);
         return $this->getResponse($responseContent);
     }
 
