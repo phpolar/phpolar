@@ -4,27 +4,27 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b36028f26e8fe5f70f53ba6eb0882bb8",
+    "content-hash": "4251f2293bb588206235b4362d69f549",
     "packages": [
         {
             "name": "phpolar/csrf-protection",
-            "version": "2.0.1",
+            "version": "2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpolar/csrf-protection.git",
-                "reference": "5914ed74ec5f9367194d49df49633a61f250e72c"
+                "reference": "5f333e950adea4b8e4eb8ebcfed6110a9166787a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpolar/csrf-protection/zipball/5914ed74ec5f9367194d49df49633a61f250e72c",
-                "reference": "5914ed74ec5f9367194d49df49633a61f250e72c",
+                "url": "https://api.github.com/repos/phpolar/csrf-protection/zipball/5f333e950adea4b8e4eb8ebcfed6110a9166787a",
+                "reference": "5f333e950adea4b8e4eb8ebcfed6110a9166787a",
                 "shasum": ""
             },
             "require": {
                 "ext-mbstring": "*",
                 "php": ">=8.1",
                 "phpolar/http-codes": "^0.0.6",
-                "psr/http-message": "^1.0",
+                "psr/http-message": "^2.0",
                 "psr/http-server-handler": "^1.0",
                 "psr/http-server-middleware": "^1.0"
             },
@@ -75,9 +75,9 @@
             ],
             "support": {
                 "issues": "https://github.com/phpolar/csrf-protection/issues",
-                "source": "https://github.com/phpolar/csrf-protection/tree/2.0.1"
+                "source": "https://github.com/phpolar/csrf-protection/tree/2.1.0"
             },
-            "time": "2023-03-02T04:40:54+00:00"
+            "time": "2023-04-29T22:41:58+00:00"
         },
         {
             "name": "phpolar/http-codes",
@@ -174,24 +174,24 @@
         },
         {
             "name": "phpolar/phpolar-core",
-            "version": "2.1.0",
+            "version": "2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpolar/phpolar-core.git",
-                "reference": "8d97bb10e7c796ec51dca65cb32c606b112b370e"
+                "reference": "3736ddf0dce1d75a14c2bc7d508a5173cd9c72dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpolar/phpolar-core/zipball/8d97bb10e7c796ec51dca65cb32c606b112b370e",
-                "reference": "8d97bb10e7c796ec51dca65cb32c606b112b370e",
+                "url": "https://api.github.com/repos/phpolar/phpolar-core/zipball/3736ddf0dce1d75a14c2bc7d508a5173cd9c72dc",
+                "reference": "3736ddf0dce1d75a14c2bc7d508a5173cd9c72dc",
                 "shasum": ""
             },
             "require": {
                 "ext-mbstring": "*",
                 "php": ">=8.1",
-                "psr/http-message": "^1.0.1",
-                "psr/http-server-handler": "^1.0.1",
-                "psr/http-server-middleware": "^1.0.1"
+                "psr/http-message": "^2.0",
+                "psr/http-server-handler": "^1.0",
+                "psr/http-server-middleware": "^1.0"
             },
             "require-dev": {
                 "ext-ast": "*",
@@ -225,9 +225,9 @@
             "description": "The internal, core components of the PHPolar Microframework",
             "support": {
                 "issues": "https://github.com/phpolar/phpolar-core/issues",
-                "source": "https://github.com/phpolar/phpolar-core/tree/2.1.0"
+                "source": "https://github.com/phpolar/phpolar-core/tree/2.2.0"
             },
-            "time": "2023-03-30T14:26:12+00:00"
+            "time": "2023-04-29T22:54:20+00:00"
         },
         {
             "name": "phpolar/phpolar-storage",
@@ -470,16 +470,16 @@
         },
         {
             "name": "psr/http-message",
-            "version": "1.1",
+            "version": "2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/http-message.git",
-                "reference": "cb6ce4845ce34a8ad9e68117c10ee90a29919eba"
+                "reference": "402d35bcb92c70c026d1a6a9883f06b2ead23d71"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/http-message/zipball/cb6ce4845ce34a8ad9e68117c10ee90a29919eba",
-                "reference": "cb6ce4845ce34a8ad9e68117c10ee90a29919eba",
+                "url": "https://api.github.com/repos/php-fig/http-message/zipball/402d35bcb92c70c026d1a6a9883f06b2ead23d71",
+                "reference": "402d35bcb92c70c026d1a6a9883f06b2ead23d71",
                 "shasum": ""
             },
             "require": {
@@ -488,7 +488,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.1.x-dev"
+                    "dev-master": "2.0.x-dev"
                 }
             },
             "autoload": {
@@ -503,7 +503,7 @@
             "authors": [
                 {
                     "name": "PHP-FIG",
-                    "homepage": "http://www.php-fig.org/"
+                    "homepage": "https://www.php-fig.org/"
                 }
             ],
             "description": "Common interface for HTTP messages",
@@ -517,9 +517,9 @@
                 "response"
             ],
             "support": {
-                "source": "https://github.com/php-fig/http-message/tree/1.1"
+                "source": "https://github.com/php-fig/http-message/tree/2.0"
             },
-            "time": "2023-04-04T09:50:52+00:00"
+            "time": "2023-04-04T09:54:51+00:00"
         },
         {
             "name": "psr/http-server-handler",
