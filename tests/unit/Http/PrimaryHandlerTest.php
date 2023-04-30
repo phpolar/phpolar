@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Phpolar\Phpolar\Http;
 
-use Phpolar\Phpolar\Tests\Stubs\MemoryStreamStub;
-use Phpolar\Phpolar\Tests\Stubs\RequestStub;
-use Phpolar\Phpolar\Tests\Stubs\ResponseStub;
+use Phpolar\HttpMessageTestUtils\MemoryStreamStub;
+use Phpolar\HttpMessageTestUtils\RequestStub;
+use Phpolar\HttpMessageTestUtils\ResponseStub;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
