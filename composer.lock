@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4251f2293bb588206235b4362d69f549",
+    "content-hash": "817f20235d08a29d9f9b5d2dda4a94de",
     "packages": [
         {
             "name": "phpolar/csrf-protection",
@@ -129,16 +129,16 @@
         },
         {
             "name": "phpolar/http-response-extensions",
-            "version": "0.1.3",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpolar/http-response-extensions.git",
-                "reference": "e447cc2d17953c698585ee0186b5b8fbeb60e138"
+                "reference": "3a8e091e120d2b54d86299ed2991dbb6103a8146"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpolar/http-response-extensions/zipball/e447cc2d17953c698585ee0186b5b8fbeb60e138",
-                "reference": "e447cc2d17953c698585ee0186b5b8fbeb60e138",
+                "url": "https://api.github.com/repos/phpolar/http-response-extensions/zipball/3a8e091e120d2b54d86299ed2991dbb6103a8146",
+                "reference": "3a8e091e120d2b54d86299ed2991dbb6103a8146",
                 "shasum": ""
             },
             "require": {
@@ -151,6 +151,7 @@
                 "php-coveralls/php-coveralls": "^2.5",
                 "phpmd/phpmd": "^2.13",
                 "phpolar/http-codes": "^0.0.6",
+                "phpolar/http-message-test-utils": "^0.1.0",
                 "phpstan/phpstan": "^1.9",
                 "phpunit/phpunit": "^9.5",
                 "squizlabs/php_codesniffer": "^3.7"
@@ -168,9 +169,9 @@
             "description": "Extends the functionality of PSR-7 HTTP Reponses.",
             "support": {
                 "issues": "https://github.com/phpolar/http-response-extensions/issues",
-                "source": "https://github.com/phpolar/http-response-extensions/tree/0.1.3"
+                "source": "https://github.com/phpolar/http-response-extensions/tree/1.0.0"
             },
-            "time": "2023-02-12T12:44:28+00:00"
+            "time": "2023-04-30T02:14:59+00:00"
         },
         {
             "name": "phpolar/phpolar-core",
@@ -2061,6 +2062,47 @@
                 }
             ],
             "time": "2022-09-10T08:44:15+00:00"
+        },
+        {
+            "name": "phpolar/http-message-test-utils",
+            "version": "0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpolar/http-message-test-utils.git",
+                "reference": "fae8687423037f4edaf528949f383c52fdd290cd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpolar/http-message-test-utils/zipball/fae8687423037f4edaf528949f383c52fdd290cd",
+                "reference": "fae8687423037f4edaf528949f383c52fdd290cd",
+                "shasum": ""
+            },
+            "require": {
+                "psr/http-factory": "^1.0",
+                "psr/http-message": "^2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Phpolar\\HttpMessageTestUtils\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Eric Fortmeyer",
+                    "email": "e.fortmeyer01@gmail.com"
+                }
+            ],
+            "description": "A PSR-7 Http Message Stub Library",
+            "support": {
+                "issues": "https://github.com/phpolar/http-message-test-utils/issues",
+                "source": "https://github.com/phpolar/http-message-test-utils/tree/0.1.0"
+            },
+            "time": "2023-04-30T01:12:14+00:00"
         },
         {
             "name": "phpstan/phpdoc-parser",
