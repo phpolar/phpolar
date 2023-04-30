@@ -13,6 +13,10 @@ use Phpolar\CsrfProtection\Http\CsrfResponseFilterMiddleware;
 use Phpolar\CsrfProtection\Http\ResponseFilterStrategyInterface;
 use Phpolar\CsrfProtection\Storage\AbstractTokenStorage;
 use Phpolar\HttpCodes\ResponseCode;
+use Phpolar\HttpMessageTestUtils\RequestStub;
+use Phpolar\HttpMessageTestUtils\ResponseFactoryStub;
+use Phpolar\HttpMessageTestUtils\ResponseStub;
+use Phpolar\HttpMessageTestUtils\StreamFactoryStub;
 use Phpolar\Phpolar\DependencyInjection\ClosureContainerFactory;
 use Phpolar\Phpolar\DependencyInjection\ContainerManager;
 use Phpolar\Phpolar\Routing\AbstractContentDelegate;
@@ -20,10 +24,6 @@ use Phpolar\Phpolar\Routing\RouteRegistry;
 use Phpolar\Phpolar\Routing\RoutingMiddleware;
 use Phpolar\Phpolar\Tests\Stubs\ConfigurableContainerStub;
 use Phpolar\Phpolar\Tests\Stubs\ContainerConfigurationStub;
-use Phpolar\Phpolar\Tests\Stubs\RequestStub;
-use Phpolar\Phpolar\Tests\Stubs\ResponseFactoryStub;
-use Phpolar\Phpolar\Tests\Stubs\ResponseStub;
-use Phpolar\Phpolar\Tests\Stubs\StreamFactoryStub;
 use Phpolar\Phpolar\Http\ErrorHandler;
 use Phpolar\Phpolar\Http\PrimaryHandler;
 use Phpolar\PurePhp\Binder;
@@ -68,7 +68,7 @@ final class AppTest extends TestCase
         $config[ContainerInterface::class] = new ConfigurableContainerStub($config);
         $config[Dispatcher::class] = new Dispatcher();
         $config[ResponseFactoryInterface::class] = new ResponseFactoryStub();
-        $config[StreamFactoryInterface::class] = new StreamFactoryStub();
+        $config[StreamFactoryInterface::class] = new StreamFactoryStub("+w");
         $config[PrimaryHandler::class] = $handler;
         $config[App::ERROR_HANDLER_404] = static fn (ArrayAccess $config) => new ErrorHandler(ResponseCode::NOT_FOUND, "Not Found", $config[ContainerInterface::class]);
         $config[CsrfRequestCheckMiddleware::class] = $csrfPreRoutingMiddleware;
@@ -99,7 +99,7 @@ final class AppTest extends TestCase
     public function test1()
     {
         $responseFactory = new ResponseFactoryStub();
-        $streamFactory = new StreamFactoryStub();
+        $streamFactory = new StreamFactoryStub("+w");
         $request = new RequestStub();
         /**
          * @var MockObject&RoutingMiddleware $routingMiddlewareSpy
@@ -137,7 +137,7 @@ final class AppTest extends TestCase
     public function test2()
     {
         $responseFactory = new ResponseFactoryStub();
-        $streamFactory = new StreamFactoryStub();
+        $streamFactory = new StreamFactoryStub("+w");
         $request = new RequestStub();
         $csrfPreRoutingMiddleware = static fn (ArrayAccess $config) => new class ($config[CsrfProtectionRequestHandler::class]) extends CsrfRequestCheckMiddleware {
             public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface

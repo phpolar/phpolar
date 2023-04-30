@@ -6,12 +6,12 @@ namespace Phpolar\Phpolar\Http;
 
 use Closure;
 use Phpolar\HttpCodes\ResponseCode;
+use Phpolar\HttpMessageTestUtils\RequestStub;
+use Phpolar\HttpMessageTestUtils\ResponseFactoryStub;
+use Phpolar\HttpMessageTestUtils\StreamFactoryStub;
 use Phpolar\Phpolar\Core\Formats;
 use Phpolar\Phpolar\Tests\Stubs\ConfigurableContainerStub;
 use Phpolar\Phpolar\Tests\Stubs\ContainerConfigurationStub;
-use Phpolar\Phpolar\Tests\Stubs\RequestStub;
-use Phpolar\Phpolar\Tests\Stubs\ResponseFactoryStub;
-use Phpolar\Phpolar\Tests\Stubs\StreamFactoryStub;
 use Phpolar\PurePhp\Binder;
 use Phpolar\PurePhp\Dispatcher;
 use Phpolar\PurePhp\FileNotFound;
@@ -42,7 +42,7 @@ final class ErrorHandlerTest extends TestCase
         $config = new ContainerConfigurationStub();
         $container = new ConfigurableContainerStub($config);
         $config[ResponseFactoryInterface::class] = new ResponseFactoryStub();
-        $config[StreamFactoryInterface::class] = new StreamFactoryStub();
+        $config[StreamFactoryInterface::class] = new StreamFactoryStub("+w");
         $config[TemplateEngine::class] = new TemplateEngine(
             $renderingAlgo,
             new Binder(),
@@ -74,7 +74,7 @@ final class ErrorHandlerTest extends TestCase
         $config = new ContainerConfigurationStub();
         $container = new ConfigurableContainerStub($config);
         $config[ResponseFactoryInterface::class] = new ResponseFactoryStub();
-        $config[StreamFactoryInterface::class] = new StreamFactoryStub();
+        $config[StreamFactoryInterface::class] = new StreamFactoryStub("+w");
         $config[TemplateEngine::class] = new TemplateEngine(
             $renderingAlgo,
             $binderStub,
@@ -101,7 +101,7 @@ final class ErrorHandlerTest extends TestCase
         $config = new ContainerConfigurationStub();
         $container = new ConfigurableContainerStub($config);
         $config[ResponseFactoryInterface::class] = new ResponseFactoryStub();
-        $config[StreamFactoryInterface::class] = new StreamFactoryStub();
+        $config[StreamFactoryInterface::class] = new StreamFactoryStub("+w");
         $config[TemplateEngine::class] = new TemplateEngine(
             $renderingAlgo,
             new Binder(),

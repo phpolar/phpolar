@@ -5,13 +5,11 @@ declare(strict_types=1);
 namespace Phpolar\Phpolar;
 
 use Closure;
-use Phpolar\Phpolar\Model\AbstractModel;
 use Phpolar\Phpolar\Model\Model;
 use Phpolar\Phpolar\Tests\Stubs\ModelStub;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\Attributes\TestDox;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface;

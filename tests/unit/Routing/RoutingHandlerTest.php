@@ -6,13 +6,13 @@ namespace Phpolar\Phpolar\Routing;
 
 use Generator;
 use Phpolar\HttpCodes\ResponseCode;
+use Phpolar\HttpMessageTestUtils\MemoryStreamStub;
+use Phpolar\HttpMessageTestUtils\RequestStub;
+use Phpolar\HttpMessageTestUtils\ResponseFactoryStub;
+use Phpolar\HttpMessageTestUtils\StreamFactoryStub;
+use Phpolar\HttpMessageTestUtils\UriStub;
 use Phpolar\Phpolar\Core\Routing\RouteNotRegistered;
 use Phpolar\Phpolar\Core\Routing\RouteParamMap;
-use Phpolar\Phpolar\Tests\Stubs\MemoryStreamStub;
-use Phpolar\Phpolar\Tests\Stubs\RequestStub;
-use Phpolar\Phpolar\Tests\Stubs\ResponseFactoryStub;
-use Phpolar\Phpolar\Tests\Stubs\StreamFactoryStub;
-use Phpolar\Phpolar\Tests\Stubs\UriStub;
 use Phpolar\Phpolar\Http\ErrorHandler;
 use Phpolar\PurePhp\Binder;
 use Phpolar\PurePhp\Dispatcher;
@@ -48,7 +48,7 @@ final class RoutingHandlerTest extends TestCase
                     return new ResponseFactoryStub();
                 }
                 if ($id === StreamFactoryInterface::class) {
-                    return $this->streamFactory ?? new StreamFactoryStub();
+                    return $this->streamFactory ?? new StreamFactoryStub("r");
                 }
                 if ($id === TemplateEngine::class) {
                     return new TemplateEngine(new StreamContentStrategy(), new Binder(), new Dispatcher());

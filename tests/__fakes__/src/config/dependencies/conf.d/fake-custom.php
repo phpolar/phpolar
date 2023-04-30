@@ -1,8 +1,8 @@
 <?php
 
 use Phpolar\HttpCodes\ResponseCode;
-use Phpolar\Phpolar\Tests\Stubs\ResponseFactoryStub;
-use Phpolar\Phpolar\Tests\Stubs\StreamFactoryStub;
+use Phpolar\HttpMessageTestUtils\ResponseFactoryStub;
+use Phpolar\HttpMessageTestUtils\StreamFactoryStub;
 use Phpolar\Phpolar\Http\ErrorHandler;
 use Phpolar\Phpolar\Http\PrimaryHandler;
 use Phpolar\Phpolar\App;
@@ -30,5 +30,5 @@ return [
     TemplateEngine::class => static fn (ContainerInterface $container) => new TemplateEngine($container->get(TemplatingStrategyInterface::class), new Binder(), new Dispatcher()),
     TemplatingStrategyInterface::class => new StreamContentStrategy(),
     ResponseFactoryInterface::class => new ResponseFactoryStub(),
-    StreamFactoryInterface::class => new StreamFactoryStub(),
+    StreamFactoryInterface::class => new StreamFactoryStub("+w"),
 ];

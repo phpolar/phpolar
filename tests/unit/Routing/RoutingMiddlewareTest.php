@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Phpolar\Phpolar\Routing;
 
 use Phpolar\HttpCodes\ResponseCode;
-use Phpolar\Phpolar\Tests\Stubs\RequestStub;
-use Phpolar\Phpolar\Tests\Stubs\ResponseStub;
-use Phpolar\Phpolar\Tests\Stubs\StreamFactoryStub;
+use Phpolar\HttpMessageTestUtils\RequestStub;
+use Phpolar\HttpMessageTestUtils\ResponseStub;
+use Phpolar\HttpMessageTestUtils\StreamFactoryStub;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -27,7 +27,7 @@ final class RoutingMiddlewareTest extends TestCase
          */
         $routingHandlerSpy = $this->createMock(RoutingHandler::class);
         $routingHandlerSpy->expects($this->once())->method("handle");
-        $sut = new RoutingMiddleware($routingHandlerSpy, new StreamFactoryStub());
+        $sut = new RoutingMiddleware($routingHandlerSpy, new StreamFactoryStub("r"));
         $noopHandler = $this->createStub(RequestHandlerInterface::class);
         $sut->process(new RequestStub(), $noopHandler);
     }
@@ -46,7 +46,7 @@ final class RoutingMiddlewareTest extends TestCase
         $routingHandlerStub = $this->createStub(RoutingHandler::class);
         $matchingRouteResponse = new ResponseStub(ResponseCode::NOT_FOUND);
         $routingHandlerStub->method("handle")->willReturn($matchingRouteResponse);
-        $sut = new RoutingMiddleware($routingHandlerStub, new StreamFactoryStub());
+        $sut = new RoutingMiddleware($routingHandlerStub, new StreamFactoryStub("r"));
         $sut->process(new RequestStub(), $nextHandlerSpy);
     }
 
@@ -65,7 +65,7 @@ final class RoutingMiddlewareTest extends TestCase
         $routingHandlerStub->method("handle")->willReturn(
             new ResponseStub(ResponseCode::OK)
         );
-        $sut = new RoutingMiddleware($routingHandlerStub, new StreamFactoryStub());
+        $sut = new RoutingMiddleware($routingHandlerStub, new StreamFactoryStub("r"));
         $response = $sut->process(new RequestStub(), $nextHandlerSpy);
         $this->assertInstanceOf(ResponseInterface::class, $response);
     }
