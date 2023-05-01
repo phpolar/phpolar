@@ -1,3 +1,13 @@
+## 2.0.0 (2023-05-01)
+
+### BREAKING CHANGE
+
+- Please see https://api.phpolar.org and https://docs.phpolar.org.
+
+### Feat
+
+- project rewrite
+
 ## 2.0.0b2 (2023-04-29)
 
 ### Fix
