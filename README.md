@@ -8,6 +8,11 @@
 
 [![Coverage Status](https://coveralls.io/repos/github/phpolar/phpolar/badge.svg?branch=main)](https://coveralls.io/repos/github/phpolar/phpolar/badge.svg?branch=main) [![Latest Stable Version](http://poser.pugx.org/phpolar/phpolar/v)][def] [![Total Downloads](http://poser.pugx.org/phpolar/phpolar/downloads)][def] [![Latest Unstable Version](http://poser.pugx.org/phpolar/phpolar/v/unstable)][def] [![License](http://poser.pugx.org/phpolar/phpolar/license)][def] [![PHP Version Require](http://poser.pugx.org/phpolar/phpolar/require/php)][def]
 
+[Quick Start](https://docs.phpolar.org/quick-start/) <br/>
+[Documentation](https://docs.phpolar.org) <br/>
+[API](https://api.phpolar.org) <br/>
+[Website](https://phpolar.org) <br/>
+
 ### Quick start
 
 ```bash
@@ -108,10 +113,5 @@ class Person extends Model
 |Source Code Size|Memory Usage|
 |----------------|------------|
 |25.5 kB|750 kB|
-
-[Quick Start](https://docs.phpolar.org/quick-start/)
-[Documentation](https://docs.phpolar.org)
-[API](https://api.phpolar.org)
-[Website](https://phpolar.org)
 
 [def]: https://packagist.org/packages/phpolar/phpolar
