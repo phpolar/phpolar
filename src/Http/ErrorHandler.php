@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Phpolar\Phpolar\Http;
 
 use Phpolar\Phpolar\Core\Formats;
-use Phpolar\PurePhp\TemplateEngine;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -22,8 +21,6 @@ final class ErrorHandler implements RequestHandlerInterface
 
     private StreamFactoryInterface $streamFactory;
 
-    private TemplateEngine $templateEngine;
-
     public function __construct(
         private int $responseCode,
         private string $reasonPhrase,
@@ -37,13 +34,8 @@ final class ErrorHandler implements RequestHandlerInterface
          * @var StreamFactoryInterface $streamFactory
          */
         $streamFactory = $container->get(StreamFactoryInterface::class);
-        /**
-         * @var TemplateEngine $templateEng
-         */
-        $templateEng = $container->get(TemplateEngine::class);
         $this->responseFactory = $responseFactory;
         $this->streamFactory = $streamFactory;
-        $this->templateEngine = $templateEng;
     }
 
     /**
@@ -65,7 +57,12 @@ final class ErrorHandler implements RequestHandlerInterface
 
     private function getResponseContent(): string
     {
-        $result = $this->templateEngine->apply(sprintf(Formats::ErrorTemplates->value, $this->responseCode));
-        return is_string($result) === false ? sprintf(Formats::ErrorText->value, $this->reasonPhrase) : $result;
+        $errorTplFilename = sprintf(Formats::ErrorTemplates->value, $this->responseCode);
+        $defaultErrorText = sprintf(Formats::ErrorText->value, $this->reasonPhrase);
+        if (file_exists($errorTplFilename) === false) {
+            return $defaultErrorText;
+        }
+        $errorTplContents = file_get_contents($errorTplFilename);
+        return $errorTplContents === false ? $defaultErrorText : $errorTplContents;
     }
 }

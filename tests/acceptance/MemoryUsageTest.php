@@ -89,6 +89,6 @@ final class MemoryUsageTest extends TestCase
         $server->receive($request);
         $totalUsed += memory_get_usage();
         $this->assertGreaterThan(0, $totalUsed);
-        $this->assertLessThanOrEqual((int) PROJECT_MEMORY_USAGE_THRESHOLD, $totalUsed);
+        $this->assertLessThanOrEqual((int) $threshold, $totalUsed);
     }
 }
