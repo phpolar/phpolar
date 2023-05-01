@@ -35,7 +35,7 @@ abstract class AbstractModel implements IteratorAggregate
     use ValidationTrait;
 
     /**
-     * @param array<string|int,mixed>|object $data
+     * @param array<string|int,mixed>|object|null $data
      */
     public function __construct(null | array | object $data = [])
     {

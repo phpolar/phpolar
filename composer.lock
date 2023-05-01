@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "817f20235d08a29d9f9b5d2dda4a94de",
+    "content-hash": "14bba46250605607c51e0c9888dce1bd",
     "packages": [
         {
             "name": "phpolar/csrf-protection",
@@ -229,105 +229,6 @@
                 "source": "https://github.com/phpolar/phpolar-core/tree/2.2.0"
             },
             "time": "2023-04-29T22:54:20+00:00"
-        },
-        {
-            "name": "phpolar/phpolar-storage",
-            "version": "1.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/phpolar/phpolar-storage.git",
-                "reference": "dcbc547333cc9f6b1de31767c668b4061f86e3bb"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/phpolar/phpolar-storage/zipball/dcbc547333cc9f6b1de31767c668b4061f86e3bb",
-                "reference": "dcbc547333cc9f6b1de31767c668b4061f86e3bb",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=8.1"
-            },
-            "require-dev": {
-                "ext-ast": "*",
-                "ext-openssl": "*",
-                "phan/phan": "^5.4",
-                "php-coveralls/php-coveralls": "^2.5",
-                "phpmd/phpmd": "^2.13",
-                "phpstan/phpstan": "^1.9",
-                "phpunit/phpunit": "^10.0",
-                "squizlabs/php_codesniffer": "^3.7"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Phpolar\\Phpolar\\Storage\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "A convenient tool to speed up the creation of data storage for application development.",
-            "support": {
-                "issues": "https://github.com/phpolar/phpolar-storage/issues",
-                "source": "https://github.com/phpolar/phpolar-storage/tree/1.2.0"
-            },
-            "time": "2023-03-06T02:10:05+00:00"
-        },
-        {
-            "name": "phpolar/pure-php",
-            "version": "1.0.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/phpolar/pure-php.git",
-                "reference": "5ec9c8488ed82e0247c7364f92e802c0d37e5669"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/phpolar/pure-php/zipball/5ec9c8488ed82e0247c7364f92e802c0d37e5669",
-                "reference": "5ec9c8488ed82e0247c7364f92e802c0d37e5669",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^8.1"
-            },
-            "require-dev": {
-                "ext-mbstring": "*",
-                "phan/phan": "^5.4",
-                "php-coveralls/php-coveralls": "^2.5",
-                "phpmd/phpmd": "^2.13",
-                "phpstan/phpstan": "^1.9",
-                "phpunit/phpunit": "^10.0",
-                "squizlabs/php_codesniffer": "^3.7"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Phpolar\\PurePhp\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Eric Fortmeyer",
-                    "email": "e.fortmeyer01@gmail.com"
-                }
-            ],
-            "description": "Pure PHP Templates",
-            "keywords": [
-                "php",
-                "template-engine",
-                "template-language",
-                "templates"
-            ],
-            "support": {
-                "issues": "https://github.com/phpolar/pure-php/issues",
-                "source": "https://github.com/phpolar/pure-php/tree/1.0.3"
-            },
-            "time": "2023-03-01T02:25:01+00:00"
         },
         {
             "name": "phpolar/storage-driver",
@@ -2105,6 +2006,61 @@
             "time": "2023-04-30T01:12:14+00:00"
         },
         {
+            "name": "phpolar/pure-php",
+            "version": "1.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpolar/pure-php.git",
+                "reference": "dfe17daaef109c6931d61f65c70b701a4a51479f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpolar/pure-php/zipball/dfe17daaef109c6931d61f65c70b701a4a51479f",
+                "reference": "dfe17daaef109c6931d61f65c70b701a4a51479f",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "ext-mbstring": "*",
+                "phan/phan": "^5.4",
+                "php-coveralls/php-coveralls": "^2.5",
+                "phpmd/phpmd": "^2.13",
+                "phpstan/phpstan": "^1.9",
+                "phpunit/phpunit": "^10.0",
+                "squizlabs/php_codesniffer": "^3.7"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Phpolar\\PurePhp\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Eric Fortmeyer",
+                    "email": "e.fortmeyer01@gmail.com"
+                }
+            ],
+            "description": "Pure PHP Templates",
+            "keywords": [
+                "php",
+                "template-engine",
+                "template-language",
+                "templates"
+            ],
+            "support": {
+                "issues": "https://github.com/phpolar/pure-php/issues",
+                "source": "https://github.com/phpolar/pure-php/tree/1.0.4"
+            },
+            "time": "2023-04-30T17:37:13+00:00"
+        },
+        {
             "name": "phpstan/phpdoc-parser",
             "version": "1.20.3",
             "source": {
@@ -3199,16 +3155,16 @@
         },
         {
             "name": "sebastian/diff",
-            "version": "5.0.1",
+            "version": "5.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/diff.git",
-                "reference": "aae9a0a43bff37bd5d8d0311426c87bf36153f02"
+                "reference": "912dc2fbe3e3c1e7873313cc801b100b6c68c87b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/diff/zipball/aae9a0a43bff37bd5d8d0311426c87bf36153f02",
-                "reference": "aae9a0a43bff37bd5d8d0311426c87bf36153f02",
+                "url": "https://api.github.com/repos/sebastianbergmann/diff/zipball/912dc2fbe3e3c1e7873313cc801b100b6c68c87b",
+                "reference": "912dc2fbe3e3c1e7873313cc801b100b6c68c87b",
                 "shasum": ""
             },
             "require": {
@@ -3254,7 +3210,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/diff/issues",
                 "security": "https://github.com/sebastianbergmann/diff/security/policy",
-                "source": "https://github.com/sebastianbergmann/diff/tree/5.0.1"
+                "source": "https://github.com/sebastianbergmann/diff/tree/5.0.3"
             },
             "funding": [
                 {
@@ -3262,7 +3218,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-03-23T05:12:41+00:00"
+            "time": "2023-05-01T07:48:21+00:00"
         },
         {
             "name": "sebastian/environment",

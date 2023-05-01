@@ -1,6 +1,6 @@
 {
     "name": "phpolar/phpolar",
-    "description": "A super-tiny, lightweight microframework for PHP projects",
+    "description": "A minimal PHP framework",
     "type": "library",
     "license": "MIT",
     "authors": [
@@ -41,8 +41,6 @@
         "phpolar/csrf-protection": "^2.1",
         "phpolar/http-response-extensions": "^1.0",
         "phpolar/phpolar-core": "^2.2",
-        "phpolar/phpolar-storage": "^1.0",
-        "phpolar/pure-php": "^1.0",
         "phpolar/storage-driver": "^1.0",
         "phpolar/validator": "^1.0",
         "psr/container": "^2.0",
@@ -59,6 +57,7 @@
         "squizlabs/php_codesniffer": "^3.7",
         "php-coveralls/php-coveralls": "^2.5",
         "phpolar/http-message-test-utils": "^0.1.0",
+        "phpolar/pure-php": "^1.0",
         "phpstan/phpstan": "^1.8",
         "phpmd/phpmd": "^2.13"
     },
