@@ -53,13 +53,13 @@
         "ext-openssl": "*",
         "ext-mbstring": "*",
         "phan/phan": "^5.3",
-        "phpunit/phpunit": "^9.5",
-        "squizlabs/php_codesniffer": "^3.7",
         "php-coveralls/php-coveralls": "^2.5",
         "phpolar/http-message-test-utils": "^0.1.0",
         "phpolar/pure-php": "^1.0",
         "phpstan/phpstan": "^1.8",
-        "phpmd/phpmd": "^2.13"
+        "phpunit/phpunit": "^10.0",
+        "picocss/pico": "2.0.0alpha1",
+        "squizlabs/php_codesniffer": "^3.7"
     },
     "scripts": {
         "analyze": "XDEBUG_MODE=off phpstan analyze src --level 9",

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "14bba46250605607c51e0c9888dce1bd",
+    "content-hash": "ae5ec239fde7186fa42f0b0f3dc669fb",
     "packages": [
         {
             "name": "phpolar/csrf-protection",
@@ -2587,6 +2587,54 @@
                 }
             ],
             "time": "2023-04-22T07:38:19+00:00"
+        },
+        {
+            "name": "picocss/pico",
+            "version": "v2.0.0-alpha1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/picocss/pico.git",
+                "reference": "2e8cd6e786b6bbdbba7362936ae47d0c619652d3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/picocss/pico/zipball/2e8cd6e786b6bbdbba7362936ae47d0c619652d3",
+                "reference": "2e8cd6e786b6bbdbba7362936ae47d0c619652d3",
+                "shasum": ""
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Lucas Larroche",
+                    "email": "lucas@larroche.com",
+                    "homepage": "https://lucaslarroche.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Minimal CSS Framework for semantic HTML.",
+            "homepage": "https://picocss.com",
+            "keywords": [
+                "CSS-Framework",
+                "css",
+                "dark-mode",
+                "dark-theme",
+                "lightweight",
+                "minimal",
+                "minimalist",
+                "minimalistic",
+                "native-html",
+                "scss-framework",
+                "semantic"
+            ],
+            "support": {
+                "issues": "https://github.com/picocss/pico/issues/",
+                "source": "https://github.com/picocss/pico/tree/v2.0.0-alpha1"
+            },
+            "time": "2023-04-23T03:53:13+00:00"
         },
         {
             "name": "psr/http-client",
@@ -5235,7 +5283,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "picocss/pico": 15
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
