@@ -1,6 +1,6 @@
 .phpdocumentor-title {
     box-sizing: border-box;
-    color: var(--title-text-color);
+    color: var(--pico-h1-color);
     font-size: var(--text-xxl);
     letter-spacing: .05rem;
     font-weight: normal;
@@ -10,6 +10,10 @@
     align-items: center;
 }
 
+.phpdocumentor-title .brand-icon {
+    width:2rem;
+    display:inline-block;
+}
 .phpdocumentor-title.-without-divider {
     border: none;
 }
@@ -17,7 +21,7 @@
 .phpdocumentor-title__link {
     transition: all .3s ease-out;
     display: flex;
-    color: var(--title-text-color);
+    color: var(--pico-h1-color);
     text-decoration: none;
     font-weight: normal;
     white-space: nowrap;
@@ -27,7 +31,6 @@
 
 .phpdocumentor-title__link:hover {
     transform: perspective(15rem) translateX(.5rem);
-    font-weight: 600;
 }
 
 @media (min-width: {{ breakpoints['menu'] }}) {
