@@ -1,8 +1,9 @@
 
+
 :root {
     /* Typography */
-    --font-primary: 'Source Sans Pro', Helvetica, Arial, sans-serif;
-    --font-secondary: 'Source Sans Pro', Helvetica, Arial, sans-serif;
+    --font-primary: 'Open Sans', Helvetica, Arial, sans-serif;
+    --font-secondary: 'Open Sans', Helvetica, Arial, sans-serif;
     --font-monospace: 'Source Code Pro', monospace;
     --line-height--primary: 1.6;
     --letter-spacing--primary: .05rem;
@@ -20,15 +21,34 @@
     --text-xxxxl: calc(var(--text-base-size) * var(--text-scale-ratio) * var(--text-scale-ratio) * var(--text-scale-ratio) * var(--text-scale-ratio) * var(--text-scale-ratio));
     --text-xxxxxl: calc(var(--text-base-size) * var(--text-scale-ratio) * var(--text-scale-ratio) * var(--text-scale-ratio) * var(--text-scale-ratio) * var(--text-scale-ratio) * var(--text-scale-ratio));
 
+    --color-hue-red:     4;
+    --color-hue-pink:     340;
+    --color-hue-purple:     291;
+    --color-hue-deep-purple:     262;
+    --color-hue-indigo:     231;
+    --color-hue-blue:     207;
+    --color-hue-light-blue:     199;
+    --color-hue-cyan:     187;
+    --color-hue-teal:     174;
+    --color-hue-green:     122;
+    --color-hue-phpdocumentor-green:     96;
+    --color-hue-light-green:     88;
+    --color-hue-lime:     66;
+    --color-hue-yellow:     54;
+    --color-hue-amber:     45;
+    --color-hue-orange:     36;
+    --color-hue-deep-orange:     14;
+    --color-hue-brown:     16;
+
     /* Colors */
-    --primary-color-hue: 96;
+    --primary-color-hue: var(--color-hue-blue, --color-hue-blue);
     --primary-color-saturation: 57%;
     --primary-color: hsl(var(--primary-color-hue), var(--primary-color-saturation), 60%);
     --primary-color-darken: hsl(var(--primary-color-hue), var(--primary-color-saturation), 40%);
-    --primary-color-darker: hsl(var(--primary-color-hue), var(--primary-color-saturation), 20%);
+    --primary-color-darker: hsl(var(--primary-color-hue), var(--primary-color-saturation), 25%);
     --primary-color-darkest: hsl(var(--primary-color-hue), var(--primary-color-saturation), 10%);
-    --primary-color-lighten: hsl(var(--primary-color-hue), var(--primary-color-saturation), 80%);
-    --primary-color-lighter: hsl(var(--primary-color-hue), var(--primary-color-saturation), 99%);
+    --primary-color-lighten: hsl(var(--primary-color-hue), calc(var(--primary-color-saturation) - 20%), 85%);
+    --primary-color-lighter: hsl(var(--primary-color-hue), calc(var(--primary-color-saturation) - 45%), 97.5%);
     --dark-gray: #d1d1d1;
     --light-gray: #f0f0f0;
 
@@ -44,8 +64,8 @@
     --button-text-color: #555;
     --button-text-color-primary: white;
     --popover-background-color: rgba(255, 255, 255, 0.75);
-    --link-color-primary: var(--primary-color-darken);
-    --link-hover-color-primary: var(--primary-color-darker);
+    --link-color-primary: var(--primary-color-darker);
+    --link-hover-color-primary: var(--primary-color-darkest);
     --form-field-border-color: var(--dark-gray);
     --form-field-color: #fff;
     --admonition-success-color: var(--primary-color);
@@ -75,7 +95,6 @@
 
     --border-radius-base-size: 3px;
 }
-
 /* Base Styles
 -------------------------------------------------- */
 body {
@@ -210,7 +229,7 @@ body {
 
 @media (min-width: 550px) {
     .phpdocumentor-column {
-        margin-left: 4%;
+        margin-left: 24%;
     }
 
     .phpdocumentor-column:first-child {
@@ -334,8 +353,7 @@ body {
     .-offset-by-one-half.phpdocumentor-column {
         margin-left: 52%;
     }
-}
-.phpdocumentor a {
+}.phpdocumentor a {
     color: var(--link-color-primary);
 }
 
@@ -547,6 +565,8 @@ td.phpdocumentor-cell:last-child {
 
 .phpdocumentor-header {
     display: flex;
+    position: fixed;
+    left: 5rem;
     flex-direction: row;
     align-items: stretch;
     flex-wrap: wrap;
@@ -593,8 +613,7 @@ td.phpdocumentor-cell:last-child {
     .phpdocumentor-header {
         padding: 0;
     }
-}
-.phpdocumentor-title {
+}.phpdocumentor-title {
     box-sizing: border-box;
     color: var(--title-text-color);
     font-size: var(--text-xxl);
@@ -628,8 +647,7 @@ td.phpdocumentor-cell:last-child {
 
 @media (min-width: 1000px) {
     .phpdocumentor-title {
-        width: 30.6666666667%;
-        border-right: var(--sidebar-border-color) solid 1px;
+        width: 22%;
     }
 
     .phpdocumentor-title__link {
@@ -647,8 +665,7 @@ td.phpdocumentor-cell:last-child {
     .phpdocumentor-title__link {
         transform: scale(1);
     }
-}
-.phpdocumentor-topnav {
+}.phpdocumentor-topnav {
     display: flex;
     align-items: center;
     margin: 0;
@@ -720,8 +737,11 @@ td.phpdocumentor-cell:last-child {
 }
 .phpdocumentor-sidebar {
     margin: 0;
-    overflow: hidden;
-    max-height: 0;
+    top: 6rem;
+        max-height: 0;
+    position: fixed;
+    padding-right: 2rem;
+
 }
 
 .phpdocumentor .phpdocumentor-sidebar .phpdocumentor-list {
@@ -754,8 +774,7 @@ td.phpdocumentor-cell:last-child {
 }
 
 .phpdocumentor .phpdocumentor-sidebar__category > * {
-    border-left: 1px solid var(--primary-color-lighten);
-}
+    }
 
 .phpdocumentor .phpdocumentor-sidebar__category {
     margin-bottom: var(--spacing-lg);
@@ -763,6 +782,7 @@ td.phpdocumentor-cell:last-child {
 
 .phpdocumentor .phpdocumentor-sidebar__category-header {
     font-size: var(--text-md);
+    margin-top: 0;
     margin-bottom: var(--spacing-xs);
     color: var(--link-color-primary);
     font-weight: 600;
@@ -781,8 +801,7 @@ td.phpdocumentor-cell:last-child {
 
 @media (min-width: 550px) {
     .phpdocumentor-sidebar {
-        border-right: var(--sidebar-border-color) solid 1px;
-    }
+            }
 }
 
 .phpdocumentor-sidebar__menu-button {
@@ -819,8 +838,7 @@ td.phpdocumentor-cell:last-child {
     .phpdocumentor-sidebar__menu-icon {
         display: none;
     }
-}
-.phpdocumentor-admonition {
+}.phpdocumentor-admonition {
     border: 1px solid var(--admonition-border-color);
     border-radius: var(--border-radius-base-size);
     border-color: var(--primary-color-lighten);

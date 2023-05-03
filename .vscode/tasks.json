@@ -34,6 +34,22 @@
             "args": [
                 "check"
             ]
+        },
+        {
+            "label": "docs",
+            "type": "process",
+            "presentation": {
+                "echo": true,
+                "reveal": "never",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": true
+            },
+            "command": "composer",
+            "args": [
+                "docs:generate"
+            ]
         }
     ]
 }

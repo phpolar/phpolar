@@ -1,0 +1,27 @@
+{# <input class="phpdocumentor-sidebar__menu-button" type="checkbox" id="sidebar-button" name="sidebar-button" />
+<label class="phpdocumentor-sidebar__menu-icon" for="sidebar-button">
+    Menu
+</label> #}
+<aside class="phpdocumentor-sidebar closed-on-mobile">
+  <nav>
+    {% for version in project.versions %}
+        <section class="phpdocumentor-sidebar__category">
+        {% for toc in version.tableOfContents %}
+            <h2 class="phpdocumentor-sidebar__category-header">{{ toc.name }}</h2>
+                {% for root in toc.roots %}
+                    {{ toc(root, 'components/menu.html.twig', 1) }}
+                {% endfor %}
+        </section>
+        {% endfor %}
+    {% endfor %}
+
+    <section class="phpdocumentor-sidebar__category">
+        <h2 class="phpdocumentor-sidebar__category-header">Reports</h2>
+        {% if project.settings.custom['graphs.enabled'] %}
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="graphs/classes.html">Class Diagram</a></h3>
+        {% endif %}
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/deprecated.html">Deprecated</a></h3>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/errors.html">Errors</a></h3>
+    </section>
+  </nav>
+</aside>
