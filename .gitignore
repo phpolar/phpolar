@@ -1,6 +1,6 @@
 .DS_Store
 .phpunit.cache
-.phpdoc
+/.phpdoc/build/
 .vs/
 /vendor/
 /api/
