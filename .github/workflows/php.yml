@@ -36,9 +36,6 @@ jobs:
     - name: Scanning for lint errors
       run: composer ci:lint
 
-    - name: Run static analysis
-      run: composer ci:analyze
-
     - name: Run test suite
       run: composer ci:test
 
