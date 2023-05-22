@@ -40,14 +40,27 @@ trait PrimaryKeyTrait
         }
         return null;
     }
-
     private function getStringVal(ReflectionProperty $prop): string
     {
-        return $prop->isInitialized($this) === true ? strval($prop->getValue($this)) : "";
+        if ($prop->isInitialized($this) === true) {
+            /**
+             * @var bool|float|int|string $val
+             */
+            $val = $prop->getValue($this);
+            return strval($val);
+        }
+        return "";
     }
 
     private function getIntVal(ReflectionProperty $prop): int
     {
-        return $prop->isInitialized($this) === true ? intval($prop->getValue($this)) : 0;
+        if ($prop->isInitialized($this) === true) {
+            /**
+             * @var float|int|string $val
+             */
+            $val = $prop->getValue($this);
+            return intval($val);
+        }
+        return 0;
     }
 }
