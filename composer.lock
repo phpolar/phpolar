@@ -4,129 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2a35bd99e9bdbf1ab14da72d987ff4fa",
+    "content-hash": "1a5ee62cac5a176a8a0c8c99217f9fc5",
     "packages": [
-        {
-            "name": "phpolar/csrf-protection",
-            "version": "2.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/phpolar/csrf-protection.git",
-                "reference": "5f333e950adea4b8e4eb8ebcfed6110a9166787a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/phpolar/csrf-protection/zipball/5f333e950adea4b8e4eb8ebcfed6110a9166787a",
-                "reference": "5f333e950adea4b8e4eb8ebcfed6110a9166787a",
-                "shasum": ""
-            },
-            "require": {
-                "ext-mbstring": "*",
-                "php": ">=8.1",
-                "phpolar/http-codes": "^0.0.6",
-                "psr/http-message": "^2.0",
-                "psr/http-server-handler": "^1.0",
-                "psr/http-server-middleware": "^1.0"
-            },
-            "provide": {
-                "psr/http-middleware-implementation": "^1.0",
-                "psr/http-server-handler-implementation": "^1.0"
-            },
-            "require-dev": {
-                "ext-ast": "^1.1",
-                "ext-openssl": "*",
-                "phan/phan": "^5.4",
-                "php-coveralls/php-coveralls": "^2.5",
-                "phpmd/phpmd": "^2.13",
-                "phpstan/phpstan": "^1.9",
-                "phpunit/phpunit": "^10.0",
-                "squizlabs/php_codesniffer": "^3.7"
-            },
-            "suggest": {
-                "laminas/laminas-diactoros": "Provides a PSR-7 implementation",
-                "monolog/monolog": "Allows for logging forbidden requests"
-            },
-            "type": "library",
-            "autoload": {
-                "files": [
-                    "src/constants.php"
-                ],
-                "psr-4": {
-                    "Phpolar\\CsrfProtection\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Eric Fortmeyer",
-                    "email": "e.fortmeyer01@gmail.com"
-                }
-            ],
-            "description": "Provides request checking and response filtering to mitigate CSRF attacks",
-            "keywords": [
-                "csrf",
-                "middleware",
-                "psr-15",
-                "psr-7",
-                "request handlers"
-            ],
-            "support": {
-                "issues": "https://github.com/phpolar/csrf-protection/issues",
-                "source": "https://github.com/phpolar/csrf-protection/tree/2.1.0"
-            },
-            "time": "2023-04-29T22:41:58+00:00"
-        },
-        {
-            "name": "phpolar/http-codes",
-            "version": "0.0.6",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/phpolar/http-codes.git",
-                "reference": "b889110e8d497395a2b77e254e57d835adc476f2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/phpolar/http-codes/zipball/b889110e8d497395a2b77e254e57d835adc476f2",
-                "reference": "b889110e8d497395a2b77e254e57d835adc476f2",
-                "shasum": ""
-            },
-            "require-dev": {
-                "phan/phan": "v5.x-dev",
-                "phpunit/phpunit": "^9.5",
-                "squizlabs/php_codesniffer": "4.0.x-dev"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Phpolar\\HttpCodes\\": "src/"
-                },
-                "exclude-from-classmap": [
-                    "/tests/**/*"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Prince Dorcis",
-                    "email": "princedorcis@gmail.com"
-                },
-                {
-                    "name": "Eric Fortmeyer",
-                    "email": "e.fortmeyer01@gmail.com"
-                }
-            ],
-            "description": "PHP class for HTTP Response Codes",
-            "support": {
-                "source": "https://github.com/phpolar/http-codes/tree/0.0.6"
-            },
-            "time": "2023-01-16T19:44:19+00:00"
-        },
         {
             "name": "phpolar/http-response-extensions",
             "version": "1.0.0",
@@ -846,21 +725,21 @@
         },
         {
             "name": "guzzlehttp/guzzle",
-            "version": "7.5.1",
+            "version": "7.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "b964ca597e86b752cd994f27293e9fa6b6a95ed9"
+                "reference": "fb7566caccf22d74d1ab270de3551f72a58399f5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/b964ca597e86b752cd994f27293e9fa6b6a95ed9",
-                "reference": "b964ca597e86b752cd994f27293e9fa6b6a95ed9",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/fb7566caccf22d74d1ab270de3551f72a58399f5",
+                "reference": "fb7566caccf22d74d1ab270de3551f72a58399f5",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "guzzlehttp/promises": "^1.5",
+                "guzzlehttp/promises": "^1.5.3 || ^2.0",
                 "guzzlehttp/psr7": "^1.9.1 || ^2.4.5",
                 "php": "^7.2.5 || ^8.0",
                 "psr/http-client": "^1.0",
@@ -872,7 +751,8 @@
             "require-dev": {
                 "bamarni/composer-bin-plugin": "^1.8.1",
                 "ext-curl": "*",
-                "php-http/client-integration-tests": "^3.0",
+                "php-http/client-integration-tests": "dev-master#2c025848417c1135031fdf9c728ee53d0a7ceaee as 3.0.999",
+                "php-http/message-factory": "^1.1",
                 "phpunit/phpunit": "^8.5.29 || ^9.5.23",
                 "psr/log": "^1.1 || ^2.0 || ^3.0"
             },
@@ -886,9 +766,6 @@
                 "bamarni-bin": {
                     "bin-links": true,
                     "forward-command": false
-                },
-                "branch-alias": {
-                    "dev-master": "7.5-dev"
                 }
             },
             "autoload": {
@@ -954,7 +831,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/guzzle/issues",
-                "source": "https://github.com/guzzle/guzzle/tree/7.5.1"
+                "source": "https://github.com/guzzle/guzzle/tree/7.7.0"
             },
             "funding": [
                 {
@@ -970,38 +847,37 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-04-17T16:30:08+00:00"
+            "time": "2023-05-21T14:04:53+00:00"
         },
         {
             "name": "guzzlehttp/promises",
-            "version": "1.5.2",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/promises.git",
-                "reference": "b94b2807d85443f9719887892882d0329d1e2598"
+                "reference": "3a494dc7dc1d7d12e511890177ae2d0e6c107da6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/promises/zipball/b94b2807d85443f9719887892882d0329d1e2598",
-                "reference": "b94b2807d85443f9719887892882d0329d1e2598",
+                "url": "https://api.github.com/repos/guzzle/promises/zipball/3a494dc7dc1d7d12e511890177ae2d0e6c107da6",
+                "reference": "3a494dc7dc1d7d12e511890177ae2d0e6c107da6",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.5"
+                "php": "^7.2.5 || ^8.0"
             },
             "require-dev": {
-                "symfony/phpunit-bridge": "^4.4 || ^5.1"
+                "bamarni/composer-bin-plugin": "^1.8.1",
+                "phpunit/phpunit": "^8.5.29 || ^9.5.23"
             },
             "type": "library",
             "extra": {
-                "branch-alias": {
-                    "dev-master": "1.5-dev"
+                "bamarni-bin": {
+                    "bin-links": true,
+                    "forward-command": false
                 }
             },
             "autoload": {
-                "files": [
-                    "src/functions_include.php"
-                ],
                 "psr-4": {
                     "GuzzleHttp\\Promise\\": "src/"
                 }
@@ -1038,7 +914,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/promises/issues",
-                "source": "https://github.com/guzzle/promises/tree/1.5.2"
+                "source": "https://github.com/guzzle/promises/tree/2.0.0"
             },
             "funding": [
                 {
@@ -1054,7 +930,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-08-28T14:55:35+00:00"
+            "time": "2023-05-21T13:50:22+00:00"
         },
         {
             "name": "guzzlehttp/psr7",
@@ -1329,16 +1205,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v4.15.4",
+            "version": "v4.15.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "6bb5176bc4af8bcb7d926f88718db9b96a2d4290"
+                "reference": "11e2663a5bc9db5d714eedb4277ee300403b4a9e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/6bb5176bc4af8bcb7d926f88718db9b96a2d4290",
-                "reference": "6bb5176bc4af8bcb7d926f88718db9b96a2d4290",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/11e2663a5bc9db5d714eedb4277ee300403b4a9e",
+                "reference": "11e2663a5bc9db5d714eedb4277ee300403b4a9e",
                 "shasum": ""
             },
             "require": {
@@ -1379,9 +1255,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nikic/PHP-Parser/issues",
-                "source": "https://github.com/nikic/PHP-Parser/tree/v4.15.4"
+                "source": "https://github.com/nikic/PHP-Parser/tree/v4.15.5"
             },
-            "time": "2023-03-05T19:49:14+00:00"
+            "time": "2023-05-19T20:20:00+00:00"
         },
         {
             "name": "pdepend/pdepend",
@@ -1965,6 +1841,131 @@
             "time": "2022-09-10T08:44:15+00:00"
         },
         {
+            "name": "phpolar/csrf-protection",
+            "version": "3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpolar/csrf-protection.git",
+                "reference": "bd91b085825287e8e4248d32fed092270a696d67"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpolar/csrf-protection/zipball/bd91b085825287e8e4248d32fed092270a696d67",
+                "reference": "bd91b085825287e8e4248d32fed092270a696d67",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "php": ">=8.1",
+                "phpolar/http-codes": "^0.0.6",
+                "phpolar/response-filter": "^1.0",
+                "psr/http-message": "^2.0",
+                "psr/http-server-handler": "^1.0",
+                "psr/http-server-middleware": "^1.0"
+            },
+            "provide": {
+                "psr/http-middleware-implementation": "^1.0",
+                "psr/http-server-handler-implementation": "^1.0"
+            },
+            "require-dev": {
+                "ext-ast": "^1.1",
+                "ext-openssl": "*",
+                "phan/phan": "^5.4",
+                "php-coveralls/php-coveralls": "^2.5",
+                "phpmd/phpmd": "^2.13",
+                "phpolar/csrf-response-filter": "^1.0",
+                "phpolar/http-message-test-utils": "^0.2.0",
+                "phpstan/phpstan": "^1.9",
+                "phpunit/phpunit": "^10.0",
+                "squizlabs/php_codesniffer": "^3.7"
+            },
+            "suggest": {
+                "monolog/monolog": "Allows for logging forbidden requests",
+                "nyholm/psr7": "A fast, simple PSR-7 implementation",
+                "phpolar/csrf-response-filter": "Attaches CSRF tokens to PSR-7 HTTP Responses"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/constants.php"
+                ],
+                "psr-4": {
+                    "Phpolar\\CsrfProtection\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Eric Fortmeyer",
+                    "email": "e.fortmeyer01@gmail.com"
+                }
+            ],
+            "description": "Provides request checking and response filtering to mitigate CSRF attacks",
+            "keywords": [
+                "csrf",
+                "middleware",
+                "psr-15",
+                "psr-7",
+                "request handlers"
+            ],
+            "support": {
+                "issues": "https://github.com/phpolar/csrf-protection/issues",
+                "source": "https://github.com/phpolar/csrf-protection/tree/3.0.0"
+            },
+            "time": "2023-05-22T03:34:14+00:00"
+        },
+        {
+            "name": "phpolar/http-codes",
+            "version": "0.0.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpolar/http-codes.git",
+                "reference": "b889110e8d497395a2b77e254e57d835adc476f2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpolar/http-codes/zipball/b889110e8d497395a2b77e254e57d835adc476f2",
+                "reference": "b889110e8d497395a2b77e254e57d835adc476f2",
+                "shasum": ""
+            },
+            "require-dev": {
+                "phan/phan": "v5.x-dev",
+                "phpunit/phpunit": "^9.5",
+                "squizlabs/php_codesniffer": "4.0.x-dev"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Phpolar\\HttpCodes\\": "src/"
+                },
+                "exclude-from-classmap": [
+                    "/tests/**/*"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Prince Dorcis",
+                    "email": "princedorcis@gmail.com"
+                },
+                {
+                    "name": "Eric Fortmeyer",
+                    "email": "e.fortmeyer01@gmail.com"
+                }
+            ],
+            "description": "PHP class for HTTP Response Codes",
+            "support": {
+                "source": "https://github.com/phpolar/http-codes/tree/0.0.6"
+            },
+            "time": "2023-01-16T19:44:19+00:00"
+        },
+        {
             "name": "phpolar/http-message-test-utils",
             "version": "0.2.0",
             "source": {
@@ -2061,23 +2062,62 @@
             "time": "2023-04-30T17:37:13+00:00"
         },
         {
-            "name": "phpstan/phpdoc-parser",
-            "version": "1.20.4",
+            "name": "phpolar/response-filter",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/phpstan/phpdoc-parser.git",
-                "reference": "7d568c87a9df9c5f7e8b5f075fc469aa8cb0a4cd"
+                "url": "https://github.com/phpolar/response-filter.git",
+                "reference": "40490cf5d246bc44c3809fefa9b81e17a1cd8670"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/7d568c87a9df9c5f7e8b5f075fc469aa8cb0a4cd",
-                "reference": "7d568c87a9df9c5f7e8b5f075fc469aa8cb0a4cd",
+                "url": "https://api.github.com/repos/phpolar/response-filter/zipball/40490cf5d246bc44c3809fefa9b81e17a1cd8670",
+                "reference": "40490cf5d246bc44c3809fefa9b81e17a1cd8670",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7",
+                "psr/http-message": "^2.0"
+            },
+            "require-dev": {
+                "squizlabs/php_codesniffer": "^3.7"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Phpolar\\Http\\Message\\": "src/Http/Message/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Supports filtering PSR-7 HTTP Responses",
+            "support": {
+                "issues": "https://github.com/phpolar/response-filter/issues",
+                "source": "https://github.com/phpolar/response-filter/tree/1.0.1"
+            },
+            "time": "2023-05-21T00:31:42+00:00"
+        },
+        {
+            "name": "phpstan/phpdoc-parser",
+            "version": "1.21.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpstan/phpdoc-parser.git",
+                "reference": "6df62b08faef4f899772bc7c3bbabb93d2b7a21c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/6df62b08faef4f899772bc7c3bbabb93d2b7a21c",
+                "reference": "6df62b08faef4f899772bc7c3bbabb93d2b7a21c",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.2 || ^8.0"
             },
             "require-dev": {
+                "nikic/php-parser": "^4.15",
                 "php-parallel-lint/php-parallel-lint": "^1.2",
                 "phpstan/extension-installer": "^1.0",
                 "phpstan/phpstan": "^1.5",
@@ -2101,9 +2141,9 @@
             "description": "PHPDoc parser with support for nullable, intersection and generic types",
             "support": {
                 "issues": "https://github.com/phpstan/phpdoc-parser/issues",
-                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.20.4"
+                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.21.0"
             },
-            "time": "2023-05-02T09:19:37+00:00"
+            "time": "2023-05-17T13:13:44+00:00"
         },
         {
             "name": "phpstan/phpstan",
@@ -2169,16 +2209,16 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "10.1.1",
+            "version": "10.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "884a0da7f9f46f28b2cb69134217fd810b793974"
+                "reference": "db1497ec8dd382e82c962f7abbe0320e4882ee4e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/884a0da7f9f46f28b2cb69134217fd810b793974",
-                "reference": "884a0da7f9f46f28b2cb69134217fd810b793974",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/db1497ec8dd382e82c962f7abbe0320e4882ee4e",
+                "reference": "db1497ec8dd382e82c962f7abbe0320e4882ee4e",
                 "shasum": ""
             },
             "require": {
@@ -2235,7 +2275,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/php-code-coverage/issues",
                 "security": "https://github.com/sebastianbergmann/php-code-coverage/security/policy",
-                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/10.1.1"
+                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/10.1.2"
             },
             "funding": [
                 {
@@ -2243,7 +2283,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-04-17T12:15:40+00:00"
+            "time": "2023-05-22T09:04:27+00:00"
         },
         {
             "name": "phpunit/php-file-iterator",

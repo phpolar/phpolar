@@ -37,7 +37,6 @@
     "require": {
         "php": ">=8.1",
         "ext-mbstring": "*",
-        "phpolar/csrf-protection": "^2.1",
         "phpolar/http-response-extensions": "^1.0",
         "phpolar/phpolar-core": "^2.2",
         "phpolar/storage-driver": "^1.0",
@@ -54,6 +53,7 @@
         "php-coveralls/php-coveralls": "^2.5",
         "phpmd/phpmd": "^2.13",
         "phpolar/http-message-test-utils": "^0.1.0 || ^0.2.0",
+        "phpolar/csrf-protection": "^3.0",
         "phpolar/pure-php": "^1.0",
         "phpstan/phpstan": "^1.8",
         "phpunit/phpunit": "^10.0",

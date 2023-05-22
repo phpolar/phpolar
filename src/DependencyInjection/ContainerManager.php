@@ -5,13 +5,12 @@ declare(strict_types=1);
 namespace Phpolar\Phpolar\DependencyInjection;
 
 use ArrayAccess;
-use Phpolar\CsrfProtection\Http\CsrfRequestCheckMiddleware;
-use Phpolar\CsrfProtection\Http\CsrfResponseFilterMiddleware;
 use Phpolar\Phpolar\Core\ContainerLoader;
 use Phpolar\Phpolar\Http\PrimaryHandler;
 use Phpolar\Phpolar\Routing\RouteRegistry;
 use Phpolar\Phpolar\Routing\RoutingMiddleware;
 use Psr\Container\ContainerInterface;
+use Psr\Http\Server\MiddlewareInterface;
 
 /**
  * Manages the dependency injection container.
@@ -44,24 +43,24 @@ final class ContainerManager
     /**
      * Retrieves the CSRF pre-routing middleware.
      */
-    public function getCsrfPreRoutingMiddleware(): CsrfRequestCheckMiddleware
+    public function getCsrfPreRoutingMiddleware(): MiddlewareInterface
     {
         /**
-         * @var CsrfRequestCheckMiddleware $middleware
+         * @var MiddlewareInterface $middleware
          */
-        $middleware = $this->container->get(CsrfRequestCheckMiddleware::class);
+        $middleware = $this->container->get(DiTokens::CSRF_CHECK_MIDDLEWARE);
         return $middleware;
     }
 
     /**
      * Retrieves the CSRF post-routing middleware
      */
-    public function getCsrfPostRoutingMiddleware(): CsrfResponseFilterMiddleware
+    public function getCsrfPostRoutingMiddleware(): MiddlewareInterface
     {
         /**
-         * @var CsrfResponseFilterMiddleware $middleware
+         * @var MiddlewareInterface $middleware
          */
-        $middleware = $this->container->get(CsrfResponseFilterMiddleware::class);
+        $middleware = $this->container->get(DiTokens::CSRF_RESPONSE_FILTER_MIDDLEWARE);
         return $middleware;
     }
 
