@@ -4,26 +4,27 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ae5ec239fde7186fa42f0b0f3dc669fb",
+    "content-hash": "c175f03aa26d86f8fc491f17e4dd992d",
     "packages": [
         {
             "name": "phpolar/csrf-protection",
-            "version": "2.1.0",
+            "version": "3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpolar/csrf-protection.git",
-                "reference": "5f333e950adea4b8e4eb8ebcfed6110a9166787a"
+                "reference": "bd91b085825287e8e4248d32fed092270a696d67"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpolar/csrf-protection/zipball/5f333e950adea4b8e4eb8ebcfed6110a9166787a",
-                "reference": "5f333e950adea4b8e4eb8ebcfed6110a9166787a",
+                "url": "https://api.github.com/repos/phpolar/csrf-protection/zipball/bd91b085825287e8e4248d32fed092270a696d67",
+                "reference": "bd91b085825287e8e4248d32fed092270a696d67",
                 "shasum": ""
             },
             "require": {
                 "ext-mbstring": "*",
                 "php": ">=8.1",
                 "phpolar/http-codes": "^0.0.6",
+                "phpolar/response-filter": "^1.0",
                 "psr/http-message": "^2.0",
                 "psr/http-server-handler": "^1.0",
                 "psr/http-server-middleware": "^1.0"
@@ -38,13 +39,16 @@
                 "phan/phan": "^5.4",
                 "php-coveralls/php-coveralls": "^2.5",
                 "phpmd/phpmd": "^2.13",
+                "phpolar/csrf-response-filter": "^1.0",
+                "phpolar/http-message-test-utils": "^0.2.0",
                 "phpstan/phpstan": "^1.9",
                 "phpunit/phpunit": "^10.0",
                 "squizlabs/php_codesniffer": "^3.7"
             },
             "suggest": {
-                "laminas/laminas-diactoros": "Provides a PSR-7 implementation",
-                "monolog/monolog": "Allows for logging forbidden requests"
+                "monolog/monolog": "Allows for logging forbidden requests",
+                "nyholm/psr7": "A fast, simple PSR-7 implementation",
+                "phpolar/csrf-response-filter": "Attaches CSRF tokens to PSR-7 HTTP Responses"
             },
             "type": "library",
             "autoload": {
@@ -75,9 +79,9 @@
             ],
             "support": {
                 "issues": "https://github.com/phpolar/csrf-protection/issues",
-                "source": "https://github.com/phpolar/csrf-protection/tree/2.1.0"
+                "source": "https://github.com/phpolar/csrf-protection/tree/3.0.0"
             },
-            "time": "2023-04-29T22:41:58+00:00"
+            "time": "2023-05-22T03:34:14+00:00"
         },
         {
             "name": "phpolar/http-codes",
@@ -229,6 +233,44 @@
                 "source": "https://github.com/phpolar/phpolar-core/tree/2.2.0"
             },
             "time": "2023-04-29T22:54:20+00:00"
+        },
+        {
+            "name": "phpolar/response-filter",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpolar/response-filter.git",
+                "reference": "40490cf5d246bc44c3809fefa9b81e17a1cd8670"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpolar/response-filter/zipball/40490cf5d246bc44c3809fefa9b81e17a1cd8670",
+                "reference": "40490cf5d246bc44c3809fefa9b81e17a1cd8670",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7",
+                "psr/http-message": "^2.0"
+            },
+            "require-dev": {
+                "squizlabs/php_codesniffer": "^3.7"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Phpolar\\Http\\Message\\": "src/Http/Message/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Supports filtering PSR-7 HTTP Responses",
+            "support": {
+                "issues": "https://github.com/phpolar/response-filter/issues",
+                "source": "https://github.com/phpolar/response-filter/tree/1.0.1"
+            },
+            "time": "2023-05-21T00:31:42+00:00"
         },
         {
             "name": "phpolar/storage-driver",
