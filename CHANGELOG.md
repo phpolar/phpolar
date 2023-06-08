@@ -1,3 +1,15 @@
+## 2.0.2 (2023-06-08)
+
+### Fix
+
+- remove .phpdoc from dist (#173)
+
+## 2.0.1 (2023-05-22)
+
+### Fix
+
+- use csrf-protection 3
+
 ## 2.0.0 (2023-05-01)
 
 ### BREAKING CHANGE
