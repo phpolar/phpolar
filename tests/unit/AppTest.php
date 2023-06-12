@@ -129,7 +129,6 @@ final class AppTest extends TestCase
         // do not use the container config file
         chdir(__DIR__);
         $server = App::create(new ContainerManager($containerFac, $config));
-        $server->useRoutes($routes);
         $server->receive($request);
         $this->assertSame(ResponseCode::OK, http_response_code());
     }
@@ -175,6 +174,7 @@ final class AppTest extends TestCase
         $routes = new RouteRegistry();
         $config[RouteRegistry::class] = $routes;
         $config[RoutingMiddleware::class] = $routingMiddlewareSpy;
+        $config[RouteRegistry::class] = $routes;
         $config[CsrfProtectionRequestHandler::class] = static fn (ArrayAccess $config) =>
             new CsrfProtectionRequestHandler(
                 new CsrfToken(new DateTimeImmutable("now")),
@@ -189,7 +189,6 @@ final class AppTest extends TestCase
         chdir(__DIR__);
         $server = App::create(new ContainerManager($containerFac, $config));
         $server->useCsrfMiddleware();
-        $server->useRoutes($routes);
         $server->receive($request);
         $this->assertSame(ResponseCode::OK, http_response_code());
     }
@@ -208,10 +207,10 @@ final class AppTest extends TestCase
         $givenRequest = new RequestStub("GET", "/");
         $handlerStub = $this->createStub(MiddlewareQueueRequestHandler::class);
         $config = new ContainerConfigurationStub();
+        $config[RouteRegistry::class] = $givenRoutes;
         $containerFac = $this->getContainerFactory($config, $handlerStub);
         $container = $containerFac->getContainer($config);
-        $sut = App::create(new ContainerManager($containerFac, $config));
-        $sut->useRoutes($givenRoutes);
+        App::create(new ContainerManager($containerFac, $config));
         /**
          * @var RouteRegistry $configuredRoutes
          */
@@ -224,9 +223,6 @@ final class AppTest extends TestCase
     public function test4()
     {
         $config = new ContainerConfigurationStub();
-        $config[TemplatingStrategyInterface::class] = $this->createStub(TemplatingStrategyInterface::class);
-        $config[StreamFactoryInterface::class] = $this->createStub(StreamFactoryInterface::class);
-        $config[ResponseFactoryInterface::class] = $this->createStub(ResponseFactoryInterface::class);
         $nonConfiguredContainerFac = $this->getNonConfiguredContainer();
         chdir("tests/__fakes__/");
         $app = App::create(new ContainerManager($nonConfiguredContainerFac, $config));
@@ -239,6 +235,7 @@ final class AppTest extends TestCase
     {
         $this->expectOutputString("<h1>Not Found</h1>");
         $config = new ContainerConfigurationStub();
+        $config[RouteRegistry::class] = new RouteRegistry();
         /**
          * @var Stub&MiddlewareQueueRequestHandler $handlerStub
          */

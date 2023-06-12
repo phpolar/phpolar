@@ -6,7 +6,6 @@ namespace Phpolar\Phpolar;
 
 use Phpolar\Extensions\HttpResponse\ResponseExtension;
 use Phpolar\Phpolar\DependencyInjection\ContainerManager;
-use Phpolar\Phpolar\Http\RouteRegistry;
 use Phpolar\Phpolar\Http\MiddlewareQueueRequestHandler;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -19,7 +18,7 @@ final class App
     public const ERROR_HANDLER_401 = "ERROR_HANDLER_401";
     public const ERROR_HANDLER_404 = "ERROR_HANDLER_404";
 
-    private static MiddlewareQueueRequestHandler $mainHandler;
+    private MiddlewareQueueRequestHandler $mainHandler;
     private static ContainerManager $containerManager;
     private static ?App $instance = null;
 
@@ -31,7 +30,7 @@ final class App
         ContainerManager $containerManager,
     ) {
         self::$containerManager = $containerManager;
-        self::$mainHandler = self::$containerManager->getMiddlewareQueueRequestHandler();
+        $this->mainHandler = $containerManager->getMiddlewareQueueRequestHandler();
     }
 
     /**
@@ -53,13 +52,14 @@ final class App
      */
     public function receive(ServerRequestInterface $request): void
     {
-        $response = self::$mainHandler->handle($request);
+        $this->setupRouting();
+        $response = $this->mainHandler->handle($request);
         ResponseExtension::extend($response)->send();
     }
 
-    private static function queueMiddleware(MiddlewareInterface $middleware): void
+    private function queueMiddleware(MiddlewareInterface $middleware): void
     {
-        self::$mainHandler->queue($middleware);
+        $this->mainHandler->queue($middleware);
     }
 
     /**
@@ -115,11 +115,9 @@ final class App
      * Configures the web server with associated
      * routes and handlers.
      */
-    public function useRoutes(RouteRegistry $routes): App
+    public function setupRouting(): void
     {
-        self::$containerManager->loadRoutes($routes);
         $routingMiddleware = self::$containerManager->getRoutingMiddleware();
-        self::queueMiddleware($routingMiddleware);
-        return $this;
+        $this->queueMiddleware($routingMiddleware);
     }
 }

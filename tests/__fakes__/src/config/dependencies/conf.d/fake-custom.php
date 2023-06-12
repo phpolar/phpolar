@@ -6,6 +6,9 @@ use Phpolar\HttpMessageTestUtils\StreamFactoryStub;
 use Phpolar\Phpolar\Http\ErrorHandler;
 use Phpolar\Phpolar\Http\MiddlewareQueueRequestHandler;
 use Phpolar\Phpolar\App;
+use Phpolar\Phpolar\Http\RouteRegistry;
+use Phpolar\Phpolar\Http\RoutingHandler;
+use Phpolar\Phpolar\Http\RoutingMiddleware;
 use Phpolar\PurePhp\Binder;
 use Phpolar\PurePhp\Dispatcher;
 use Phpolar\PurePhp\StreamContentStrategy;
@@ -31,4 +34,13 @@ return [
     TemplatingStrategyInterface::class => new StreamContentStrategy(),
     ResponseFactoryInterface::class => new ResponseFactoryStub(),
     StreamFactoryInterface::class => new StreamFactoryStub("+w"),
+    RouteRegistry::class => new RouteRegistry(),
+    RoutingMiddleware::class => static fn (ContainerInterface $container) => new RoutingMiddleware($container->get(RoutingHandler::class)),
+    RoutingHandler::class => static fn (ContainerInterface $container) => new RoutingHandler(
+        $container->get(RouteRegistry::class),
+        $container->get(ResponseFactoryInterface::class),
+        $container->get(StreamFactoryInterface::class),
+        $container->get(App::ERROR_HANDLER_404),
+        $container,
+    )
 ];

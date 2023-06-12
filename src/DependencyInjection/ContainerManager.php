@@ -7,7 +7,6 @@ namespace Phpolar\Phpolar\DependencyInjection;
 use ArrayAccess;
 use Phpolar\Phpolar\Core\ContainerLoader;
 use Phpolar\Phpolar\Http\MiddlewareQueueRequestHandler;
-use Phpolar\Phpolar\Http\RouteRegistry;
 use Phpolar\Phpolar\Http\RoutingMiddleware;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -25,8 +24,6 @@ final class ContainerManager
      */
     private ContainerInterface $container;
 
-    private RouteLoader $routeLoader;
-
     /**
      * @param ContainerFactoryInterface $containerFac
      * @param ArrayAccess<string,mixed> $containerConfig
@@ -37,7 +34,6 @@ final class ContainerManager
     ) {
         $this->container = $containerFac->getContainer($containerConfig);
         (new ContainerLoader())->load($containerConfig, $this->container);
-        $this->routeLoader = new RouteLoader($containerConfig);
     }
 
     /**
@@ -74,14 +70,6 @@ final class ContainerManager
          */
         $handler = $this->container->get(MiddlewareQueueRequestHandler::class);
         return $handler;
-    }
-
-    /**
-     * Adds routes to the container.
-     */
-    public function loadRoutes(RouteRegistry $routes): void
-    {
-        $this->routeLoader->loadRoutes($routes);
     }
 
     /**
