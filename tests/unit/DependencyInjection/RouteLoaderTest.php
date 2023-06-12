@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Phpolar\Phpolar\DependencyInjection;
 
-use Phpolar\Phpolar\Routing\RouteRegistry;
+use Phpolar\Phpolar\Http\RouteRegistry;
 use Phpolar\Phpolar\Tests\Stubs\ConfigurableContainerStub;
 use Phpolar\Phpolar\Tests\Stubs\ContainerConfigurationStub;
 use PHPUnit\Framework\Attributes\CoversClass;

@@ -167,16 +167,16 @@ and handles errors.</p>
 <dd>Retrieves the CSRF pre-routing middleware.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Phpolar-Phpolar-DependencyInjection-ContainerManager.html#method_getPrimaryHandler">getPrimaryHandler()</a>
+    <a href="classes/Phpolar-Phpolar-DependencyInjection-ContainerManager.html#method_getMiddlewareQueueRequestHandler">getMiddlewareQueueRequestHandler()</a>
     <span>
-                                &nbsp;: <a href="classes/Phpolar-Phpolar-Http-PrimaryHandler.html"><abbr title="\Phpolar\Phpolar\Http\PrimaryHandler">PrimaryHandler</abbr></a>    </span>
+                                &nbsp;: <a href="classes/Phpolar-Phpolar-Http-MiddlewareQueueRequestHandler.html"><abbr title="\Phpolar\Phpolar\Http\MiddlewareQueueRequestHandler">MiddlewareQueueRequestHandler</abbr></a>    </span>
 </dt>
 <dd>Retrieves the middleware processing queue</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Phpolar-Phpolar-DependencyInjection-ContainerManager.html#method_getRoutingMiddleware">getRoutingMiddleware()</a>
     <span>
-                                &nbsp;: <a href="classes/Phpolar-Phpolar-Routing-RoutingMiddleware.html"><abbr title="\Phpolar\Phpolar\Routing\RoutingMiddleware">RoutingMiddleware</abbr></a>    </span>
+                                &nbsp;: <a href="classes/Phpolar-Phpolar-Http-RoutingMiddleware.html"><abbr title="\Phpolar\Phpolar\Http\RoutingMiddleware">RoutingMiddleware</abbr></a>    </span>
 </dt>
 <dd>Retrieves the routing middleware.</dd>
 
@@ -322,9 +322,9 @@ and handles errors.</p>
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_getPrimaryHandler">
-        getPrimaryHandler()
-        <a href="classes/Phpolar-Phpolar-DependencyInjection-ContainerManager.html#method_getPrimaryHandler" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_getMiddlewareQueueRequestHandler">
+        getMiddlewareQueueRequestHandler()
+        <a href="classes/Phpolar-Phpolar-DependencyInjection-ContainerManager.html#method_getMiddlewareQueueRequestHandler" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="DependencyInjection/ContainerManager.php"><a href="files/dependencyinjection-containermanager.html"><abbr title="DependencyInjection/ContainerManager.php">ContainerManager.php</abbr></a></abbr>
@@ -337,14 +337,14 @@ and handles errors.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getPrimaryHandler</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Phpolar-Phpolar-Http-PrimaryHandler.html"><abbr title="\Phpolar\Phpolar\Http\PrimaryHandler">PrimaryHandler</abbr></a></span></code>
+                    <span class="phpdocumentor-signature__name">getMiddlewareQueueRequestHandler</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Phpolar-Phpolar-Http-MiddlewareQueueRequestHandler.html"><abbr title="\Phpolar\Phpolar\Http\MiddlewareQueueRequestHandler">MiddlewareQueueRequestHandler</abbr></a></span></code>
 
     
     
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><a href="classes/Phpolar-Phpolar-Http-PrimaryHandler.html"><abbr title="\Phpolar\Phpolar\Http\PrimaryHandler">PrimaryHandler</abbr></a></span>
+    <span class="phpdocumentor-signature__response_type"><a href="classes/Phpolar-Phpolar-Http-MiddlewareQueueRequestHandler.html"><abbr title="\Phpolar\Phpolar\Http\MiddlewareQueueRequestHandler">MiddlewareQueueRequestHandler</abbr></a></span>
             &mdash;
         
     
@@ -370,14 +370,14 @@ and handles errors.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getRoutingMiddleware</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Phpolar-Phpolar-Routing-RoutingMiddleware.html"><abbr title="\Phpolar\Phpolar\Routing\RoutingMiddleware">RoutingMiddleware</abbr></a></span></code>
+                    <span class="phpdocumentor-signature__name">getRoutingMiddleware</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Phpolar-Phpolar-Http-RoutingMiddleware.html"><abbr title="\Phpolar\Phpolar\Http\RoutingMiddleware">RoutingMiddleware</abbr></a></span></code>
 
     
     
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><a href="classes/Phpolar-Phpolar-Routing-RoutingMiddleware.html"><abbr title="\Phpolar\Phpolar\Routing\RoutingMiddleware">RoutingMiddleware</abbr></a></span>
+    <span class="phpdocumentor-signature__response_type"><a href="classes/Phpolar-Phpolar-Http-RoutingMiddleware.html"><abbr title="\Phpolar\Phpolar\Http\RoutingMiddleware">RoutingMiddleware</abbr></a></span>
             &mdash;
         
     
@@ -403,14 +403,14 @@ and handles errors.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">loadRoutes</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Phpolar-Phpolar-Routing-RouteRegistry.html"><abbr title="\Phpolar\Phpolar\Routing\RouteRegistry">RouteRegistry</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$routes</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+                    <span class="phpdocumentor-signature__name">loadRoutes</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Phpolar-Phpolar-Http-RouteRegistry.html"><abbr title="\Phpolar\Phpolar\Http\RouteRegistry">RouteRegistry</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$routes</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$routes</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Phpolar-Phpolar-Routing-RouteRegistry.html"><abbr title="\Phpolar\Phpolar\Routing\RouteRegistry">RouteRegistry</abbr></a></span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Phpolar-Phpolar-Http-RouteRegistry.html"><abbr title="\Phpolar\Phpolar\Http\RouteRegistry">RouteRegistry</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"></section>

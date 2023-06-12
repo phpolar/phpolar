@@ -15,8 +15,8 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-#[CoversClass(PrimaryHandler::class)]
-final class PrimaryHandlerTest extends TestCase
+#[CoversClass(MiddlewareQueueRequestHandler::class)]
+final class MiddlewareQueueRequestHandlerTest extends TestCase
 {
     #[TestDox("Shall execute the fallback handler when the queue is exhausted")]
     public function test1()
@@ -31,7 +31,7 @@ final class PrimaryHandlerTest extends TestCase
                 return (new ResponseStub())->withBody(new MemoryStreamStub($this->responseContent));
             }
         };
-        $sut = new PrimaryHandler($fallbackHandler);
+        $sut = new MiddlewareQueueRequestHandler($fallbackHandler);
         $response = $sut->handle(new RequestStub("GET", "/anything"));
         $this->assertSame($expectedResponseContent, $response->getBody()->getContents());
     }
@@ -58,7 +58,7 @@ final class PrimaryHandlerTest extends TestCase
                 return (new ResponseStub())->withBody(new MemoryStreamStub($this->responseContent));
             }
         };
-        $sut = new PrimaryHandler($fallbackHandler);
+        $sut = new MiddlewareQueueRequestHandler($fallbackHandler);
         $sut->queue($givenMiddleware);
         $response = $sut->handle(new RequestStub("POST", "/anything"));
         $this->assertSame($expectedResponseContent, $response->getBody()->getContents());

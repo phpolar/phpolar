@@ -6,8 +6,8 @@ namespace Phpolar\Phpolar;
 
 use Phpolar\Extensions\HttpResponse\ResponseExtension;
 use Phpolar\Phpolar\DependencyInjection\ContainerManager;
-use Phpolar\Phpolar\Routing\RouteRegistry;
-use Phpolar\Phpolar\Http\PrimaryHandler;
+use Phpolar\Phpolar\Http\RouteRegistry;
+use Phpolar\Phpolar\Http\MiddlewareQueueRequestHandler;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 
@@ -19,7 +19,7 @@ final class App
     public const ERROR_HANDLER_401 = "ERROR_HANDLER_401";
     public const ERROR_HANDLER_404 = "ERROR_HANDLER_404";
 
-    private static PrimaryHandler $primaryHandler;
+    private static MiddlewareQueueRequestHandler $mainHandler;
     private static ContainerManager $containerManager;
     private static ?App $instance = null;
 
@@ -31,7 +31,7 @@ final class App
         ContainerManager $containerManager,
     ) {
         self::$containerManager = $containerManager;
-        self::$primaryHandler = self::$containerManager->getPrimaryHandler();
+        self::$mainHandler = self::$containerManager->getMiddlewareQueueRequestHandler();
     }
 
     /**
@@ -53,13 +53,13 @@ final class App
      */
     public function receive(ServerRequestInterface $request): void
     {
-        $response = self::$primaryHandler->handle($request);
+        $response = self::$mainHandler->handle($request);
         ResponseExtension::extend($response)->send();
     }
 
     private static function queueMiddleware(MiddlewareInterface $middleware): void
     {
-        self::$primaryHandler->queue($middleware);
+        self::$mainHandler->queue($middleware);
     }
 
     /**

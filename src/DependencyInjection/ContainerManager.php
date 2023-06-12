@@ -6,9 +6,9 @@ namespace Phpolar\Phpolar\DependencyInjection;
 
 use ArrayAccess;
 use Phpolar\Phpolar\Core\ContainerLoader;
-use Phpolar\Phpolar\Http\PrimaryHandler;
-use Phpolar\Phpolar\Routing\RouteRegistry;
-use Phpolar\Phpolar\Routing\RoutingMiddleware;
+use Phpolar\Phpolar\Http\MiddlewareQueueRequestHandler;
+use Phpolar\Phpolar\Http\RouteRegistry;
+use Phpolar\Phpolar\Http\RoutingMiddleware;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Server\MiddlewareInterface;
 
@@ -67,12 +67,12 @@ final class ContainerManager
     /**
      * Retrieves the middleware processing queue
      */
-    public function getPrimaryHandler(): PrimaryHandler
+    public function getMiddlewareQueueRequestHandler(): MiddlewareQueueRequestHandler
     {
         /**
-         * @var PrimaryHandler
+         * @var MiddlewareQueueRequestHandler
          */
-        $handler = $this->container->get(PrimaryHandler::class);
+        $handler = $this->container->get(MiddlewareQueueRequestHandler::class);
         return $handler;
     }
 

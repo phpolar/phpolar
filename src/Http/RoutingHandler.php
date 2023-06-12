@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Phpolar\Phpolar\Routing;
+namespace Phpolar\Phpolar\Http;
 
 use Phpolar\Phpolar\Core\Routing\RouteNotRegistered;
 use Phpolar\Phpolar\Http\ErrorHandler;
-use Phpolar\Phpolar\ModelParamResolver;
+use Phpolar\Phpolar\ModelResolver;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -55,7 +55,7 @@ class RoutingHandler implements RequestHandlerInterface
     private function handleDelegate(AbstractContentDelegate $delegate, ServerRequestInterface $request): ResponseInterface
     {
         $reflectionMethod = new ReflectionMethod($delegate, "getResponseContent");
-        $resolver = new ModelParamResolver($reflectionMethod, $request);
+        $resolver = new ModelResolver($reflectionMethod, $request);
         $modelParams = $resolver->resolve();
         /**
          * @var string $responseContent

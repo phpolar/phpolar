@@ -14,11 +14,11 @@
 declare(strict_types=1);
 
 use Phpolar\HttpCodes\ResponseCode;
-use Phpolar\Phpolar\Routing\RouteRegistry;
-use Phpolar\Phpolar\Routing\RoutingHandler;
-use Phpolar\Phpolar\Routing\RoutingMiddleware;
+use Phpolar\Phpolar\Http\RouteRegistry;
+use Phpolar\Phpolar\Http\RoutingHandler;
+use Phpolar\Phpolar\Http\RoutingMiddleware;
 use Phpolar\Phpolar\Http\ErrorHandler;
-use Phpolar\Phpolar\Http\PrimaryHandler;
+use Phpolar\Phpolar\Http\MiddlewareQueueRequestHandler;
 use Phpolar\Phpolar\App;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
@@ -54,7 +54,7 @@ return [
     /**
      * @suppress PhanUnreferencedClosure
      */
-    PrimaryHandler::class => static fn (ContainerInterface $container) => new PrimaryHandler($container->get(App::ERROR_HANDLER_404)),
+    MiddlewareQueueRequestHandler::class => static fn (ContainerInterface $container) => new MiddlewareQueueRequestHandler($container->get(App::ERROR_HANDLER_404)),
     /**
      * @suppress PhanUnreferencedClosure
      */

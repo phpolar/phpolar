@@ -17,7 +17,7 @@ use Psr\Http\Server\RequestHandlerInterface;
  * [queue-based handler](https://www.php-fig.org/psr/psr-15/meta/#queue-based-request-handler)
  * that processes [PSR-15 middleware](https://www.php-fig.org/psr/psr-15/#22-psrhttpservermiddlewareinterface).
  */
-class PrimaryHandler implements RequestHandlerInterface
+class MiddlewareQueueRequestHandler implements RequestHandlerInterface
 {
     /**
      * A collection of middleware to

@@ -6,7 +6,7 @@ namespace Phpolar\Phpolar\DependencyInjection;
 
 use ArrayAccess;
 use Closure;
-use Phpolar\Phpolar\Routing\RouteRegistry;
+use Phpolar\Phpolar\Http\RouteRegistry;
 
 /**
  * Adds the route registry to the

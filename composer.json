@@ -19,13 +19,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Phpolar\\Phpolar\\": "src/",
-            "Phpolar\\Phpolar\\Config\\": "config/"
-        },
-        "files": [
-            "src/Validation/Functions/getValidators.php",
-            "src/Validation/Functions/getMessageGetters.php"
-        ]
+            "Phpolar\\Phpolar\\": "src/"
+        }
     },
     "autoload-dev": {
         "psr-4": {

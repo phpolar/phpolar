@@ -6,21 +6,24 @@ namespace Phpolar\Phpolar;
 
 use Phpolar\Phpolar\Model\AbstractModel;
 use Phpolar\Phpolar\Model\Model;
-use Psr\Http\Message\ServerRequestInterface;
 use ReflectionMethod;
 use ReflectionNamedType;
 use ReflectionParameter;
 use RuntimeException;
 
 /**
- * Converts a an object that is marked as a model
+ * Converts an object that is marked as a model
  * attribute to a argument-name-object key-value pair.
  */
-final class ModelParamResolver
+final class ModelResolver
 {
+    /**
+     * @param ReflectionMethod $reflectionMethod
+     * @param array<string,string>|object|null $parsedRequestBody
+     */
     public function __construct(
         private ReflectionMethod $reflectionMethod,
-        private ServerRequestInterface $request,
+        private array|object|null $parsedRequestBody,
     ) {
     }
 
@@ -68,7 +71,7 @@ final class ModelParamResolver
                     )
                 );
             }
-            return new $className($this->request->getParsedBody());
+            return new $className($this->parsedRequestBody);
         }
         return null; // @codeCoverageIgnore
     }

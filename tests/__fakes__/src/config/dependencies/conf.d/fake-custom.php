@@ -4,7 +4,7 @@ use Phpolar\HttpCodes\ResponseCode;
 use Phpolar\HttpMessageTestUtils\ResponseFactoryStub;
 use Phpolar\HttpMessageTestUtils\StreamFactoryStub;
 use Phpolar\Phpolar\Http\ErrorHandler;
-use Phpolar\Phpolar\Http\PrimaryHandler;
+use Phpolar\Phpolar\Http\MiddlewareQueueRequestHandler;
 use Phpolar\Phpolar\App;
 use Phpolar\PurePhp\Binder;
 use Phpolar\PurePhp\Dispatcher;
@@ -16,7 +16,7 @@ use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 
 return [
-    PrimaryHandler::class => static fn (ContainerInterface $container) => new PrimaryHandler($container->get(App::ERROR_HANDLER_404)),
+    MiddlewareQueueRequestHandler::class => static fn (ContainerInterface $container) => new MiddlewareQueueRequestHandler($container->get(App::ERROR_HANDLER_404)),
     App::ERROR_HANDLER_401 => static fn (ContainerInterface $container) => new ErrorHandler(
         ResponseCode::UNAUTHORIZED,
         "Unauthorized",

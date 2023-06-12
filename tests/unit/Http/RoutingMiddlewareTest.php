@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Phpolar\Phpolar\Routing;
+namespace Phpolar\Phpolar\Http;
 
 use Phpolar\HttpCodes\ResponseCode;
 use Phpolar\HttpMessageTestUtils\RequestStub;

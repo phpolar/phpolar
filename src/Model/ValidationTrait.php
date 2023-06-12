@@ -5,10 +5,9 @@ declare(strict_types=1);
 namespace Phpolar\Phpolar\Model;
 
 use Phpolar\Validator\ValidatorInterface;
+use ReflectionAttribute;
 use ReflectionObject;
 use ReflectionProperty;
-
-use function Phpolar\Phpolar\Validation\Functions\getValidators;
 
 /**
  * Use to add support for validating the properties of an object.
@@ -39,10 +38,35 @@ trait ValidationTrait
     private function validateProperty(bool $prev, ReflectionProperty $prop): bool
     {
         return $prev && array_reduce(
-            getValidators($prop, $this),
+            $this->getValidators($prop),
             static fn (bool $previousResult, ValidatorInterface $currentAttribute) =>
                 $previousResult && $currentAttribute->isValid(),
             true
+        );
+    }
+
+
+    /**
+     * Provides a way of retrieving only the validator attributes of a property.
+     *
+     * Returns only validation attributes.
+     *
+     * @return ValidatorInterface[]
+     */
+    private function getValidators(ReflectionProperty $prop): array
+    {
+        return array_map(
+            function (ReflectionAttribute $attr) use ($prop): ValidatorInterface {
+                $instance = $attr->newInstance();
+                if (method_exists($instance, "withRequiredPropVal") === true) {
+                    return $instance->withRequiredPropVal($prop, $this);
+                }
+                if (property_exists($instance, "propVal") === true) {
+                    $instance->propVal = $prop->isInitialized($this) === true ? $prop->getValue($this) : $prop->getDefaultValue();
+                }
+                return $instance;
+            },
+            $prop->getAttributes(ValidatorInterface::class, ReflectionAttribute::IS_INSTANCEOF),
         );
     }
 }

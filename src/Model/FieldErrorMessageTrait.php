@@ -5,11 +5,10 @@ declare(strict_types=1);
 namespace Phpolar\Phpolar\Model;
 
 use Phpolar\Validator\MessageGetterInterface;
+use ReflectionAttribute;
 use ReflectionObject;
 use ReflectionProperty;
 use Stringable;
-
-use function Phpolar\Phpolar\Validation\Functions\getMessageGetters;
 
 /**
  * Provides support for displaying form field error messages.
@@ -101,7 +100,7 @@ trait FieldErrorMessageTrait
             $props,
             function (ReflectionProperty $prop): void {
                 $errorMessages = self::getErrorsFromAttributes(
-                    getMessageGetters($prop, $this),
+                    $this->getMessageGetters($prop),
                 );
                 array_walk(
                     $errorMessages,
@@ -110,6 +109,30 @@ trait FieldErrorMessageTrait
                     }
                 );
             }
+        );
+    }
+
+    /**
+     * Provides a way of retrieving only the validator attributes of a property.
+     *
+     * Returns only validation attributes.
+     *
+     * @return MessageGetterInterface[]
+     */
+    private function getMessageGetters(ReflectionProperty $prop): array
+    {
+        return array_map(
+            function (ReflectionAttribute $attr) use ($prop): MessageGetterInterface {
+                $instance = $attr->newInstance();
+                if (method_exists($instance, "withRequiredPropVal") === true) {
+                    return $instance->withRequiredPropVal($prop, $this);
+                }
+                if (property_exists($instance, "propVal") === true) {
+                    $instance->propVal = $prop->isInitialized($this) === true ? $prop->getValue($this) : $prop->getDefaultValue();
+                }
+                return $instance;
+            },
+            $prop->getAttributes(MessageGetterInterface::class, ReflectionAttribute::IS_INSTANCEOF),
         );
     }
 

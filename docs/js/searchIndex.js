@@ -86,10 +86,10 @@ Search.appendIndex(
             "summary": "Retrieves\u0020the\u0020CSRF\u0020post\u002Drouting\u0020middleware",
             "url": "classes/Phpolar-Phpolar-DependencyInjection-ContainerManager.html#method_getCsrfPostRoutingMiddleware"
         },                {
-            "fqsen": "\\Phpolar\\Phpolar\\DependencyInjection\\ContainerManager\u003A\u003AgetPrimaryHandler\u0028\u0029",
-            "name": "getPrimaryHandler",
+            "fqsen": "\\Phpolar\\Phpolar\\DependencyInjection\\ContainerManager\u003A\u003AgetMiddlewareQueueRequestHandler\u0028\u0029",
+            "name": "getMiddlewareQueueRequestHandler",
             "summary": "Retrieves\u0020the\u0020middleware\u0020processing\u0020queue",
-            "url": "classes/Phpolar-Phpolar-DependencyInjection-ContainerManager.html#method_getPrimaryHandler"
+            "url": "classes/Phpolar-Phpolar-DependencyInjection-ContainerManager.html#method_getMiddlewareQueueRequestHandler"
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\DependencyInjection\\ContainerManager\u003A\u003AloadRoutes\u0028\u0029",
             "name": "loadRoutes",
@@ -131,9 +131,19 @@ Search.appendIndex(
             "summary": "Add\u0020routes\u0020to\u0020container.",
             "url": "classes/Phpolar-Phpolar-DependencyInjection-RouteLoader.html#method_loadRoutes"
         },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\AbstractContentDelegate",
+            "name": "AbstractContentDelegate",
+            "summary": "Defines\u0020what\u0020should\u0020be\u0020done\u0020when\u0020a\u0020request\u0020is\u0020received.",
+            "url": "classes/Phpolar-Phpolar-Http-AbstractContentDelegate.html"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\AbstractContentDelegate\u003A\u003AgetResponseContent\u0028\u0029",
+            "name": "getResponseContent",
+            "summary": "Returns\u0020the\u0020content\u0020of\u0020the\u0020response\u0020body.",
+            "url": "classes/Phpolar-Phpolar-Http-AbstractContentDelegate.html#method_getResponseContent"
+        },                {
             "fqsen": "\\Phpolar\\Phpolar\\Http\\ErrorHandler",
             "name": "ErrorHandler",
-            "summary": "Handles\u0020401\u0020errors.",
+            "summary": "Handles\u0020HTTP\u0020errors.",
             "url": "classes/Phpolar-Phpolar-Http-ErrorHandler.html"
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\Http\\ErrorHandler\u003A\u003A__construct\u0028\u0029",
@@ -143,28 +153,93 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\Http\\ErrorHandler\u003A\u003Ahandle\u0028\u0029",
             "name": "handle",
-            "summary": "Return\u0020a\u0020401\u0020response.",
+            "summary": "Return\u0020an\u0020HTTP\u0020error\u0020response.",
             "url": "classes/Phpolar-Phpolar-Http-ErrorHandler.html#method_handle"
         },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Http\\PrimaryHandler",
-            "name": "PrimaryHandler",
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\MiddlewareQueueRequestHandler",
+            "name": "MiddlewareQueueRequestHandler",
             "summary": "The\u0020HTTP\u0020Server\u0020request\u0020handling\u0020starting\u0020point\nfor\u0020the\u0020application.",
-            "url": "classes/Phpolar-Phpolar-Http-PrimaryHandler.html"
+            "url": "classes/Phpolar-Phpolar-Http-MiddlewareQueueRequestHandler.html"
         },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Http\\PrimaryHandler\u003A\u003A__construct\u0028\u0029",
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\MiddlewareQueueRequestHandler\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
             "summary": "",
-            "url": "classes/Phpolar-Phpolar-Http-PrimaryHandler.html#method___construct"
+            "url": "classes/Phpolar-Phpolar-Http-MiddlewareQueueRequestHandler.html#method___construct"
         },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Http\\PrimaryHandler\u003A\u003Ahandle\u0028\u0029",
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\MiddlewareQueueRequestHandler\u003A\u003Ahandle\u0028\u0029",
             "name": "handle",
             "summary": "",
-            "url": "classes/Phpolar-Phpolar-Http-PrimaryHandler.html#method_handle"
+            "url": "classes/Phpolar-Phpolar-Http-MiddlewareQueueRequestHandler.html#method_handle"
         },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Http\\PrimaryHandler\u003A\u003Aqueue\u0028\u0029",
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\MiddlewareQueueRequestHandler\u003A\u003Aqueue\u0028\u0029",
             "name": "queue",
             "summary": "Load\u0020the\u0020provided\u0020middleware\non\u0020the\u0020queue\u0020for\u0020processing.",
-            "url": "classes/Phpolar-Phpolar-Http-PrimaryHandler.html#method_queue"
+            "url": "classes/Phpolar-Phpolar-Http-MiddlewareQueueRequestHandler.html#method_queue"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\ResolvedRoute",
+            "name": "ResolvedRoute",
+            "summary": "Represents\u0020a\u0020route\u0020with\u0020route\u0020parameters.",
+            "url": "classes/Phpolar-Phpolar-Http-ResolvedRoute.html"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\ResolvedRoute\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Phpolar-Phpolar-Http-ResolvedRoute.html#method___construct"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\ResolvedRoute\u003A\u003A\u0024delegate",
+            "name": "delegate",
+            "summary": "",
+            "url": "classes/Phpolar-Phpolar-Http-ResolvedRoute.html#property_delegate"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\ResolvedRoute\u003A\u003A\u0024routeParamMap",
+            "name": "routeParamMap",
+            "summary": "",
+            "url": "classes/Phpolar-Phpolar-Http-ResolvedRoute.html#property_routeParamMap"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\RouteRegistry",
+            "name": "RouteRegistry",
+            "summary": "Contains\u0020route\u0020paths\u0020and\u0020their\u0020associated\nrequest\u0020handlers.",
+            "url": "classes/Phpolar-Phpolar-Http-RouteRegistry.html"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\RouteRegistry\u003A\u003Aadd\u0028\u0029",
+            "name": "add",
+            "summary": "Associates\u0020a\u0020request\u0020handler\u0020to\u0020a\u0020request.",
+            "url": "classes/Phpolar-Phpolar-Http-RouteRegistry.html#method_add"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\RouteRegistry\u003A\u003Amatch\u0028\u0029",
+            "name": "match",
+            "summary": "Retrieves\u0020the\u0020registered\u0020handler\u0020for\u0020a\u0020request.",
+            "url": "classes/Phpolar-Phpolar-Http-RouteRegistry.html#method_match"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\RoutingHandler",
+            "name": "RoutingHandler",
+            "summary": "Handles\u0020request\u0020routing\u0020for\u0020the\u0020application.",
+            "url": "classes/Phpolar-Phpolar-Http-RoutingHandler.html"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\RoutingHandler\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Phpolar-Phpolar-Http-RoutingHandler.html#method___construct"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\RoutingHandler\u003A\u003Ahandle\u0028\u0029",
+            "name": "handle",
+            "summary": "Locates\u0020and\u0020executes\u0020the\u0020registered\u0020route\u0020handler.",
+            "url": "classes/Phpolar-Phpolar-Http-RoutingHandler.html#method_handle"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\RoutingMiddleware",
+            "name": "RoutingMiddleware",
+            "summary": "Takes\u0020care\u0020of\u0020routing\u0020requests\u0020to\u0020handlers",
+            "url": "classes/Phpolar-Phpolar-Http-RoutingMiddleware.html"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\RoutingMiddleware\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Phpolar-Phpolar-Http-RoutingMiddleware.html#method___construct"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\RoutingMiddleware\u003A\u003Aprocess\u0028\u0029",
+            "name": "process",
+            "summary": "Handle\u0020routing\u0020a\u0020request.",
+            "url": "classes/Phpolar-Phpolar-Http-RoutingMiddleware.html#method_process"
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\Model\\AbstractModel",
             "name": "AbstractModel",
@@ -431,105 +506,20 @@ Search.appendIndex(
             "summary": "Determines\u0020if\u0020the\u0020configured\u0020properties\u0020of\u0020an\u0020object\nare\u0020valid.",
             "url": "classes/Phpolar-Phpolar-Model-ValidationTrait.html#method_isValid"
         },                {
-            "fqsen": "\\Phpolar\\Phpolar\\ModelParamResolver",
-            "name": "ModelParamResolver",
-            "summary": "Converts\u0020a\u0020an\u0020object\u0020that\u0020is\u0020marked\u0020as\u0020a\u0020model\nattribute\u0020to\u0020a\u0020argument\u002Dname\u002Dobject\u0020key\u002Dvalue\u0020pair.",
-            "url": "classes/Phpolar-Phpolar-ModelParamResolver.html"
+            "fqsen": "\\Phpolar\\Phpolar\\ModelResolver",
+            "name": "ModelResolver",
+            "summary": "Converts\u0020an\u0020object\u0020that\u0020is\u0020marked\u0020as\u0020a\u0020model\nattribute\u0020to\u0020a\u0020argument\u002Dname\u002Dobject\u0020key\u002Dvalue\u0020pair.",
+            "url": "classes/Phpolar-Phpolar-ModelResolver.html"
         },                {
-            "fqsen": "\\Phpolar\\Phpolar\\ModelParamResolver\u003A\u003A__construct\u0028\u0029",
+            "fqsen": "\\Phpolar\\Phpolar\\ModelResolver\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
             "summary": "",
-            "url": "classes/Phpolar-Phpolar-ModelParamResolver.html#method___construct"
+            "url": "classes/Phpolar-Phpolar-ModelResolver.html#method___construct"
         },                {
-            "fqsen": "\\Phpolar\\Phpolar\\ModelParamResolver\u003A\u003Aresolve\u0028\u0029",
+            "fqsen": "\\Phpolar\\Phpolar\\ModelResolver\u003A\u003Aresolve\u0028\u0029",
             "name": "resolve",
             "summary": "Return\u0020the\u0020argument\u002Dname,\u0020object\u0020key\u002Dvalue\u0020pair\nof\u0020the\u0020Model.",
-            "url": "classes/Phpolar-Phpolar-ModelParamResolver.html#method_resolve"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Routing\\AbstractContentDelegate",
-            "name": "AbstractContentDelegate",
-            "summary": "Defines\u0020what\u0020should\u0020be\u0020done\u0020when\u0020a\u0020request\u0020is\u0020received.",
-            "url": "classes/Phpolar-Phpolar-Routing-AbstractContentDelegate.html"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Routing\\AbstractContentDelegate\u003A\u003AgetResponseContent\u0028\u0029",
-            "name": "getResponseContent",
-            "summary": "Returns\u0020the\u0020content\u0020of\u0020the\u0020response\u0020body.",
-            "url": "classes/Phpolar-Phpolar-Routing-AbstractContentDelegate.html#method_getResponseContent"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Routing\\ResolvedRoute",
-            "name": "ResolvedRoute",
-            "summary": "Represents\u0020a\u0020route\u0020with\u0020route\u0020parameters.",
-            "url": "classes/Phpolar-Phpolar-Routing-ResolvedRoute.html"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Routing\\ResolvedRoute\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/Phpolar-Phpolar-Routing-ResolvedRoute.html#method___construct"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Routing\\ResolvedRoute\u003A\u003A\u0024delegate",
-            "name": "delegate",
-            "summary": "",
-            "url": "classes/Phpolar-Phpolar-Routing-ResolvedRoute.html#property_delegate"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Routing\\ResolvedRoute\u003A\u003A\u0024routeParamMap",
-            "name": "routeParamMap",
-            "summary": "",
-            "url": "classes/Phpolar-Phpolar-Routing-ResolvedRoute.html#property_routeParamMap"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Routing\\RouteRegistry",
-            "name": "RouteRegistry",
-            "summary": "Contains\u0020route\u0020paths\u0020and\u0020their\u0020associated\nrequest\u0020handlers.",
-            "url": "classes/Phpolar-Phpolar-Routing-RouteRegistry.html"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Routing\\RouteRegistry\u003A\u003Aadd\u0028\u0029",
-            "name": "add",
-            "summary": "Associates\u0020a\u0020request\u0020handler\u0020to\u0020a\u0020request.",
-            "url": "classes/Phpolar-Phpolar-Routing-RouteRegistry.html#method_add"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Routing\\RouteRegistry\u003A\u003Amatch\u0028\u0029",
-            "name": "match",
-            "summary": "Retrieves\u0020the\u0020registered\u0020handler\u0020for\u0020a\u0020request.",
-            "url": "classes/Phpolar-Phpolar-Routing-RouteRegistry.html#method_match"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Routing\\RoutingHandler",
-            "name": "RoutingHandler",
-            "summary": "Handles\u0020request\u0020routing\u0020for\u0020the\u0020application.",
-            "url": "classes/Phpolar-Phpolar-Routing-RoutingHandler.html"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Routing\\RoutingHandler\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/Phpolar-Phpolar-Routing-RoutingHandler.html#method___construct"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Routing\\RoutingHandler\u003A\u003Ahandle\u0028\u0029",
-            "name": "handle",
-            "summary": "Locates\u0020and\u0020executes\u0020the\u0020registered\u0020route\u0020handler.",
-            "url": "classes/Phpolar-Phpolar-Routing-RoutingHandler.html#method_handle"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Routing\\RoutingMiddleware",
-            "name": "RoutingMiddleware",
-            "summary": "Takes\u0020care\u0020of\u0020routing\u0020requests\u0020to\u0020handlers",
-            "url": "classes/Phpolar-Phpolar-Routing-RoutingMiddleware.html"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Routing\\RoutingMiddleware\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/Phpolar-Phpolar-Routing-RoutingMiddleware.html#method___construct"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Routing\\RoutingMiddleware\u003A\u003Aprocess\u0028\u0029",
-            "name": "process",
-            "summary": "Handle\u0020routing\u0020a\u0020request.",
-            "url": "classes/Phpolar-Phpolar-Routing-RoutingMiddleware.html#method_process"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Validation\\Functions\\getMessageGetters\u0028\u0029",
-            "name": "getMessageGetters",
-            "summary": "Provides\u0020a\u0020way\u0020of\u0020retrieving\u0020only\u0020the\u0020validator\u0020attributes\u0020of\u0020a\u0020property.",
-            "url": "namespaces/phpolar-phpolar-validation-functions.html#function_getMessageGetters"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Validation\\Functions\\getValidators\u0028\u0029",
-            "name": "getValidators",
-            "summary": "Provides\u0020a\u0020way\u0020of\u0020retrieving\u0020only\u0020the\u0020validator\u0020attributes\u0020of\u0020a\u0020property.",
-            "url": "namespaces/phpolar-phpolar-validation-functions.html#function_getValidators"
+            "url": "classes/Phpolar-Phpolar-ModelResolver.html#method_resolve"
         },                {
             "fqsen": "\\",
             "name": "\\",
@@ -560,20 +550,5 @@ Search.appendIndex(
             "name": "Model",
             "summary": "",
             "url": "namespaces/phpolar-phpolar-model.html"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Routing",
-            "name": "Routing",
-            "summary": "",
-            "url": "namespaces/phpolar-phpolar-routing.html"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Validation\\Functions",
-            "name": "Functions",
-            "summary": "",
-            "url": "namespaces/phpolar-phpolar-validation-functions.html"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Validation",
-            "name": "Validation",
-            "summary": "",
-            "url": "namespaces/phpolar-phpolar-validation.html"
         }            ]
 );
