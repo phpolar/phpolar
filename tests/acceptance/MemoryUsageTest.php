@@ -87,7 +87,6 @@ final class MemoryUsageTest extends TestCase
         $containerFac = $this->getContainerFactory($routes);
         $totalUsed = -memory_get_usage();
         $server = App::create(new ContainerManager($containerFac, $config));
-        $server->useRoutes($routes);
         $server->receive($request);
         $totalUsed += memory_get_usage();
         $this->assertGreaterThan(0, $totalUsed);

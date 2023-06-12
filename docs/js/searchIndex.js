@@ -26,10 +26,10 @@ Search.appendIndex(
             "summary": "Configures\u0020the\u0020server\u0020for\u0020CSRF\u0020attack\u0020mitigation.",
             "url": "classes/Phpolar-Phpolar-App.html#method_useCsrfMiddleware"
         },                {
-            "fqsen": "\\Phpolar\\Phpolar\\App\u003A\u003AuseRoutes\u0028\u0029",
-            "name": "useRoutes",
+            "fqsen": "\\Phpolar\\Phpolar\\App\u003A\u003AsetupRouting\u0028\u0029",
+            "name": "setupRouting",
             "summary": "Configures\u0020the\u0020web\u0020server\u0020with\u0020associated\nroutes\u0020and\u0020handlers.",
-            "url": "classes/Phpolar-Phpolar-App.html#method_useRoutes"
+            "url": "classes/Phpolar-Phpolar-App.html#method_setupRouting"
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\App\u003A\u003AERROR_HANDLER_401",
             "name": "ERROR_HANDLER_401",
@@ -91,11 +91,6 @@ Search.appendIndex(
             "summary": "Retrieves\u0020the\u0020middleware\u0020processing\u0020queue",
             "url": "classes/Phpolar-Phpolar-DependencyInjection-ContainerManager.html#method_getMiddlewareQueueRequestHandler"
         },                {
-            "fqsen": "\\Phpolar\\Phpolar\\DependencyInjection\\ContainerManager\u003A\u003AloadRoutes\u0028\u0029",
-            "name": "loadRoutes",
-            "summary": "Adds\u0020routes\u0020to\u0020the\u0020container.",
-            "url": "classes/Phpolar-Phpolar-DependencyInjection-ContainerManager.html#method_loadRoutes"
-        },                {
             "fqsen": "\\Phpolar\\Phpolar\\DependencyInjection\\ContainerManager\u003A\u003AgetRoutingMiddleware\u0028\u0029",
             "name": "getRoutingMiddleware",
             "summary": "Retrieves\u0020the\u0020routing\u0020middleware.",
@@ -115,21 +110,6 @@ Search.appendIndex(
             "name": "CSRF_RESPONSE_FILTER_MIDDLEWARE",
             "summary": "",
             "url": "classes/Phpolar-Phpolar-DependencyInjection-DiTokens.html#constant_CSRF_RESPONSE_FILTER_MIDDLEWARE"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\DependencyInjection\\RouteLoader",
-            "name": "RouteLoader",
-            "summary": "Adds\u0020the\u0020route\u0020registry\u0020to\u0020the\ndependency\u0020injection\u0020container.",
-            "url": "classes/Phpolar-Phpolar-DependencyInjection-RouteLoader.html"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\DependencyInjection\\RouteLoader\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/Phpolar-Phpolar-DependencyInjection-RouteLoader.html#method___construct"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\DependencyInjection\\RouteLoader\u003A\u003AloadRoutes\u0028\u0029",
-            "name": "loadRoutes",
-            "summary": "Add\u0020routes\u0020to\u0020container.",
-            "url": "classes/Phpolar-Phpolar-DependencyInjection-RouteLoader.html#method_loadRoutes"
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\Http\\AbstractContentDelegate",
             "name": "AbstractContentDelegate",

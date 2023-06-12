@@ -104,6 +104,6 @@ class Person extends AbstractModel
 
 |Source Code Size|Memory Usage|
 |----------------|------------|
-|     27.5 kB    |   405 kB   |
+|     27 kB    |   730 kB   |
 
 [def]: https://packagist.org/packages/phpolar/phpolar

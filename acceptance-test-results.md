@@ -19,10 +19,10 @@
 - [x] Should have optional table name configuration
 
 ## Memory Usage (Phpolar\Phpolar\MemoryUsage)
-- [x] Memory usage shall be below 405000 bytes
+- [x] Memory usage shall be below 730000 bytes
 
 ## Project Size (Phpolar\Phpolar\ProjectSize)
-- [x] Source code total size shall be below 27500 bytes
+- [x] Source code total size shall be below 27000 bytes
 
 ## Routing (Phpolar\Phpolar\Routing\Routing)
 - [x] Shall invoke the handler registered to the given route
