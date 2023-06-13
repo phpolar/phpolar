@@ -102,8 +102,14 @@ class Person extends AbstractModel
 
 ### Thresholds
 
-|Source Code Size|Memory Usage|
-|----------------|------------|
-|     27 kB    |   730 kB   |
+|      Module    |Source Code Size * |Memory Usage|  Required |
+|----------------|-------------------|------------|-----------|
+|     phpolar    |        9 kB       |   400 kB   |    [x]    |
+|  phpolar-core  |        4 kB       |            |    [x]    |
+|      model     |       19 kB       |   108 kB   |           |
+|     **TOTAL**  |     **32 kB**     | **508 kB** |           |
+
+* Note: Does not include comments.
+
 
 [def]: https://packagist.org/packages/phpolar/phpolar

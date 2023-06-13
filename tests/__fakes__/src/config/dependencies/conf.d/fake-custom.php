@@ -3,6 +3,7 @@
 use Phpolar\HttpCodes\ResponseCode;
 use Phpolar\HttpMessageTestUtils\ResponseFactoryStub;
 use Phpolar\HttpMessageTestUtils\StreamFactoryStub;
+use Phpolar\ModelResolver\ModelResolverInterface;
 use Phpolar\Phpolar\Http\ErrorHandler;
 use Phpolar\Phpolar\Http\MiddlewareQueueRequestHandler;
 use Phpolar\Phpolar\App;
@@ -42,5 +43,11 @@ return [
         $container->get(StreamFactoryInterface::class),
         $container->get(App::ERROR_HANDLER_404),
         $container,
+        new class () implements ModelResolverInterface {
+            public function resolve(object $it, string $methodName): array
+            {
+                return [];
+            }
+        },
     )
 ];

@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Phpolar\Phpolar\Http;
 
+use Phpolar\ModelResolver\ModelResolverInterface;
 use Phpolar\Phpolar\Core\Routing\RouteNotRegistered;
 use Phpolar\Phpolar\Http\ErrorHandler;
-use Phpolar\Phpolar\ModelResolver;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -26,6 +26,7 @@ class RoutingHandler implements RequestHandlerInterface
         private StreamFactoryInterface $streamFactory,
         private ErrorHandler $errorHandler,
         private ContainerInterface $container,
+        private ModelResolverInterface $modelResolver,
     ) {
     }
 
@@ -41,7 +42,7 @@ class RoutingHandler implements RequestHandlerInterface
         return match (true) {
             $matchResult instanceof RouteNotRegistered => $this->errorHandler->handle($request),
             $matchResult instanceof ResolvedRoute => $this->handleResolvedRoute($matchResult),
-            default => $this->handleDelegate($matchResult, $request),
+            default => $this->handleDelegate($matchResult),
         };
     }
 
@@ -52,15 +53,13 @@ class RoutingHandler implements RequestHandlerInterface
         return $response->withBody($responseStream);
     }
 
-    private function handleDelegate(AbstractContentDelegate $delegate, ServerRequestInterface $request): ResponseInterface
+    private function handleDelegate(AbstractContentDelegate $delegate): ResponseInterface
     {
-        $reflectionMethod = new ReflectionMethod($delegate, "getResponseContent");
-        $resolver = new ModelResolver($reflectionMethod, $request);
-        $modelParams = $resolver->resolve();
+        $modelParams = $this->modelResolver->resolve($delegate, "getResponseContent");
         /**
          * @var string $responseContent
          */
-        $responseContent = empty($modelParams) === false ? $reflectionMethod->invokeArgs($delegate, array_merge([$this->container], $modelParams)) : $delegate->getResponseContent($this->container);
+        $responseContent = empty($modelParams) === false ? (new ReflectionMethod($delegate, "getResponseContent"))->invokeArgs($delegate, array_merge([$this->container], $modelParams)) : $delegate->getResponseContent($this->container);
         return $this->getResponse($responseContent);
     }
 

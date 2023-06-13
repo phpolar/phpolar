@@ -18,6 +18,7 @@ use Phpolar\HttpMessageTestUtils\RequestStub;
 use Phpolar\HttpMessageTestUtils\ResponseFactoryStub;
 use Phpolar\HttpMessageTestUtils\ResponseStub;
 use Phpolar\HttpMessageTestUtils\StreamFactoryStub;
+use Phpolar\ModelResolver\ModelResolverInterface;
 use Phpolar\Phpolar\DependencyInjection\ClosureContainerFactory;
 use Phpolar\Phpolar\DependencyInjection\ContainerManager;
 use Phpolar\Phpolar\DependencyInjection\DiTokens;
@@ -235,6 +236,7 @@ final class AppTest extends TestCase
     {
         $this->expectOutputString("<h1>Not Found</h1>");
         $config = new ContainerConfigurationStub();
+        $config[ModelResolverInterface::class] = $this->createStub(ModelResolverInterface::class);
         $config[RouteRegistry::class] = new RouteRegistry();
         /**
          * @var Stub&MiddlewareQueueRequestHandler $handlerStub

@@ -14,6 +14,7 @@
 declare(strict_types=1);
 
 use Phpolar\HttpCodes\ResponseCode;
+use Phpolar\ModelResolver\ModelResolverInterface;
 use Phpolar\Phpolar\Http\RouteRegistry;
 use Phpolar\Phpolar\Http\RoutingHandler;
 use Phpolar\Phpolar\Http\RoutingMiddleware;
@@ -50,6 +51,7 @@ return [
         $container->get(StreamFactoryInterface::class),
         $container->get(App::ERROR_HANDLER_404),
         $container,
+        $container->get(ModelResolverInterface::class),
     ),
     /**
      * @suppress PhanUnreferencedClosure

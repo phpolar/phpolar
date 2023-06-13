@@ -16,6 +16,7 @@ use Phpolar\HttpCodes\ResponseCode;
 use Phpolar\HttpMessageTestUtils\RequestStub;
 use Phpolar\HttpMessageTestUtils\ResponseFactoryStub;
 use Phpolar\HttpMessageTestUtils\StreamFactoryStub;
+use Phpolar\ModelResolver\ModelResolverInterface;
 use Phpolar\Phpolar\DependencyInjection\ClosureContainerFactory;
 use Phpolar\Phpolar\DependencyInjection\ContainerFactoryInterface;
 use Phpolar\Phpolar\DependencyInjection\ContainerManager;
@@ -51,7 +52,15 @@ final class MemoryUsageTest extends TestCase
         $config = new ContainerConfigurationStub();
         $config[RouteRegistry::class] = $routes;
         $config[RoutingMiddleware::class] = static fn (ArrayAccess $config) => new RoutingMiddleware($config[RoutingHandler::class]);
-        $config[RoutingHandler::class] = static fn (ArrayAccess $config) => new RoutingHandler($config[RouteRegistry::class], $config[ResponseFactoryInterface::class], $config[StreamFactoryInterface::class], $config[App::ERROR_HANDLER_401], $config[ContainerInterface::class]);
+        $config[ModelResolverInterface::class] = $this->createStub(ModelResolverInterface::class);
+        $config[RoutingHandler::class] = static fn (ArrayAccess $config) => new RoutingHandler(
+            $config[RouteRegistry::class],
+            $config[ResponseFactoryInterface::class],
+            $config[StreamFactoryInterface::class],
+            $config[App::ERROR_HANDLER_401],
+            $config[ContainerInterface::class],
+            $config[ModelResolverInterface::class],
+        );
         $config[MiddlewareQueueRequestHandler::class] = static fn (ArrayAccess $config) => new MiddlewareQueueRequestHandler($config[App::ERROR_HANDLER_404]);
         $config[App::ERROR_HANDLER_404] = static fn (ArrayAccess $config) => new ErrorHandler(ResponseCode::NOT_FOUND, "Not Found", $config[ContainerInterface::class]);
         $config[App::ERROR_HANDLER_401] = static fn (ArrayAccess $conf) => new ErrorHandler(401, "Unauthorized", $conf[ContainerInterface::class]);
