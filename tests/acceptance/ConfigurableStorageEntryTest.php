@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Phpolar\Phpolar;
 
-use Phpolar\Phpolar\Model\Column;
-use Phpolar\Phpolar\Model\Size;
-use Phpolar\Phpolar\Model\ColumnNameTrait;
-use Phpolar\Phpolar\Model\DataTypeDetectionTrait;
-use Phpolar\Phpolar\Model\SizeConfigurationTrait;
-use Phpolar\Phpolar\Tests\Stubs\EntityNameConfigured;
+use Phpolar\Model\EntityName;
+use Phpolar\Model\Column;
+use Phpolar\Model\Size;
+use Phpolar\Model\ColumnNameTrait;
+use Phpolar\Model\DataTypeDetectionTrait;
+use Phpolar\Model\SizeConfigurationTrait;
 use Phpolar\StorageDriver\StorageDriverInterface;
 use Phpolar\StorageDriver\TypeName;
 use PHPUnit\Framework\Attributes\Test;
@@ -109,7 +109,7 @@ final class ConfigurableStorageEntryTest extends TestCase
     #[TestDox("Should have optional table name configuration")]
     public function criterion4()
     {
-        $entity = new EntityNameConfigured();
+        $entity = new EntityName(ENTITY_NAME_TEST_CASE);
         $actual = $entity->getName();
         $this->assertSame(ENTITY_NAME_TEST_CASE, $actual);
     }

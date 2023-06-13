@@ -74,9 +74,9 @@ $view = $this;
 ### Use Attributes to Configure Models
 
 ```php
-use Efortmeyer\Polar\Api\Model;
+use Phpolar\Phpolar\AbstractModel;
 
-class Person extends Model
+class Person extends AbstractModel
 {
     public string $title = "Person Form";
 
@@ -97,21 +97,19 @@ class Person extends Model
     #[Label("Business Address")]
     #[MaxLength(200)]
     public string $address2;
-
-    #[DateFormat("Y-m-d")]
-    public DateTimeImmutable $dateOfBirth;
-
-    #[DateFormat("Y-m-d h:i:s a")]
-    public DateTimeImmutable $enteredOn;
-
-    #[DateFormat("Y-m-d h:i:s a")]
-    public DateTimeImmutable $modifiedOn;
 }
 ```
 
 ### Thresholds
-|Source Code Size|Memory Usage|
-|----------------|------------|
-|25.5 kB|750 kB|
+
+|      Module    |Source Code Size * |Memory Usage|  Required |
+|----------------|-------------------|------------|-----------|
+|     phpolar    |        9 kB       |   400 kB   |    [x]    |
+|  phpolar-core  |        4 kB       |            |    [x]    |
+|      model     |       19 kB       |   108 kB   |           |
+|     **TOTAL**  |     **32 kB**     | **508 kB** |           |
+
+* Note: Does not include comments.
+
 
 [def]: https://packagist.org/packages/phpolar/phpolar

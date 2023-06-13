@@ -7,7 +7,7 @@ repos:
       - id: trailing-whitespace
         exclude: (docs|\.phan|tests/__templates__)
       - id: end-of-file-fixer
-        exclude: (docs|tests/__templates__)
+        exclude: (docs|tests/__templates__|bin)
       - id: check-json
         exclude: (.vscode)
       - id: check-xml

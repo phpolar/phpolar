@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1a5ee62cac5a176a8a0c8c99217f9fc5",
+    "content-hash": "b458a1ecbf30fe6157c4ede4471bb317",
     "packages": [
         {
             "name": "phpolar/http-response-extensions",
@@ -51,6 +51,46 @@
                 "source": "https://github.com/phpolar/http-response-extensions/tree/1.0.0"
             },
             "time": "2023-04-30T02:14:59+00:00"
+        },
+        {
+            "name": "phpolar/model-resolver",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpolar/model-resolver.git",
+                "reference": "ee34c5a979e3503565df304be52c2b1905cf1096"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpolar/model-resolver/zipball/ee34c5a979e3503565df304be52c2b1905cf1096",
+                "reference": "ee34c5a979e3503565df304be52c2b1905cf1096",
+                "shasum": ""
+            },
+            "suggest": {
+                "phpolar/model": "Provides support for configuring the properties of an object for validation, formatting, and storage."
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Phpolar\\ModelResolver\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Eric Fortmeyer",
+                    "email": "e.fortmeyer01@gmail.com"
+                }
+            ],
+            "description": "Unifies implementations that create models from method arguments.",
+            "support": {
+                "issues": "https://github.com/phpolar/model-resolver/issues",
+                "source": "https://github.com/phpolar/model-resolver/tree/1.0.0"
+            },
+            "time": "2023-06-13T03:29:30+00:00"
         },
         {
             "name": "phpolar/phpolar-core",
@@ -2005,6 +2045,55 @@
                 "source": "https://github.com/phpolar/http-message-test-utils/tree/0.2.0"
             },
             "time": "2023-05-21T07:04:41+00:00"
+        },
+        {
+            "name": "phpolar/model",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpolar/model.git",
+                "reference": "3d6f946ed5b65f98bfb1a31f4adbf6e21c4211d6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpolar/model/zipball/3d6f946ed5b65f98bfb1a31f4adbf6e21c4211d6",
+                "reference": "3d6f946ed5b65f98bfb1a31f4adbf6e21c4211d6",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.1",
+                "phpolar/phpolar-core": "^2.2",
+                "phpolar/storage-driver": "^1.0",
+                "phpolar/validator": "^1.0"
+            },
+            "require-dev": {
+                "ext-ast": "*",
+                "ext-openssl": "*",
+                "phan/phan": "^5.4",
+                "php-coveralls/php-coveralls": "^2.5",
+                "phpmd/phpmd": "^2.13",
+                "phpstan/phpstan": "^1.9",
+                "phpunit/phpunit": "^10",
+                "squizlabs/php_codesniffer": "^3.7"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Phpolar\\Model\\": [
+                        "src/"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Provides support for configuring the properties of an object for validation, formatting, and storage.",
+            "support": {
+                "issues": "https://github.com/phpolar/model/issues",
+                "source": "https://github.com/phpolar/model/tree/1.0.0"
+            },
+            "time": "2023-06-13T02:46:48+00:00"
         },
         {
             "name": "phpolar/pure-php",
