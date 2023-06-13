@@ -89,22 +89,32 @@
                                         <ul class="phpdocumentor-breadcrumbs">
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/phpolar.html">Phpolar</a></li>
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/phpolar-phpolar.html">Phpolar</a></li>
-            <li class="phpdocumentor-breadcrumb"><a href="namespaces/phpolar-phpolar-model.html">Model</a></li>
     </ul>
 
-    <article class="phpdocumentor-element -trait">
+    <article class="phpdocumentor-element -class">
         <h2 class="phpdocumentor-content__title">
-    ValidationTrait
+    ModelResolver
+
+    
+            <div class="phpdocumentor-element__package">
+            in package
+            <ul class="phpdocumentor-breadcrumbs">
+                                    <li class="phpdocumentor-breadcrumb"><a href="packages/Phpolar.html">Phpolar</a></li>
+                            </ul>
+        </div>
+    
+    
     </h2>
 
         <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="Model/ValidationTrait.php"><a href="files/model-validationtrait.html"><abbr title="Model/ValidationTrait.php">ValidationTrait.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="ModelResolver.php"><a href="files/modelresolver.html"><abbr title="ModelResolver.php">ModelResolver.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">15</span>
+    <span class="phpdocumentor-element-found-in__line">18</span>
 
     </aside>
 
-            <p class="phpdocumentor-summary">Use to add support for validating the properties of an object.</p>
+            <p class="phpdocumentor-summary">Converts an object that is marked as a model
+attribute to a argument-name-object key-value pair.</p>
 
 
 
@@ -113,7 +123,7 @@
 
 <h3 id="toc">
     Table of Contents
-    <a href="classes/Phpolar-Phpolar-Model-ValidationTrait.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/Phpolar-Phpolar-ModelResolver.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h3>
 
@@ -128,17 +138,24 @@
 
 <h4 id="toc-methods">
     Methods
-    <a href="classes/Phpolar-Phpolar-Model-ValidationTrait.html#toc-methods" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/Phpolar-Phpolar-ModelResolver.html#toc-methods" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h4>
 <dl class="phpdocumentor-table-of-contents">
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Phpolar-Phpolar-Model-ValidationTrait.html#method_isValid">isValid()</a>
+    <a href="classes/Phpolar-Phpolar-ModelResolver.html#method___construct">__construct()</a>
     <span>
-                                &nbsp;: bool    </span>
+                                &nbsp;: mixed    </span>
 </dt>
-<dd>Determines if the configured properties of an object
-are valid.</dd>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Phpolar-Phpolar-ModelResolver.html#method_resolve">resolve()</a>
+    <span>
+                                &nbsp;: array&lt;string, <a href="classes/Phpolar-Phpolar-Model-AbstractModel.html"><abbr title="\Phpolar\Phpolar\Model\AbstractModel">AbstractModel</abbr></a>&gt;    </span>
+</dt>
+<dd>Return the argument-name, object key-value pair
+of the Model.</dd>
 
     </dl>
 
@@ -147,10 +164,12 @@ are valid.</dd>
 
         
 
+        
+
             <section class="phpdocumentor-methods">
         <h3 class="phpdocumentor-elements__header" id="methods">
             Methods
-            <a href="classes/Phpolar-Phpolar-Model-ValidationTrait.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/Phpolar-Phpolar-ModelResolver.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
         </h3>
                     <article
         class="phpdocumentor-element
@@ -158,32 +177,79 @@ are valid.</dd>
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_isValid">
-        isValid()
-        <a href="classes/Phpolar-Phpolar-Model-ValidationTrait.html#method_isValid" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method___construct">
+        __construct()
+        <a href="classes/Phpolar-Phpolar-ModelResolver.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="Model/ValidationTrait.php"><a href="files/model-validationtrait.html"><abbr title="Model/ValidationTrait.php">ValidationTrait.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="ModelResolver.php"><a href="files/modelresolver.html"><abbr title="ModelResolver.php">ModelResolver.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">25</span>
+    <span class="phpdocumentor-element-found-in__line">24</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Determines if the configured properties of an object
-are valid.</p>
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\ReflectionMethod">ReflectionMethod</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$reflectionMethod</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">array&lt;string, string&gt;|object|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$parsedRequestBody</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$reflectionMethod</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\ReflectionMethod">ReflectionMethod</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$parsedRequestBody</span>
+                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string, string&gt;|object|null</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">mixed</span>
+            &mdash;
+        
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_resolve">
+        resolve()
+        <a href="classes/Phpolar-Phpolar-ModelResolver.html#method_resolve" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="ModelResolver.php"><a href="files/modelresolver.html"><abbr title="ModelResolver.php">ModelResolver.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">36</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Return the argument-name, object key-value pair
+of the Model.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">isValid</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+                    <span class="phpdocumentor-signature__name">resolve</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string, <a href="classes/Phpolar-Phpolar-Model-AbstractModel.html"><abbr title="\Phpolar\Phpolar\Model\AbstractModel">AbstractModel</abbr></a>&gt;</span></code>
 
-        <section class="phpdocumentor-description"><p>The configuration is used to determine validity.</p>
-</section>
-
+    
     
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">bool</span>
+    <span class="phpdocumentor-signature__response_type">array&lt;string, <a href="classes/Phpolar-Phpolar-Model-AbstractModel.html"><abbr title="\Phpolar\Phpolar\Model\AbstractModel">AbstractModel</abbr></a>&gt;</span>
             &mdash;
         
     
@@ -266,7 +332,7 @@ are valid.</p>
     </section>
 </section>
         </div>
-        <a href="classes/Phpolar-Phpolar-Model-ValidationTrait.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+        <a href="classes/Phpolar-Phpolar-ModelResolver.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
     </main>
 

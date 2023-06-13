@@ -89,12 +89,12 @@
                                         <ul class="phpdocumentor-breadcrumbs">
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/phpolar.html">Phpolar</a></li>
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/phpolar-phpolar.html">Phpolar</a></li>
-            <li class="phpdocumentor-breadcrumb"><a href="namespaces/phpolar-phpolar-dependencyinjection.html">DependencyInjection</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/phpolar-phpolar-http.html">Http</a></li>
     </ul>
 
     <article class="phpdocumentor-element -class">
         <h2 class="phpdocumentor-content__title">
-    RouteLoader
+    ResolvedRoute
 
     
             <div class="phpdocumentor-element__package">
@@ -108,15 +108,18 @@
     </h2>
 
         <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="DependencyInjection/RouteLoader.php"><a href="files/dependencyinjection-routeloader.html"><abbr title="DependencyInjection/RouteLoader.php">RouteLoader.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="Http/ResolvedRoute.php"><a href="files/http-resolvedroute.html"><abbr title="Http/ResolvedRoute.php">ResolvedRoute.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">15</span>
+    <span class="phpdocumentor-element-found-in__line">17</span>
 
     </aside>
 
-            <p class="phpdocumentor-summary">Adds the route registry to the
-dependency injection container.</p>
+            <p class="phpdocumentor-summary">Represents a route with route parameters.</p>
 
+    <section class="phpdocumentor-description"><p><strong>Example</strong>: <code class="prettyprint">/some/path/{id}</code></p>
+<p>Contains the delegate for the route
+along with a map of the route parameters.</p>
+</section>
 
 
 
@@ -124,7 +127,7 @@ dependency injection container.</p>
 
 <h3 id="toc">
     Table of Contents
-    <a href="classes/Phpolar-Phpolar-DependencyInjection-RouteLoader.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/Phpolar-Phpolar-Http-ResolvedRoute.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h3>
 
@@ -136,26 +139,40 @@ dependency injection container.</p>
 
 
 
+<h4 id="toc-properties">
+    Properties
+    <a href="classes/Phpolar-Phpolar-Http-ResolvedRoute.html#toc-properties" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h4>
+<dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a href="classes/Phpolar-Phpolar-Http-ResolvedRoute.html#property_delegate">$delegate</a>
+    <span>
+                        &nbsp;: <a href="classes/Phpolar-Phpolar-Http-AbstractContentDelegate.html"><abbr title="\Phpolar\Phpolar\Http\AbstractContentDelegate">AbstractContentDelegate</abbr></a>            </span>
+</dt>
+<dd></dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a href="classes/Phpolar-Phpolar-Http-ResolvedRoute.html#property_routeParamMap">$routeParamMap</a>
+    <span>
+                        &nbsp;: <abbr title="\Phpolar\Phpolar\Core\Routing\RouteParamMap">RouteParamMap</abbr>            </span>
+</dt>
+<dd></dd>
+
+    </dl>
 
 <h4 id="toc-methods">
     Methods
-    <a href="classes/Phpolar-Phpolar-DependencyInjection-RouteLoader.html#toc-methods" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/Phpolar-Phpolar-Http-ResolvedRoute.html#toc-methods" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h4>
 <dl class="phpdocumentor-table-of-contents">
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Phpolar-Phpolar-DependencyInjection-RouteLoader.html#method___construct">__construct()</a>
+    <a href="classes/Phpolar-Phpolar-Http-ResolvedRoute.html#method___construct">__construct()</a>
     <span>
                                 &nbsp;: mixed    </span>
 </dt>
 <dd></dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Phpolar-Phpolar-DependencyInjection-RouteLoader.html#method_loadRoutes">loadRoutes()</a>
-    <span>
-                                &nbsp;: void    </span>
-</dt>
-<dd>Add routes to container.</dd>
 
     </dl>
 
@@ -165,11 +182,85 @@ dependency injection container.</p>
         
 
         
+    <section class="phpdocumentor-properties">
+        <h3 class="phpdocumentor-elements__header" id="properties">
+            Properties
+            <a href="classes/Phpolar-Phpolar-Http-ResolvedRoute.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
+        </h3>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_delegate">
+        $delegate
+        <a href="classes/Phpolar-Phpolar-Http-ResolvedRoute.html#property_delegate" class="headerlink"><i class="fas fa-link"></i></a>
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="Http/ResolvedRoute.php"><a href="files/http-resolvedroute.html"><abbr title="Http/ResolvedRoute.php">ResolvedRoute.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">20</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type"><a href="classes/Phpolar-Phpolar-Http-AbstractContentDelegate.html"><abbr title="\Phpolar\Phpolar\Http\AbstractContentDelegate">AbstractContentDelegate</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$delegate</span>
+    </code>
+
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_routeParamMap">
+        $routeParamMap
+        <a href="classes/Phpolar-Phpolar-Http-ResolvedRoute.html#property_routeParamMap" class="headerlink"><i class="fas fa-link"></i></a>
+        <span class="phpdocumentor-element__modifiers">
+                                </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="Http/ResolvedRoute.php"><a href="files/http-resolvedroute.html"><abbr title="Http/ResolvedRoute.php">ResolvedRoute.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">21</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type"><abbr title="\Phpolar\Phpolar\Core\Routing\RouteParamMap">RouteParamMap</abbr></span>
+    <span class="phpdocumentor-signature__name">$routeParamMap</span>
+    </code>
+
+        <section class="phpdocumentor-description"></section>
+
+        <section class="phpdocumentor-description"></section>
+
+    
+
+</article>
+            </section>
 
             <section class="phpdocumentor-methods">
         <h3 class="phpdocumentor-elements__header" id="methods">
             Methods
-            <a href="classes/Phpolar-Phpolar-DependencyInjection-RouteLoader.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/Phpolar-Phpolar-Http-ResolvedRoute.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
         </h3>
                     <article
         class="phpdocumentor-element
@@ -179,69 +270,35 @@ dependency injection container.</p>
 >
     <h4 class="phpdocumentor-element__name" id="method___construct">
         __construct()
-        <a href="classes/Phpolar-Phpolar-DependencyInjection-RouteLoader.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Phpolar-Phpolar-Http-ResolvedRoute.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="DependencyInjection/RouteLoader.php"><a href="files/dependencyinjection-routeloader.html"><abbr title="DependencyInjection/RouteLoader.php">RouteLoader.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="Http/ResolvedRoute.php"><a href="files/http-resolvedroute.html"><abbr title="Http/ResolvedRoute.php">ResolvedRoute.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">27</span>
+    <span class="phpdocumentor-element-found-in__line">19</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\ArrayAccess">ArrayAccess</abbr>&lt;string, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$containerConfig</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Phpolar-Phpolar-Http-AbstractContentDelegate.html"><abbr title="\Phpolar\Phpolar\Http\AbstractContentDelegate">AbstractContentDelegate</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$delegate</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Phpolar\Phpolar\Core\Routing\RouteParamMap">RouteParamMap</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$routeParamMap</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
 
-    
+        <section class="phpdocumentor-description"></section>
+
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$containerConfig</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\ArrayAccess">ArrayAccess</abbr>&lt;string, mixed&gt;</span>
+                <span class="phpdocumentor-signature__argument__name">$delegate</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Phpolar-Phpolar-Http-AbstractContentDelegate.html"><abbr title="\Phpolar\Phpolar\Http\AbstractContentDelegate">AbstractContentDelegate</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                
+                    <section class="phpdocumentor-description"></section>
+
             </dd>
-            </dl>
-
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">mixed</span>
-            &mdash;
-        
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_loadRoutes">
-        loadRoutes()
-        <a href="classes/Phpolar-Phpolar-DependencyInjection-RouteLoader.html#method_loadRoutes" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="DependencyInjection/RouteLoader.php"><a href="files/dependencyinjection-routeloader.html"><abbr title="DependencyInjection/RouteLoader.php">RouteLoader.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">36</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Add routes to container.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">loadRoutes</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Phpolar-Phpolar-Http-RouteRegistry.html"><abbr title="\Phpolar\Phpolar\Http\RouteRegistry">RouteRegistry</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$routes</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
-
-    
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$routes</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Phpolar-Phpolar-Http-RouteRegistry.html"><abbr title="\Phpolar\Phpolar\Http\RouteRegistry">RouteRegistry</abbr></a></span>
+                <span class="phpdocumentor-signature__argument__name">$routeParamMap</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Phpolar\Phpolar\Core\Routing\RouteParamMap">RouteParamMap</abbr></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"></section>
@@ -252,7 +309,7 @@ dependency injection container.</p>
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
+    <span class="phpdocumentor-signature__response_type">mixed</span>
             &mdash;
         
     
@@ -335,7 +392,7 @@ dependency injection container.</p>
     </section>
 </section>
         </div>
-        <a href="classes/Phpolar-Phpolar-DependencyInjection-RouteLoader.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+        <a href="classes/Phpolar-Phpolar-Http-ResolvedRoute.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
     </main>
 

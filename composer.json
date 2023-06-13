@@ -18,13 +18,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Phpolar\\Phpolar\\": "src/",
-            "Phpolar\\Phpolar\\Config\\": "config/"
-        },
-        "files": [
-            "src/Validation/Functions/getValidators.php",
-            "src/Validation/Functions/getMessageGetters.php"
-        ]
+            "Phpolar\\Phpolar\\": "src/"
+        }
     },
     "autoload-dev": {
         "psr-4": {
@@ -39,6 +34,7 @@
         "php": ">=8.1",
         "ext-mbstring": "*",
         "phpolar/http-response-extensions": "^1.0",
+        "phpolar/model-resolver": "^1.0",
         "phpolar/phpolar-core": "^2.2",
         "phpolar/storage-driver": "^1.0",
         "phpolar/validator": "^1.0",
@@ -54,8 +50,9 @@
         "phan/phan": "^5.3",
         "php-coveralls/php-coveralls": "^2.5",
         "phpmd/phpmd": "^2.13",
-        "phpolar/http-message-test-utils": "^0.1.0 || ^0.2.0",
         "phpolar/csrf-protection": "^3.0",
+        "phpolar/http-message-test-utils": "^0.1.0 || ^0.2.0",
+        "phpolar/model": "^1.0",
         "phpolar/pure-php": "^1.0",
         "phpstan/phpstan": "^1.8",
         "phpunit/phpunit": "^10.0",

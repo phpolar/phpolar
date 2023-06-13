@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Phpolar\Phpolar\Routing;
+namespace Phpolar\Phpolar\Http;
 
 use Exception;
 use Phpolar\HttpCodes\ResponseCode;
@@ -10,6 +10,7 @@ use Phpolar\HttpMessageTestUtils\MemoryStreamStub;
 use Phpolar\HttpMessageTestUtils\RequestStub;
 use Phpolar\HttpMessageTestUtils\ResponseStub;
 use Phpolar\HttpMessageTestUtils\UriStub;
+use Phpolar\ModelResolver\ModelResolverInterface;
 use Phpolar\Phpolar\Http\ErrorHandler;
 use Phpolar\PurePhp\Binder;
 use Phpolar\PurePhp\Dispatcher;
@@ -83,6 +84,11 @@ final class RoutingTest extends TestCase
         };
     }
 
+    protected function getModelResolver(): ModelResolverInterface
+    {
+        return $this->createStub(ModelResolverInterface::class);
+    }
+
     #[Test]
     #[TestDox("Shall invoke the handler registered to the given route")]
     public function criterion1()
@@ -108,6 +114,7 @@ final class RoutingTest extends TestCase
             streamFactory: $this->getStreamFactory(),
             errorHandler: new ErrorHandler(0, "", $container),
             container: $container,
+            modelResolver: $this->getModelResolver(),
         );
         $requestStub = (new RequestStub("GET"))->withUri(new UriStub($givenRoute));
         $response = $routingHandler->handle($requestStub);
@@ -128,6 +135,7 @@ final class RoutingTest extends TestCase
             streamFactory: $this->getStreamFactory(),
             errorHandler: new ErrorHandler(404, "Not Found", $container),
             container: $container,
+            modelResolver: $this->getModelResolver(),
         );
         $requestStub = (new RequestStub("GET"))->withUri(new UriStub($givenRoute));
         $response = $routingHandler->handle($requestStub);

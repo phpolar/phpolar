@@ -13,7 +13,7 @@ use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
 /**
- * Handles 401 errors.
+ * Handles HTTP errors.
  */
 final class ErrorHandler implements RequestHandlerInterface
 {
@@ -39,7 +39,7 @@ final class ErrorHandler implements RequestHandlerInterface
     }
 
     /**
-     * Return a 401 response.
+     * Return an HTTP error response.
      *
      * @suppress PhanUnusedPublicFinalMethodParameter
      */
