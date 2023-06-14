@@ -73,7 +73,7 @@ final class AppTest extends TestCase
         $config[ResponseFactoryInterface::class] = new ResponseFactoryStub();
         $config[StreamFactoryInterface::class] = new StreamFactoryStub("+w");
         $config[MiddlewareQueueRequestHandler::class] = $handler;
-        $config[App::ERROR_HANDLER_404] = static fn (ArrayAccess $config) => new ErrorHandler(ResponseCode::NOT_FOUND, "Not Found", $config[ContainerInterface::class]);
+        $config[DiTokens::ERROR_HANDLER_404] = static fn (ArrayAccess $config) => new ErrorHandler(ResponseCode::NOT_FOUND, "Not Found", $config[ContainerInterface::class]);
         $config[DiTokens::CSRF_CHECK_MIDDLEWARE] = $csrfPreRoutingMiddleware;
         $config[DiTokens::CSRF_RESPONSE_FILTER_MIDDLEWARE] = $csrfPostRoutingMiddleware;
         $config[AbstractTokenStorage::class] = $this->createStub(AbstractTokenStorage::class);
@@ -125,7 +125,7 @@ final class AppTest extends TestCase
                 $config[ResponseFactoryInterface::class],
                 "",
             );
-        $handler = static fn (ArrayAccess $config) => new MiddlewareQueueRequestHandler($config[App::ERROR_HANDLER_404]);
+        $handler = static fn (ArrayAccess $config) => new MiddlewareQueueRequestHandler($config[DiTokens::ERROR_HANDLER_404]);
         $containerFac = $this->getContainerFactory($config, $handler);
         // do not use the container config file
         chdir(__DIR__);
@@ -184,7 +184,7 @@ final class AppTest extends TestCase
                 "",
                 "",
             );
-        $handler = static fn (ArrayAccess $config) => new MiddlewareQueueRequestHandler($config[App::ERROR_HANDLER_404]);
+        $handler = static fn (ArrayAccess $config) => new MiddlewareQueueRequestHandler($config[DiTokens::ERROR_HANDLER_404]);
         $containerFac = $this->getContainerFactory($config, $handler, $csrfPreRoutingMiddleware, $csrfPostRoutingMiddleware);
         // do not use the container config file
         chdir(__DIR__);
