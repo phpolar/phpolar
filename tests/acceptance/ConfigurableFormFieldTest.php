@@ -20,6 +20,7 @@ use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\Attributes\TestWith;
 use PHPUnit\Framework\TestCase;
 
+#[TestDox("Configurable Form Object (Model)")]
 final class ConfigurableFormFieldTest extends TestCase
 {
     #[Test]

@@ -19,10 +19,11 @@ use Stringable;
 
 use const Phpolar\Phpolar\Tests\ENTITY_NAME_TEST_CASE;
 
+#[TestDox("Configurable, Storable Object (Model)")]
 final class ConfigurableStorageEntryTest extends TestCase
 {
     #[Test]
-    #[TestDox("Should configure column names")]
+    #[TestDox("Shall configure column names")]
     public function criterion1()
     {
         $model1 = new class ()
@@ -61,7 +62,7 @@ final class ConfigurableStorageEntryTest extends TestCase
     }
 
     #[Test]
-    #[TestDox("Should detect data types")]
+    #[TestDox("Shall detect data types")]
     public function criterion2()
     {
         $model = new class ()
@@ -91,7 +92,7 @@ final class ConfigurableStorageEntryTest extends TestCase
     }
 
     #[Test]
-    #[TestDox("Should allow configuration of size")]
+    #[TestDox("Shall allow configuration of size")]
     public function criterion3()
     {
         $entity = new class ()
@@ -106,7 +107,7 @@ final class ConfigurableStorageEntryTest extends TestCase
     }
 
     #[Test]
-    #[TestDox("Should have optional table name configuration")]
+    #[TestDox("Shall have optional table name configuration")]
     public function criterion4()
     {
         $entity = new EntityName(ENTITY_NAME_TEST_CASE);

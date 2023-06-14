@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Phpolar\Phpolar;
 
 use ArrayAccess;
+use Laminas\HttpHandlerRunner\Emitter\SapiEmitter;
 use Phpolar\CsrfProtection\CsrfTokenGenerator;
 use Phpolar\CsrfProtection\Http\CsrfRequestCheckMiddleware;
 use Phpolar\CsrfProtection\Http\CsrfResponseFilterMiddleware;
@@ -45,6 +46,7 @@ use PHPUnit\Framework\TestCase;
 use const Phpolar\CsrfProtection\REQUEST_ID_KEY;
 use const Phpolar\Phpolar\Tests\PROJECT_MEMORY_USAGE_THRESHOLD;
 
+#[TestDox("Low Memory Usage")]
 final class MemoryUsageTest extends TestCase
 {
     protected function getContainerFactory(RouteRegistry $routes): ContainerFactoryInterface
@@ -64,6 +66,7 @@ final class MemoryUsageTest extends TestCase
         $config[MiddlewareQueueRequestHandler::class] = static fn (ArrayAccess $config) => new MiddlewareQueueRequestHandler($config[DiTokens::ERROR_HANDLER_404]);
         $config[DiTokens::ERROR_HANDLER_404] = static fn (ArrayAccess $config) => new ErrorHandler(ResponseCode::NOT_FOUND, "Not Found", $config[ContainerInterface::class]);
         $config[DiTokens::ERROR_HANDLER_401] = static fn (ArrayAccess $conf) => new ErrorHandler(401, "Unauthorized", $conf[ContainerInterface::class]);
+        $config[DiTokens::RESPONSE_EMITTER] = new SapiEmitter();
         $config[ContainerInterface::class] = static fn (ArrayAccess $conf) => new ConfigurableContainerStub($conf);
         $config[ResponseFactoryInterface::class] = new ResponseFactoryStub();
         $config[StreamFactoryInterface::class] = new StreamFactoryStub("+w");

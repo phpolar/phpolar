@@ -85,7 +85,15 @@
         ],
         "test": "phpunit --color=always",
         "test:acceptance": "@test --configuration=phpunit.acceptance.xml --testsuite acceptance",
-        "test:acceptance:report": "@test --configuration=phpunit.acceptance.xml --testsuite acceptance --testdox-text acceptance-test-results.md",
+        "test:acceptance:report": [
+            "@test:acceptance --testdox-text acceptance-test-results.md",
+            "@acceptance-report-subheadings",
+            "@acceptance-report-checkbox",
+            "@acceptance-report-title"
+        ],
+        "acceptance-report-title": "sed -i -e '1i # Acceptance Test Report\\n' acceptance-test-results.md",
+        "acceptance-report-subheadings": "sed -i -E 's/^(\\S)/## \\1/' acceptance-test-results.md",
+        "acceptance-report-checkbox": "sed -i -E 's/^ \\[/- [/' acceptance-test-results.md",
         "test:benchmark": "@test --configuration=phpunit.dev.xml --testsuite benchmark",
         "test:unit": "@test --configuration=phpunit.dev.xml --testsuite unit",
         "test:coverage": "XDEBUG_MODE=coverage composer exec \"@test --configuration=phpunit.ci.xml --coverage-text\""
