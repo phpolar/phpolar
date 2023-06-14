@@ -86,16 +86,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Phpolar-Phpolar-DependencyInjection-DiTokens.html#constant_RESPONSE_EMITTER"
         },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Http\\AbstractContentDelegate",
-            "name": "AbstractContentDelegate",
-            "summary": "Defines\u0020what\u0020should\u0020be\u0020done\u0020when\u0020a\u0020request\u0020is\u0020received.",
-            "url": "classes/Phpolar-Phpolar-Http-AbstractContentDelegate.html"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Http\\AbstractContentDelegate\u003A\u003AgetResponseContent\u0028\u0029",
-            "name": "getResponseContent",
-            "summary": "Returns\u0020the\u0020content\u0020of\u0020the\u0020response\u0020body.",
-            "url": "classes/Phpolar-Phpolar-Http-AbstractContentDelegate.html#method_getResponseContent"
-        },                {
             "fqsen": "\\Phpolar\\Phpolar\\Http\\ErrorHandler",
             "name": "ErrorHandler",
             "summary": "Handles\u0020HTTP\u0020errors.",
@@ -150,6 +140,16 @@ Search.appendIndex(
             "name": "routeParamMap",
             "summary": "",
             "url": "classes/Phpolar-Phpolar-Http-ResolvedRoute.html#property_routeParamMap"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\RoutableInterface",
+            "name": "RoutableInterface",
+            "summary": "Defines\u0020what\u0020should\u0020be\u0020done\u0020when\u0020a\u0020request\u0020is\u0020received.",
+            "url": "classes/Phpolar-Phpolar-Http-RoutableInterface.html"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\RoutableInterface\u003A\u003Aprocess\u0028\u0029",
+            "name": "process",
+            "summary": "Returns\u0020the\u0020content\u0020of\u0020the\u0020response\u0020body.",
+            "url": "classes/Phpolar-Phpolar-Http-RoutableInterface.html#method_process"
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\Http\\RouteRegistry",
             "name": "RouteRegistry",
