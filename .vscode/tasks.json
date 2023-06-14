@@ -36,6 +36,38 @@
             ]
         },
         {
+            "label": "analyze",
+            "type": "process",
+            "presentation": {
+                "echo": true,
+                "reveal": "never",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": true
+            },
+            "command": "composer",
+            "args": [
+                "analyze"
+            ]
+        },
+        {
+            "label": "smell",
+            "type": "process",
+            "presentation": {
+                "echo": true,
+                "reveal": "never",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": true
+            },
+            "command": "composer",
+            "args": [
+                "smell"
+            ]
+        },
+        {
             "label": "test",
             "type": "process",
             "presentation": {

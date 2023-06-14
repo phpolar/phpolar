@@ -2,12 +2,14 @@
   "intelephense.telemetry.enabled": false,
   "intelephense.diagnostics.undefinedFunctions": false,
   "triggerTaskOnSave.restart": true,
-//   "triggerTaskOnSave.selectedTask": "lint-fix",
+  "triggerTaskOnSave.delay": 1000,
   "triggerTaskOnSave.showNotifications": true,
   "triggerTaskOnSave.showStatusBarToggle": true,
   "triggerTaskOnSave.tasks": {
       "lint-fix": ["{src,tests}/**/*.php"],
       "test": ["{src,tests}/**/*.php"],
+      "analyze": ["{src,tests}/**/*.php"],
+      "check": ["{src,tests}/**/*.php"],
       "docs": [".phpdoc/template/**/*.twig"]
   },
   "prettier.enable": false,
