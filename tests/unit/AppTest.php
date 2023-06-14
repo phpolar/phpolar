@@ -19,7 +19,9 @@ use Phpolar\HttpMessageTestUtils\ResponseFactoryStub;
 use Phpolar\HttpMessageTestUtils\ResponseStub;
 use Phpolar\HttpMessageTestUtils\StreamFactoryStub;
 use Phpolar\ModelResolver\ModelResolverInterface;
+use Phpolar\Phpolar\Core\ContainerLoader;
 use Phpolar\Phpolar\DependencyInjection\ClosureContainerFactory;
+use Phpolar\Phpolar\DependencyInjection\ContainerFactoryInterface;
 use Phpolar\Phpolar\DependencyInjection\ContainerManager;
 use Phpolar\Phpolar\DependencyInjection\DiTokens;
 use Phpolar\Phpolar\Http\AbstractContentDelegate;
@@ -50,7 +52,6 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 #[RunTestsInSeparateProcesses]
 #[CoversClass(App::class)]
-#[CoversClass(ContainerManager::class)]
 #[UsesClass(RouteRegistry::class)]
 final class AppTest extends TestCase
 {
@@ -97,6 +98,13 @@ final class AppTest extends TestCase
         };
     }
 
+    private function configureContainer(ContainerFactoryInterface $containerFac, ArrayAccess $containerConfig): ContainerInterface
+    {
+        $container = $containerFac->getContainer($containerConfig);
+        (new ContainerLoader())->load($containerConfig, $container);
+        return $container;
+    }
+
     #[TestDox("Shall delegate request processing to the routing middleware")]
     public function test1()
     {
@@ -129,7 +137,9 @@ final class AppTest extends TestCase
         $containerFac = $this->getContainerFactory($config, $handler);
         // do not use the container config file
         chdir(__DIR__);
-        $server = App::create(new ContainerManager($containerFac, $config));
+        $server = App::create(
+            $this->configureContainer($containerFac, $config),
+        );
         $server->receive($request);
         $this->assertSame(ResponseCode::OK, http_response_code());
     }
@@ -188,7 +198,9 @@ final class AppTest extends TestCase
         $containerFac = $this->getContainerFactory($config, $handler, $csrfPreRoutingMiddleware, $csrfPostRoutingMiddleware);
         // do not use the container config file
         chdir(__DIR__);
-        $server = App::create(new ContainerManager($containerFac, $config));
+        $server = App::create(
+            $this->configureContainer($containerFac, $config),
+        );
         $server->useCsrfMiddleware();
         $server->receive($request);
         $this->assertSame(ResponseCode::OK, http_response_code());
@@ -211,7 +223,9 @@ final class AppTest extends TestCase
         $config[RouteRegistry::class] = $givenRoutes;
         $containerFac = $this->getContainerFactory($config, $handlerStub);
         $container = $containerFac->getContainer($config);
-        App::create(new ContainerManager($containerFac, $config));
+        App::create(
+            $this->configureContainer($containerFac, $config),
+        );
         /**
          * @var RouteRegistry $configuredRoutes
          */
@@ -226,7 +240,9 @@ final class AppTest extends TestCase
         $config = new ContainerConfigurationStub();
         $nonConfiguredContainerFac = $this->getNonConfiguredContainer();
         chdir("tests/__fakes__/");
-        $app = App::create(new ContainerManager($nonConfiguredContainerFac, $config));
+        $app = App::create(
+            $this->configureContainer($nonConfiguredContainerFac, $config),
+        );
         $app->receive(new RequestStub());
         $this->expectOutputString("<h1>Not Found</h1>");
     }
@@ -243,8 +259,10 @@ final class AppTest extends TestCase
          */
         $handlerStub = $this->createStub(MiddlewareQueueRequestHandler::class);
         $handlerStub->method("handle")->willReturn((new ResponseStub(404, "Not Found")));
-        $container = $this->getContainerFactory($config, $handlerStub);
-        $sut = App::create(new ContainerManager($container, $config));
+        $containerFac = $this->getContainerFactory($config, $handlerStub);
+        $sut = App::create(
+            $this->configureContainer($containerFac, $config),
+        );
         $sut->receive(new RequestStub("GET", "/non-existing-route"));
         $this->assertSame(ResponseCode::NOT_FOUND, http_response_code());
     }
@@ -256,10 +274,14 @@ final class AppTest extends TestCase
         $config[TemplatingStrategyInterface::class] = $this->createStub(TemplatingStrategyInterface::class);
         $config[StreamFactoryInterface::class] = $this->createStub(StreamFactoryInterface::class);
         $config[ResponseFactoryInterface::class] = $this->createStub(ResponseFactoryInterface::class);
-        $nonConfiguredContainerFac = $this->getNonConfiguredContainer();
+        $containerFac = $this->getNonConfiguredContainer();
         chdir("tests/__fakes__/");
-        $app1 = App::create(new ContainerManager($nonConfiguredContainerFac, $config));
-        $app2 = App::create(new ContainerManager($nonConfiguredContainerFac, $config));
+        $app1 = App::create(
+            $this->configureContainer($containerFac, $config),
+        );
+        $app2 = App::create(
+            $this->configureContainer($containerFac, $config),
+        );
         $this->assertSame($app1, $app2);
     }
 }

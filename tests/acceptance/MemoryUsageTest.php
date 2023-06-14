@@ -19,7 +19,6 @@ use Phpolar\HttpMessageTestUtils\StreamFactoryStub;
 use Phpolar\ModelResolver\ModelResolverInterface;
 use Phpolar\Phpolar\DependencyInjection\ClosureContainerFactory;
 use Phpolar\Phpolar\DependencyInjection\ContainerFactoryInterface;
-use Phpolar\Phpolar\DependencyInjection\ContainerManager;
 use Phpolar\Phpolar\Http\AbstractContentDelegate;
 use Phpolar\Phpolar\Http\RouteRegistry;
 use Phpolar\Phpolar\Http\RoutingHandler;
@@ -29,6 +28,7 @@ use Phpolar\Phpolar\Tests\Stubs\ContainerConfigurationStub;
 use Phpolar\Phpolar\Http\ErrorHandler;
 use Phpolar\Phpolar\Http\MiddlewareQueueRequestHandler;
 use Phpolar\Phpolar\App;
+use Phpolar\Phpolar\Core\ContainerLoader;
 use Phpolar\Phpolar\DependencyInjection\DiTokens;
 use Phpolar\PurePhp\Binder;
 use Phpolar\PurePhp\Dispatcher;
@@ -79,6 +79,13 @@ final class MemoryUsageTest extends TestCase
         return new ClosureContainerFactory(static fn () => $container);
     }
 
+    private function configureContainer(ContainerFactoryInterface $containerFac, ArrayAccess $containerConfig): ContainerInterface
+    {
+        $container = $containerFac->getContainer($containerConfig);
+        (new ContainerLoader())->load($containerConfig, $container);
+        return $container;
+    }
+
     #[TestDox("Memory usage shall be below \$threshold bytes")]
     public function test1(int|string $threshold = PROJECT_MEMORY_USAGE_THRESHOLD)
     {
@@ -95,7 +102,7 @@ final class MemoryUsageTest extends TestCase
         $config[RouteRegistry::class] = $routes;
         $containerFac = $this->getContainerFactory($routes);
         $totalUsed = -memory_get_usage();
-        $server = App::create(new ContainerManager($containerFac, $config));
+        $server = App::create($this->configureContainer($containerFac, $config));
         $server->receive($request);
         $totalUsed += memory_get_usage();
         $this->assertGreaterThan(0, $totalUsed);
