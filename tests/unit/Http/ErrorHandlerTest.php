@@ -49,11 +49,11 @@ final class ErrorHandlerTest extends TestCase
             new Dispatcher(),
         );
         $sut = new ErrorHandler(
-            ResponseCode::NOT_FOUND,
-            "Not Found",
+            ResponseCode::IM_A_TEAPOT,
+            "I'm a teapot",
             $container
         );
-        $this->assertSame(sprintf(Formats::ErrorText->value, "Not Found"), $sut->handle(new RequestStub())->getBody()->getContents());
+        $this->assertSame(sprintf(Formats::ErrorText->value, "I'm a teapot"), $sut->handle(new RequestStub())->getBody()->getContents());
     }
 
     #[TestDox("Shall return default error message if the a bind error occurs")]

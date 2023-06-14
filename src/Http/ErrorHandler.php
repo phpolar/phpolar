@@ -62,7 +62,6 @@ final class ErrorHandler implements RequestHandlerInterface
         if (file_exists($errorTplFilename) === false) {
             return $defaultErrorText;
         }
-        $errorTplContents = file_get_contents($errorTplFilename);
-        return $errorTplContents === false ? $defaultErrorText : $errorTplContents;
+        return (string) file_get_contents($errorTplFilename);
     }
 }
