@@ -10,6 +10,7 @@ use PHPUnit\Framework\TestCase;
 
 use const Phpolar\Phpolar\Tests\PROJECT_SIZE_THRESHOLD;
 
+#[TestDox("Small Project Size")]
 final class ProjectSizeTest extends TestCase
 {
     #[Test]
