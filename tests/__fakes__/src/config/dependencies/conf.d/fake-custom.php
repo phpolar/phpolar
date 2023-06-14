@@ -1,5 +1,7 @@
 <?php
 
+use Laminas\HttpHandlerRunner\Emitter\EmitterInterface;
+use Laminas\HttpHandlerRunner\Emitter\SapiEmitter;
 use Phpolar\HttpCodes\ResponseCode;
 use Phpolar\HttpMessageTestUtils\ResponseFactoryStub;
 use Phpolar\HttpMessageTestUtils\StreamFactoryStub;
@@ -36,6 +38,7 @@ return [
     ResponseFactoryInterface::class => new ResponseFactoryStub(),
     StreamFactoryInterface::class => new StreamFactoryStub("+w"),
     RouteRegistry::class => new RouteRegistry(),
+    DiTokens::RESPONSE_EMITTER => new SapiEmitter(),
     RoutingMiddleware::class => static fn (ContainerInterface $container) => new RoutingMiddleware($container->get(RoutingHandler::class)),
     RoutingHandler::class => static fn (ContainerInterface $container) => new RoutingHandler(
         $container->get(RouteRegistry::class),

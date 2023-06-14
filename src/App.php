@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Phpolar\Phpolar;
 
-use Phpolar\Extensions\HttpResponse\ResponseExtension;
 use Phpolar\Phpolar\DependencyInjection\DiTokens;
 use Phpolar\Phpolar\Http\MiddlewareQueueRequestHandler;
 use Phpolar\Phpolar\Http\RoutingMiddleware;
@@ -13,11 +12,12 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 
 /**
- * Represents an web application that handles and responds to HTTP requests.
+ * Represents a web application that handles and responds to HTTP requests.
  */
 final class App
 {
     private MiddlewareQueueRequestHandler $mainHandler;
+    private \Laminas\HttpHandlerRunner\Emitter\EmitterInterface $emitter;
     private static ?App $instance = null;
 
 
@@ -31,6 +31,11 @@ final class App
          * @var MiddlewareQueueRequestHandler $handler
          */
         $handler = $this->container->get(MiddlewareQueueRequestHandler::class);
+        /**
+         * @var \Laminas\HttpHandlerRunner\Emitter\EmitterInterface $emitter
+         */
+        $emitter = $this->container->get(DiTokens::RESPONSE_EMITTER);
+        $this->emitter = $emitter;
         $this->mainHandler = $handler;
     }
 
@@ -54,8 +59,9 @@ final class App
     public function receive(ServerRequestInterface $request): void
     {
         $this->setupRouting();
+
         $response = $this->mainHandler->handle($request);
-        ResponseExtension::extend($response)->send();
+        $this->emitter->emit($response);
     }
 
     private function queueMiddleware(MiddlewareInterface $middleware): void
