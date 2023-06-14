@@ -11,13 +11,10 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 
 /**
- * Represents a server that handles and responds to request.
+ * Represents an web application that handles and responds to HTTP requests.
  */
 final class App
 {
-    public const ERROR_HANDLER_401 = "ERROR_HANDLER_401";
-    public const ERROR_HANDLER_404 = "ERROR_HANDLER_404";
-
     private MiddlewareQueueRequestHandler $mainHandler;
     private static ContainerManager $containerManager;
     private static ?App $instance = null;

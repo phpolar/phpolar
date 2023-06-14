@@ -20,7 +20,7 @@ use Phpolar\Phpolar\Http\RoutingHandler;
 use Phpolar\Phpolar\Http\RoutingMiddleware;
 use Phpolar\Phpolar\Http\ErrorHandler;
 use Phpolar\Phpolar\Http\MiddlewareQueueRequestHandler;
-use Phpolar\Phpolar\App;
+use Phpolar\Phpolar\DependencyInjection\DiTokens;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\StreamFactoryInterface;
@@ -29,7 +29,7 @@ return [
     /**
      * @suppress PhanUnreferencedClosure
      */
-    App::ERROR_HANDLER_401 => static fn (ContainerInterface $container) => new ErrorHandler(
+    DiTokens::ERROR_HANDLER_401 => static fn (ContainerInterface $container) => new ErrorHandler(
         ResponseCode::UNAUTHORIZED,
         "Unauthorized",
         $container,
@@ -37,7 +37,7 @@ return [
     /**
      * @suppress PhanUnreferencedClosure
      */
-    App::ERROR_HANDLER_404 => static fn (ContainerInterface $container) => new ErrorHandler(
+    DiTokens::ERROR_HANDLER_404 => static fn (ContainerInterface $container) => new ErrorHandler(
         ResponseCode::NOT_FOUND,
         "Not Found",
         $container,
@@ -49,14 +49,14 @@ return [
         $container->get(RouteRegistry::class),
         $container->get(ResponseFactoryInterface::class),
         $container->get(StreamFactoryInterface::class),
-        $container->get(App::ERROR_HANDLER_404),
+        $container->get(DiTokens::ERROR_HANDLER_404),
         $container,
         $container->get(ModelResolverInterface::class),
     ),
     /**
      * @suppress PhanUnreferencedClosure
      */
-    MiddlewareQueueRequestHandler::class => static fn (ContainerInterface $container) => new MiddlewareQueueRequestHandler($container->get(App::ERROR_HANDLER_404)),
+    MiddlewareQueueRequestHandler::class => static fn (ContainerInterface $container) => new MiddlewareQueueRequestHandler($container->get(DiTokens::ERROR_HANDLER_404)),
     /**
      * @suppress PhanUnreferencedClosure
      */
