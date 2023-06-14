@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace Phpolar\Phpolar;
 
 use Phpolar\Extensions\HttpResponse\ResponseExtension;
-use Phpolar\Phpolar\DependencyInjection\ContainerManager;
+use Phpolar\Phpolar\DependencyInjection\DiTokens;
 use Phpolar\Phpolar\Http\MiddlewareQueueRequestHandler;
+use Phpolar\Phpolar\Http\RoutingMiddleware;
+use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 
@@ -16,7 +18,6 @@ use Psr\Http\Server\MiddlewareInterface;
 final class App
 {
     private MiddlewareQueueRequestHandler $mainHandler;
-    private static ContainerManager $containerManager;
     private static ?App $instance = null;
 
 
@@ -24,10 +25,13 @@ final class App
      * Prevent creation of multiple instances.
      */
     private function __construct(
-        ContainerManager $containerManager,
+        private ContainerInterface $container,
     ) {
-        self::$containerManager = $containerManager;
-        $this->mainHandler = $containerManager->getMiddlewareQueueRequestHandler();
+        /**
+         * @var MiddlewareQueueRequestHandler $handler
+         */
+        $handler = $this->container->get(MiddlewareQueueRequestHandler::class);
+        $this->mainHandler = $handler;
     }
 
     /**
@@ -36,9 +40,9 @@ final class App
      * only a single instance is created on each request.
      */
     public static function create(
-        ContainerManager $containerManager,
+        ContainerInterface $container,
     ): App {
-        return self::$instance ??= new self($containerManager);
+        return self::$instance ??= new self($container);
     }
 
     /**
@@ -101,8 +105,14 @@ final class App
         ]
     ): App {
         $this->useSession($sessionOpts);
-        $csrfPreRouting = self::$containerManager->getCsrfPreRoutingMiddleware();
-        $csrfPostRouting = self::$containerManager->getCsrfPostRoutingMiddleware();
+        /**
+         * @var MiddlewareInterface $csrfPreRouting
+         */
+        $csrfPreRouting = $this->container->get(DiTokens::CSRF_CHECK_MIDDLEWARE);
+        /**
+         * @var MiddlewareInterface $csrfPostRouting
+         */
+        $csrfPostRouting = $this->container->get(DiTokens::CSRF_RESPONSE_FILTER_MIDDLEWARE);
         $this->queueMiddleware($csrfPreRouting);
         $this->queueMiddleware($csrfPostRouting);
         return $this;
@@ -114,7 +124,10 @@ final class App
      */
     public function setupRouting(): void
     {
-        $routingMiddleware = self::$containerManager->getRoutingMiddleware();
+        /**
+         * @var MiddlewareInterface $routingMiddleware
+         */
+        $routingMiddleware = $this->container->get(RoutingMiddleware::class);
         $this->queueMiddleware($routingMiddleware);
     }
 }
