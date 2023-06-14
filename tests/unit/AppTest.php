@@ -7,7 +7,6 @@ namespace Phpolar\Phpolar;
 use ArrayAccess;
 use Closure;
 use DateTimeImmutable;
-use Laminas\HttpHandlerRunner\Emitter\EmitterInterface;
 use Laminas\HttpHandlerRunner\Emitter\SapiEmitter;
 use Phpolar\CsrfProtection\CsrfToken;
 use Phpolar\CsrfProtection\Http\CsrfProtectionRequestHandler;
@@ -24,9 +23,8 @@ use Phpolar\ModelResolver\ModelResolverInterface;
 use Phpolar\Phpolar\Core\ContainerLoader;
 use Phpolar\Phpolar\DependencyInjection\ClosureContainerFactory;
 use Phpolar\Phpolar\DependencyInjection\ContainerFactoryInterface;
-use Phpolar\Phpolar\DependencyInjection\ContainerManager;
 use Phpolar\Phpolar\DependencyInjection\DiTokens;
-use Phpolar\Phpolar\Http\AbstractContentDelegate;
+use Phpolar\Phpolar\Http\RoutableInterface;
 use Phpolar\Phpolar\Http\RouteRegistry;
 use Phpolar\Phpolar\Http\RoutingMiddleware;
 use Phpolar\Phpolar\Tests\Stubs\ConfigurableContainerStub;
@@ -215,10 +213,10 @@ final class AppTest extends TestCase
         $expectedContent = "EXPECTED CONTENT";
         $givenRoutes = new RouteRegistry();
         /**
-         * @var Stub&AbstractContentDelegate $handlerStub
+         * @var Stub&RoutableInterface $handlerStub
          */
-        $handlerStub = $this->createStub(AbstractContentDelegate::class);
-        $handlerStub->method("getResponseContent")->willReturn($expectedContent);
+        $handlerStub = $this->createStub(RoutableInterface::class);
+        $handlerStub->method("process")->willReturn($expectedContent);
         $givenRoutes->add("GET", "/", $handlerStub);
         $givenRequest = new RequestStub("GET", "/");
         $handlerStub = $this->createStub(MiddlewareQueueRequestHandler::class);
@@ -234,7 +232,7 @@ final class AppTest extends TestCase
          */
         $configuredRoutes = $config[RouteRegistry::class];
         $configuredHandler = $configuredRoutes->match($givenRequest);
-        $this->assertSame($expectedContent, $configuredHandler->getResponseContent($container));
+        $this->assertSame($expectedContent, $configuredHandler->process($container));
     }
 
     #[TestDox("Shall add custom services to the provided dependency injection container")]
