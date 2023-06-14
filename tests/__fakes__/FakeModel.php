@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Phpolar\Phpolar\Tests\Fakes;
 
-use Phpolar\Phpolar\Model\AbstractModel;
+use Phpolar\Model\AbstractModel;
 
 final class FakeModel extends AbstractModel
 {

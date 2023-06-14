@@ -7,6 +7,8 @@ namespace Phpolar\Phpolar;
 use ArrayAccess;
 use Closure;
 use DateTimeImmutable;
+use Laminas\HttpHandlerRunner\Emitter\EmitterInterface;
+use Laminas\HttpHandlerRunner\Emitter\SapiEmitter;
 use Phpolar\CsrfProtection\CsrfToken;
 use Phpolar\CsrfProtection\Http\CsrfProtectionRequestHandler;
 use Phpolar\CsrfProtection\Http\CsrfRequestCheckMiddleware;
@@ -74,6 +76,7 @@ final class AppTest extends TestCase
         $config[ResponseFactoryInterface::class] = new ResponseFactoryStub();
         $config[StreamFactoryInterface::class] = new StreamFactoryStub("+w");
         $config[MiddlewareQueueRequestHandler::class] = $handler;
+        $config[DiTokens::RESPONSE_EMITTER] = new SapiEmitter();
         $config[DiTokens::ERROR_HANDLER_404] = static fn (ArrayAccess $config) => new ErrorHandler(ResponseCode::NOT_FOUND, "Not Found", $config[ContainerInterface::class]);
         $config[DiTokens::CSRF_CHECK_MIDDLEWARE] = $csrfPreRoutingMiddleware;
         $config[DiTokens::CSRF_RESPONSE_FILTER_MIDDLEWARE] = $csrfPostRoutingMiddleware;

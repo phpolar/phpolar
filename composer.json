@@ -32,7 +32,7 @@
     "require": {
         "php": ">=8.1",
         "ext-mbstring": "*",
-        "phpolar/http-response-extensions": "^1.0",
+        "laminas/laminas-httphandlerrunner": "^2.6",
         "phpolar/model-resolver": "^1.0",
         "phpolar/phpolar-core": "^2.2",
         "phpolar/storage-driver": "^1.0",
