@@ -14,7 +14,7 @@ use Psr\Container\ContainerInterface;
  * response body.  However, any action MAY also be performed.  The implementation MAY or MAY
  * NOT cause side effects.
  */
-abstract class AbstractContentDelegate
+interface RoutableInterface
 {
     /**
      * Returns the content of the response body.
@@ -32,10 +32,10 @@ abstract class AbstractContentDelegate
      * ```php
      * $route = `/some/path/{id}`;
      *
-     * class PathWithIdDelegate extends AbstractContentDelegate
+     * class PathWithIdDelegate implements RoutableInterface
      * {
      *     // Define route parameters as optional arguments in the child class.
-     *     public function getResponseContent(ContainerInterface $container, string $id = ""): string
+     *     public function process(ContainerInterface $container, string $id = ""): string
      *     {
      *         // ...
      *     }
@@ -44,10 +44,10 @@ abstract class AbstractContentDelegate
      *
      * $route = `/some/path/{name}`;
      *
-     * class PathWithNameDelegate extends AbstractContentDelegate
+     * class PathWithNameDelegate implements RoutableInterface
      * {
      *     // Define route parameters as optional arguments in the child class.
-     *     public function getResponseContent(ContainerInterface $container, string $name = ""): string
+     *     public function process(ContainerInterface $container, string $name = ""): string
      *     {
      *         // ...
      *     }
@@ -55,5 +55,5 @@ abstract class AbstractContentDelegate
      *
      * ```
      */
-    abstract public function getResponseContent(ContainerInterface $container): string;
+    public function process(ContainerInterface $container): string;
 }

@@ -92,8 +92,8 @@ final class RoutingHandlerTest extends TestCase
         /**
          * @var MockObject $registeredRouteHandler
          */
-        $registeredRouteHandler = $this->createMock(AbstractContentDelegate::class);
-        $registeredRouteHandler->expects($this->once())->method("getResponseContent");
+        $registeredRouteHandler = $this->createMock(RoutableInterface::class);
+        $registeredRouteHandler->expects($this->once())->method("process");
         /**
          * @var Stub&RouteRegistry $routeRegistryStub
          */
@@ -122,8 +122,8 @@ final class RoutingHandlerTest extends TestCase
         /**
          * @var Stub $registeredRouteHandler
          */
-        $registeredRouteHandler = $this->createStub(AbstractContentDelegate::class);
-        $registeredRouteHandler->method("getResponseContent")->willReturn($responseContent);
+        $registeredRouteHandler = $this->createStub(RoutableInterface::class);
+        $registeredRouteHandler->method("process")->willReturn($responseContent);
         /**
          * @var Stub&RouteRegistry $routeRegistryStub
          */
@@ -152,8 +152,8 @@ final class RoutingHandlerTest extends TestCase
         $streamFactoryStub = $this->createMock(StreamFactoryStub::class);
         $streamFactoryStub->expects($this->once())->method("createStream")->with($responseContent)->willReturn(new MemoryStreamStub($responseContent));
         $container = $this->getContainer($streamFactoryStub);
-        $registeredRouteHandler = new class () extends AbstractContentDelegate {
-            public function getResponseContent(ContainerInterface $container, string $id = ""): string
+        $registeredRouteHandler = new class () implements RoutableInterface {
+            public function process(ContainerInterface $container, string $id = ""): string
             {
                 return $id;
             }
@@ -181,8 +181,8 @@ final class RoutingHandlerTest extends TestCase
         $expectedModelName = uniqid();
         $fakeModel = (object) ["name" => $expectedModelName];
         $container = $this->getContainer();
-        $registeredRouteHandler = new class () extends AbstractContentDelegate {
-            public function getResponseContent(ContainerInterface $container, #[Model] object $form = null): string
+        $registeredRouteHandler = new class () implements RoutableInterface {
+            public function process(ContainerInterface $container, #[Model] object $form = null): string
             {
                 return $form->name;
             }

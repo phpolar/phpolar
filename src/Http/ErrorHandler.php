@@ -50,12 +50,12 @@ final class ErrorHandler implements RequestHandlerInterface
             $this->reasonPhrase,
         )->withBody(
             $this->streamFactory->createStream(
-                $this->getResponseContent()
+                $this->process()
             )
         );
     }
 
-    private function getResponseContent(): string
+    private function process(): string
     {
         $errorTplFilename = sprintf(Formats::ErrorTemplates->value, $this->responseCode);
         $defaultErrorText = sprintf(Formats::ErrorText->value, $this->reasonPhrase);

@@ -97,12 +97,12 @@ final class RoutingTest extends TestCase
         $givenRoute = "/";
         $expectedResponse = "<h1>Found!</h1>";
         $routeRegistry = new RouteRegistry();
-        $indexHandler = new class ($expectedResponse) extends AbstractContentDelegate {
+        $indexHandler = new class ($expectedResponse) implements RoutableInterface {
             public function __construct(private string $responseTemplate)
             {
             }
 
-            public function getResponseContent(ContainerInterface $container): string
+            public function process(ContainerInterface $container): string
             {
                 return $this->responseTemplate;
             }

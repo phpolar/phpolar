@@ -20,7 +20,7 @@ use Phpolar\HttpMessageTestUtils\StreamFactoryStub;
 use Phpolar\ModelResolver\ModelResolverInterface;
 use Phpolar\Phpolar\DependencyInjection\ClosureContainerFactory;
 use Phpolar\Phpolar\DependencyInjection\ContainerFactoryInterface;
-use Phpolar\Phpolar\Http\AbstractContentDelegate;
+use Phpolar\Phpolar\Http\RoutableInterface;
 use Phpolar\Phpolar\Http\RouteRegistry;
 use Phpolar\Phpolar\Http\RoutingHandler;
 use Phpolar\Phpolar\Http\RoutingMiddleware;
@@ -97,10 +97,10 @@ final class MemoryUsageTest extends TestCase
         $config = new ContainerConfigurationStub();
         $routes = new RouteRegistry();
         /**
-         * @var Stub&AbstractContentDelegate $contentDelStub
+         * @var Stub&RoutableInterface $contentDelStub
          */
-        $contentDelStub = $this->createStub(AbstractContentDelegate::class);
-        $contentDelStub->method("getResponseContent")->willReturn("content");
+        $contentDelStub = $this->createStub(RoutableInterface::class);
+        $contentDelStub->method("process")->willReturn("content");
         $routes->add("GET", "/", $contentDelStub);
         $config[RouteRegistry::class] = $routes;
         $containerFac = $this->getContainerFactory($routes);

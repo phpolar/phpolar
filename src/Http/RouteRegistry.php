@@ -17,12 +17,12 @@ use const Phpolar\Phpolar\Core\Routing\ROUTE_PARAM_PATTERN;
 class RouteRegistry
 {
     /**
-     * @var array<string,AbstractContentDelegate> Stores actions for `GET` requests.
+     * @var array<string,RoutableInterface> Stores actions for `GET` requests.
      */
     private array $registryForGet = [];
 
     /**
-     * @var array<string,AbstractContentDelegate> Stores actions for `POST` requests.
+     * @var array<string,RoutableInterface> Stores actions for `POST` requests.
      */
     private array $registryForPost = [];
 
@@ -31,7 +31,7 @@ class RouteRegistry
     /**
      * Associates a request handler to a request.
      */
-    public function add(string $method, string $route, AbstractContentDelegate $handler): void
+    public function add(string $method, string $route, RoutableInterface $handler): void
     {
         if (strtoupper($method) === "GET") {
             $this->registryForGet[$route] = $handler;
@@ -45,25 +45,25 @@ class RouteRegistry
     /**
      * Retrieves the registered handler for a request.
      */
-    public function match(ServerRequestInterface $request): AbstractContentDelegate | ResolvedRoute | RouteNotRegistered
+    public function match(ServerRequestInterface $request): RoutableInterface | ResolvedRoute | RouteNotRegistered
     {
         $method = $request->getMethod();
         $route = $request->getUri()->getPath();
         return strtoupper($method) === "GET" ? $this->matchGetRoute($route) : $this->matchPostRoute($route);
     }
 
-    private function matchGetRoute(string $route): AbstractContentDelegate | ResolvedRoute | RouteNotRegistered
+    private function matchGetRoute(string $route): RoutableInterface | ResolvedRoute | RouteNotRegistered
     {
         return $this->registryForGet[$route] ?? $this->matchAnyParameterizedRoute($this->registryForGet, $route);
     }
 
-    private function matchPostRoute(string $route): AbstractContentDelegate | ResolvedRoute | RouteNotRegistered
+    private function matchPostRoute(string $route): RoutableInterface | ResolvedRoute | RouteNotRegistered
     {
         return $this->registryForPost[$route] ?? $this->matchAnyParameterizedRoute($this->registryForPost, $route);
     }
 
     /**
-     * @param array<string,AbstractContentDelegate> $registry
+     * @param array<string,RoutableInterface> $registry
      * @param string $path
      */
     private function matchAnyParameterizedRoute(array $registry, string $path): ResolvedRoute | RouteNotRegistered
