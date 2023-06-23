@@ -54,16 +54,16 @@
         },
         {
             "name": "phpolar/model-resolver",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpolar/model-resolver.git",
-                "reference": "ee34c5a979e3503565df304be52c2b1905cf1096"
+                "reference": "5bb4bd5d7a6e467a7b0dca90f91d266b3a113a54"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpolar/model-resolver/zipball/ee34c5a979e3503565df304be52c2b1905cf1096",
-                "reference": "ee34c5a979e3503565df304be52c2b1905cf1096",
+                "url": "https://api.github.com/repos/phpolar/model-resolver/zipball/5bb4bd5d7a6e467a7b0dca90f91d266b3a113a54",
+                "reference": "5bb4bd5d7a6e467a7b0dca90f91d266b3a113a54",
                 "shasum": ""
             },
             "suggest": {
@@ -88,9 +88,9 @@
             "description": "Unifies implementations that create models from method arguments.",
             "support": {
                 "issues": "https://github.com/phpolar/model-resolver/issues",
-                "source": "https://github.com/phpolar/model-resolver/tree/1.0.0"
+                "source": "https://github.com/phpolar/model-resolver/tree/1.0.1"
             },
-            "time": "2023-06-13T03:29:30+00:00"
+            "time": "2023-06-13T13:39:48+00:00"
         },
         {
             "name": "phpolar/phpolar-core",
