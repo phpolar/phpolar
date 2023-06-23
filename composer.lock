@@ -2048,20 +2048,21 @@
         },
         {
             "name": "phpolar/model",
-            "version": "1.0.0",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpolar/model.git",
-                "reference": "3d6f946ed5b65f98bfb1a31f4adbf6e21c4211d6"
+                "reference": "15a2409033add6c0d2259943053c0e2fcd9265f2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpolar/model/zipball/3d6f946ed5b65f98bfb1a31f4adbf6e21c4211d6",
-                "reference": "3d6f946ed5b65f98bfb1a31f4adbf6e21c4211d6",
+                "url": "https://api.github.com/repos/phpolar/model/zipball/15a2409033add6c0d2259943053c0e2fcd9265f2",
+                "reference": "15a2409033add6c0d2259943053c0e2fcd9265f2",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.1",
+                "phpolar/model-resolver": "^1.0",
                 "phpolar/phpolar-core": "^2.2",
                 "phpolar/storage-driver": "^1.0",
                 "phpolar/validator": "^1.0"
@@ -2091,9 +2092,9 @@
             "description": "Provides support for configuring the properties of an object for validation, formatting, and storage.",
             "support": {
                 "issues": "https://github.com/phpolar/model/issues",
-                "source": "https://github.com/phpolar/model/tree/1.0.0"
+                "source": "https://github.com/phpolar/model/tree/1.1.0"
             },
-            "time": "2023-06-13T02:46:48+00:00"
+            "time": "2023-06-13T04:02:30+00:00"
         },
         {
             "name": "phpolar/pure-php",
