@@ -4,6 +4,7 @@
 /composer.lock              export-ignore
 /.cz.yaml                   export-ignore
 /docs                       export-ignore
+/bin                        export-ignore
 /examples                   export-ignore
 /.gitattributes             export-ignore
 /.github                    export-ignore
