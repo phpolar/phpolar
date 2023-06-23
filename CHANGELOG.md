@@ -1,3 +1,9 @@
+## 3.0.0a1 (2023-06-23)
+
+### Refactor
+
+- remove unused classes (#199)
+
 ## 3.0.0a0 (2023-06-23)
 
 ### Refactor
