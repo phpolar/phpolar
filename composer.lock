@@ -198,16 +198,16 @@
         },
         {
             "name": "phpolar/validator",
-            "version": "1.0.3",
+            "version": "1.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpolar/validator.git",
-                "reference": "1bf27ee2d4c46702937e562a6dee17c8d6193164"
+                "reference": "c428593704727629e6a0b6aeba0770a0bebeeea9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpolar/validator/zipball/1bf27ee2d4c46702937e562a6dee17c8d6193164",
-                "reference": "1bf27ee2d4c46702937e562a6dee17c8d6193164",
+                "url": "https://api.github.com/repos/phpolar/validator/zipball/c428593704727629e6a0b6aeba0770a0bebeeea9",
+                "reference": "c428593704727629e6a0b6aeba0770a0bebeeea9",
                 "shasum": ""
             },
             "suggest": {
@@ -232,9 +232,9 @@
             "description": "Unifies validator implementations",
             "support": {
                 "issues": "https://github.com/phpolar/validator/issues",
-                "source": "https://github.com/phpolar/validator/tree/1.0.3"
+                "source": "https://github.com/phpolar/validator/tree/1.0.5"
             },
-            "time": "2023-03-31T20:47:33+00:00"
+            "time": "2023-06-13T13:50:37+00:00"
         },
         {
             "name": "psr/container",
