@@ -14,8 +14,8 @@ use const Phpolar\Phpolar\Tests\PROJECT_SIZE_THRESHOLD;
 final class ProjectSizeTest extends TestCase
 {
     #[Test]
-    #[TestDox("Source code total size shall be below " . PROJECT_SIZE_THRESHOLD . " bytes")]
-    public function shallBeBelowThreshold()
+    #[TestDox("Source code total size shall be below \$threshold bytes")]
+    public function shallBeBelowThreshold(int|string $threshold = PROJECT_SIZE_THRESHOLD)
     {
         $totalSize = mb_strlen(
             implode(
@@ -34,6 +34,6 @@ final class ProjectSizeTest extends TestCase
             )
         );
         $this->assertGreaterThan(0, $totalSize);
-        $this->assertLessThanOrEqual(PROJECT_SIZE_THRESHOLD, $totalSize);
+        $this->assertLessThanOrEqual($threshold, $totalSize);
     }
 }

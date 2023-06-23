@@ -18,8 +18,6 @@ use Phpolar\HttpMessageTestUtils\RequestStub;
 use Phpolar\HttpMessageTestUtils\ResponseFactoryStub;
 use Phpolar\HttpMessageTestUtils\StreamFactoryStub;
 use Phpolar\ModelResolver\ModelResolverInterface;
-use Phpolar\Phpolar\DependencyInjection\ClosureContainerFactory;
-use Phpolar\Phpolar\DependencyInjection\ContainerFactoryInterface;
 use Phpolar\Phpolar\Http\RoutableInterface;
 use Phpolar\Phpolar\Http\RouteRegistry;
 use Phpolar\Phpolar\Http\RoutingHandler;
@@ -49,7 +47,7 @@ use const Phpolar\Phpolar\Tests\PROJECT_MEMORY_USAGE_THRESHOLD;
 #[TestDox("Low Memory Usage")]
 final class MemoryUsageTest extends TestCase
 {
-    protected function getContainerFactory(RouteRegistry $routes): ContainerFactoryInterface
+    protected function getContainerFactory(RouteRegistry $routes): ContainerInterface
     {
         $config = new ContainerConfigurationStub();
         $config[RouteRegistry::class] = $routes;
@@ -78,13 +76,11 @@ final class MemoryUsageTest extends TestCase
         $session = [REQUEST_ID_KEY => ""];
         $config[AbstractTokenStorage::class] = new SessionTokenStorage(new SessionWrapper($session));
         $config[ResponseFilterStrategyInterface::class] = $this->createStub(ResponseFilterStrategyInterface::class);
-        $container = new ConfigurableContainerStub($config);
-        return new ClosureContainerFactory(static fn () => $container);
+        return new ConfigurableContainerStub($config);
     }
 
-    private function configureContainer(ContainerFactoryInterface $containerFac, ArrayAccess $containerConfig): ContainerInterface
+    private function configureContainer(ContainerInterface $container, ArrayAccess $containerConfig): ContainerInterface
     {
-        $container = $containerFac->getContainer($containerConfig);
         (new ContainerLoader())->load($containerConfig, $container);
         return $container;
     }
