@@ -22,7 +22,6 @@ use Phpolar\HttpMessageTestUtils\StreamFactoryStub;
 use Phpolar\ModelResolver\ModelResolverInterface;
 use Phpolar\Phpolar\Core\ContainerLoader;
 use Phpolar\Phpolar\DependencyInjection\ClosureContainerFactory;
-use Phpolar\Phpolar\DependencyInjection\ContainerFactoryInterface;
 use Phpolar\Phpolar\DependencyInjection\DiTokens;
 use Phpolar\Phpolar\Http\RoutableInterface;
 use Phpolar\Phpolar\Http\RouteRegistry;
@@ -65,7 +64,7 @@ final class AppTest extends TestCase
         MiddlewareQueueRequestHandler|Closure $handler,
         CsrfRequestCheckMiddleware|Closure|null $csrfPreRoutingMiddleware = null,
         CsrfResponseFilterMiddleware|Closure|null $csrfPostRoutingMiddleware = null,
-    ): ClosureContainerFactory {
+    ): ContainerInterface {
         $config[TemplatingStrategyInterface::class] = new StreamContentStrategy();
         $config[TemplateEngine::class] = static fn (ArrayAccess $config) => new TemplateEngine($config[TemplatingStrategyInterface::class], $config[Binder::class], $config[Dispatcher::class]);
         $config[Binder::class] = new Binder();
@@ -81,27 +80,18 @@ final class AppTest extends TestCase
         $config[AbstractTokenStorage::class] = $this->createStub(AbstractTokenStorage::class);
         $config[ResponseFilterInterface::class] = $this->createStub(ResponseFilterInterface::class);
 
-        $containerFac = static fn (ArrayAccess $container): ContainerInterface =>
-        new ConfigurableContainerStub($container);
-
-        return new class ($containerFac) extends ClosureContainerFactory {
-        };
+        return new ConfigurableContainerStub($config);
     }
 
-    private function getNonConfiguredContainer(): ClosureContainerFactory
+    private function getNonConfiguredContainer(ArrayAccess $config): ContainerInterface
     {
-        $containerFac = static function (ArrayAccess $config): ContainerInterface {
-            $container = new ConfigurableContainerStub($config);
-            $config[ContainerInterface::class] = $container;
-            return $container;
-        };
-        return new class ($containerFac) extends ClosureContainerFactory {
-        };
+        $container = new ConfigurableContainerStub($config);
+        $config[ContainerInterface::class] = $container;
+        return $container;
     }
 
-    private function configureContainer(ContainerFactoryInterface $containerFac, ArrayAccess $containerConfig): ContainerInterface
+    private function configureContainer(ContainerInterface $container, ArrayAccess $containerConfig): ContainerInterface
     {
-        $container = $containerFac->getContainer($containerConfig);
         (new ContainerLoader())->load($containerConfig, $container);
         return $container;
     }
@@ -222,10 +212,9 @@ final class AppTest extends TestCase
         $handlerStub = $this->createStub(MiddlewareQueueRequestHandler::class);
         $config = new ContainerConfigurationStub();
         $config[RouteRegistry::class] = $givenRoutes;
-        $containerFac = $this->getContainerFactory($config, $handlerStub);
-        $container = $containerFac->getContainer($config);
+        $container = $this->getContainerFactory($config, $handlerStub);
         App::create(
-            $this->configureContainer($containerFac, $config),
+            $this->configureContainer($container, $config),
         );
         /**
          * @var RouteRegistry $configuredRoutes
@@ -239,7 +228,7 @@ final class AppTest extends TestCase
     public function test4()
     {
         $config = new ContainerConfigurationStub();
-        $nonConfiguredContainerFac = $this->getNonConfiguredContainer();
+        $nonConfiguredContainerFac = $this->getNonConfiguredContainer($config);
         chdir("tests/__fakes__/");
         $app = App::create(
             $this->configureContainer($nonConfiguredContainerFac, $config),
@@ -275,7 +264,7 @@ final class AppTest extends TestCase
         $config[TemplatingStrategyInterface::class] = $this->createStub(TemplatingStrategyInterface::class);
         $config[StreamFactoryInterface::class] = $this->createStub(StreamFactoryInterface::class);
         $config[ResponseFactoryInterface::class] = $this->createStub(ResponseFactoryInterface::class);
-        $containerFac = $this->getNonConfiguredContainer();
+        $containerFac = $this->getNonConfiguredContainer($config);
         chdir("tests/__fakes__/");
         $app1 = App::create(
             $this->configureContainer($containerFac, $config),
