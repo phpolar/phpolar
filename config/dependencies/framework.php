@@ -60,5 +60,9 @@ return [
     /**
      * @suppress PhanUnreferencedClosure
      */
-    RoutingMiddleware::class => static fn (ContainerInterface $container) => new RoutingMiddleware($container->get(RoutingHandler::class))
+    RoutingMiddleware::class => static fn (ContainerInterface $container) => new RoutingMiddleware($container->get(RoutingHandler::class)),
+    /**
+     * @suppress PhanUnreferencedClosure
+     */
+    DiTokens::RESPONSE_EMITTER => new Laminas\HttpHandlerRunner\Emitter\SapiEmitter(),
 ];

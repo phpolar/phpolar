@@ -128,7 +128,7 @@ final class App
      * Configures the web server with associated
      * routes and handlers.
      */
-    public function setupRouting(): void
+    private function setupRouting(): void
     {
         /**
          * @var MiddlewareInterface $routingMiddleware
