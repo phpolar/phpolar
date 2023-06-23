@@ -17,7 +17,7 @@ use Phpolar\Phpolar\Core\Routing\RouteParamMap;
 final class ResolvedRoute
 {
     public function __construct(
-        public AbstractContentDelegate $delegate,
+        public RoutableInterface $delegate,
         public RouteParamMap $routeParamMap
     ) {
     }

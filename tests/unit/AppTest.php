@@ -7,6 +7,7 @@ namespace Phpolar\Phpolar;
 use ArrayAccess;
 use Closure;
 use DateTimeImmutable;
+use Laminas\HttpHandlerRunner\Emitter\SapiEmitter;
 use Phpolar\CsrfProtection\CsrfToken;
 use Phpolar\CsrfProtection\Http\CsrfProtectionRequestHandler;
 use Phpolar\CsrfProtection\Http\CsrfRequestCheckMiddleware;
@@ -19,10 +20,11 @@ use Phpolar\HttpMessageTestUtils\ResponseFactoryStub;
 use Phpolar\HttpMessageTestUtils\ResponseStub;
 use Phpolar\HttpMessageTestUtils\StreamFactoryStub;
 use Phpolar\ModelResolver\ModelResolverInterface;
+use Phpolar\Phpolar\Core\ContainerLoader;
 use Phpolar\Phpolar\DependencyInjection\ClosureContainerFactory;
-use Phpolar\Phpolar\DependencyInjection\ContainerManager;
+use Phpolar\Phpolar\DependencyInjection\ContainerFactoryInterface;
 use Phpolar\Phpolar\DependencyInjection\DiTokens;
-use Phpolar\Phpolar\Http\AbstractContentDelegate;
+use Phpolar\Phpolar\Http\RoutableInterface;
 use Phpolar\Phpolar\Http\RouteRegistry;
 use Phpolar\Phpolar\Http\RoutingMiddleware;
 use Phpolar\Phpolar\Tests\Stubs\ConfigurableContainerStub;
@@ -50,7 +52,6 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 #[RunTestsInSeparateProcesses]
 #[CoversClass(App::class)]
-#[CoversClass(ContainerManager::class)]
 #[UsesClass(RouteRegistry::class)]
 final class AppTest extends TestCase
 {
@@ -73,7 +74,8 @@ final class AppTest extends TestCase
         $config[ResponseFactoryInterface::class] = new ResponseFactoryStub();
         $config[StreamFactoryInterface::class] = new StreamFactoryStub("+w");
         $config[MiddlewareQueueRequestHandler::class] = $handler;
-        $config[App::ERROR_HANDLER_404] = static fn (ArrayAccess $config) => new ErrorHandler(ResponseCode::NOT_FOUND, "Not Found", $config[ContainerInterface::class]);
+        $config[DiTokens::RESPONSE_EMITTER] = new SapiEmitter();
+        $config[DiTokens::ERROR_HANDLER_404] = static fn (ArrayAccess $config) => new ErrorHandler(ResponseCode::NOT_FOUND, "Not Found", $config[ContainerInterface::class]);
         $config[DiTokens::CSRF_CHECK_MIDDLEWARE] = $csrfPreRoutingMiddleware;
         $config[DiTokens::CSRF_RESPONSE_FILTER_MIDDLEWARE] = $csrfPostRoutingMiddleware;
         $config[AbstractTokenStorage::class] = $this->createStub(AbstractTokenStorage::class);
@@ -95,6 +97,13 @@ final class AppTest extends TestCase
         };
         return new class ($containerFac) extends ClosureContainerFactory {
         };
+    }
+
+    private function configureContainer(ContainerFactoryInterface $containerFac, ArrayAccess $containerConfig): ContainerInterface
+    {
+        $container = $containerFac->getContainer($containerConfig);
+        (new ContainerLoader())->load($containerConfig, $container);
+        return $container;
     }
 
     #[TestDox("Shall delegate request processing to the routing middleware")]
@@ -125,11 +134,13 @@ final class AppTest extends TestCase
                 $config[ResponseFactoryInterface::class],
                 "",
             );
-        $handler = static fn (ArrayAccess $config) => new MiddlewareQueueRequestHandler($config[App::ERROR_HANDLER_404]);
+        $handler = static fn (ArrayAccess $config) => new MiddlewareQueueRequestHandler($config[DiTokens::ERROR_HANDLER_404]);
         $containerFac = $this->getContainerFactory($config, $handler);
         // do not use the container config file
         chdir(__DIR__);
-        $server = App::create(new ContainerManager($containerFac, $config));
+        $server = App::create(
+            $this->configureContainer($containerFac, $config),
+        );
         $server->receive($request);
         $this->assertSame(ResponseCode::OK, http_response_code());
     }
@@ -184,11 +195,13 @@ final class AppTest extends TestCase
                 "",
                 "",
             );
-        $handler = static fn (ArrayAccess $config) => new MiddlewareQueueRequestHandler($config[App::ERROR_HANDLER_404]);
+        $handler = static fn (ArrayAccess $config) => new MiddlewareQueueRequestHandler($config[DiTokens::ERROR_HANDLER_404]);
         $containerFac = $this->getContainerFactory($config, $handler, $csrfPreRoutingMiddleware, $csrfPostRoutingMiddleware);
         // do not use the container config file
         chdir(__DIR__);
-        $server = App::create(new ContainerManager($containerFac, $config));
+        $server = App::create(
+            $this->configureContainer($containerFac, $config),
+        );
         $server->useCsrfMiddleware();
         $server->receive($request);
         $this->assertSame(ResponseCode::OK, http_response_code());
@@ -200,10 +213,10 @@ final class AppTest extends TestCase
         $expectedContent = "EXPECTED CONTENT";
         $givenRoutes = new RouteRegistry();
         /**
-         * @var Stub&AbstractContentDelegate $handlerStub
+         * @var Stub&RoutableInterface $handlerStub
          */
-        $handlerStub = $this->createStub(AbstractContentDelegate::class);
-        $handlerStub->method("getResponseContent")->willReturn($expectedContent);
+        $handlerStub = $this->createStub(RoutableInterface::class);
+        $handlerStub->method("process")->willReturn($expectedContent);
         $givenRoutes->add("GET", "/", $handlerStub);
         $givenRequest = new RequestStub("GET", "/");
         $handlerStub = $this->createStub(MiddlewareQueueRequestHandler::class);
@@ -211,13 +224,15 @@ final class AppTest extends TestCase
         $config[RouteRegistry::class] = $givenRoutes;
         $containerFac = $this->getContainerFactory($config, $handlerStub);
         $container = $containerFac->getContainer($config);
-        App::create(new ContainerManager($containerFac, $config));
+        App::create(
+            $this->configureContainer($containerFac, $config),
+        );
         /**
          * @var RouteRegistry $configuredRoutes
          */
         $configuredRoutes = $config[RouteRegistry::class];
         $configuredHandler = $configuredRoutes->match($givenRequest);
-        $this->assertSame($expectedContent, $configuredHandler->getResponseContent($container));
+        $this->assertSame($expectedContent, $configuredHandler->process($container));
     }
 
     #[TestDox("Shall add custom services to the provided dependency injection container")]
@@ -226,7 +241,9 @@ final class AppTest extends TestCase
         $config = new ContainerConfigurationStub();
         $nonConfiguredContainerFac = $this->getNonConfiguredContainer();
         chdir("tests/__fakes__/");
-        $app = App::create(new ContainerManager($nonConfiguredContainerFac, $config));
+        $app = App::create(
+            $this->configureContainer($nonConfiguredContainerFac, $config),
+        );
         $app->receive(new RequestStub());
         $this->expectOutputString("<h1>Not Found</h1>");
     }
@@ -243,8 +260,10 @@ final class AppTest extends TestCase
          */
         $handlerStub = $this->createStub(MiddlewareQueueRequestHandler::class);
         $handlerStub->method("handle")->willReturn((new ResponseStub(404, "Not Found")));
-        $container = $this->getContainerFactory($config, $handlerStub);
-        $sut = App::create(new ContainerManager($container, $config));
+        $containerFac = $this->getContainerFactory($config, $handlerStub);
+        $sut = App::create(
+            $this->configureContainer($containerFac, $config),
+        );
         $sut->receive(new RequestStub("GET", "/non-existing-route"));
         $this->assertSame(ResponseCode::NOT_FOUND, http_response_code());
     }
@@ -256,10 +275,14 @@ final class AppTest extends TestCase
         $config[TemplatingStrategyInterface::class] = $this->createStub(TemplatingStrategyInterface::class);
         $config[StreamFactoryInterface::class] = $this->createStub(StreamFactoryInterface::class);
         $config[ResponseFactoryInterface::class] = $this->createStub(ResponseFactoryInterface::class);
-        $nonConfiguredContainerFac = $this->getNonConfiguredContainer();
+        $containerFac = $this->getNonConfiguredContainer();
         chdir("tests/__fakes__/");
-        $app1 = App::create(new ContainerManager($nonConfiguredContainerFac, $config));
-        $app2 = App::create(new ContainerManager($nonConfiguredContainerFac, $config));
+        $app1 = App::create(
+            $this->configureContainer($containerFac, $config),
+        );
+        $app2 = App::create(
+            $this->configureContainer($containerFac, $config),
+        );
         $this->assertSame($app1, $app2);
     }
 }

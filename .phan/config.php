@@ -342,13 +342,14 @@ return [
         'src',
         'config',
         'vendor/psr',
-        'vendor/phpolar/validator/src',
         'vendor/phpolar/csrf-protection/src',
         'vendor/phpolar/http-codes/src',
         'vendor/phpolar/http-response-extensions/src',
+        'vendor/phpolar/model-resolver/src',
         'vendor/phpolar/phpolar-core/src',
         'vendor/phpolar/pure-php/src',
         'vendor/phpolar/storage-driver/src',
+        'vendor/phpolar/validator/src',
     ],
 
     // A list of individual files to include in analysis

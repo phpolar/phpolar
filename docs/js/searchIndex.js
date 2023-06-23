@@ -3,7 +3,7 @@ Search.appendIndex(
                 {
             "fqsen": "\\Phpolar\\Phpolar\\App",
             "name": "App",
-            "summary": "Represents\u0020a\u0020server\u0020that\u0020handles\u0020and\u0020responds\u0020to\u0020request.",
+            "summary": "Represents\u0020a\u0020web\u0020application\u0020that\u0020handles\u0020and\u0020responds\u0020to\u0020HTTP\u0020requests.",
             "url": "classes/Phpolar-Phpolar-App.html"
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\App\u003A\u003Acreate\u0028\u0029",
@@ -25,21 +25,6 @@ Search.appendIndex(
             "name": "useCsrfMiddleware",
             "summary": "Configures\u0020the\u0020server\u0020for\u0020CSRF\u0020attack\u0020mitigation.",
             "url": "classes/Phpolar-Phpolar-App.html#method_useCsrfMiddleware"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\App\u003A\u003AsetupRouting\u0028\u0029",
-            "name": "setupRouting",
-            "summary": "Configures\u0020the\u0020web\u0020server\u0020with\u0020associated\nroutes\u0020and\u0020handlers.",
-            "url": "classes/Phpolar-Phpolar-App.html#method_setupRouting"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\App\u003A\u003AERROR_HANDLER_401",
-            "name": "ERROR_HANDLER_401",
-            "summary": "",
-            "url": "classes/Phpolar-Phpolar-App.html#constant_ERROR_HANDLER_401"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\App\u003A\u003AERROR_HANDLER_404",
-            "name": "ERROR_HANDLER_404",
-            "summary": "",
-            "url": "classes/Phpolar-Phpolar-App.html#constant_ERROR_HANDLER_404"
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\DependencyInjection\\ClosureContainerFactory",
             "name": "ClosureContainerFactory",
@@ -66,36 +51,6 @@ Search.appendIndex(
             "summary": "Retrieve\u0020the\u0020configured\u0020PSR\u002D11\u0020container.",
             "url": "classes/Phpolar-Phpolar-DependencyInjection-ContainerFactoryInterface.html#method_getContainer"
         },                {
-            "fqsen": "\\Phpolar\\Phpolar\\DependencyInjection\\ContainerManager",
-            "name": "ContainerManager",
-            "summary": "Manages\u0020the\u0020dependency\u0020injection\u0020container.",
-            "url": "classes/Phpolar-Phpolar-DependencyInjection-ContainerManager.html"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\DependencyInjection\\ContainerManager\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/Phpolar-Phpolar-DependencyInjection-ContainerManager.html#method___construct"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\DependencyInjection\\ContainerManager\u003A\u003AgetCsrfPreRoutingMiddleware\u0028\u0029",
-            "name": "getCsrfPreRoutingMiddleware",
-            "summary": "Retrieves\u0020the\u0020CSRF\u0020pre\u002Drouting\u0020middleware.",
-            "url": "classes/Phpolar-Phpolar-DependencyInjection-ContainerManager.html#method_getCsrfPreRoutingMiddleware"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\DependencyInjection\\ContainerManager\u003A\u003AgetCsrfPostRoutingMiddleware\u0028\u0029",
-            "name": "getCsrfPostRoutingMiddleware",
-            "summary": "Retrieves\u0020the\u0020CSRF\u0020post\u002Drouting\u0020middleware",
-            "url": "classes/Phpolar-Phpolar-DependencyInjection-ContainerManager.html#method_getCsrfPostRoutingMiddleware"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\DependencyInjection\\ContainerManager\u003A\u003AgetMiddlewareQueueRequestHandler\u0028\u0029",
-            "name": "getMiddlewareQueueRequestHandler",
-            "summary": "Retrieves\u0020the\u0020middleware\u0020processing\u0020queue",
-            "url": "classes/Phpolar-Phpolar-DependencyInjection-ContainerManager.html#method_getMiddlewareQueueRequestHandler"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\DependencyInjection\\ContainerManager\u003A\u003AgetRoutingMiddleware\u0028\u0029",
-            "name": "getRoutingMiddleware",
-            "summary": "Retrieves\u0020the\u0020routing\u0020middleware.",
-            "url": "classes/Phpolar-Phpolar-DependencyInjection-ContainerManager.html#method_getRoutingMiddleware"
-        },                {
             "fqsen": "\\Phpolar\\Phpolar\\DependencyInjection\\DiTokens",
             "name": "DiTokens",
             "summary": "Contains\u0020dependency\u0020injection\u0020tokens.",
@@ -111,15 +66,20 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Phpolar-Phpolar-DependencyInjection-DiTokens.html#constant_CSRF_RESPONSE_FILTER_MIDDLEWARE"
         },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Http\\AbstractContentDelegate",
-            "name": "AbstractContentDelegate",
-            "summary": "Defines\u0020what\u0020should\u0020be\u0020done\u0020when\u0020a\u0020request\u0020is\u0020received.",
-            "url": "classes/Phpolar-Phpolar-Http-AbstractContentDelegate.html"
+            "fqsen": "\\Phpolar\\Phpolar\\DependencyInjection\\DiTokens\u003A\u003AERROR_HANDLER_401",
+            "name": "ERROR_HANDLER_401",
+            "summary": "",
+            "url": "classes/Phpolar-Phpolar-DependencyInjection-DiTokens.html#constant_ERROR_HANDLER_401"
         },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Http\\AbstractContentDelegate\u003A\u003AgetResponseContent\u0028\u0029",
-            "name": "getResponseContent",
-            "summary": "Returns\u0020the\u0020content\u0020of\u0020the\u0020response\u0020body.",
-            "url": "classes/Phpolar-Phpolar-Http-AbstractContentDelegate.html#method_getResponseContent"
+            "fqsen": "\\Phpolar\\Phpolar\\DependencyInjection\\DiTokens\u003A\u003AERROR_HANDLER_404",
+            "name": "ERROR_HANDLER_404",
+            "summary": "",
+            "url": "classes/Phpolar-Phpolar-DependencyInjection-DiTokens.html#constant_ERROR_HANDLER_404"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\DependencyInjection\\DiTokens\u003A\u003ARESPONSE_EMITTER",
+            "name": "RESPONSE_EMITTER",
+            "summary": "",
+            "url": "classes/Phpolar-Phpolar-DependencyInjection-DiTokens.html#constant_RESPONSE_EMITTER"
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\Http\\ErrorHandler",
             "name": "ErrorHandler",
@@ -175,6 +135,16 @@ Search.appendIndex(
             "name": "routeParamMap",
             "summary": "",
             "url": "classes/Phpolar-Phpolar-Http-ResolvedRoute.html#property_routeParamMap"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\RoutableInterface",
+            "name": "RoutableInterface",
+            "summary": "Defines\u0020what\u0020should\u0020be\u0020done\u0020when\u0020a\u0020request\u0020is\u0020received.",
+            "url": "classes/Phpolar-Phpolar-Http-RoutableInterface.html"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\RoutableInterface\u003A\u003Aprocess\u0028\u0029",
+            "name": "process",
+            "summary": "Returns\u0020the\u0020content\u0020of\u0020the\u0020response\u0020body.",
+            "url": "classes/Phpolar-Phpolar-Http-RoutableInterface.html#method_process"
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\Http\\RouteRegistry",
             "name": "RouteRegistry",

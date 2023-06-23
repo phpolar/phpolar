@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Phpolar\Phpolar;
 
 use ArrayAccess;
+use Laminas\HttpHandlerRunner\Emitter\SapiEmitter;
 use Phpolar\CsrfProtection\CsrfTokenGenerator;
 use Phpolar\CsrfProtection\Http\CsrfRequestCheckMiddleware;
 use Phpolar\CsrfProtection\Http\CsrfResponseFilterMiddleware;
@@ -19,8 +20,7 @@ use Phpolar\HttpMessageTestUtils\StreamFactoryStub;
 use Phpolar\ModelResolver\ModelResolverInterface;
 use Phpolar\Phpolar\DependencyInjection\ClosureContainerFactory;
 use Phpolar\Phpolar\DependencyInjection\ContainerFactoryInterface;
-use Phpolar\Phpolar\DependencyInjection\ContainerManager;
-use Phpolar\Phpolar\Http\AbstractContentDelegate;
+use Phpolar\Phpolar\Http\RoutableInterface;
 use Phpolar\Phpolar\Http\RouteRegistry;
 use Phpolar\Phpolar\Http\RoutingHandler;
 use Phpolar\Phpolar\Http\RoutingMiddleware;
@@ -29,6 +29,7 @@ use Phpolar\Phpolar\Tests\Stubs\ContainerConfigurationStub;
 use Phpolar\Phpolar\Http\ErrorHandler;
 use Phpolar\Phpolar\Http\MiddlewareQueueRequestHandler;
 use Phpolar\Phpolar\App;
+use Phpolar\Phpolar\Core\ContainerLoader;
 use Phpolar\Phpolar\DependencyInjection\DiTokens;
 use Phpolar\PurePhp\Binder;
 use Phpolar\PurePhp\Dispatcher;
@@ -45,6 +46,7 @@ use PHPUnit\Framework\TestCase;
 use const Phpolar\CsrfProtection\REQUEST_ID_KEY;
 use const Phpolar\Phpolar\Tests\PROJECT_MEMORY_USAGE_THRESHOLD;
 
+#[TestDox("Low Memory Usage")]
 final class MemoryUsageTest extends TestCase
 {
     protected function getContainerFactory(RouteRegistry $routes): ContainerFactoryInterface
@@ -57,13 +59,14 @@ final class MemoryUsageTest extends TestCase
             $config[RouteRegistry::class],
             $config[ResponseFactoryInterface::class],
             $config[StreamFactoryInterface::class],
-            $config[App::ERROR_HANDLER_401],
+            $config[DiTokens::ERROR_HANDLER_401],
             $config[ContainerInterface::class],
             $config[ModelResolverInterface::class],
         );
-        $config[MiddlewareQueueRequestHandler::class] = static fn (ArrayAccess $config) => new MiddlewareQueueRequestHandler($config[App::ERROR_HANDLER_404]);
-        $config[App::ERROR_HANDLER_404] = static fn (ArrayAccess $config) => new ErrorHandler(ResponseCode::NOT_FOUND, "Not Found", $config[ContainerInterface::class]);
-        $config[App::ERROR_HANDLER_401] = static fn (ArrayAccess $conf) => new ErrorHandler(401, "Unauthorized", $conf[ContainerInterface::class]);
+        $config[MiddlewareQueueRequestHandler::class] = static fn (ArrayAccess $config) => new MiddlewareQueueRequestHandler($config[DiTokens::ERROR_HANDLER_404]);
+        $config[DiTokens::ERROR_HANDLER_404] = static fn (ArrayAccess $config) => new ErrorHandler(ResponseCode::NOT_FOUND, "Not Found", $config[ContainerInterface::class]);
+        $config[DiTokens::ERROR_HANDLER_401] = static fn (ArrayAccess $conf) => new ErrorHandler(401, "Unauthorized", $conf[ContainerInterface::class]);
+        $config[DiTokens::RESPONSE_EMITTER] = new SapiEmitter();
         $config[ContainerInterface::class] = static fn (ArrayAccess $conf) => new ConfigurableContainerStub($conf);
         $config[ResponseFactoryInterface::class] = new ResponseFactoryStub();
         $config[StreamFactoryInterface::class] = new StreamFactoryStub("+w");
@@ -79,6 +82,13 @@ final class MemoryUsageTest extends TestCase
         return new ClosureContainerFactory(static fn () => $container);
     }
 
+    private function configureContainer(ContainerFactoryInterface $containerFac, ArrayAccess $containerConfig): ContainerInterface
+    {
+        $container = $containerFac->getContainer($containerConfig);
+        (new ContainerLoader())->load($containerConfig, $container);
+        return $container;
+    }
+
     #[TestDox("Memory usage shall be below \$threshold bytes")]
     public function test1(int|string $threshold = PROJECT_MEMORY_USAGE_THRESHOLD)
     {
@@ -87,15 +97,15 @@ final class MemoryUsageTest extends TestCase
         $config = new ContainerConfigurationStub();
         $routes = new RouteRegistry();
         /**
-         * @var Stub&AbstractContentDelegate $contentDelStub
+         * @var Stub&RoutableInterface $contentDelStub
          */
-        $contentDelStub = $this->createStub(AbstractContentDelegate::class);
-        $contentDelStub->method("getResponseContent")->willReturn("content");
+        $contentDelStub = $this->createStub(RoutableInterface::class);
+        $contentDelStub->method("process")->willReturn("content");
         $routes->add("GET", "/", $contentDelStub);
         $config[RouteRegistry::class] = $routes;
         $containerFac = $this->getContainerFactory($routes);
         $totalUsed = -memory_get_usage();
-        $server = App::create(new ContainerManager($containerFac, $config));
+        $server = App::create($this->configureContainer($containerFac, $config));
         $server->receive($request);
         $totalUsed += memory_get_usage();
         $this->assertGreaterThan(0, $totalUsed);
