@@ -41,14 +41,14 @@ final class RouteRegistryTest extends TestCase
     {
         $givenRoute = "/";
         /**
-         * @var MockObject&AbstractContentDelegate $handlerSpy
+         * @var MockObject&RoutableInterface $handlerSpy
          */
-        $handlerSpy = $this->getMockForAbstractClass(AbstractContentDelegate::class);
-        $handlerSpy->expects($this->once())->method("getResponseContent")->willReturn("");
+        $handlerSpy = $this->createMock(RoutableInterface::class);
+        $handlerSpy->expects($this->once())->method("process")->willReturn("");
         $sut = new RouteRegistry();
         $sut->add($requestMethod, $givenRoute, $handlerSpy);
         $registeredHandler = $sut->match(new RequestStub($requestMethod, $givenRoute), $givenRoute);
-        $registeredHandler->getResponseContent(new ConfigurableContainerStub(new ContainerConfigurationStub()));
+        $registeredHandler->process(new ConfigurableContainerStub(new ContainerConfigurationStub()));
     }
 
     #[TestDox("Shall return a RouteNotRegistered instance when a path of a \$requestMethod request is not associated with any handlers.")]
@@ -66,9 +66,9 @@ final class RouteRegistryTest extends TestCase
     {
         $givenRoute = "/";
         /**
-         * @var Stub&AbstractContentDelegate $handlerStub
+         * @var Stub&RoutableInterface $handlerStub
          */
-        $handlerStub = $this->createStub(AbstractContentDelegate::class);
+        $handlerStub = $this->createStub(RoutableInterface::class);
         $sut = new RouteRegistry();
         $sut->add($methodA, $givenRoute, $handlerStub);
         $result = $sut->match(new RequestStub($methodB, $givenRoute), $givenRoute);
@@ -87,9 +87,9 @@ final class RouteRegistryTest extends TestCase
     public function testa(string $method, string $givenRoute, string $givenRequestPath)
     {
         /**
-         * @var Stub&AbstractContentDelegate $handlerStub
+         * @var Stub&RoutableInterface $handlerStub
          */
-        $handlerStub = $this->createStub(AbstractContentDelegate::class);
+        $handlerStub = $this->createStub(RoutableInterface::class);
         $sut = new RouteRegistry();
         $sut->add($method, $givenRoute, $handlerStub);
         $result = $sut->match(new RequestStub($method, $givenRequestPath));
@@ -114,9 +114,9 @@ final class RouteRegistryTest extends TestCase
     public function testb(string $method, string $givenRoute, string $givenRequestPath)
     {
         /**
-         * @var Stub&AbstractContentDelegate $handlerStub
+         * @var Stub&RoutableInterface $handlerStub
          */
-        $handlerStub = $this->createStub(AbstractContentDelegate::class);
+        $handlerStub = $this->createStub(RoutableInterface::class);
         $sut = new RouteRegistry();
         $sut->add($method, $givenRoute, $handlerStub);
         $result = $sut->match(new RequestStub($method, $givenRequestPath));

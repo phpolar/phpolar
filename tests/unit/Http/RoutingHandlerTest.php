@@ -11,6 +11,7 @@ use Phpolar\HttpMessageTestUtils\RequestStub;
 use Phpolar\HttpMessageTestUtils\ResponseFactoryStub;
 use Phpolar\HttpMessageTestUtils\StreamFactoryStub;
 use Phpolar\HttpMessageTestUtils\UriStub;
+use Phpolar\Model\Model;
 use Phpolar\ModelResolver\ModelResolverInterface;
 use Phpolar\Phpolar\Core\Routing\RouteNotRegistered;
 use Phpolar\Phpolar\Core\Routing\RouteParamMap;
@@ -91,8 +92,8 @@ final class RoutingHandlerTest extends TestCase
         /**
          * @var MockObject $registeredRouteHandler
          */
-        $registeredRouteHandler = $this->createMock(AbstractContentDelegate::class);
-        $registeredRouteHandler->expects($this->once())->method("getResponseContent");
+        $registeredRouteHandler = $this->createMock(RoutableInterface::class);
+        $registeredRouteHandler->expects($this->once())->method("process");
         /**
          * @var Stub&RouteRegistry $routeRegistryStub
          */
@@ -121,8 +122,8 @@ final class RoutingHandlerTest extends TestCase
         /**
          * @var Stub $registeredRouteHandler
          */
-        $registeredRouteHandler = $this->createStub(AbstractContentDelegate::class);
-        $registeredRouteHandler->method("getResponseContent")->willReturn($responseContent);
+        $registeredRouteHandler = $this->createStub(RoutableInterface::class);
+        $registeredRouteHandler->method("process")->willReturn($responseContent);
         /**
          * @var Stub&RouteRegistry $routeRegistryStub
          */
@@ -151,8 +152,8 @@ final class RoutingHandlerTest extends TestCase
         $streamFactoryStub = $this->createMock(StreamFactoryStub::class);
         $streamFactoryStub->expects($this->once())->method("createStream")->with($responseContent)->willReturn(new MemoryStreamStub($responseContent));
         $container = $this->getContainer($streamFactoryStub);
-        $registeredRouteHandler = new class () extends AbstractContentDelegate {
-            public function getResponseContent(ContainerInterface $container, string $id = ""): string
+        $registeredRouteHandler = new class () implements RoutableInterface {
+            public function process(ContainerInterface $container, string $id = ""): string
             {
                 return $id;
             }
@@ -172,5 +173,46 @@ final class RoutingHandlerTest extends TestCase
         $request = (new RequestStub())->withUri(new UriStub(uniqid()));
         $response = $sut->handle($request);
         $this->assertSame($givenIdRouteParam, $response->getBody()->getContents());
+    }
+
+    #[TestDox("Shall pass model parameters to the routable handler")]
+    public function testc()
+    {
+        $expectedModelName = uniqid();
+        $fakeModel = (object) ["name" => $expectedModelName];
+        $container = $this->getContainer();
+        $registeredRouteHandler = new class () implements RoutableInterface {
+            public function process(ContainerInterface $container, #[Model] object $form = null): string
+            {
+                return $form->name;
+            }
+        };
+        /**
+         * @var MockObject&ModelResolverInterface
+         */
+        $modelResolverMock = $this->createMock(ModelResolverInterface::class);
+        $modelResolverMock->method("resolve")->willReturn(["form" => $fakeModel]);
+        /**
+         * @var MockObject&StreamFactoryInterface
+         */
+        $streamFactoryMock = $this->createMock(StreamFactoryInterface::class);
+        $streamFactoryMock->expects($this->once())->method("createStream")->with($fakeModel->name);
+        /**
+         * @var Stub&RouteRegistry
+         */
+        $routeRegistryStub = $this->createStub(RouteRegistry::class);
+        $routeRegistryStub->method("match")->willReturn($registeredRouteHandler);
+        $errorHandler = new ErrorHandler(404, "Not Found", $container);
+        $responseFactory = $container->get(ResponseFactoryInterface::class);
+        $request = (new RequestStub())->withUri(new UriStub(uniqid()));
+        $sut = new RoutingHandler(
+            $routeRegistryStub,
+            $responseFactory,
+            $streamFactoryMock,
+            $errorHandler,
+            $container,
+            $modelResolverMock,
+        );
+        $sut->handle($request);
     }
 }

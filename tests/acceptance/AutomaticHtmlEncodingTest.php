@@ -13,6 +13,7 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 
+#[TestDox("Automatic HTML Encoding")]
 final class AutomaticHtmlEncodingTest extends TestCase
 {
     protected function getTemplateEngine()
@@ -26,7 +27,7 @@ final class AutomaticHtmlEncodingTest extends TestCase
     }
 
     #[Test]
-    #[TestDox("Should prevent cross-site scripting injection")]
+    #[TestDox("Shall prevent cross-site scripting injection")]
     public function criterion1()
     {
         $templatingEngine = $this->getTemplateEngine();

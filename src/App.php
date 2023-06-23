@@ -4,22 +4,20 @@ declare(strict_types=1);
 
 namespace Phpolar\Phpolar;
 
-use Phpolar\Extensions\HttpResponse\ResponseExtension;
-use Phpolar\Phpolar\DependencyInjection\ContainerManager;
+use Phpolar\Phpolar\DependencyInjection\DiTokens;
 use Phpolar\Phpolar\Http\MiddlewareQueueRequestHandler;
+use Phpolar\Phpolar\Http\RoutingMiddleware;
+use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 
 /**
- * Represents a server that handles and responds to request.
+ * Represents a web application that handles and responds to HTTP requests.
  */
 final class App
 {
-    public const ERROR_HANDLER_401 = "ERROR_HANDLER_401";
-    public const ERROR_HANDLER_404 = "ERROR_HANDLER_404";
-
     private MiddlewareQueueRequestHandler $mainHandler;
-    private static ContainerManager $containerManager;
+    private \Laminas\HttpHandlerRunner\Emitter\EmitterInterface $emitter;
     private static ?App $instance = null;
 
 
@@ -27,10 +25,18 @@ final class App
      * Prevent creation of multiple instances.
      */
     private function __construct(
-        ContainerManager $containerManager,
+        private ContainerInterface $container,
     ) {
-        self::$containerManager = $containerManager;
-        $this->mainHandler = $containerManager->getMiddlewareQueueRequestHandler();
+        /**
+         * @var MiddlewareQueueRequestHandler $handler
+         */
+        $handler = $this->container->get(MiddlewareQueueRequestHandler::class);
+        /**
+         * @var \Laminas\HttpHandlerRunner\Emitter\EmitterInterface $emitter
+         */
+        $emitter = $this->container->get(DiTokens::RESPONSE_EMITTER);
+        $this->emitter = $emitter;
+        $this->mainHandler = $handler;
     }
 
     /**
@@ -39,9 +45,9 @@ final class App
      * only a single instance is created on each request.
      */
     public static function create(
-        ContainerManager $containerManager,
+        ContainerInterface $container,
     ): App {
-        return self::$instance ??= new self($containerManager);
+        return self::$instance ??= new self($container);
     }
 
     /**
@@ -53,8 +59,9 @@ final class App
     public function receive(ServerRequestInterface $request): void
     {
         $this->setupRouting();
+
         $response = $this->mainHandler->handle($request);
-        ResponseExtension::extend($response)->send();
+        $this->emitter->emit($response);
     }
 
     private function queueMiddleware(MiddlewareInterface $middleware): void
@@ -104,8 +111,14 @@ final class App
         ]
     ): App {
         $this->useSession($sessionOpts);
-        $csrfPreRouting = self::$containerManager->getCsrfPreRoutingMiddleware();
-        $csrfPostRouting = self::$containerManager->getCsrfPostRoutingMiddleware();
+        /**
+         * @var MiddlewareInterface $csrfPreRouting
+         */
+        $csrfPreRouting = $this->container->get(DiTokens::CSRF_CHECK_MIDDLEWARE);
+        /**
+         * @var MiddlewareInterface $csrfPostRouting
+         */
+        $csrfPostRouting = $this->container->get(DiTokens::CSRF_RESPONSE_FILTER_MIDDLEWARE);
         $this->queueMiddleware($csrfPreRouting);
         $this->queueMiddleware($csrfPostRouting);
         return $this;
@@ -115,9 +128,12 @@ final class App
      * Configures the web server with associated
      * routes and handlers.
      */
-    public function setupRouting(): void
+    private function setupRouting(): void
     {
-        $routingMiddleware = self::$containerManager->getRoutingMiddleware();
+        /**
+         * @var MiddlewareInterface $routingMiddleware
+         */
+        $routingMiddleware = $this->container->get(RoutingMiddleware::class);
         $this->queueMiddleware($routingMiddleware);
     }
 }

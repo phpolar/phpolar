@@ -53,19 +53,19 @@ class RoutingHandler implements RequestHandlerInterface
         return $response->withBody($responseStream);
     }
 
-    private function handleDelegate(AbstractContentDelegate $delegate): ResponseInterface
+    private function handleDelegate(RoutableInterface $delegate): ResponseInterface
     {
-        $modelParams = $this->modelResolver->resolve($delegate, "getResponseContent");
+        $modelParams = $this->modelResolver->resolve($delegate, "process");
         /**
          * @var string $responseContent
          */
-        $responseContent = empty($modelParams) === false ? (new ReflectionMethod($delegate, "getResponseContent"))->invokeArgs($delegate, array_merge([$this->container], $modelParams)) : $delegate->getResponseContent($this->container);
+        $responseContent = empty($modelParams) === false ? (new ReflectionMethod($delegate, "process"))->invokeArgs($delegate, array_merge([$this->container], $modelParams)) : $delegate->process($this->container);
         return $this->getResponse($responseContent);
     }
 
     private function handleResolvedRoute(ResolvedRoute $resolvedRoute): ResponseInterface
     {
-        $reflectionMethod = new ReflectionMethod($resolvedRoute->delegate, "getResponseContent");
+        $reflectionMethod = new ReflectionMethod($resolvedRoute->delegate, "process");
         $args = array_merge([$this->container], $resolvedRoute->routeParamMap->toArray());
         /**
          * @var string $responseContent

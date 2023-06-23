@@ -25,6 +25,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Message\StreamInterface;
 
+#[TestDox("HTTP Request Routing")]
 final class RoutingTest extends TestCase
 {
     protected function getContainer(): ContainerInterface
@@ -90,18 +91,18 @@ final class RoutingTest extends TestCase
     }
 
     #[Test]
-    #[TestDox("Shall invoke the handler registered to the given route")]
+    #[TestDox("Shall invoke the routable object registered to the given request path")]
     public function criterion1()
     {
         $givenRoute = "/";
         $expectedResponse = "<h1>Found!</h1>";
         $routeRegistry = new RouteRegistry();
-        $indexHandler = new class ($expectedResponse) extends AbstractContentDelegate {
+        $indexHandler = new class ($expectedResponse) implements RoutableInterface {
             public function __construct(private string $responseTemplate)
             {
             }
 
-            public function getResponseContent(ContainerInterface $container): string
+            public function process(ContainerInterface $container): string
             {
                 return $this->responseTemplate;
             }
