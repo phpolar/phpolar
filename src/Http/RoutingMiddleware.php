@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Phpolar\Phpolar\Http;
 
-use Phpolar\HttpCodes\ResponseCode;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -15,6 +14,8 @@ use Psr\Http\Server\RequestHandlerInterface;
  */
 class RoutingMiddleware implements MiddlewareInterface
 {
+    private const NOT_FOUND = 404;
+
     public function __construct(private RoutingHandler $requestHandler)
     {
     }
@@ -25,6 +26,6 @@ class RoutingMiddleware implements MiddlewareInterface
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $response = $this->requestHandler->handle($request);
-        return $response->getStatusCode() === ResponseCode::NOT_FOUND ? $handler->handle($request) : $response;
+        return $response->getStatusCode() === self::NOT_FOUND ? $handler->handle($request) : $response;
     }
 }

@@ -26,11 +26,6 @@ Search.appendIndex(
             "summary": "Configures\u0020the\u0020server\u0020for\u0020CSRF\u0020attack\u0020mitigation.",
             "url": "classes/Phpolar-Phpolar-App.html#method_useCsrfMiddleware"
         },                {
-            "fqsen": "\\Phpolar\\Phpolar\\App\u003A\u003AsetupRouting\u0028\u0029",
-            "name": "setupRouting",
-            "summary": "Configures\u0020the\u0020web\u0020server\u0020with\u0020associated\nroutes\u0020and\u0020handlers.",
-            "url": "classes/Phpolar-Phpolar-App.html#method_setupRouting"
-        },                {
             "fqsen": "\\Phpolar\\Phpolar\\DependencyInjection\\ClosureContainerFactory",
             "name": "ClosureContainerFactory",
             "summary": "Creates\u0020a\u0020container\u0020using\u0020the\u0020provided\nclosure.",
