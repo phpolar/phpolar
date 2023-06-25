@@ -92,9 +92,6 @@ final class App
      * CSRF check fails.  The current response
      * will be set up for CSRF detection.
      *
-     * Must be called directly before the
-     * `useRoutes` method is called.
-     *
      * @param array<string,bool|int|float|string> $sessionOpts
      */
     public function useCsrfMiddleware(
