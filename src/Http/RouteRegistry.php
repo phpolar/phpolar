@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Phpolar\Phpolar\Http;
 
+use DomainException;
 use Psr\Http\Message\ServerRequestInterface;
 use Phpolar\Phpolar\Core\Routing\RouteNotRegistered;
 use Phpolar\Phpolar\Core\Routing\RouteParamMap;
@@ -33,13 +34,16 @@ class RouteRegistry
      */
     public function add(string $method, string $route, RoutableInterface $handler): void
     {
+        $this->containsParamRoutes = preg_match(ROUTE_PARAM_PATTERN, $route) === 1;
         if (strtoupper($method) === "GET") {
             $this->registryForGet[$route] = $handler;
+            return;
         }
         if (strtoupper($method) === "POST") {
             $this->registryForPost[$route] = $handler;
+            return;
         }
-        $this->containsParamRoutes = $this->containsParamRoutes || preg_match(ROUTE_PARAM_PATTERN, $route) === 1;
+        throw new DomainException(sprintf("%s is not supported", $method));
     }
 
     /**
@@ -54,12 +58,12 @@ class RouteRegistry
 
     private function matchGetRoute(string $route): RoutableInterface | ResolvedRoute | RouteNotRegistered
     {
-        return $this->registryForGet[$route] ?? $this->matchAnyParameterizedRoute($this->registryForGet, $route);
+        return $this->containsParamRoutes === false ? $this->registryForGet[$route] ?? new RouteNotRegistered() : $this->matchAnyParameterizedRoute($this->registryForGet, $route);
     }
 
     private function matchPostRoute(string $route): RoutableInterface | ResolvedRoute | RouteNotRegistered
     {
-        return $this->registryForPost[$route] ?? $this->matchAnyParameterizedRoute($this->registryForPost, $route);
+        return $this->containsParamRoutes === false ? $this->registryForPost[$route] ?? new RouteNotRegistered() : $this->matchAnyParameterizedRoute($this->registryForPost, $route);
     }
 
     /**
@@ -68,43 +72,27 @@ class RouteRegistry
      */
     private function matchAnyParameterizedRoute(array $registry, string $path): ResolvedRoute | RouteNotRegistered
     {
-        if ($this->containsParamRoutes === false) {
-            return new RouteNotRegistered();
-        }
-        $pathParts = explode("/", ltrim($path, "/"));
-        /**
-         * @var string[]
-         */
-        $registeredRoutes = array_keys($registry);
-        // @codeCoverageIgnoreStart
-        foreach ($registeredRoutes as $registeredRoute) {
-            $regRouteParts = explode("/", ltrim($registeredRoute, "/"));
-            $regRoutePrtCnt = count($regRouteParts);
-            $routePrtCnt = count($pathParts);
-            if ($regRoutePrtCnt !== $routePrtCnt) {
-                continue;
-            }
-            $matched = [];
-            for ($i = 0; $i < $regRoutePrtCnt; $i++) {
-                if (self::partsMatch($regRouteParts[$i], $pathParts[$i]) === false) {
-                    continue 2;
-                }
-                $matched[] = $regRouteParts[$i];
-            }
-            $routeToTest = "/" . implode("/", $matched);
-            if (isset($registry[$routeToTest]) === true) {
-                return new ResolvedRoute(
-                    $registry[$routeToTest],
-                    new RouteParamMap($routeToTest, $path)
-                );
-            }
-        }
-        // @codeCoverageIgnoreEnd
-        return new RouteNotRegistered();
+        $matched = array_filter(
+            array_keys($registry),
+            static fn (string $registeredRoute) => self::partsMatch($registeredRoute, $path),
+        );
+        return empty($matched) === true ? new RouteNotRegistered() : new ResolvedRoute($registry[$matched[0]], new RouteParamMap($matched[0], $path));
     }
 
-    private static function partsMatch(string $regRoutePart, string $pathPart): bool
+    private static function partsMatch(string $registeredRoute, string $path): bool
     {
-        return $regRoutePart === $pathPart || preg_match(ROUTE_PARAM_PATTERN, $regRoutePart) === 1;
+        $pathParts = explode("/", ltrim($path, "/"));
+        $routeParts = explode("/", ltrim($registeredRoute, "/"));
+        $routePartsCnt = count($routeParts);
+        if ($routePartsCnt !== count($pathParts)) {
+            return false;
+        }
+        return count(
+            array_filter(
+                array_combine($routeParts, $pathParts),
+                static fn (string $pathPart, string $routePart) => $routePart === $pathPart || preg_match(ROUTE_PARAM_PATTERN, $routePart) === 1,
+                ARRAY_FILTER_USE_BOTH,
+            )
+        ) === count($routeParts);
     }
 }
