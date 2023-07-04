@@ -23,6 +23,7 @@ use Phpolar\PurePhp\TemplateEngine;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\TestDox;
+use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
@@ -32,6 +33,8 @@ use Psr\Http\Message\StreamFactoryInterface;
 
 #[CoversClass(RoutingHandler::class)]
 #[CoversClass(RouteRegistry::class)]
+#[UsesClass(ErrorHandler::class)]
+#[UsesClass(ResolvedRoute::class)]
 final class RoutingHandlerTest extends TestCase
 {
     public function getContainer(?StreamFactoryInterface $streamFactory = null): ContainerInterface
