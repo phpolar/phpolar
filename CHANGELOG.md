@@ -1,3 +1,15 @@
+## 3.0.0b0 (2023-07-03)
+
+### Fix
+
+- prune dist (#201)
+
+### Refactor
+
+- use newly renamed core library (#209)
+- **RouteRegistry**: reduce complexity (#206)
+- remove unused test helpers (#205)
+
 ## 3.0.0a1 (2023-06-23)
 
 ### Refactor
