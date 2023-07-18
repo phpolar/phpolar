@@ -100,7 +100,7 @@ final class AuthenticateTest extends TestCase
     #[TestDox("Shall add user credentials to the target delegate when the request is authenticated")]
     public function testc()
     {
-        $authenticatedUserCredentials = new User(name: "FAKE NAME", nickname: "FAKE NICKNAME", email: "FAKE EMAIL", avatarUrl: "FAKE AVATAR URL");
+        $authenticatedUserCredentials = (object) ["user" => new User(name: "FAKE NAME", nickname: "FAKE NICKNAME", email: "FAKE EMAIL", avatarUrl: "FAKE AVATAR URL")];
         $expectedContent = "<h1>I AM THE TARGET HANDLER</h1>";
         /**
          * @var AuthenticatorInterface&MockObject
@@ -126,6 +126,6 @@ final class AuthenticateTest extends TestCase
          */
         $authenticateAttr = $authenticateAttrs[0]->newInstance();
         $result = $authenticateAttr->getResolvedRoutable(target: $hostClass, authenticator: $authenticatorMock);
-        $this->assertEquals($result->user, $authenticatedUserCredentials);
+        $this->assertEquals($result->user, $authenticatedUserCredentials->user);
     }
 }
