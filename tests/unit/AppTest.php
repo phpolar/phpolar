@@ -249,6 +249,7 @@ final class AppTest extends TestCase
         $this->expectOutputString("<h1>Not Found</h1>");
         $config = new ContainerConfigurationStub();
         $config[ModelResolverInterface::class] = $this->createStub(ModelResolverInterface::class);
+        $config[DiTokens::UNAUTHORIZED_HANDLER] = $this->createStub(RequestHandlerInterface::class);
         $config[RouteRegistry::class] = new RouteRegistry();
         /**
          * @var Stub&MiddlewareQueueRequestHandler $handlerStub

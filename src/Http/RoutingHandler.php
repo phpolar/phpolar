@@ -28,6 +28,7 @@ class RoutingHandler implements RequestHandlerInterface
         private ContainerInterface $container,
         private ModelResolverInterface $modelResolver,
         private RoutableResolverInterface $routableResolver,
+        private RequestHandlerInterface $unauthHandler,
     ) {
     }
 
@@ -42,8 +43,8 @@ class RoutingHandler implements RequestHandlerInterface
         $matchResult = $this->routeRegistry->match($request);
         return match (true) {
             $matchResult instanceof RouteNotRegistered => $this->responseFactory->createResponse(404, "Not Found"),
-            $matchResult instanceof ResolvedRoute => $this->handleResolvedRoute($matchResult),
-            default => $this->handleDelegate($matchResult),
+            $matchResult instanceof ResolvedRoute => $this->handleResolvedRoute($matchResult, $request),
+            default => $this->handleDelegate($matchResult, $request),
         };
     }
 
@@ -54,12 +55,12 @@ class RoutingHandler implements RequestHandlerInterface
         return $response->withBody($responseStream);
     }
 
-    private function handleDelegate(RoutableInterface $delegate): ResponseInterface
+    private function handleDelegate(RoutableInterface $delegate, ServerRequestInterface $request): ResponseInterface
     {
         $authorizedDelegate = $this->routableResolver->resolve($delegate);
 
         if ($authorizedDelegate === false) {
-            return $this->responseFactory->createResponse(401, "Unauthorized");
+            return $this->unauthHandler->handle($request);
         }
 
         $modelParams = $this->modelResolver->resolve($authorizedDelegate, "process");
@@ -70,12 +71,12 @@ class RoutingHandler implements RequestHandlerInterface
         return $this->getResponse($responseContent);
     }
 
-    private function handleResolvedRoute(ResolvedRoute $resolvedRoute): ResponseInterface
+    private function handleResolvedRoute(ResolvedRoute $resolvedRoute, ServerRequestInterface $request): ResponseInterface
     {
         $authResult = $this->routableResolver->resolve($resolvedRoute->delegate);
 
         if ($authResult === false) {
-            return $this->responseFactory->createResponse(401);
+            return $this->unauthHandler->handle($request);
         }
 
         $resolvedRoute->delegate = $authResult;

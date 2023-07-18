@@ -3,6 +3,7 @@
 use Laminas\HttpHandlerRunner\Emitter\SapiEmitter;
 use Phpolar\HttpCodes\ResponseCode;
 use Phpolar\HttpMessageTestUtils\ResponseFactoryStub;
+use Phpolar\HttpMessageTestUtils\ResponseStub;
 use Phpolar\HttpMessageTestUtils\StreamFactoryStub;
 use Phpolar\ModelResolver\ModelResolverInterface;
 use Phpolar\Phpolar\Auth\AuthenticatorInterface;
@@ -21,7 +22,10 @@ use Phpolar\PurePhp\TemplateEngine;
 use Phpolar\PurePhp\TemplatingStrategyInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamFactoryInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 
 return [
     MiddlewareQueueRequestHandler::class => static fn (ContainerInterface $container) => new MiddlewareQueueRequestHandler($container->get(DiTokens::ERROR_HANDLER_404)),
@@ -63,6 +67,12 @@ return [
             public function resolve(RoutableInterface $target): RoutableInterface | false
             {
                 return $target;
+            }
+        },
+        new class () implements RequestHandlerInterface {
+            public function handle(ServerRequestInterface $request): ResponseInterface
+            {
+                return new ResponseStub();
             }
         },
     )
