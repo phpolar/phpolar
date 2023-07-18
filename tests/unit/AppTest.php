@@ -20,6 +20,7 @@ use Phpolar\HttpMessageTestUtils\ResponseFactoryStub;
 use Phpolar\HttpMessageTestUtils\ResponseStub;
 use Phpolar\HttpMessageTestUtils\StreamFactoryStub;
 use Phpolar\ModelResolver\ModelResolverInterface;
+use Phpolar\Phpolar\Auth\AuthenticatorInterface;
 use Phpolar\Phpolar\DependencyInjection\ContainerLoader;
 use Phpolar\Phpolar\DependencyInjection\DiTokens;
 use Phpolar\Phpolar\Http\RoutableInterface;
@@ -84,6 +85,7 @@ final class AppTest extends TestCase
         $config[DiTokens::CSRF_RESPONSE_FILTER_MIDDLEWARE] = $csrfPostRoutingMiddleware;
         $config[AbstractTokenStorage::class] = $this->createStub(AbstractTokenStorage::class);
         $config[ResponseFilterInterface::class] = $this->createStub(ResponseFilterInterface::class);
+        $config[AuthenticatorInterface::class] = $this->createStub(AuthenticatorInterface::class);
 
         return new ConfigurableContainerStub($config);
     }
