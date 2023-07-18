@@ -12,6 +12,7 @@ use Phpolar\HttpMessageTestUtils\ResponseStub;
 use Phpolar\HttpMessageTestUtils\UriStub;
 use Phpolar\ModelResolver\ModelResolverInterface;
 use Phpolar\Phpolar\RoutableResolverInterface;
+use Phpolar\Phpolar\RoutableInterface;
 use Phpolar\PurePhp\Binder;
 use Phpolar\PurePhp\Dispatcher;
 use Phpolar\PurePhp\StreamContentStrategy;

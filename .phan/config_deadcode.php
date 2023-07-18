@@ -267,6 +267,8 @@ return [
         'PhanPluginNoCommentOnProtectedProperty',
         'PhanPluginNoCommentOnPrivateMethod',
         'PhanPluginDescriptionlessCommentOnPrivateMethod',
+        // does not support contrariance
+        'PhanTypeMismatchArgumentSuperType',
         // does not support covariance
         'PhanTypeMismatchReturnSuperType'
     ],

@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace Phpolar\Phpolar;
 
-use Phpolar\Phpolar\Auth\AbstractProtectedRoutable;
-use Phpolar\Phpolar\Http\RoutableInterface;
-
 /**
  * Used by the application to determine which
  * routable/handler to use.  This can be
