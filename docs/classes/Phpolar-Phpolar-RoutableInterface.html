@@ -93,7 +93,7 @@
 
     <article class="phpdocumentor-element -interface">
         <h2 class="phpdocumentor-content__title">
-    RoutableResolverInterface
+    RoutableInterface
                 <div class="phpdocumentor-element__package">
             in
             <ul class="phpdocumentor-breadcrumbs">
@@ -103,17 +103,19 @@
     </h2>
 
         <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="RoutableResolverInterface.php"><a href="files/routableresolverinterface.html"><abbr title="RoutableResolverInterface.php">RoutableResolverInterface.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="RoutableInterface.php"><a href="files/routableinterface.html"><abbr title="RoutableInterface.php">RoutableInterface.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">13</span>
+    <span class="phpdocumentor-element-found-in__line">17</span>
 
     </aside>
 
-            <p class="phpdocumentor-summary">Used by the application to determine which
-routable/handler to use.  This can be
-used for authenticating routes after
-the route has been resolved.</p>
+            <p class="phpdocumentor-summary">Defines what should be done when a request is received.</p>
 
+    <section class="phpdocumentor-description"><p>This is intended to be used to define an
+action associated with a route.  This MUST, at least, return the content of the
+response body.  However, any action MAY also be performed.  The implementation MAY or MAY
+NOT cause side effects.</p>
+</section>
 
 
 
@@ -121,7 +123,7 @@ the route has been resolved.</p>
 
 <h3 id="toc">
     Table of Contents
-    <a href="classes/Phpolar-Phpolar-RoutableResolverInterface.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/Phpolar-Phpolar-RoutableInterface.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h3>
 
@@ -136,16 +138,16 @@ the route has been resolved.</p>
 
 <h4 id="toc-methods">
     Methods
-    <a href="classes/Phpolar-Phpolar-RoutableResolverInterface.html#toc-methods" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/Phpolar-Phpolar-RoutableInterface.html#toc-methods" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h4>
 <dl class="phpdocumentor-table-of-contents">
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Phpolar-Phpolar-RoutableResolverInterface.html#method_resolve">resolve()</a>
+    <a href="classes/Phpolar-Phpolar-RoutableInterface.html#method_process">process()</a>
     <span>
-                                &nbsp;: <a href="classes/Phpolar-Phpolar-RoutableInterface.html"><abbr title="\Phpolar\Phpolar\RoutableInterface">RoutableInterface</abbr></a>|false    </span>
+                                &nbsp;: string    </span>
 </dt>
-<dd>Return the given routable or false.</dd>
+<dd>Returns the content of the response body.</dd>
 
     </dl>
 
@@ -157,7 +159,7 @@ the route has been resolved.</p>
             <section class="phpdocumentor-methods">
         <h3 class="phpdocumentor-elements__header" id="methods">
             Methods
-            <a href="classes/Phpolar-Phpolar-RoutableResolverInterface.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/Phpolar-Phpolar-RoutableInterface.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
         </h3>
                     <article
         class="phpdocumentor-element
@@ -165,29 +167,31 @@ the route has been resolved.</p>
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_resolve">
-        resolve()
-        <a href="classes/Phpolar-Phpolar-RoutableResolverInterface.html#method_resolve" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_process">
+        process()
+        <a href="classes/Phpolar-Phpolar-RoutableInterface.html#method_process" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="RoutableResolverInterface.php"><a href="files/routableresolverinterface.html"><abbr title="RoutableResolverInterface.php">RoutableResolverInterface.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="RoutableInterface.php"><a href="files/routableinterface.html"><abbr title="RoutableInterface.php">RoutableInterface.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">18</span>
+    <span class="phpdocumentor-element-found-in__line">58</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Return the given routable or false.</p>
+        <p class="phpdocumentor-summary">Returns the content of the response body.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">resolve</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Phpolar-Phpolar-RoutableInterface.html"><abbr title="\Phpolar\Phpolar\RoutableInterface">RoutableInterface</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$target</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Phpolar-Phpolar-RoutableInterface.html"><abbr title="\Phpolar\Phpolar\RoutableInterface">RoutableInterface</abbr></a>|false</span></code>
+                    <span class="phpdocumentor-signature__name">process</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Container\ContainerInterface">ContainerInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$container</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
-    
+        <section class="phpdocumentor-description"><p>This MAY also execute any action associated with a given route.</p>
+</section>
+
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$target</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Phpolar-Phpolar-RoutableInterface.html"><abbr title="\Phpolar\Phpolar\RoutableInterface">RoutableInterface</abbr></a></span>
+                <span class="phpdocumentor-signature__argument__name">$container</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Container\ContainerInterface">ContainerInterface</abbr></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"></section>
@@ -198,9 +202,39 @@ the route has been resolved.</p>
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><a href="classes/Phpolar-Phpolar-RoutableInterface.html"><abbr title="\Phpolar\Phpolar\RoutableInterface">RoutableInterface</abbr></a>|false</span>
+    <span class="phpdocumentor-signature__response_type">string</span>
             &mdash;
-        
+            <section class="phpdocumentor-description"><p>The content of the response body.</p>
+<h1>Route Parameters</h1>
+<p>The framework will pass <em>route parameters</em> to this
+method based on the name in the route.</p>
+<h2>Examples</h2>
+<pre class="prettyprint"><code class="language-php">$route = `/some/path/{id}`;
+
+class PathWithIdDelegate implements RoutableInterface
+{
+    // Define route parameters as optional arguments in the child class.
+    public function process(ContainerInterface $container, string $id = &quot;&quot;): string
+    {
+        // ...
+    }
+}
+
+
+$route = `/some/path/{name}`;
+
+class PathWithNameDelegate implements RoutableInterface
+{
+    // Define route parameters as optional arguments in the child class.
+    public function process(ContainerInterface $container, string $name = &quot;&quot;): string
+    {
+        // ...
+    }
+}
+
+</code></pre>
+</section>
+
     
 </article>
             </section>
@@ -281,7 +315,7 @@ the route has been resolved.</p>
     </section>
 </section>
         </div>
-        <a href="classes/Phpolar-Phpolar-RoutableResolverInterface.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+        <a href="classes/Phpolar-Phpolar-RoutableInterface.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
     </main>
 

@@ -33,7 +33,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\Auth\\AbstractProtectedRoutable\u003A\u003AwithUser\u0028\u0029",
             "name": "withUser",
-            "summary": "",
+            "summary": "Create\u0020a\u0020\u0060User\u0060\u0020from\u0020the\u0020given\u0020session\nand\u0020assign\u0020it\u0020to\u0020the\u0020user\u0020property.",
             "url": "classes/Phpolar-Phpolar-Auth-AbstractProtectedRoutable.html#method_withUser"
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\Auth\\AbstractProtectedRoutable\u003A\u003A\u0024user",
@@ -58,7 +58,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\Auth\\AuthenticatorInterface\u003A\u003AgetCredentials\u0028\u0029",
             "name": "getCredentials",
-            "summary": "",
+            "summary": "Returns\u0020user\u0020information\u0020from\nthe\u0020authenticated\u0020session.",
             "url": "classes/Phpolar-Phpolar-Auth-AuthenticatorInterface.html#method_getCredentials"
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\Auth\\ProtectedRoutableResolver",
@@ -221,16 +221,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Phpolar-Phpolar-Http-ResolvedRoute.html#property_routeParamMap"
         },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Http\\RoutableInterface",
-            "name": "RoutableInterface",
-            "summary": "Defines\u0020what\u0020should\u0020be\u0020done\u0020when\u0020a\u0020request\u0020is\u0020received.",
-            "url": "classes/Phpolar-Phpolar-Http-RoutableInterface.html"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Http\\RoutableInterface\u003A\u003Aprocess\u0028\u0029",
-            "name": "process",
-            "summary": "Returns\u0020the\u0020content\u0020of\u0020the\u0020response\u0020body.",
-            "url": "classes/Phpolar-Phpolar-Http-RoutableInterface.html#method_process"
-        },                {
             "fqsen": "\\Phpolar\\Phpolar\\Http\\RouteRegistry",
             "name": "RouteRegistry",
             "summary": "Contains\u0020route\u0020paths\u0020and\u0020their\u0020associated\nrequest\u0020handlers.",
@@ -275,6 +265,16 @@ Search.appendIndex(
             "name": "process",
             "summary": "Handle\u0020routing\u0020a\u0020request.",
             "url": "classes/Phpolar-Phpolar-Http-RoutingMiddleware.html#method_process"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\RoutableInterface",
+            "name": "RoutableInterface",
+            "summary": "Defines\u0020what\u0020should\u0020be\u0020done\u0020when\u0020a\u0020request\u0020is\u0020received.",
+            "url": "classes/Phpolar-Phpolar-RoutableInterface.html"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\RoutableInterface\u003A\u003Aprocess\u0028\u0029",
+            "name": "process",
+            "summary": "Returns\u0020the\u0020content\u0020of\u0020the\u0020response\u0020body.",
+            "url": "classes/Phpolar-Phpolar-RoutableInterface.html#method_process"
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\RoutableResolverInterface",
             "name": "RoutableResolverInterface",
