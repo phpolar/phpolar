@@ -14,6 +14,10 @@ use Phpolar\HttpMessageTestUtils\UriStub;
 use Phpolar\Model\Model;
 use Phpolar\ModelResolver\ModelResolverInterface;
 use Phpolar\Phpolar\Auth\AbstractProtectedRoutable;
+use Phpolar\Phpolar\Auth\Authenticate;
+use Phpolar\Phpolar\Auth\AuthenticatorInterface;
+use Phpolar\Phpolar\Auth\ProtectedRoutableResolver;
+use Phpolar\Phpolar\Auth\User;
 use Phpolar\Phpolar\Core\Routing\RouteNotRegistered;
 use Phpolar\Phpolar\Core\Routing\RouteParamMap;
 use Phpolar\Phpolar\Http\ErrorHandler;
@@ -56,7 +60,7 @@ final class RoutingHandlerTest extends TestCase
                     return new ResponseFactoryStub();
                 }
                 if ($id === StreamFactoryInterface::class) {
-                    return $this->streamFactory ?? new StreamFactoryStub("r");
+                    return $this->streamFactory ?? new StreamFactoryStub("w");
                 }
                 if ($id === TemplateEngine::class) {
                     return new TemplateEngine(new StreamContentStrategy(), new Binder(), new Dispatcher());
@@ -329,5 +333,87 @@ final class RoutingHandlerTest extends TestCase
             $routableResolver,
         );
         $sut->handle($request);
+    }
+
+    #[TestDox("Shall pass model parameters to the authenticated handler")]
+    public function teste()
+    {
+        $expectedModelName = uniqid();
+        $fakeModel = (object) ["name" => $expectedModelName];
+        $container = $this->getContainer();
+        $registeredRouteHandler = new class () extends AbstractProtectedRoutable {
+            #[Authenticate]
+            public function process(ContainerInterface $container, #[Model] object $form = null): string
+            {
+                return $form->name;
+            }
+        };
+        /**
+         * @var MockObject&ModelResolverInterface
+         */
+        $modelResolverMock = $this->createMock(ModelResolverInterface::class);
+        $modelResolverMock->method("resolve")->willReturn(["form" => $fakeModel]);
+        /**
+         * @var Stub&RouteRegistry
+         */
+        $routeRegistryStub = $this->createStub(RouteRegistry::class);
+        $routeRegistryStub->method("match")->willReturn($registeredRouteHandler);
+        /**
+         * @var Stub&RoutableResolverInterface
+         */
+        $routableResolver = $this->createStub(RoutableResolverInterface::class);
+        $routableResolver->method("resolve")->willReturn($registeredRouteHandler);
+        $responseFactory = $container->get(ResponseFactoryInterface::class);
+        $streamFactory = $container->get(StreamFactoryInterface::class);
+        $request = (new RequestStub())->withUri(new UriStub(uniqid()));
+        $sut = new RoutingHandler(
+            $routeRegistryStub,
+            $responseFactory,
+            $streamFactory,
+            $container,
+            $modelResolverMock,
+            $routableResolver,
+        );
+        $response = $sut->handle($request);
+        $this->assertSame($fakeModel->name, $response->getBody()->getContents());
+    }
+
+    #[TestDox("Should set the user property of the authenticated routable")]
+    #[DataProvider("requestMethods")]
+    public function testf(string $requestMethod)
+    {
+        $fakeUserName = "FAKE_NAME";
+        $registeredRouteHandler = new class () extends AbstractProtectedRoutable {
+            #[Authenticate]
+            public function process(ContainerInterface $container): string
+            {
+                return $this->user->name;
+            }
+        };
+
+        /**
+         * @var MockObject&AuthenticatorInterface
+         */
+        $authenticatorStub = $this->createStub(AuthenticatorInterface::class);
+        $authenticatorStub->method("getCredentials")->willReturn((object) [
+            "name" => $fakeUserName,
+            "nickname" => "FAKE_NICKNAME",
+            "email" => "fake@fake.fake",
+            "avatarUrl" => "https://fake.fake/fake",
+        ]);
+        $protectedRoutableResolver = new ProtectedRoutableResolver($authenticatorStub);
+        /**
+         * @var Stub&RouteRegistry $routeRegistryStub
+         */
+        $routeRegistryStub = $this->createStub(RouteRegistry::class);
+        $routeRegistryStub->method("match")->willReturn($registeredRouteHandler);
+        $container = $this->getContainer();
+        $responseFactory = $container->get(ResponseFactoryInterface::class);
+        $streamFactory = $container->get(StreamFactoryInterface::class);
+        $modelResolver = $this->createStub(ModelResolverInterface::class);
+        $sut = new RoutingHandler($routeRegistryStub, $responseFactory, $streamFactory, $container, $modelResolver, $protectedRoutableResolver);
+        $request = (new RequestStub($requestMethod))->withUri(new UriStub(uniqid()));
+        $response = $sut->handle($request);
+        $this->assertSame($fakeUserName, $response->getBody()->getContents());
     }
 }
