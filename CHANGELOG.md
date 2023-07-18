@@ -1,3 +1,9 @@
+## 3.0.0rc3 (2023-07-18)
+
+### Fix
+
+- **AbstractProtectedRoutable**: use session user object (#227)
+
 ## 3.0.0rc2 (2023-07-18)
 
 ### Fix
