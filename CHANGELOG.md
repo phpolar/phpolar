@@ -1,3 +1,9 @@
+## 3.0.0rc0 (2023-07-17)
+
+### Feat
+
+- add support for authenticated routables (#218)
+
 ## 3.0.0b0 (2023-07-03)
 
 ### Fix
