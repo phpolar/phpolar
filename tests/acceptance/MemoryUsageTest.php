@@ -27,7 +27,7 @@ use Phpolar\Phpolar\Tests\Stubs\ContainerConfigurationStub;
 use Phpolar\Phpolar\Http\ErrorHandler;
 use Phpolar\Phpolar\Http\MiddlewareQueueRequestHandler;
 use Phpolar\Phpolar\App;
-use Phpolar\Phpolar\Core\ContainerLoader;
+use Phpolar\Phpolar\DependencyInjection\ContainerLoader;
 use Phpolar\Phpolar\DependencyInjection\DiTokens;
 use Phpolar\PurePhp\Binder;
 use Phpolar\PurePhp\Dispatcher;
@@ -53,13 +53,19 @@ final class MemoryUsageTest extends TestCase
         $config[RouteRegistry::class] = $routes;
         $config[RoutingMiddleware::class] = static fn (ArrayAccess $config) => new RoutingMiddleware($config[RoutingHandler::class]);
         $config[ModelResolverInterface::class] = $this->createStub(ModelResolverInterface::class);
+        $config[RoutableResolverInterface::class] = new class () implements RoutableResolverInterface {
+            public function resolve(RoutableInterface $target): RoutableInterface|false
+            {
+                return $target;
+            }
+        };
         $config[RoutingHandler::class] = static fn (ArrayAccess $config) => new RoutingHandler(
             $config[RouteRegistry::class],
             $config[ResponseFactoryInterface::class],
             $config[StreamFactoryInterface::class],
-            $config[DiTokens::ERROR_HANDLER_401],
             $config[ContainerInterface::class],
             $config[ModelResolverInterface::class],
+            routableResolver: $config[RoutableResolverInterface::class],
         );
         $config[MiddlewareQueueRequestHandler::class] = static fn (ArrayAccess $config) => new MiddlewareQueueRequestHandler($config[DiTokens::ERROR_HANDLER_404]);
         $config[DiTokens::ERROR_HANDLER_404] = static fn (ArrayAccess $config) => new ErrorHandler(ResponseCode::NOT_FOUND, "Not Found", $config[ContainerInterface::class]);
