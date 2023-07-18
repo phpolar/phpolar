@@ -10,11 +10,11 @@ namespace Phpolar\Phpolar\Auth;
 final class User
 {
     public function __construct(
-        public string $name,
-        public string $nickname,
-        public string $email,
-        public string $avatarUrl,
-        public ?string $picture = null,
+        public readonly string $name,
+        public readonly string $nickname,
+        public readonly string $email,
+        public readonly string $avatarUrl,
+        public readonly ?string $picture = null,
     ) {
     }
 }

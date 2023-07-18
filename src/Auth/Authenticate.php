@@ -23,7 +23,6 @@ final class Authenticate
         AbstractProtectedRoutable $target,
         AuthenticatorInterface $authenticator,
     ): RoutableInterface | false {
-        $session = $authenticator->getCredentials();
-        return $session === null ? false : $target->withUser($session);
+        return $authenticator->isAuthenticated() === false ? false : $target->withUser((object) $authenticator->getUser());
     }
 }

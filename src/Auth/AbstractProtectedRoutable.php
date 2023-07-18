@@ -19,18 +19,18 @@ abstract class AbstractProtectedRoutable implements RoutableInterface
     public User $user;
 
     /**
-     * Create a `User` from the given session
+     * Create a `User` from the given user object
      * and assign it to the user property.
      */
-    public function withUser(object $session): self
+    public function withUser(object $user): self
     {
         $copy = clone $this;
         $copy->user = new User(
-            avatarUrl: $session->user->avatarUrl ?? "",
-            email: $session->user->email ?? "",
-            name: $session->user->name ?? "",
-            nickname: $session->user->nickname ?? "",
-            picture: $session->user->picture ?? null,
+            avatarUrl: $user->avatarUrl ?? "",
+            email: $user->email ?? "",
+            name: $user->name ?? "",
+            nickname: $user->nickname ?? "",
+            picture: $user->picture ?? null,
         );
         return $copy;
     }
