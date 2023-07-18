@@ -260,7 +260,18 @@ return [
 
     // Add any issue types (such as `'PhanUndeclaredMethod'`)
     // to this list to inhibit them from being reported.
-    'suppress_issue_types' => [],
+    'suppress_issue_types' => [
+        'PhanUnreferencedPublicMethod',
+        'PhanUnreferencedClass',
+        'PhanPluginNoCommentOnPrivateProperty',
+        'PhanPluginNoCommentOnProtectedProperty',
+        'PhanPluginNoCommentOnPrivateMethod',
+        'PhanPluginDescriptionlessCommentOnPrivateMethod',
+        // does not support contrariance
+        'PhanTypeMismatchArgumentSuperType',
+        // does not support covariance
+        'PhanTypeMismatchReturnSuperType'
+    ],
 
     // A regular expression to match files to be excluded
     // from parsing and analysis and will not be read at all.

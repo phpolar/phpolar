@@ -17,6 +17,7 @@ use Phpolar\Phpolar\Auth\AbstractProtectedRoutable;
 use Phpolar\Phpolar\Core\Routing\RouteNotRegistered;
 use Phpolar\Phpolar\Core\Routing\RouteParamMap;
 use Phpolar\Phpolar\Http\ErrorHandler;
+use Phpolar\Phpolar\RoutableInterface;
 use Phpolar\Phpolar\RoutableResolverInterface;
 use Phpolar\PurePhp\Binder;
 use Phpolar\PurePhp\Dispatcher;

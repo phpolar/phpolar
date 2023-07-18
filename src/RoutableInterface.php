@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Phpolar\Phpolar\Http;
+namespace Phpolar\Phpolar;
 
 use Psr\Container\ContainerInterface;
 

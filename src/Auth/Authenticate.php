@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Phpolar\Phpolar\Auth;
 
 use Attribute;
-use Phpolar\Phpolar\Http\RoutableInterface;
+use Phpolar\Phpolar\RoutableInterface;
 
 /**
  * Provides an authentication mechanism
