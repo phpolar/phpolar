@@ -6,7 +6,7 @@ namespace Phpolar\Phpolar\Http;
 
 use Phpolar\ModelResolver\ModelResolverInterface;
 use Phpolar\Phpolar\Core\Routing\RouteNotRegistered;
-use Phpolar\Phpolar\Http\ErrorHandler;
+use Phpolar\Phpolar\RoutableResolverInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -24,9 +24,9 @@ class RoutingHandler implements RequestHandlerInterface
         private RouteRegistry $routeRegistry,
         private ResponseFactoryInterface $responseFactory,
         private StreamFactoryInterface $streamFactory,
-        private ErrorHandler $errorHandler,
         private ContainerInterface $container,
         private ModelResolverInterface $modelResolver,
+        private RoutableResolverInterface $routableResolver,
     ) {
     }
 
@@ -40,7 +40,7 @@ class RoutingHandler implements RequestHandlerInterface
     {
         $matchResult = $this->routeRegistry->match($request);
         return match (true) {
-            $matchResult instanceof RouteNotRegistered => $this->errorHandler->handle($request),
+            $matchResult instanceof RouteNotRegistered => $this->responseFactory->createResponse(404, "Not Found"),
             $matchResult instanceof ResolvedRoute => $this->handleResolvedRoute($matchResult),
             default => $this->handleDelegate($matchResult),
         };
@@ -55,6 +55,10 @@ class RoutingHandler implements RequestHandlerInterface
 
     private function handleDelegate(RoutableInterface $delegate): ResponseInterface
     {
+        if ($this->routableResolver->resolve($delegate) === false) {
+            return $this->responseFactory->createResponse(401, "Unauthorized");
+        }
+
         $modelParams = $this->modelResolver->resolve($delegate, "process");
         /**
          * @var string $responseContent
@@ -65,6 +69,10 @@ class RoutingHandler implements RequestHandlerInterface
 
     private function handleResolvedRoute(ResolvedRoute $resolvedRoute): ResponseInterface
     {
+        if ($this->routableResolver->resolve($resolvedRoute->delegate) === false) {
+            return $this->responseFactory->createResponse(401);
+        }
+
         $reflectionMethod = new ReflectionMethod($resolvedRoute->delegate, "process");
         $args = array_merge([$this->container], $resolvedRoute->routeParamMap->toArray());
         /**

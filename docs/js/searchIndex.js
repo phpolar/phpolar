@@ -26,6 +26,91 @@ Search.appendIndex(
             "summary": "Configures\u0020the\u0020server\u0020for\u0020CSRF\u0020attack\u0020mitigation.",
             "url": "classes/Phpolar-Phpolar-App.html#method_useCsrfMiddleware"
         },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Auth\\AbstractProtectedRoutable",
+            "name": "AbstractProtectedRoutable",
+            "summary": "Represents\u0020an\u0020authenticated\u0020request\u0020delegate\nthat\u0020contains\u0020the\u0020credentials\u0020of\u0020an\u0020authenticated\nuser.",
+            "url": "classes/Phpolar-Phpolar-Auth-AbstractProtectedRoutable.html"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Auth\\AbstractProtectedRoutable\u003A\u003AwithUser\u0028\u0029",
+            "name": "withUser",
+            "summary": "",
+            "url": "classes/Phpolar-Phpolar-Auth-AbstractProtectedRoutable.html#method_withUser"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Auth\\AbstractProtectedRoutable\u003A\u003A\u0024user",
+            "name": "user",
+            "summary": "Contains\u0020credentials\u0020for\u0020an\u0020authenticated\u0020user",
+            "url": "classes/Phpolar-Phpolar-Auth-AbstractProtectedRoutable.html#property_user"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Auth\\Authenticate",
+            "name": "Authenticate",
+            "summary": "Provides\u0020an\u0020authentication\u0020mechanism\nfor\u0020objects\u0020that\u0020handle\u0020requests.",
+            "url": "classes/Phpolar-Phpolar-Auth-Authenticate.html"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Auth\\Authenticate\u003A\u003AgetResolvedRoutable\u0028\u0029",
+            "name": "getResolvedRoutable",
+            "summary": "Return\u0020the\u0020target\u0020\u0060Routable\u0060\u0020when\u0020the\u0020request\nhas\u0020been\u0020authenticated.\u0020\u0020Otherwise,\u0020return\nthe\u0020fallback\u0020\u0060Routable\u0060.",
+            "url": "classes/Phpolar-Phpolar-Auth-Authenticate.html#method_getResolvedRoutable"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Auth\\AuthenticatorInterface",
+            "name": "AuthenticatorInterface",
+            "summary": "Has\u0020the\u0020ability\u0020to\u0020determine\nif\u0020a\u0020request\u0020has\u0020been\u0020authenticated.",
+            "url": "classes/Phpolar-Phpolar-Auth-AuthenticatorInterface.html"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Auth\\AuthenticatorInterface\u003A\u003AgetCredentials\u0028\u0029",
+            "name": "getCredentials",
+            "summary": "",
+            "url": "classes/Phpolar-Phpolar-Auth-AuthenticatorInterface.html#method_getCredentials"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Auth\\ProtectedRoutableResolver",
+            "name": "ProtectedRoutableResolver",
+            "summary": "Returns\u0020either\u0020the\u0020given\u0020routable\u0020or\u0020the\u0020given\u0020fallback\u0020handler\nbased\u0020on\u0020the\u0020boolean\u0020result\u0020of\u0020a\u0020given\u0020algorithm.",
+            "url": "classes/Phpolar-Phpolar-Auth-ProtectedRoutableResolver.html"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Auth\\ProtectedRoutableResolver\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Phpolar-Phpolar-Auth-ProtectedRoutableResolver.html#method___construct"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Auth\\ProtectedRoutableResolver\u003A\u003Aresolve\u0028\u0029",
+            "name": "resolve",
+            "summary": "Return\u0020the\u0020given\u0020routable\u0020or\u0020false.",
+            "url": "classes/Phpolar-Phpolar-Auth-ProtectedRoutableResolver.html#method_resolve"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Auth\\User",
+            "name": "User",
+            "summary": "Represents\u0020an\u0020authenticated\u0020user.",
+            "url": "classes/Phpolar-Phpolar-Auth-User.html"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Auth\\User\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Phpolar-Phpolar-Auth-User.html#method___construct"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Auth\\User\u003A\u003A\u0024name",
+            "name": "name",
+            "summary": "",
+            "url": "classes/Phpolar-Phpolar-Auth-User.html#property_name"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Auth\\User\u003A\u003A\u0024nickname",
+            "name": "nickname",
+            "summary": "",
+            "url": "classes/Phpolar-Phpolar-Auth-User.html#property_nickname"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Auth\\User\u003A\u003A\u0024email",
+            "name": "email",
+            "summary": "",
+            "url": "classes/Phpolar-Phpolar-Auth-User.html#property_email"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Auth\\User\u003A\u003A\u0024avatarUrl",
+            "name": "avatarUrl",
+            "summary": "",
+            "url": "classes/Phpolar-Phpolar-Auth-User.html#property_avatarUrl"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Auth\\User\u003A\u003A\u0024picture",
+            "name": "picture",
+            "summary": "",
+            "url": "classes/Phpolar-Phpolar-Auth-User.html#property_picture"
+        },                {
             "fqsen": "\\Phpolar\\Phpolar\\DependencyInjection\\ContainerLoader",
             "name": "ContainerLoader",
             "summary": "Configures\u0020a\u0020dependency\u0020injection\u0020container.",
@@ -191,6 +276,16 @@ Search.appendIndex(
             "summary": "Handle\u0020routing\u0020a\u0020request.",
             "url": "classes/Phpolar-Phpolar-Http-RoutingMiddleware.html#method_process"
         },                {
+            "fqsen": "\\Phpolar\\Phpolar\\RoutableResolverInterface",
+            "name": "RoutableResolverInterface",
+            "summary": "Used\u0020by\u0020the\u0020application\u0020to\u0020determine\u0020which\nroutable\/handler\u0020to\u0020use.\u0020\u0020This\u0020can\u0020be\nused\u0020for\u0020authenticating\u0020routes\u0020after\nthe\u0020route\u0020has\u0020been\u0020resolved.",
+            "url": "classes/Phpolar-Phpolar-RoutableResolverInterface.html"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\RoutableResolverInterface\u003A\u003Aresolve\u0028\u0029",
+            "name": "resolve",
+            "summary": "Return\u0020the\u0020given\u0020routable\u0020or\u0020false.",
+            "url": "classes/Phpolar-Phpolar-RoutableResolverInterface.html#method_resolve"
+        },                {
             "fqsen": "\\",
             "name": "\\",
             "summary": "",
@@ -205,6 +300,11 @@ Search.appendIndex(
             "name": "Phpolar",
             "summary": "",
             "url": "namespaces/phpolar.html"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Auth",
+            "name": "Auth",
+            "summary": "",
+            "url": "namespaces/phpolar-phpolar-auth.html"
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\DependencyInjection",
             "name": "DependencyInjection",

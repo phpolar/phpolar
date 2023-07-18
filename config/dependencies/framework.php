@@ -15,12 +15,15 @@ declare(strict_types=1);
 
 use Phpolar\HttpCodes\ResponseCode;
 use Phpolar\ModelResolver\ModelResolverInterface;
+use Phpolar\Phpolar\Auth\AuthenticatorInterface;
+use Phpolar\Phpolar\Auth\ProtectedRoutableResolver;
 use Phpolar\Phpolar\Http\RouteRegistry;
 use Phpolar\Phpolar\Http\RoutingHandler;
 use Phpolar\Phpolar\Http\RoutingMiddleware;
 use Phpolar\Phpolar\Http\ErrorHandler;
 use Phpolar\Phpolar\Http\MiddlewareQueueRequestHandler;
 use Phpolar\Phpolar\DependencyInjection\DiTokens;
+use Phpolar\Phpolar\RoutableResolverInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\StreamFactoryInterface;
@@ -46,13 +49,17 @@ return [
      * @suppress PhanUnreferencedClosure
      */
     RoutingHandler::class => static fn (ContainerInterface $container) => new RoutingHandler(
-        $container->get(RouteRegistry::class),
-        $container->get(ResponseFactoryInterface::class),
-        $container->get(StreamFactoryInterface::class),
-        $container->get(DiTokens::ERROR_HANDLER_404),
-        $container,
-        $container->get(ModelResolverInterface::class),
+        routeRegistry: $container->get(RouteRegistry::class),
+        responseFactory: $container->get(ResponseFactoryInterface::class),
+        streamFactory: $container->get(StreamFactoryInterface::class),
+        modelResolver: $container->get(ModelResolverInterface::class),
+        container: $container,
+        routableResolver: $container->get(RoutableResolverInterface::class),
     ),
+    /**
+     * @suppress PhanUnreferencedClosure
+     */
+    RoutableResolverInterface::class => static fn (ContainerInterface $container) => new ProtectedRoutableResolver($container->get(AuthenticatorInterface::class)),
     /**
      * @suppress PhanUnreferencedClosure
      */

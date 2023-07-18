@@ -11,7 +11,7 @@ use Phpolar\HttpMessageTestUtils\RequestStub;
 use Phpolar\HttpMessageTestUtils\ResponseStub;
 use Phpolar\HttpMessageTestUtils\UriStub;
 use Phpolar\ModelResolver\ModelResolverInterface;
-use Phpolar\Phpolar\Http\ErrorHandler;
+use Phpolar\Phpolar\RoutableResolverInterface;
 use Phpolar\PurePhp\Binder;
 use Phpolar\PurePhp\Dispatcher;
 use Phpolar\PurePhp\StreamContentStrategy;
@@ -113,9 +113,14 @@ final class RoutingTest extends TestCase
             routeRegistry: $routeRegistry,
             responseFactory: $this->getResponseFactory(),
             streamFactory: $this->getStreamFactory(),
-            errorHandler: new ErrorHandler(0, "", $container),
             container: $container,
             modelResolver: $this->getModelResolver(),
+            routableResolver: new class () implements RoutableResolverInterface {
+                public function resolve(RoutableInterface $target): RoutableInterface|false
+                {
+                    return $target;
+                }
+            },
         );
         $requestStub = (new RequestStub("GET"))->withUri(new UriStub($givenRoute));
         $response = $routingHandler->handle($requestStub);
@@ -134,14 +139,18 @@ final class RoutingTest extends TestCase
             routeRegistry: $routeRegistry,
             responseFactory: $this->getResponseFactory(),
             streamFactory: $this->getStreamFactory(),
-            errorHandler: new ErrorHandler(404, "Not Found", $container),
             container: $container,
             modelResolver: $this->getModelResolver(),
+            routableResolver: new class () implements RoutableResolverInterface {
+                public function resolve(RoutableInterface $target): RoutableInterface|false
+                {
+                    return $target;
+                }
+            },
         );
         $requestStub = (new RequestStub("GET"))->withUri(new UriStub($givenRoute));
         $response = $routingHandler->handle($requestStub);
         $this->assertSame($expectedStatusCode, $response->getStatusCode());
         $this->assertSame("Not Found", $response->getReasonPhrase());
-        $this->assertSame("<h1>Not Found</h1>", $response->getBody()->getContents());
     }
 }
