@@ -26,11 +26,11 @@ abstract class AbstractProtectedRoutable implements RoutableInterface
     {
         $copy = clone $this;
         $copy->user = new User(
-            avatarUrl: $session->avatarUrl ?? "",
-            email: $session->email ?? "",
-            name: $session->name ?? "",
-            nickname: $session->nickname ?? "",
-            picture: $session->picture ?? null,
+            avatarUrl: $session->user->avatarUrl ?? "",
+            email: $session->user->email ?? "",
+            name: $session->user->name ?? "",
+            nickname: $session->user->nickname ?? "",
+            picture: $session->user->picture ?? null,
         );
         return $copy;
     }
