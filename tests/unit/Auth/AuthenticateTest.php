@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Phpolar\Phpolar\Auth;
 
 use Generator;
-use Phpolar\Phpolar\Http\RoutableInterface;
+use Phpolar\Phpolar\RoutableInterface;
 use Phpolar\Phpolar\Tests\Stubs\ConfigurableContainerStub;
 use Phpolar\Phpolar\Tests\Stubs\ContainerConfigurationStub;
 use PHPUnit\Framework\Attributes\CoversClass;

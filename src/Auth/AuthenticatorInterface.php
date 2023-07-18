@@ -10,5 +10,9 @@ namespace Phpolar\Phpolar\Auth;
  */
 interface AuthenticatorInterface
 {
+    /**
+     * Returns user information from
+     * the authenticated session.
+     */
     public function getCredentials(): ?object;
 }

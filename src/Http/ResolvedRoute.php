@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Phpolar\Phpolar\Http;
 
+use Phpolar\Phpolar\RoutableInterface;
 use Phpolar\Phpolar\Core\Routing\RouteParamMap;
 
 /**

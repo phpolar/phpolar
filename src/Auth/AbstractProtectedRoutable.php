@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Phpolar\Phpolar\Auth;
 
-use Phpolar\Phpolar\Http\RoutableInterface;
+use Phpolar\Phpolar\RoutableInterface;
 
 /**
  * Represents an authenticated request delegate
@@ -18,6 +18,10 @@ abstract class AbstractProtectedRoutable implements RoutableInterface
      */
     public User $user;
 
+    /**
+     * Create a `User` from the given session
+     * and assign it to the user property.
+     */
     public function withUser(object $session): self
     {
         $copy = clone $this;

@@ -6,6 +6,7 @@ namespace Phpolar\Phpolar\Http;
 
 use Phpolar\ModelResolver\ModelResolverInterface;
 use Phpolar\Phpolar\Core\Routing\RouteNotRegistered;
+use Phpolar\Phpolar\RoutableInterface;
 use Phpolar\Phpolar\RoutableResolverInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
