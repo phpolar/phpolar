@@ -13,9 +13,11 @@ use Phpolar\HttpMessageTestUtils\StreamFactoryStub;
 use Phpolar\HttpMessageTestUtils\UriStub;
 use Phpolar\Model\Model;
 use Phpolar\ModelResolver\ModelResolverInterface;
+use Phpolar\Phpolar\Auth\AbstractProtectedRoutable;
 use Phpolar\Phpolar\Core\Routing\RouteNotRegistered;
 use Phpolar\Phpolar\Core\Routing\RouteParamMap;
 use Phpolar\Phpolar\Http\ErrorHandler;
+use Phpolar\Phpolar\RoutableResolverInterface;
 use Phpolar\PurePhp\Binder;
 use Phpolar\PurePhp\Dispatcher;
 use Phpolar\PurePhp\StreamContentStrategy;
@@ -81,8 +83,7 @@ final class RoutingHandlerTest extends TestCase
         $responseFactory = $container->get(ResponseFactoryInterface::class);
         $streamFactory = $container->get(StreamFactoryInterface::class);
         $modelResolver = $this->createStub(ModelResolverInterface::class);
-        $errorHandler = new ErrorHandler(404, "Not Found", $container);
-        $sut = new RoutingHandler($routeRegistryStub, $responseFactory, $streamFactory, $errorHandler, $container, $modelResolver);
+        $sut = new RoutingHandler($routeRegistryStub, $responseFactory, $streamFactory, $container, $modelResolver, $this->createStub(RoutableResolverInterface::class));
         $request = (new RequestStub($requestMethod))->withUri(new UriStub(uniqid()));
         $response = $sut->handle($request);
         $this->assertSame(ResponseCode::NOT_FOUND, $response->getStatusCode());
@@ -102,15 +103,75 @@ final class RoutingHandlerTest extends TestCase
          */
         $routeRegistryStub = $this->createStub(RouteRegistry::class);
         $routeRegistryStub->method("match")->willReturn($registeredRouteHandler);
+        /**
+         * @var Stub&RoutableResolverInterface
+         */
+        $routableResolver = $this->createStub(RoutableResolverInterface::class);
+        $routableResolver->method("resolve")->willReturn($registeredRouteHandler);
         $container = $this->getContainer();
         $responseFactory = $container->get(ResponseFactoryInterface::class);
         $streamFactory = $container->get(StreamFactoryInterface::class);
         $modelResolver = $this->createStub(ModelResolverInterface::class);
-        $errorHandler = new ErrorHandler(404, "Not Found", $container);
-        $sut = new RoutingHandler($routeRegistryStub, $responseFactory, $streamFactory, $errorHandler, $container, $modelResolver);
+        $sut = new RoutingHandler($routeRegistryStub, $responseFactory, $streamFactory, $container, $modelResolver, $routableResolver);
         $request = (new RequestStub($requestMethod))->withUri(new UriStub(uniqid()));
         $response = $sut->handle($request);
         $this->assertSame(ResponseCode::OK, $response->getStatusCode());
+    }
+
+    #[TestDox("Shall attempt to authenticate the registered route handler for \$requestMethod requests")]
+    #[DataProvider("requestMethods")]
+    public function test2b(string $requestMethod)
+    {
+        /**
+         * @var Stub&RoutableInterface $registeredRouteHandler
+         */
+        $registeredRouteHandler = $this->createStub(AbstractProtectedRoutable::class);
+        /**
+         * @var MockObject&RoutableResolverInterface
+         */
+        $protectedRoutableResolver = $this->createMock(RoutableResolverInterface::class);
+        $protectedRoutableResolver->expects($this->once())->method("resolve")->willReturn($registeredRouteHandler);
+        /**
+         * @var Stub&RouteRegistry $routeRegistryStub
+         */
+        $routeRegistryStub = $this->createStub(RouteRegistry::class);
+        $routeRegistryStub->method("match")->willReturn($registeredRouteHandler);
+        $container = $this->getContainer();
+        $responseFactory = $container->get(ResponseFactoryInterface::class);
+        $streamFactory = $container->get(StreamFactoryInterface::class);
+        $modelResolver = $this->createStub(ModelResolverInterface::class);
+        $sut = new RoutingHandler($routeRegistryStub, $responseFactory, $streamFactory, $container, $modelResolver, $protectedRoutableResolver);
+        $request = (new RequestStub($requestMethod))->withUri(new UriStub(uniqid()));
+        $response = $sut->handle($request);
+        $this->assertSame(ResponseCode::OK, $response->getStatusCode());
+    }
+
+    #[TestDox("Shall return unauthorized response for unauthorized routes for \$requestMethod requests")]
+    #[DataProvider("requestMethods")]
+    public function test2c(string $requestMethod)
+    {
+        /**
+         * @var Stub&RoutableInterface $registeredRouteHandler
+         */
+        $registeredRouteHandler = $this->createStub(AbstractProtectedRoutable::class);
+        /**
+         * @var MockObject&RoutableResolverInterface
+         */
+        $protectedRoutableResolver = $this->createMock(RoutableResolverInterface::class);
+        $protectedRoutableResolver->expects($this->once())->method("resolve")->willReturn(false);
+        /**
+         * @var Stub&RouteRegistry $routeRegistryStub
+         */
+        $routeRegistryStub = $this->createStub(RouteRegistry::class);
+        $routeRegistryStub->method("match")->willReturn($registeredRouteHandler);
+        $container = $this->getContainer();
+        $responseFactory = $container->get(ResponseFactoryInterface::class);
+        $streamFactory = $container->get(StreamFactoryInterface::class);
+        $modelResolver = $this->createStub(ModelResolverInterface::class);
+        $sut = new RoutingHandler($routeRegistryStub, $responseFactory, $streamFactory, $container, $modelResolver, $protectedRoutableResolver);
+        $request = (new RequestStub($requestMethod))->withUri(new UriStub(uniqid()));
+        $response = $sut->handle($request);
+        $this->assertSame(ResponseCode::UNAUTHORIZED, $response->getStatusCode());
     }
 
     #[TestDox("Shall create the response stream")]
@@ -132,12 +193,16 @@ final class RoutingHandlerTest extends TestCase
          */
         $routeRegistryStub = $this->createStub(RouteRegistry::class);
         $routeRegistryStub->method("match")->willReturn($registeredRouteHandler);
+        /**
+         * @var Stub&RoutableResolverInterface
+         */
+        $routableResolver = $this->createStub(RoutableResolverInterface::class);
+        $routableResolver->method("resolve")->willReturn($registeredRouteHandler);
         $container = $this->getContainer($streamFactoryStub);
         $modelResolver = $this->createStub(ModelResolverInterface::class);
         $responseFactory = $container->get(ResponseFactoryInterface::class);
         $streamFactory = $container->get(StreamFactoryInterface::class);
-        $errorHandler = new ErrorHandler(404, "Not Found", $container);
-        $sut = new RoutingHandler($routeRegistryStub, $responseFactory, $streamFactory, $errorHandler, $container, $modelResolver);
+        $sut = new RoutingHandler($routeRegistryStub, $responseFactory, $streamFactory, $container, $modelResolver, $routableResolver);
         $request = (new RequestStub())->withUri(new UriStub(uniqid()));
         $response = $sut->handle($request);
         $this->assertSame(ResponseCode::OK, $response->getStatusCode());
@@ -168,11 +233,53 @@ final class RoutingHandlerTest extends TestCase
          */
         $routeRegistryStub = $this->createStub(RouteRegistry::class);
         $routeRegistryStub->method("match")->willReturn($resolvedRoute);
-        $errorHandler = new ErrorHandler(404, "Not Found", $container);
+        /**
+         * @var Stub&RoutableResolverInterface
+         */
+        $routableResolver = $this->createStub(RoutableResolverInterface::class);
+        $routableResolver->method("resolve")->willReturn($registeredRouteHandler);
         $streamFactory = $container->get(StreamFactoryInterface::class);
         $responseFactory = $container->get(ResponseFactoryInterface::class);
         $modelResolver = $this->createStub(ModelResolverInterface::class);
-        $sut = new RoutingHandler($routeRegistryStub, $responseFactory, $streamFactory, $errorHandler, $container, $modelResolver);
+        $sut = new RoutingHandler($routeRegistryStub, $responseFactory, $streamFactory, $container, $modelResolver, $routableResolver);
+        $request = (new RequestStub())->withUri(new UriStub(uniqid()));
+        $response = $sut->handle($request);
+        $this->assertSame($givenIdRouteParam, $response->getBody()->getContents());
+    }
+
+    #[TestDox("Shall pass the resolved route params to the handler and attempt to authenticate when the names match")]
+    public function testa2()
+    {
+        $givenIdRouteParam = "123";
+        $responseContent = $givenIdRouteParam;
+        /**
+         * @var MockObject&StreamFactoryStub
+         */
+        $streamFactoryStub = $this->createMock(StreamFactoryStub::class);
+        $streamFactoryStub->expects($this->once())->method("createStream")->with($responseContent)->willReturn(new MemoryStreamStub($responseContent));
+        $container = $this->getContainer($streamFactoryStub);
+        $registeredRouteHandler = new class () extends AbstractProtectedRoutable {
+            public function process(ContainerInterface $container, string $id = ""): string
+            {
+                return $id;
+            }
+        };
+        /**
+         * @var MockObject&RoutableResolverInterface
+         */
+        $protectedRoutableResolver = $this->createMock(RoutableResolverInterface::class);
+        $protectedRoutableResolver->expects($this->once())->method("resolve")->willReturn($registeredRouteHandler);
+        $routeParamMap = new RouteParamMap("/some/path/{id}", "/some/path/$givenIdRouteParam");
+        $resolvedRoute = new ResolvedRoute($registeredRouteHandler, $routeParamMap);
+        /**
+         * @var Stub&RouteRegistry $routeRegistryStub
+         */
+        $routeRegistryStub = $this->createStub(RouteRegistry::class);
+        $routeRegistryStub->method("match")->willReturn($resolvedRoute);
+        $streamFactory = $container->get(StreamFactoryInterface::class);
+        $responseFactory = $container->get(ResponseFactoryInterface::class);
+        $modelResolver = $this->createStub(ModelResolverInterface::class);
+        $sut = new RoutingHandler($routeRegistryStub, $responseFactory, $streamFactory, $container, $modelResolver, $protectedRoutableResolver);
         $request = (new RequestStub())->withUri(new UriStub(uniqid()));
         $response = $sut->handle($request);
         $this->assertSame($givenIdRouteParam, $response->getBody()->getContents());
@@ -205,16 +312,20 @@ final class RoutingHandlerTest extends TestCase
          */
         $routeRegistryStub = $this->createStub(RouteRegistry::class);
         $routeRegistryStub->method("match")->willReturn($registeredRouteHandler);
-        $errorHandler = new ErrorHandler(404, "Not Found", $container);
+        /**
+         * @var Stub&RoutableResolverInterface
+         */
+        $routableResolver = $this->createStub(RoutableResolverInterface::class);
+        $routableResolver->method("resolve")->willReturn($registeredRouteHandler);
         $responseFactory = $container->get(ResponseFactoryInterface::class);
         $request = (new RequestStub())->withUri(new UriStub(uniqid()));
         $sut = new RoutingHandler(
             $routeRegistryStub,
             $responseFactory,
             $streamFactoryMock,
-            $errorHandler,
             $container,
             $modelResolverMock,
+            $routableResolver,
         );
         $sut->handle($request);
     }
