@@ -30,13 +30,13 @@ final class AuthenticateTest extends TestCase
     #[DataProvider("getContainerStub")]
     public function testa(ContainerInterface $container)
     {
-        $authenticatedResult = (object) "SOME CREDENTIALS";
         $expectedContent = "<h1>I AM THE TARGET HANDLER</h1>";
         /**
          * @var AuthenticatorInterface&MockObject
          */
         $authenticatorMock = $this->createMock(AuthenticatorInterface::class);
-        $authenticatorMock->method("getCredentials")->willReturn($authenticatedResult);
+        $authenticatorMock->method("isAuthenticated")->willReturn(true);
+        $authenticatorMock->method("getUser")->willReturn(["name" => "", "avatarUrl" => "", "nickname" => "", "email" => ""]);
         $hostClass = new class ($expectedContent) extends AbstractProtectedRoutable
         {
             public function __construct(public string $content)
@@ -63,7 +63,6 @@ final class AuthenticateTest extends TestCase
     #[DataProvider("getContainerStub")]
     public function testb(ContainerInterface $container)
     {
-        $notAuthenticatedResult = null;
         $expectedContent = "<h1>I AM THE FALLBACK HANDLER</h1>";
         /**
          * @var RoutableInterface&Stub
@@ -74,7 +73,7 @@ final class AuthenticateTest extends TestCase
          * @var AuthenticatorInterface&MockObject
          */
         $authenticatorMock = $this->createMock(AuthenticatorInterface::class);
-        $authenticatorMock->method("getCredentials")->willReturn($notAuthenticatedResult);
+        $authenticatorMock->method("isAuthenticated")->willReturn(false);
         $hostClass = new class ($expectedContent) implements RoutableInterface
         {
             public function __construct(public string $content)
@@ -100,13 +99,14 @@ final class AuthenticateTest extends TestCase
     #[TestDox("Shall add user credentials to the target delegate when the request is authenticated")]
     public function testc()
     {
-        $authenticatedUserCredentials = (object) ["user" => new User(name: "FAKE NAME", nickname: "FAKE NICKNAME", email: "FAKE EMAIL", avatarUrl: "FAKE AVATAR URL")];
+        $authenticatedUser = ["name" => "FAKE NAME", "nickname" => "FAKE NICKNAME", "email" => "FAKE EMAIL", "avatarUrl" => "FAKE AVATAR URL"];
         $expectedContent = "<h1>I AM THE TARGET HANDLER</h1>";
         /**
          * @var AuthenticatorInterface&MockObject
          */
         $authenticatorMock = $this->createMock(AuthenticatorInterface::class);
-        $authenticatorMock->method("getCredentials")->willReturn($authenticatedUserCredentials);
+        $authenticatorMock->method("isAuthenticated")->willReturn(true);
+        $authenticatorMock->method("getUser")->willReturn($authenticatedUser);
         $hostClass = new class ($expectedContent) extends AbstractProtectedRoutable
         {
             public function __construct(public string $content)
@@ -126,6 +126,6 @@ final class AuthenticateTest extends TestCase
          */
         $authenticateAttr = $authenticateAttrs[0]->newInstance();
         $result = $authenticateAttr->getResolvedRoutable(target: $hostClass, authenticator: $authenticatorMock);
-        $this->assertEquals($result->user, $authenticatedUserCredentials->user);
+        $this->assertEquals($result->user, new User(...$authenticatedUser));
     }
 }

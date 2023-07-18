@@ -46,7 +46,15 @@ return [
     RouteRegistry::class => new RouteRegistry(),
     DiTokens::RESPONSE_EMITTER => new SapiEmitter(),
     AuthenticatorInterface::class => new class () implements AuthenticatorInterface {
+        public function isAuthenticated(): bool
+        {
+            return false;
+        }
         public function getCredentials(): ?object
+        {
+            return null;
+        }
+        public function getUser(): ?array
         {
             return null;
         }

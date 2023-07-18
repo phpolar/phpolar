@@ -25,7 +25,7 @@ final class ProtectedRoutableResolverTest extends TestCase
          * @var Stub&AuthenticatorInterface
          */
         $authenticatorStub = $this->createStub(AuthenticatorInterface::class);
-        $authenticatorStub->method("getCredentials")->willReturn(null);
+        $authenticatorStub->method("isAuthenticated")->willReturn(false);
         $sut = new ProtectedRoutableResolver($authenticatorStub);
         $target = new class () extends AbstractProtectedRoutable
         {
@@ -46,7 +46,8 @@ final class ProtectedRoutableResolverTest extends TestCase
          * @var Stub&AuthenticatorInterface
          */
         $authenticatorMock = $this->createStub(AuthenticatorInterface::class);
-        $authenticatorMock->method("getCredentials")->willReturn((object) "");
+        $authenticatorMock->method("isAuthenticated")->willReturn(true);
+        $authenticatorMock->method("getUser")->willReturn(["name" => "", "nickname" => "", "email" => "", "avatarUrl" => ""]);
         $sut = new ProtectedRoutableResolver($authenticatorMock);
         $target = new class () extends AbstractProtectedRoutable
         {
@@ -67,7 +68,7 @@ final class ProtectedRoutableResolverTest extends TestCase
          * @var Stub&AuthenticatorInterface
          */
         $authenticatorMock = $this->createStub(AuthenticatorInterface::class);
-        $authenticatorMock->method("getCredentials")->willReturn(null);
+        $authenticatorMock->method("isAuthenticated")->willReturn(true);
         $sut = new ProtectedRoutableResolver($authenticatorMock);
         $target = new class () extends AbstractProtectedRoutable
         {
@@ -87,7 +88,7 @@ final class ProtectedRoutableResolverTest extends TestCase
          * @var Stub&AuthenticatorInterface
          */
         $authenticatorMock = $this->createStub(AuthenticatorInterface::class);
-        $authenticatorMock->method("getCredentials")->willReturn(null);
+        $authenticatorMock->method("isAuthenticated")->willReturn(false);
         $sut = new ProtectedRoutableResolver($authenticatorMock);
         $target = new class () implements RoutableInterface
         {
