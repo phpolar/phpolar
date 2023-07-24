@@ -168,6 +168,7 @@ final class RouteRegistryTest extends TestCase
         $result = $sut->match(new RequestStub($method, $givenRequestPath));
         $this->assertInstanceOf(RouteNotRegistered::class, $result);
     }
+
     #[DataProvider("notImplementedMethods")]
     #[TestDox("Shall throw an exception when attempting to add a non-supported method. Attempted \$method")]
     public function teste(string $method, string $givenRoute = "/")
@@ -179,5 +180,31 @@ final class RouteRegistryTest extends TestCase
         $handlerStub = $this->createStub(RoutableInterface::class);
         $sut = new RouteRegistry();
         $sut->add($method, $givenRoute, $handlerStub);
+    }
+
+    #[DataProvider("requestMethods")]
+    #[TestDox("Shall match a route with params when multiple routes are registered")]
+    public function testf(string $requestMethod)
+    {
+        /**
+         * @var Stub&RoutableInterface $handlerStub
+         */
+        $handlerStub = $this->createStub(RoutableInterface::class);
+        $sut = new RouteRegistry();
+
+        $routes = [
+            "/",
+            "/no-params",
+            "/something/{id}/something-else/{anotherId}",
+        ];
+
+        $requestPath = "/something/123/something-else/456";
+
+        foreach ($routes as $route) {
+            $sut->add($requestMethod, $route, $handlerStub);
+        }
+
+        $result = $sut->match(new RequestStub($requestMethod, $requestPath));
+        $this->assertNotInstanceOf(RouteNotRegistered::class, $result);
     }
 }

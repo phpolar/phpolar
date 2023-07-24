@@ -35,7 +35,7 @@ class RouteRegistry
      */
     public function add(string $method, string $route, RoutableInterface $handler): void
     {
-        $this->containsParamRoutes = preg_match(ROUTE_PARAM_PATTERN, $route) === 1;
+        $this->containsParamRoutes = $this->containsParamRoutes || preg_match(ROUTE_PARAM_PATTERN, $route) === 1;
         if (strtoupper($method) === "GET") {
             $this->registryForGet[$route] = $handler;
             return;
@@ -59,12 +59,12 @@ class RouteRegistry
 
     private function matchGetRoute(string $route): RoutableInterface | ResolvedRoute | RouteNotRegistered
     {
-        return $this->containsParamRoutes === false ? $this->registryForGet[$route] ?? new RouteNotRegistered() : $this->matchAnyParameterizedRoute($this->registryForGet, $route);
+        return $this->registryForGet[$route] ?? ($this->containsParamRoutes === false ? new RouteNotRegistered() : $this->matchAnyParameterizedRoute($this->registryForGet, $route));
     }
 
     private function matchPostRoute(string $route): RoutableInterface | ResolvedRoute | RouteNotRegistered
     {
-        return $this->containsParamRoutes === false ? $this->registryForPost[$route] ?? new RouteNotRegistered() : $this->matchAnyParameterizedRoute($this->registryForPost, $route);
+        return $this->registryForPost[$route] ?? ($this->containsParamRoutes === false ? new RouteNotRegistered() : $this->matchAnyParameterizedRoute($this->registryForPost, $route));
     }
 
     /**
@@ -73,9 +73,12 @@ class RouteRegistry
      */
     private function matchAnyParameterizedRoute(array $registry, string $path): ResolvedRoute | RouteNotRegistered
     {
-        $matched = array_filter(
-            array_keys($registry),
-            static fn (string $registeredRoute) => self::partsMatch($registeredRoute, $path),
+        // Reindex the result. See https://www.php.net/manual/en/function.array-filter.php
+        $matched = array_values(
+            array_filter(
+                array_keys($registry),
+                static fn (string $registeredRoute) => self::partsMatch($registeredRoute, $path),
+            )
         );
         return empty($matched) === true ? new RouteNotRegistered() : new ResolvedRoute($registry[$matched[0]], new RouteParamMap($matched[0], $path));
     }
