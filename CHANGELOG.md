@@ -1,3 +1,9 @@
+## 3.0.0rc5 (2023-07-24)
+
+### Fix
+
+- **RouteRegistry**: reindex projected array (#232)
+
 ## 3.0.0rc4 (2023-07-18)
 
 ### Fix
