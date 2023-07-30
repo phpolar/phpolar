@@ -6,6 +6,7 @@ namespace Phpolar\Phpolar;
 
 use Phpolar\Phpolar\DependencyInjection\DiTokens;
 use Phpolar\Phpolar\Http\MiddlewareQueueRequestHandler;
+use Phpolar\Phpolar\Http\RoutingHandler;
 use Phpolar\Phpolar\Http\RoutingMiddleware;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -17,6 +18,7 @@ use Psr\Http\Server\MiddlewareInterface;
 final class App
 {
     private MiddlewareQueueRequestHandler $mainHandler;
+    private MiddlewareInterface $routingMiddleware;
     private \Laminas\HttpHandlerRunner\Emitter\EmitterInterface $emitter;
     private static ?App $instance = null;
 
@@ -31,6 +33,11 @@ final class App
          * @var MiddlewareQueueRequestHandler $handler
          */
         $handler = $this->container->get(MiddlewareQueueRequestHandler::class);
+        /**
+         * @var MiddlewareInterface
+         */
+        $routingMiddleware = $this->container->get(RoutingMiddleware::class);
+        $this->routingMiddleware = $routingMiddleware;
         /**
          * @var \Laminas\HttpHandlerRunner\Emitter\EmitterInterface $emitter
          */
@@ -64,6 +71,20 @@ final class App
     private function queueMiddleware(MiddlewareInterface $middleware): void
     {
         $this->mainHandler->queue($middleware);
+    }
+
+    /**
+     * Configures the application
+     * for checking route authorization.
+     */
+    public function useAuthorization(): App
+    {
+        /**
+         * @var RoutingHandler
+         */
+        $authRoutingHandler = $this->container->get(DiTokens::AUTHENTICATED_ROUTING_HANDLER);
+        $this->routingMiddleware = new RoutingMiddleware($authRoutingHandler);
+        return $this;
     }
 
     /**
@@ -124,10 +145,6 @@ final class App
      */
     private function setupRouting(): void
     {
-        /**
-         * @var MiddlewareInterface $routingMiddleware
-         */
-        $routingMiddleware = $this->container->get(RoutingMiddleware::class);
-        $this->queueMiddleware($routingMiddleware);
+        $this->queueMiddleware($this->routingMiddleware);
     }
 }
