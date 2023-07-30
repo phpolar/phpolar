@@ -126,16 +126,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Phpolar-Phpolar-DependencyInjection-DiTokens.html#constant_CSRF_RESPONSE_FILTER_MIDDLEWARE"
         },                {
-            "fqsen": "\\Phpolar\\Phpolar\\DependencyInjection\\DiTokens\u003A\u003AERROR_HANDLER_401",
-            "name": "ERROR_HANDLER_401",
-            "summary": "",
-            "url": "classes/Phpolar-Phpolar-DependencyInjection-DiTokens.html#constant_ERROR_HANDLER_401"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\DependencyInjection\\DiTokens\u003A\u003AERROR_HANDLER_404",
-            "name": "ERROR_HANDLER_404",
-            "summary": "",
-            "url": "classes/Phpolar-Phpolar-DependencyInjection-DiTokens.html#constant_ERROR_HANDLER_404"
-        },                {
             "fqsen": "\\Phpolar\\Phpolar\\DependencyInjection\\DiTokens\u003A\u003ARESPONSE_EMITTER",
             "name": "RESPONSE_EMITTER",
             "summary": "",
@@ -160,21 +150,6 @@ Search.appendIndex(
             "name": "CustomDeps",
             "summary": "The\u0020custom\u0020dependencies\u0020directory\u0020should\u0020be\nset\u0020up\u0020in\u0020the\u0020application\u0020using\u0020the\u0020framework.",
             "url": ""
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Http\\ErrorHandler",
-            "name": "ErrorHandler",
-            "summary": "Handles\u0020HTTP\u0020errors.",
-            "url": "classes/Phpolar-Phpolar-Http-ErrorHandler.html"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Http\\ErrorHandler\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/Phpolar-Phpolar-Http-ErrorHandler.html#method___construct"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Http\\ErrorHandler\u003A\u003Ahandle\u0028\u0029",
-            "name": "handle",
-            "summary": "Return\u0020an\u0020HTTP\u0020error\u0020response.",
-            "url": "classes/Phpolar-Phpolar-Http-ErrorHandler.html#method_handle"
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\Http\\MiddlewareQueueRequestHandler",
             "name": "MiddlewareQueueRequestHandler",

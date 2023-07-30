@@ -13,38 +13,24 @@
 
 declare(strict_types=1);
 
-use Phpolar\HttpCodes\ResponseCode;
 use Phpolar\ModelResolver\ModelResolverInterface;
 use Phpolar\Authenticator\AuthenticatorInterface;
+use Phpolar\HttpCodes\ResponseCode;
 use Phpolar\Phpolar\Auth\ProtectedRoutableResolver;
 use Phpolar\Phpolar\Http\RouteRegistry;
 use Phpolar\Phpolar\Http\RoutingHandler;
 use Phpolar\Phpolar\Http\RoutingMiddleware;
-use Phpolar\Phpolar\Http\ErrorHandler;
 use Phpolar\Phpolar\Http\MiddlewareQueueRequestHandler;
 use Phpolar\Phpolar\DependencyInjection\DiTokens;
 use Phpolar\Routable\RoutableResolverInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamFactoryInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 
 return [
-    /**
-     * @suppress PhanUnreferencedClosure
-     */
-    DiTokens::ERROR_HANDLER_401 => static fn (ContainerInterface $container) => new ErrorHandler(
-        ResponseCode::UNAUTHORIZED,
-        "Unauthorized",
-        $container,
-    ),
-    /**
-     * @suppress PhanUnreferencedClosure
-     */
-    DiTokens::ERROR_HANDLER_404 => static fn (ContainerInterface $container) => new ErrorHandler(
-        ResponseCode::NOT_FOUND,
-        "Not Found",
-        $container,
-    ),
     /**
      * @suppress PhanUnreferencedClosure
      */
@@ -64,7 +50,20 @@ return [
     /**
      * @suppress PhanUnreferencedClosure
      */
-    MiddlewareQueueRequestHandler::class => static fn (ContainerInterface $container) => new MiddlewareQueueRequestHandler($container->get(DiTokens::ERROR_HANDLER_404)),
+    MiddlewareQueueRequestHandler::class => static function (ContainerInterface $container) {
+        $responseFactory = $container->get(ResponseFactoryInterface::class);
+        $fallbackHandler = new class ($responseFactory) implements RequestHandlerInterface {
+            public function __construct(private ResponseFactoryInterface $responseFactory)
+            {
+            }
+
+            public function handle(ServerRequestInterface $request): ResponseInterface
+            {
+                return $this->responseFactory->createResponse(ResponseCode::NOT_FOUND, "Not Found");
+            }
+        };
+        return new MiddlewareQueueRequestHandler($fallbackHandler);
+    },
     /**
      * @suppress PhanUnreferencedClosure
      */
