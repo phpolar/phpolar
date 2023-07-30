@@ -7,7 +7,6 @@ use Phpolar\HttpMessageTestUtils\ResponseStub;
 use Phpolar\HttpMessageTestUtils\StreamFactoryStub;
 use Phpolar\ModelResolver\ModelResolverInterface;
 use Phpolar\Authenticator\AuthenticatorInterface;
-use Phpolar\Phpolar\Http\ErrorHandler;
 use Phpolar\Phpolar\Http\MiddlewareQueueRequestHandler;
 use Phpolar\Phpolar\DependencyInjection\DiTokens;
 use Phpolar\Routable\RoutableInterface;
@@ -28,20 +27,17 @@ use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
 return [
-    MiddlewareQueueRequestHandler::class => static fn (ContainerInterface $container) => new MiddlewareQueueRequestHandler($container->get(DiTokens::ERROR_HANDLER_404)),
-    DiTokens::ERROR_HANDLER_401 => static fn (ContainerInterface $container) => new ErrorHandler(
-        ResponseCode::UNAUTHORIZED,
-        "Unauthorized",
-        $container,
-    ),
-    DiTokens::ERROR_HANDLER_404 => static fn (ContainerInterface $container) => new ErrorHandler(
-        ResponseCode::NOT_FOUND,
-        "Not Found",
-        $container,
+    MiddlewareQueueRequestHandler::class => new MiddlewareQueueRequestHandler(
+        new class () implements RequestHandlerInterface {
+            public function handle(ServerRequestInterface $request): ResponseInterface
+            {
+                return (new ResponseFactoryStub((new StreamFactoryStub("+w"))->createStream()))->createResponse(ResponseCode::NOT_FOUND);
+            }
+        }
     ),
     TemplateEngine::class => static fn (ContainerInterface $container) => new TemplateEngine($container->get(TemplatingStrategyInterface::class), new Binder(), new Dispatcher()),
     TemplatingStrategyInterface::class => new StreamContentStrategy(),
-    ResponseFactoryInterface::class => new ResponseFactoryStub(),
+    ResponseFactoryInterface::class => new ResponseFactoryStub((new StreamFactoryStub("+w"))->createStream()),
     StreamFactoryInterface::class => new StreamFactoryStub("+w"),
     RouteRegistry::class => new RouteRegistry(),
     DiTokens::RESPONSE_EMITTER => new SapiEmitter(),
