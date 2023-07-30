@@ -33,7 +33,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\Auth\\AbstractProtectedRoutable\u003A\u003AwithUser\u0028\u0029",
             "name": "withUser",
-            "summary": "Create\u0020a\u0020\u0060User\u0060\u0020from\u0020the\u0020given\u0020session\nand\u0020assign\u0020it\u0020to\u0020the\u0020user\u0020property.",
+            "summary": "Create\u0020a\u0020\u0060User\u0060\u0020from\u0020the\u0020given\u0020user\u0020object\nand\u0020assign\u0020it\u0020to\u0020the\u0020user\u0020property.",
             "url": "classes/Phpolar-Phpolar-Auth-AbstractProtectedRoutable.html#method_withUser"
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\Auth\\AbstractProtectedRoutable\u003A\u003A\u0024user",
@@ -51,16 +51,6 @@ Search.appendIndex(
             "summary": "Return\u0020the\u0020target\u0020\u0060Routable\u0060\u0020when\u0020the\u0020request\nhas\u0020been\u0020authenticated.\u0020\u0020Otherwise,\u0020return\nthe\u0020fallback\u0020\u0060Routable\u0060.",
             "url": "classes/Phpolar-Phpolar-Auth-Authenticate.html#method_getResolvedRoutable"
         },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Auth\\AuthenticatorInterface",
-            "name": "AuthenticatorInterface",
-            "summary": "Has\u0020the\u0020ability\u0020to\u0020determine\nif\u0020a\u0020request\u0020has\u0020been\u0020authenticated.",
-            "url": "classes/Phpolar-Phpolar-Auth-AuthenticatorInterface.html"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Auth\\AuthenticatorInterface\u003A\u003AgetCredentials\u0028\u0029",
-            "name": "getCredentials",
-            "summary": "Returns\u0020user\u0020information\u0020from\nthe\u0020authenticated\u0020session.",
-            "url": "classes/Phpolar-Phpolar-Auth-AuthenticatorInterface.html#method_getCredentials"
-        },                {
             "fqsen": "\\Phpolar\\Phpolar\\Auth\\ProtectedRoutableResolver",
             "name": "ProtectedRoutableResolver",
             "summary": "Returns\u0020either\u0020the\u0020given\u0020routable\u0020or\u0020the\u0020given\u0020fallback\u0020handler\nbased\u0020on\u0020the\u0020boolean\u0020result\u0020of\u0020a\u0020given\u0020algorithm.",
@@ -73,7 +63,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\Auth\\ProtectedRoutableResolver\u003A\u003Aresolve\u0028\u0029",
             "name": "resolve",
-            "summary": "Return\u0020the\u0020given\u0020routable\u0020or\u0020false.",
+            "summary": "",
             "url": "classes/Phpolar-Phpolar-Auth-ProtectedRoutableResolver.html#method_resolve"
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\Auth\\User",
@@ -150,6 +140,11 @@ Search.appendIndex(
             "name": "RESPONSE_EMITTER",
             "summary": "",
             "url": "classes/Phpolar-Phpolar-DependencyInjection-DiTokens.html#constant_RESPONSE_EMITTER"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\DependencyInjection\\DiTokens\u003A\u003AUNAUTHORIZED_HANDLER",
+            "name": "UNAUTHORIZED_HANDLER",
+            "summary": "",
+            "url": "classes/Phpolar-Phpolar-DependencyInjection-DiTokens.html#constant_UNAUTHORIZED_HANDLER"
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\DependencyInjection\\Globs",
             "name": "Globs",
@@ -265,26 +260,6 @@ Search.appendIndex(
             "name": "process",
             "summary": "Handle\u0020routing\u0020a\u0020request.",
             "url": "classes/Phpolar-Phpolar-Http-RoutingMiddleware.html#method_process"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\RoutableInterface",
-            "name": "RoutableInterface",
-            "summary": "Defines\u0020what\u0020should\u0020be\u0020done\u0020when\u0020a\u0020request\u0020is\u0020received.",
-            "url": "classes/Phpolar-Phpolar-RoutableInterface.html"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\RoutableInterface\u003A\u003Aprocess\u0028\u0029",
-            "name": "process",
-            "summary": "Returns\u0020the\u0020content\u0020of\u0020the\u0020response\u0020body.",
-            "url": "classes/Phpolar-Phpolar-RoutableInterface.html#method_process"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\RoutableResolverInterface",
-            "name": "RoutableResolverInterface",
-            "summary": "Used\u0020by\u0020the\u0020application\u0020to\u0020determine\u0020which\nroutable\/handler\u0020to\u0020use.\u0020\u0020This\u0020can\u0020be\nused\u0020for\u0020authenticating\u0020routes\u0020after\nthe\u0020route\u0020has\u0020been\u0020resolved.",
-            "url": "classes/Phpolar-Phpolar-RoutableResolverInterface.html"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\RoutableResolverInterface\u003A\u003Aresolve\u0028\u0029",
-            "name": "resolve",
-            "summary": "Return\u0020the\u0020given\u0020routable\u0020or\u0020false.",
-            "url": "classes/Phpolar-Phpolar-RoutableResolverInterface.html#method_resolve"
         },                {
             "fqsen": "\\",
             "name": "\\",
