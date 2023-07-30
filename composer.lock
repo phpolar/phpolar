@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "89702cf65f1990ea70c0444b02ab059e",
+    "content-hash": "60ffbf4ad0c50f53da2fba58b3d86abd",
     "packages": [
         {
             "name": "guzzlehttp/psr7",
@@ -190,6 +190,45 @@
             "time": "2023-07-25T20:20:46+00:00"
         },
         {
+            "name": "phpolar/authenticator",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpolar/authenticator.git",
+                "reference": "de2a3594903cdef7ec8325840f53469b9c6d1f57"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpolar/authenticator/zipball/de2a3594903cdef7ec8325840f53469b9c6d1f57",
+                "reference": "de2a3594903cdef7ec8325840f53469b9c6d1f57",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8"
+            },
+            "require-dev": {
+                "ext-ast": "*",
+                "ext-openssl": "*",
+                "squizlabs/php_codesniffer": "^3.7"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Phpolar\\Authenticator\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Supports authentication interoperability.",
+            "support": {
+                "issues": "https://github.com/phpolar/authenticator/issues",
+                "source": "https://github.com/phpolar/authenticator/tree/1.0.0"
+            },
+            "time": "2023-07-30T03:49:15+00:00"
+        },
+        {
             "name": "phpolar/core",
             "version": "3.0.0",
             "source": {
@@ -286,6 +325,46 @@
                 "source": "https://github.com/phpolar/model-resolver/tree/1.0.1"
             },
             "time": "2023-06-13T13:39:48+00:00"
+        },
+        {
+            "name": "phpolar/routable",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpolar/routable.git",
+                "reference": "6106f23622d2757bdcc01c32291f739da2777f07"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpolar/routable/zipball/6106f23622d2757bdcc01c32291f739da2777f07",
+                "reference": "6106f23622d2757bdcc01c32291f739da2777f07",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.1",
+                "psr/container": "^2.0"
+            },
+            "require-dev": {
+                "ext-ast": "*",
+                "ext-openssl": "*",
+                "squizlabs/php_codesniffer": "^3.7"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Phpolar\\Routable\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Supports route handling interoperability.",
+            "support": {
+                "issues": "https://github.com/phpolar/routable/issues",
+                "source": "https://github.com/phpolar/routable/tree/1.0.0"
+            },
+            "time": "2023-07-30T04:46:55+00:00"
         },
         {
             "name": "phpolar/storage-driver",

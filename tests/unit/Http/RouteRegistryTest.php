@@ -9,7 +9,7 @@ use Generator;
 use Phpolar\HttpMessageTestUtils\RequestStub;
 use Phpolar\Phpolar\Core\Routing\RouteNotRegistered;
 use Phpolar\Phpolar\Core\Routing\RouteParamMap;
-use Phpolar\Phpolar\RoutableInterface;
+use Phpolar\Routable\RoutableInterface;
 use Phpolar\Phpolar\Tests\Stubs\ConfigurableContainerStub;
 use Phpolar\Phpolar\Tests\Stubs\ContainerConfigurationStub;
 use PHPUnit\Framework\Attributes\CoversClass;

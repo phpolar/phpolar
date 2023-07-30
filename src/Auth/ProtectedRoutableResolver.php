@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace Phpolar\Phpolar\Auth;
 
-use Phpolar\Phpolar\RoutableInterface;
-use Phpolar\Phpolar\RoutableResolverInterface;
+use Phpolar\Authenticator\AuthenticatorInterface;
+use Phpolar\Routable\RoutableInterface;
+use Phpolar\Routable\RoutableResolverInterface;
 use ReflectionMethod;
 use ReflectionAttribute;
 

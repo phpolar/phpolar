@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Phpolar\Phpolar\Http;
 
+use Phpolar\Authenticator\AuthenticatorInterface;
 use Phpolar\Phpolar\Auth\AbstractProtectedRoutable;
 use Phpolar\Phpolar\Auth\Authenticate;
-use Phpolar\Phpolar\Auth\AuthenticatorInterface;
 use Phpolar\Phpolar\Auth\ProtectedRoutableResolver;
-use Phpolar\Phpolar\RoutableInterface;
+use Phpolar\Routable\RoutableInterface;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\MockObject\Stub;

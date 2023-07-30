@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Phpolar\Phpolar\Http;
 
-use Phpolar\Phpolar\RoutableInterface;
 use Phpolar\Phpolar\Core\Routing\RouteParamMap;
+use Phpolar\Routable\RoutableInterface;
 
 /**
  * Represents a route with route parameters.

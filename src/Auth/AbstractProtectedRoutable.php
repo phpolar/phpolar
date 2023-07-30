@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Phpolar\Phpolar\Auth;
 
-use Phpolar\Phpolar\RoutableInterface;
+use Phpolar\Routable\RoutableInterface;
 
 /**
  * Represents an authenticated request delegate
