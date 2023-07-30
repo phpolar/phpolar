@@ -5,9 +5,10 @@ declare(strict_types=1);
 namespace Phpolar\Phpolar\Auth;
 
 use Generator;
-use Phpolar\Phpolar\RoutableInterface;
 use Phpolar\Phpolar\Tests\Stubs\ConfigurableContainerStub;
 use Phpolar\Phpolar\Tests\Stubs\ContainerConfigurationStub;
+use Phpolar\Authenticator\AuthenticatorInterface;
+use Phpolar\Routable\RoutableInterface;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\TestDox;

@@ -6,9 +6,9 @@ namespace Phpolar\Phpolar\Http;
 
 use DomainException;
 use Psr\Http\Message\ServerRequestInterface;
-use Phpolar\Phpolar\RoutableInterface;
 use Phpolar\Phpolar\Core\Routing\RouteNotRegistered;
 use Phpolar\Phpolar\Core\Routing\RouteParamMap;
+use Phpolar\Routable\RoutableInterface;
 
 use const Phpolar\Phpolar\Core\Routing\ROUTE_PARAM_PATTERN;
 
