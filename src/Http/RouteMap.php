@@ -13,10 +13,11 @@ use Phpolar\Routable\RoutableInterface;
 use const Phpolar\Phpolar\Core\Routing\ROUTE_PARAM_PATTERN;
 
 /**
- * Contains route paths and their associated
- * request handlers.
+ * Contains route paths associated with target objects.
+ * The target objects define what should happen when a
+ * request is mapped to the given route.
  */
-class RouteRegistry
+class RouteMap
 {
     /**
      * @var array<string,RoutableInterface> Stores actions for `GET` requests.
@@ -31,24 +32,34 @@ class RouteRegistry
     private bool $containsParamRoutes = false;
 
     /**
-     * Associates a request handler to a request.
+     * Associates a request method, route and a target object.
+     *
+     * @param string $method An HTTP request method
+     * @param string $route Represents an HTTP request path
+     * @param RoutableInterface $target The target object that will handle the request
      */
-    public function add(string $method, string $route, RoutableInterface $handler): void
+    public function add(string $method, string $route, RoutableInterface $target): void
     {
         $this->containsParamRoutes = $this->containsParamRoutes || preg_match(ROUTE_PARAM_PATTERN, $route) === 1;
         if (strtoupper($method) === "GET") {
-            $this->registryForGet[$route] = $handler;
+            $this->registryForGet[$route] = $target;
             return;
         }
         if (strtoupper($method) === "POST") {
-            $this->registryForPost[$route] = $handler;
+            $this->registryForPost[$route] = $target;
             return;
         }
         throw new DomainException(sprintf("%s is not supported", $method));
     }
 
     /**
-     * Retrieves the registered handler for a request.
+     * Attempts to locate an object associated with a given request.
+     *
+     * ### Result matrix
+     *
+     * | Not Parameterized |        Parameterized      |      Not Located     |
+     * |-------------------|---------------------------|----------------------|
+     * | Target Object     | Target Object w/ metadata | `RouteNotRegistered` |
      */
     public function match(ServerRequestInterface $request): RoutableInterface | ResolvedRoute | RouteNotRegistered
     {

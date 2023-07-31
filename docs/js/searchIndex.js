@@ -16,6 +16,11 @@ Search.appendIndex(
             "summary": "Handle\u0020and\u0020respond\u0020to\u0020requests\u0020from\u0020clients.",
             "url": "classes/Phpolar-Phpolar-App.html#method_receive"
         },                {
+            "fqsen": "\\Phpolar\\Phpolar\\App\u003A\u003AuseAuthorization\u0028\u0029",
+            "name": "useAuthorization",
+            "summary": "Configures\u0020the\u0020application\nfor\u0020checking\u0020route\u0020authorization.",
+            "url": "classes/Phpolar-Phpolar-App.html#method_useAuthorization"
+        },                {
             "fqsen": "\\Phpolar\\Phpolar\\App\u003A\u003AuseSession\u0028\u0029",
             "name": "useSession",
             "summary": "Configures\u0020a\u0020session.",
@@ -131,6 +136,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Phpolar-Phpolar-DependencyInjection-DiTokens.html#constant_RESPONSE_EMITTER"
         },                {
+            "fqsen": "\\Phpolar\\Phpolar\\DependencyInjection\\DiTokens\u003A\u003AAUTHENTICATED_ROUTING_HANDLER",
+            "name": "AUTHENTICATED_ROUTING_HANDLER",
+            "summary": "",
+            "url": "classes/Phpolar-Phpolar-DependencyInjection-DiTokens.html#constant_AUTHENTICATED_ROUTING_HANDLER"
+        },                {
             "fqsen": "\\Phpolar\\Phpolar\\DependencyInjection\\DiTokens\u003A\u003AUNAUTHORIZED_HANDLER",
             "name": "UNAUTHORIZED_HANDLER",
             "summary": "",
@@ -191,20 +201,20 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Phpolar-Phpolar-Http-ResolvedRoute.html#property_routeParamMap"
         },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Http\\RouteRegistry",
-            "name": "RouteRegistry",
-            "summary": "Contains\u0020route\u0020paths\u0020and\u0020their\u0020associated\nrequest\u0020handlers.",
-            "url": "classes/Phpolar-Phpolar-Http-RouteRegistry.html"
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\RouteMap",
+            "name": "RouteMap",
+            "summary": "Contains\u0020route\u0020paths\u0020associated\u0020with\u0020target\u0020objects.",
+            "url": "classes/Phpolar-Phpolar-Http-RouteMap.html"
         },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Http\\RouteRegistry\u003A\u003Aadd\u0028\u0029",
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\RouteMap\u003A\u003Aadd\u0028\u0029",
             "name": "add",
-            "summary": "Associates\u0020a\u0020request\u0020handler\u0020to\u0020a\u0020request.",
-            "url": "classes/Phpolar-Phpolar-Http-RouteRegistry.html#method_add"
+            "summary": "Associates\u0020a\u0020request\u0020method,\u0020route\u0020and\u0020a\u0020target\u0020object.",
+            "url": "classes/Phpolar-Phpolar-Http-RouteMap.html#method_add"
         },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Http\\RouteRegistry\u003A\u003Amatch\u0028\u0029",
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\RouteMap\u003A\u003Amatch\u0028\u0029",
             "name": "match",
-            "summary": "Retrieves\u0020the\u0020registered\u0020handler\u0020for\u0020a\u0020request.",
-            "url": "classes/Phpolar-Phpolar-Http-RouteRegistry.html#method_match"
+            "summary": "Attempts\u0020to\u0020locate\u0020an\u0020object\u0020associated\u0020with\u0020a\u0020given\u0020request.",
+            "url": "classes/Phpolar-Phpolar-Http-RouteMap.html#method_match"
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\Http\\RoutingHandler",
             "name": "RoutingHandler",
