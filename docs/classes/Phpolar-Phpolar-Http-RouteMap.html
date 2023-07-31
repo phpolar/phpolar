@@ -94,7 +94,7 @@
 
     <article class="phpdocumentor-element -class">
         <h2 class="phpdocumentor-content__title">
-    RoutingHandler
+    RouteMap
 
     
             <div class="phpdocumentor-element__package">
@@ -104,21 +104,21 @@
                             </ul>
         </div>
     
-            <span class="phpdocumentor-element__implements">
-            implements
-                            <abbr title="\Psr\Http\Server\RequestHandlerInterface">RequestHandlerInterface</abbr>                    </span>
     
     </h2>
 
         <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="Http/RoutingHandler.php"><a href="files/http-routinghandler.html"><abbr title="Http/RoutingHandler.php">RoutingHandler.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="Http/RouteMap.php"><a href="files/http-routemap.html"><abbr title="Http/RouteMap.php">RouteMap.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">22</span>
+    <span class="phpdocumentor-element-found-in__line">20</span>
 
     </aside>
 
-            <p class="phpdocumentor-summary">Handles request routing for the application.</p>
+            <p class="phpdocumentor-summary">Contains route paths associated with target objects.</p>
 
+    <section class="phpdocumentor-description"><p>The target objects define what should happen when a
+request is mapped to the given route.</p>
+</section>
 
 
 
@@ -126,19 +126,12 @@
 
 <h3 id="toc">
     Table of Contents
-    <a href="classes/Phpolar-Phpolar-Http-RoutingHandler.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/Phpolar-Phpolar-Http-RouteMap.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h3>
 
 
 
-    <h4 id="toc-interfaces">
-        Interfaces
-        <a href="classes/Phpolar-Phpolar-Http-RoutingHandler.html#toc-interfaces" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <dl class="phpdocumentor-table-of-contents">
-                    <dt class="phpdocumentor-table-of-contents__entry -interface"><abbr title="\Psr\Http\Server\RequestHandlerInterface">RequestHandlerInterface</abbr></dt>    </dl>
 
 
 
@@ -148,23 +141,23 @@
 
 <h4 id="toc-methods">
     Methods
-    <a href="classes/Phpolar-Phpolar-Http-RoutingHandler.html#toc-methods" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/Phpolar-Phpolar-Http-RouteMap.html#toc-methods" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h4>
 <dl class="phpdocumentor-table-of-contents">
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Phpolar-Phpolar-Http-RoutingHandler.html#method___construct">__construct()</a>
+    <a href="classes/Phpolar-Phpolar-Http-RouteMap.html#method_add">add()</a>
     <span>
-                                &nbsp;: mixed    </span>
+                                &nbsp;: void    </span>
 </dt>
-<dd></dd>
+<dd>Associates a request method, route and a target object.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Phpolar-Phpolar-Http-RoutingHandler.html#method_handle">handle()</a>
+    <a href="classes/Phpolar-Phpolar-Http-RouteMap.html#method_match">match()</a>
     <span>
-                                &nbsp;: <abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr>    </span>
+                                &nbsp;: <abbr title="\Phpolar\Routable\RoutableInterface">RoutableInterface</abbr>|<a href="classes/Phpolar-Phpolar-Http-ResolvedRoute.html"><abbr title="\Phpolar\Phpolar\Http\ResolvedRoute">ResolvedRoute</abbr></a>|<abbr title="\Phpolar\Phpolar\Core\Routing\RouteNotRegistered">RouteNotRegistered</abbr>    </span>
 </dt>
-<dd>Locates and executes the registered route handler.</dd>
+<dd>Attempts to locate an object associated with a given request.</dd>
 
     </dl>
 
@@ -178,7 +171,7 @@
             <section class="phpdocumentor-methods">
         <h3 class="phpdocumentor-elements__header" id="methods">
             Methods
-            <a href="classes/Phpolar-Phpolar-Http-RoutingHandler.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/Phpolar-Phpolar-Http-RouteMap.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
         </h3>
                     <article
         class="phpdocumentor-element
@@ -186,80 +179,51 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method___construct">
-        __construct()
-        <a href="classes/Phpolar-Phpolar-Http-RoutingHandler.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_add">
+        add()
+        <a href="classes/Phpolar-Phpolar-Http-RouteMap.html#method_add" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="Http/RoutingHandler.php"><a href="files/http-routinghandler.html"><abbr title="Http/RoutingHandler.php">RoutingHandler.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="Http/RouteMap.php"><a href="files/http-routemap.html"><abbr title="Http/RouteMap.php">RouteMap.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">24</span>
+    <span class="phpdocumentor-element-found-in__line">41</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Associates a request method, route and a target object.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Phpolar-Phpolar-Http-RouteMap.html"><abbr title="\Phpolar\Phpolar\Http\RouteMap">RouteMap</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$routeRegistry</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\ResponseFactoryInterface">ResponseFactoryInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$responseFactory</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\StreamFactoryInterface">StreamFactoryInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$streamFactory</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Container\ContainerInterface">ContainerInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$container</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Phpolar\ModelResolver\ModelResolverInterface">ModelResolverInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$modelResolver</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Phpolar\Routable\RoutableResolverInterface">RoutableResolverInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$routableResolver</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Server\RequestHandlerInterface">RequestHandlerInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$unauthHandler</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">add</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$method</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$route</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Phpolar\Routable\RoutableInterface">RoutableInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$target</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$routeRegistry</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Phpolar-Phpolar-Http-RouteMap.html"><abbr title="\Phpolar\Phpolar\Http\RouteMap">RouteMap</abbr></a></span>
+                <span class="phpdocumentor-signature__argument__name">$method</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
+                    <section class="phpdocumentor-description"><p>An HTTP request method</p>
+</section>
 
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$responseFactory</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\ResponseFactoryInterface">ResponseFactoryInterface</abbr></span>
+                <span class="phpdocumentor-signature__argument__name">$route</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
+                    <section class="phpdocumentor-description"><p>Represents an HTTP request path</p>
+</section>
 
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$streamFactory</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\StreamFactoryInterface">StreamFactoryInterface</abbr></span>
+                <span class="phpdocumentor-signature__argument__name">$target</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Phpolar\Routable\RoutableInterface">RoutableInterface</abbr></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
-            </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$container</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Container\ContainerInterface">ContainerInterface</abbr></span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
-            </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$modelResolver</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Phpolar\ModelResolver\ModelResolverInterface">ModelResolverInterface</abbr></span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
-            </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$routableResolver</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Phpolar\Routable\RoutableResolverInterface">RoutableResolverInterface</abbr></span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
-            </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$unauthHandler</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Server\RequestHandlerInterface">RequestHandlerInterface</abbr></span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
+                    <section class="phpdocumentor-description"><p>The target object that will handle the request</p>
+</section>
 
             </dd>
             </dl>
@@ -267,7 +231,7 @@
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">mixed</span>
+    <span class="phpdocumentor-signature__response_type">void</span>
             &mdash;
         
     
@@ -278,25 +242,27 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_handle">
-        handle()
-        <a href="classes/Phpolar-Phpolar-Http-RoutingHandler.html#method_handle" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_match">
+        match()
+        <a href="classes/Phpolar-Phpolar-Http-RouteMap.html#method_match" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="Http/RoutingHandler.php"><a href="files/http-routinghandler.html"><abbr title="Http/RoutingHandler.php">RoutingHandler.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="Http/RouteMap.php"><a href="files/http-routemap.html"><abbr title="Http/RouteMap.php">RouteMap.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">41</span>
+    <span class="phpdocumentor-element-found-in__line">64</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Locates and executes the registered route handler.</p>
+        <p class="phpdocumentor-summary">Attempts to locate an object associated with a given request.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">handle</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\ServerRequestInterface">ServerRequestInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$request</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr></span></code>
+                    <span class="phpdocumentor-signature__name">match</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\ServerRequestInterface">ServerRequestInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$request</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Phpolar\Routable\RoutableInterface">RoutableInterface</abbr>|<a href="classes/Phpolar-Phpolar-Http-ResolvedRoute.html"><abbr title="\Phpolar\Phpolar\Http\ResolvedRoute">ResolvedRoute</abbr></a>|<abbr title="\Phpolar\Phpolar\Core\Routing\RouteNotRegistered">RouteNotRegistered</abbr></span></code>
 
-        <section class="phpdocumentor-description"><p>If a handler for the route cannot be located,
-a &quot;Not Found&quot; response will be returned.</p>
+        <section class="phpdocumentor-description"><h3>Result matrix</h3>
+<p>| Not Parameterized |        Parameterized      |      Not Located     |
+|-------------------|---------------------------|----------------------|
+| Target Object     | Target Object w/ metadata | <code class="prettyprint">RouteNotRegistered</code> |</p>
 </section>
 
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
@@ -314,7 +280,7 @@ a &quot;Not Found&quot; response will be returned.</p>
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr></span>
+    <span class="phpdocumentor-signature__response_type"><abbr title="\Phpolar\Routable\RoutableInterface">RoutableInterface</abbr>|<a href="classes/Phpolar-Phpolar-Http-ResolvedRoute.html"><abbr title="\Phpolar\Phpolar\Http\ResolvedRoute">ResolvedRoute</abbr></a>|<abbr title="\Phpolar\Phpolar\Core\Routing\RouteNotRegistered">RouteNotRegistered</abbr></span>
             &mdash;
         
     
@@ -397,7 +363,7 @@ a &quot;Not Found&quot; response will be returned.</p>
     </section>
 </section>
         </div>
-        <a href="classes/Phpolar-Phpolar-Http-RoutingHandler.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+        <a href="classes/Phpolar-Phpolar-Http-RouteMap.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
     </main>
 
