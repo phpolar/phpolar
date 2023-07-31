@@ -9,8 +9,9 @@ use Phpolar\Routable\RoutableInterface;
 use Phpolar\Authenticator\AuthenticatorInterface;
 
 /**
- * Provides an authentication mechanism
- * for objects that handle requests.
+ * Use to indicate that a route should
+ * only be accessed by an authenticated
+ * user.
  */
 #[Attribute(Attribute::TARGET_METHOD)]
 final class Authenticate
