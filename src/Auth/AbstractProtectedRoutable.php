@@ -7,9 +7,13 @@ namespace Phpolar\Phpolar\Auth;
 use Phpolar\Routable\RoutableInterface;
 
 /**
- * Represents an authenticated request delegate
- * that contains the credentials of an authenticated
- * user.
+ * Represents a target object for a request route
+ * that requires authorization.
+ *
+ * Objects that extend this class will have access
+ * to metadata associated with the authenticated
+ * user.  Route target objects that require
+ * authorization should extend this class.
  */
 abstract class AbstractProtectedRoutable implements RoutableInterface
 {

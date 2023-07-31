@@ -12,7 +12,7 @@ use Phpolar\Routable\RoutableInterface;
  *
  * **Example**: `/some/path/{id}`
  *
- * Contains the delegate for the route
+ * Contains the target object for the route
  * along with a map of the route parameters.
  */
 final class ResolvedRoute

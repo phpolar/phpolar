@@ -47,9 +47,7 @@ final class App
     }
 
     /**
-     * Creates a singleton web server application.  This framework targets the
-     * *stateless, single-threaded, server-side application use case*.  Therefore,
-     * only a single instance is created on each request.
+     * Creates a singleton web-based application.
      */
     public static function create(
         ContainerInterface $container,
@@ -74,8 +72,7 @@ final class App
     }
 
     /**
-     * Configures the application
-     * for checking route authorization.
+     * Configures the application for checking route authorization.
      */
     public function useAuthorization(): App
     {
@@ -140,7 +137,7 @@ final class App
     }
 
     /**
-     * Configures the web server with associated
+     * Configures the application with associated
      * routes and handlers.
      */
     private function setupRouting(): void
