@@ -21,7 +21,7 @@ use Phpolar\HttpMessageTestUtils\StreamFactoryStub;
 use Phpolar\ModelResolver\ModelResolverInterface;
 use Phpolar\Routable\RoutableInterface;
 use Phpolar\Routable\RoutableResolverInterface;
-use Phpolar\Phpolar\Http\RouteRegistry;
+use Phpolar\Phpolar\Http\RouteMap;
 use Phpolar\Phpolar\Http\RoutingHandler;
 use Phpolar\Phpolar\Http\RoutingMiddleware;
 use Phpolar\Phpolar\Tests\Stubs\ConfigurableContainerStub;
@@ -50,10 +50,10 @@ use const Phpolar\Phpolar\Tests\PROJECT_MEMORY_USAGE_THRESHOLD;
 #[TestDox("Low Memory Usage")]
 final class MemoryUsageTest extends TestCase
 {
-    protected function getContainerFactory(RouteRegistry $routes): ContainerInterface
+    protected function getContainerFactory(RouteMap $routes): ContainerInterface
     {
         $config = new ContainerConfigurationStub();
-        $config[RouteRegistry::class] = $routes;
+        $config[RouteMap::class] = $routes;
         $config[RoutingMiddleware::class] = static fn (ArrayAccess $config) => new RoutingMiddleware($config[RoutingHandler::class]);
         $config[ModelResolverInterface::class] = $this->createStub(ModelResolverInterface::class);
         $config[RoutableResolverInterface::class] = new class () implements RoutableResolverInterface {
@@ -63,7 +63,7 @@ final class MemoryUsageTest extends TestCase
             }
         };
         $config[RoutingHandler::class] = static fn (ArrayAccess $config) => new RoutingHandler(
-            $config[RouteRegistry::class],
+            $config[RouteMap::class],
             $config[ResponseFactoryInterface::class],
             $config[StreamFactoryInterface::class],
             $config[ContainerInterface::class],
@@ -111,14 +111,14 @@ final class MemoryUsageTest extends TestCase
         $this->expectOutputString("content");
         $request = new RequestStub("GET", "/");
         $config = new ContainerConfigurationStub();
-        $routes = new RouteRegistry();
+        $routes = new RouteMap();
         /**
          * @var Stub&RoutableInterface $contentDelStub
          */
         $contentDelStub = $this->createStub(RoutableInterface::class);
         $contentDelStub->method("process")->willReturn("content");
         $routes->add("GET", "/", $contentDelStub);
-        $config[RouteRegistry::class] = $routes;
+        $config[RouteMap::class] = $routes;
         $containerFac = $this->getContainerFactory($routes);
         $totalUsed = -memory_get_usage();
         $server = App::create($this->configureContainer($containerFac, $config));

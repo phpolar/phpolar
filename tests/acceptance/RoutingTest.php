@@ -98,7 +98,7 @@ final class RoutingTest extends TestCase
     {
         $givenRoute = "/";
         $expectedResponse = "<h1>Found!</h1>";
-        $routeRegistry = new RouteRegistry();
+        $routeRegistry = new RouteMap();
         $indexHandler = new class ($expectedResponse) implements RoutableInterface {
             public function __construct(private string $responseTemplate)
             {
@@ -136,7 +136,7 @@ final class RoutingTest extends TestCase
     {
         $givenRoute = "an_unregistered_route";
         $expectedStatusCode = ResponseCode::NOT_FOUND;
-        $routeRegistry = new RouteRegistry();
+        $routeRegistry = new RouteMap();
         $container = $this->getContainer();
         $routingHandler = new RoutingHandler(
             routeRegistry: $routeRegistry,
