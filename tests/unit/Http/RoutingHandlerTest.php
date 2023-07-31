@@ -504,4 +504,54 @@ final class RoutingHandlerTest extends TestCase
         $response = $sut->handle($request);
         $this->assertSame("BANG!", $response->getBody()->getContents());
     }
+
+    #[TestDox("Should call configured unauthorized handler when route is parameterized")]
+    #[DataProvider("requestMethods")]
+    public function testh(string $requestMethod)
+    {
+        $routable = new class () extends AbstractProtectedRoutable {
+            #[Authenticate]
+            public function process(ContainerInterface $container): string
+            {
+                return "";
+            }
+        };
+
+        $routeParamMap = new RouteParamMap("/fake/path/{id}", "/fake/path/123");
+        $resololvedRoute = new ResolvedRoute($routable, $routeParamMap);
+
+        /**
+         * @var MockObject&AuthenticatorInterface
+         */
+        $authenticatorStub = $this->createStub(AuthenticatorInterface::class);
+        $authenticatorStub->method("isAuthenticated")->willReturn(false);
+        $protectedRoutableResolver = new ProtectedRoutableResolver($authenticatorStub);
+        /**
+         * @var Stub&RouteRegistry $routeRegistryStub
+         */
+        $routeRegistryStub = $this->createStub(RouteRegistry::class);
+        $routeRegistryStub->method("match")->willReturn($resololvedRoute);
+        $container = $this->getContainer();
+        $responseFactory = $container->get(ResponseFactoryInterface::class);
+        $streamFactory = $container->get(StreamFactoryInterface::class);
+        $modelResolver = $this->createStub(ModelResolverInterface::class);
+        $unauthHandler = new class () implements RequestHandlerInterface {
+            public function handle(ServerRequestInterface $request): ResponseInterface
+            {
+                return (new ResponseStub())->withBody((new StreamFactoryStub("w"))->createStream("BANG!"));
+            }
+        };
+        $sut = new RoutingHandler(
+            $routeRegistryStub,
+            $responseFactory,
+            $streamFactory,
+            $container,
+            $modelResolver,
+            $protectedRoutableResolver,
+            $unauthHandler,
+        );
+        $request = (new RequestStub($requestMethod))->withUri(new UriStub(uniqid()));
+        $response = $sut->handle($request);
+        $this->assertSame("BANG!", $response->getBody()->getContents());
+    }
 }
