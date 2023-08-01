@@ -94,7 +94,7 @@
 
     <article class="phpdocumentor-element -class">
         <h2 class="phpdocumentor-content__title">
-    ProtectedRoutableResolver
+    Authorize
 
     
             <div class="phpdocumentor-element__package">
@@ -104,26 +104,20 @@
                             </ul>
         </div>
     
-            <span class="phpdocumentor-element__implements">
-            implements
-                            <abbr title="\Phpolar\Routable\RoutableResolverInterface">RoutableResolverInterface</abbr>                    </span>
     
     </h2>
 
         <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="Auth/ProtectedRoutableResolver.php"><a href="files/auth-protectedroutableresolver.html"><abbr title="Auth/ProtectedRoutableResolver.php">ProtectedRoutableResolver.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="Auth/Authorize.php"><a href="files/auth-authorize.html"><abbr title="Auth/Authorize.php">Authorize.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">21</span>
+    <span class="phpdocumentor-element-found-in__line">16</span>
 
     </aside>
 
-            <p class="phpdocumentor-summary">Returns either the given routable or the given fallback handler
-based on the boolean result of a given algorithm.</p>
+            <p class="phpdocumentor-summary">Use to indicate that a route should
+only be accessed by an authorized, authenticated
+user.</p>
 
-    <section class="phpdocumentor-description"><p>Authentication is <em>opt-in</em>.  Therefore, the given routable
-will be returned if it is not configured with
-an <code class="prettyprint">Authorize</code> attribute.</p>
-</section>
 
 
 
@@ -131,19 +125,12 @@ an <code class="prettyprint">Authorize</code> attribute.</p>
 
 <h3 id="toc">
     Table of Contents
-    <a href="classes/Phpolar-Phpolar-Auth-ProtectedRoutableResolver.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/Phpolar-Phpolar-Auth-Authorize.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h3>
 
 
 
-    <h4 id="toc-interfaces">
-        Interfaces
-        <a href="classes/Phpolar-Phpolar-Auth-ProtectedRoutableResolver.html#toc-interfaces" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <dl class="phpdocumentor-table-of-contents">
-                    <dt class="phpdocumentor-table-of-contents__entry -interface"><abbr title="\Phpolar\Routable\RoutableResolverInterface">RoutableResolverInterface</abbr></dt>    </dl>
 
 
 
@@ -153,23 +140,18 @@ an <code class="prettyprint">Authorize</code> attribute.</p>
 
 <h4 id="toc-methods">
     Methods
-    <a href="classes/Phpolar-Phpolar-Auth-ProtectedRoutableResolver.html#toc-methods" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/Phpolar-Phpolar-Auth-Authorize.html#toc-methods" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h4>
 <dl class="phpdocumentor-table-of-contents">
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Phpolar-Phpolar-Auth-ProtectedRoutableResolver.html#method___construct">__construct()</a>
-    <span>
-                                &nbsp;: mixed    </span>
-</dt>
-<dd></dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Phpolar-Phpolar-Auth-ProtectedRoutableResolver.html#method_resolve">resolve()</a>
+    <a href="classes/Phpolar-Phpolar-Auth-Authorize.html#method_getResolvedRoutable">getResolvedRoutable()</a>
     <span>
                                 &nbsp;: <abbr title="\Phpolar\Routable\RoutableInterface">RoutableInterface</abbr>|false    </span>
 </dt>
-<dd></dd>
+<dd>Return the target `Routable` when the request
+has been authenticated.  Otherwise, return
+the fallback `Routable`.</dd>
 
     </dl>
 
@@ -183,7 +165,7 @@ an <code class="prettyprint">Authorize</code> attribute.</p>
             <section class="phpdocumentor-methods">
         <h3 class="phpdocumentor-elements__header" id="methods">
             Methods
-            <a href="classes/Phpolar-Phpolar-Auth-ProtectedRoutableResolver.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/Phpolar-Phpolar-Auth-Authorize.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
         </h3>
                     <article
         class="phpdocumentor-element
@@ -191,73 +173,39 @@ an <code class="prettyprint">Authorize</code> attribute.</p>
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method___construct">
-        __construct()
-        <a href="classes/Phpolar-Phpolar-Auth-ProtectedRoutableResolver.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_getResolvedRoutable">
+        getResolvedRoutable()
+        <a href="classes/Phpolar-Phpolar-Auth-Authorize.html#method_getResolvedRoutable" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="Auth/ProtectedRoutableResolver.php"><a href="files/auth-protectedroutableresolver.html"><abbr title="Auth/ProtectedRoutableResolver.php">ProtectedRoutableResolver.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="Auth/Authorize.php"><a href="files/auth-authorize.html"><abbr title="Auth/Authorize.php">Authorize.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">25</span>
+    <span class="phpdocumentor-element-found-in__line">24</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Return the target `Routable` when the request
+has been authenticated.  Otherwise, return
+the fallback `Routable`.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Phpolar\Authenticator\AuthenticatorInterface">AuthenticatorInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$authenticator</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">getResolvedRoutable</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Phpolar-Phpolar-Auth-AbstractProtectedRoutable.html"><abbr title="\Phpolar\Phpolar\Auth\AbstractProtectedRoutable">AbstractProtectedRoutable</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$target</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Phpolar\Authenticator\AuthenticatorInterface">AuthenticatorInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$authenticator</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Phpolar\Routable\RoutableInterface">RoutableInterface</abbr>|false</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$authenticator</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Phpolar\Authenticator\AuthenticatorInterface">AuthenticatorInterface</abbr></span>
+                <span class="phpdocumentor-signature__argument__name">$target</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Phpolar-Phpolar-Auth-AbstractProtectedRoutable.html"><abbr title="\Phpolar\Phpolar\Auth\AbstractProtectedRoutable">AbstractProtectedRoutable</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"></section>
 
             </dd>
-            </dl>
-
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">mixed</span>
-            &mdash;
-        
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_resolve">
-        resolve()
-        <a href="classes/Phpolar-Phpolar-Auth-ProtectedRoutableResolver.html#method_resolve" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="Auth/ProtectedRoutableResolver.php"><a href="files/auth-protectedroutableresolver.html"><abbr title="Auth/ProtectedRoutableResolver.php">ProtectedRoutableResolver.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">29</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">resolve</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Phpolar\Routable\RoutableInterface">RoutableInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$target</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Phpolar\Routable\RoutableInterface">RoutableInterface</abbr>|false</span></code>
-
-        <section class="phpdocumentor-description"></section>
-
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$target</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Phpolar\Routable\RoutableInterface">RoutableInterface</abbr></span>
+                <span class="phpdocumentor-signature__argument__name">$authenticator</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Phpolar\Authenticator\AuthenticatorInterface">AuthenticatorInterface</abbr></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"></section>
@@ -351,7 +299,7 @@ an <code class="prettyprint">Authorize</code> attribute.</p>
     </section>
 </section>
         </div>
-        <a href="classes/Phpolar-Phpolar-Auth-ProtectedRoutableResolver.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+        <a href="classes/Phpolar-Phpolar-Auth-Authorize.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
     </main>
 
