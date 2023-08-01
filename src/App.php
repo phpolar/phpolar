@@ -72,6 +72,15 @@ final class App
     }
 
     /**
+     * Queue the given [PSR-15 middleware](https://www.php-fig.org/psr/psr-15/#22-psrhttpservermiddlewareinterface).
+     */
+    public function use(MiddlewareInterface $middleware): App
+    {
+        $this->queueMiddleware($middleware);
+        return $this;
+    }
+
+    /**
      * Configures the application for checking route authorization.
      */
     public function useAuthorization(): App
