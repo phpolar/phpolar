@@ -22,6 +22,7 @@ use Phpolar\Phpolar\Http\RoutingHandler;
 use Phpolar\Phpolar\Http\RoutingMiddleware;
 use Phpolar\Phpolar\Http\MiddlewareQueueRequestHandler;
 use Phpolar\Phpolar\DependencyInjection\DiTokens;
+use Phpolar\Phpolar\Http\AuthorizationChecker;
 use Phpolar\Routable\RoutableInterface;
 use Phpolar\Routable\RoutableResolverInterface;
 use Psr\Container\ContainerInterface;
@@ -40,7 +41,13 @@ return [
         responseFactory: $container->get(ResponseFactoryInterface::class),
         streamFactory: $container->get(StreamFactoryInterface::class),
         modelResolver: $container->get(ModelResolverInterface::class),
+        authChecker: $container->get(DiTokens::NOOP_AUTH_CHECKER),
         container: $container,
+    ),
+    /**
+     * @suppress PhanUnreferencedClosure
+     */
+    AuthorizationChecker::class => static fn (ContainerInterface $container) => new AuthorizationChecker(
         routableResolver: new class () implements RoutableResolverInterface {
             public function resolve(RoutableInterface $target): RoutableInterface|false
             {
@@ -62,14 +69,20 @@ return [
     /**
      * @suppress PhanUnreferencedClosure
      */
+    DiTokens::NOOP_AUTH_CHECKER => static fn (ContainerInterface $container) => new AuthorizationChecker(
+        routableResolver: new ProtectedRoutableResolver($container->get(AuthenticatorInterface::class)),
+        unauthHandler: $container->get(DiTokens::UNAUTHORIZED_HANDLER),
+    ),
+    /**
+     * @suppress PhanUnreferencedClosure
+     */
     DiTokens::AUTHENTICATED_ROUTING_HANDLER => static fn (ContainerInterface $container) => new RoutingHandler(
         routeRegistry: $container->get(RouteMap::class),
         responseFactory: $container->get(ResponseFactoryInterface::class),
         streamFactory: $container->get(StreamFactoryInterface::class),
         modelResolver: $container->get(ModelResolverInterface::class),
+        authChecker: $container->get(AuthorizationChecker::class),
         container: $container,
-        routableResolver: new ProtectedRoutableResolver($container->get(AuthenticatorInterface::class)),
-        unauthHandler: $container->get(DiTokens::UNAUTHORIZED_HANDLER),
     ),
     /**
      * @suppress PhanUnreferencedClosure

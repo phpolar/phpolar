@@ -151,6 +151,11 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Phpolar-Phpolar-DependencyInjection-DiTokens.html#constant_UNAUTHORIZED_HANDLER"
         },                {
+            "fqsen": "\\Phpolar\\Phpolar\\DependencyInjection\\DiTokens\u003A\u003ANOOP_AUTH_CHECKER",
+            "name": "NOOP_AUTH_CHECKER",
+            "summary": "",
+            "url": "classes/Phpolar-Phpolar-DependencyInjection-DiTokens.html#constant_NOOP_AUTH_CHECKER"
+        },                {
             "fqsen": "\\Phpolar\\Phpolar\\DependencyInjection\\Globs",
             "name": "Globs",
             "summary": "Contains\u0020all\u0020pathname\u0020patterns\nused\u0020for\u0020dependency\u0020injection.",
@@ -165,6 +170,21 @@ Search.appendIndex(
             "name": "CustomDeps",
             "summary": "The\u0020custom\u0020dependencies\u0020directory\u0020should\u0020be\nset\u0020up\u0020in\u0020the\u0020application\u0020using\u0020the\u0020framework.",
             "url": ""
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\AuthorizationChecker",
+            "name": "AuthorizationChecker",
+            "summary": "Determines\u0020if\u0020authorization\u0020is\u0020successful\nfor\u0020a\u0020given\u0020\u0060Routable\u0060.",
+            "url": "classes/Phpolar-Phpolar-Http-AuthorizationChecker.html"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\AuthorizationChecker\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Phpolar-Phpolar-Http-AuthorizationChecker.html#method___construct"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\AuthorizationChecker\u003A\u003Acheck\u0028\u0029",
+            "name": "check",
+            "summary": "Returns\u0020\u0060Routable\u0060\u0020when\u0020authorization\u0020is\u0020successful\nand\u0020an\u0020\u0060Unauthorized\u0060\u0020HTTP\u0020response\u0020when\u0020it\u0020is\u0020not.",
+            "url": "classes/Phpolar-Phpolar-Http-AuthorizationChecker.html#method_check"
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\Http\\MiddlewareQueueRequestHandler",
             "name": "MiddlewareQueueRequestHandler",

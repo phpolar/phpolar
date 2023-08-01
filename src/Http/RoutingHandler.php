@@ -7,7 +7,6 @@ namespace Phpolar\Phpolar\Http;
 use Phpolar\ModelResolver\ModelResolverInterface;
 use Phpolar\Phpolar\Core\Routing\RouteNotRegistered;
 use Phpolar\Routable\RoutableInterface;
-use Phpolar\Routable\RoutableResolverInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -27,8 +26,7 @@ class RoutingHandler implements RequestHandlerInterface
         private StreamFactoryInterface $streamFactory,
         private ContainerInterface $container,
         private ModelResolverInterface $modelResolver,
-        private RoutableResolverInterface $routableResolver,
-        private RequestHandlerInterface $unauthHandler,
+        private AuthorizationChecker $authChecker,
     ) {
     }
 
@@ -48,38 +46,36 @@ class RoutingHandler implements RequestHandlerInterface
         };
     }
 
-    private function getResponse(string $responseContent): ResponseInterface
+    private function handleDelegate(RoutableInterface $routable, ServerRequestInterface $request): ResponseInterface
     {
-        $responseStream = $this->streamFactory->createStream($responseContent);
-        $response = $this->responseFactory->createResponse();
-        return $response->withBody($responseStream);
-    }
+        $result = $this->authChecker->check($routable, $request);
 
-    private function handleDelegate(RoutableInterface $delegate, ServerRequestInterface $request): ResponseInterface
-    {
-        $authorizedDelegate = $this->routableResolver->resolve($delegate);
-
-        if ($authorizedDelegate === false) {
-            return $this->unauthHandler->handle($request);
+        if ($result instanceof ResponseInterface) {
+            return $result;
         }
+
+        $authorizedDelegate = $result;
 
         $modelParams = $this->modelResolver->resolve($authorizedDelegate, "process");
         /**
          * @var string $responseContent
          */
         $responseContent = empty($modelParams) === false ? (new ReflectionMethod($authorizedDelegate, "process"))->invokeArgs($authorizedDelegate, array_merge([$this->container], $modelParams)) : $authorizedDelegate->process($this->container);
-        return $this->getResponse($responseContent);
+
+        $responseStream = $this->streamFactory->createStream($responseContent);
+        $response = $this->responseFactory->createResponse();
+        return $response->withBody($responseStream);
     }
 
     private function handleResolvedRoute(ResolvedRoute $resolvedRoute, ServerRequestInterface $request): ResponseInterface
     {
-        $authResult = $this->routableResolver->resolve($resolvedRoute->delegate);
+        $result = $this->authChecker->check($resolvedRoute->delegate, $request);
 
-        if ($authResult === false) {
-            return $this->unauthHandler->handle($request);
+        if ($result instanceof ResponseInterface) {
+            return $result;
         }
 
-        $resolvedRoute->delegate = $authResult;
+        $resolvedRoute->delegate = $result;
 
         $reflectionMethod = new ReflectionMethod($resolvedRoute->delegate, "process");
         $args = array_merge([$this->container], $resolvedRoute->routeParamMap->toArray());
@@ -87,6 +83,9 @@ class RoutingHandler implements RequestHandlerInterface
          * @var string $responseContent
          */
         $responseContent = $reflectionMethod->invokeArgs($resolvedRoute->delegate, $args);
-        return $this->getResponse($responseContent);
+
+        $responseStream = $this->streamFactory->createStream($responseContent);
+        $response = $this->responseFactory->createResponse();
+        return $response->withBody($responseStream);
     }
 }

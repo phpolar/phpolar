@@ -104,8 +104,10 @@ final class RoutingHandlerTest extends TestCase
             $streamFactory,
             $container,
             $modelResolver,
-            $this->createStub(RoutableResolverInterface::class),
-            $this->createStub(RequestHandlerInterface::class),
+            new AuthorizationChecker(
+                $this->createStub(RoutableResolverInterface::class),
+                $this->createStub(RequestHandlerInterface::class),
+            ),
         );
         $request = (new RequestStub($requestMethod))->withUri(new UriStub(uniqid()));
         $response = $sut->handle($request);
@@ -141,8 +143,10 @@ final class RoutingHandlerTest extends TestCase
             $streamFactory,
             $container,
             $modelResolver,
-            $routableResolver,
-            $this->createStub(RequestHandlerInterface::class),
+            new AuthorizationChecker(
+                $routableResolver,
+                $this->createStub(RequestHandlerInterface::class),
+            ),
         );
         $request = (new RequestStub($requestMethod))->withUri(new UriStub(uniqid()));
         $response = $sut->handle($request);
@@ -177,8 +181,10 @@ final class RoutingHandlerTest extends TestCase
             $streamFactory,
             $container,
             $modelResolver,
-            $protectedRoutableResolver,
-            $this->createStub(RequestHandlerInterface::class),
+            new AuthorizationChecker(
+                $protectedRoutableResolver,
+                $this->createStub(RequestHandlerInterface::class),
+            ),
         );
         $request = (new RequestStub($requestMethod))->withUri(new UriStub(uniqid()));
         $response = $sut->handle($request);
@@ -219,8 +225,10 @@ final class RoutingHandlerTest extends TestCase
             $streamFactory,
             $container,
             $modelResolver,
-            $routableResolver,
-            $this->createStub(RequestHandlerInterface::class),
+            new AuthorizationChecker(
+                $routableResolver,
+                $this->createStub(RequestHandlerInterface::class),
+            ),
         );
         $request = (new RequestStub())->withUri(new UriStub(uniqid()));
         $response = $sut->handle($request);
@@ -266,8 +274,10 @@ final class RoutingHandlerTest extends TestCase
             $streamFactory,
             $container,
             $modelResolver,
-            $routableResolver,
-            $this->createStub(RequestHandlerInterface::class),
+            new AuthorizationChecker(
+                $routableResolver,
+                $this->createStub(RequestHandlerInterface::class),
+            ),
         );
         $request = (new RequestStub())->withUri(new UriStub(uniqid()));
         $response = $sut->handle($request);
@@ -312,8 +322,10 @@ final class RoutingHandlerTest extends TestCase
             $streamFactory,
             $container,
             $modelResolver,
-            $protectedRoutableResolver,
-            $this->createStub(RequestHandlerInterface::class),
+            new AuthorizationChecker(
+                $protectedRoutableResolver,
+                $this->createStub(RequestHandlerInterface::class),
+            ),
         );
         $request = (new RequestStub())->withUri(new UriStub(uniqid()));
         $response = $sut->handle($request);
@@ -360,8 +372,10 @@ final class RoutingHandlerTest extends TestCase
             $streamFactoryMock,
             $container,
             $modelResolverMock,
-            $routableResolver,
-            $this->createStub(RequestHandlerInterface::class),
+            new AuthorizationChecker(
+                $routableResolver,
+                $this->createStub(RequestHandlerInterface::class),
+            ),
         );
         $sut->handle($request);
     }
@@ -403,8 +417,10 @@ final class RoutingHandlerTest extends TestCase
             $streamFactory,
             $container,
             $modelResolverMock,
-            $routableResolver,
-            $this->createStub(RequestHandlerInterface::class),
+            new AuthorizationChecker(
+                $routableResolver,
+                $this->createStub(RequestHandlerInterface::class),
+            ),
         );
         $response = $sut->handle($request);
         $this->assertSame($fakeModel->name, $response->getBody()->getContents());
@@ -450,8 +466,10 @@ final class RoutingHandlerTest extends TestCase
             $streamFactory,
             $container,
             $modelResolver,
-            $protectedRoutableResolver,
-            $this->createStub(RequestHandlerInterface::class),
+            new AuthorizationChecker(
+                $protectedRoutableResolver,
+                $this->createStub(RequestHandlerInterface::class),
+            ),
         );
         $request = (new RequestStub($requestMethod))->withUri(new UriStub(uniqid()));
         $response = $sut->handle($request);
@@ -497,8 +515,10 @@ final class RoutingHandlerTest extends TestCase
             $streamFactory,
             $container,
             $modelResolver,
-            $protectedRoutableResolver,
-            $unauthHandler,
+            new AuthorizationChecker(
+                $protectedRoutableResolver,
+                $unauthHandler,
+            ),
         );
         $request = (new RequestStub($requestMethod))->withUri(new UriStub(uniqid()));
         $response = $sut->handle($request);
@@ -547,8 +567,10 @@ final class RoutingHandlerTest extends TestCase
             $streamFactory,
             $container,
             $modelResolver,
-            $protectedRoutableResolver,
-            $unauthHandler,
+            new AuthorizationChecker(
+                $protectedRoutableResolver,
+                $unauthHandler,
+            ),
         );
         $request = (new RequestStub($requestMethod))->withUri(new UriStub(uniqid()));
         $response = $sut->handle($request);

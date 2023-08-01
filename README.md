@@ -82,7 +82,10 @@ class Person extends AbstractModel
 
     public string $action = "somewhere";
 
-    #[MaxLength(20)]
+    #[PrimaryKey]
+    public string $id;
+
+        #[MaxLength(20)]
     public string $firstName;
 
     #[MaxLength(20)]
@@ -104,10 +107,10 @@ class Person extends AbstractModel
 
 |      Module    |Source Code Size * |Memory Usage|  Required |
 |----------------|-------------------|------------|-----------|
-|     phpolar    |        8 kB       |   125 kB   |      x    |
+|     phpolar    |       10 kB       |   131 kB   |      x    |
 |  phpolar/core  |        4 kB       |            |      x    |
 |  phplar/model  |       19 kB       |   108 kB   |           |
-|     **TOTAL**  |     **31 kB**     | **232 kB** |           |
+|     **TOTAL**  |     **33 kB**     | **239 kB** |           |
 
 * Note: Does not include comments.
 
