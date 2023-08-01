@@ -15,7 +15,7 @@ use Phpolar\HttpMessageTestUtils\UriStub;
 use Phpolar\Model\Model;
 use Phpolar\ModelResolver\ModelResolverInterface;
 use Phpolar\Phpolar\Auth\AbstractProtectedRoutable;
-use Phpolar\Phpolar\Auth\Authenticate;
+use Phpolar\Phpolar\Auth\Authorize;
 use Phpolar\Authenticator\AuthenticatorInterface;
 use Phpolar\Phpolar\Auth\ProtectedRoutableResolver;
 use Phpolar\Phpolar\Core\Routing\RouteNotRegistered;
@@ -373,7 +373,7 @@ final class RoutingHandlerTest extends TestCase
         $fakeModel = (object) ["name" => $expectedModelName];
         $container = $this->getContainer();
         $registeredRouteHandler = new class () extends AbstractProtectedRoutable {
-            #[Authenticate]
+            #[Authorize]
             public function process(ContainerInterface $container, #[Model] object $form = null): string
             {
                 return $form->name;
@@ -416,7 +416,7 @@ final class RoutingHandlerTest extends TestCase
     {
         $fakeUserName = "FAKE_NAME";
         $registeredRouteHandler = new class () extends AbstractProtectedRoutable {
-            #[Authenticate]
+            #[Authorize]
             public function process(ContainerInterface $container): string
             {
                 return $this->user->name;
@@ -463,7 +463,7 @@ final class RoutingHandlerTest extends TestCase
     public function testg(string $requestMethod)
     {
         $registeredRouteHandler = new class () extends AbstractProtectedRoutable {
-            #[Authenticate]
+            #[Authorize]
             public function process(ContainerInterface $container): string
             {
                 return "";
@@ -510,7 +510,7 @@ final class RoutingHandlerTest extends TestCase
     public function testh(string $requestMethod)
     {
         $routable = new class () extends AbstractProtectedRoutable {
-            #[Authenticate]
+            #[Authorize]
             public function process(ContainerInterface $container): string
             {
                 return "";
