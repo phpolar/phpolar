@@ -157,7 +157,7 @@ request is mapped to the given route.</p>
     <span>
                                 &nbsp;: <abbr title="\Phpolar\Routable\RoutableInterface">RoutableInterface</abbr>|<a href="classes/Phpolar-Phpolar-Http-ResolvedRoute.html"><abbr title="\Phpolar\Phpolar\Http\ResolvedRoute">ResolvedRoute</abbr></a>|<abbr title="\Phpolar\Phpolar\Core\Routing\RouteNotRegistered">RouteNotRegistered</abbr>    </span>
 </dt>
-<dd>Attempts to locate an object associated with a given request.</dd>
+<dd>Attempts to locate an object associated with a given route.</dd>
 
     </dl>
 
@@ -249,20 +249,25 @@ request is mapped to the given route.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Http/RouteMap.php"><a href="files/http-routemap.html"><abbr title="Http/RouteMap.php">RouteMap.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">64</span>
+    <span class="phpdocumentor-element-found-in__line">67</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Attempts to locate an object associated with a given request.</p>
+        <p class="phpdocumentor-summary">Attempts to locate an object associated with a given route.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">match</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\ServerRequestInterface">ServerRequestInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$request</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Phpolar\Routable\RoutableInterface">RoutableInterface</abbr>|<a href="classes/Phpolar-Phpolar-Http-ResolvedRoute.html"><abbr title="\Phpolar\Phpolar\Http\ResolvedRoute">ResolvedRoute</abbr></a>|<abbr title="\Phpolar\Phpolar\Core\Routing\RouteNotRegistered">RouteNotRegistered</abbr></span></code>
 
-        <section class="phpdocumentor-description"><h3>Result matrix</h3>
-<p>| Not Parameterized |        Parameterized      |      Not Located     |
-|-------------------|---------------------------|----------------------|
-| Target Object     | Target Object w/ metadata | <code class="prettyprint">RouteNotRegistered</code> |</p>
+        <section class="phpdocumentor-description"><p>The object defines an action that will be executed for
+HTTP requests that match the associated route.</p>
+<h3>Result matrix</h3>
+<ol>
+<li>Not Parameterized =&gt; Target Object</li>
+<li>Parameterized =&gt; Target Object w/ metadata</li>
+<li>Not Located =&gt; <code class="prettyprint">RouteNotRegistered</code>
+</li>
+</ol>
 </section>
 
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
