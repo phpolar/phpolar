@@ -47,7 +47,7 @@ return [
     /**
      * @suppress PhanUnreferencedClosure
      */
-    AuthorizationChecker::class => static fn (ContainerInterface $container) => new AuthorizationChecker(
+    DiTokens::NOOP_AUTH_CHECKER => static fn (ContainerInterface $container) => new AuthorizationChecker(
         routableResolver: new class () implements RoutableResolverInterface {
             public function resolve(RoutableInterface $target): RoutableInterface|false
             {
@@ -69,7 +69,7 @@ return [
     /**
      * @suppress PhanUnreferencedClosure
      */
-    DiTokens::NOOP_AUTH_CHECKER => static fn (ContainerInterface $container) => new AuthorizationChecker(
+    AuthorizationChecker::class => static fn (ContainerInterface $container) => new AuthorizationChecker(
         routableResolver: new ProtectedRoutableResolver($container->get(AuthenticatorInterface::class)),
         unauthHandler: $container->get(DiTokens::UNAUTHORIZED_HANDLER),
     ),
