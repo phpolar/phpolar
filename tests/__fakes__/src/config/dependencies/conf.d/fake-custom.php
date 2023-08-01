@@ -9,6 +9,7 @@ use Phpolar\ModelResolver\ModelResolverInterface;
 use Phpolar\Authenticator\AuthenticatorInterface;
 use Phpolar\Phpolar\Http\MiddlewareQueueRequestHandler;
 use Phpolar\Phpolar\DependencyInjection\DiTokens;
+use Phpolar\Phpolar\Http\AuthorizationChecker;
 use Phpolar\Routable\RoutableInterface;
 use Phpolar\Phpolar\Http\RouteMap;
 use Phpolar\Phpolar\Http\RoutingHandler;
@@ -67,6 +68,9 @@ return [
                 return [];
             }
         },
+        $container->get(AuthorizationChecker::class),
+    ),
+    AuthorizationChecker::class => static fn (ContainerInterface $container) => new AuthorizationChecker(
         new class () implements RoutableResolverInterface {
             public function resolve(RoutableInterface $target): RoutableInterface | false
             {
@@ -79,5 +83,5 @@ return [
                 return new ResponseStub();
             }
         },
-    )
+    ),
 ];

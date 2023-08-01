@@ -94,7 +94,7 @@
 
     <article class="phpdocumentor-element -class">
         <h2 class="phpdocumentor-content__title">
-    RoutingHandler
+    AuthorizationChecker
 
     
             <div class="phpdocumentor-element__package">
@@ -104,20 +104,18 @@
                             </ul>
         </div>
     
-            <span class="phpdocumentor-element__implements">
-            implements
-                            <abbr title="\Psr\Http\Server\RequestHandlerInterface">RequestHandlerInterface</abbr>                    </span>
     
     </h2>
 
         <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="Http/RoutingHandler.php"><a href="files/http-routinghandler.html"><abbr title="Http/RoutingHandler.php">RoutingHandler.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="Http/AuthorizationChecker.php"><a href="files/http-authorizationchecker.html"><abbr title="Http/AuthorizationChecker.php">AuthorizationChecker.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">21</span>
+    <span class="phpdocumentor-element-found-in__line">17</span>
 
     </aside>
 
-            <p class="phpdocumentor-summary">Handles request routing for the application.</p>
+            <p class="phpdocumentor-summary">Determines if authorization is successful
+for a given `Routable`.</p>
 
 
 
@@ -126,19 +124,12 @@
 
 <h3 id="toc">
     Table of Contents
-    <a href="classes/Phpolar-Phpolar-Http-RoutingHandler.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/Phpolar-Phpolar-Http-AuthorizationChecker.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h3>
 
 
 
-    <h4 id="toc-interfaces">
-        Interfaces
-        <a href="classes/Phpolar-Phpolar-Http-RoutingHandler.html#toc-interfaces" class="headerlink"><i class="fas fa-link"></i></a>
-
-    </h4>
-    <dl class="phpdocumentor-table-of-contents">
-                    <dt class="phpdocumentor-table-of-contents__entry -interface"><abbr title="\Psr\Http\Server\RequestHandlerInterface">RequestHandlerInterface</abbr></dt>    </dl>
 
 
 
@@ -148,23 +139,24 @@
 
 <h4 id="toc-methods">
     Methods
-    <a href="classes/Phpolar-Phpolar-Http-RoutingHandler.html#toc-methods" class="headerlink"><i class="fas fa-link"></i></a>
+    <a href="classes/Phpolar-Phpolar-Http-AuthorizationChecker.html#toc-methods" class="headerlink"><i class="fas fa-link"></i></a>
 
 </h4>
 <dl class="phpdocumentor-table-of-contents">
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Phpolar-Phpolar-Http-RoutingHandler.html#method___construct">__construct()</a>
+    <a href="classes/Phpolar-Phpolar-Http-AuthorizationChecker.html#method___construct">__construct()</a>
     <span>
                                 &nbsp;: mixed    </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Phpolar-Phpolar-Http-RoutingHandler.html#method_handle">handle()</a>
+    <a href="classes/Phpolar-Phpolar-Http-AuthorizationChecker.html#method_check">check()</a>
     <span>
-                                &nbsp;: <abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr>    </span>
+                                &nbsp;: <abbr title="\Phpolar\Routable\RoutableInterface">RoutableInterface</abbr>|<abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr>    </span>
 </dt>
-<dd>Locates and executes the registered route handler.</dd>
+<dd>Returns `Routable` when authorization is successful
+and an `Unauthorized` HTTP response when it is not.</dd>
 
     </dl>
 
@@ -178,7 +170,7 @@
             <section class="phpdocumentor-methods">
         <h3 class="phpdocumentor-elements__header" id="methods">
             Methods
-            <a href="classes/Phpolar-Phpolar-Http-RoutingHandler.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/Phpolar-Phpolar-Http-AuthorizationChecker.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
         </h3>
                     <article
         class="phpdocumentor-element
@@ -188,67 +180,35 @@
 >
     <h4 class="phpdocumentor-element__name" id="method___construct">
         __construct()
-        <a href="classes/Phpolar-Phpolar-Http-RoutingHandler.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Phpolar-Phpolar-Http-AuthorizationChecker.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="Http/RoutingHandler.php"><a href="files/http-routinghandler.html"><abbr title="Http/RoutingHandler.php">RoutingHandler.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="Http/AuthorizationChecker.php"><a href="files/http-authorizationchecker.html"><abbr title="Http/AuthorizationChecker.php">AuthorizationChecker.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">23</span>
+    <span class="phpdocumentor-element-found-in__line">19</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Phpolar-Phpolar-Http-RouteMap.html"><abbr title="\Phpolar\Phpolar\Http\RouteMap">RouteMap</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$routeRegistry</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\ResponseFactoryInterface">ResponseFactoryInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$responseFactory</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\StreamFactoryInterface">StreamFactoryInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$streamFactory</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Container\ContainerInterface">ContainerInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$container</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Phpolar\ModelResolver\ModelResolverInterface">ModelResolverInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$modelResolver</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Phpolar-Phpolar-Http-AuthorizationChecker.html"><abbr title="\Phpolar\Phpolar\Http\AuthorizationChecker">AuthorizationChecker</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$authChecker</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Phpolar\Routable\RoutableResolverInterface">RoutableResolverInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$routableResolver</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Server\RequestHandlerInterface">RequestHandlerInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$unauthHandler</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
 
         <section class="phpdocumentor-description"></section>
 
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$routeRegistry</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Phpolar-Phpolar-Http-RouteMap.html"><abbr title="\Phpolar\Phpolar\Http\RouteMap">RouteMap</abbr></a></span>
+                <span class="phpdocumentor-signature__argument__name">$routableResolver</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Phpolar\Routable\RoutableResolverInterface">RoutableResolverInterface</abbr></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"></section>
 
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$responseFactory</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\ResponseFactoryInterface">ResponseFactoryInterface</abbr></span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
-            </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$streamFactory</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\StreamFactoryInterface">StreamFactoryInterface</abbr></span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
-            </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$container</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Container\ContainerInterface">ContainerInterface</abbr></span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
-            </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$modelResolver</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Phpolar\ModelResolver\ModelResolverInterface">ModelResolverInterface</abbr></span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
-            </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$authChecker</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Phpolar-Phpolar-Http-AuthorizationChecker.html"><abbr title="\Phpolar\Phpolar\Http\AuthorizationChecker">AuthorizationChecker</abbr></a></span>
+                <span class="phpdocumentor-signature__argument__name">$unauthHandler</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Server\RequestHandlerInterface">RequestHandlerInterface</abbr></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"></section>
@@ -270,29 +230,35 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_handle">
-        handle()
-        <a href="classes/Phpolar-Phpolar-Http-RoutingHandler.html#method_handle" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_check">
+        check()
+        <a href="classes/Phpolar-Phpolar-Http-AuthorizationChecker.html#method_check" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="Http/RoutingHandler.php"><a href="files/http-routinghandler.html"><abbr title="Http/RoutingHandler.php">RoutingHandler.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="Http/AuthorizationChecker.php"><a href="files/http-authorizationchecker.html"><abbr title="Http/AuthorizationChecker.php">AuthorizationChecker.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">39</span>
+    <span class="phpdocumentor-element-found-in__line">29</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Locates and executes the registered route handler.</p>
+        <p class="phpdocumentor-summary">Returns `Routable` when authorization is successful
+and an `Unauthorized` HTTP response when it is not.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">handle</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\ServerRequestInterface">ServerRequestInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$request</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr></span></code>
+                    <span class="phpdocumentor-signature__name">check</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Phpolar\Routable\RoutableInterface">RoutableInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$routable</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\ServerRequestInterface">ServerRequestInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$request</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Phpolar\Routable\RoutableInterface">RoutableInterface</abbr>|<abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr></span></code>
 
-        <section class="phpdocumentor-description"><p>If a handler for the route cannot be located,
-a &quot;Not Found&quot; response will be returned.</p>
-</section>
-
+    
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$routable</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Phpolar\Routable\RoutableInterface">RoutableInterface</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"></section>
+
+            </dd>
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$request</span>
                 : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\ServerRequestInterface">ServerRequestInterface</abbr></span>
@@ -306,7 +272,7 @@ a &quot;Not Found&quot; response will be returned.</p>
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr></span>
+    <span class="phpdocumentor-signature__response_type"><abbr title="\Phpolar\Routable\RoutableInterface">RoutableInterface</abbr>|<abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr></span>
             &mdash;
         
     
@@ -389,7 +355,7 @@ a &quot;Not Found&quot; response will be returned.</p>
     </section>
 </section>
         </div>
-        <a href="classes/Phpolar-Phpolar-Http-RoutingHandler.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+        <a href="classes/Phpolar-Phpolar-Http-AuthorizationChecker.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
     </main>
 
