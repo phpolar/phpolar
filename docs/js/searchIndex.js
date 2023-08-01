@@ -16,6 +16,11 @@ Search.appendIndex(
             "summary": "Handle\u0020and\u0020respond\u0020to\u0020requests\u0020from\u0020clients.",
             "url": "classes/Phpolar-Phpolar-App.html#method_receive"
         },                {
+            "fqsen": "\\Phpolar\\Phpolar\\App\u003A\u003Ause\u0028\u0029",
+            "name": "use",
+            "summary": "Queue\u0020the\u0020given\u0020\u005BPSR\u002D15\u0020middleware\u005D\u0028https\u003A\/\/www.php\u002Dfig.org\/psr\/psr\u002D15\/\u002322\u002Dpsrhttpservermiddlewareinterface\u0029.",
+            "url": "classes/Phpolar-Phpolar-App.html#method_use"
+        },                {
             "fqsen": "\\Phpolar\\Phpolar\\App\u003A\u003AuseAuthorization\u0028\u0029",
             "name": "useAuthorization",
             "summary": "Configures\u0020the\u0020application\u0020for\u0020checking\u0020route\u0020authorization.",

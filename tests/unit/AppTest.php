@@ -7,7 +7,6 @@ namespace Phpolar\Phpolar;
 use ArrayAccess;
 use Closure;
 use DateTimeImmutable;
-use Exception;
 use Laminas\HttpHandlerRunner\Emitter\SapiEmitter;
 use Phpolar\CsrfProtection\CsrfToken;
 use Phpolar\CsrfProtection\Http\CsrfProtectionRequestHandler;
@@ -49,6 +48,7 @@ use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamFactoryInterface;
+use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
 #[RunTestsInSeparateProcesses]
@@ -304,5 +304,30 @@ final class AppTest extends TestCase
         $sut->useAuthorization();
         $sut->receive(new RequestStub("GET", "/"));
         $this->assertSame(ResponseCode::OK, http_response_code());
+    }
+
+    #[TestDox("Shall support queueing any PSR-15 middleware")]
+    public function test8()
+    {
+        $handler = static fn (ArrayAccess $config) => new MiddlewareQueueRequestHandler($config[self::ERROR_HANDLER_404]);
+        $config = new ContainerConfigurationStub();
+        $config[ModelResolverInterface::class] = $this->createStub(ModelResolverInterface::class);
+        $config[DiTokens::UNAUTHORIZED_HANDLER] = $this->createStub(RequestHandlerInterface::class);
+        $routes = new RouteMap();
+        $routes->add("GET", "/", $this->createStub(AbstractProtectedRoutable::class));
+        $config[RouteMap::class] = $routes;
+        $container = $this->configureContainer($this->getContainerFactory($config, $handler), $config);
+        /**
+         * @var Stub&MiddlewareInterface
+         */
+        $givenMiddleware = $this->createStub(MiddlewareInterface::class);
+        $expectedResponse = new ResponseStub(ResponseCode::IM_A_TEAPOT);
+        $givenMiddleware->method("process")->willReturn(
+            $expectedResponse->withBody((new StreamFactoryStub("+w"))->createStream())
+        );
+        $sut = App::create($container);
+        $sut->use($givenMiddleware);
+        $sut->receive(new RequestStub());
+        $this->assertSame(ResponseCode::IM_A_TEAPOT, http_response_code());
     }
 }
