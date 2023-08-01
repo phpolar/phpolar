@@ -16,7 +16,7 @@ use ReflectionAttribute;
  *
  * Authentication is *opt-in*.  Therefore, the given routable
  * will be returned if it is not configured with
- * an `Authenticate` attribute.
+ * an `Authorize` attribute.
  */
 final class ProtectedRoutableResolver implements RoutableResolverInterface
 {
@@ -45,23 +45,23 @@ final class ProtectedRoutableResolver implements RoutableResolverInterface
     }
 
     /**
-     * @return ReflectionAttribute<Authenticate>[]
+     * @return ReflectionAttribute<Authorize>[]
      */
     private function getAuthenticateAttributes(AbstractProtectedRoutable $routable): array
     {
         $reflectionMethod = new ReflectionMethod($routable, self::ROUTABLE_METHOD_NAME);
-        return $reflectionMethod->getAttributes(Authenticate::class);
+        return $reflectionMethod->getAttributes(Authorize::class);
     }
 
     /**
-     * @param ReflectionAttribute<Authenticate>[] $authenticateAttrs
+     * @param ReflectionAttribute<Authorize>[] $authenticateAttrs
      */
     private function resolveRoutable(
         array $authenticateAttrs,
         AbstractProtectedRoutable $target,
     ): RoutableInterface | false {
         /**
-         * @var Authenticate
+         * @var Authorize
          */
         $authenticateAttr = $authenticateAttrs[0]->newInstance();
         return $authenticateAttr->getResolvedRoutable(

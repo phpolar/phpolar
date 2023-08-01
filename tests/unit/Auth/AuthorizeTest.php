@@ -18,9 +18,9 @@ use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 use ReflectionMethod;
 
-#[CoversClass(Authenticate::class)]
+#[CoversClass(Authorize::class)]
 #[CoversClass(User::class)]
-final class AuthenticateTest extends TestCase
+final class AuthorizeTest extends TestCase
 {
     public static function getContainerStub(): Generator
     {
@@ -44,16 +44,16 @@ final class AuthenticateTest extends TestCase
             {
             }
 
-            #[Authenticate]
+            #[Authorize]
             public function process(ContainerInterface $container): string
             {
                 return $this->content;
             }
         };
         $reflectionMethod = new ReflectionMethod($hostClass, "process");
-        $authenticateAttrs = $reflectionMethod->getAttributes(Authenticate::class);
+        $authenticateAttrs = $reflectionMethod->getAttributes(Authorize::class);
         /**
-         * @var Authenticate
+         * @var Authorize
          */
         $authenticateAttr = $authenticateAttrs[0]->newInstance();
         $result = $authenticateAttr->getResolvedRoutable(target: $hostClass, authenticator: $authenticatorMock);
@@ -81,16 +81,16 @@ final class AuthenticateTest extends TestCase
             {
             }
 
-            #[Authenticate]
+            #[Authorize]
             public function process(ContainerInterface $container): string
             {
                 return $this->content;
             }
         };
         $reflectionMethod = new ReflectionMethod($hostClass, "process");
-        $authenticateAttrs = $reflectionMethod->getAttributes(Authenticate::class);
+        $authenticateAttrs = $reflectionMethod->getAttributes(Authorize::class);
         /**
-         * @var Authenticate
+         * @var Authorize
          */
         $authenticateAttr = $authenticateAttrs[0]->newInstance();
         $result = $authenticateAttr->getResolvedRoutable(target: $targetDelegateStub, authenticator: $authenticatorMock);
@@ -114,16 +114,16 @@ final class AuthenticateTest extends TestCase
             {
             }
 
-            #[Authenticate]
+            #[Authorize]
             public function process(ContainerInterface $container): string
             {
                 return $this->content;
             }
         };
         $reflectionMethod = new ReflectionMethod($hostClass, "process");
-        $authenticateAttrs = $reflectionMethod->getAttributes(Authenticate::class);
+        $authenticateAttrs = $reflectionMethod->getAttributes(Authorize::class);
         /**
-         * @var Authenticate
+         * @var Authorize
          */
         $authenticateAttr = $authenticateAttrs[0]->newInstance();
         $result = $authenticateAttr->getResolvedRoutable(target: $hostClass, authenticator: $authenticatorMock);

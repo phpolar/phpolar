@@ -6,7 +6,7 @@ namespace Phpolar\Phpolar\Http;
 
 use Phpolar\Authenticator\AuthenticatorInterface;
 use Phpolar\Phpolar\Auth\AbstractProtectedRoutable;
-use Phpolar\Phpolar\Auth\Authenticate;
+use Phpolar\Phpolar\Auth\Authorize;
 use Phpolar\Phpolar\Auth\ProtectedRoutableResolver;
 use Phpolar\Routable\RoutableInterface;
 use PHPUnit\Framework\Attributes\CoversClass;
@@ -29,7 +29,7 @@ final class ProtectedRoutableResolverTest extends TestCase
         $sut = new ProtectedRoutableResolver($authenticatorStub);
         $target = new class () extends AbstractProtectedRoutable
         {
-            #[Authenticate]
+            #[Authorize]
             public function process(ContainerInterface $container): string
             {
                 return "";
@@ -51,7 +51,7 @@ final class ProtectedRoutableResolverTest extends TestCase
         $sut = new ProtectedRoutableResolver($authenticatorMock);
         $target = new class () extends AbstractProtectedRoutable
         {
-            #[Authenticate]
+            #[Authorize]
             public function process(ContainerInterface $container): string
             {
                 return "";

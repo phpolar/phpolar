@@ -46,15 +46,15 @@ Search.appendIndex(
             "summary": "Contains\u0020credentials\u0020for\u0020an\u0020authenticated\u0020user",
             "url": "classes/Phpolar-Phpolar-Auth-AbstractProtectedRoutable.html#property_user"
         },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Auth\\Authenticate",
-            "name": "Authenticate",
-            "summary": "Use\u0020to\u0020indicate\u0020that\u0020a\u0020route\u0020should\nonly\u0020be\u0020accessed\u0020by\u0020an\u0020authenticated\nuser.",
-            "url": "classes/Phpolar-Phpolar-Auth-Authenticate.html"
+            "fqsen": "\\Phpolar\\Phpolar\\Auth\\Authorize",
+            "name": "Authorize",
+            "summary": "Use\u0020to\u0020indicate\u0020that\u0020a\u0020route\u0020should\nonly\u0020be\u0020accessed\u0020by\u0020an\u0020authorized,\u0020authenticated\nuser.",
+            "url": "classes/Phpolar-Phpolar-Auth-Authorize.html"
         },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Auth\\Authenticate\u003A\u003AgetResolvedRoutable\u0028\u0029",
+            "fqsen": "\\Phpolar\\Phpolar\\Auth\\Authorize\u003A\u003AgetResolvedRoutable\u0028\u0029",
             "name": "getResolvedRoutable",
             "summary": "Return\u0020the\u0020target\u0020\u0060Routable\u0060\u0020when\u0020the\u0020request\nhas\u0020been\u0020authenticated.\u0020\u0020Otherwise,\u0020return\nthe\u0020fallback\u0020\u0060Routable\u0060.",
-            "url": "classes/Phpolar-Phpolar-Auth-Authenticate.html#method_getResolvedRoutable"
+            "url": "classes/Phpolar-Phpolar-Auth-Authorize.html#method_getResolvedRoutable"
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\Auth\\ProtectedRoutableResolver",
             "name": "ProtectedRoutableResolver",

@@ -10,11 +10,11 @@ use Phpolar\Authenticator\AuthenticatorInterface;
 
 /**
  * Use to indicate that a route should
- * only be accessed by an authenticated
+ * only be accessed by an authorized, authenticated
  * user.
  */
 #[Attribute(Attribute::TARGET_METHOD)]
-final class Authenticate
+final class Authorize
 {
     /**
      * Return the target `Routable` when the request
