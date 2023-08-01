@@ -224,6 +224,7 @@ final class AppTest extends TestCase
         $givenRequest = new RequestStub("GET", "/");
         $handlerStub = $this->createStub(MiddlewareQueueRequestHandler::class);
         $config = new ContainerConfigurationStub();
+        $config[DiTokens::UNAUTHORIZED_HANDLER] = $this->createStub(RequestHandlerInterface::class);
         $config[ModelResolverInterface::class] = $this->createStub(ModelResolverInterface::class);
         $config[RouteMap::class] = $givenRoutes;
         $container = $this->getContainerFactory($config, $handlerStub);

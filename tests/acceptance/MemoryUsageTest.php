@@ -30,6 +30,7 @@ use Phpolar\Phpolar\Http\MiddlewareQueueRequestHandler;
 use Phpolar\Phpolar\App;
 use Phpolar\Phpolar\DependencyInjection\ContainerLoader;
 use Phpolar\Phpolar\DependencyInjection\DiTokens;
+use Phpolar\Phpolar\Http\AuthorizationChecker;
 use Phpolar\PurePhp\Binder;
 use Phpolar\PurePhp\Dispatcher;
 use Phpolar\PurePhp\StreamContentStrategy;
@@ -68,13 +69,15 @@ final class MemoryUsageTest extends TestCase
             $config[StreamFactoryInterface::class],
             $config[ContainerInterface::class],
             $config[ModelResolverInterface::class],
-            routableResolver: $config[RoutableResolverInterface::class],
-            unauthHandler: new class () implements RequestHandlerInterface {
-                public function handle(ServerRequestInterface $request): ResponseInterface
-                {
-                    return new ResponseStub(ResponseCode::UNAUTHORIZED, "Unauthorized");
-                }
-            },
+            new AuthorizationChecker(
+                routableResolver: $config[RoutableResolverInterface::class],
+                unauthHandler: new class () implements RequestHandlerInterface {
+                    public function handle(ServerRequestInterface $request): ResponseInterface
+                    {
+                        return new ResponseStub(ResponseCode::UNAUTHORIZED, "Unauthorized");
+                    }
+                },
+            ),
         );
         $config[MiddlewareQueueRequestHandler::class] = new MiddlewareQueueRequestHandler(
             new class () implements RequestHandlerInterface {

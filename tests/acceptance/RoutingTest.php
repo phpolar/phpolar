@@ -117,13 +117,15 @@ final class RoutingTest extends TestCase
             streamFactory: $this->getStreamFactory(),
             container: $container,
             modelResolver: $this->getModelResolver(),
-            routableResolver: new class () implements RoutableResolverInterface {
-                public function resolve(RoutableInterface $target): RoutableInterface|false
-                {
-                    return $target;
-                }
-            },
-            unauthHandler: $this->createStub(RequestHandlerInterface::class),
+            authChecker: new AuthorizationChecker(
+                routableResolver: new class () implements RoutableResolverInterface {
+                    public function resolve(RoutableInterface $target): RoutableInterface|false
+                    {
+                        return $target;
+                    }
+                },
+                unauthHandler: $this->createStub(RequestHandlerInterface::class),
+            ),
         );
         $requestStub = (new RequestStub("GET"))->withUri(new UriStub($givenRoute));
         $response = $routingHandler->handle($requestStub);
@@ -144,13 +146,15 @@ final class RoutingTest extends TestCase
             streamFactory: $this->getStreamFactory(),
             container: $container,
             modelResolver: $this->getModelResolver(),
-            routableResolver: new class () implements RoutableResolverInterface {
-                public function resolve(RoutableInterface $target): RoutableInterface|false
-                {
-                    return $target;
-                }
-            },
-            unauthHandler: $this->createStub(RequestHandlerInterface::class),
+            authChecker: new AuthorizationChecker(
+                routableResolver: new class () implements RoutableResolverInterface {
+                    public function resolve(RoutableInterface $target): RoutableInterface|false
+                    {
+                        return $target;
+                    }
+                },
+                unauthHandler: $this->createStub(RequestHandlerInterface::class),
+            ),
         );
         $requestStub = (new RequestStub("GET"))->withUri(new UriStub($givenRoute));
         $response = $routingHandler->handle($requestStub);
