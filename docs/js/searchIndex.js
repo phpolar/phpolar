@@ -18,7 +18,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\App\u003A\u003Ause\u0028\u0029",
             "name": "use",
-            "summary": "Queue\u0020the\u0020given\u0020\u005BPSR\u002D15\u0020middleware\u005D\u0028https\u003A\/\/www.php\u002Dfig.org\/psr\/psr\u002D15\/\u002322\u002Dpsrhttpservermiddlewareinterface\u0029.",
+            "summary": "Queue\u0020the\u0020given\u0020PSR\u002D15\u0020middleware.",
             "url": "classes/Phpolar-Phpolar-App.html#method_use"
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\App\u003A\u003AuseAuthorization\u0028\u0029",
@@ -58,12 +58,12 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\Auth\\Authorize\u003A\u003AgetResolvedRoutable\u0028\u0029",
             "name": "getResolvedRoutable",
-            "summary": "Return\u0020the\u0020target\u0020\u0060Routable\u0060\u0020when\u0020the\u0020request\nhas\u0020been\u0020authenticated.\u0020\u0020Otherwise,\u0020return\nthe\u0020fallback\u0020\u0060Routable\u0060.",
+            "summary": "Return\u0020the\u0020target\u0020Routable\u0020when\u0020the\u0020request\nhas\u0020been\u0020authenticated.\u0020\u0020Otherwise,\u0020return\nthe\u0020fallback\u0020Routable.",
             "url": "classes/Phpolar-Phpolar-Auth-Authorize.html#method_getResolvedRoutable"
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\Auth\\ProtectedRoutableResolver",
             "name": "ProtectedRoutableResolver",
-            "summary": "Returns\u0020either\u0020the\u0020given\u0020routable\u0020or\u0020the\u0020given\u0020fallback\u0020handler\nbased\u0020on\u0020the\u0020boolean\u0020result\u0020of\u0020a\u0020given\u0020algorithm.",
+            "summary": "Returns\u0020either\u0020the\u0020given\u0020Routable\u0020or\u0020the\u0020given\u0020fallback\u0020handler\nbased\u0020on\u0020the\u0020boolean\u0020result\u0020of\u0020a\u0020given\u0020algorithm.",
             "url": "classes/Phpolar-Phpolar-Auth-ProtectedRoutableResolver.html"
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\Auth\\ProtectedRoutableResolver\u003A\u003A__construct\u0028\u0029",
@@ -173,7 +173,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\Http\\AuthorizationChecker",
             "name": "AuthorizationChecker",
-            "summary": "Determines\u0020if\u0020authorization\u0020is\u0020successful\nfor\u0020a\u0020given\u0020\u0060Routable\u0060.",
+            "summary": "Determines\u0020if\u0020authorization\u0020is\u0020successful\nfor\u0020a\u0020given\u0020Routable.",
             "url": "classes/Phpolar-Phpolar-Http-AuthorizationChecker.html"
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\Http\\AuthorizationChecker\u003A\u003A__construct\u0028\u0029",
@@ -183,7 +183,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\Http\\AuthorizationChecker\u003A\u003Acheck\u0028\u0029",
             "name": "check",
-            "summary": "Returns\u0020\u0060Routable\u0060\u0020when\u0020authorization\u0020is\u0020successful\nand\u0020an\u0020\u0060Unauthorized\u0060\u0020HTTP\u0020response\u0020when\u0020it\u0020is\u0020not.",
+            "summary": "Returns\u0020Routable\u0020when\u0020authorization\u0020is\u0020successful\nand\u0020an\u0020Unauthorized\u0020HTTP\u0020response\u0020when\u0020it\u0020is\u0020not.",
             "url": "classes/Phpolar-Phpolar-Http-AuthorizationChecker.html#method_check"
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\Http\\MiddlewareQueueRequestHandler",
@@ -208,7 +208,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\Http\\ResolvedRoute",
             "name": "ResolvedRoute",
-            "summary": "Represents\u0020a\u0020route\u0020with\u0020route\u0020parameters.",
+            "summary": "Contains\u0020a\u0020routable\u0020that\u0020is\u0020the\u0020target\u0020of\u0020a\u0020route\nand\u0020bound\u0020route\u0020parameters.",
             "url": "classes/Phpolar-Phpolar-Http-ResolvedRoute.html"
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\Http\\ResolvedRoute\u003A\u003A__construct\u0028\u0029",
