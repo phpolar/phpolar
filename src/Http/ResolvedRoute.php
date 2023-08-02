@@ -8,12 +8,10 @@ use Phpolar\Phpolar\Core\Routing\RouteParamMap;
 use Phpolar\Routable\RoutableInterface;
 
 /**
- * Represents a route with route parameters.
+ * Contains a routable that is the target of a route
+ * and bound route parameters.
  *
  * **Example**: `/some/path/{id}`
- *
- * Contains the target object for the route
- * along with a map of the route parameters.
  */
 final class ResolvedRoute
 {

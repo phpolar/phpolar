@@ -12,14 +12,17 @@ use Phpolar\Authenticator\AuthenticatorInterface;
  * Use to indicate that a route should
  * only be accessed by an authorized, authenticated
  * user.
+ *
+ * Declare this attribute on the process method of
+ * each Routable that requires authorization.
  */
 #[Attribute(Attribute::TARGET_METHOD)]
 final class Authorize
 {
     /**
-     * Return the target `Routable` when the request
+     * Return the target Routable when the request
      * has been authenticated.  Otherwise, return
-     * the fallback `Routable`.
+     * the fallback Routable.
      */
     public function getResolvedRoutable(
         AbstractProtectedRoutable $target,
