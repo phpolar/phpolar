@@ -8,6 +8,7 @@ use DomainException;
 use Psr\Http\Message\ServerRequestInterface;
 use Phpolar\Phpolar\Core\Routing\RouteNotRegistered;
 use Phpolar\Phpolar\Core\Routing\RouteParamMap;
+use Phpolar\PropertyInjectorContract\PropertyInjectorInterface;
 use Phpolar\Routable\RoutableInterface;
 
 use const Phpolar\Phpolar\Core\Routing\ROUTE_PARAM_PATTERN;
@@ -19,6 +20,10 @@ use const Phpolar\Phpolar\Core\Routing\ROUTE_PARAM_PATTERN;
  */
 class RouteMap
 {
+    public function __construct(private PropertyInjectorInterface $propertyInjector)
+    {
+    }
+
     /**
      * @var array<string,RoutableInterface> Stores actions for `GET` requests.
      */
@@ -40,6 +45,7 @@ class RouteMap
      */
     public function add(string $method, string $route, RoutableInterface $target): void
     {
+        $this->propertyInjector->inject($target);
         $this->containsParamRoutes = $this->containsParamRoutes || preg_match(ROUTE_PARAM_PATTERN, $route) === 1;
         if (strtoupper($method) === "GET") {
             $this->registryForGet[$route] = $target;

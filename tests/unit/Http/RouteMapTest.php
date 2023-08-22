@@ -12,6 +12,7 @@ use Phpolar\Phpolar\Core\Routing\RouteParamMap;
 use Phpolar\Routable\RoutableInterface;
 use Phpolar\Phpolar\Tests\Stubs\ConfigurableContainerStub;
 use Phpolar\Phpolar\Tests\Stubs\ContainerConfigurationStub;
+use Phpolar\PropertyInjectorContract\PropertyInjectorInterface;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\TestDox;
@@ -26,6 +27,11 @@ use PHPUnit\Framework\TestCase;
 #[UsesClass(RouteParamMap::class)]
 final class RouteMapTest extends TestCase
 {
+    private function getPropertyInjectorStub(): PropertyInjectorInterface
+    {
+        return $this->createStub(PropertyInjectorInterface::class);
+    }
+
     public static function requestMethods(): Generator
     {
         yield ["GET"];
@@ -55,7 +61,7 @@ final class RouteMapTest extends TestCase
          */
         $handlerSpy = $this->createMock(RoutableInterface::class);
         $handlerSpy->expects($this->once())->method("process")->willReturn("");
-        $sut = new RouteMap();
+        $sut = new RouteMap($this->getPropertyInjectorStub());
         $sut->add($requestMethod, $givenRoute, $handlerSpy);
         $registeredHandler = $sut->match(new RequestStub($requestMethod, $givenRoute), $givenRoute);
         $registeredHandler->process(new ConfigurableContainerStub(new ContainerConfigurationStub()));
@@ -65,7 +71,7 @@ final class RouteMapTest extends TestCase
     #[DataProvider("requestMethods")]
     public function test2(string $requestMethod)
     {
-        $sut = new RouteMap();
+        $sut = new RouteMap($this->getPropertyInjectorStub());
         $result = $sut->match(new RequestStub($requestMethod), "an_unregistered_path");
         $this->assertInstanceOf(RouteNotRegistered::class, $result);
     }
@@ -79,7 +85,7 @@ final class RouteMapTest extends TestCase
          * @var Stub&RoutableInterface $handlerStub
          */
         $handlerStub = $this->createStub(RoutableInterface::class);
-        $sut = new RouteMap();
+        $sut = new RouteMap($this->getPropertyInjectorStub());
         $sut->add($methodA, $givenRoute, $handlerStub);
         $result = $sut->match(new RequestStub($methodB, $givenRoute), $givenRoute);
         $this->assertInstanceOf(RouteNotRegistered::class, $result);
@@ -101,7 +107,7 @@ final class RouteMapTest extends TestCase
          * @var Stub&RoutableInterface $handlerStub
          */
         $handlerStub = $this->createStub(RoutableInterface::class);
-        $sut = new RouteMap();
+        $sut = new RouteMap($this->getPropertyInjectorStub());
         $sut->add($method, $givenRoute, $handlerStub);
         $result = $sut->match(new RequestStub($method, $givenRequestPath));
         $this->assertNotInstanceOf(RouteNotRegistered::class, $result);
@@ -128,7 +134,7 @@ final class RouteMapTest extends TestCase
          * @var Stub&RoutableInterface $handlerStub
          */
         $handlerStub = $this->createStub(RoutableInterface::class);
-        $sut = new RouteMap();
+        $sut = new RouteMap($this->getPropertyInjectorStub());
         $sut->add($method, $givenRoute, $handlerStub);
         $result = $sut->match(new RequestStub($method, $givenRequestPath));
         $this->assertInstanceOf(RouteNotRegistered::class, $result, $givenRequestPath);
@@ -149,7 +155,7 @@ final class RouteMapTest extends TestCase
     #[TestDox("Shall not match a route with params when the route was not registered. \$givenRequestPath did not match")]
     public function testc(string $method, string $givenRequestPath)
     {
-        $sut = new RouteMap();
+        $sut = new RouteMap($this->getPropertyInjectorStub());
         $result = $sut->match(new RequestStub($method, $givenRequestPath));
         $this->assertInstanceOf(RouteNotRegistered::class, $result);
     }
@@ -163,7 +169,7 @@ final class RouteMapTest extends TestCase
          * @var Stub&RoutableInterface $handlerStub
          */
         $handlerStub = $this->createStub(RoutableInterface::class);
-        $sut = new RouteMap();
+        $sut = new RouteMap($this->getPropertyInjectorStub());
         $sut->add($method, $givenRoute, $handlerStub);
         $result = $sut->match(new RequestStub($method, $givenRequestPath));
         $this->assertInstanceOf(RouteNotRegistered::class, $result);
@@ -178,7 +184,7 @@ final class RouteMapTest extends TestCase
          * @var Stub&RoutableInterface $handlerStub
          */
         $handlerStub = $this->createStub(RoutableInterface::class);
-        $sut = new RouteMap();
+        $sut = new RouteMap($this->getPropertyInjectorStub());
         $sut->add($method, $givenRoute, $handlerStub);
     }
 
@@ -190,7 +196,7 @@ final class RouteMapTest extends TestCase
          * @var Stub&RoutableInterface $handlerStub
          */
         $handlerStub = $this->createStub(RoutableInterface::class);
-        $sut = new RouteMap();
+        $sut = new RouteMap($this->getPropertyInjectorStub());
 
         $routes = [
             "/",
@@ -206,5 +212,23 @@ final class RouteMapTest extends TestCase
 
         $result = $sut->match(new RequestStub($requestMethod, $requestPath));
         $this->assertNotInstanceOf(RouteNotRegistered::class, $result);
+    }
+
+    #[TestWith(["GET", "/{invalid^}", "/67a8c963-a381-462d-9530-c2e6beb27a28"])]
+    #[TestWith(["POST", "/some/path/{invalid%}", "/some/path/123"])]
+    #[TestDox("Shall call inject on property injector when adding a route configuration")]
+    public function testg(string $method, string $givenRoute, string $givenRequestPath)
+    {
+        /**
+         * @var Stub&RoutableInterface $handlerStub
+         */
+        $handlerStub = $this->createStub(RoutableInterface::class);
+        /**
+         * @var MockObject&PropertyInjectorInterface
+         */
+        $propertyInjectorMock = $this->createMock(PropertyInjectorInterface::class);
+        $propertyInjectorMock->expects($this->once())->method("inject")->with($handlerStub);
+        $sut = new RouteMap($propertyInjectorMock);
+        $sut->add($method, $givenRoute, $handlerStub);
     }
 }

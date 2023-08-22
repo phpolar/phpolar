@@ -7,7 +7,6 @@ namespace Phpolar\Phpolar\Http;
 use Phpolar\ModelResolver\ModelResolverInterface;
 use Phpolar\Phpolar\Core\Routing\RouteNotRegistered;
 use Phpolar\Routable\RoutableInterface;
-use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -24,7 +23,6 @@ class RoutingHandler implements RequestHandlerInterface
         private RouteMap $routeRegistry,
         private ResponseFactoryInterface $responseFactory,
         private StreamFactoryInterface $streamFactory,
-        private ContainerInterface $container,
         private ModelResolverInterface $modelResolver,
         private AuthorizationChecker $authChecker,
     ) {
@@ -60,7 +58,7 @@ class RoutingHandler implements RequestHandlerInterface
         /**
          * @var string $responseContent
          */
-        $responseContent = empty($modelParams) === false ? (new ReflectionMethod($authorizedDelegate, "process"))->invokeArgs($authorizedDelegate, array_merge([$this->container], $modelParams)) : $authorizedDelegate->process($this->container);
+        $responseContent = empty($modelParams) === false ? (new ReflectionMethod($authorizedDelegate, "process"))->invokeArgs($authorizedDelegate, $modelParams) : $authorizedDelegate->process();
 
         $responseStream = $this->streamFactory->createStream($responseContent);
         $response = $this->responseFactory->createResponse();
@@ -78,7 +76,7 @@ class RoutingHandler implements RequestHandlerInterface
         $resolvedRoute->delegate = $result;
 
         $reflectionMethod = new ReflectionMethod($resolvedRoute->delegate, "process");
-        $args = array_merge([$this->container], $resolvedRoute->routeParamMap->toArray());
+        $args = $resolvedRoute->routeParamMap->toArray();
         /**
          * @var string $responseContent
          */

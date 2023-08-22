@@ -42,7 +42,6 @@ return [
         streamFactory: $container->get(StreamFactoryInterface::class),
         modelResolver: $container->get(ModelResolverInterface::class),
         authChecker: $container->get(DiTokens::NOOP_AUTH_CHECKER),
-        container: $container,
     ),
     /**
      * @suppress PhanUnreferencedClosure
@@ -82,7 +81,6 @@ return [
         streamFactory: $container->get(StreamFactoryInterface::class),
         modelResolver: $container->get(ModelResolverInterface::class),
         authChecker: $container->get(AuthorizationChecker::class),
-        container: $container,
     ),
     /**
      * @suppress PhanUnreferencedClosure

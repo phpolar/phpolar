@@ -45,7 +45,7 @@ final class AuthorizeTest extends TestCase
             }
 
             #[Authorize]
-            public function process(ContainerInterface $container): string
+            public function process(): string
             {
                 return $this->content;
             }
@@ -82,7 +82,7 @@ final class AuthorizeTest extends TestCase
             }
 
             #[Authorize]
-            public function process(ContainerInterface $container): string
+            public function process(): string
             {
                 return $this->content;
             }
@@ -115,7 +115,7 @@ final class AuthorizeTest extends TestCase
             }
 
             #[Authorize]
-            public function process(ContainerInterface $container): string
+            public function process(): string
             {
                 return $this->content;
             }

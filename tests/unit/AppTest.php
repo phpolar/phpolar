@@ -30,6 +30,7 @@ use Phpolar\Phpolar\Tests\Stubs\ConfigurableContainerStub;
 use Phpolar\Phpolar\Tests\Stubs\ContainerConfigurationStub;
 use Phpolar\Phpolar\Http\MiddlewareQueueRequestHandler;
 use Phpolar\Phpolar\Http\RoutingHandler;
+use Phpolar\PropertyInjectorContract\PropertyInjectorInterface;
 use Phpolar\PurePhp\Binder;
 use Phpolar\PurePhp\Dispatcher;
 use Phpolar\PurePhp\StreamContentStrategy;
@@ -65,6 +66,11 @@ final class AppTest extends TestCase
     const HEADER_KEY = "Content-Range";
     const HEADER_VALUE = "bytes 21010-47021/47022";
     const ERROR_HANDLER_404 = "ERROR_HANDLER_404";
+
+    private function getPropertyInjectorStub(): PropertyInjectorInterface
+    {
+        return $this->createStub(PropertyInjectorInterface::class);
+    }
 
     protected function getContainerFactory(
         ArrayAccess $config,
@@ -127,7 +133,7 @@ final class AppTest extends TestCase
                     ->withBody($streamFactory->createStream())
             );
         $config = new ContainerConfigurationStub();
-        $routes = new RouteMap();
+        $routes = new RouteMap($this->getPropertyInjectorStub());
         $config[RouteMap::class] = $routes;
         $config[RoutingMiddleware::class] = $routingMiddlewareSpy;
         $config[CsrfProtectionRequestHandler::class] = static fn (ArrayAccess $config) =>
@@ -186,7 +192,7 @@ final class AppTest extends TestCase
                     ->withBody($streamFactory->createStream())
             );
         $config = new ContainerConfigurationStub();
-        $routes = new RouteMap();
+        $routes = new RouteMap($this->getPropertyInjectorStub());
         $config[RouteMap::class] = $routes;
         $config[RoutingMiddleware::class] = $routingMiddlewareSpy;
         $config[RouteMap::class] = $routes;
@@ -214,7 +220,7 @@ final class AppTest extends TestCase
     public function test3()
     {
         $expectedContent = "EXPECTED CONTENT";
-        $givenRoutes = new RouteMap();
+        $givenRoutes = new RouteMap($this->getPropertyInjectorStub());
         /**
          * @var Stub&RoutableInterface $handlerStub
          */
@@ -258,7 +264,7 @@ final class AppTest extends TestCase
         $config = new ContainerConfigurationStub();
         $config[ModelResolverInterface::class] = $this->createStub(ModelResolverInterface::class);
         $config[DiTokens::UNAUTHORIZED_HANDLER] = $this->createStub(RequestHandlerInterface::class);
-        $config[RouteMap::class] = new RouteMap();
+        $config[RouteMap::class] = new RouteMap($this->getPropertyInjectorStub());
         /**
          * @var Stub&MiddlewareQueueRequestHandler $handlerStub
          */
@@ -297,7 +303,7 @@ final class AppTest extends TestCase
         $config = new ContainerConfigurationStub();
         $config[ModelResolverInterface::class] = $this->createStub(ModelResolverInterface::class);
         $config[DiTokens::UNAUTHORIZED_HANDLER] = $this->createStub(RequestHandlerInterface::class);
-        $routes = new RouteMap();
+        $routes = new RouteMap($this->getPropertyInjectorStub());
         $routes->add("GET", "/", $this->createStub(AbstractProtectedRoutable::class));
         $config[RouteMap::class] = $routes;
         $container = $this->configureContainer($this->getContainerFactory($config, $handler), $config);
@@ -314,7 +320,7 @@ final class AppTest extends TestCase
         $config = new ContainerConfigurationStub();
         $config[ModelResolverInterface::class] = $this->createStub(ModelResolverInterface::class);
         $config[DiTokens::UNAUTHORIZED_HANDLER] = $this->createStub(RequestHandlerInterface::class);
-        $routes = new RouteMap();
+        $routes = new RouteMap($this->getPropertyInjectorStub());
         $routes->add("GET", "/", $this->createStub(AbstractProtectedRoutable::class));
         $config[RouteMap::class] = $routes;
         $container = $this->configureContainer($this->getContainerFactory($config, $handler), $config);
