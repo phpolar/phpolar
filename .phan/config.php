@@ -349,6 +349,7 @@ return [
         'vendor/phpolar/http-codes/src',
         'vendor/phpolar/model-resolver/src',
         'vendor/phpolar/core/src',
+        'vendor/phpolar/property-injector-contract/src',
         'vendor/phpolar/pure-php/src',
         'vendor/phpolar/storage-driver/src',
         'vendor/phpolar/authenticator/src',

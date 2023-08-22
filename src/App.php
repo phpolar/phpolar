@@ -6,7 +6,6 @@ namespace Phpolar\Phpolar;
 
 use Phpolar\Phpolar\DependencyInjection\DiTokens;
 use Phpolar\Phpolar\Http\MiddlewareQueueRequestHandler;
-use Phpolar\Phpolar\Http\RoutingHandler;
 use Phpolar\Phpolar\Http\RoutingMiddleware;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -89,7 +88,7 @@ final class App
     public function useAuthorization(): App
     {
         /**
-         * @var RoutingHandler
+         * @var \Phpolar\Phpolar\Http\RoutingHandler
          */
         $authRoutingHandler = $this->container->get(DiTokens::AUTHENTICATED_ROUTING_HANDLER);
         $this->routingMiddleware = new RoutingMiddleware($authRoutingHandler);

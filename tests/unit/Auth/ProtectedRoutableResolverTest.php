@@ -13,7 +13,6 @@ use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
-use Psr\Container\ContainerInterface;
 
 #[CoversClass(ProtectedRoutableResolver::class)]
 final class ProtectedRoutableResolverTest extends TestCase
@@ -30,7 +29,7 @@ final class ProtectedRoutableResolverTest extends TestCase
         $target = new class () extends AbstractProtectedRoutable
         {
             #[Authorize]
-            public function process(ContainerInterface $container): string
+            public function process(): string
             {
                 return "";
             }
@@ -52,7 +51,7 @@ final class ProtectedRoutableResolverTest extends TestCase
         $target = new class () extends AbstractProtectedRoutable
         {
             #[Authorize]
-            public function process(ContainerInterface $container): string
+            public function process(): string
             {
                 return "";
             }
@@ -72,7 +71,7 @@ final class ProtectedRoutableResolverTest extends TestCase
         $sut = new ProtectedRoutableResolver($authenticatorMock);
         $target = new class () extends AbstractProtectedRoutable
         {
-            public function process(ContainerInterface $container): string
+            public function process(): string
             {
                 return "";
             }
@@ -92,7 +91,7 @@ final class ProtectedRoutableResolverTest extends TestCase
         $sut = new ProtectedRoutableResolver($authenticatorMock);
         $target = new class () implements RoutableInterface
         {
-            public function process(ContainerInterface $container): string
+            public function process(): string
             {
                 return "";
             }

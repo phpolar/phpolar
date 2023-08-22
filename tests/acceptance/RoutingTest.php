@@ -11,16 +11,12 @@ use Phpolar\HttpMessageTestUtils\RequestStub;
 use Phpolar\HttpMessageTestUtils\ResponseStub;
 use Phpolar\HttpMessageTestUtils\UriStub;
 use Phpolar\ModelResolver\ModelResolverInterface;
+use Phpolar\PropertyInjectorContract\PropertyInjectorInterface;
 use Phpolar\Routable\RoutableResolverInterface;
 use Phpolar\Routable\RoutableInterface;
-use Phpolar\PurePhp\Binder;
-use Phpolar\PurePhp\Dispatcher;
-use Phpolar\PurePhp\StreamContentStrategy;
-use Phpolar\PurePhp\TemplateEngine;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
-use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamFactoryInterface;
@@ -30,35 +26,6 @@ use Psr\Http\Server\RequestHandlerInterface;
 #[TestDox("HTTP Request Routing")]
 final class RoutingTest extends TestCase
 {
-    protected function getContainer(): ContainerInterface
-    {
-        return new class ($this->getResponseFactory(), $this->getStreamFactory()) implements ContainerInterface {
-            public function __construct(
-                private ResponseFactoryInterface $responseFactory,
-                private StreamFactoryInterface $streamFactory
-            ) {
-            }
-            public function has(string $id): bool
-            {
-                return true;
-            }
-
-            public function get(string $id)
-            {
-                if ($id === ResponseFactoryInterface::class) {
-                    return $this->responseFactory;
-                }
-
-                if ($id === StreamFactoryInterface::class) {
-                    return $this->streamFactory;
-                }
-                if ($id === TemplateEngine::class) {
-                    return new TemplateEngine(new StreamContentStrategy(), new Binder(), new Dispatcher());
-                }
-            }
-        };
-    }
-
     protected function getResponseFactory(): ResponseFactoryInterface
     {
         return new class () implements ResponseFactoryInterface {
@@ -98,24 +65,23 @@ final class RoutingTest extends TestCase
     {
         $givenRoute = "/";
         $expectedResponse = "<h1>Found!</h1>";
-        $routeRegistry = new RouteMap();
+        $propertyInjector = $this->createStub(PropertyInjectorInterface::class);
+        $routeRegistry = new RouteMap($propertyInjector);
         $indexHandler = new class ($expectedResponse) implements RoutableInterface {
             public function __construct(private string $responseTemplate)
             {
             }
 
-            public function process(ContainerInterface $container): string
+            public function process(): string
             {
                 return $this->responseTemplate;
             }
         };
-        $container = $this->getContainer();
         $routeRegistry->add("GET", $givenRoute, $indexHandler);
         $routingHandler = new RoutingHandler(
             routeRegistry: $routeRegistry,
             responseFactory: $this->getResponseFactory(),
             streamFactory: $this->getStreamFactory(),
-            container: $container,
             modelResolver: $this->getModelResolver(),
             authChecker: new AuthorizationChecker(
                 routableResolver: new class () implements RoutableResolverInterface {
@@ -138,13 +104,12 @@ final class RoutingTest extends TestCase
     {
         $givenRoute = "an_unregistered_route";
         $expectedStatusCode = ResponseCode::NOT_FOUND;
-        $routeRegistry = new RouteMap();
-        $container = $this->getContainer();
+        $propertyInjector = $this->createStub(PropertyInjectorInterface::class);
+        $routeRegistry = new RouteMap($propertyInjector);
         $routingHandler = new RoutingHandler(
             routeRegistry: $routeRegistry,
             responseFactory: $this->getResponseFactory(),
             streamFactory: $this->getStreamFactory(),
-            container: $container,
             modelResolver: $this->getModelResolver(),
             authChecker: new AuthorizationChecker(
                 routableResolver: new class () implements RoutableResolverInterface {

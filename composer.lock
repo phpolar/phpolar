@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "60ffbf4ad0c50f53da2fba58b3d86abd",
+    "content-hash": "c90d658333e98d98bcb673eda6aba905",
     "packages": [
         {
             "name": "guzzlehttp/psr7",
@@ -327,26 +327,63 @@
             "time": "2023-06-13T13:39:48+00:00"
         },
         {
-            "name": "phpolar/routable",
+            "name": "phpolar/property-injector-contract",
             "version": "1.0.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/phpolar/routable.git",
-                "reference": "6106f23622d2757bdcc01c32291f739da2777f07"
+                "url": "https://github.com/phpolar/property-injector-contract.git",
+                "reference": "77b00a75c5029a7e5485a016643419d882f3dcab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpolar/routable/zipball/6106f23622d2757bdcc01c32291f739da2777f07",
-                "reference": "6106f23622d2757bdcc01c32291f739da2777f07",
+                "url": "https://api.github.com/repos/phpolar/property-injector-contract/zipball/77b00a75c5029a7e5485a016643419d882f3dcab",
+                "reference": "77b00a75c5029a7e5485a016643419d882f3dcab",
+                "shasum": ""
+            },
+            "suggest": {
+                "phpolar/property-injector": "A property injection implementation"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Phpolar\\PropertyInjectorContract\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Eric Fortmeyer",
+                    "email": "e.fortmeyer01@gmail.com"
+                }
+            ],
+            "description": "Unifies property injector implementations.",
+            "support": {
+                "issues": "https://github.com/phpolar/property-injector-contract/issues",
+                "source": "https://github.com/phpolar/property-injector-contract/tree/1.0.0"
+            },
+            "time": "2023-08-21T16:09:08+00:00"
+        },
+        {
+            "name": "phpolar/routable",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpolar/routable.git",
+                "reference": "c6834b678f15980ac8dc7b4a6c8f26dd6ada388d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpolar/routable/zipball/c6834b678f15980ac8dc7b4a6c8f26dd6ada388d",
+                "reference": "c6834b678f15980ac8dc7b4a6c8f26dd6ada388d",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.1",
-                "psr/container": "^2.0"
+                "php": ">=8.1"
             },
             "require-dev": {
-                "ext-ast": "*",
-                "ext-openssl": "*",
                 "squizlabs/php_codesniffer": "^3.7"
             },
             "type": "library",
@@ -362,9 +399,9 @@
             "description": "Supports route handling interoperability.",
             "support": {
                 "issues": "https://github.com/phpolar/routable/issues",
-                "source": "https://github.com/phpolar/routable/tree/1.0.0"
+                "source": "https://github.com/phpolar/routable/tree/2.0.0"
             },
-            "time": "2023-07-30T04:46:55+00:00"
+            "time": "2023-08-21T01:24:38+00:00"
         },
         {
             "name": "phpolar/storage-driver",
