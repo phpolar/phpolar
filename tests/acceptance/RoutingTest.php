@@ -77,7 +77,7 @@ final class RoutingTest extends TestCase
                 return $this->responseTemplate;
             }
         };
-        $routeRegistry->add("GET", $givenRoute, $indexHandler);
+        $routeRegistry->add(RequestMethods::GET, $givenRoute, $indexHandler);
         $routingHandler = new RoutingHandler(
             routeRegistry: $routeRegistry,
             responseFactory: $this->getResponseFactory(),

@@ -31,6 +31,7 @@ use Phpolar\Phpolar\App;
 use Phpolar\Phpolar\DependencyInjection\ContainerLoader;
 use Phpolar\Phpolar\DependencyInjection\DiTokens;
 use Phpolar\Phpolar\Http\AuthorizationChecker;
+use Phpolar\Phpolar\Http\RequestMethods;
 use Phpolar\PropertyInjectorContract\PropertyInjectorInterface;
 use Phpolar\PurePhp\Binder;
 use Phpolar\PurePhp\Dispatcher;
@@ -121,7 +122,7 @@ final class MemoryUsageTest extends TestCase
          */
         $contentDelStub = $this->createStub(RoutableInterface::class);
         $contentDelStub->method("process")->willReturn("content");
-        $routes->add("GET", "/", $contentDelStub);
+        $routes->add(RequestMethods::GET, "/", $contentDelStub);
         $config[RouteMap::class] = $routes;
         $containerFac = $this->getContainerFactory($routes);
         $totalUsed = -memory_get_usage();
