@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Phpolar\Phpolar\Http;
 
-use DomainException;
 use Generator;
 use Phpolar\HttpMessageTestUtils\RequestStub;
 use Phpolar\Phpolar\Core\Routing\RouteNotRegistered;
@@ -34,26 +33,19 @@ final class RouteMapTest extends TestCase
 
     public static function requestMethods(): Generator
     {
-        yield ["GET"];
-        yield ["POST"];
+        yield [RequestMethods::GET, "GET"];
+        yield [RequestMethods::POST, "POST"];
     }
 
     public static function nonMatchingMethods(): Generator
     {
-        yield ["GET", "POST"];
-        yield ["POST", "GET"];
+        yield [RequestMethods::GET, RequestMethods::POST, "GET", "POST"];
+        yield [RequestMethods::POST, RequestMethods::GET, "POST", "GET"];
     }
 
-    public static function notImplementedMethods(): Generator
-    {
-        yield ["PUT"];
-        yield ["DELETE"];
-        yield ["PATCH"];
-    }
-
-    #[TestDox("Shall retrieve the request handlers associated with a \$requestMethod request")]
+    #[TestDox("Shall retrieve the request handlers associated with a \$requestMethodString request")]
     #[DataProvider("requestMethods")]
-    public function test1(string $requestMethod)
+    public function test1(RequestMethods $requestMethod, string $requestMethodString)
     {
         $givenRoute = "/";
         /**
@@ -63,22 +55,22 @@ final class RouteMapTest extends TestCase
         $handlerSpy->expects($this->once())->method("process")->willReturn("");
         $sut = new RouteMap($this->getPropertyInjectorStub());
         $sut->add($requestMethod, $givenRoute, $handlerSpy);
-        $registeredHandler = $sut->match(new RequestStub($requestMethod, $givenRoute), $givenRoute);
+        $registeredHandler = $sut->match(new RequestStub($requestMethodString, $givenRoute), $givenRoute);
         $registeredHandler->process(new ConfigurableContainerStub(new ContainerConfigurationStub()));
     }
 
-    #[TestDox("Shall return a RouteNotRegistered instance when a path of a \$requestMethod request is not associated with any handlers.")]
+    #[TestDox("Shall return a RouteNotRegistered instance when a path of a \$requestMethodString request is not associated with any handlers.")]
     #[DataProvider("requestMethods")]
-    public function test2(string $requestMethod)
+    public function test2(RequestMethods $requestMethod, string $requestMethodString)
     {
         $sut = new RouteMap($this->getPropertyInjectorStub());
-        $result = $sut->match(new RequestStub($requestMethod), "an_unregistered_path");
+        $result = $sut->match(new RequestStub($requestMethodString), "an_unregistered_path");
         $this->assertInstanceOf(RouteNotRegistered::class, $result);
     }
 
-    #[TestDox("Shall not associate a \$methodA request with a \$methodB request.")]
+    #[TestDox("Shall not associate a \$methodAString request with a \$methodBString request.")]
     #[DataProvider("nonMatchingMethods")]
-    public function test3(string $methodA, string $methodB)
+    public function test3(RequestMethods $methodA, RequestMethods $methodB, string $methodAString, string $methodBString)
     {
         $givenRoute = "/";
         /**
@@ -87,21 +79,21 @@ final class RouteMapTest extends TestCase
         $handlerStub = $this->createStub(RoutableInterface::class);
         $sut = new RouteMap($this->getPropertyInjectorStub());
         $sut->add($methodA, $givenRoute, $handlerStub);
-        $result = $sut->match(new RequestStub($methodB, $givenRoute), $givenRoute);
+        $result = $sut->match(new RequestStub($methodBString, $givenRoute), $givenRoute);
         $this->assertInstanceOf(RouteNotRegistered::class, $result);
     }
 
-    #[TestWith(["GET", "/some/path/{id}", "/some/path/123"])]
-    #[TestWith(["GET", "/some/path/{name}", "/some/path/abcdefg"])]
-    #[TestWith(["GET", "/some/path/{id}/something", "/some/path/67a8c963-a381-462d-9530-c2e6beb27a28/something"])]
-    #[TestWith(["GET", "/{id}", "/67a8c963-a381-462d-9530-c2e6beb27a28"])]
-    #[TestWith(["GET", "", ""])]
-    #[TestWith(["POST", "/some/path/{id}", "/some/path/123"])]
-    #[TestWith(["POST", "/some/path/{name}", "/some/path/abcdefg"])]
-    #[TestWith(["POST", "/some/path/{id}/something", "/some/path/67a8c963-a381-462d-9530-c2e6beb27a28/something"])]
-    #[TestWith(["POST", "/{id}", "/67a8c963-a381-462d-9530-c2e6beb27a28"])]
+    #[TestWith([RequestMethods::GET, "GET", "/some/path/{id}", "/some/path/123"])]
+    #[TestWith([RequestMethods::GET, "GET", "/some/path/{name}", "/some/path/abcdefg"])]
+    #[TestWith([RequestMethods::GET, "GET", "/some/path/{id}/something", "/some/path/67a8c963-a381-462d-9530-c2e6beb27a28/something"])]
+    #[TestWith([RequestMethods::GET, "GET", "/{id}", "/67a8c963-a381-462d-9530-c2e6beb27a28"])]
+    #[TestWith([RequestMethods::GET, "GET", "", ""])]
+    #[TestWith([RequestMethods::POST, "POST", "/some/path/{id}", "/some/path/123"])]
+    #[TestWith([RequestMethods::POST, "POST", "/some/path/{name}", "/some/path/abcdefg"])]
+    #[TestWith([RequestMethods::POST, "POST", "/some/path/{id}/something", "/some/path/67a8c963-a381-462d-9530-c2e6beb27a28/something"])]
+    #[TestWith([RequestMethods::POST, "POST", "/{id}", "/67a8c963-a381-462d-9530-c2e6beb27a28"])]
     #[TestDox("Shall match a route with params to the correct handler with parsed route params. \$givenRoute matched \$givenRequestPath")]
-    public function testa(string $method, string $givenRoute, string $givenRequestPath)
+    public function testa(RequestMethods $method, string $methodString, string $givenRoute, string $givenRequestPath)
     {
         /**
          * @var Stub&RoutableInterface $handlerStub
@@ -109,26 +101,26 @@ final class RouteMapTest extends TestCase
         $handlerStub = $this->createStub(RoutableInterface::class);
         $sut = new RouteMap($this->getPropertyInjectorStub());
         $sut->add($method, $givenRoute, $handlerStub);
-        $result = $sut->match(new RequestStub($method, $givenRequestPath));
+        $result = $sut->match(new RequestStub($methodString, $givenRequestPath));
         $this->assertNotInstanceOf(RouteNotRegistered::class, $result);
     }
 
-    #[TestWith(["GET", "/some/non-matching-path/{id}", "/some/path/123"])]
-    #[TestWith(["GET", "/some/path/that/does/not/match/{name}", "/some/path/abcdefg"])]
-    #[TestWith(["GET", "/some/path/{id}/something-else", "/some/path/67a8c963-a381-462d-9530-c2e6beb27a28/something"])]
-    #[TestWith(["GET", "/some/path/{id}", "/some/path/67a8c963-a381-462d-9530-c2e6beb27a28/an-extra-part"])]
-    #[TestWith(["GET", "", "67a8c963-a381-462d-9530-c2e6beb27a28"])]
-    #[TestWith(["GET", "", "/67a8c963-a381-462d-9530-c2e6beb27a28"])]
-    #[TestWith(["GET", "/", "/67a8c963-a381-462d-9530-c2e6beb27a28"])]
-    #[TestWith(["POST", "/some/non-matching-path/{id}", "/some/path/123"])]
-    #[TestWith(["POST", "/some/path/that/does/not/match/{name}", "/some/path/abcdefg"])]
-    #[TestWith(["POST", "/some/path/{id}/something-else", "/some/path/67a8c963-a381-462d-9530-c2e6beb27a28/something"])]
-    #[TestWith(["POST", "/some/path/{id}", "/some/path/67a8c963-a381-462d-9530-c2e6beb27a28/an-extra-part"])]
-    #[TestWith(["POST", "", "67a8c963-a381-462d-9530-c2e6beb27a28"])]
-    #[TestWith(["POST", "", "/67a8c963-a381-462d-9530-c2e6beb27a28"])]
-    #[TestWith(["POST", "/", "/67a8c963-a381-462d-9530-c2e6beb27a28"])]
+    #[TestWith([RequestMethods::GET, "GET", "/some/non-matching-path/{id}", "/some/path/123"])]
+    #[TestWith([RequestMethods::GET, "GET", "/some/path/that/does/not/match/{name}", "/some/path/abcdefg"])]
+    #[TestWith([RequestMethods::GET, "GET", "/some/path/{id}/something-else", "/some/path/67a8c963-a381-462d-9530-c2e6beb27a28/something"])]
+    #[TestWith([RequestMethods::GET, "GET", "/some/path/{id}", "/some/path/67a8c963-a381-462d-9530-c2e6beb27a28/an-extra-part"])]
+    #[TestWith([RequestMethods::GET, "GET", "", "67a8c963-a381-462d-9530-c2e6beb27a28"])]
+    #[TestWith([RequestMethods::GET, "GET", "", "/67a8c963-a381-462d-9530-c2e6beb27a28"])]
+    #[TestWith([RequestMethods::GET, "GET", "/", "/67a8c963-a381-462d-9530-c2e6beb27a28"])]
+    #[TestWith([RequestMethods::POST, "POST", "/some/non-matching-path/{id}", "/some/path/123"])]
+    #[TestWith([RequestMethods::POST, "POST", "/some/path/that/does/not/match/{name}", "/some/path/abcdefg"])]
+    #[TestWith([RequestMethods::POST, "POST", "/some/path/{id}/something-else", "/some/path/67a8c963-a381-462d-9530-c2e6beb27a28/something"])]
+    #[TestWith([RequestMethods::POST, "POST", "/some/path/{id}", "/some/path/67a8c963-a381-462d-9530-c2e6beb27a28/an-extra-part"])]
+    #[TestWith([RequestMethods::POST, "POST", "", "67a8c963-a381-462d-9530-c2e6beb27a28"])]
+    #[TestWith([RequestMethods::POST, "POST", "", "/67a8c963-a381-462d-9530-c2e6beb27a28"])]
+    #[TestWith([RequestMethods::POST, "POST", "/", "/67a8c963-a381-462d-9530-c2e6beb27a28"])]
     #[TestDox("Shall not match a route with params when the path is not a complete match. \$givenRoute did not match \$givenRequestPath")]
-    public function testb(string $method, string $givenRoute, string $givenRequestPath)
+    public function testb(RequestMethods $method, string $methodString, string $givenRoute, string $givenRequestPath)
     {
         /**
          * @var Stub&RoutableInterface $handlerStub
@@ -136,7 +128,7 @@ final class RouteMapTest extends TestCase
         $handlerStub = $this->createStub(RoutableInterface::class);
         $sut = new RouteMap($this->getPropertyInjectorStub());
         $sut->add($method, $givenRoute, $handlerStub);
-        $result = $sut->match(new RequestStub($method, $givenRequestPath));
+        $result = $sut->match(new RequestStub($methodString, $givenRequestPath));
         $this->assertInstanceOf(RouteNotRegistered::class, $result, $givenRequestPath);
     }
 
@@ -160,10 +152,10 @@ final class RouteMapTest extends TestCase
         $this->assertInstanceOf(RouteNotRegistered::class, $result);
     }
 
-    #[TestWith(["GET", "/{invalid^}", "/67a8c963-a381-462d-9530-c2e6beb27a28"])]
-    #[TestWith(["POST", "/some/path/{invalid%}", "/some/path/123"])]
+    #[TestWith([RequestMethods::GET, "GET", "/{invalid^}", "/67a8c963-a381-462d-9530-c2e6beb27a28"])]
+    #[TestWith([RequestMethods::POST, "POST", "/some/path/{invalid%}", "/some/path/123"])]
     #[TestDox("Shall not match a route when the route param is invalid")]
-    public function testd(string $method, string $givenRoute, string $givenRequestPath)
+    public function tesd(RequestMethods $method, string $methodString, string $givenRoute, string $givenRequestPath)
     {
         /**
          * @var Stub&RoutableInterface $handlerStub
@@ -171,26 +163,13 @@ final class RouteMapTest extends TestCase
         $handlerStub = $this->createStub(RoutableInterface::class);
         $sut = new RouteMap($this->getPropertyInjectorStub());
         $sut->add($method, $givenRoute, $handlerStub);
-        $result = $sut->match(new RequestStub($method, $givenRequestPath));
+        $result = $sut->match(new RequestStub($methodString, $givenRequestPath));
         $this->assertInstanceOf(RouteNotRegistered::class, $result);
-    }
-
-    #[DataProvider("notImplementedMethods")]
-    #[TestDox("Shall throw an exception when attempting to add a non-supported method. Attempted \$method")]
-    public function teste(string $method, string $givenRoute = "/")
-    {
-        $this->expectException(DomainException::class);
-        /**
-         * @var Stub&RoutableInterface $handlerStub
-         */
-        $handlerStub = $this->createStub(RoutableInterface::class);
-        $sut = new RouteMap($this->getPropertyInjectorStub());
-        $sut->add($method, $givenRoute, $handlerStub);
     }
 
     #[DataProvider("requestMethods")]
     #[TestDox("Shall match a route with params when multiple routes are registered")]
-    public function testf(string $requestMethod)
+    public function testf(RequestMethods $requestMethod, string $requestMethodString)
     {
         /**
          * @var Stub&RoutableInterface $handlerStub
@@ -210,14 +189,14 @@ final class RouteMapTest extends TestCase
             $sut->add($requestMethod, $route, $handlerStub);
         }
 
-        $result = $sut->match(new RequestStub($requestMethod, $requestPath));
+        $result = $sut->match(new RequestStub($requestMethodString, $requestPath));
         $this->assertNotInstanceOf(RouteNotRegistered::class, $result);
     }
 
-    #[TestWith(["GET", "/{invalid^}", "/67a8c963-a381-462d-9530-c2e6beb27a28"])]
-    #[TestWith(["POST", "/some/path/{invalid%}", "/some/path/123"])]
+    #[TestWith([RequestMethods::GET, "/some/path"])]
+    #[TestWith([RequestMethods::POST, "/some/path"])]
     #[TestDox("Shall call inject on property injector when adding a route configuration")]
-    public function testg(string $method, string $givenRoute, string $givenRequestPath)
+    public function testg(RequestMethods $method, string $givenRoute)
     {
         /**
          * @var Stub&RoutableInterface $handlerStub

@@ -206,6 +206,21 @@ Search.appendIndex(
             "summary": "Load\u0020the\u0020provided\u0020middleware\non\u0020the\u0020queue\u0020for\u0020processing.",
             "url": "classes/Phpolar-Phpolar-Http-MiddlewareQueueRequestHandler.html#method_queue"
         },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\RequestMethods",
+            "name": "RequestMethods",
+            "summary": "Contains\u0020the\u0020currently\u0020supported\nHTTP\u0020request\u0020methods\u0020supported\u0020for\nrouting.",
+            "url": "classes/Phpolar-Phpolar-Http-RequestMethods.html"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\RequestMethods\u003A\u003AGET",
+            "name": "GET",
+            "summary": "",
+            "url": ""
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\RequestMethods\u003A\u003APOST",
+            "name": "POST",
+            "summary": "",
+            "url": ""
+        },                {
             "fqsen": "\\Phpolar\\Phpolar\\Http\\ResolvedRoute",
             "name": "ResolvedRoute",
             "summary": "Contains\u0020a\u0020routable\u0020that\u0020is\u0020the\u0020target\u0020of\u0020a\u0020route\nand\u0020bound\u0020route\u0020parameters.",

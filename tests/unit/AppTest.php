@@ -29,6 +29,7 @@ use Phpolar\Phpolar\Http\RoutingMiddleware;
 use Phpolar\Phpolar\Tests\Stubs\ConfigurableContainerStub;
 use Phpolar\Phpolar\Tests\Stubs\ContainerConfigurationStub;
 use Phpolar\Phpolar\Http\MiddlewareQueueRequestHandler;
+use Phpolar\Phpolar\Http\RequestMethods;
 use Phpolar\Phpolar\Http\RoutingHandler;
 use Phpolar\PropertyInjectorContract\PropertyInjectorInterface;
 use Phpolar\PurePhp\Binder;
@@ -226,7 +227,7 @@ final class AppTest extends TestCase
          */
         $handlerStub = $this->createStub(RoutableInterface::class);
         $handlerStub->method("process")->willReturn($expectedContent);
-        $givenRoutes->add("GET", "/", $handlerStub);
+        $givenRoutes->add(RequestMethods::GET, "/", $handlerStub);
         $givenRequest = new RequestStub("GET", "/");
         $handlerStub = $this->createStub(MiddlewareQueueRequestHandler::class);
         $config = new ContainerConfigurationStub();
@@ -304,7 +305,7 @@ final class AppTest extends TestCase
         $config[ModelResolverInterface::class] = $this->createStub(ModelResolverInterface::class);
         $config[DiTokens::UNAUTHORIZED_HANDLER] = $this->createStub(RequestHandlerInterface::class);
         $routes = new RouteMap($this->getPropertyInjectorStub());
-        $routes->add("GET", "/", $this->createStub(AbstractProtectedRoutable::class));
+        $routes->add(RequestMethods::GET, "/", $this->createStub(AbstractProtectedRoutable::class));
         $config[RouteMap::class] = $routes;
         $container = $this->configureContainer($this->getContainerFactory($config, $handler), $config);
         $sut = App::create($container);
@@ -321,7 +322,7 @@ final class AppTest extends TestCase
         $config[ModelResolverInterface::class] = $this->createStub(ModelResolverInterface::class);
         $config[DiTokens::UNAUTHORIZED_HANDLER] = $this->createStub(RequestHandlerInterface::class);
         $routes = new RouteMap($this->getPropertyInjectorStub());
-        $routes->add("GET", "/", $this->createStub(AbstractProtectedRoutable::class));
+        $routes->add(RequestMethods::GET, "/", $this->createStub(AbstractProtectedRoutable::class));
         $config[RouteMap::class] = $routes;
         $container = $this->configureContainer($this->getContainerFactory($config, $handler), $config);
         /**

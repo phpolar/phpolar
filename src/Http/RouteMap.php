@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Phpolar\Phpolar\Http;
 
-use DomainException;
 use Psr\Http\Message\ServerRequestInterface;
 use Phpolar\Phpolar\Core\Routing\RouteNotRegistered;
 use Phpolar\Phpolar\Core\Routing\RouteParamMap;
@@ -38,24 +37,15 @@ class RouteMap
 
     /**
      * Associates a request method, route and a target object.
-     *
-     * @param string $method An HTTP request method
-     * @param string $route Represents an HTTP request path
-     * @param RoutableInterface $target The target object that will handle the request
      */
-    public function add(string $method, string $route, RoutableInterface $target): void
+    public function add(RequestMethods $method, string $route, RoutableInterface $target): void
     {
         $this->propertyInjector->inject($target);
         $this->containsParamRoutes = $this->containsParamRoutes || preg_match(ROUTE_PARAM_PATTERN, $route) === 1;
-        if (strtoupper($method) === "GET") {
-            $this->registryForGet[$route] = $target;
-            return;
-        }
-        if (strtoupper($method) === "POST") {
-            $this->registryForPost[$route] = $target;
-            return;
-        }
-        throw new DomainException(sprintf("%s is not supported", $method));
+        match ($method) {
+            RequestMethods::GET => $this->registryForGet[$route] = $target,
+            RequestMethods::POST => $this->registryForPost[$route] = $target,
+        };
     }
 
     /**

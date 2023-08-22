@@ -23,8 +23,8 @@
 - [x] Shall return a "not found" response when the given route has not been registered
 
 ## Low Memory Usage
-- [x] Memory usage shall be below 131000 bytes
+- [x] Memory usage shall be below 167000 bytes
 
 ## Small Project Size
-- [x] Source code total size shall be below 10000 bytes
+- [x] Source code total size shall be below 9000 bytes
 
