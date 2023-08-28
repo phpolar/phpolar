@@ -23,25 +23,25 @@
 </head>
 <body id="top">
     {% include 'components/header.html.twig' %}
+    <style>
+    </style>
 
-    <main class="phpdocumentor container">
-        <div class="phpdocumentor-section">
-            {% include 'components/sidebar.html.twig' %}
+    <main class="phpdocumentor container" role="grid-container">
+        {% include 'components/sidebar.html.twig' %}
 
-            <div class="phpdocumentor-column -nine phpdocumentor-content">
-                {% if block('on_this_page') is defined %}
-                <section>
-                {% endif %}
-                    {% block content %}{% endblock %}
-                {% if block('on_this_page') is defined %}
-                </section>
-                <section class="phpdocumentor-on-this-page__sidebar">
-                    {{ block('on_this_page') }}
-                </section>
-                {% endif %}
-            </div>
-            {% include 'components/search-results.html.twig' %}
+        <div role="document">
+            {% if block('on_this_page') is defined %}
+            <section>
+            {% endif %}
+                {% block content %}{% endblock %}
+            {% if block('on_this_page') is defined %}
+            </section>
+            <section class="phpdocumentor-on-this-page__sidebar">
+                {{ block('on_this_page') }}
+            </section>
+            {% endif %}
         </div>
+        {% include 'components/search-results.html.twig' %}
         {{ include('components/back-to-top.html.twig') }}
     </main>
 
