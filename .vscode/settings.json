@@ -34,4 +34,5 @@
       "editor.formatOnSave": true
   },
 "editor.indentSize": "tabSize",
+"liveServer.settings.port": 5501,
 }
