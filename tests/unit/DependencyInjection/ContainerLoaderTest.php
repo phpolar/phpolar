@@ -26,7 +26,7 @@ final class ContainerLoaderTest extends TestCase
         $containerConfig[ResponseFactoryInterface::class] = new ResponseFactoryStub();
         $containerConfig[StreamFactoryInterface::class] = new StreamFactoryStub("r");
         $container = new ConfigurableContainerStub($containerConfig);
-        (new ContainerLoader())->load($containerConfig, $container);
+        (new ContainerLoader())->load($container, $containerConfig);
         $this->assertNotEmpty($container->get(ResponseFactoryInterface::class));
         $this->assertNotEmpty($container->get(StreamFactoryInterface::class));
     }
@@ -38,7 +38,7 @@ final class ContainerLoaderTest extends TestCase
         chdir("tests/__fakes__");
         $containerConfig = new ContainerConfigurationStub();
         $container = new ConfigurableContainerStub($containerConfig);
-        (new ContainerLoader())->load($containerConfig, $container);
+        (new ContainerLoader())->load($container, $containerConfig);
         chdir($dir);
         $this->assertNotEmpty($container->get(ResponseFactoryInterface::class));
         $this->assertNotEmpty($container->get(StreamFactoryInterface::class));
@@ -51,7 +51,7 @@ final class ContainerLoaderTest extends TestCase
         chdir(__DIR__);
         $containerConfig = new ContainerConfigurationStub();
         $container = new ConfigurableContainerStub($containerConfig);
-        (new ContainerLoader())->load($containerConfig, $container);
+        (new ContainerLoader())->load($container, $containerConfig);
         chdir($dir);
         $this->assertCount(0, $containerConfig);
     }

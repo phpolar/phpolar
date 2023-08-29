@@ -112,7 +112,7 @@ final class AppTest extends TestCase
 
     private function configureContainer(ContainerInterface $container, ArrayAccess $containerConfig): ContainerInterface
     {
-        (new ContainerLoader())->load($containerConfig, $container);
+        (new ContainerLoader())->load($container, $containerConfig);
         return $container;
     }
 
