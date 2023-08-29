@@ -19,8 +19,8 @@ final class ContainerLoader
      * @param ArrayAccess<string,mixed> $containerConfig
      */
     public function load(
-        ArrayAccess $containerConfig,
         ContainerInterface $container,
+        ArrayAccess $containerConfig,
     ): void {
         $frameworkDepFiles = glob(Globs::FrameworkDeps->value, GLOB_BRACE);
         $customDepFiles = glob(Globs::CustomDeps->value, GLOB_BRACE);
