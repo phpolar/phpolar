@@ -5,7 +5,6 @@
     {% block head %}
         <title>{% block title %}{{ project.name }}{% endblock %}</title>
     {% endblock %}
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {{ renderBaseUrlHeader() }}
     <link rel="icon" href="https://phpolar.org/resources/images/icon.svg"/>
@@ -23,10 +22,8 @@
 </head>
 <body id="top">
     {% include 'components/header.html.twig' %}
-
     <main class="container" role="grid-container">
         {% include 'components/sidebar.html.twig' %}
-
         <div role="document">
             {% if block('on_this_page') is defined %}
             <section>
@@ -42,7 +39,6 @@
         {% include 'components/search-results.html.twig' %}
         {{ include('components/back-to-top.html.twig') }}
     </main>
-
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/prism.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/autoloader/prism-autoloader.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
