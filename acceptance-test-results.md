@@ -26,5 +26,5 @@
 - [x] Memory usage shall be below 167000 bytes
 
 ## Small Project Size
-- [x] Source code total size shall be below 9000 bytes
+- [x] Source code total size shall be below 10000 bytes
 

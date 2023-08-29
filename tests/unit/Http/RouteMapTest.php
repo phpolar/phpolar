@@ -210,4 +210,26 @@ final class RouteMapTest extends TestCase
         $sut = new RouteMap($propertyInjectorMock);
         $sut->add($method, $givenRoute, $handlerStub);
     }
+
+    #[TestWith([RequestMethods::GET, "/some/path"])]
+    #[TestWith([RequestMethods::POST, "/some/path"])]
+    #[TestDox("Shall call inject on property injector when adding a route configuration")]
+    public function testh(RequestMethods $method, string $givenRoute)
+    {
+        /**
+         * @var Stub&RoutableInterface $handlerStub
+         */
+        $handlerStub = $this->createStub(RoutableInterface::class);
+        /**
+         * @var Stub&PropertyInjectorInterface
+         */
+        $propertyInjectorStub = $this->createStub(PropertyInjectorInterface::class);
+        /**
+         * @var RouteFactory
+         */
+        $routeFactoryMock = $this->createMock(RoutableFactory::class);
+        $routeFactoryMock->expects($this->once())->method("createInstance")->willReturn($handlerStub);
+        $sut = new RouteMap($propertyInjectorStub);
+        $sut->add($method, $givenRoute, $routeFactoryMock);
+    }
 }

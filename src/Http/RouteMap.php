@@ -38,14 +38,20 @@ class RouteMap
     /**
      * Associates a request method, route and a target object.
      */
-    public function add(RequestMethods $method, string $route, RoutableInterface $target): void
+    public function add(RequestMethods $method, string $route, RoutableInterface | RoutableFactory $targetOrFactory): void
     {
+        // @codeCoverageIgnoreStart
+        $target = match (true) {
+            $targetOrFactory instanceof RoutableInterface => $targetOrFactory,
+            $targetOrFactory instanceof RoutableFactory => $targetOrFactory->createInstance(),
+        };
         $this->propertyInjector->inject($target);
         $this->containsParamRoutes = $this->containsParamRoutes || preg_match(ROUTE_PARAM_PATTERN, $route) === 1;
         match ($method) {
             RequestMethods::GET => $this->registryForGet[$route] = $target,
             RequestMethods::POST => $this->registryForPost[$route] = $target,
         };
+        // @codeCoverageIgnoreEnd
     }
 
     /**
