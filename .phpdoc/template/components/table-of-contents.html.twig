@@ -14,9 +14,9 @@
     Packages
     {{ include('components/headerlink.html.twig', {'on': node, 'at': 'packages'}, with_context = false) }}
 </h4>
-<dl class="phpdocumentor-table-of-contents">
+<dl class="">
     {% for package in packages %}
-        <dt class="phpdocumentor-table-of-contents__entry -package">{{ package|route('class:short') }}</dt>
+        <dt class="">{{ package|route('class:short') }}</dt>
     {% endfor %}
 </dl>
 {% endif %}
@@ -100,7 +100,7 @@
     Constants
     {{ include('components/headerlink.html.twig', {'on': node, 'at': 'toc-constants'}, with_context = false) }}
 </h4>
-<dl class="phpdocumentor-table-of-contents">
+<dl class="">
     {% for constant in constants|sortByVisibility %}
         {{ include('components/table-of-contents-entry.html.twig', {'type': 'constant', 'node': constant}) }}
     {% endfor %}
@@ -112,7 +112,7 @@
     Cases
     {{ include('components/headerlink.html.twig', {'on': node, 'at': 'toc-cases'}, with_context = false) }}
 </h4>
-<dl class="phpdocumentor-table-of-contents">
+<dl class="">
     {% for case in cases|sortByVisibility %}
         {{ include('components/table-of-contents-entry.html.twig', {'type': 'case', 'node': case}) }}
     {% endfor %}
@@ -124,7 +124,7 @@
     Properties
     {{ include('components/headerlink.html.twig', {'on': node, 'at': 'toc-properties'}, with_context = false) }}
 </h4>
-<dl class="phpdocumentor-table-of-contents">
+<dl class="">
     {% for property in properties|sortByVisibility %}
         {{ include('components/table-of-contents-entry.html.twig', {'type': 'property', 'node': property}) }}
     {% endfor %}
