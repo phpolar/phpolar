@@ -444,17 +444,9 @@ body > header {
     padding-bottom: 0 !important;
     z-index: 999;
     background-color: white;
-}.phpdocumentor-title {
-    box-sizing: border-box;
-    color: var(--pico-h1-color);
-    font-size: var(--text-xxl);
-    letter-spacing: .05rem;
-    font-weight: normal;
-    width: auto;
-    margin: 0;
-    display: flex;
-    align-items: center;
 }
+.phpdocumentor-title {
+    }
 
 .phpdocumentor-title .brand-icon {
     width:2rem;
