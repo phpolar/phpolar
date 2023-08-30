@@ -156,7 +156,7 @@ final class RouteMapTest extends TestCase
     #[TestWith([RequestMethods::GET, "GET", "/{invalid^}", "/67a8c963-a381-462d-9530-c2e6beb27a28"])]
     #[TestWith([RequestMethods::POST, "POST", "/some/path/{invalid%}", "/some/path/123"])]
     #[TestDox("Shall not match a route when the route param is invalid")]
-    public function tesd(RequestMethods $method, string $methodString, string $givenRoute, string $givenRequestPath)
+    public function testd(RequestMethods $method, string $methodString, string $givenRoute, string $givenRequestPath)
     {
         /**
          * @var Stub&RoutableInterface $handlerStub
@@ -194,10 +194,10 @@ final class RouteMapTest extends TestCase
         $this->assertNotInstanceOf(RouteNotRegistered::class, $result);
     }
 
-    #[TestWith([RequestMethods::GET, "/some/path"])]
-    #[TestWith([RequestMethods::POST, "/some/path"])]
-    #[TestDox("Shall call inject on property injector when adding a route configuration")]
-    public function testg(RequestMethods $method, string $givenRoute)
+    #[TestWith([RequestMethods::GET, "GET", "/some/path"])]
+    #[TestWith([RequestMethods::POST, "POST", "/some/path"])]
+    #[TestDox("Shall call inject on property injector when a route target is matched")]
+    public function testg(RequestMethods $method, string $methodString, string $givenRoute)
     {
         /**
          * @var Stub&RoutableInterface $handlerStub
@@ -210,27 +210,44 @@ final class RouteMapTest extends TestCase
         $propertyInjectorMock->expects($this->once())->method("inject")->with($handlerStub);
         $sut = new RouteMap($propertyInjectorMock);
         $sut->add($method, $givenRoute, $handlerStub);
+        $sut->match(new RequestStub($methodString, $givenRoute));
     }
 
-    #[TestWith([RequestMethods::GET, "/some/path"])]
-    #[TestWith([RequestMethods::POST, "/some/path"])]
-    #[TestDox("Shall call createInstance on routable factory when adding a route configuration")]
-    public function testh(RequestMethods $method, string $givenRoute)
+    #[TestWith([RequestMethods::GET, "GET", "/some/path"])]
+    #[TestWith([RequestMethods::POST, "POST", "/some/path"])]
+    #[TestDox("Shall call createInstance on routable factory when matching a route without params")]
+    public function testh(RequestMethods $method, string $methodString, string $givenRoute)
     {
         /**
          * @var Stub&RoutableInterface $handlerStub
          */
         $handlerStub = $this->createStub(RoutableInterface::class);
         /**
-         * @var Stub&PropertyInjectorInterface
+         * @var MockObject&RoutableFactoryInterface
          */
-        $propertyInjectorStub = $this->createStub(PropertyInjectorInterface::class);
+        $routeFactoryMock = $this->createMock(RoutableFactoryInterface::class);
+        $routeFactoryMock->expects($this->once())->method("createInstance")->willReturn($handlerStub);
+        $sut = new RouteMap($this->getPropertyInjectorStub());
+        $sut->add($method, $givenRoute, $routeFactoryMock);
+        $sut->match(new RequestStub($methodString, $givenRoute));
+    }
+
+    #[TestWith([RequestMethods::GET, "GET", "/some/path/{id}", "/some/path/123"])]
+    #[TestWith([RequestMethods::POST, "POST", "/some/path/{id}", "/some/path/123"])]
+    #[TestDox("Shall call createInstance on routable factory when matching a route with params")]
+    public function testj(RequestMethods $method, string $methodString, string $givenRoute, string $givenRequestPath)
+    {
+        /**
+         * @var Stub&RoutableInterface $handlerStub
+         */
+        $handlerStub = $this->createStub(RoutableInterface::class);
         /**
          * @var MockObject&RoutableFactoryInterface
          */
         $routeFactoryMock = $this->createMock(RoutableFactoryInterface::class);
         $routeFactoryMock->expects($this->once())->method("createInstance")->willReturn($handlerStub);
-        $sut = new RouteMap($propertyInjectorStub);
+        $sut = new RouteMap($this->getPropertyInjectorStub());
         $sut->add($method, $givenRoute, $routeFactoryMock);
+        $sut->match(new RequestStub($methodString, $givenRequestPath));
     }
 }
