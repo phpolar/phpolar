@@ -9,6 +9,7 @@
  * The framework is any PSR-11 container for
  * interoperability with other frameworks and to allow
  * users to use whatever implementation they want.
+ * @phan-file-suppress PhanUnreferencedClosure
  */
 
 declare(strict_types=1);
@@ -34,7 +35,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 return [
     /**
-     * @suppress PhanUnreferencedClosure
+     *
      */
     RoutingHandler::class => static fn (ContainerInterface $container) => new RoutingHandler(
         routeRegistry: $container->get(RouteMap::class),
@@ -43,9 +44,6 @@ return [
         modelResolver: $container->get(ModelResolverInterface::class),
         authChecker: $container->get(DiTokens::NOOP_AUTH_CHECKER),
     ),
-    /**
-     * @suppress PhanUnreferencedClosure
-     */
     DiTokens::NOOP_AUTH_CHECKER => static fn (ContainerInterface $container) => new AuthorizationChecker(
         routableResolver: new class () implements RoutableResolverInterface {
             public function resolve(RoutableInterface $target): RoutableInterface|false
@@ -65,16 +63,10 @@ return [
             }
         },
     ),
-    /**
-     * @suppress PhanUnreferencedClosure
-     */
     AuthorizationChecker::class => static fn (ContainerInterface $container) => new AuthorizationChecker(
         routableResolver: new ProtectedRoutableResolver($container->get(AuthenticatorInterface::class)),
         unauthHandler: $container->get(DiTokens::UNAUTHORIZED_HANDLER),
     ),
-    /**
-     * @suppress PhanUnreferencedClosure
-     */
     DiTokens::AUTHENTICATED_ROUTING_HANDLER => static fn (ContainerInterface $container) => new RoutingHandler(
         routeRegistry: $container->get(RouteMap::class),
         responseFactory: $container->get(ResponseFactoryInterface::class),
@@ -82,9 +74,6 @@ return [
         modelResolver: $container->get(ModelResolverInterface::class),
         authChecker: $container->get(AuthorizationChecker::class),
     ),
-    /**
-     * @suppress PhanUnreferencedClosure
-     */
     MiddlewareQueueRequestHandler::class => static function (ContainerInterface $container) {
         $responseFactory = $container->get(ResponseFactoryInterface::class);
         $fallbackHandler = new class ($responseFactory) implements RequestHandlerInterface {
@@ -99,12 +88,6 @@ return [
         };
         return new MiddlewareQueueRequestHandler($fallbackHandler);
     },
-    /**
-     * @suppress PhanUnreferencedClosure
-     */
     RoutingMiddleware::class => static fn (ContainerInterface $container) => new RoutingMiddleware($container->get(RoutingHandler::class)),
-    /**
-     * @suppress PhanUnreferencedClosure
-     */
     DiTokens::RESPONSE_EMITTER => new Laminas\HttpHandlerRunner\Emitter\SapiEmitter(),
 ];
