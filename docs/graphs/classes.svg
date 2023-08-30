@@ -28,7 +28,7 @@ reverse link Psr\\Http\\Server\\RequestHandlerInterface to Phpolar\\Phpolar\\Htt
 reverse link Psr\\Http\\Server\\RequestHandlerInterface to Phpolar\\Phpolar\\Http\\RoutingHandler--><path d="M284.72,729.33 C284.72,729.33 426.95,729.33 426.95,729.33 " fill="none" id="Psr\\Http\\Server\\RequestHandlerInterface&lt;-Phpolar\\Phpolar\\Http\\RoutingHandler" style="stroke: #516F42; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><polygon fill="none" points="284.72,736.33,264.72,729.33,284.72,722.33,284.72,736.33" style="stroke: #516F42; stroke-width: 1.0;"/><!--MD5=[a99784d97307c6a3b2964acff219c718]
 reverse link Psr\\Http\\Server\\MiddlewareInterface to Phpolar\\Phpolar\\Http\\RoutingMiddleware--><path d="M270.3,791 C270.3,791 416.36,791 416.36,791 " fill="none" id="Psr\\Http\\Server\\MiddlewareInterface&lt;-Phpolar\\Phpolar\\Http\\RoutingMiddleware" style="stroke: #516F42; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><polygon fill="none" points="270.3,798,250.3,791,270.3,784,270.3,798" style="stroke: #516F42; stroke-width: 1.0;"/><!--MD5=[9bc72e7149e8379893f580527249b729]
 link Phpolar\\Phpolar\\Http\\AuthorizationChecker to Phpolar\\Phpolar\\Http\\ResolvedRoute--><!--MD5=[3062c2a477cc1b6d22c0b43a126b4f46]
-link Phpolar\\Phpolar\\Http\\AuthorizationChecker to Phpolar\\Phpolar\\Http\\RouteMap--><!--MD5=[90a3de987ad159089e6867b2a19a15be]
+link Phpolar\\Phpolar\\Http\\AuthorizationChecker to Phpolar\\Phpolar\\Http\\RouteMap--><!--MD5=[9bac2c8fd0acdc71054479c73bfb2965]
 @startuml
    skinparam ArrowColor #516f42
    skinparam activityBorderColor #516f42
@@ -89,7 +89,7 @@ PlantUML version 1.2020.02(Sun Mar 01 04:22:07 CST 2020)
 (GPL source distribution)
 Java Runtime: OpenJDK Runtime Environment
 JVM: OpenJDK 64-Bit Server VM
-Java Version: 11.0.20+8-post-Ubuntu-1ubuntu122.04
+Java Version: 11.0.20.1+1-post-Ubuntu-0ubuntu122.04
 Operating System: Linux
 Default Encoding: UTF-8
 Language: en

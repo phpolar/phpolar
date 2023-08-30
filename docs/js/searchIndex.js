@@ -53,7 +53,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\Auth\\Authorize",
             "name": "Authorize",
-            "summary": "Use\u0020to\u0020indicate\u0020that\u0020a\u0020route\u0020should\nonly\u0020be\u0020accessed\u0020by\u0020an\u0020authorized,\u0020authenticated\nuser.",
+            "summary": "Use\u0020to\u0020indicate\u0020that\u0020a\u0020route\u0020should\nonly\u0020be\u0020accessed\u0020by\u0020an\u0020authorized\u0020user.",
             "url": "classes/Phpolar-Phpolar-Auth-Authorize.html"
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\Auth\\Authorize\u003A\u003AgetResolvedRoutable\u0028\u0029",
@@ -63,7 +63,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\Auth\\ProtectedRoutableResolver",
             "name": "ProtectedRoutableResolver",
-            "summary": "Returns\u0020either\u0020the\u0020given\u0020Routable\u0020or\u0020the\u0020given\u0020fallback\u0020handler\nbased\u0020on\u0020the\u0020boolean\u0020result\u0020of\u0020a\u0020given\u0020algorithm.",
+            "summary": "Returns\u0020either\u0020the\u0020given\u0020Routable\u0020or\u0020false\u0020when\u0020the\u0020user\u0020is\u0020not\nauthenticated.",
             "url": "classes/Phpolar-Phpolar-Auth-ProtectedRoutableResolver.html"
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\Auth\\ProtectedRoutableResolver\u003A\u003A__construct\u0028\u0029",
