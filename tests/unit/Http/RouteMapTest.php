@@ -12,6 +12,7 @@ use Phpolar\Routable\RoutableInterface;
 use Phpolar\Phpolar\Tests\Stubs\ConfigurableContainerStub;
 use Phpolar\Phpolar\Tests\Stubs\ContainerConfigurationStub;
 use Phpolar\PropertyInjectorContract\PropertyInjectorInterface;
+use Phpolar\RoutableFactory\RoutableFactoryInterface;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\TestDox;
@@ -213,7 +214,7 @@ final class RouteMapTest extends TestCase
 
     #[TestWith([RequestMethods::GET, "/some/path"])]
     #[TestWith([RequestMethods::POST, "/some/path"])]
-    #[TestDox("Shall call inject on property injector when adding a route configuration")]
+    #[TestDox("Shall call createInstance on routable factory when adding a route configuration")]
     public function testh(RequestMethods $method, string $givenRoute)
     {
         /**
@@ -225,9 +226,9 @@ final class RouteMapTest extends TestCase
          */
         $propertyInjectorStub = $this->createStub(PropertyInjectorInterface::class);
         /**
-         * @var RouteFactory
+         * @var MockObject&RoutableFactoryInterface
          */
-        $routeFactoryMock = $this->createMock(RoutableFactory::class);
+        $routeFactoryMock = $this->createMock(RoutableFactoryInterface::class);
         $routeFactoryMock->expects($this->once())->method("createInstance")->willReturn($handlerStub);
         $sut = new RouteMap($propertyInjectorStub);
         $sut->add($method, $givenRoute, $routeFactoryMock);
