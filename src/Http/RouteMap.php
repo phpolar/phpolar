@@ -9,6 +9,7 @@ use Phpolar\Phpolar\Core\Routing\RouteNotRegistered;
 use Phpolar\Phpolar\Core\Routing\RouteParamMap;
 use Phpolar\PropertyInjectorContract\PropertyInjectorInterface;
 use Phpolar\Routable\RoutableInterface;
+use Phpolar\RoutableFactory\RoutableFactoryInterface;
 
 use const Phpolar\Phpolar\Core\Routing\ROUTE_PARAM_PATTERN;
 
@@ -38,12 +39,11 @@ class RouteMap
     /**
      * Associates a request method, route and a target object.
      */
-    public function add(RequestMethods $method, string $route, RoutableInterface | RoutableFactory $targetOrFactory): void
+    public function add(RequestMethods $method, string $route, RoutableInterface | RoutableFactoryInterface $targetOrFactory): void
     {
-        // @codeCoverageIgnoreStart
         $target = match (true) {
             $targetOrFactory instanceof RoutableInterface => $targetOrFactory,
-            $targetOrFactory instanceof RoutableFactory => $targetOrFactory->createInstance(),
+            $targetOrFactory instanceof RoutableFactoryInterface => $targetOrFactory->createInstance(),
         };
         $this->propertyInjector->inject($target);
         $this->containsParamRoutes = $this->containsParamRoutes || preg_match(ROUTE_PARAM_PATTERN, $route) === 1;
@@ -51,7 +51,6 @@ class RouteMap
             RequestMethods::GET => $this->registryForGet[$route] = $target,
             RequestMethods::POST => $this->registryForPost[$route] = $target,
         };
-        // @codeCoverageIgnoreEnd
     }
 
     /**

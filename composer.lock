@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c90d658333e98d98bcb673eda6aba905",
+    "content-hash": "32a7988d33659d9fe86ccd5528566b12",
     "packages": [
         {
             "name": "guzzlehttp/psr7",
@@ -402,6 +402,54 @@
                 "source": "https://github.com/phpolar/routable/tree/2.0.0"
             },
             "time": "2023-08-21T01:24:38+00:00"
+        },
+        {
+            "name": "phpolar/routable-factory",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpolar/routable-factory.git",
+                "reference": "f1503278a034c057f29f63de029505845a7c2bd2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpolar/routable-factory/zipball/f1503278a034c057f29f63de029505845a7c2bd2",
+                "reference": "f1503278a034c057f29f63de029505845a7c2bd2",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.1",
+                "phpolar/routable": "^2.0"
+            },
+            "require-dev": {
+                "ext-ast": "*",
+                "ext-openssl": "*",
+                "phan/phan": "^5.4",
+                "phpmd/phpmd": "^2.13",
+                "squizlabs/php_codesniffer": "^3.7"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Phpolar\\RoutableFactory\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Eric Fortmeyer",
+                    "email": "e.fortmeyer01@gmail.com"
+                }
+            ],
+            "description": "Unifies implementations of factories used to create route targets",
+            "support": {
+                "issues": "https://github.com/phpolar/routable-factory/issues",
+                "source": "https://github.com/phpolar/routable-factory/tree/1.0.1"
+            },
+            "time": "2023-08-30T03:55:52+00:00"
         },
         {
             "name": "phpolar/storage-driver",
