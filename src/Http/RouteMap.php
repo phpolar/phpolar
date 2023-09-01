@@ -89,10 +89,11 @@ class RouteMap
         if (isset($registry[$key]) === false) {
             return new RouteNotRegistered();
         }
+        $isParamRoute = preg_match("/\{([[:alpha:]]+)\}/", $key) === 1;
         $targetOrFactory = $registry[$key];
         $target = $targetOrFactory instanceof RoutableFactoryInterface ? $targetOrFactory->createInstance() : $targetOrFactory;
         $this->propertyInjector->inject($target);
-        return $this->containsParamRoutes === true ? new ResolvedRoute($target, new RouteParamMap($key, $route)) : $target;
+        return $isParamRoute === true ? new ResolvedRoute($target, new RouteParamMap($key, $route)) : $target;
     }
 
     /**
