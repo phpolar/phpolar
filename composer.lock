@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "32a7988d33659d9fe86ccd5528566b12",
+    "content-hash": "1d4bf0ce0fa12aca21201897afdfc6c4",
     "packages": [
         {
             "name": "guzzlehttp/psr7",
@@ -2393,20 +2393,20 @@
         },
         {
             "name": "phpolar/pure-php",
-            "version": "1.0.4",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpolar/pure-php.git",
-                "reference": "dfe17daaef109c6931d61f65c70b701a4a51479f"
+                "reference": "ea987c10b4f4581079229127a4acb92cf9b77724"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpolar/pure-php/zipball/dfe17daaef109c6931d61f65c70b701a4a51479f",
-                "reference": "dfe17daaef109c6931d61f65c70b701a4a51479f",
+                "url": "https://api.github.com/repos/phpolar/pure-php/zipball/ea987c10b4f4581079229127a4acb92cf9b77724",
+                "reference": "ea987c10b4f4581079229127a4acb92cf9b77724",
                 "shasum": ""
             },
             "require": {
-                "php": "^8.1"
+                "php": ">= 8.1"
             },
             "require-dev": {
                 "ext-mbstring": "*",
@@ -2442,9 +2442,9 @@
             ],
             "support": {
                 "issues": "https://github.com/phpolar/pure-php/issues",
-                "source": "https://github.com/phpolar/pure-php/tree/1.0.4"
+                "source": "https://github.com/phpolar/pure-php/tree/2.0.0"
             },
-            "time": "2023-04-30T17:37:13+00:00"
+            "time": "2023-09-02T01:48:55+00:00"
         },
         {
             "name": "phpolar/response-filter",
