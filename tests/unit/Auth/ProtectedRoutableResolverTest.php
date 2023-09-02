@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Phpolar\Phpolar\Http;
 
-use Phpolar\Authenticator\AuthenticatorInterface;
+use PhpContrib\Authenticator\AuthenticatorInterface;
 use Phpolar\Phpolar\Auth\AbstractProtectedRoutable;
 use Phpolar\Phpolar\Auth\Authorize;
 use Phpolar\Phpolar\Auth\ProtectedRoutableResolver;

@@ -15,7 +15,7 @@
 declare(strict_types=1);
 
 use Phpolar\ModelResolver\ModelResolverInterface;
-use Phpolar\Authenticator\AuthenticatorInterface;
+use PhpContrib\Authenticator\AuthenticatorInterface;
 use Phpolar\HttpCodes\ResponseCode;
 use Phpolar\Phpolar\Auth\ProtectedRoutableResolver;
 use Phpolar\Phpolar\Http\RouteMap;

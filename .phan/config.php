@@ -352,10 +352,10 @@ return [
         'vendor/phpolar/property-injector-contract/src',
         'vendor/phpolar/pure-php/src',
         'vendor/phpolar/storage-driver/src',
-        'vendor/phpolar/authenticator/src',
         'vendor/phpolar/routable/src',
         'vendor/phpolar/routable-factory/src',
-        'vendor/phpolar/validator/src',
+        'vendor/php-contrib/authenticator/src',
+        'vendor/php-contrib/validator/src',
     ],
 
     // A list of individual files to include in analysis
