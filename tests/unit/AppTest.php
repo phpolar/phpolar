@@ -32,9 +32,6 @@ use Phpolar\Phpolar\Http\MiddlewareQueueRequestHandler;
 use Phpolar\Phpolar\Http\RequestMethods;
 use Phpolar\Phpolar\Http\RoutingHandler;
 use Phpolar\PropertyInjectorContract\PropertyInjectorInterface;
-use Phpolar\PurePhp\Binder;
-use Phpolar\PurePhp\Dispatcher;
-use Phpolar\PurePhp\StreamContentStrategy;
 use Phpolar\PurePhp\TemplateEngine;
 use Phpolar\PurePhp\TemplatingStrategyInterface;
 use Phpolar\Routable\RoutableInterface;
@@ -79,11 +76,8 @@ final class AppTest extends TestCase
         CsrfRequestCheckMiddleware|Closure|null $csrfPreRoutingMiddleware = null,
         CsrfResponseFilterMiddleware|Closure|null $csrfPostRoutingMiddleware = null,
     ): ContainerInterface {
-        $config[TemplatingStrategyInterface::class] = new StreamContentStrategy();
-        $config[TemplateEngine::class] = static fn (ArrayAccess $config) => new TemplateEngine($config[TemplatingStrategyInterface::class], $config[Binder::class], $config[Dispatcher::class]);
-        $config[Binder::class] = new Binder();
+        $config[TemplateEngine::class] = static fn () => new TemplateEngine();
         $config[ContainerInterface::class] = new ConfigurableContainerStub($config);
-        $config[Dispatcher::class] = new Dispatcher();
         $config[ResponseFactoryInterface::class] = new ResponseFactoryStub((new StreamFactoryStub("+w"))->createStream());
         $config[StreamFactoryInterface::class] = new StreamFactoryStub("+w");
         $config[MiddlewareQueueRequestHandler::class] = $handler;

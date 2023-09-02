@@ -16,11 +16,7 @@ use Phpolar\Phpolar\Http\RoutingHandler;
 use Phpolar\Phpolar\Http\RoutingMiddleware;
 use Phpolar\PropertyInjectorContract\PropertyInjectorInterface;
 use Phpolar\Routable\RoutableResolverInterface;
-use Phpolar\PurePhp\Binder;
-use Phpolar\PurePhp\Dispatcher;
-use Phpolar\PurePhp\StreamContentStrategy;
 use Phpolar\PurePhp\TemplateEngine;
-use Phpolar\PurePhp\TemplatingStrategyInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -37,8 +33,7 @@ return [
             }
         }
     ),
-    TemplateEngine::class => static fn (ContainerInterface $container) => new TemplateEngine($container->get(TemplatingStrategyInterface::class), new Binder(), new Dispatcher()),
-    TemplatingStrategyInterface::class => new StreamContentStrategy(),
+    TemplateEngine::class => static fn () => new TemplateEngine(),
     ResponseFactoryInterface::class => new ResponseFactoryStub((new StreamFactoryStub("+w"))->createStream()),
     StreamFactoryInterface::class => new StreamFactoryStub("+w"),
     RouteMap::class => new RouteMap(

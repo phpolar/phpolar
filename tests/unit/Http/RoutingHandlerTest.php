@@ -65,7 +65,7 @@ final class RoutingHandlerTest extends TestCase
                     return $this->streamFactory ?? new StreamFactoryStub("w");
                 }
                 if ($id === TemplateEngine::class) {
-                    return new TemplateEngine(new StreamContentStrategy(), new Binder(), new Dispatcher());
+                    return new TemplateEngine();
                 }
                 if ($id === DiTokens::UNAUTHORIZED_HANDLER) {
                     return new class () implements RequestHandlerInterface {
