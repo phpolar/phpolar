@@ -52,9 +52,6 @@ final class App
 
     /**
      * Handle and respond to requests from clients.
-     *
-     * If `useRoutes` is not called before this method,
-     * a 401 "Not Found" response will be produced.
      */
     public function receive(ServerRequestInterface $request): void
     {
