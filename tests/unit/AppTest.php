@@ -7,6 +7,7 @@ namespace Phpolar\Phpolar;
 use ArrayAccess;
 use Closure;
 use DateTimeImmutable;
+use Exception;
 use Laminas\HttpHandlerRunner\Emitter\SapiEmitter;
 use Phpolar\CsrfProtection\CsrfToken;
 use Phpolar\CsrfProtection\Http\CsrfProtectionRequestHandler;
@@ -21,6 +22,7 @@ use Phpolar\HttpMessageTestUtils\ResponseStub;
 use Phpolar\HttpMessageTestUtils\StreamFactoryStub;
 use Phpolar\ModelResolver\ModelResolverInterface;
 use Phpolar\Authenticator\AuthenticatorInterface;
+use Phpolar\Phpolar\Auth\AbstractProtectedRoutable;
 use Phpolar\Phpolar\DependencyInjection\ContainerLoader;
 use Phpolar\Phpolar\DependencyInjection\DiTokens;
 use Phpolar\Phpolar\Http\RouteRegistry;
@@ -222,6 +224,7 @@ final class AppTest extends TestCase
         $givenRequest = new RequestStub("GET", "/");
         $handlerStub = $this->createStub(MiddlewareQueueRequestHandler::class);
         $config = new ContainerConfigurationStub();
+        $config[ModelResolverInterface::class] = $this->createStub(ModelResolverInterface::class);
         $config[RouteRegistry::class] = $givenRoutes;
         $container = $this->getContainerFactory($config, $handlerStub);
         App::create(
@@ -284,5 +287,22 @@ final class AppTest extends TestCase
             $this->configureContainer($containerFac, $config),
         );
         $this->assertSame($app1, $app2);
+    }
+
+    #[TestDox("Shall support opt-in authorization")]
+    public function test7()
+    {
+        $handler = static fn (ArrayAccess $config) => new MiddlewareQueueRequestHandler($config[self::ERROR_HANDLER_404]);
+        $config = new ContainerConfigurationStub();
+        $config[ModelResolverInterface::class] = $this->createStub(ModelResolverInterface::class);
+        $config[DiTokens::UNAUTHORIZED_HANDLER] = $this->createStub(RequestHandlerInterface::class);
+        $routes = new RouteRegistry();
+        $routes->add("GET", "/", $this->createStub(AbstractProtectedRoutable::class));
+        $config[RouteRegistry::class] = $routes;
+        $container = $this->configureContainer($this->getContainerFactory($config, $handler), $config);
+        $sut = App::create($container);
+        $sut->useAuthorization();
+        $sut->receive(new RequestStub("GET", "/"));
+        $this->assertSame(ResponseCode::OK, http_response_code());
     }
 }

@@ -22,6 +22,7 @@ use Phpolar\Phpolar\Http\RoutingHandler;
 use Phpolar\Phpolar\Http\RoutingMiddleware;
 use Phpolar\Phpolar\Http\MiddlewareQueueRequestHandler;
 use Phpolar\Phpolar\DependencyInjection\DiTokens;
+use Phpolar\Routable\RoutableInterface;
 use Phpolar\Routable\RoutableResolverInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
@@ -40,13 +41,36 @@ return [
         streamFactory: $container->get(StreamFactoryInterface::class),
         modelResolver: $container->get(ModelResolverInterface::class),
         container: $container,
-        routableResolver: $container->get(RoutableResolverInterface::class),
-        unauthHandler: $container->get(DiTokens::UNAUTHORIZED_HANDLER),
+        routableResolver: new class () implements RoutableResolverInterface {
+            public function resolve(RoutableInterface $target): RoutableInterface|false
+            {
+                // authorized by default
+                return $target;
+            }
+        },
+        unauthHandler: new class ($container->get(ResponseFactoryInterface::class)) implements RequestHandlerInterface {
+            public function __construct(private ResponseFactoryInterface $responseFactory)
+            {
+            }
+
+            public function handle(ServerRequestInterface $request): ResponseInterface
+            {
+                return $this->responseFactory->createResponse(ResponseCode::UNAUTHORIZED, "Unauthorized");
+            }
+        },
     ),
     /**
      * @suppress PhanUnreferencedClosure
      */
-    RoutableResolverInterface::class => static fn (ContainerInterface $container) => new ProtectedRoutableResolver($container->get(AuthenticatorInterface::class)),
+    DiTokens::AUTHENTICATED_ROUTING_HANDLER => static fn (ContainerInterface $container) => new RoutingHandler(
+        routeRegistry: $container->get(RouteRegistry::class),
+        responseFactory: $container->get(ResponseFactoryInterface::class),
+        streamFactory: $container->get(StreamFactoryInterface::class),
+        modelResolver: $container->get(ModelResolverInterface::class),
+        container: $container,
+        routableResolver: new ProtectedRoutableResolver($container->get(AuthenticatorInterface::class)),
+        unauthHandler: $container->get(DiTokens::UNAUTHORIZED_HANDLER),
+    ),
     /**
      * @suppress PhanUnreferencedClosure
      */
