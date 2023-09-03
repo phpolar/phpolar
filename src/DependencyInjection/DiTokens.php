@@ -14,4 +14,5 @@ final class DiTokens
     public const ERROR_HANDLER_401 = "ERROR_HANDLER_401";
     public const ERROR_HANDLER_404 = "ERROR_HANDLER_404";
     public const RESPONSE_EMITTER = "RESPONSE_EMITTER";
+    public const UNAUTHORIZED_HANDLER = "UNAUTHORIZED_HANDLER";
 }

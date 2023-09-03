@@ -55,6 +55,7 @@ return [
         modelResolver: $container->get(ModelResolverInterface::class),
         container: $container,
         routableResolver: $container->get(RoutableResolverInterface::class),
+        unauthHandler: $container->get(DiTokens::UNAUTHORIZED_HANDLER),
     ),
     /**
      * @suppress PhanUnreferencedClosure
