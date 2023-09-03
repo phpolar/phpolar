@@ -69,7 +69,7 @@ class Person extends Model
     #[Column("Business Address")]
     #[Label("Business Address")]
     #[MaxLength(200)]
-    public string$address2;
+    public string $address2;
 
     #[DateFormat("Y-m-d")]
     public DateTimeImmutable $dateOfBirth;
