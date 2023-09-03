@@ -35,7 +35,7 @@ class MinTest extends TestCase
 
             public function __construct(int|float $prop)
             {
-                $this->isPosted = true;
+                $this->shouldValidate = true;
                 $this->property = $prop;
             }
         };
@@ -58,7 +58,7 @@ class MinTest extends TestCase
 
             public function __construct(int|float $prop)
             {
-                $this->isPosted = true;
+                $this->shouldValidate = true;
                 $this->property = $prop;
             }
         };
@@ -80,7 +80,7 @@ class MinTest extends TestCase
 
             public function __construct(mixed $prop)
             {
-                $this->isPosted = true;
+                $this->shouldValidate = true;
                 $this->property = $prop;
             }
         };
