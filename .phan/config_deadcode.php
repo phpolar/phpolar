@@ -285,7 +285,9 @@ return [
     //
     // This is useful for excluding hopelessly unanalyzable
     // files that can't be removed for whatever reason.
-    'exclude_file_list' => [],
+    'exclude_file_list' => [
+        'src/config/dependencies/framework.php',
+    ],
 
     // A directory list that defines files that will be excluded
     // from static analysis, but whose class and method
@@ -364,5 +366,7 @@ return [
     // A list of individual files to include in analysis
     // with a path relative to the root directory of the
     // project.
-    'file_list' => [],
+    'file_list' => [
+        'config/Globs.php'
+    ],
 ];

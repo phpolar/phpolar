@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Phpolar\Phpolar\WebServer;
 
+use ArrayAccess;
 use Phpolar\CsrfProtection\Http\CsrfPostRoutingMiddleware;
 use Phpolar\CsrfProtection\Http\CsrfPostRoutingMiddlewareFactory;
 use Phpolar\CsrfProtection\Http\CsrfPreRoutingMiddleware;
@@ -36,6 +37,7 @@ use ReflectionObject;
 #[RunTestsInSeparateProcesses]
 #[CoversClass(WebServer::class)]
 #[CoversClass(MiddlewareProcessingQueue::class)]
+#[CoversClass(ContainerManager::class)]
 #[UsesClass(RouteRegistry::class)]
 final class WebServerTest extends TestCase
 {
@@ -48,7 +50,7 @@ final class WebServerTest extends TestCase
         RequestHandlerInterface $handler,
         ?CsrfPreRoutingMiddleware $csrfPreRoutingMiddleware = null,
         ?CsrfPostRoutingMiddlewareFactory $csrfPostRoutingMiddlewareFactory = null,
-    ): ContainerInterface {
+    ): ContainerInterface & ArrayAccess {
         $responseFactory = new ResponseFactoryStub();
         $streamFactory = new StreamFactoryStub();
         $templateEngine = new TemplateEngine(new StreamContentStrategy(), new Binder(), new Dispatcher());
@@ -64,6 +66,37 @@ final class WebServerTest extends TestCase
             $csrfPostRoutingMiddlewareFactory,
             $handler,
         );
+    }
+
+    private function getNonConfiguredContainer(): ContainerInterface & ArrayAccess
+    {
+        return new class () implements ContainerInterface, ArrayAccess {
+            private array $values = [];
+            public function offsetExists(mixed $offset): bool
+            {
+                return isset($this->values[$offset]);
+            }
+            public function offsetGet(mixed $offset): mixed
+            {
+                return $this->values[$offset];
+            }
+            public function offsetSet(mixed $offset, mixed $value): void
+            {
+                $this->values[$offset] = $value;
+            }
+            public function offsetUnset(mixed $offset): void
+            {
+                unset($this->values[$offset]);
+            }
+            public function has(string $id): bool
+            {
+                return isset($this[$id]);
+            }
+            public function get(string $id)
+            {
+                return $this->values[$id]($this);
+            }
+        };
     }
 
     #[TestDox("Shall use the given routing handler to handle requests")]
@@ -258,5 +291,22 @@ final class WebServerTest extends TestCase
         $sut->useRoutes($givenRoutes);
         $this->assertTrue($useRoutesProp->getValue($sut));
         $this->assertInstanceOf(RouteRegistry::class, $routesProp->getValue($sut));
+    }
+
+    #[TestDox("Shall add required services to the provided dependency injection container")]
+    public function test7()
+    {
+        $nonConfiguredContainer = $this->getNonConfiguredContainer();
+        WebServer::createApp($nonConfiguredContainer);
+        $this->expectNotToPerformAssertions();
+    }
+
+    #[TestDox("Shall add custom services to the provided dependency injection container")]
+    public function test8()
+    {
+        $nonConfiguredContainer = $this->getNonConfiguredContainer();
+        chdir("tests/__fakes__/");
+        WebServer::createApp($nonConfiguredContainer);
+        $this->assertTrue($nonConfiguredContainer->has(RequestStub::class));
     }
 }
