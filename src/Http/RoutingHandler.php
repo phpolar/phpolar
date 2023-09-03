@@ -40,7 +40,7 @@ class RoutingHandler implements RequestHandlerInterface
     {
         $matchResult = $this->routeRegistry->match($request);
         return match (true) {
-            $matchResult instanceof RouteNotRegistered => $this->responseFactory->createResponse(404),
+            $matchResult instanceof RouteNotRegistered => $this->responseFactory->createResponse(404, "Not Found"),
             $matchResult instanceof ResolvedRoute => $this->handleResolvedRoute($matchResult),
             default => $this->handleDelegate($matchResult),
         };
@@ -56,7 +56,7 @@ class RoutingHandler implements RequestHandlerInterface
     private function handleDelegate(RoutableInterface $delegate): ResponseInterface
     {
         if ($this->routableResolver->resolve($delegate) === false) {
-            return $this->responseFactory->createResponse(401);
+            return $this->responseFactory->createResponse(401, "Unauthorized");
         }
 
         $modelParams = $this->modelResolver->resolve($delegate, "process");
