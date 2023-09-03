@@ -21,11 +21,10 @@ on:
     branches: [ "main" ]
     paths:
       - '**.php'
-    paths-ignore:
-      - 'tests/**'
-      - 'examples/**'
-      - 'config/**'
-      - '.phan/**'
+      - '!tests/**'
+      - '!examples/**'
+      - '!config/**'
+      - '!.phan/**'
 
 permissions:
   contents: read
