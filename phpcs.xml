@@ -7,9 +7,12 @@
 
     <arg name="basepath" value="."/>
     <arg name="extensions" value="php"/>
-    <arg name="colors"/>
-    <arg name="parallel" value="75"/>
-    <arg value="np"/>
+    <arg name="no-colors"/>
+    <arg name="cache"/>
+    <arg name="parallel" value="20"/>
+    <arg value="nq"/>
+
+    <ini name="memory_limit" value="64M"/>
 
     <!-- Don't hide tokenizer exceptions -->
     <rule ref="Internal.Tokenizer.Exception">
