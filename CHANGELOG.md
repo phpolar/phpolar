@@ -1,3 +1,9 @@
+## 3.0.0rc4 (2023-07-18)
+
+### Fix
+
+- retrieve the user object directly (#228)
+
 ## 3.0.0rc3 (2023-07-18)
 
 ### Fix
