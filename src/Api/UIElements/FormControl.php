@@ -17,8 +17,6 @@ use RuntimeException;
 
 abstract class FormControl
 {
-    protected FieldMetadata $field;
-
     protected string $errorMessage = "";
 
     protected bool $hasErrors = true;
@@ -28,7 +26,7 @@ abstract class FormControl
      */
     protected const ERROR_STYLING = "border: 2px solid red";
 
-    private function __construct(FieldMetadata $field)
+    private function __construct(protected FieldMetadata $field)
     {
         $this->field = $field;
         $this->setState();

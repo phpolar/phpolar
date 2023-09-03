@@ -21,18 +21,14 @@ abstract class Entry
      */
     private array $fields;
 
-    private AttributeConfigCollection $attributeConfigMap;
-
     /**
      * @throws RuntimeException
      */
-    public function __construct(AttributeConfigCollection $attributeConfigMap, array $storedValues = [])
+    public function __construct(private AttributeConfigCollection $attributeConfigMap, array $storedValues = [])
     {
         if (empty($storedValues) === false) {
             $this->setValues($storedValues);
         }
-
-        $this->attributeConfigMap = $attributeConfigMap;
 
         $properties = (new ReflectionClass($this))->getProperties(ReflectionProperty::IS_PUBLIC);
 

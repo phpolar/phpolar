@@ -9,25 +9,12 @@ namespace Efortmeyer\Polar\Core\Parsers\Annotation;
  */
 abstract class Constructor
 {
-    private string $qualifiedName;
-
-    protected string $unqualifiedName;
-
-    private string $defaultAttributeClassName;
-
-    protected array $argsForDefault;
-
-    /**
-     * @var ?mixed
-     */
-    protected $value;
-
     public function __construct(
-        string $qualifiedName,
-        string $unqualifiedName,
-        string $defaultAttributeClassName,
-        array $argsForDefault,
-        $value = null
+        private string $qualifiedName,
+        protected string $unqualifiedName,
+        private string $defaultAttributeClassName,
+        protected array $argsForDefault,
+        protected mixed $value = null
     ) {
         $this->qualifiedName = $qualifiedName;
         $this->unqualifiedName = $unqualifiedName;

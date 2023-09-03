@@ -29,10 +29,7 @@ class FieldMetadata
      */
     public array $validators = [];
 
-    /**
-     * @var mixed
-     */
-    public $value;
+    public mixed $value;
 
     protected function __construct()
     {

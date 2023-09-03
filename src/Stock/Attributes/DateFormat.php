@@ -14,11 +14,8 @@ use Efortmeyer\Polar\Core\Attributes\Attribute;
  */
 final class DateFormat extends Attribute
 {
-    private string $dateFormat;
-
-    public function __construct(string $dateFormat)
+    public function __construct(private string $dateFormat)
     {
-        $this->dateFormat = $dateFormat;
     }
 
     public function __invoke(): string

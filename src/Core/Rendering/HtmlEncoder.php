@@ -23,7 +23,7 @@ class HtmlEncoder
      *
      * @api
      */
-    private static function encode($it): mixed
+    private static function encode(mixed $it): mixed
     {
         if (HtmlEncoder::canEncode($it) === true) {
             return HtmlEncoder::encodeString($it);
@@ -40,17 +40,17 @@ class HtmlEncoder
         }
     }
 
-    private static function isSerializable($it): bool
+    private static function isSerializable(mixed $it): bool
     {
         return $it instanceof Stringable || $it instanceof Serializable;
     }
 
-    private static function shouldSkip($it): bool
+    private static function shouldSkip(mixed $it): bool
     {
         return is_bool($it) === true || is_float($it) === true || is_integer($it) === true;
     }
 
-    private static function canEncode($it): bool
+    private static function canEncode(mixed $it): bool
     {
         return is_string($it) === true;
     }
