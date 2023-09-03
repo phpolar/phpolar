@@ -20,20 +20,11 @@ final class TypeValidation implements ValidationInterface
      */
     public $value;
 
-    /**
-     * @var string
-     */
-    private $type;
+    private string $type;
 
-    /**
-     * @var string
-     */
-    private $errorMessage = "";
+    private string $errorMessage = "";
 
-    /**
-     * @var boolean
-     */
-    private $typeIsValid = false;
+    private bool $typeIsValid = false;
 
     public function __construct($value, string $type)
     {

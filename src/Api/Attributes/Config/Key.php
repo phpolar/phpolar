@@ -11,10 +11,7 @@ use Stringable;
  */
 abstract class Key implements Stringable
 {
-    /**
-     * @var string
-     */
-    protected static $key;
+    protected static string $key;
 
     /**
      * Returns the string representation of this key.

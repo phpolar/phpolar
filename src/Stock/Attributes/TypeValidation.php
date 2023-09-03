@@ -20,12 +20,7 @@ final class TypeValidation implements AttributeInterface
      */
     private $value;
 
-    /**
-     * The expected type of the value.
-     *
-     * @var string
-     */
-    private $type;
+    private string $type;
 
     public function __construct($value, string $type)
     {

@@ -11,15 +11,9 @@ namespace Efortmeyer\Polar\Core\Parsers\Annotation;
  */
 class Token
 {
-    /**
-     * @var array
-     */
-    private $arguments;
+    private array $arguments;
 
-    /**
-     * @var string
-     */
-    private $qualifiedName;
+    private string $qualifiedName;
 
     public function __construct(string $qualifiedName, array $arguments)
     {

@@ -44,9 +44,21 @@ class AppTest extends TestCase
                 echo "Bang!";
             }
         ];
+        $givenStorage = $this->createStub(StorageStub::class);
+        /**
+         * @var Stub|CollectionStorageFactory
+         */
+        $storageFactory = $this->createStub(CollectionStorageFactory::class);
+        $storageFactory->method("getStorage")->willReturn($givenStorage);
+        $givenRootTemplate = $this->createStub(TemplateContext::class);
+        $templateFactory = function () use ($givenRootTemplate) {
+            return $givenRootTemplate;
+        };
         $_SERVER["REQUEST_URI"] = "/";
         $sut = App::configure($_SERVER["REQUEST_URI"], new InMemoryAppConfig());
         $sut->setUpRoutes($routeConfig);
+        $sut->setUpRootTemplate($templateFactory);
+        $sut->setUpStorage($storageFactory);
         $sut->run();
         $this->expectOutputString("Bang!");
     }

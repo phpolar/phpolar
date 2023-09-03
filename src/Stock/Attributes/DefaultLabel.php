@@ -12,10 +12,7 @@ use Efortmeyer\Polar\Core\Defaults;
  */
 final class DefaultLabel implements AttributeInterface
 {
-    /**
-     * @var string
-     */
-    private $labelText;
+    private string $labelText;
 
     public function __construct(string $labelText)
     {

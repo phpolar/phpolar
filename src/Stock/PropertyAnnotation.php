@@ -36,35 +36,20 @@ use ReflectionProperty;
  */
 final class PropertyAnnotation
 {
-    /**
-     * @var string
-     */
-    private $docComment;
+    private string $docComment;
 
-    /**
-     * @var string
-     */
-    private $propertyName;
+    private string $propertyName;
 
     /**
      * @var mixed
      */
     private $propertyValue;
 
-    /**
-     * @var AttributeConfigCollection
-     */
-    private $attributeConfigMap;
+    private AttributeConfigCollection $attributeConfigMap;
 
-    /**
-     * @var Closure
-     */
-    private static $onlyRequired;
+    private static Closure $onlyRequired;
 
-    /**
-     * @var Closure
-     */
-    private static $toAttribute;
+    private static Closure $toAttribute;
 
     public function __construct(
         object $instance,

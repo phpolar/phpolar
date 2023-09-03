@@ -11,10 +11,7 @@ use Efortmeyer\Polar\Api\Attributes\AttributeInterface;
  */
 class Label implements AttributeInterface
 {
-    /**
-     * @var string
-     */
-    private $labelText;
+    private string $labelText;
 
     public function __construct(string $labelText)
     {

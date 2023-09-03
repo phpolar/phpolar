@@ -30,7 +30,6 @@
     <rule ref="Generic.PHP.LowerCaseConstant"/>
     <rule ref="Generic.PHP.LowerCaseType"/>
     <rule ref="Generic.ControlStructures.InlineControlStructure"/>
-    <rule ref="Squiz.Commenting.VariableComment"/>
     <rule ref="Squiz.Operators.ComparisonOperatorUsage"/>
     <rule ref="PSR12.Files.OpenTag"/>
     <rule ref="PSR12.Files.DeclareStatement"/>
