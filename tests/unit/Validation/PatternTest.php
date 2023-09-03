@@ -14,10 +14,10 @@ use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\TestCase;
 
 #[CoversClass(Pattern::class)]
+#[CoversClass(AbstractValidationError::class)]
 #[UsesClass(ValidationTrait::class)]
 #[UsesClass(FieldErrorMessageTrait::class)]
 #[UsesClass(DefaultValidationError::class)]
-#[UsesClass(AbstractValidationError::class)]
 final class PatternTest extends TestCase
 {
     #[Test]

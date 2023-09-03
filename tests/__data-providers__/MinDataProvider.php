@@ -22,6 +22,7 @@ final class MinDataProvider
             [random_int((int) self::MIN, PHP_INT_MAX)],
             [self::MIN + 1E-2],
             [self::MIN],
+            [(float) self::MIN],
         ];
     }
 }

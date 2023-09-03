@@ -10,14 +10,15 @@ use Phpolar\Phpolar\Tests\DataProviders\MinDataProvider;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProviderExternal;
 use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\TestCase;
 
 #[CoversClass(Min::class)]
+#[CoversClass(AbstractValidationError::class)]
 #[UsesClass(ValidationTrait::class)]
 #[UsesClass(FieldErrorMessageTrait::class)]
 #[UsesClass(DefaultValidationError::class)]
-#[UsesClass(AbstractValidationError::class)]
 class MinTest extends TestCase
 {
     #[Test]
@@ -62,5 +63,26 @@ class MinTest extends TestCase
 
         $this->assertFalse($sut->isValid());
         $this->assertNotEmpty($sut->getFieldErrorMessage("property"));
+    }
+
+    #[TestDox("Shall be valid if property type is non-numeric")]
+    public function testA()
+    {
+        $sut = new class (null)
+        {
+            use ValidationTrait;
+            use FieldErrorMessageTrait;
+
+            #[Min(MinDataProvider::MIN)]
+            public mixed $property;
+
+            public function __construct(mixed $prop)
+            {
+                $this->property = $prop;
+            }
+        };
+
+        $this->assertTrue($sut->isValid());
+        $this->assertEmpty($sut->getFieldErrorMessage("property"));
     }
 }
