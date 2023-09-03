@@ -21,7 +21,6 @@ use Phpolar\Phpolar\Auth\ProtectedRoutableResolver;
 use Phpolar\Phpolar\Core\Routing\RouteNotRegistered;
 use Phpolar\Phpolar\Core\Routing\RouteParamMap;
 use Phpolar\Phpolar\DependencyInjection\DiTokens;
-use Phpolar\Phpolar\Http\ErrorHandler;
 use Phpolar\Routable\RoutableInterface;
 use Phpolar\Routable\RoutableResolverInterface;
 use Phpolar\PurePhp\Binder;
@@ -44,7 +43,6 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 #[CoversClass(RoutingHandler::class)]
 #[CoversClass(RouteRegistry::class)]
-#[UsesClass(ErrorHandler::class)]
 #[UsesClass(ResolvedRoute::class)]
 final class RoutingHandlerTest extends TestCase
 {

@@ -16,6 +16,7 @@ use Phpolar\Http\Message\ResponseFilterStrategyInterface;
 use Phpolar\HttpCodes\ResponseCode;
 use Phpolar\HttpMessageTestUtils\RequestStub;
 use Phpolar\HttpMessageTestUtils\ResponseFactoryStub;
+use Phpolar\HttpMessageTestUtils\ResponseStub;
 use Phpolar\HttpMessageTestUtils\StreamFactoryStub;
 use Phpolar\ModelResolver\ModelResolverInterface;
 use Phpolar\Routable\RoutableInterface;
@@ -25,7 +26,6 @@ use Phpolar\Phpolar\Http\RoutingHandler;
 use Phpolar\Phpolar\Http\RoutingMiddleware;
 use Phpolar\Phpolar\Tests\Stubs\ConfigurableContainerStub;
 use Phpolar\Phpolar\Tests\Stubs\ContainerConfigurationStub;
-use Phpolar\Phpolar\Http\ErrorHandler;
 use Phpolar\Phpolar\Http\MiddlewareQueueRequestHandler;
 use Phpolar\Phpolar\App;
 use Phpolar\Phpolar\DependencyInjection\ContainerLoader;
@@ -41,6 +41,8 @@ use Psr\Http\Server\RequestHandlerInterface;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\ResponseInterface;
 
 use const Phpolar\CsrfProtection\REQUEST_ID_KEY;
 use const Phpolar\Phpolar\Tests\PROJECT_MEMORY_USAGE_THRESHOLD;
@@ -67,11 +69,21 @@ final class MemoryUsageTest extends TestCase
             $config[ContainerInterface::class],
             $config[ModelResolverInterface::class],
             routableResolver: $config[RoutableResolverInterface::class],
-            unauthHandler: $config[DiTokens::ERROR_HANDLER_401],
+            unauthHandler: new class () implements RequestHandlerInterface {
+                public function handle(ServerRequestInterface $request): ResponseInterface
+                {
+                    return new ResponseStub(ResponseCode::UNAUTHORIZED, "Unauthorized");
+                }
+            },
         );
-        $config[MiddlewareQueueRequestHandler::class] = static fn (ArrayAccess $config) => new MiddlewareQueueRequestHandler($config[DiTokens::ERROR_HANDLER_404]);
-        $config[DiTokens::ERROR_HANDLER_404] = static fn (ArrayAccess $config) => new ErrorHandler(ResponseCode::NOT_FOUND, "Not Found", $config[ContainerInterface::class]);
-        $config[DiTokens::ERROR_HANDLER_401] = static fn (ArrayAccess $conf) => new ErrorHandler(401, "Unauthorized", $conf[ContainerInterface::class]);
+        $config[MiddlewareQueueRequestHandler::class] = new MiddlewareQueueRequestHandler(
+            new class () implements RequestHandlerInterface {
+                public function handle(ServerRequestInterface $request): ResponseInterface
+                {
+                    return new ResponseStub(ResponseCode::NOT_FOUND, "Not Found");
+                }
+            }
+        );
         $config[DiTokens::RESPONSE_EMITTER] = new SapiEmitter();
         $config[ContainerInterface::class] = static fn (ArrayAccess $conf) => new ConfigurableContainerStub($conf);
         $config[ResponseFactoryInterface::class] = new ResponseFactoryStub();

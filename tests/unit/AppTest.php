@@ -27,7 +27,6 @@ use Phpolar\Phpolar\Http\RouteRegistry;
 use Phpolar\Phpolar\Http\RoutingMiddleware;
 use Phpolar\Phpolar\Tests\Stubs\ConfigurableContainerStub;
 use Phpolar\Phpolar\Tests\Stubs\ContainerConfigurationStub;
-use Phpolar\Phpolar\Http\ErrorHandler;
 use Phpolar\Phpolar\Http\MiddlewareQueueRequestHandler;
 use Phpolar\Phpolar\Http\RoutingHandler;
 use Phpolar\PurePhp\Binder;
@@ -54,7 +53,6 @@ use Psr\Http\Server\RequestHandlerInterface;
 #[CoversClass(App::class)]
 #[UsesClass(RouteRegistry::class)]
 #[UsesClass(ContainerLoader::class)]
-#[UsesClass(ErrorHandler::class)]
 #[UsesClass(MiddlewareQueueRequestHandler::class)]
 #[UsesClass(RoutingHandler::class)]
 #[UsesClass(RoutingMiddleware::class)]
@@ -64,6 +62,7 @@ final class AppTest extends TestCase
     const RESPONSE_STATUS = 500;
     const HEADER_KEY = "Content-Range";
     const HEADER_VALUE = "bytes 21010-47021/47022";
+    const ERROR_HANDLER_404 = "ERROR_HANDLER_404";
 
     protected function getContainerFactory(
         ArrayAccess $config,
@@ -76,11 +75,16 @@ final class AppTest extends TestCase
         $config[Binder::class] = new Binder();
         $config[ContainerInterface::class] = new ConfigurableContainerStub($config);
         $config[Dispatcher::class] = new Dispatcher();
-        $config[ResponseFactoryInterface::class] = new ResponseFactoryStub();
+        $config[ResponseFactoryInterface::class] = new ResponseFactoryStub((new StreamFactoryStub("+w"))->createStream());
         $config[StreamFactoryInterface::class] = new StreamFactoryStub("+w");
         $config[MiddlewareQueueRequestHandler::class] = $handler;
         $config[DiTokens::RESPONSE_EMITTER] = new SapiEmitter();
-        $config[DiTokens::ERROR_HANDLER_404] = static fn (ArrayAccess $config) => new ErrorHandler(ResponseCode::NOT_FOUND, "Not Found", $config[ContainerInterface::class]);
+        $config[self::ERROR_HANDLER_404] = new class () implements RequestHandlerInterface {
+            public function handle(ServerRequestInterface $request): ResponseInterface
+            {
+                return new ResponseStub(ResponseCode::NOT_FOUND);
+            }
+        };
         $config[DiTokens::CSRF_CHECK_MIDDLEWARE] = $csrfPreRoutingMiddleware;
         $config[DiTokens::CSRF_RESPONSE_FILTER_MIDDLEWARE] = $csrfPostRoutingMiddleware;
         $config[AbstractTokenStorage::class] = $this->createStub(AbstractTokenStorage::class);
@@ -131,7 +135,7 @@ final class AppTest extends TestCase
                 $config[ResponseFactoryInterface::class],
                 "",
             );
-        $handler = static fn (ArrayAccess $config) => new MiddlewareQueueRequestHandler($config[DiTokens::ERROR_HANDLER_404]);
+        $handler = static fn (ArrayAccess $config) => new MiddlewareQueueRequestHandler($config[self::ERROR_HANDLER_404]);
         $containerFac = $this->getContainerFactory($config, $handler);
         // do not use the container config file
         chdir(__DIR__);
@@ -192,7 +196,7 @@ final class AppTest extends TestCase
                 "",
                 "",
             );
-        $handler = static fn (ArrayAccess $config) => new MiddlewareQueueRequestHandler($config[DiTokens::ERROR_HANDLER_404]);
+        $handler = static fn (ArrayAccess $config) => new MiddlewareQueueRequestHandler($config[self::ERROR_HANDLER_404]);
         $containerFac = $this->getContainerFactory($config, $handler, $csrfPreRoutingMiddleware, $csrfPostRoutingMiddleware);
         // do not use the container config file
         chdir(__DIR__);
@@ -241,13 +245,12 @@ final class AppTest extends TestCase
             $this->configureContainer($nonConfiguredContainerFac, $config),
         );
         $app->receive(new RequestStub());
-        $this->expectOutputString("<h1>Not Found</h1>");
+        $this->assertSame(ResponseCode::NOT_FOUND, http_response_code());
     }
 
     #[TestDox("Shall process the 404 error handler if the request path does not exist")]
     public function test5()
     {
-        $this->expectOutputString("<h1>Not Found</h1>");
         $config = new ContainerConfigurationStub();
         $config[ModelResolverInterface::class] = $this->createStub(ModelResolverInterface::class);
         $config[DiTokens::UNAUTHORIZED_HANDLER] = $this->createStub(RequestHandlerInterface::class);
