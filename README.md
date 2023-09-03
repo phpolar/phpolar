@@ -2,7 +2,7 @@
 
 ## A super-tiny, lightweight microframework for PHP projects
 
-[![Coverage Status](https://coveralls.io/repos/github/ericfortmeyer/polar/badge.svg?branch=main)](https://coveralls.io/repos/github/ericfortmeyer/polar/badge.svg?branch=main)
+[![Coverage Status](https://coveralls.io/repos/github/ericfortmeyer/polar/badge.svg?branch=main)](https://coveralls.io/repos/github/ericfortmeyer/polar/badge.svg?branch=main) [![Latest Stable Version](http://poser.pugx.org/efortmeyer/polar/v)](https://packagist.org/packages/efortmeyer/polar) [![Total Downloads](http://poser.pugx.org/efortmeyer/polar/downloads)](https://packagist.org/packages/efortmeyer/polar) [![Latest Unstable Version](http://poser.pugx.org/efortmeyer/polar/v/unstable)](https://packagist.org/packages/efortmeyer/polar) [![License](http://poser.pugx.org/efortmeyer/polar/license)](https://packagist.org/packages/efortmeyer/polar) [![PHP Version Require](http://poser.pugx.org/efortmeyer/polar/require/php)](https://packagist.org/packages/efortmeyer/polar)
 
 ### Objectives
 
@@ -104,4 +104,4 @@ class Person extends Model
 ```
 
 
-[API Documentation](https://ericfortmeyer.dev/projects/polar/api)
+[API Documentation](https://ericfortmeyer.github.io/polar-docs)
