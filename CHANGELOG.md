@@ -1,3 +1,22 @@
+## 3.0.0 (2023-07-31)
+
+### Feat
+
+- **App**: add support for queueing middleware (#248)
+- add support for route authorization (#243)
+- move interfaces out of project (#238)
+
+### Fix
+
+- remove bin folder (#237)
+
+### Refactor
+
+- **RoutingHandler**: reduce dependency count (#249)
+- rename authenticate attribute to authorize (#247)
+- **RouteRegistry**: rename to route map (#245)
+- remove error handler class (#241)
+
 ## 3.0.0rc5 (2023-07-24)
 
 ### Fix
