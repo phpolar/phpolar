@@ -8,6 +8,7 @@ use Closure;
 use DateTime;
 use DateTimeImmutable;
 use DateTimeInterface;
+use Phan\Language\Element\Clazz;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
@@ -39,6 +40,7 @@ final class FormControlTypeDetectionTraitTest extends TestCase
             public string | int | bool $unionProp;
             public string | int | bool | array $invalidUnionProp1;
             public int | bool | array $invalidUnionProp2;
+            public Closure & DateTime $invalidIntersectionProp;
             public $noValueNotDeclaredProp;
             public $numNotDeclaredProp = 2;
             public $floatNotDeclaredProp = 2e9;
@@ -64,6 +66,7 @@ final class FormControlTypeDetectionTraitTest extends TestCase
         $model->nullNotDeclaredProp = null;
         $model->funcNotDeclaredProp = fn () => null;
         $this->assertInstanceOf(FormControlTypes::Input::class, $model->getFormControlType("unionProp"));
+        $this->assertInstanceOf(FormControlTypes::Invalid::class, $model->getFormControlType("invalidIntersectionProp"));
         $this->assertInstanceOf(FormControlTypes::Invalid::class, $model->getFormControlType("invalidUnionProp1"));
         $this->assertInstanceOf(FormControlTypes::Invalid::class, $model->getFormControlType("invalidUnionProp2"));
         $this->assertInstanceOf(FormControlTypes::Input::class, $model->getFormControlType("numProp"));

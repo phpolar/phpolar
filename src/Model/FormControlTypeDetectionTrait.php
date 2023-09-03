@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Phpolar\Phpolar\Model;
 
-use Phpolar\Phpolar\Core\PropertyTypeNotDeclared;
 use DateTime;
 use DateTimeImmutable;
 use DateTimeInterface;
@@ -27,9 +26,24 @@ trait FormControlTypeDetectionTrait
     public function getFormControlType(string $propName): FormControlTypes
     {
         $property = new ReflectionProperty($this, $propName);
-        $propertyType = $property->getType() ?? new PropertyTypeNotDeclared();
-        return match (true) {
-            $propertyType instanceof ReflectionNamedType => match ($property->getName()) {
+        $propertyType = $property->getType();
+        $propTypeNotDeclared = $propertyType === null;
+        if ($propTypeNotDeclared === true) {
+            return $property->isInitialized($this) === true ? match (gettype($property->getValue($this))) {
+                "string",
+                "integer",
+                "double",
+                "boolean" => FormControlTypes::Input,
+                "object" => match (get_class($property->getValue($this))) {
+                    "DateTimeInterface", "DateTimeImmutable", "DateTime" => FormControlTypes::Input,
+                    default => FormControlTypes::Invalid,
+                },
+                "array" => FormControlTypes::Select,
+                default => FormControlTypes::Invalid,
+            } : FormControlTypes::Invalid;
+        }
+        if ($propertyType instanceof ReflectionNamedType) {
+            return match ($property->getName()) {
                 "string",
                 "int",
                 "float",
@@ -40,23 +54,12 @@ trait FormControlTypeDetectionTrait
                 FormControlTypes::Input,
                 "array" => FormControlTypes::Select,
                 default => FormControlTypes::Invalid,
-            },
-            $propertyType instanceof ReflectionUnionType =>
-                in_array("string", $propertyType->getTypes()) === true &&
-                in_array("array", $propertyType->getTypes()) === false ? FormControlTypes::Input : FormControlTypes::Invalid,
-            $propertyType instanceof PropertyTypeNotDeclared =>
-                $property->isInitialized($this) === true ? match (gettype($property->getValue($this))) {
-                    "string",
-                    "integer",
-                    "double",
-                    "boolean" => FormControlTypes::Input,
-                    "object" => match (get_class($property->getValue($this))) {
-                        "DateTimeInterface", "DateTimeImmutable", "DateTime" => FormControlTypes::Input,
-                        default => FormControlTypes::Invalid,
-                    },
-                    "array" => FormControlTypes::Select,
-                    default => FormControlTypes::Invalid,
-                } : FormControlTypes::Invalid,
-        };
+            };
+        }
+        if ($propertyType instanceof ReflectionUnionType) {
+            return in_array("string", $propertyType->getTypes()) === true &&
+            in_array("array", $propertyType->getTypes()) === false ? FormControlTypes::Input : FormControlTypes::Invalid;
+        }
+        return FormControlTypes::Invalid;
     }
 }

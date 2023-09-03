@@ -24,18 +24,24 @@ final class WebServer
     private RequestHandlerInterface $primaryHandler;
 
     /**
+     * Dependencies/services required
+     * by the web server.
+     *
      * @var string[]
      */
-    private static array $requiredDeps = [
+    private const REQUIRED_DEPS = [
         MiddlewareProcessingQueue::class,
         self::PRIMARY_REQUEST_HANDLER,
         Error401Handler::class,
     ];
 
     /**
+     * CSRF dependencies required
+     * by the web server.
+     *
      * @var string[]
      */
-    private static array $requiredCsrfDeps = [
+    private const REQUIRED_CSRF_DEPS = [
         CsrfPreRoutingMiddleware::class,
         CsrfPostRoutingMiddlewareFactory::class,
     ];
@@ -45,7 +51,7 @@ final class WebServer
      */
     private function __construct(private ContainerInterface $container)
     {
-        self::checkContainer($container, self::$requiredDeps);
+        self::checkContainer($container, self::REQUIRED_DEPS);
         /**
          * @var MiddlewareProcessingQueue
          */
@@ -110,7 +116,7 @@ final class WebServer
      */
     public function useCsrfMiddleware(): WebServer
     {
-        self::checkContainer($this->container, self::$requiredCsrfDeps);
+        self::checkContainer($this->container, self::REQUIRED_CSRF_DEPS);
         /**
          * @var CsrfPreRoutingMiddleware
          */

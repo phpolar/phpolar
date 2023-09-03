@@ -25,7 +25,17 @@ trait FieldErrorMessageTrait
      */
     private array $errorMessages;
 
-    private bool $checked = false;
+    /**
+     * Make sure the properties are
+     * checked only once.
+     *
+     * Do not initialize this.
+     * Otherwise, this property
+     * will appear when iterating
+     * the objects that use this
+     * trait.
+     */
+    protected bool $checked;
 
     /**
      * Provides an interface for
@@ -37,7 +47,10 @@ trait FieldErrorMessageTrait
      */
     public function getFieldErrorMessage(string $fieldName, string $stringToAppend = ""): string
     {
-        if ($this->checked === false) {
+        if (
+            (new ReflectionProperty($this, "checked"))->isInitialized($this) === false ||
+                $this->checked === false
+        ) {
             $this->checked = true;
             $this->setErrorMessages();
         }

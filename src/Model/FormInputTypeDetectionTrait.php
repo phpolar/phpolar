@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace Phpolar\Phpolar\Model;
 
-use DateTimeInterface;
 use Phpolar\Phpolar\Core\InputTypes;
-use Phpolar\Phpolar\Core\PropertyTypeNotDeclared;
+use DateTimeInterface;
 use ReflectionNamedType;
 use ReflectionProperty;
 use ReflectionUnionType;
@@ -29,27 +28,31 @@ trait FormInputTypeDetectionTrait
         if (count($property->getAttributes(Hidden::class)) > 0) {
             return InputTypes::Hidden;
         }
-        $propertyType = $property->getType() ?? new PropertyTypeNotDeclared();
-        return match (true) {
-            $propertyType instanceof ReflectionNamedType => match ($propertyType->getName()) {
+        $propertyType = $property->getType();
+        $propTypeNotDeclared = $propertyType === null;
+        if ($propTypeNotDeclared === true) {
+            return $property->isInitialized($this) === true ? match (gettype($property->getValue($this))) {
+                "string" => InputTypes::Text,
+                "integer", "double" => InputTypes::Number,
+                "boolean" => InputTypes::Checkbox,
+                "object" => $property->getValue($this) instanceof DateTimeInterface ? InputTypes::Date : InputTypes::Invalid,
+                default => InputTypes::Invalid,
+            } : InputTypes::Invalid;
+        }
+        if ($propertyType instanceof ReflectionNamedType) {
+            return match ($propertyType->getName()) {
                 "string" => InputTypes::Text,
                 "int", "float" => InputTypes::Number,
                 "bool" => InputTypes::Checkbox,
                 "DateTimeInterface", "DateTimeImmutable", "DateTime" =>
                 InputTypes::Date,
                 default => InputTypes::Invalid,
-            },
-            $propertyType instanceof ReflectionUnionType =>
-                in_array("string", $propertyType->getTypes()) === true &&
-                in_array("array", $propertyType->getTypes()) === false ? InputTypes::Text : InputTypes::Invalid,
-                $propertyType instanceof PropertyTypeNotDeclared =>
-                $property->isInitialized($this) === true ? match (gettype($property->getValue($this))) {
-                    "string" => InputTypes::Text,
-                    "integer", "double" => InputTypes::Number,
-                    "boolean" => InputTypes::Checkbox,
-                    "object" => $property->getValue($this) instanceof DateTimeInterface ? InputTypes::Date : InputTypes::Invalid,
-                    default => InputTypes::Invalid,
-                } : InputTypes::Invalid,
-        };
+            };
+        }
+        if ($propertyType instanceof ReflectionUnionType) {
+            return in_array("string", $propertyType->getTypes()) === true &&
+                in_array("array", $propertyType->getTypes()) === false ? InputTypes::Text : InputTypes::Invalid;
+        }
+        return InputTypes::Invalid;
     }
 }
