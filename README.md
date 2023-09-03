@@ -55,6 +55,39 @@ use Efortmeyer\Polar\Api\Model;
 
 class Person extends Model
 {
+    #[MaxLength(20)]
+    public string $firstName;
+
+    #[MaxLength(20)]
+    public string $lastName;
+
+    #[Column("Residential Address")]
+    #[Label("Residential Address")]
+    #[MaxLength(200)]
+    public string $address1;
+
+    #[Column("Business Address")]
+    #[Label("Business Address")]
+    #[MaxLength(200)]
+    public string$address2;
+
+    #[DateFormat("Y-m-d")]
+    public DateTimeImmutable $dateOfBirth;
+
+    #[DateFormat("Y-m-d h:i:s a")]
+    public DateTimeImmutable $enteredOn;
+
+    #[DateFormat("Y-m-d h:i:s a")]
+    public DateTimeImmutable $modifiedOn;
+}
+```
+
+### Use Annotations to Configure Models
+```php
+use Efortmeyer\Polar\Api\Model;
+
+class Person extends Model
+{
     /**
      * @var string
      * @MaxLength(20)
