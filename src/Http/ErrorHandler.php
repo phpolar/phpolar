@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Phpolar\Phpolar\Http;
 
-use Phpolar\Phpolar\Config\Formats;
+use Phpolar\Phpolar\Core\Formats;
 use Phpolar\PurePhp\TemplateEngine;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
