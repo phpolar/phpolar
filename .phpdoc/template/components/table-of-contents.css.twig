@@ -39,7 +39,7 @@
     width: 1.25rem;
     height: 1.25rem;
     line-height: 1.25rem;
-    background: transparent url('data:image/svg+xml;utf8,{{ include('icons/method.svg.twig', {'hue': colours.hue(parameter.color|default('phpdocumentor-green'))})|trim|raw }}') no-repeat center center;
+    background: transparent url('data:image/svg+xml;utf8,{{ include('icons/method.svg.twig', {'hue': colours.hue(parameter.color|default('blue'))})|trim|raw }}') no-repeat center center;
     content: '';
     position: absolute;
     left: 1.25rem;
@@ -86,11 +86,17 @@
 }
 
 .phpdocumentor-table-of-contents .phpdocumentor-table-of-contents__entry.-namespace:before {
-    content: 'N'
+    content: 'N';
+    left: 0;
+}
+.phpdocumentor-element.-namespace .phpdocumentor-table-of-contents .phpdocumentor-table-of-contents__entry.-namespace:before {
+    content: 'N';
+    left: 1.25rem;
 }
 
 .phpdocumentor-table-of-contents .phpdocumentor-table-of-contents__entry.-package:before {
-    content: 'P'
+    content: 'P';
+    left: 0;
 }
 
 .phpdocumentor-table-of-contents .phpdocumentor-table-of-contents__entry.-enum:before {

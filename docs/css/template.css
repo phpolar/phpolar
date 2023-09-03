@@ -91,7 +91,7 @@
     width: 1.25rem;
     height: 1.25rem;
     line-height: 1.25rem;
-    background: transparent url('data:image/svg+xml;utf8,<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="10" fill="hsl(    96, 57%, 60%)"/></svg>') no-repeat center center;
+    background: transparent url('data:image/svg+xml;utf8,<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="10" fill="hsl(    207, 57%, 60%)"/></svg>') no-repeat center center;
     content: '';
     position: absolute;
     left: 1.25rem;
@@ -138,11 +138,17 @@
 }
 
 .phpdocumentor-table-of-contents .phpdocumentor-table-of-contents__entry.-namespace:before {
-    content: 'N'
+    content: 'N';
+    left: 0;
+}
+.phpdocumentor-element.-namespace .phpdocumentor-table-of-contents .phpdocumentor-table-of-contents__entry.-namespace:before {
+    content: 'N';
+    left: 1.25rem;
 }
 
 .phpdocumentor-table-of-contents .phpdocumentor-table-of-contents__entry.-package:before {
-    content: 'P'
+    content: 'P';
+    left: 0;
 }
 
 .phpdocumentor-table-of-contents .phpdocumentor-table-of-contents__entry.-enum:before {
@@ -152,7 +158,8 @@
 .phpdocumentor-table-of-contents dd {
     font-style: italic;
     margin-left: 2rem;
-}.phpdocumentor-element-found-in {
+}
+.phpdocumentor-element-found-in {
     position: absolute;
     top: 0;
     right: 0;
