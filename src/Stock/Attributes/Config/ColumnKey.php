@@ -14,7 +14,7 @@ final class ColumnKey extends Key
         return Column::class;
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return Column::class;
     }

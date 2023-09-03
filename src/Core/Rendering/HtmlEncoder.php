@@ -21,10 +21,9 @@ class HtmlEncoder
      * When given an array or object, it's members
      * will be recursively sanitized.
      *
-     * @return mixed
      * @api
      */
-    private static function encode($it)
+    private static function encode($it): mixed
     {
         if (HtmlEncoder::canEncode($it) === true) {
             return HtmlEncoder::encodeString($it);
@@ -56,19 +55,12 @@ class HtmlEncoder
         return is_string($it) === true;
     }
 
-    /**
-     * @param bool|int|float $it
-     * @return bool|int|float
-     */
-    private static function skip($it)
+    private static function skip(bool|int|float $it): bool|int|float
     {
         return $it;
     }
 
-    /**
-     * @param Serializable|Stringable $it
-     */
-    private static function serializeValue($it): string
+    private static function serializeValue(Serializable|Stringable $it): string
     {
         return HtmlEncoder::encodeString($it instanceof Serializable ? (string) $it->serialize() : (string) $it);
     }

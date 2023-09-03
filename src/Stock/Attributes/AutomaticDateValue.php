@@ -19,7 +19,7 @@ final class AutomaticDateValue extends Attribute
 {
     public string $type = InputTypes::DATE;
 
-    public function __invoke()
+    public function __invoke(): DateTimeImmutable
     {
         return new DateTimeImmutable();
     }

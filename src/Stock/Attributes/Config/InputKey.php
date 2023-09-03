@@ -14,7 +14,7 @@ final class InputKey extends Key
         return Input::class;
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return Input::class;
     }
