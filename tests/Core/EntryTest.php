@@ -289,6 +289,270 @@ class EntryTest extends TestCase
      * @test
      * @dataProvider config
      */
+    public function shouldMaintainOrderOfFieldValuesWhenAllPropsUseAttributes(Collection $config)
+    {
+        $sut = new class($config) extends Entry
+        {
+            #[MaxLength(30)]
+            public string $property1 = "what";
+
+            #[MaxLength(30)]
+            public string $property2 = "huh?";
+
+            #[MaxLength(30)]
+            public string $property3 = "again";
+        };
+        $this->assertSame(["what", "huh?", "again"], $sut->getFieldValues());
+    }
+
+    /**
+     * @test
+     * @dataProvider config
+     */
+    public function shouldMaintainOrderOfColumnNamesWhenAllPropsUseAnnotations(Collection $config)
+    {
+        $sut = new class($config) extends Entry
+        {
+            /**
+             * @var string
+             * MaxLength(30)
+             */
+            public $property1 = "what";
+
+            /**
+             * @var string
+             * MaxLength(30)
+             */
+            public $property2 = "huh?";
+
+            /**
+             * @var string
+             * MaxLength(30)
+             */
+            public $property3 = "again";
+        };
+        $this->assertSame(["Property1", "Property2", "Property3"], $sut->getColumnNames());
+    }
+
+    /**
+     * @test
+     * @dataProvider config
+     */
+    public function shouldMaintainOrderOfPropNamesWhenAllPropsUseAnnotations(Collection $config)
+    {
+        $sut = new class($config) extends Entry
+        {
+            /**
+             * @var string
+             * MaxLength(30)
+             */
+            public $property1 = "what";
+
+            /**
+             * @var string
+             * MaxLength(30)
+             */
+            public $property2 = "huh?";
+
+            /**
+             * @var string
+             * MaxLength(30)
+             */
+            public $property3 = "again";
+        };
+        $this->assertSame(["property1", "property2", "property3"], $sut->getPropertyNames());
+    }
+
+    /**
+     * @test
+     * @dataProvider config
+     */
+    public function shouldMaintainOrderOfFieldValuesWhenAllPropsUseAnnotations(Collection $config)
+    {
+        $sut = new class($config) extends Entry
+        {
+            /**
+             * @var string
+             * MaxLength(30)
+             */
+            public $property1 = "what";
+
+            /**
+             * @var string
+             * MaxLength(30)
+             */
+            public $property2 = "huh?";
+
+            /**
+             * @var string
+             * MaxLength(30)
+             */
+            public $property3 = "again";
+        };
+        $this->assertSame(["what", "huh?", "again"], $sut->getFieldValues());
+    }
+
+    /**
+     * @test
+     * @dataProvider config
+     */
+    public function shouldMaintainOrderOfColumnNamesWhenAllPropsNotConfigured(Collection $config)
+    {
+        $sut = new class($config) extends Entry
+        {
+            public string $property1 = "what";
+
+            public string $property2 = "huh?";
+
+            public string $property3 = "again";
+        };
+        $this->assertSame(["Property1", "Property2", "Property3"], $sut->getColumnNames());
+    }
+
+    /**
+     * @test
+     * @dataProvider config
+     */
+    public function shouldMaintainOrderOfPropNamesWhenAllPropsNotConfigured(Collection $config)
+    {
+        $sut = new class($config) extends Entry
+        {
+            public string $property1 = "what";
+
+            public string $property2 = "huh?";
+
+            public string $property3 = "again";
+        };
+        $this->assertSame(["property1", "property2", "property3"], $sut->getPropertyNames());
+    }
+
+    /**
+     * @test
+     * @dataProvider config
+     */
+    public function shouldMaintainOrderOfFieldValuesWhenAllPropsNotConfigured(Collection $config)
+    {
+        $sut = new class($config) extends Entry
+        {
+            public string $property1 = "what";
+
+            public string $property2 = "huh?";
+
+            public string $property3 = "again";
+        };
+        $this->assertSame(["what", "huh?", "again"], $sut->getFieldValues());
+    }
+
+    /**
+     * @test
+     * @dataProvider config
+     */
+    public function shouldMaintainOrderOfColumnNamesWhenAllPropsMixConfigured(Collection $config)
+    {
+        $sut = new class($config) extends Entry
+        {
+            /**
+             * @var string
+             * MaxLength(30)
+             */
+            public $property1 = "what";
+
+            public string $property2 = "huh?";
+
+            #[MaxLength(20)]
+            public string $property3 = "again";
+        };
+        $this->assertSame(["Property1", "Property2", "Property3"], $sut->getColumnNames());
+    }
+
+    /**
+     * @test
+     * @dataProvider config
+     */
+    public function shouldMaintainOrderOfPropNamesWhenAllPropsMixConfigured(Collection $config)
+    {
+        $sut = new class($config) extends Entry
+        {
+            /**
+             * @var string
+             * MaxLength(30)
+             */
+            public $property1 = "what";
+
+            public string $property2 = "huh?";
+
+            #[MaxLength(20)]
+            public string $property3 = "again";
+        };
+        $this->assertSame(["property1", "property2", "property3"], $sut->getPropertyNames());
+    }
+
+    /**
+     * @test
+     * @dataProvider config
+     */
+    public function shouldMaintainOrderOfFieldValuesWhenAllPropsMixConfigured(Collection $config)
+    {
+        $sut = new class($config) extends Entry
+        {
+            /**
+             * @var string
+             * MaxLength(30)
+             */
+            public $property1 = "what";
+
+            public string $property2 = "huh?";
+
+            #[MaxLength(20)]
+            public string $property3 = "again";
+        };
+        $this->assertSame(["what", "huh?", "again"], $sut->getFieldValues());
+    }
+
+    /**
+     * @test
+     * @dataProvider config
+     */
+    public function shouldMaintainOrderOfColumnNamesWhenAllPropsUseAttributes(Collection $config)
+    {
+        $sut = new class($config) extends Entry
+        {
+            #[MaxLength(30)]
+            public string $property1 = "what";
+
+            #[MaxLength(30)]
+            public string $property2 = "huh?";
+
+            #[MaxLength(30)]
+            public string $property3 = "again";
+        };
+        $this->assertSame(["Property1", "Property2", "Property3"], $sut->getColumnNames());
+    }
+
+    /**
+     * @test
+     * @dataProvider config
+     */
+    public function shouldMaintainOrderOfPropNamesWhenAllPropsUseAttributes(Collection $config)
+    {
+        $sut = new class($config) extends Entry
+        {
+            #[MaxLength(30)]
+            public string $property1 = "what";
+
+            #[MaxLength(30)]
+            public string $property2 = "huh?";
+
+            #[MaxLength(30)]
+            public string $property3 = "again";
+        };
+        $this->assertSame(["property1", "property2", "property3"], $sut->getPropertyNames());
+    }
+
+    /**
+     * @test
+     * @dataProvider config
+     */
     public function shouldNotReturnTheStoredValuesOfAllFieldsWhenTheGivenArrayIsNotAssociative(Collection $configCollection)
     {
         $nonAssociativeArray = ["what", "huh?"];
