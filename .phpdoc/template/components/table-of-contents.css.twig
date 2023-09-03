@@ -28,18 +28,18 @@
     position: absolute;
 }
 .phpdocumentor-table-of-contents .phpdocumentor-table-of-contents__entry.-private:after {
-    background: url('data:image/svg+xml;utf8,{{ include('icons/private.svg.twig')|trim|raw }}') no-repeat;
+    {# background: url('data:image/svg+xml;utf8,{{ include('icons/private.svg.twig')|trim|raw }}') no-repeat; #}
 }
 .phpdocumentor-table-of-contents .phpdocumentor-table-of-contents__entry.-protected:after {
     left: 13px;
-    background: url('data:image/svg+xml;utf8,{{ include('icons/protected.svg.twig')|trim|raw }}') no-repeat;
+    {# background: url('data:image/svg+xml;utf8,{{ include('icons/protected.svg.twig')|trim|raw }}') no-repeat; #}
 }
 
 .phpdocumentor-table-of-contents .phpdocumentor-table-of-contents__entry:before {
     width: 1.25rem;
     height: 1.25rem;
     line-height: 1.25rem;
-    background: transparent url('data:image/svg+xml;utf8,{{ include('icons/method.svg.twig', {'hue': colours.hue(parameter.color|default('blue'))})|trim|raw }}') no-repeat center center;
+    {# background: transparent url('data:image/svg+xml;utf8,{{ include('icons/method.svg.twig', {'hue': colours.hue(parameter.color|default('blue'))})|trim|raw }}') no-repeat center center; #}
     content: '';
     position: absolute;
     left: 1.25rem;
@@ -60,7 +60,7 @@
 .phpdocumentor-table-of-contents .phpdocumentor-table-of-contents__entry.-function:before {
     content: 'M';
     color: '{{ colours.hue(parameter.color|default('phpdocumentor-green')) }}';
-    background-image: url('data:image/svg+xml;utf8,{{ include('icons/method.svg.twig', {'hue': colours.hue(parameter.color|default('phpdocumentor-green'))})|trim|raw }}');
+    {# background-image: url('data:image/svg+xml;utf8,{{ include('icons/method.svg.twig', {'hue': colours.hue(parameter.color|default('phpdocumentor-green'))})|trim|raw }}'); #}
 }
 
 .phpdocumentor-table-of-contents .phpdocumentor-table-of-contents__entry.-property:before {
@@ -70,7 +70,7 @@
 .phpdocumentor-table-of-contents .phpdocumentor-table-of-contents__entry.-constant:before {
     content: 'C';
     background-color: transparent;
-    background-image: url('data:image/svg+xml;utf8,{{ include('icons/constant.svg.twig', {'hue': colours.hue(parameter.color|default('phpdocumentor-green'))})|trim|raw }}');
+    {# background-image: url('data:image/svg+xml;utf8,{{ include('icons/constant.svg.twig', {'hue': colours.hue(parameter.color|default('phpdocumentor-green'))})|trim|raw }}'); #}
 }
 
 .phpdocumentor-table-of-contents .phpdocumentor-table-of-contents__entry.-class:before {
