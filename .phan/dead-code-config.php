@@ -363,6 +363,7 @@ return [
         'vendor/phpolar/storage-driver/src',
         'vendor/phpolar/authenticator/src',
         'vendor/phpolar/routable/src',
+        'vendor/phpolar/routable-factory/src',
         'vendor/phpolar/validator/src',
     ],
 
