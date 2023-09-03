@@ -11,10 +11,10 @@ use ReflectionMethod;
 use ReflectionAttribute;
 
 /**
- * Returns either the given Routable or the given fallback handler
- * based on the boolean result of a given algorithm.
+ * Returns either the given Routable or false when the user is not
+ * authenticated.
  *
- * Authentication is *opt-in*.  Therefore, the given Routable
+ * Authorization is *opt-in*.  Therefore, the given Routable
  * will be returned if it is not configured with
  * an Authorize attribute.
  */
@@ -41,13 +41,16 @@ final class ProtectedRoutableResolver implements RoutableResolverInterface
             return $target;
         }
 
-        return $this->resolveRoutable(authenticateAttrs: $authenticateAttrs, target: $target);
+        return $this->resolveRoutable(
+            authenticateAttrs: $authenticateAttrs,
+            target: $target, // @phan-suppress-current-line PhanTypeMismatchArgumentSuperType
+        );
     }
 
     /**
      * @return ReflectionAttribute<Authorize>[]
      */
-    private function getAuthenticateAttributes(AbstractProtectedRoutable $routable): array
+    private function getAuthenticateAttributes(RoutableInterface $routable): array
     {
         $reflectionMethod = new ReflectionMethod($routable, self::ROUTABLE_METHOD_NAME);
         return $reflectionMethod->getAttributes(Authorize::class);

@@ -10,8 +10,7 @@ use Phpolar\Authenticator\AuthenticatorInterface;
 
 /**
  * Use to indicate that a route should
- * only be accessed by an authorized, authenticated
- * user.
+ * only be accessed by an authorized user.
  *
  * Declare this attribute on the process method of
  * each Routable that requires authorization.
