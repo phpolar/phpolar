@@ -1,3 +1,108 @@
+## 2.0.0b1 (2023-04-29)
+
+### Fix
+
+- **Model**: use correct attribute target
+
+## 2.0.0b0 (2023-04-04)
+
+### Feat
+
+- add support for model attributes
+
+### Refactor
+
+- **RoutingHandler**: use type doc annotation instead of casting with strval
+
+## 2.0.0a1 (2023-04-01)
+
+## 2.0.0a0.dev0 (2023-04-01)
+
+### BREAKING CHANGE
+
+- https://github.com/phpolar/phpolar-core/issues/12
+- Issue #58
+
+### Feat
+
+- pass psr 11 container instead of config array
+- add support for configuring properties as primary keys
+- add support for parameterized routes
+- add routing handler and middleware
+- select validation html attribute string based on model state
+- update method signatures
+- add use authentication method
+- **DefaultRoutingHandler**: add support for custom 404 error handling
+- add launch script
+- **AbstractModel**: hydrate model when it is created
+- **FieldErrorMessageTrait**: use method instead of property for posted state
+- make error handling generic
+- automatically configure dependencies
+- change name of abstract request handler
+- allow using basename for template files
+- **RouteRegistry**: add routing based on request methods
+- **FieldErrorMessageTrait**: add haserror method
+- **WebServer**: add useroutes method
+- **FieldErrorMessageTrait**: add support for appending to the field error message
+- add phpolar-storage, use phpunit 10 😀
+- rewrite project
+- add validation attributes
+
+### Fix
+
+- **WebServer**: make web server singleton
+- bump alpha version
+- bump alpha version
+- **AbstractModel**: all iteration over all public properties
+- return declared types only
+- bump alpha version
+- **AbstractModel**: add primary key trait
+- bump alpha version
+- bump alpha version
+- add support for parameterized routes for post requests
+- bump alpha version
+- use 404 error handler
+- remove unused dependency
+- bump version
+- do not set dynamic properties
+- get di configuration from the installed path
+- **MiddlewareProcessingQueue**: handle unauthorized requests from csrf middleware
+- **AbstractModel**: prevent type errors
+- **FieldErrorMessageTrait**: only validate posted forms
+- respond to post requests
+- use container implementation/config instead of psr-11 container
+- **AbstractRouteDelegate**: provide the di container
+- **ContainerFactory**: provide a container factory implementation
+- require container configuration when creating app
+- do not initialize the checked property
+- exclude unnecessary files from dist
+- exclude unnecessary files from dist
+- upgrade library, use remote repo instead of local
+
+### Refactor
+
+- move validators to lib
+- rename web server to app
+- move formats to core
+- restructure namespaces
+- move classes to core
+- **FormControlTypeDetectionTraitTest**: remove unused import
+- **PrimaryHandler**: handle null result explicitly
+- simplify config loading
+- load routes in container, update container manager
+- add primary handler
+- upgrade csrf library, simplify web server implementation
+- use formats from enum
+- simplify implementation
+- move format strings to enum
+- **WebServer**: change method name
+- rename abstract route delegate to abstract content delegate
+- do not send response in middleware queue
+- use newly named library
+- use newly renamed template library
+- create model and webserver namespaces
+- remove classes
+
 ## 1.6.5 (2023-01-16)
 
 ### Fix
