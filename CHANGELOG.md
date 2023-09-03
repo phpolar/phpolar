@@ -1,3 +1,19 @@
+## 1.5.0 (2022-08-08)
+
+### Feat
+
+- add support for enumerations
+
+### Refactor
+
+- use readonly properties
+
+### Fix
+
+- php 8 deprecations
+
+## php8-0 (2022-08-06)
+
 ## 1.4.0 (2022-08-06)
 
 ### Feat
