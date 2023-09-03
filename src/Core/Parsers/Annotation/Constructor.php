@@ -12,7 +12,7 @@ abstract class Constructor
     public function __construct(
         private readonly string $qualifiedName,
         protected readonly string $unqualifiedName,
-        private readonly string $defaultAttributeClassName,
+        private readonly string $defaultAttrClassName,
         protected readonly array $argsForDefault,
         protected readonly mixed $value = null
     ) {
@@ -28,7 +28,7 @@ abstract class Constructor
     {
         $pattern = $this->getPattern();
         $hasAttribute = preg_match($pattern, $annotationString, $matches) === 1;
-        $className = $hasAttribute === true ? $this->qualifiedName : $this->defaultAttributeClassName;
+        $className = $hasAttribute === true ? $this->qualifiedName : $this->defaultAttrClassName;
         return new Token($className, $this->getArgs($hasAttribute, $matches));
     }
 

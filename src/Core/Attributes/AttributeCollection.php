@@ -14,6 +14,10 @@ use Efortmeyer\Polar\Stock\Attributes\DefaultLabel;
 use Efortmeyer\Polar\Stock\Attributes\Input;
 use Efortmeyer\Polar\Stock\Attributes\Label;
 
+/**
+ *
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+ */
 class AttributeCollection
 {
     /**
@@ -107,17 +111,16 @@ class AttributeCollection
 
     public function getFieldClassName(): string
     {
-        $automaticDateFormControls = array_filter($this->internalArray, fn (Attribute $attribute) => $attribute->isAutomaticDateInput() === true);
+        $autoDateFormControls = array_filter($this->internalArray, fn (Attribute $attribute) => $attribute->isAutomaticDateInput() === true);
         $otherFormControls = array_filter($this->internalArray, fn (Attribute $attribute) => $attribute->isFormControl() === true && $attribute->isAutomaticDateInput() === false);
 
-        if (count($automaticDateFormControls) > 0) {
+        if (count($autoDateFormControls) > 0) {
             return AutomaticDateField::class;
         } else if (count($otherFormControls) > 0) {
             $formControl = current($otherFormControls);
             return ($formControl !== false ? $formControl : new DefaultFormControl())->getFieldClassName();
-        } else {
-            return "";
         }
+        return "";
     }
 
     /**

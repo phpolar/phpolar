@@ -8,7 +8,8 @@ use Efortmeyer\Polar\Core\Attributes\InputTypes;
 use Efortmeyer\Polar\Core\Fields\{
     AutomaticDateField,
     DateField,
-    FieldMetadata,
+    FieldMetadataConfig,
+    FieldMetadataFactory,
     NumberField,
     TextField,
     TextAreaField,
@@ -57,30 +58,37 @@ class FieldMetadataTestData
     {
         $text = uniqid();
         $dateTime = new DateTimeImmutable();
+        $fieldMetadataFnc = function (AttributeCollection $attrs) {
+            $className = $attrs->getFieldClassName();
+            return new FieldMetadataFactory(
+                new $className(),
+                new FieldMetadataConfig($attrs),
+            );
+        };
         $getLabelTestCase = fn (string $propName, Attribute $attribute) => [
             $propName,
             $attribute(),
-            FieldMetadata::getFactory(new AttributeCollection([...RequiredAttributes::getWithoutLabel(), $attribute]))->create("testProperty", "")
+            $fieldMetadataFnc(new AttributeCollection([...RequiredAttributes::getWithoutLabel(), $attribute]))->create("testProperty", "")
         ];
         $getColumnTestCase = fn (string $propName, Attribute $attribute) => [
             $propName,
             $attribute(),
-            FieldMetadata::getFactory(new AttributeCollection([...RequiredAttributes::getWithoutColumn(), $attribute]))->create("testProperty", "")
+            $fieldMetadataFnc(new AttributeCollection([...RequiredAttributes::getWithoutColumn(), $attribute]))->create("testProperty", "")
         ];
         $getDateFormatTestCase = fn (string $propName, Attribute $attribute) => [
             $propName,
             $attribute(),
-            FieldMetadata::getFactory(new AttributeCollection([...RequiredAttributes::getWithoutDateFormat(), $attribute]))->create("testProperty", "")
+            $fieldMetadataFnc(new AttributeCollection([...RequiredAttributes::getWithoutDateFormat(), $attribute]))->create("testProperty", "")
         ];
         $getFormControlTestCase = fn (string $propName, Attribute $attribute) => [
             $propName,
             $attribute(),
-            FieldMetadata::getFactory(new AttributeCollection([...RequiredAttributes::getWithoutFormControl(), $attribute]))->create("testProperty", $text)
+            $fieldMetadataFnc(new AttributeCollection([...RequiredAttributes::getWithoutFormControl(), $attribute]))->create("testProperty", $text)
         ];
         $getAutomaticDateTestCase = fn ($propName, Attribute $attribute) => [
             $propName,
             $attribute(),
-            FieldMetadata::getFactory(new AttributeCollection([...RequiredAttributes::getWithoutFormControl(), $attribute]))->create("testProperty", null)
+            $fieldMetadataFnc(new AttributeCollection([...RequiredAttributes::getWithoutFormControl(), $attribute]))->create("testProperty", null)
         ];
 
         return [

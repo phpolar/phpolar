@@ -40,13 +40,22 @@ use DateTimeImmutable;
  */
 class FieldMetadataTest extends TestCase
 {
+    private static function getFactory(AttributeCollection $attrs): FieldMetadataFactory
+    {
+        $className = $attrs->getFieldClassName();
+        return new FieldMetadataFactory(
+            new $className(),
+            new FieldMetadataConfig($attrs),
+        );
+    }
+
     /**
      * @test
      * @dataProvider Efortmeyer\Polar\Tests\DataProviders\FieldMetadataTestData::values
      */
     public function shouldReturnTheValue($givenValue, string $format, $expected)
     {
-        $sut = FieldMetadata::getFactory(new AttributeCollection(RequiredAttributes::get()))->create("testProperty", $givenValue);
+        $sut = self::getFactory(new AttributeCollection(RequiredAttributes::get()))->create("testProperty", $givenValue);
         $sut->format = $format;
         $this->assertEquals($expected, $sut->getValue());
     }
@@ -76,7 +85,7 @@ class FieldMetadataTest extends TestCase
         string $expectedValidatorClassName,
         Attribute $givenAttribute
     ) {
-        $createdField = FieldMetadata::getFactory(new AttributeCollection([...RequiredAttributes::getWithoutMaxLength(), $givenAttribute]))->create("testProperty", $givenValue);
+        $createdField = self::getFactory(new AttributeCollection([...RequiredAttributes::getWithoutMaxLength(), $givenAttribute]))->create("testProperty", $givenValue);
         $this->assertContainsOnlyInstancesOf($expectedValidatorClassName, $createdField->validators);
     }
 
@@ -89,7 +98,7 @@ class FieldMetadataTest extends TestCase
         $givenValue,
         Attribute $givenAttribute
     ) {
-        $actualField = FieldMetadata::getFactory(new AttributeCollection([...RequiredAttributes::getWithoutFormControl(), $givenAttribute]))->create("testProperty", $givenValue);
+        $actualField = self::getFactory(new AttributeCollection([...RequiredAttributes::getWithoutFormControl(), $givenAttribute]))->create("testProperty", $givenValue);
         $this->assertInstanceOf($expectedFieldClassName, $actualField);
     }
 }

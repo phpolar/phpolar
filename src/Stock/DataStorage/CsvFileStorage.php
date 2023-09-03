@@ -30,7 +30,7 @@ final class CsvFileStorage implements CollectionStorageInterface
 
     private static Collection $attributeConfigMap;
 
-    public function __construct(private string $pathToFile, Collection $attributeConfigMap)
+    public function __construct(Collection $attributeConfigMap, private string $pathToFile)
     {
         static::$attributeConfigMap = $attributeConfigMap;
     }
@@ -50,11 +50,6 @@ final class CsvFileStorage implements CollectionStorageInterface
         }
     }
 
-    public static function getDefaultName(): string
-    {
-        return date("Ym") . ".csv";
-    }
-
     /**
      * @return resource
      */
@@ -64,9 +59,8 @@ final class CsvFileStorage implements CollectionStorageInterface
         // @codeCoverageIgnoreStart
         if ($fileOpenResult === false) {
             throw new RuntimeException("File open error occured.");
-        } else {
-            static::$writeFile = $fileOpenResult;
         }
+        static::$writeFile = $fileOpenResult;
         // @codeCoverageIgnoreEnd
         return static::$writeFile;
     }
@@ -92,9 +86,8 @@ final class CsvFileStorage implements CollectionStorageInterface
     {
         if (is_subclass_of($className, Model::class) === true) {
             return new $className(static::$attributeConfigMap, $values);
-        } else {
-            throw new InvalidArgumentException("${className} should extend " . Model::class);
         }
+        throw new InvalidArgumentException("${className} should extend " . Model::class);
     }
 
     /**
@@ -142,6 +135,7 @@ final class CsvFileStorage implements CollectionStorageInterface
      * Returns a list of records from a CSV file.
      *
      * @return Model[]
+     * @SuppressWarnings(PHPMD.UnusedLocalVariable)
      * @api
      */
     public function list(string $modelClassName): array
@@ -159,17 +153,16 @@ final class CsvFileStorage implements CollectionStorageInterface
                     throw new RuntimeException(
                         "The model is missing some columns. Model properties ${propertyNamesString}, Column names: ${columnNamesString}"
                     );
-                } else {
-                    // convert column headers to property names
-                    // assumes they have the same position
-                    $fields = array_combine($propertyNames, $line);
-                    // @phan-suppress-next-line PhanTypeNoAccessiblePropertiesForeach
-                    foreach ($model as $prop => $v) {
-                        // @phan-suppress-next-line PhanTypeArraySuspiciousNullable
-                        $model->$prop = $fields[$prop];
-                    }
-                    return $model;
                 }
+                // convert column headers to property names
+                // assumes they have the same position
+                $fields = array_combine($propertyNames, $line);
+                // @phan-suppress-next-line PhanTypeNoAccessiblePropertiesForeach
+                foreach ($model as $prop => $v) {
+                    // @phan-suppress-next-line PhanTypeArraySuspiciousNullable
+                    $model->$prop = $fields[$prop];
+                }
+                return $model;
             },
             $lines
         );

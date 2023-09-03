@@ -15,45 +15,41 @@ use Efortmeyer\Polar\Core\Attributes\{
  */
 class FieldMetadataConfig
 {
-    public Attribute $labelAttribute;
+    public Attribute $labelAttr;
 
-    public Attribute $formControlTypeAttribute;
+    public Attribute $formControlTypeAttr;
 
-    public Attribute $columnAttribute;
+    public Attribute $columnAttr;
 
-    private ?Attribute $dateFormatAttribute;
+    private ?Attribute $dateFormatAttr;
 
-    private ?Attribute $valueAttribute;
+    private ?Attribute $valueAttr;
 
     /**
      * @var Attribute[]
      */
     public array $validatorAttributes = [];
 
-    protected function __construct() {}
-
-    public static function create(AttributeCollection $attributes): FieldMetadataConfig
+    public function __construct(AttributeCollection $attributes)
     {
-        $config = new self();
-        $config->labelAttribute = $attributes->getLabelAttribute();
-        $config->columnAttribute = $attributes->getColumnAttribute();
-        $config->formControlTypeAttribute = $attributes->getFormControlAttribute();
-        $config->valueAttribute = $attributes->getValueAttributeOrNull();
-        $config->dateFormatAttribute = $attributes->getDateFormatAttributeOrNull();
-        $config->validatorAttributes = $attributes->getValidatorAttributes();
-        return $config;
+        $this->labelAttr = $attributes->getLabelAttribute();
+        $this->columnAttr = $attributes->getColumnAttribute();
+        $this->formControlTypeAttr = $attributes->getFormControlAttribute();
+        $this->valueAttr = $attributes->getValueAttributeOrNull();
+        $this->dateFormatAttr = $attributes->getDateFormatAttributeOrNull();
+        $this->validatorAttributes = $attributes->getValidatorAttributes();
     }
 
     public function getAttributeValueOrElse($value)
     {
-        $valueAttribute = $this->valueAttribute;
-        return $valueAttribute instanceof Attribute ? $valueAttribute() : $value;
+        $valueAttr = $this->valueAttr;
+        return $valueAttr instanceof Attribute ? $valueAttr() : $value;
     }
 
     public function getDateFormatOrEmptyString(): string
     {
-        $dateFormatAttribute = $this->dateFormatAttribute;
-        return $dateFormatAttribute instanceof Attribute ? (string) $dateFormatAttribute() : "";
+        $dateFormatAttr = $this->dateFormatAttr;
+        return $dateFormatAttr instanceof Attribute ? (string) $dateFormatAttr() : "";
     }
 
     /**

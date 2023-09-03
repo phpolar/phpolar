@@ -8,6 +8,7 @@ use Efortmeyer\Polar\Core\Attributes\AttributeCollection;
 use Efortmeyer\Polar\Core\Attributes\InputTypes;
 use Efortmeyer\Polar\Core\Fields\FieldMetadata;
 use Efortmeyer\Polar\Core\Fields\FieldMetadataConfig;
+use Efortmeyer\Polar\Core\Fields\FieldMetadataFactory;
 use Efortmeyer\Polar\Stock\Attributes\AutomaticDateValue;
 use Efortmeyer\Polar\Stock\Attributes\DefaultColumn;
 use Efortmeyer\Polar\Stock\Attributes\DefaultDateFormat;
@@ -60,6 +61,15 @@ class FormControlTest extends TestCase
         ];
     }
 
+    private static function getFactory(AttributeCollection $attrs): FieldMetadataFactory
+    {
+        $className = $attrs->getFieldClassName();
+        return new FieldMetadataFactory(
+            new $className(),
+            new FieldMetadataConfig($attrs),
+        );
+    }
+
     public static function fieldWithoutErrorsTestCases()
     {
         $requiredAttributes = [
@@ -69,7 +79,7 @@ class FormControlTest extends TestCase
             new DefaultMaxLength(""),
         ];
         return [
-            [FieldMetadata::getFactory(new AttributeCollection([...$requiredAttributes, new Input(InputTypes::Text)]))->create("testProperty", "")],
+            [self::getFactory(new AttributeCollection([...$requiredAttributes, new Input(InputTypes::Text)]))->create("testProperty", "")],
         ];
     }
 
@@ -83,7 +93,7 @@ class FormControlTest extends TestCase
             ->willReturn(false);
         $attributeStub->method("getErrorMessage")
             ->willReturn(Messages::ERROR_MESSAGE);
-        $field = FieldMetadata::getFactory(new AttributeCollection(RequiredAttributes::get()))->create("testProperty", "");
+        $field = self::getFactory(new AttributeCollection(RequiredAttributes::get()))->create("testProperty", "");
         $field->validators[] = $attributeStub;
 
         return [
@@ -102,23 +112,23 @@ class FormControlTest extends TestCase
         return [
             [
                 TextFormControl::class,
-                FieldMetadata::getFactory(new AttributeCollection([...$requiredAttributes, new Input(InputTypes::Text)]))->create("testProperty", ""),
+                self::getFactory(new AttributeCollection([...$requiredAttributes, new Input(InputTypes::Text)]))->create("testProperty", ""),
             ],
             [
                 TextAreaFormControl::class,
-                FieldMetadata::getFactory(new AttributeCollection([...$requiredAttributes, new Input(InputTypes::Textarea)]))->create("testProperty", ""),
+                self::getFactory(new AttributeCollection([...$requiredAttributes, new Input(InputTypes::Textarea)]))->create("testProperty", ""),
             ],
             [
                 NumberFormControl::class,
-                FieldMetadata::getFactory(new AttributeCollection([...$requiredAttributes, new Input(InputTypes::Number)]))->create("testProperty", ""),
+                self::getFactory(new AttributeCollection([...$requiredAttributes, new Input(InputTypes::Number)]))->create("testProperty", ""),
             ],
             [
                 DateFormControl::class,
-                FieldMetadata::getFactory(new AttributeCollection([...$requiredAttributes, new Input(InputTypes::Date)]))->create("testProperty", null),
+                self::getFactory(new AttributeCollection([...$requiredAttributes, new Input(InputTypes::Date)]))->create("testProperty", null),
             ],
             [
                 HiddenFormControl::class,
-                FieldMetadata::getFactory(new AttributeCollection([...$requiredAttributes, new AutomaticDateValue()]))->create("testProperty", null),
+                self::getFactory(new AttributeCollection([...$requiredAttributes, new AutomaticDateValue()]))->create("testProperty", null),
             ],
         ];
     }
@@ -138,7 +148,7 @@ class FormControlTest extends TestCase
     public function shouldThrowRuntimeExceptionWhenGivenFieldThatWithUnknownType()
     {
         $this->expectException(RuntimeException::class);
-        FormControl::create(UnknownFieldType::create("propertyName", "", FieldMetadataConfig::create(new AttributeCollection(RequiredAttributes::get()))));
+        FormControl::create(UnknownFieldType::create("propertyName", "", new FieldMetadataConfig(new AttributeCollection(RequiredAttributes::get()))));
     }
 
     /**
@@ -146,7 +156,7 @@ class FormControlTest extends TestCase
      */
     public function shouldNotReturnErrorMessageWhenFieldDoesNotHaveErrors()
     {
-        $sut = FormControl::create(FieldMetadata::getFactory(new AttributeCollection(RequiredAttributes::get()))->create("testProperty", ""));
+        $sut = FormControl::create(self::getFactory(new AttributeCollection(RequiredAttributes::get()))->create("testProperty", ""));
         $this->assertEmpty($sut->getErrorMesage());
     }
 

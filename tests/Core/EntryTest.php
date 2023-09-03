@@ -7,6 +7,8 @@ namespace Efortmeyer\Polar\Core;
 use Efortmeyer\Polar\Api\Attributes\Config\Collection;
 use Efortmeyer\Polar\Core\Attributes\AttributeCollection;
 use Efortmeyer\Polar\Core\Fields\FieldMetadata;
+use Efortmeyer\Polar\Core\Fields\FieldMetadataConfig;
+use Efortmeyer\Polar\Core\Fields\FieldMetadataFactory;
 use Efortmeyer\Polar\Stock\Attributes\Column;
 use Efortmeyer\Polar\Tests\Fakes\RequiredAttributes;
 use PHPUnit\Framework\TestCase;
@@ -48,6 +50,15 @@ use PHPUnit\Framework\TestCase;
  */
 class EntryTest extends TestCase
 {
+    private static function getFactory(AttributeCollection $attrs): FieldMetadataFactory
+    {
+        $className = $attrs->getFieldClassName();
+        return new FieldMetadataFactory(
+            new $className(),
+            new FieldMetadataConfig($attrs),
+        );
+    }
+
     public static function config()
     {
         $attributesConfigFile = getcwd() . ATTRIBUTES_CONFIG_PATH;
@@ -199,7 +210,7 @@ class EntryTest extends TestCase
              */
             public $property1 = "what";
         };
-        $expectedField = FieldMetadata::getFactory(new AttributeCollection(RequiredAttributes::get()))->create("property1", $sut->property1);
+        $expectedField = self::getFactory(new AttributeCollection(RequiredAttributes::get()))->create("property1", $sut->property1);
         $fields = $sut->getFields();
         foreach ($fields as $field) {
             $this->assertSame($expectedField->getValue(), $field->getValue());

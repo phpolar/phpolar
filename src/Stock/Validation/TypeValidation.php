@@ -36,11 +36,11 @@ class TypeValidation implements ValidationInterface
     {
         // the functions will be used to validate their corresponding type
         $typeCheckMap = [
-            ScalarTypes::String->value    => "is_string",
-            ScalarTypes::Integer->value   => "is_int",
-            ScalarTypes::Float->value     => "is_float",
-            ScalarTypes::Double->value    => "is_float",
-            ScalarTypes::Bool->value      => "is_bool",
+            ScalarTypes::String->value    => is_string(...),
+            ScalarTypes::Integer->value   => is_int(...),
+            ScalarTypes::Float->value     => is_float(...),
+            ScalarTypes::Double->value    => is_float(...),
+            ScalarTypes::Bool->value      => is_bool(...),
             ScalarTypes::Null->value      => fn ($value) => $value === null,
             Serializable::class           => fn ($value) => is_subclass_of($value, Serializable::class) === true,
         ];
@@ -49,9 +49,9 @@ class TypeValidation implements ValidationInterface
             if ($this->typeIsValid === false) {
                 $this->errorMessage = Messages::InvalidType->value;
             }
-        } else {
-            $this->typeIsValid = false;
-            $this->errorMessage = Messages::UknownType->value;
+            return;
         }
+        $this->typeIsValid = false;
+        $this->errorMessage = Messages::UknownType->value;
     }
 }

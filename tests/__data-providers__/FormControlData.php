@@ -6,16 +6,26 @@ namespace Efortmeyer\Polar\Tests\DataProviders;
 
 use Efortmeyer\Polar\Api\UIElements\Messages;
 use Efortmeyer\Polar\Core\Attributes\AttributeCollection;
-use Efortmeyer\Polar\Core\Fields\FieldMetadata;
+use Efortmeyer\Polar\Core\Fields\FieldMetadataConfig;
+use Efortmeyer\Polar\Core\Fields\FieldMetadataFactory;
 use Efortmeyer\Polar\Tests\Fakes\RequiredAttributes;
 use PHPUnit\Framework\TestCase;
 
 class FormControlData extends TestCase
 {
+    private static function getFactory(AttributeCollection $attrs): FieldMetadataFactory
+    {
+        $className = $attrs->getFieldClassName();
+        return new FieldMetadataFactory(
+            new $className(),
+            new FieldMetadataConfig($attrs),
+        );
+    }
+
     public static function fieldWithoutErrorsTestCases()
     {
         return [
-            [FieldMetadata::getFactory(new AttributeCollection([RequiredAttributes::get()]))->create("", "")],
+            [self::getFactory(new AttributeCollection([RequiredAttributes::get()]))->create("", "")],
         ];
     }
 
@@ -26,7 +36,7 @@ class FormControlData extends TestCase
             ->willReturn(false);
         $attributeStub->method("getErrorMessage")
             ->willReturn(Messages::ERROR_MESSAGE);
-        $field = FieldMetadata::getFactory(new AttributeCollection([RequiredAttributes::get()]))->create("", "");
+        $field = self::getFactory(new AttributeCollection([RequiredAttributes::get()]))->create("", "");
         $field->validators[] = $attributeStub;
 
         return [

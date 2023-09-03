@@ -8,7 +8,7 @@ use Efortmeyer\Polar\Core\Attributes\Config\ConstructorArgs;
 use Efortmeyer\Polar\Core\Attributes\Config\ConstructorArgsNone;
 use Efortmeyer\Polar\Core\Attributes\Config\ConstructorArgsPropertyName;
 use Efortmeyer\Polar\Core\Attributes\Config\ConstructorArgsPropertyValue;
-use Efortmeyer\Polar\Core\Attributes\Config\ConstructorArgsPropertyValueWithSecondArg;
+use Efortmeyer\Polar\Core\Attributes\Config\ConstructorArgsPropValWithSndArg;
 
 
 use PHPUnit\Framework\TestCase;
@@ -28,7 +28,7 @@ class AttributeConfigTest extends TestCase
             [ConstructorArgsNone::class, new ConstructorArgsNone()],
             [ConstructorArgsPropertyName::class, new ConstructorArgsPropertyName()],
             [ConstructorArgsPropertyValue::class, new ConstructorArgsPropertyValue()],
-            [ConstructorArgsPropertyValueWithSecondArg::class, new ConstructorArgsPropertyValueWithSecondArg()],
+            [ConstructorArgsPropValWithSndArg::class, new ConstructorArgsPropValWithSndArg()],
         ];
     }
 

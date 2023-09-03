@@ -16,6 +16,7 @@ final class ConstructorArgsNone extends Constructor
 
     /**
      * @suppress PhanUnusedProtectedFinalMethodParameter
+     * @SuppressWarnings(PHPMD)
      */
     protected function getArgs(bool $hasAttribute, array $matches): array
     {

@@ -14,6 +14,6 @@ namespace Efortmeyer\Polar\Core\Attributes\Config;
  *
  * @example Person.php
  */
-final class ConstructorArgsPropertyValueWithSecondArg extends ConstructorArgs
+final class ConstructorArgsPropValWithSndArg extends ConstructorArgs
 {
 }

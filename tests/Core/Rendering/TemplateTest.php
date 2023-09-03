@@ -6,7 +6,6 @@ namespace Efortmeyer\Polar\Core\Rendering;
 
 use Efortmeyer\Polar\Api\Rendering\TemplateContext;
 use Efortmeyer\Polar\Tests\Extensions\PolarTestCaseExtension;
-use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \Efortmeyer\Polar\Core\Rendering\Template

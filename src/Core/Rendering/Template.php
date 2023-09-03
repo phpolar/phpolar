@@ -27,7 +27,7 @@ final class Template
             include $pathToFile;
             ob_end_flush();
         };
-        $context = HtmlEncoder::encodeProperties($context);
+        $context = (new HtmlEncoder())->encodeProperties($context);
         $closure = $closure->bindTo($context, $context);
         $closure($templatePath);
     }

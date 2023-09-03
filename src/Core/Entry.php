@@ -7,6 +7,8 @@ namespace Efortmeyer\Polar\Core;
 use Efortmeyer\Polar\Api\Attributes\Config\Collection as AttributeConfigCollection;
 use Efortmeyer\Polar\Core\Attributes\AttributeCollection;
 use Efortmeyer\Polar\Core\Fields\FieldMetadata;
+use Efortmeyer\Polar\Core\Fields\FieldMetadataConfig;
+use Efortmeyer\Polar\Core\Fields\FieldMetadataFactory;
 use ReflectionAttribute;
 use ReflectionClass;
 use ReflectionObject;
@@ -52,7 +54,9 @@ abstract class Entry
             function (string $propertyName, mixed $propertyValue): FieldMetadata {
                 $annotation = new PropertyAnnotation($this, $propertyName, $this->attributeConfigMap);
                 $attributes = $annotation->parse();
-                return FieldMetadata::getFactory($attributes)->create($propertyName, $attributes->getValueAttributeOrElse($propertyValue));
+                $className = $attributes->getFieldClassName();
+                return (new FieldMetadataFactory(new $className(), new FieldMetadataConfig($attributes)))
+                    ->create($propertyName, $attributes->getValueAttributeOrElse($propertyValue));
             },
             array_map(fn (ReflectionProperty $prop) => $prop->getName(), $properties),
             array_map(fn (ReflectionProperty $prop) => $prop->isInitialized($this) === true ? $prop->getValue($this) : $prop->getDefaultValue(), $properties)
@@ -74,8 +78,10 @@ abstract class Entry
                         $property->getAttributes()
                     )
                 );
+                $className = $attributes->getFieldClassName();
                 $attributes->addDefaultsBasedOnMissingAttributes($propertyName);
-                return FieldMetadata::getFactory($attributes)->create($propertyName, $attributes->getValueAttributeOrElse($propertyValue));
+                return (new FieldMetadataFactory(new $className(), new FieldMetadataConfig($attributes)))
+                    ->create($propertyName, $attributes->getValueAttributeOrElse($propertyValue));
             },
             array_filter(
                 (new ReflectionObject($this))->getProperties(ReflectionProperty::IS_PUBLIC),

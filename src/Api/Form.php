@@ -38,15 +38,14 @@ class Form extends TemplateContext
 
     public function submit(CollectionStorageInterface $storage): void
     {
-        if ($this->hasErrors() === true)
-        {
-            $this->banner = new ErrorBanner();
-        } else {
+        if ($this->hasErrors() === false) {
             $this->banner = new SuccessBanner();
             $storage->save(
                 $this->getModel()
             );
+            return;
         }
+        $this->banner = new ErrorBanner();
     }
 
     /**

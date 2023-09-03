@@ -31,14 +31,8 @@ class FieldMetadata
 
     public mixed $value;
 
-    protected function __construct()
+    public function __construct()
     {
-    }
-
-    public static function getFactory(AttributeCollection $attributes): FieldMetadataFactory
-    {
-        $className = $attributes->getFieldClassName();
-        return FieldMetadataFactory::getInstance(new $className(), $attributes);
     }
 
     public function getValue(): mixed

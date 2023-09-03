@@ -15,7 +15,7 @@ use Efortmeyer\Polar\Core\Attributes\Config\{
     ConstructorArgsOne,
     ConstructorArgsPropertyName,
     ConstructorArgsPropertyValue,
-    ConstructorArgsPropertyValueWithSecondArg,
+    ConstructorArgsPropValWithSndArg,
 };
 use Efortmeyer\Polar\Stock\Attributes\Config\{
     AutomaticDateValueKey,
@@ -39,6 +39,8 @@ use DateTimeInterface;
 
 /**
  * Provides an in memory interface for configuration the application.
+ *
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
 final class InMemoryAppConfig implements AppConfigInterface
 {
@@ -95,7 +97,7 @@ final class InMemoryAppConfig implements AppConfigInterface
         $this->configCollection->add(
             new MaxLengthKey(),
             new class(
-                new ConstructorArgsPropertyValueWithSecondArg(),
+                new ConstructorArgsPropValWithSndArg(),
                 DefaultMaxLength::class,
                 new ConstructorArgsPropertyValue(),
             ) extends AttributeConfig
@@ -116,7 +118,7 @@ final class InMemoryAppConfig implements AppConfigInterface
         $this->configCollection->add(
             new TypeValidationKey(),
             new class(
-                new ConstructorArgsPropertyValueWithSecondArg(),
+                new ConstructorArgsPropValWithSndArg(),
                 NoopValidate::class,
                 new ConstructorArgsNone()
             ) extends AttributeConfig

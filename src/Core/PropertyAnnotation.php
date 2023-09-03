@@ -13,7 +13,7 @@ use Efortmeyer\Polar\Core\Attributes\Config\{
     ConstructorArgsOne as ConfigConstructorArgsOne,
     ConstructorArgsPropertyName,
     ConstructorArgsPropertyValue,
-    ConstructorArgsPropertyValueWithSecondArg,
+    ConstructorArgsPropValWithSndArg,
 };
 use Efortmeyer\Polar\Core\Parsers\Annotation\{
     ConstructorArgsOne,
@@ -35,6 +35,8 @@ use ReflectionProperty;
 
 /**
  * Provides a way to parse a class's property attributes.
+ *
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
 final class PropertyAnnotation
 {
@@ -47,10 +49,6 @@ final class PropertyAnnotation
      */
     private readonly mixed $propertyValue;
 
-    private static Closure $onlyRequired;
-
-    private static Closure $toAttribute;
-
     public function __construct(
         object $instance,
         string $propertyName,
@@ -61,8 +59,6 @@ final class PropertyAnnotation
         $this->docComment = $docComment === false ? "" : $docComment;
         $this->propertyName = $reflectionProperty->getName();
         $this->propertyValue = $reflectionProperty->isInitialized($instance) === true ? $reflectionProperty->getValue($instance) : $reflectionProperty->getDefaultValue();
-        static::$onlyRequired = Closure::fromCallable([$this, "filterRequiredAttributes"]);
-        static::$toAttribute = Closure::fromCallable([$this, "mapToAttribute"]);
     }
 
     /**
@@ -72,15 +68,13 @@ final class PropertyAnnotation
     {
         return new AttributeCollection(
             $this->attributeConfigMap
-                ->filter(static::$onlyRequired)
-                ->map(static::$toAttribute)
+                ->filter(
+                    fn (AttributeConfigInterface $config) =>
+                        $config->isConfiguredForClass() === true ? $this->propertyValue === null || is_a($this->propertyValue, $config->forType()) : true
+                )
+                ->map($this->mapToAttribute(...))
                 ->toArray()
         );
-    }
-
-    private function filterRequiredAttributes(AttributeConfigInterface $config): bool
-    {
-        return $config->isConfiguredForClass() === true ? $this->propertyValue === null || is_a($this->propertyValue, $config->forType()) : true;
     }
 
     private function mapToAttribute(string $attributeConfigKey, AttributeConfig $attributeConfig): Attribute
@@ -89,9 +83,9 @@ final class PropertyAnnotation
         $unqualifiedClassName = $reflectionClass->getShortName();
         $constructorArgType = $attributeConfig->getConstructorArgType();
         $defaultAttribute = $attributeConfig->getClassNameForDefaultAttribute();
-        $defaultConstructorArgType = $attributeConfig->getConstructorArgTypeForDefault();
-        $propertyValueConstructorArg = $constructorArgType instanceof ConstructorArgsPropertyValueWithSecondArg ? $this->propertyValue : null;
-        $argsForDefault = $this->getArgsForDefault($defaultAttribute, $defaultConstructorArgType);
+        $defaultType = $attributeConfig->getConstructorArgTypeForDefault();
+        $propertyValueArg = $constructorArgType instanceof ConstructorArgsPropValWithSndArg ? $this->propertyValue : null;
+        $argsForDefault = $this->getArgsForDefault($defaultAttribute, $defaultType);
         $parserClassName = $this->getParserClassName($attributeConfigKey, $constructorArgType);
 
         return (new $parserClassName(
@@ -99,7 +93,7 @@ final class PropertyAnnotation
             $unqualifiedClassName,
             $defaultAttribute,
             $argsForDefault,
-            $propertyValueConstructorArg)
+            $propertyValueArg)
         )->toToken($this->docComment)
             ->newInstance();
     }
@@ -107,12 +101,12 @@ final class PropertyAnnotation
     /**
      * @return string[]
      */
-    private function getArgsForDefault(string $defaultAttribute, ConstructorArgs $defaultConstructorArgType): array
+    private function getArgsForDefault(string $defaultAttribute, ConstructorArgs $defaultType): array
     {
         return match (true) {
-            $defaultConstructorArgType instanceof ConstructorArgsPropertyName => [$this->propertyName],
-            $defaultConstructorArgType instanceof ConstructorArgsPropertyValue => [$this->propertyValue],
-            $defaultConstructorArgType instanceof ConstructorArgsNone => [],
+            $defaultType instanceof ConstructorArgsPropertyName => [$this->propertyName],
+            $defaultType instanceof ConstructorArgsPropertyValue => [$this->propertyValue],
+            $defaultType instanceof ConstructorArgsNone => [],
             default => throw new InvalidArgumentException("Invalid Attribute config for ${defaultAttribute}")
         };
     }
@@ -123,7 +117,7 @@ final class PropertyAnnotation
             $constructorArgType instanceof ConstructorArgsPropertyName,
             $constructorArgType instanceof ConfigConstructorArgsOne => ConstructorArgsOne::class,
             $constructorArgType instanceof ConstructorArgsNone => AnnotationConstructorArgsNone::class,
-            $constructorArgType instanceof ConstructorArgsPropertyValueWithSecondArg =>
+            $constructorArgType instanceof ConstructorArgsPropValWithSndArg =>
                 $attributeConfigKey === TypeValidation::class ? TypeTag::class : ConstructorArgsOneWithValue::class,
             default => throw new InvalidArgumentException("Invalid Attribute config for {$attributeConfigKey}")
         };

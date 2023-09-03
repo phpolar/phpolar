@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Efortmeyer\Polar\Stock\Attributes;
 
-use DateTimeInterface;
-use Efortmeyer\Polar\Core\Defaults;
 use PHPUnit\Framework\TestCase;
 
 /**

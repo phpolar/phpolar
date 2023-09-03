@@ -65,7 +65,7 @@ class CsvFileStorageTest extends PolarTestCaseExtension
 
     public static function setUpBeforeClass(): void
     {
-        $attributesConfigFile = getcwd() . ATTRIBUTES_CONFIG_PATH;
+        $attributesConfigFile = getcwd() . \ATTRIBUTES_CONFIG_PATH;
         static::$attributesConfigMap = include $attributesConfigFile;
     }
 
@@ -89,7 +89,7 @@ class CsvFileStorageTest extends PolarTestCaseExtension
              */
             public $property3 = "AGAIN... ANOTHER FAKE VALUE";
         };
-        $sut = new CsvFileStorage(static::$fakeCsvFilePath, static::$attributesConfigMap);
+        $sut = new CsvFileStorage(static::$attributesConfigMap, static::$fakeCsvFilePath);
         $sut->save($this->record);
         $this->sut = $sut;
     }
@@ -130,7 +130,7 @@ class CsvFileStorageTest extends PolarTestCaseExtension
         unlink(static::$fakeCsvFilePath);
         $this->sut->__destruct();
         $newFile = self::getTestFileName(".csv");
-        $sut = new CsvFileStorage($newFile, static::$attributesConfigMap);
+        $sut = new CsvFileStorage(static::$attributesConfigMap, $newFile);
         $resultList = $sut->list(ModelSubclass::class);
         unlink($newFile);
         $this->assertEmpty($resultList);
