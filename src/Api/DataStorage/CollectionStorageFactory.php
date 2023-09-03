@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Api\DataStorage;
+namespace Phpolar\Phpolar\Api\DataStorage;
 
-use Efortmeyer\Polar\Api\Attributes\Config\Collection;
+use Phpolar\Phpolar\Api\Attributes\Config\Collection;
 
 /**
  * Provides a way to create a storage object.

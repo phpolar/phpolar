@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Stock\Attributes\Config;
+namespace Phpolar\Phpolar\Stock\Attributes\Config;
 
-use Efortmeyer\Polar\Api\Attributes\Config\Key;
-use Efortmeyer\Polar\Stock\Attributes\MaxLength;
+use Phpolar\Phpolar\Api\Attributes\Config\Key;
+use Phpolar\Phpolar\Stock\Attributes\MaxLength;
 
 final class MaxLengthKey extends Key
 {

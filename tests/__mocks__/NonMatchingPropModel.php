@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Tests\Mocks;
+namespace Phpolar\Phpolar\Tests\Mocks;
 
-use Efortmeyer\Polar\Api\Model;
+use Phpolar\Phpolar\Api\Model;
 
 final class NonMatchingPropModel extends Model
 {

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Api\DataStorage;
+namespace Phpolar\Phpolar\Api\DataStorage;
 
-use Efortmeyer\Polar\Api\Model;
+use Phpolar\Phpolar\Api\Model;
 
 /**
  * Provides a way to interact with a list of items.

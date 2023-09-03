@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Api;
+namespace Phpolar\Phpolar\Api;
 
-use Efortmeyer\Polar\Api\DataStorage\CollectionStorageInterface;
-use Efortmeyer\Polar\Api\Rendering\TemplateContext;
-use Efortmeyer\Polar\Core\Rendering\Template;
+use Phpolar\Phpolar\Api\DataStorage\CollectionStorageInterface;
+use Phpolar\Phpolar\Api\Rendering\TemplateContext;
+use Phpolar\Phpolar\Core\Rendering\Template;
 
 /**
  * Provides common functionality for

@@ -2,25 +2,25 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Api;
+namespace Phpolar\Phpolar\Api;
 
-use Efortmeyer\Polar\Api\DataStorage\CollectionStorageFactory;
-use Efortmeyer\Polar\Api\Rendering\TemplateContext;
-use Efortmeyer\Polar\Stock\AppConfig\InMemoryAppConfig;
-use Efortmeyer\Polar\Stock\DataStorage\CsvFileStorage;
-use Efortmeyer\Polar\Tests\Mocks\StorageStub;
+use Phpolar\Phpolar\Api\DataStorage\CollectionStorageFactory;
+use Phpolar\Phpolar\Api\Rendering\TemplateContext;
+use Phpolar\Phpolar\Stock\AppConfig\InMemoryAppConfig;
+use Phpolar\Phpolar\Stock\DataStorage\CsvFileStorage;
+use Phpolar\Phpolar\Tests\Mocks\StorageStub;
 use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 
 /**
- * @covers \Efortmeyer\Polar\Api\App
+ * @covers \Phpolar\Phpolar\Api\App
  *
- * @uses \Efortmeyer\Polar\Api\Attributes\Config\Collection
- * @uses \Efortmeyer\Polar\Stock\AppConfig\InMemoryAppConfig
- * @uses \Efortmeyer\Polar\Stock\DataStorage\CsvFileStorage
- * @uses \Efortmeyer\Polar\Core\Attributes\Config\AttributeConfig
- * @uses \Efortmeyer\Polar\Stock\Attributes\Config\InputKey
+ * @uses \Phpolar\Phpolar\Api\Attributes\Config\Collection
+ * @uses \Phpolar\Phpolar\Stock\AppConfig\InMemoryAppConfig
+ * @uses \Phpolar\Phpolar\Stock\DataStorage\CsvFileStorage
+ * @uses \Phpolar\Phpolar\Core\Attributes\Config\AttributeConfig
+ * @uses \Phpolar\Phpolar\Stock\Attributes\Config\InputKey
  */
 class AppTest extends TestCase
 {

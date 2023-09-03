@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Tests\DataProviders;
+namespace Phpolar\Phpolar\Tests\DataProviders;
 
-use Efortmeyer\Polar\Stock\Attributes\Defaults;
+use Phpolar\Phpolar\Stock\Attributes\Defaults;
 
 class DefaultColumnTestData
 {

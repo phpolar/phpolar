@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Stock\Attributes;
+namespace Phpolar\Phpolar\Stock\Attributes;
 
 use PHPUnit\Framework\TestCase;
 use ReflectionProperty;
 
 /**
- * @covers \Efortmeyer\Polar\Stock\Attributes\MaxLength
+ * @covers \Phpolar\Phpolar\Stock\Attributes\MaxLength
  *
- * @uses Efortmeyer\Polar\Core\Attributes\Attribute
- * @uses Efortmeyer\Polar\Stock\Validation\MaxLength
+ * @uses Phpolar\Phpolar\Core\Attributes\Attribute
+ * @uses Phpolar\Phpolar\Stock\Validation\MaxLength
  * @testdox MaxLength
  */
 class MaxLengthTest extends TestCase

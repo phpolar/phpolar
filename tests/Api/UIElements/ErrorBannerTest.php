@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Api\UIElements;
+namespace Phpolar\Phpolar\Api\UIElements;
 
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \Efortmeyer\Polar\Api\UIElements\ErrorBanner
+ * @covers \Phpolar\Phpolar\Api\UIElements\ErrorBanner
  * @testdox ErrorBanner
  */
 class ErrorBannerTest extends TestCase

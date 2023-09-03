@@ -1,6 +1,6 @@
 <?php
 
-use Efortmeyer\Polar\Api\Model;
+use Phpolar\Phpolar\Api\Model;
 
 class Person extends Model
 {

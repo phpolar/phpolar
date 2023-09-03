@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Stock\Attributes;
+namespace Phpolar\Phpolar\Stock\Attributes;
 
-use Efortmeyer\Polar\Core\Attributes\Attribute;
-use Efortmeyer\Polar\Api\Validation\ValidationInterface;
-use Efortmeyer\Polar\Stock\Validation\TypeValidation as ValidationTypeValidation;
+use Phpolar\Phpolar\Core\Attributes\Attribute;
+use Phpolar\Phpolar\Api\Validation\ValidationInterface;
+use Phpolar\Phpolar\Stock\Validation\TypeValidation as ValidationTypeValidation;
 
 /**
  * Configures validation of the type of a property's value.

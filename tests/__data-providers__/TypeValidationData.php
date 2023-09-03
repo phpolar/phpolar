@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Tests\DataProviders;
+namespace Phpolar\Phpolar\Tests\DataProviders;
 
-use Efortmeyer\Polar\Stock\Validation\ScalarTypes;
-use Efortmeyer\Polar\Tests\Mocks\SerializableMock;
+use Phpolar\Phpolar\Stock\Validation\ScalarTypes;
+use Phpolar\Phpolar\Tests\Mocks\SerializableMock;
 use Serializable;
 use stdClass;
 

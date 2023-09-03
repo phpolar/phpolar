@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Core;
+namespace Phpolar\Phpolar\Core;
 
 /**
  * Provides support for equality comparison.

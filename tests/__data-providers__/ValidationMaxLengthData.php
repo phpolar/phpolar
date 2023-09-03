@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Tests\DataProviders;
+namespace Phpolar\Phpolar\Tests\DataProviders;
 
 class ValidationMaxLengthData
 {

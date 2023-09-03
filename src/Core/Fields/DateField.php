@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Core\Fields;
+namespace Phpolar\Phpolar\Core\Fields;
 
 /**
  * Represents a date field.

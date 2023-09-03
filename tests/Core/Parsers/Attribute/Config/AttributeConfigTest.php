@@ -2,25 +2,25 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Core\Attributes\Config;
+namespace Phpolar\Phpolar\Core\Attributes\Config;
 
-use Efortmeyer\Polar\Core\Attributes\Config\ConstructorArgs;
-use Efortmeyer\Polar\Core\Attributes\Config\ConstructorArgsNone;
-use Efortmeyer\Polar\Core\Attributes\Config\ConstructorArgsPropertyName;
-use Efortmeyer\Polar\Core\Attributes\Config\ConstructorArgsPropertyValue;
-use Efortmeyer\Polar\Core\Attributes\Config\ConstructorArgsPropValWithSndArg;
+use Phpolar\Phpolar\Core\Attributes\Config\ConstructorArgs;
+use Phpolar\Phpolar\Core\Attributes\Config\ConstructorArgsNone;
+use Phpolar\Phpolar\Core\Attributes\Config\ConstructorArgsPropertyName;
+use Phpolar\Phpolar\Core\Attributes\Config\ConstructorArgsPropertyValue;
+use Phpolar\Phpolar\Core\Attributes\Config\ConstructorArgsPropValWithSndArg;
 
 
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \Efortmeyer\Polar\Core\Attributes\Config\AttributeConfig
+ * @covers \Phpolar\Phpolar\Core\Attributes\Config\AttributeConfig
  * @testdox AttributeConfig
  */
 class AttributeConfigTest extends TestCase
 {
     /**
-     * @return \Efortmeyer\Polar\Stock\Attributes\Config\ConstructorArgs[]
+     * @return \Phpolar\Phpolar\Stock\Attributes\Config\ConstructorArgs[]
      */
     public static function constructorArgs()
     {

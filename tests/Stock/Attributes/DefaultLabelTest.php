@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Stock\Attributes;
+namespace Phpolar\Phpolar\Stock\Attributes;
 
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \Efortmeyer\Polar\Stock\Attributes\DefaultLabel
+ * @covers \Phpolar\Phpolar\Stock\Attributes\DefaultLabel
  * @testdox DefaultLabel
  */
 class DefaultLabelTest extends TestCase
 {
     /**
      * @test
-     * @dataProvider Efortmeyer\Polar\Tests\DataProviders\DefaultLabelTestData::testCases
+     * @dataProvider Phpolar\Phpolar\Tests\DataProviders\DefaultLabelTestData::testCases
      */
     public function shouldReturnStringWithUpperCaseFirstCharacter(string $givenString, string $expectedUpperCaseFirstChar)
     {

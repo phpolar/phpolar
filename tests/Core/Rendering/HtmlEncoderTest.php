@@ -2,26 +2,26 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Core\Rendering;
+namespace Phpolar\Phpolar\Core\Rendering;
 
-use Efortmeyer\Polar\Tests\Comparables\NestedXSSFix;
-use Efortmeyer\Polar\Tests\Comparables\NestedXSSFixEnd;
-use Efortmeyer\Polar\Tests\Comparables\NestedXSSHack;
-use Efortmeyer\Polar\Tests\Comparables\NestedXSSHackEnd;
-use Efortmeyer\Polar\Tests\Extensions\PolarTestCaseExtension;
-use Efortmeyer\Polar\Tests\Mocks\SerializableMock;
-use Efortmeyer\Polar\Tests\Mocks\StringableMock;
+use Phpolar\Phpolar\Tests\Comparables\NestedXSSFix;
+use Phpolar\Phpolar\Tests\Comparables\NestedXSSFixEnd;
+use Phpolar\Phpolar\Tests\Comparables\NestedXSSHack;
+use Phpolar\Phpolar\Tests\Comparables\NestedXSSHackEnd;
+use Phpolar\Phpolar\Tests\Extensions\PhpolarTestCaseExtension;
+use Phpolar\Phpolar\Tests\Mocks\SerializableMock;
+use Phpolar\Phpolar\Tests\Mocks\StringableMock;
 
 use Serializable;
 use stdClass;
 use Stringable;
 
 /**
- * @covers \Efortmeyer\Polar\Core\Rendering\HtmlEncoder
+ * @covers \Phpolar\Phpolar\Core\Rendering\HtmlEncoder
  *
  * @testdox Serialize::htmlEncode
  */
-class HtmlEncoderTest extends PolarTestCaseExtension
+class HtmlEncoderTest extends PhpolarTestCaseExtension
 {
     /**
      * @var resource

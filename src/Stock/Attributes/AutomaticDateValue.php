@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Stock\Attributes;
+namespace Phpolar\Phpolar\Stock\Attributes;
 
 use Attribute as GlobalAttribute;
-use Efortmeyer\Polar\Core\Attributes\Attribute;
+use Phpolar\Phpolar\Core\Attributes\Attribute;
 
 use DateTimeImmutable;
-use Efortmeyer\Polar\Core\Attributes\InputTypes;
-use Efortmeyer\Polar\Core\Fields\AutomaticDateField;
+use Phpolar\Phpolar\Core\Attributes\InputTypes;
+use Phpolar\Phpolar\Core\Fields\AutomaticDateField;
 
 /**
  * Use when an automatic date value should be used.

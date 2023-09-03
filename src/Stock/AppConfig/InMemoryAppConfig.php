@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Stock\AppConfig;
+namespace Phpolar\Phpolar\Stock\AppConfig;
 
-use Efortmeyer\Polar\Api\AppConfigInterface;
-use Efortmeyer\Polar\Api\Attributes\Config\{
+use Phpolar\Phpolar\Api\AppConfigInterface;
+use Phpolar\Phpolar\Api\Attributes\Config\{
     Collection,
     Key,
 };
-use Efortmeyer\Polar\Core\Attributes\Config\{
+use Phpolar\Phpolar\Core\Attributes\Config\{
     AttributeConfig,
     ConstructorArgsNone,
     ConstructorArgsOne,
@@ -17,7 +17,7 @@ use Efortmeyer\Polar\Core\Attributes\Config\{
     ConstructorArgsPropertyValue,
     ConstructorArgsPropValWithSndArg,
 };
-use Efortmeyer\Polar\Stock\Attributes\Config\{
+use Phpolar\Phpolar\Stock\Attributes\Config\{
     AutomaticDateValueKey,
     ColumnKey,
     DateFormatKey,
@@ -26,7 +26,7 @@ use Efortmeyer\Polar\Stock\Attributes\Config\{
     MaxLengthKey,
     TypeValidationKey,
 };
-use Efortmeyer\Polar\Stock\Attributes\{
+use Phpolar\Phpolar\Stock\Attributes\{
     DefaultColumn,
     DefaultDateFormat,
     DefaultFormControl,

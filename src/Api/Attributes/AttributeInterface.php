@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Api\Attributes;
+namespace Phpolar\Phpolar\Api\Attributes;
 
 /**
  * Provides a way to configure objects using Attributes.

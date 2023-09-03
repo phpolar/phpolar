@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Stock\Attributes;
+namespace Phpolar\Phpolar\Stock\Attributes;
 
-use Efortmeyer\Polar\Core\Attributes\Attribute;
-use Efortmeyer\Polar\Api\Validation\ValidationInterface;
-use Efortmeyer\Polar\Stock\Validation\MaxLength as ValidationMaxLength;
+use Phpolar\Phpolar\Core\Attributes\Attribute;
+use Phpolar\Phpolar\Api\Validation\ValidationInterface;
+use Phpolar\Phpolar\Stock\Validation\MaxLength as ValidationMaxLength;
 
 /**
  * Use to validate that length of a field's value

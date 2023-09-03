@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Stock\Attributes;
+namespace Phpolar\Phpolar\Stock\Attributes;
 
-use Efortmeyer\Polar\Stock\Validation\Noop;
+use Phpolar\Phpolar\Stock\Validation\Noop;
 
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \Efortmeyer\Polar\Stock\Attributes\NoopValidate
+ * @covers \Phpolar\Phpolar\Stock\Attributes\NoopValidate
  *
- * @uses \Efortmeyer\Polar\Stock\Validation\Noop
+ * @uses \Phpolar\Phpolar\Stock\Validation\Noop
  * @testdox NoopValidate
  */
 class NoopValidateTest extends TestCase

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Api;
+namespace Phpolar\Phpolar\Api;
 
-use Efortmeyer\Polar\Core\{
+use Phpolar\Phpolar\Core\{
     Entry,
     Comparable,
 };

@@ -16,16 +16,16 @@
     },
     "autoload": {
         "psr-4": {
-            "Efortmeyer\\Polar\\": "src/"
+            "Phpolar\\Phpolar\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Efortmeyer\\Polar\\Tests\\DataProviders\\": "tests/__data-providers__",
-            "Efortmeyer\\Polar\\Tests\\Mocks\\": "tests/__mocks__",
-            "Efortmeyer\\Polar\\Tests\\Fakes\\": "tests/__fakes__",
-            "Efortmeyer\\Polar\\Tests\\Comparables\\": "tests/__comparables__",
-            "Efortmeyer\\Polar\\Tests\\Extensions\\": "tests/__extensions__"
+            "Phpolar\\Phpolar\\Tests\\DataProviders\\": "tests/__data-providers__",
+            "Phpolar\\Phpolar\\Tests\\Mocks\\": "tests/__mocks__",
+            "Phpolar\\Phpolar\\Tests\\Fakes\\": "tests/__fakes__",
+            "Phpolar\\Phpolar\\Tests\\Comparables\\": "tests/__comparables__",
+            "Phpolar\\Phpolar\\Tests\\Extensions\\": "tests/__extensions__"
         }
     },
     "require": {

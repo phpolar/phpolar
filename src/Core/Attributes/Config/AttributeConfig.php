@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Core\Attributes\Config;
+namespace Phpolar\Phpolar\Core\Attributes\Config;
 
 class AttributeConfig implements AttributeConfigInterface
 {

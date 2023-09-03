@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Core\Rendering;
+namespace Phpolar\Phpolar\Core\Rendering;
 
 use Closure;
 use Serializable;

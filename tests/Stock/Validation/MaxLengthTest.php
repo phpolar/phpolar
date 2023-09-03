@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Stock\Validation;
+namespace Phpolar\Phpolar\Stock\Validation;
 
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \Efortmeyer\Polar\Stock\Validation\MaxLength
+ * @covers \Phpolar\Phpolar\Stock\Validation\MaxLength
  * @testdox MaxLength
  */
 class MaxLengthTest extends TestCase
 {
     /**
      * @test
-     * @dataProvider Efortmeyer\Polar\Tests\DataProviders\ValidationMaxLengthData::valid
+     * @dataProvider Phpolar\Phpolar\Tests\DataProviders\ValidationMaxLengthData::valid
      */
     public function shouldBeValidWhenValueIsValid($validValue, $givenMaxLength)
     {
@@ -24,7 +24,7 @@ class MaxLengthTest extends TestCase
 
     /**
      * @test
-     * @dataProvider Efortmeyer\Polar\Tests\DataProviders\ValidationMaxLengthData::valid
+     * @dataProvider Phpolar\Phpolar\Tests\DataProviders\ValidationMaxLengthData::valid
      */
     public function shouldNotHaveErrorMessageWhenValueIsValid($validValue, $givenMaxLength)
     {
@@ -34,7 +34,7 @@ class MaxLengthTest extends TestCase
 
     /**
      * @test
-     * @dataProvider Efortmeyer\Polar\Tests\DataProviders\ValidationMaxLengthData::invalid
+     * @dataProvider Phpolar\Phpolar\Tests\DataProviders\ValidationMaxLengthData::invalid
      */
     public function shouldBeInvalidWhenValueIsInvalid($invalidValue, $givenMaxLength)
     {
@@ -44,7 +44,7 @@ class MaxLengthTest extends TestCase
 
     /**
      * @test
-     * @dataProvider Efortmeyer\Polar\Tests\DataProviders\ValidationMaxLengthData::invalid
+     * @dataProvider Phpolar\Phpolar\Tests\DataProviders\ValidationMaxLengthData::invalid
      */
     public function shouldHaveErrorMessageWhenValueIsInvalid($invalidValue, $givenMaxLength)
     {

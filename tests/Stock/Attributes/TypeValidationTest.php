@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Stock\Attributes;
+namespace Phpolar\Phpolar\Stock\Attributes;
 
-use Efortmeyer\Polar\Stock\Validation\ScalarTypes;
+use Phpolar\Phpolar\Stock\Validation\ScalarTypes;
 
 use PHPUnit\Framework\TestCase;
 
 use ReflectionProperty;
 
 /**
- * @covers \Efortmeyer\Polar\Stock\Attributes\TypeValidation
+ * @covers \Phpolar\Phpolar\Stock\Attributes\TypeValidation
  *
- * @uses \Efortmeyer\Polar\Stock\Validation\TypeValidation
+ * @uses \Phpolar\Phpolar\Stock\Validation\TypeValidation
  * @testdox TypeValidation
  */
 class TypeValidationTest extends TestCase

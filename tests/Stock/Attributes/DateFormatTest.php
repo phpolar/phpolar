@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Stock\Attributes;
+namespace Phpolar\Phpolar\Stock\Attributes;
 
 use DateTimeInterface;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \Efortmeyer\Polar\Stock\Attributes\DateFormat
+ * @covers \Phpolar\Phpolar\Stock\Attributes\DateFormat
  */
 class DateFormatTest extends TestCase
 {
     /**
      * @test
-     * @dataProvider Efortmeyer\Polar\Tests\DataProviders\DateFormatTestData::testCases
+     * @dataProvider Phpolar\Phpolar\Tests\DataProviders\DateFormatTestData::testCases
      */
     public function shouldReturnFormattedDate(string $format)
     {

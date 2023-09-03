@@ -2,41 +2,41 @@
 
 declare(strict_types=1);
 
-use Efortmeyer\Polar\Api\Model;
+use Phpolar\Phpolar\Api\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \Efortmeyer\Polar\Api\Model
- * @covers \Efortmeyer\Polar\Api\Attributes\Config\Collection
- * @covers \Efortmeyer\Polar\Core\Entry
- * @covers \Efortmeyer\Polar\Core\PropertyAnnotation
+ * @covers \Phpolar\Phpolar\Api\Model
+ * @covers \Phpolar\Phpolar\Api\Attributes\Config\Collection
+ * @covers \Phpolar\Phpolar\Core\Entry
+ * @covers \Phpolar\Phpolar\Core\PropertyAnnotation
  *
- * @uses \Efortmeyer\Polar\Core\Parsers\Annotation\Token
- * @uses \Efortmeyer\Polar\Core\Parsers\Annotation\Constructor
- * @uses \Efortmeyer\Polar\Core\Parsers\Annotation\TypeTag
- * @uses \Efortmeyer\Polar\Core\Parsers\Annotation\ConstructorArgsOne
- * @uses \Efortmeyer\Polar\Core\Parsers\Annotation\ConstructorArgsOneWithValue
- * @uses \Efortmeyer\Polar\Core\Parsers\Annotation\ConstructorArgsNone
- * @uses \Efortmeyer\Polar\Core\Attributes\Attribute
- * @uses \Efortmeyer\Polar\Core\Attributes\AttributeCollection
- * @uses \Efortmeyer\Polar\Core\Fields\FieldMetadata
- * @uses \Efortmeyer\Polar\Core\Fields\FieldMetadataConfig
- * @uses \Efortmeyer\Polar\Core\Fields\FieldMetadataFactory
- * @uses \Efortmeyer\Polar\Core\Attributes\Config\AttributeConfig
- * @uses \Efortmeyer\Polar\Stock\Attributes\DefaultColumn
- * @uses \Efortmeyer\Polar\Stock\Attributes\DefaultFormControl
- * @uses \Efortmeyer\Polar\Stock\Attributes\DefaultLabel
- * @uses \Efortmeyer\Polar\Stock\Attributes\DefaultMaxLength
- * @uses \Efortmeyer\Polar\Stock\Attributes\NoopValidate
- * @uses \Efortmeyer\Polar\Stock\Attributes\TypeValidation
- * @uses \Efortmeyer\Polar\Stock\Validation\Noop
- * @uses \Efortmeyer\Polar\Stock\Validation\TypeValidation
- * @uses \Efortmeyer\Polar\Stock\Validation\MaxLength
+ * @uses \Phpolar\Phpolar\Core\Parsers\Annotation\Token
+ * @uses \Phpolar\Phpolar\Core\Parsers\Annotation\Constructor
+ * @uses \Phpolar\Phpolar\Core\Parsers\Annotation\TypeTag
+ * @uses \Phpolar\Phpolar\Core\Parsers\Annotation\ConstructorArgsOne
+ * @uses \Phpolar\Phpolar\Core\Parsers\Annotation\ConstructorArgsOneWithValue
+ * @uses \Phpolar\Phpolar\Core\Parsers\Annotation\ConstructorArgsNone
+ * @uses \Phpolar\Phpolar\Core\Attributes\Attribute
+ * @uses \Phpolar\Phpolar\Core\Attributes\AttributeCollection
+ * @uses \Phpolar\Phpolar\Core\Fields\FieldMetadata
+ * @uses \Phpolar\Phpolar\Core\Fields\FieldMetadataConfig
+ * @uses \Phpolar\Phpolar\Core\Fields\FieldMetadataFactory
+ * @uses \Phpolar\Phpolar\Core\Attributes\Config\AttributeConfig
+ * @uses \Phpolar\Phpolar\Stock\Attributes\DefaultColumn
+ * @uses \Phpolar\Phpolar\Stock\Attributes\DefaultFormControl
+ * @uses \Phpolar\Phpolar\Stock\Attributes\DefaultLabel
+ * @uses \Phpolar\Phpolar\Stock\Attributes\DefaultMaxLength
+ * @uses \Phpolar\Phpolar\Stock\Attributes\NoopValidate
+ * @uses \Phpolar\Phpolar\Stock\Attributes\TypeValidation
+ * @uses \Phpolar\Phpolar\Stock\Validation\Noop
+ * @uses \Phpolar\Phpolar\Stock\Validation\TypeValidation
+ * @uses \Phpolar\Phpolar\Stock\Validation\MaxLength
  */
 class ModelTest extends TestCase
 {
     /**
-     * @var <string, Efortmeyer\Polar\Core\Attributes\Config\AttributeConfigInterface>[]
+     * @var <string, Phpolar\Phpolar\Core\Attributes\Config\AttributeConfigInterface>[]
      */
     protected static $attributesConfigMap;
 

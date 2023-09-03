@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Core\Rendering;
+namespace Phpolar\Phpolar\Core\Rendering;
 
-use Efortmeyer\Polar\Api\Rendering\TemplateContext;
+use Phpolar\Phpolar\Api\Rendering\TemplateContext;
 
 /**
  * Provides a way to bind a template context's variables
@@ -22,7 +22,7 @@ final class Template
      */
     public function render(TemplateContext $context, string $templatePath): void
     {
-         $closure = function (string $pathToFile): void {
+        $closure = function (string $pathToFile): void {
             ob_start();
             include $pathToFile;
             ob_end_flush();

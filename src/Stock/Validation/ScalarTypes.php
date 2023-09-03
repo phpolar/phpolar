@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Stock\Validation;
+namespace Phpolar\Phpolar\Stock\Validation;
 
 /**
  * Contains a set of values representing scalar types.

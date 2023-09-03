@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Api\Validation;
+namespace Phpolar\Phpolar\Api\Validation;
 
 /**
  * Provides a way to validate a field.

@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Tests\Extensions;
+namespace Phpolar\Phpolar\Tests\Extensions;
 
-use Efortmeyer\Polar\Core\Comparable;
+use Phpolar\Phpolar\Core\Comparable;
 use PHPUnit\Framework\TestCase;
 
-class PolarTestCaseExtension extends TestCase
+class PhpolarTestCaseExtension extends TestCase
 {
     protected static function getTestFileName(string $extension): string
     {

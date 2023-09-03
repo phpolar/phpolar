@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Stock\Attributes;
+namespace Phpolar\Phpolar\Stock\Attributes;
 
-use Efortmeyer\Polar\Core\Attributes\Attribute;
+use Phpolar\Phpolar\Core\Attributes\Attribute;
 
 /**
  * Configures the default form control type.

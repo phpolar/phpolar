@@ -1,6 +1,6 @@
 <?php
 
-use Efortmeyer\Polar\Api\Attributes\Config\Key;
+use Phpolar\Phpolar\Api\Attributes\Config\Key;
 
 class MyCustomAttributeConfigKey extends Key
 {

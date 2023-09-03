@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Stock\Attributes;
+namespace Phpolar\Phpolar\Stock\Attributes;
 
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \Efortmeyer\Polar\Stock\Attributes\Label
+ * @covers \Phpolar\Phpolar\Stock\Attributes\Label
  */
 class LabelTest extends TestCase
 {
     /**
      * @test
-     * @dataProvider Efortmeyer\Polar\Tests\DataProviders\LabelTestData::text
+     * @dataProvider Phpolar\Phpolar\Tests\DataProviders\LabelTestData::text
      */
     public function shouldReturnTheGivenText(string $givenText)
     {

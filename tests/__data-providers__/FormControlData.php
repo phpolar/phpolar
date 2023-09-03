@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Tests\DataProviders;
+namespace Phpolar\Phpolar\Tests\DataProviders;
 
-use Efortmeyer\Polar\Api\UIElements\Messages;
-use Efortmeyer\Polar\Core\Attributes\AttributeCollection;
-use Efortmeyer\Polar\Core\Fields\FieldMetadataConfig;
-use Efortmeyer\Polar\Core\Fields\FieldMetadataFactory;
-use Efortmeyer\Polar\Tests\Fakes\RequiredAttributes;
+use Phpolar\Phpolar\Api\UIElements\Messages;
+use Phpolar\Phpolar\Core\Attributes\AttributeCollection;
+use Phpolar\Phpolar\Core\Fields\FieldMetadataConfig;
+use Phpolar\Phpolar\Core\Fields\FieldMetadataFactory;
+use Phpolar\Phpolar\Tests\Fakes\RequiredAttributes;
 use PHPUnit\Framework\TestCase;
 
 class FormControlData extends TestCase

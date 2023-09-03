@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Tests\Mocks;
+namespace Phpolar\Phpolar\Tests\Mocks;
 
-use Efortmeyer\Polar\Api\DataStorage\CollectionStorageInterface;
-use Efortmeyer\Polar\Api\Model;
+use Phpolar\Phpolar\Api\DataStorage\CollectionStorageInterface;
+use Phpolar\Phpolar\Api\Model;
 
 class StorageStub implements CollectionStorageInterface
 {
