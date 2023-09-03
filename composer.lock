@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "40842becd1e4385f6e289b85d9073e6f",
+    "content-hash": "c7609367e1a5843dda7eaacdcef3c30d",
     "packages": [
         {
             "name": "phpolar/csrf-protection",
@@ -175,16 +175,16 @@
         },
         {
             "name": "phpolar/php-templating",
-            "version": "0.3.2",
+            "version": "0.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpolar/php-templating.git",
-                "reference": "aef3c2f30aeddb2b6dd8460b42d9ac3ea15dd36e"
+                "reference": "1c4fa1e56745cc4625f9acba06b318b3a61482c3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpolar/php-templating/zipball/aef3c2f30aeddb2b6dd8460b42d9ac3ea15dd36e",
-                "reference": "aef3c2f30aeddb2b6dd8460b42d9ac3ea15dd36e",
+                "url": "https://api.github.com/repos/phpolar/php-templating/zipball/1c4fa1e56745cc4625f9acba06b318b3a61482c3",
+                "reference": "1c4fa1e56745cc4625f9acba06b318b3a61482c3",
                 "shasum": ""
             },
             "require": {
@@ -196,7 +196,7 @@
                 "php-coveralls/php-coveralls": "^2.5",
                 "phpmd/phpmd": "^2.13",
                 "phpstan/phpstan": "^1.9",
-                "phpunit/phpunit": "^9.5",
+                "phpunit/phpunit": "^10.0",
                 "squizlabs/php_codesniffer": "^3.7"
             },
             "type": "library",
@@ -224,9 +224,9 @@
             ],
             "support": {
                 "issues": "https://github.com/phpolar/php-templating/issues",
-                "source": "https://github.com/phpolar/php-templating/tree/0.3.2"
+                "source": "https://github.com/phpolar/php-templating/tree/0.4.0"
             },
-            "time": "2023-02-13T04:27:37+00:00"
+            "time": "2023-02-15T04:31:33+00:00"
         },
         {
             "name": "phpolar/phpolar-core",
