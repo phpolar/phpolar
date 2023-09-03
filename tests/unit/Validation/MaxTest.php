@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace Phpolar\Phpolar\Validation;
 
-use Phpolar\Phpolar\ValidationTrait;
-use Phpolar\Phpolar\FieldErrorMessageTrait;
+use Phpolar\Phpolar\Model\ValidationTrait;
+use Phpolar\Phpolar\Model\FieldErrorMessageTrait;
 use Phpolar\Phpolar\Tests\DataProviders\MaxDataProvider;
 use PHPUnit\Framework\TestCase;
 
 /**
  * @covers \Phpolar\Phpolar\Validation\Max
- * @uses \Phpolar\Phpolar\ValidationTrait
- * @uses \Phpolar\Phpolar\FieldErrorMessageTrait
+ * @uses \Phpolar\Phpolar\Model\ValidationTrait
+ * @uses \Phpolar\Phpolar\Model\FieldErrorMessageTrait
  * @uses \Phpolar\Phpolar\Validation\DefaultValidationError
  * @uses \Phpolar\Phpolar\Validation\AbstractValidationError
  */

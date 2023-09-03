@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Phpolar\Phpolar\Tests\DataProviders;
 
-use Phpolar\Phpolar\AbstractModel;
-use Phpolar\Phpolar\Label;
+use Phpolar\Phpolar\Model\AbstractModel;
+use Phpolar\Phpolar\Model\Label;
 
 final class LabelDataProvider
 {
