@@ -4,6 +4,12 @@ on:
   pull_request_target:
     paths-ignore:
       - '**.php'
+      - '**.yml'
+      - '**.md'
+      - '**.svg'
+      - '**.xml'
+      - '.gitattributes'
+      - '.gitignore'
 
 jobs:
   auto-merge:
