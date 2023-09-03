@@ -27,6 +27,7 @@ use Phpolar\Phpolar\Tests\Stubs\ContainerConfigurationStub;
 use Phpolar\Phpolar\Http\ErrorHandler;
 use Phpolar\Phpolar\Http\PrimaryHandler;
 use Phpolar\Phpolar\App;
+use Phpolar\Phpolar\DependencyInjection\DiTokens;
 use Phpolar\PurePhp\Binder;
 use Phpolar\PurePhp\Dispatcher;
 use Phpolar\PurePhp\StreamContentStrategy;
@@ -59,8 +60,8 @@ final class MemoryUsageTest extends TestCase
         $config[TemplateEngine::class] = new TemplateEngine(new StreamContentStrategy(), new Binder(), new Dispatcher());
         $config[TemplatingStrategyInterface::class] = new StreamContentStrategy();
         $config[ContainerInterface::class] = new ConfigurableContainerStub($config);
-        $config[CsrfRequestCheckMiddleware::class] = static fn (ArrayAccess $config) => new CsrfRequestCheckMiddleware($config[RequestHandlerInterface::class]);
-        $config[CsrfResponseFilterMiddleware::class] = static fn (ArrayAccess $config) => new CsrfResponseFilterMiddleware($config[AbstractTokenStorage::class], $config[CsrfTokenGenerator::class], $config[ResponseFilterStrategyInterface::class]);
+        $config[DiTokens::CSRF_CHECK_MIDDLEWARE] = static fn (ArrayAccess $config) => new CsrfRequestCheckMiddleware($config[RequestHandlerInterface::class]);
+        $config[DiTokens::CSRF_RESPONSE_FILTER_MIDDLEWARE] = static fn (ArrayAccess $config) => new CsrfResponseFilterMiddleware($config[AbstractTokenStorage::class], $config[CsrfTokenGenerator::class], $config[ResponseFilterStrategyInterface::class]);
         $config[CsrfTokenGenerator::class] = new CsrfTokenGenerator();
         $config[AbstractTokenStorage::class] = new SessionTokenStorage([REQUEST_ID_KEY => ""]);
         $config[ResponseFilterStrategyInterface::class] = $this->createStub(ResponseFilterStrategyInterface::class);

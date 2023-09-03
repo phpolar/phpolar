@@ -6,12 +6,13 @@ namespace Phpolar\Phpolar;
 
 use ArrayAccess;
 use Closure;
-use Phpolar\CsrfProtection\CsrfTokenGenerator;
+use DateTimeImmutable;
+use Phpolar\CsrfProtection\CsrfToken;
 use Phpolar\CsrfProtection\Http\CsrfProtectionRequestHandler;
 use Phpolar\CsrfProtection\Http\CsrfRequestCheckMiddleware;
 use Phpolar\CsrfProtection\Http\CsrfResponseFilterMiddleware;
-use Phpolar\CsrfProtection\Http\ResponseFilterStrategyInterface;
 use Phpolar\CsrfProtection\Storage\AbstractTokenStorage;
+use Phpolar\Http\Message\ResponseFilterInterface;
 use Phpolar\HttpCodes\ResponseCode;
 use Phpolar\HttpMessageTestUtils\RequestStub;
 use Phpolar\HttpMessageTestUtils\ResponseFactoryStub;
@@ -19,6 +20,7 @@ use Phpolar\HttpMessageTestUtils\ResponseStub;
 use Phpolar\HttpMessageTestUtils\StreamFactoryStub;
 use Phpolar\Phpolar\DependencyInjection\ClosureContainerFactory;
 use Phpolar\Phpolar\DependencyInjection\ContainerManager;
+use Phpolar\Phpolar\DependencyInjection\DiTokens;
 use Phpolar\Phpolar\Routing\AbstractContentDelegate;
 use Phpolar\Phpolar\Routing\RouteRegistry;
 use Phpolar\Phpolar\Routing\RoutingMiddleware;
@@ -71,11 +73,10 @@ final class AppTest extends TestCase
         $config[StreamFactoryInterface::class] = new StreamFactoryStub("+w");
         $config[PrimaryHandler::class] = $handler;
         $config[App::ERROR_HANDLER_404] = static fn (ArrayAccess $config) => new ErrorHandler(ResponseCode::NOT_FOUND, "Not Found", $config[ContainerInterface::class]);
-        $config[CsrfRequestCheckMiddleware::class] = $csrfPreRoutingMiddleware;
-        $config[CsrfResponseFilterMiddleware::class] = $csrfPostRoutingMiddleware;
-        $config[CsrfTokenGenerator::class] = $this->createStub(CsrfTokenGenerator::class);
+        $config[DiTokens::CSRF_CHECK_MIDDLEWARE] = $csrfPreRoutingMiddleware;
+        $config[DiTokens::CSRF_RESPONSE_FILTER_MIDDLEWARE] = $csrfPostRoutingMiddleware;
         $config[AbstractTokenStorage::class] = $this->createStub(AbstractTokenStorage::class);
-        $config[ResponseFilterStrategyInterface::class] = $this->createStub(ResponseFilterStrategyInterface::class);
+        $config[ResponseFilterInterface::class] = $this->createStub(ResponseFilterInterface::class);
 
         $containerFac = static fn (ArrayAccess $container): ContainerInterface =>
         new ConfigurableContainerStub($container);
@@ -118,9 +119,9 @@ final class AppTest extends TestCase
         $config[RoutingMiddleware::class] = $routingMiddlewareSpy;
         $config[CsrfProtectionRequestHandler::class] = static fn (ArrayAccess $config) =>
             new CsrfProtectionRequestHandler(
-                $config[ResponseFactoryInterface::class],
+                new CsrfToken(new DateTimeImmutable("now")),
                 $config[AbstractTokenStorage::class],
-                "",
+                $config[ResponseFactoryInterface::class],
                 "",
             );
         $handler = static fn (ArrayAccess $config) => new PrimaryHandler($config[App::ERROR_HANDLER_404]);
@@ -150,9 +151,7 @@ final class AppTest extends TestCase
          */
         $csrfPostRoutingMiddleware = static fn (ArrayAccess $config) =>
             new class (
-                $config[AbstractTokenStorage::class],
-                $config[CsrfTokenGenerator::class],
-                $config[ResponseFilterStrategyInterface::class],
+                $config[ResponseFilterInterface::class],
             ) extends CsrfResponseFilterMiddleware {
                 public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
                 {
@@ -178,8 +177,9 @@ final class AppTest extends TestCase
         $config[RoutingMiddleware::class] = $routingMiddlewareSpy;
         $config[CsrfProtectionRequestHandler::class] = static fn (ArrayAccess $config) =>
             new CsrfProtectionRequestHandler(
-                $config[ResponseFactoryInterface::class],
+                new CsrfToken(new DateTimeImmutable("now")),
                 $config[AbstractTokenStorage::class],
+                $config[ResponseFactoryInterface::class],
                 "",
                 "",
             );
