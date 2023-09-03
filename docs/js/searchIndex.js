@@ -26,30 +26,15 @@ Search.appendIndex(
             "summary": "Configures\u0020the\u0020server\u0020for\u0020CSRF\u0020attack\u0020mitigation.",
             "url": "classes/Phpolar-Phpolar-App.html#method_useCsrfMiddleware"
         },                {
-            "fqsen": "\\Phpolar\\Phpolar\\DependencyInjection\\ClosureContainerFactory",
-            "name": "ClosureContainerFactory",
-            "summary": "Creates\u0020a\u0020container\u0020using\u0020the\u0020provided\nclosure.",
-            "url": "classes/Phpolar-Phpolar-DependencyInjection-ClosureContainerFactory.html"
+            "fqsen": "\\Phpolar\\Phpolar\\DependencyInjection\\ContainerLoader",
+            "name": "ContainerLoader",
+            "summary": "Configures\u0020a\u0020dependency\u0020injection\u0020container.",
+            "url": "classes/Phpolar-Phpolar-DependencyInjection-ContainerLoader.html"
         },                {
-            "fqsen": "\\Phpolar\\Phpolar\\DependencyInjection\\ClosureContainerFactory\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/Phpolar-Phpolar-DependencyInjection-ClosureContainerFactory.html#method___construct"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\DependencyInjection\\ClosureContainerFactory\u003A\u003AgetContainer\u0028\u0029",
-            "name": "getContainer",
-            "summary": "Retrieve\u0020the\u0020configured\u0020PSR\u002D11\u0020container.",
-            "url": "classes/Phpolar-Phpolar-DependencyInjection-ClosureContainerFactory.html#method_getContainer"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\DependencyInjection\\ContainerFactoryInterface",
-            "name": "ContainerFactoryInterface",
-            "summary": "Provides\u0020a\u0020means\u0020to\u0020configure\u0020the\u0020dependency\u0020injection\nbefore\u0020the\u0020server\u0020is\u0020initialized,\u0020afterwards,\u0020or\u0020both.",
-            "url": "classes/Phpolar-Phpolar-DependencyInjection-ContainerFactoryInterface.html"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\DependencyInjection\\ContainerFactoryInterface\u003A\u003AgetContainer\u0028\u0029",
-            "name": "getContainer",
-            "summary": "Retrieve\u0020the\u0020configured\u0020PSR\u002D11\u0020container.",
-            "url": "classes/Phpolar-Phpolar-DependencyInjection-ContainerFactoryInterface.html#method_getContainer"
+            "fqsen": "\\Phpolar\\Phpolar\\DependencyInjection\\ContainerLoader\u003A\u003Aload\u0028\u0029",
+            "name": "load",
+            "summary": "Configure\u0020the\u0020container.",
+            "url": "classes/Phpolar-Phpolar-DependencyInjection-ContainerLoader.html#method_load"
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\DependencyInjection\\DiTokens",
             "name": "DiTokens",
@@ -80,6 +65,21 @@ Search.appendIndex(
             "name": "RESPONSE_EMITTER",
             "summary": "",
             "url": "classes/Phpolar-Phpolar-DependencyInjection-DiTokens.html#constant_RESPONSE_EMITTER"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\DependencyInjection\\Globs",
+            "name": "Globs",
+            "summary": "Contains\u0020all\u0020pathname\u0020patterns\nused\u0020for\u0020dependency\u0020injection.",
+            "url": "classes/Phpolar-Phpolar-DependencyInjection-Globs.html"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\DependencyInjection\\Globs\u003A\u003AFrameworkDeps",
+            "name": "FrameworkDeps",
+            "summary": "The\u0020frameworks\u0020dependencies\u0020configuration\nis\u0020located\u0020in\u0020the\u0020source\u0020files\u0020of\u0020the\u0020framework.",
+            "url": ""
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\DependencyInjection\\Globs\u003A\u003ACustomDeps",
+            "name": "CustomDeps",
+            "summary": "The\u0020custom\u0020dependencies\u0020directory\u0020should\u0020be\nset\u0020up\u0020in\u0020the\u0020application\u0020using\u0020the\u0020framework.",
+            "url": ""
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\Http\\ErrorHandler",
             "name": "ErrorHandler",
