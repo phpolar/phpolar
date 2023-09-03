@@ -101,6 +101,21 @@ Search.appendIndex(
             "summary": "Retrieves\u0020the\u0020routing\u0020middleware.",
             "url": "classes/Phpolar-Phpolar-DependencyInjection-ContainerManager.html#method_getRoutingMiddleware"
         },                {
+            "fqsen": "\\Phpolar\\Phpolar\\DependencyInjection\\DiTokens",
+            "name": "DiTokens",
+            "summary": "Contains\u0020dependency\u0020injection\u0020tokens.",
+            "url": "classes/Phpolar-Phpolar-DependencyInjection-DiTokens.html"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\DependencyInjection\\DiTokens\u003A\u003ACSRF_CHECK_MIDDLEWARE",
+            "name": "CSRF_CHECK_MIDDLEWARE",
+            "summary": "",
+            "url": "classes/Phpolar-Phpolar-DependencyInjection-DiTokens.html#constant_CSRF_CHECK_MIDDLEWARE"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\DependencyInjection\\DiTokens\u003A\u003ACSRF_RESPONSE_FILTER_MIDDLEWARE",
+            "name": "CSRF_RESPONSE_FILTER_MIDDLEWARE",
+            "summary": "",
+            "url": "classes/Phpolar-Phpolar-DependencyInjection-DiTokens.html#constant_CSRF_RESPONSE_FILTER_MIDDLEWARE"
+        },                {
             "fqsen": "\\Phpolar\\Phpolar\\DependencyInjection\\RouteLoader",
             "name": "RouteLoader",
             "summary": "Adds\u0020the\u0020route\u0020registry\u0020to\u0020the\ndependency\u0020injection\u0020container.",
