@@ -19,7 +19,7 @@ use Phpolar\Phpolar\Routing\RoutingHandler;
 use Phpolar\Phpolar\Routing\RoutingMiddleware;
 use Phpolar\Phpolar\Http\ErrorHandler;
 use Phpolar\Phpolar\Http\PrimaryHandler;
-use Phpolar\Phpolar\WebServer;
+use Phpolar\Phpolar\App;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\StreamFactoryInterface;
@@ -28,7 +28,7 @@ return [
     /**
      * @suppress PhanUnreferencedClosure
      */
-    WebServer::ERROR_HANDLER_401 => static fn (ContainerInterface $container) => new ErrorHandler(
+    App::ERROR_HANDLER_401 => static fn (ContainerInterface $container) => new ErrorHandler(
         ResponseCode::UNAUTHORIZED,
         "Unauthorized",
         $container,
@@ -36,7 +36,7 @@ return [
     /**
      * @suppress PhanUnreferencedClosure
      */
-    WebServer::ERROR_HANDLER_404 => static fn (ContainerInterface $container) => new ErrorHandler(
+    App::ERROR_HANDLER_404 => static fn (ContainerInterface $container) => new ErrorHandler(
         ResponseCode::NOT_FOUND,
         "Not Found",
         $container,
@@ -48,13 +48,13 @@ return [
         $container->get(RouteRegistry::class),
         $container->get(ResponseFactoryInterface::class),
         $container->get(StreamFactoryInterface::class),
-        $container->get(WebServer::ERROR_HANDLER_404),
+        $container->get(App::ERROR_HANDLER_404),
         $container,
     ),
     /**
      * @suppress PhanUnreferencedClosure
      */
-    PrimaryHandler::class => static fn (ContainerInterface $container) => new PrimaryHandler($container->get(WebServer::ERROR_HANDLER_404)),
+    PrimaryHandler::class => static fn (ContainerInterface $container) => new PrimaryHandler($container->get(App::ERROR_HANDLER_404)),
     /**
      * @suppress PhanUnreferencedClosure
      */

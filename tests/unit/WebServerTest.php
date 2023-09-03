@@ -46,7 +46,7 @@ use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
 #[RunTestsInSeparateProcesses]
-#[CoversClass(WebServer::class)]
+#[CoversClass(App::class)]
 #[CoversClass(ContainerManager::class)]
 #[UsesClass(RouteRegistry::class)]
 final class WebServerTest extends TestCase
@@ -70,7 +70,7 @@ final class WebServerTest extends TestCase
         $config[ResponseFactoryInterface::class] = new ResponseFactoryStub();
         $config[StreamFactoryInterface::class] = new StreamFactoryStub();
         $config[PrimaryHandler::class] = $handler;
-        $config[WebServer::ERROR_HANDLER_404] = static fn (ArrayAccess $config) => new ErrorHandler(ResponseCode::NOT_FOUND, "Not Found", $config[ContainerInterface::class]);
+        $config[App::ERROR_HANDLER_404] = static fn (ArrayAccess $config) => new ErrorHandler(ResponseCode::NOT_FOUND, "Not Found", $config[ContainerInterface::class]);
         $config[CsrfRequestCheckMiddleware::class] = $csrfPreRoutingMiddleware;
         $config[CsrfResponseFilterMiddleware::class] = $csrfPostRoutingMiddleware;
         $config[CsrfTokenGenerator::class] = $this->createStub(CsrfTokenGenerator::class);
@@ -123,11 +123,11 @@ final class WebServerTest extends TestCase
                 "",
                 "",
             );
-        $handler = static fn (ArrayAccess $config) => new PrimaryHandler($config[WebServer::ERROR_HANDLER_404]);
+        $handler = static fn (ArrayAccess $config) => new PrimaryHandler($config[App::ERROR_HANDLER_404]);
         $containerFac = $this->getContainerFactory($config, $handler);
         // do not use the container config file
         chdir(__DIR__);
-        $server = WebServer::createApp(new ContainerManager($containerFac, $config));
+        $server = App::create(new ContainerManager($containerFac, $config));
         $server->useRoutes($routes);
         $server->receive($request);
         $this->assertSame(ResponseCode::OK, http_response_code());
@@ -183,11 +183,11 @@ final class WebServerTest extends TestCase
                 "",
                 "",
             );
-        $handler = static fn (ArrayAccess $config) => new PrimaryHandler($config[WebServer::ERROR_HANDLER_404]);
+        $handler = static fn (ArrayAccess $config) => new PrimaryHandler($config[App::ERROR_HANDLER_404]);
         $containerFac = $this->getContainerFactory($config, $handler, $csrfPreRoutingMiddleware, $csrfPostRoutingMiddleware);
         // do not use the container config file
         chdir(__DIR__);
-        $server = WebServer::createApp(new ContainerManager($containerFac, $config));
+        $server = App::create(new ContainerManager($containerFac, $config));
         $server->useCsrfMiddleware();
         $server->useRoutes($routes);
         $server->receive($request);
@@ -210,7 +210,7 @@ final class WebServerTest extends TestCase
         $config = new ContainerConfigurationStub();
         $containerFac = $this->getContainerFactory($config, $handlerStub);
         $container = $containerFac->getContainer($config);
-        $sut = WebServer::createApp(new ContainerManager($containerFac, $config));
+        $sut = App::create(new ContainerManager($containerFac, $config));
         $sut->useRoutes($givenRoutes);
         /**
          * @var RouteRegistry $configuredRoutes
@@ -229,7 +229,7 @@ final class WebServerTest extends TestCase
         $config[ResponseFactoryInterface::class] = $this->createStub(ResponseFactoryInterface::class);
         $nonConfiguredContainerFac = $this->getNonConfiguredContainer();
         chdir("tests/__fakes__/");
-        $app = WebServer::createApp(new ContainerManager($nonConfiguredContainerFac, $config));
+        $app = App::create(new ContainerManager($nonConfiguredContainerFac, $config));
         $app->receive(new RequestStub());
         $this->expectOutputString("<h1>Not Found</h1>");
     }
@@ -245,7 +245,7 @@ final class WebServerTest extends TestCase
         $handlerStub = $this->createStub(PrimaryHandler::class);
         $handlerStub->method("handle")->willReturn((new ResponseStub(404, "Not Found")));
         $container = $this->getContainerFactory($config, $handlerStub);
-        $sut = WebServer::createApp(new ContainerManager($container, $config));
+        $sut = App::create(new ContainerManager($container, $config));
         $sut->receive(new RequestStub("GET", "/non-existing-route"));
         $this->assertSame(ResponseCode::NOT_FOUND, http_response_code());
     }
@@ -259,8 +259,8 @@ final class WebServerTest extends TestCase
         $config[ResponseFactoryInterface::class] = $this->createStub(ResponseFactoryInterface::class);
         $nonConfiguredContainerFac = $this->getNonConfiguredContainer();
         chdir("tests/__fakes__/");
-        $app1 = WebServer::createApp(new ContainerManager($nonConfiguredContainerFac, $config));
-        $app2 = WebServer::createApp(new ContainerManager($nonConfiguredContainerFac, $config));
+        $app1 = App::create(new ContainerManager($nonConfiguredContainerFac, $config));
+        $app2 = App::create(new ContainerManager($nonConfiguredContainerFac, $config));
         $this->assertSame($app1, $app2);
     }
 }

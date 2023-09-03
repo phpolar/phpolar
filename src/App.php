@@ -14,14 +14,14 @@ use Psr\Http\Server\MiddlewareInterface;
 /**
  * Represents a server that handles and responds to request.
  */
-final class WebServer
+final class App
 {
     public const ERROR_HANDLER_401 = "ERROR_HANDLER_401";
     public const ERROR_HANDLER_404 = "ERROR_HANDLER_404";
 
     private static PrimaryHandler $primaryHandler;
     private static ContainerManager $containerManager;
-    private static ?WebServer $instance = null;
+    private static ?App $instance = null;
 
 
     /**
@@ -39,9 +39,9 @@ final class WebServer
      * *stateless, single-threaded, server-side application use case*.  Therefore,
      * only a single instance is created on each request.
      */
-    public static function createApp(
+    public static function create(
         ContainerManager $containerManager,
-    ): WebServer {
+    ): App {
         return self::$instance ??= new self($containerManager);
     }
 
@@ -76,7 +76,7 @@ final class WebServer
             "use_strict_mode" => true,
             "referer_check" => true,
         ]
-    ): WebServer {
+    ): App {
         session_status() !== PHP_SESSION_ACTIVE && session_start($options); // @codeCoverageIgnore
         return $this;
     }
@@ -102,7 +102,7 @@ final class WebServer
             "use_strict_mode" => true,
             "referer_check" => true,
         ]
-    ): WebServer {
+    ): App {
         $this->useSession($sessionOpts);
         $csrfPreRouting = self::$containerManager->getCsrfPreRoutingMiddleware();
         $csrfPostRouting = self::$containerManager->getCsrfPostRoutingMiddleware();
@@ -115,7 +115,7 @@ final class WebServer
      * Configures the web server with associated
      * routes and handlers.
      */
-    public function useRoutes(RouteRegistry $routes): WebServer
+    public function useRoutes(RouteRegistry $routes): App
     {
         self::$containerManager->loadRoutes($routes);
         $routingMiddleware = self::$containerManager->getRoutingMiddleware();
