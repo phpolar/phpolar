@@ -361,6 +361,11 @@ Search.appendIndex(
             "summary": "Returns\u0020the\u0020formatted\u0020label.",
             "url": "classes/Phpolar-Phpolar-Model-LabelFormatTrait.html#method_getLabel"
         },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Model\\Model",
+            "name": "Model",
+            "summary": "Marks\u0020a\u0020method\u0020argument\u0020as\u0020being\u0020a\u0020model.",
+            "url": "classes/Phpolar-Phpolar-Model-Model.html"
+        },                {
             "fqsen": "\\Phpolar\\Phpolar\\Model\\PrimaryKey",
             "name": "PrimaryKey",
             "summary": "Provides\u0020support\u0020for\u0020configuring\u0020properties\u0020as\u0020primary\u0020keys.",
@@ -410,6 +415,21 @@ Search.appendIndex(
             "name": "isValid",
             "summary": "Determines\u0020if\u0020the\u0020configured\u0020properties\u0020of\u0020an\u0020object\nare\u0020valid.",
             "url": "classes/Phpolar-Phpolar-Model-ValidationTrait.html#method_isValid"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\ModelParamResolver",
+            "name": "ModelParamResolver",
+            "summary": "Converts\u0020a\u0020an\u0020object\u0020that\u0020is\u0020marked\u0020as\u0020a\u0020model\nattribute\u0020to\u0020a\u0020argument\u002Dname\u002Dobject\u0020key\u002Dvalue\u0020pair.",
+            "url": "classes/Phpolar-Phpolar-ModelParamResolver.html"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\ModelParamResolver\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Phpolar-Phpolar-ModelParamResolver.html#method___construct"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\ModelParamResolver\u003A\u003Aresolve\u0028\u0029",
+            "name": "resolve",
+            "summary": "Return\u0020the\u0020argument\u002Dname,\u0020object\u0020key\u002Dvalue\u0020pair\nof\u0020the\u0020Model.",
+            "url": "classes/Phpolar-Phpolar-ModelParamResolver.html#method_resolve"
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\Routing\\AbstractContentDelegate",
             "name": "AbstractContentDelegate",
