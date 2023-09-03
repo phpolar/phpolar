@@ -1,3 +1,9 @@
+## 3.0.0rc1 (2023-07-18)
+
+### Refactor
+
+- **RoutableInterface**: move interface out of http namespace (#220)
+
 ## 3.0.0rc0 (2023-07-17)
 
 ### Feat
