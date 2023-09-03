@@ -22,8 +22,8 @@ class MaxLengthTest extends TestCase
     {
         $givenValue = str_repeat("a", random_int(1, 100));
         $givenMaxLength = strlen($givenValue);
-        $sut = new MaxLength($givenValue, $givenMaxLength);
-        $validator = $sut();
+        $sut = new MaxLength($givenMaxLength);
+        $validator = $sut->withValue($givenValue)->__invoke();
         $reflection = new ReflectionProperty($validator, "maxLength");
         $reflection->setAccessible(true);
         $actualValue = $reflection->getValue($validator);

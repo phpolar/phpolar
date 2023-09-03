@@ -14,13 +14,9 @@ use Efortmeyer\Polar\Stock\Validation\MaxLength as ValidationMaxLength;
  */
 class DefaultMaxLength extends Attribute
 {
-    public function __construct(private mixed $value)
+    public function __invoke(mixed $value = null): ValidationInterface
     {
-    }
-
-    public function __invoke(): ValidationInterface
-    {
-        return new ValidationMaxLength($this->value, Defaults::MAX_LENGTH);
+        return new ValidationMaxLength($value, Defaults::MAX_LENGTH);
     }
 
     public function isValidator(): bool

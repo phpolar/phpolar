@@ -110,7 +110,7 @@ class FieldMetadataTestData
         $maxLengthVal = str_repeat("a", random_int(1, 10));
         $maxLength = strlen($maxLengthVal);
 
-        $maxLengthAttribute = new MaxLength($maxLengthVal, $maxLength);
+        $maxLengthAttribute = new MaxLength($maxLength, $maxLengthVal);
         $typeValidationAttribute = new TypeValidation($text, ScalarTypes::String->value);
         $noopAttribute = new NoopValidate();
 
