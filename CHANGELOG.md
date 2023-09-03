@@ -1,3 +1,9 @@
+## 2.0.0b2 (2023-04-29)
+
+### Fix
+
+- **AbstractModel**: add null to constructor parameter type hint
+
 ## 2.0.0b1 (2023-04-29)
 
 ### Fix
