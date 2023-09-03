@@ -2,10 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Api\DataStorage;
+namespace Efortmeyer\Polar\Stock\DataStorage;
 
-use Efortmeyer\Polar\Api\Attributes\Config\Collection;
 use Efortmeyer\Polar\Api\Model;
+use Efortmeyer\Polar\Api\Attributes\Config\Collection;
+use Efortmeyer\Polar\Api\DataStorage\CollectionStorageInterface;
 
 use InvalidArgumentException;
 use RuntimeException;
@@ -46,7 +47,6 @@ final class CsvFileStorage implements CollectionStorageInterface
             if (static::$readFile !== null) {
                 fclose(static::$readFile);
             }
-
             if (static::$writeFile !== null) {
                 fclose(static::$writeFile);
             }
