@@ -61,7 +61,10 @@ class RoutingHandler implements RequestHandlerInterface
     {
         $reflectionMethod = new ReflectionMethod($resolvedRoute->delegate, "getResponseContent");
         $args = array_merge([$this->container], $resolvedRoute->routeParamMap->toArray());
+        /**
+         * @var string $responseContent
+         */
         $responseContent = $reflectionMethod->invokeArgs($resolvedRoute->delegate, $args);
-        return $this->getResponse(strval($responseContent));
+        return $this->getResponse($responseContent);
     }
 }
