@@ -12,7 +12,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 /**
  * Determines if authorization is successful
- * for a given `Routable`.
+ * for a given Routable.
  */
 final class AuthorizationChecker
 {
@@ -23,8 +23,8 @@ final class AuthorizationChecker
     }
 
     /**
-     * Returns `Routable` when authorization is successful
-     * and an `Unauthorized` HTTP response when it is not.
+     * Returns Routable when authorization is successful
+     * and an Unauthorized HTTP response when it is not.
      */
     public function check(RoutableInterface $routable, ServerRequestInterface $request): RoutableInterface | ResponseInterface
     {

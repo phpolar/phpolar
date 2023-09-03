@@ -72,7 +72,10 @@ final class App
     }
 
     /**
-     * Queue the given [PSR-15 middleware](https://www.php-fig.org/psr/psr-15/#22-psrhttpservermiddlewareinterface).
+     * Queue the given PSR-15 middleware.
+     *
+     * @see https://www.php-fig.org/psr/psr-15/#22-psrhttpservermiddlewareinterface
+     * for more information on PSR-15 middleware.
      */
     public function use(MiddlewareInterface $middleware): App
     {

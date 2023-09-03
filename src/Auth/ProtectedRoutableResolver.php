@@ -11,12 +11,12 @@ use ReflectionMethod;
 use ReflectionAttribute;
 
 /**
- * Returns either the given routable or the given fallback handler
+ * Returns either the given Routable or the given fallback handler
  * based on the boolean result of a given algorithm.
  *
- * Authentication is *opt-in*.  Therefore, the given routable
+ * Authentication is *opt-in*.  Therefore, the given Routable
  * will be returned if it is not configured with
- * an `Authorize` attribute.
+ * an Authorize attribute.
  */
 final class ProtectedRoutableResolver implements RoutableResolverInterface
 {
