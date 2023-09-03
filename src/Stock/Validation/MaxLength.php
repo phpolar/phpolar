@@ -5,8 +5,7 @@ declare(strict_types=1);
 namespace Efortmeyer\Polar\Stock\Validation;
 
 use Efortmeyer\Polar\Api\Validation\ValidationInterface;
-
-use Efortmeyer\Polar\Core\Messages;
+use Efortmeyer\Polar\Stock\Attributes\Messages;
 
 /**
  * Provides a way to validate the maximum length of a field.

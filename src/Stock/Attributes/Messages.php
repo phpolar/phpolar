@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Core;
+namespace Efortmeyer\Polar\Stock\Attributes;
 
 /**
  * Contains text for messages.

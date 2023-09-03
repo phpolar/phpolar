@@ -12,7 +12,7 @@ use Efortmeyer\Polar\Core\Attributes\Config\{
     ConstructorArgsPropertyValue,
     ConstructorArgsPropertyValueWithSecondArg,
 };
-use Efortmeyer\Polar\Stock\Attributes\Config\AttributeConfig;
+use Efortmeyer\Polar\Core\Attributes\Config\AttributeConfig;
 use Efortmeyer\Polar\Stock\Attributes\Config\ColumnKey;
 use Efortmeyer\Polar\Stock\Attributes\Config\DateFormatKey;
 use Efortmeyer\Polar\Stock\Attributes\Config\LabelKey;
@@ -24,6 +24,7 @@ use Efortmeyer\Polar\Stock\Attributes\Config\AutomaticDateValueKey;
 use Efortmeyer\Polar\Stock\Attributes\Config\InputKey;
 
 $configCollection = new Collection();
+
 
 $configCollection->add(
     new ColumnKey(),

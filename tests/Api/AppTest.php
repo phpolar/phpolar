@@ -15,9 +15,9 @@ use ReflectionClass;
  * @covers \Efortmeyer\Polar\Api\App
  *
  * @uses \Efortmeyer\Polar\Api\Attributes\Config\Collection
- * @uses \Efortmeyer\Polar\Stock\DataStorage\CsvFileStorage
  * @uses \Efortmeyer\Polar\Api\InMemoryAppConfig
- * @uses \Efortmeyer\Polar\Stock\Attributes\Config\AttributeConfig
+ * @uses \Efortmeyer\Polar\Stock\DataStorage\CsvFileStorage
+ * @uses \Efortmeyer\Polar\Core\Attributes\Config\AttributeConfig
  * @uses \Efortmeyer\Polar\Stock\Attributes\Config\InputKey
  */
 class AppTest extends TestCase

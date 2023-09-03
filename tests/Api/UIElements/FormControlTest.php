@@ -4,17 +4,18 @@ declare(strict_types=1);
 
 namespace Efortmeyer\Polar\Api\UIElements;
 
-use Efortmeyer\Polar\Core\Defaults;
+use Efortmeyer\Polar\Core\Attributes\AttributeCollection;
+use Efortmeyer\Polar\Core\Attributes\InputTypes;
+use Efortmeyer\Polar\Core\Fields\FieldMetadata;
+use Efortmeyer\Polar\Core\Fields\FieldMetadataConfig;
 use Efortmeyer\Polar\Stock\Attributes\AutomaticDateValue;
+use Efortmeyer\Polar\Stock\Attributes\DefaultColumn;
+use Efortmeyer\Polar\Stock\Attributes\DefaultDateFormat;
+use Efortmeyer\Polar\Stock\Attributes\DefaultLabel;
+use Efortmeyer\Polar\Stock\Attributes\DefaultMaxLength;
 use Efortmeyer\Polar\Stock\Attributes\Input;
-use Efortmeyer\Polar\Stock\Attributes\InputTypes;
-use Efortmeyer\Polar\Stock\AutomaticDateField;
-use Efortmeyer\Polar\Stock\DateField;
-use Efortmeyer\Polar\Stock\Field;
-use Efortmeyer\Polar\Stock\NumberField;
-use Efortmeyer\Polar\Stock\TextAreaField;
-use Efortmeyer\Polar\Stock\TextField;
 use Efortmeyer\Polar\Stock\Validation\MaxLength;
+use Efortmeyer\Polar\Tests\Fakes\RequiredAttributes;
 use Efortmeyer\Polar\Tests\Mocks\UnknownFieldType;
 use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
@@ -26,17 +27,49 @@ use RuntimeException;
  * @uses \Efortmeyer\Polar\Api\UIElements\TextFormControl
  * @uses \Efortmeyer\Polar\Api\UIElements\TextAreaFormControl
  * @uses \Efortmeyer\Polar\Api\Validation\ValidationInterface
- * @uses \Efortmeyer\Polar\Stock\Field
+ * @uses \Efortmeyer\Polar\Core\Attributes\Attribute
+ * @uses \Efortmeyer\Polar\Core\Attributes\AttributeCollection
+ * @uses \Efortmeyer\Polar\Core\Fields\FieldMetadata
+ * @uses \Efortmeyer\Polar\Core\Fields\FieldMetadataConfig
+ * @uses \Efortmeyer\Polar\Core\Fields\FieldMetadataFactory
+ * @uses \Efortmeyer\Polar\Stock\Attributes\DefaultColumn
+ * @uses \Efortmeyer\Polar\Stock\Attributes\DefaultMaxLength
+ * @uses \Efortmeyer\Polar\Stock\Attributes\DefaultLabel
+ * @uses \Efortmeyer\Polar\Stock\Attributes\DefaultDateFormat
+ * @uses \Efortmeyer\Polar\Stock\Attributes\MaxLength
+ * @uses \Efortmeyer\Polar\Stock\Validation\MaxLength
  * @uses \Efortmeyer\Polar\Stock\Attributes\AutomaticDateValue
  * @uses \Efortmeyer\Polar\Stock\Attributes\Input
  * @testdox FormControl
  */
 class FormControlTest extends TestCase
 {
+    /**
+     * @var Attribute[]
+     */
+    public $requiredAttributes;
+
+    public function setUp(): void
+    {
+        $this->requiredAttributes = [
+            new DefaultLabel(""),
+            new DefaultColumn(""),
+            new DefaultDateFormat(),
+            new DefaultMaxLength(""),
+            new Input(InputTypes::TEXT),
+        ];
+    }
+
     public static function fieldWithoutErrorsTestCases()
     {
+        $requiredAttributes = [
+            new DefaultLabel(""),
+            new DefaultColumn(""),
+            new DefaultDateFormat(),
+            new DefaultMaxLength(""),
+        ];
         return [
-            [Field::create("testProperty", "", [])],
+            [FieldMetadata::getFactory(new AttributeCollection([...$requiredAttributes, new Input(InputTypes::TEXT)]))->create("testProperty", "")],
         ];
     }
 
@@ -49,8 +82,8 @@ class FormControlTest extends TestCase
         $attributeStub->method("isValid")
             ->willReturn(false);
         $attributeStub->method("getErrorMessage")
-            ->willReturn(Defaults::ERROR_MESSAGE);
-        $field = Field::create("testProperty", "", []);
+            ->willReturn(Messages::ERROR_MESSAGE);
+        $field = FieldMetadata::getFactory(new AttributeCollection(RequiredAttributes::get()))->create("testProperty", "");
         $field->validators[] = $attributeStub;
 
         return [
@@ -58,49 +91,45 @@ class FormControlTest extends TestCase
         ];
     }
 
-    /**
-     * @test
-     */
-    public function shouldCreateTextFormControlWhenGivenTextFieldAttribute()
+    public function fieldExpectationTestCases()
     {
-        $sut = FormControl::create(TextField::create("testProperty", "", [new Input(InputTypes::TEXT)]));
-        $this->assertInstanceOf(TextFormControl::class, $sut);
+        $requiredAttributes = [
+            new DefaultLabel(""),
+            new DefaultColumn(""),
+            new DefaultDateFormat(),
+            new DefaultMaxLength(""),
+        ];
+        return [
+            [
+                TextFormControl::class,
+                FieldMetadata::getFactory(new AttributeCollection([...$requiredAttributes, new Input(InputTypes::TEXT)]))->create("testProperty", ""),
+            ],
+            [
+                TextAreaFormControl::class,
+                FieldMetadata::getFactory(new AttributeCollection([...$requiredAttributes, new Input(InputTypes::TEXTAREA)]))->create("testProperty", ""),
+            ],
+            [
+                NumberFormControl::class,
+                FieldMetadata::getFactory(new AttributeCollection([...$requiredAttributes, new Input(InputTypes::NUMBER)]))->create("testProperty", ""),
+            ],
+            [
+                DateFormControl::class,
+                FieldMetadata::getFactory(new AttributeCollection([...$requiredAttributes, new Input(InputTypes::DATE)]))->create("testProperty", null),
+            ],
+            [
+                HiddenFormControl::class,
+                FieldMetadata::getFactory(new AttributeCollection([...$requiredAttributes, new AutomaticDateValue()]))->create("testProperty", null),
+            ],
+        ];
     }
 
     /**
      * @test
+     * @dataProvider fieldExpectationTestCases
      */
-    public function shouldCreateTextAreaFormControlWhenGivenTextAreaFieldAttribute()
+    public function shouldCreateExpectedFormControlBasedOnGivenFieldMetadata(string $expectedClass, FieldMetadata $givenField)
     {
-        $sut = FormControl::create(TextAreaField::create("testProperty", "", [new Input(InputTypes::TEXTAREA)]));
-        $this->assertInstanceOf(TextAreaFormControl::class, $sut);
-    }
-
-    /**
-     * @test
-     */
-    public function shouldCreateNumberFormControlWhenGivenNumberFieldAttribute()
-    {
-        $sut = FormControl::create(NumberField::create("testProperty", "", [new Input(InputTypes::NUMBER)]));
-        $this->assertInstanceOf(NumberFormControl::class, $sut);
-    }
-
-    /**
-     * @test
-     */
-    public function shouldCreateDateFormControlWhenGivenDateFieldAttribute()
-    {
-        $sut = FormControl::create(DateField::create("testProperty", null, [new Input(InputTypes::DATE)]));
-        $this->assertInstanceOf(DateFormControl::class, $sut);
-    }
-
-    /**
-     * @test
-     */
-    public function shouldCreateHiddenFormControlWhenGivenAutomaticDateFieldAttribute()
-    {
-        $sut = FormControl::create(AutomaticDateField::create("testProperty", null, [new AutomaticDateValue()]));
-        $this->assertInstanceOf(HiddenFormControl::class, $sut);
+        $this->assertInstanceOf($expectedClass, FormControl::create($givenField));
     }
 
     /**
@@ -109,7 +138,7 @@ class FormControlTest extends TestCase
     public function shouldThrowRuntimeExceptionWhenGivenFieldThatWithUnknownType()
     {
         $this->expectException(RuntimeException::class);
-        FormControl::create(UnknownFieldType::create("propertyName", "", []));
+        FormControl::create(UnknownFieldType::create("propertyName", "", FieldMetadataConfig::create(new AttributeCollection(RequiredAttributes::get()))));
     }
 
     /**
@@ -117,7 +146,7 @@ class FormControlTest extends TestCase
      */
     public function shouldNotReturnErrorMessageWhenFieldDoesNotHaveErrors()
     {
-        $sut = FormControl::create(Field::create("testProperty", "", []));
+        $sut = FormControl::create(FieldMetadata::getFactory(new AttributeCollection(RequiredAttributes::get()))->create("testProperty", ""));
         $this->assertEmpty($sut->getErrorMesage());
     }
 
@@ -125,7 +154,7 @@ class FormControlTest extends TestCase
      * @test
      * @dataProvider fieldErrorsTestCases
      */
-    public function shouldReturnErrorMessageWhenFieldHasErrors($field)
+    public function shouldReturnErrorMessageWhenFieldHasErrors(FieldMetadata $field)
     {
         $sut = FormControl::create($field);
         $this->assertNotEmpty($sut->getErrorMesage());
@@ -135,7 +164,7 @@ class FormControlTest extends TestCase
      * @test
      * @dataProvider fieldWithoutErrorsTestCases
      */
-    public function shouldNotReturnErrorStylingWhenFieldDoesNotHaveErrors($field)
+    public function shouldNotReturnErrorStylingWhenFieldDoesNotHaveErrors(FieldMetadata $field)
     {
         $sut = FormControl::create($field);
         $this->assertEmpty($sut->getErrorStyling());
@@ -145,7 +174,7 @@ class FormControlTest extends TestCase
      * @test
      * @dataProvider fieldErrorsTestCases
      */
-    public function shouldReturnErrorStylingWhenFieldHasErrors($field)
+    public function shouldReturnErrorStylingWhenFieldHasErrors(FieldMetadata $field)
     {
         $sut = FormControl::create($field);
         $this->assertNotEmpty($sut->getErrorStyling());
@@ -155,7 +184,7 @@ class FormControlTest extends TestCase
      * @test
      * @dataProvider fieldWithoutErrorsTestCases
      */
-    public function shouldBeValidWhenFieldDoesNotHaveErrors($field)
+    public function shouldBeValidWhenFieldDoesNotHaveErrors(FieldMetadata $field)
     {
         $sut = FormControl::create($field);
         $this->assertFalse($sut->isInvalid());
@@ -165,7 +194,7 @@ class FormControlTest extends TestCase
      * @test
      * @dataProvider fieldErrorsTestCases
      */
-    public function shouldBeInvalidWhenFieldHasErrors($field)
+    public function shouldBeInvalidWhenFieldHasErrors(FieldMetadata $field)
     {
         $sut = FormControl::create($field);
         $this->assertTrue($sut->isInvalid());
@@ -173,11 +202,11 @@ class FormControlTest extends TestCase
 
     /**
      * @test
+     * @dataProvider fieldWithoutErrorsTestCases
      */
-    public function shouldGetTheLabelOfTheField()
+    public function shouldGetTheLabelOfTheField(FieldMetadata $field)
     {
         $fakeLabel = uniqid();
-        $field = Field::create("testProperty", "", []);
         $field->label = $fakeLabel;
         $sut = FormControl::create($field);
         $this->assertSame($fakeLabel, $sut->getLabel());
@@ -185,11 +214,11 @@ class FormControlTest extends TestCase
 
     /**
      * @test
+     * @dataProvider fieldWithoutErrorsTestCases
      */
-    public function shouldGetTheNameOfTheField()
+    public function shouldGetTheNameOfTheField(FieldMetadata $field)
     {
         $fakeName = uniqid();
-        $field = Field::create("testProperty", "", []);
         $field->propertyName = $fakeName;
         $sut = FormControl::create($field);
         $this->assertSame($fakeName, $sut->getName());
@@ -197,11 +226,12 @@ class FormControlTest extends TestCase
 
     /**
      * @test
+     * @dataProvider fieldWithoutErrorsTestCases
      */
-    public function shouldGetTheValueOfTheField()
+    public function shouldGetTheValueOfTheField(FieldMetadata $field)
     {
         $fakeValue = uniqid();
-        $field = Field::create("testProperty", $fakeValue, []);
+        $field->value = $fakeValue;
         $sut = FormControl::create($field);
         $this->assertSame($fakeValue, $sut->getValue());
     }

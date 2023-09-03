@@ -4,8 +4,12 @@ declare(strict_types=1);
 
 namespace Efortmeyer\Polar\Api;
 
-use Efortmeyer\Polar\Api\Attributes\Config\Collection;
+use Efortmeyer\Polar\Api\Attributes\Config\{
+    Collection,
+    Key,
+};
 use Efortmeyer\Polar\Core\Attributes\Config\{
+    AttributeConfig,
     ConstructorArgsNone,
     ConstructorArgsOne,
     ConstructorArgsPropertyName,
@@ -13,7 +17,6 @@ use Efortmeyer\Polar\Core\Attributes\Config\{
     ConstructorArgsPropertyValueWithSecondArg,
 };
 use Efortmeyer\Polar\Stock\Attributes\Config\{
-    AttributeConfig,
     AutomaticDateValueKey,
     ColumnKey,
     DateFormatKey,
@@ -32,7 +35,6 @@ use Efortmeyer\Polar\Stock\Attributes\{
 };
 
 use DateTimeInterface;
-use Efortmeyer\Polar\Api\Attributes\Config\Key;
 
 /**
  * Provides an in memory interface for configuration the application.

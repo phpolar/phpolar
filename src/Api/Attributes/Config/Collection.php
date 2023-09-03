@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Efortmeyer\Polar\Api\Attributes\Config;
 
-use Efortmeyer\Polar\Api\Attributes\Config\AttributeConfigInterface;
+use Efortmeyer\Polar\Core\Attributes\Config\AttributeConfigInterface;
 
 use Closure;
 

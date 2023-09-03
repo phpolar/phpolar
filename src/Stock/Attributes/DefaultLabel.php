@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace Efortmeyer\Polar\Stock\Attributes;
 
-use Efortmeyer\Polar\Api\Attributes\AttributeInterface;
-use Efortmeyer\Polar\Core\Defaults;
+use Efortmeyer\Polar\Core\Attributes\Attribute;
 
 /**
  * Formats a label's text using the default format.
  */
-final class DefaultLabel implements AttributeInterface
+final class DefaultLabel extends Attribute
 {
     private string $labelText;
 
@@ -23,5 +22,10 @@ final class DefaultLabel implements AttributeInterface
     {
         $fun = Defaults::LABEL_FORMATTER;
         return $fun($this->labelText);
+    }
+
+    public function isLabel(): bool
+    {
+        return true;
     }
 }

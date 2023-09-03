@@ -2,10 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Stock\Attributes\Config;
-
-use Efortmeyer\Polar\Api\Attributes\Config\AttributeConfigInterface;
-use Efortmeyer\Polar\Core\Attributes\Config\ConstructorArgs;
+namespace Efortmeyer\Polar\Core\Attributes\Config;
 
 class AttributeConfig implements AttributeConfigInterface
 {

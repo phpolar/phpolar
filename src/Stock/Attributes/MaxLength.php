@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Efortmeyer\Polar\Stock\Attributes;
 
-use Efortmeyer\Polar\Api\Attributes\AttributeInterface;
+use Efortmeyer\Polar\Core\Attributes\Attribute;
 use Efortmeyer\Polar\Api\Validation\ValidationInterface;
 use Efortmeyer\Polar\Stock\Validation\MaxLength as ValidationMaxLength;
 
 /**
  * Configures the max length of a property's value.
  */
-final class MaxLength implements AttributeInterface
+final class MaxLength extends Attribute
 {
     /**
      * The value to validate.
@@ -31,5 +31,10 @@ final class MaxLength implements AttributeInterface
     public function __invoke(): ValidationInterface
     {
         return new ValidationMaxLength($this->value, $this->maxLength);
+    }
+
+    public function isValidator(): bool
+    {
+        return true;
     }
 }

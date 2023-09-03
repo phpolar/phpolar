@@ -2,9 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Api\Attributes\Config;
-
-use Efortmeyer\Polar\Core\Attributes\Config\ConstructorArgs;
+namespace Efortmeyer\Polar\Core\Attributes\Config;
 
 /**
  * Provides a way to retrieve
