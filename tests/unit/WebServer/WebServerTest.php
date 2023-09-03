@@ -247,4 +247,18 @@ final class WebServerTest extends TestCase
         $sut->receive(new RequestStub("GET", "/non-existing-route"));
         $this->assertSame(ResponseCode::NOT_FOUND, http_response_code());
     }
+
+    #[TestDox("Shall be a singleton object")]
+    public function test6()
+    {
+        $config = new ContainerConfigurationStub();
+        $config[TemplatingStrategyInterface::class] = $this->createStub(TemplatingStrategyInterface::class);
+        $config[StreamFactoryInterface::class] = $this->createStub(StreamFactoryInterface::class);
+        $config[ResponseFactoryInterface::class] = $this->createStub(ResponseFactoryInterface::class);
+        $nonConfiguredContainerFac = $this->getNonConfiguredContainer();
+        chdir("tests/__fakes__/");
+        $app1 = WebServer::createApp(new ContainerManager($nonConfiguredContainerFac, $config));
+        $app2 = WebServer::createApp(new ContainerManager($nonConfiguredContainerFac, $config));
+        $this->assertSame($app1, $app2);
+    }
 }
