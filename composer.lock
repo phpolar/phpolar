@@ -273,16 +273,16 @@
         },
         {
             "name": "phpolar/pure-php",
-            "version": "1.0.2",
+            "version": "1.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpolar/pure-php.git",
-                "reference": "e3c251c468b31169e9543ac4aea20440cb7e1785"
+                "reference": "5ec9c8488ed82e0247c7364f92e802c0d37e5669"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpolar/pure-php/zipball/e3c251c468b31169e9543ac4aea20440cb7e1785",
-                "reference": "e3c251c468b31169e9543ac4aea20440cb7e1785",
+                "url": "https://api.github.com/repos/phpolar/pure-php/zipball/5ec9c8488ed82e0247c7364f92e802c0d37e5669",
+                "reference": "5ec9c8488ed82e0247c7364f92e802c0d37e5669",
                 "shasum": ""
             },
             "require": {
@@ -322,9 +322,9 @@
             ],
             "support": {
                 "issues": "https://github.com/phpolar/pure-php/issues",
-                "source": "https://github.com/phpolar/pure-php/tree/1.0.2"
+                "source": "https://github.com/phpolar/pure-php/tree/1.0.3"
             },
-            "time": "2023-02-27T19:16:46+00:00"
+            "time": "2023-03-01T02:25:01+00:00"
         },
         {
             "name": "phpolar/response-filter",
@@ -1513,16 +1513,16 @@
         },
         {
             "name": "pdepend/pdepend",
-            "version": "2.12.1",
+            "version": "2.13.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pdepend/pdepend.git",
-                "reference": "7a892d56ceafd804b4a2ecc85184640937ce9e84"
+                "reference": "31be7cd4f305f3f7b52af99c1cb13fc938d1cfad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pdepend/pdepend/zipball/7a892d56ceafd804b4a2ecc85184640937ce9e84",
-                "reference": "7a892d56ceafd804b4a2ecc85184640937ce9e84",
+                "url": "https://api.github.com/repos/pdepend/pdepend/zipball/31be7cd4f305f3f7b52af99c1cb13fc938d1cfad",
+                "reference": "31be7cd4f305f3f7b52af99c1cb13fc938d1cfad",
                 "shasum": ""
             },
             "require": {
@@ -1558,7 +1558,7 @@
             "description": "Official version of pdepend to be handled with Composer",
             "support": {
                 "issues": "https://github.com/pdepend/pdepend/issues",
-                "source": "https://github.com/pdepend/pdepend/tree/2.12.1"
+                "source": "https://github.com/pdepend/pdepend/tree/2.13.0"
             },
             "funding": [
                 {
@@ -1566,7 +1566,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-09-08T19:30:37+00:00"
+            "time": "2023-02-28T20:56:15+00:00"
         },
         {
             "name": "phan/phan",
