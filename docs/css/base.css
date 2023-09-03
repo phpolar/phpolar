@@ -222,138 +222,10 @@ body {
         width: 95%;
     }
 }
-.phpdocumentor-column {
-    box-sizing: border-box;
-    float: left;
-    width: 100%;
-}
-
-@media (min-width: 550px) {
-    .phpdocumentor-column {
-        margin-left: 24%;
-    }
-
-    .phpdocumentor-column:first-child {
-        margin-left: 0;
-    }
-
-    .-one.phpdocumentor-column {
-        width: 4.66666666667%;
-    }
-
-    .-two.phpdocumentor-column {
-        width: 13.3333333333%;
-    }
-
-    .-three.phpdocumentor-column {
-        width: 22%;
-    }
-
-    .-four.phpdocumentor-column {
-        width: 30.6666666667%;
-    }
-
-    .-five.phpdocumentor-column {
-        width: 39.3333333333%;
-    }
-
-    .-six.phpdocumentor-column {
-        width: 48%;
-    }
-
-    .-seven.phpdocumentor-column {
-        width: 56.6666666667%;
-    }
-
-    .-eight.phpdocumentor-column {
-        width: 65.3333333333%;
-    }
-
-    .-nine.phpdocumentor-column {
-        width: 74.0%;
-    }
-
-    .-ten.phpdocumentor-column {
-        width: 82.6666666667%;
-    }
-
-    .-eleven.phpdocumentor-column {
-        width: 91.3333333333%;
-    }
-
-    .-twelve.phpdocumentor-column {
-        margin-left: 0;
-        width: 100%;
-    }
-
-    .-one-third.phpdocumentor-column {
-        width: 30.6666666667%;
-    }
-
-    .-two-thirds.phpdocumentor-column {
-        width: 65.3333333333%;
-    }
-
-    .-one-half.phpdocumentor-column {
-        width: 48%;
-    }
-
-    /* Offsets */
-    .-offset-by-one.phpdocumentor-column {
-        margin-left: 8.66666666667%;
-    }
-
-    .-offset-by-two.phpdocumentor-column {
-        margin-left: 17.3333333333%;
-    }
-
-    .-offset-by-three.phpdocumentor-column {
-        margin-left: 26%;
-    }
-
-    .-offset-by-four.phpdocumentor-column {
-        margin-left: 34.6666666667%;
-    }
-
-    .-offset-by-five.phpdocumentor-column {
-        margin-left: 43.3333333333%;
-    }
-
-    .-offset-by-six.phpdocumentor-column {
-        margin-left: 52%;
-    }
-
-    .-offset-by-seven.phpdocumentor-column {
-        margin-left: 60.6666666667%;
-    }
-
-    .-offset-by-eight.phpdocumentor-column {
-        margin-left: 69.3333333333%;
-    }
-
-    .-offset-by-nine.phpdocumentor-column {
-        margin-left: 78.0%;
-    }
-
-    .-offset-by-ten.phpdocumentor-column {
-        margin-left: 86.6666666667%;
-    }
-
-    .-offset-by-eleven.phpdocumentor-column {
-        margin-left: 95.3333333333%;
-    }
-
-    .-offset-by-one-third.phpdocumentor-column {
-        margin-left: 34.6666666667%;
-    }
-
-    .-offset-by-two-thirds.phpdocumentor-column {
-        margin-left: 69.3333333333%;
-    }
-
-    .-offset-by-one-half.phpdocumentor-column {
-        margin-left: 52%;
-    }
+[role=grid-container] {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    column-gap: 1em;
 }
 .phpdocumentor a {
     color: var(--link-color-primary);
@@ -565,58 +437,14 @@ td.phpdocumentor-cell:last-child {
     padding-right: 0;
 }
 
-.phpdocumentor-header {
-    display: flex;
-    position: fixed;
-    left: 5rem;
-    flex-direction: row;
-    align-items: stretch;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    height: auto;
-    padding: var(--spacing-md) var(--spacing-md);
-}
-
-.phpdocumentor-header__menu-button {
-    position: absolute;
-    top: -100%;
-    left: -100%;
-}
-
-.phpdocumentor-header__menu-icon {
-    font-size: 2rem;
-    color: var(--primary-color);
-}
-
-.phpdocumentor-header__menu-button:checked ~ .phpdocumentor-topnav {
-    max-height: 250px;
-    padding-top: var(--spacing-md);
-}
-
-@media (min-width: 1000px) {
-    .phpdocumentor-header {
-        flex-direction: row;
-        padding: var(--spacing-lg) var(--spacing-lg);
-        min-height: var(--header-height);
-    }
-
-    .phpdocumentor-header__menu-icon {
-        display: none;
-    }
-}
-
-@media (min-width: 1000px) {
-    .phpdocumentor-header {
-        padding-top: 0;
-        padding-bottom: 0;
-    }
-}
-@media (min-width: 1200px) {
-    .phpdocumentor-header {
-        padding: 0;
-    }
-}
-.phpdocumentor-title {
+body > header {
+    position: sticky;
+    top: 0;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    z-index: 999;
+    background-color: white;
+}.phpdocumentor-title {
     box-sizing: border-box;
     color: var(--pico-h1-color);
     font-size: var(--text-xxl);
@@ -744,7 +572,7 @@ td.phpdocumentor-cell:last-child {
 }
 .phpdocumentor-sidebar {
     margin: 0;
-    top: 6rem;
+    top: 10rem;
         max-height: 0;
     position: fixed;
     padding-right: 2rem;

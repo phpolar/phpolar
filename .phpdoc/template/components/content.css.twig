@@ -1,14 +1,65 @@
-.phpdocumentor-content {
-    position: relative;
-    display: flex;
-    margin-left: 5rem;
-    gap: var(--spacing-md);
+article {
+  box-shadow: none !important;
 }
-.phpdocumentor-content > section:first-of-type {
+body > main > section > p,
+body > main > section > header {
+  text-align: center;
+}
+body > main > article > footer img,
+body > footer > address img,
+body > footer > header img {
+  width: 2.5rem;
+}
+body > header img,
+body > main > header img {
+  width: 3rem;
+  bottom: -0.3rem;
+  margin-right: 0.2rem;
+}
+body > header img {
+  bottom: -0.3rem;
+  position: relative;
+}
+body > header {
+  position: sticky;
+  top: 0;
+  background-color: white;
+  border-bottom: 1px var(--pico-color);
+}
+body > header {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+body > footer > header img {
+  bottom: -0.5rem;
+  margin-right: 0.2rem;
+}
+body > main > header img,
+body > footer > header img {
+  position: relative;
+}
+body > main > article > section > footer {
+  position: relative;
+  bottom: 0;
+}
+[role=grid-container] {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  column-gap: 1em;
+}
+[role=side-nav] > aside {
+   position: sticky;
+   top: 10rem;
+}
+@media (max-width: 768px) {
+  .closed-on-mobile {
+     display: none;
+  }
+  body > main > aside {
+    display: none;
+  }
+  body > main aside + section {
     width: 100%;
-    flex: 1 1 auto;
-}
-
-.phpdocumentor .phpdocumentor-content__title {
-    margin-top: 0;
+    margin-left: 0;
+  }
 }
