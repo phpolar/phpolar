@@ -35,13 +35,14 @@ trait FieldErrorMessageTrait
      *
      * @throws ValidatorWithNoErrorMessageException
      */
-    public function getFieldErrorMessage(string $fieldName): string
+    public function getFieldErrorMessage(string $fieldName, string $stringToAppend = ""): string
     {
         if ($this->checked === false) {
             $this->checked = true;
             $this->setErrorMessages();
         }
-        return $this->errorMessages[$fieldName] ?? "";
+        $hasError = isset($this->errorMessages[$fieldName]);
+        return $hasError === true ? ($this->errorMessages[$fieldName] . $stringToAppend) : "";
     }
 
     private function setErrorMessages(): void
