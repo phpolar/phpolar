@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c7609367e1a5843dda7eaacdcef3c30d",
+    "content-hash": "e7cc28d9b7211a4391971e9d8ebb189e",
     "packages": [
         {
             "name": "phpolar/csrf-protection",
@@ -174,61 +174,6 @@
             "time": "2023-02-12T12:44:28+00:00"
         },
         {
-            "name": "phpolar/php-templating",
-            "version": "0.4.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/phpolar/php-templating.git",
-                "reference": "1c4fa1e56745cc4625f9acba06b318b3a61482c3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/phpolar/php-templating/zipball/1c4fa1e56745cc4625f9acba06b318b3a61482c3",
-                "reference": "1c4fa1e56745cc4625f9acba06b318b3a61482c3",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^8.1"
-            },
-            "require-dev": {
-                "ext-mbstring": "*",
-                "phan/phan": "^5.4",
-                "php-coveralls/php-coveralls": "^2.5",
-                "phpmd/phpmd": "^2.13",
-                "phpstan/phpstan": "^1.9",
-                "phpunit/phpunit": "^10.0",
-                "squizlabs/php_codesniffer": "^3.7"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Phpolar\\PhpTemplating\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Eric Fortmeyer",
-                    "email": "e.fortmeyer01@gmail.com"
-                }
-            ],
-            "description": "Pure PHP Templates",
-            "keywords": [
-                "php",
-                "template-engine",
-                "template-language",
-                "templates"
-            ],
-            "support": {
-                "issues": "https://github.com/phpolar/php-templating/issues",
-                "source": "https://github.com/phpolar/php-templating/tree/0.4.0"
-            },
-            "time": "2023-02-15T04:31:33+00:00"
-        },
-        {
             "name": "phpolar/phpolar-core",
             "version": "0.2.4",
             "source": {
@@ -325,6 +270,61 @@
                 "source": "https://github.com/phpolar/phpolar-storage/tree/1.0.1"
             },
             "time": "2023-02-12T12:26:31+00:00"
+        },
+        {
+            "name": "phpolar/pure-php",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpolar/pure-php.git",
+                "reference": "0b8d7407478ae165841ace783871cd00406c92ad"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpolar/pure-php/zipball/0b8d7407478ae165841ace783871cd00406c92ad",
+                "reference": "0b8d7407478ae165841ace783871cd00406c92ad",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "ext-mbstring": "*",
+                "phan/phan": "^5.4",
+                "php-coveralls/php-coveralls": "^2.5",
+                "phpmd/phpmd": "^2.13",
+                "phpstan/phpstan": "^1.9",
+                "phpunit/phpunit": "^10.0",
+                "squizlabs/php_codesniffer": "^3.7"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Phpolar\\PurePhp\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Eric Fortmeyer",
+                    "email": "e.fortmeyer01@gmail.com"
+                }
+            ],
+            "description": "Pure PHP Templates",
+            "keywords": [
+                "php",
+                "template-engine",
+                "template-language",
+                "templates"
+            ],
+            "support": {
+                "issues": "https://github.com/phpolar/pure-php/issues",
+                "source": "https://github.com/phpolar/pure-php/tree/1.0.0"
+            },
+            "time": "2023-02-23T04:41:51+00:00"
         },
         {
             "name": "phpolar/storage-driver",
