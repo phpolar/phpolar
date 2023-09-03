@@ -11,11 +11,14 @@ use Phpolar\Phpolar\Tests\Stubs\RequestStub;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\TestDox;
+use PHPUnit\Framework\Attributes\TestWith;
+use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\MockObject\Stub\Stub;
 use PHPUnit\Framework\TestCase;
 
 #[CoversClass(RouteRegistry::class)]
+#[UsesClass(RouteParamMap::class)]
 final class RouteRegistryTest extends TestCase
 {
     public static function requestMethods(): Generator
@@ -61,12 +64,63 @@ final class RouteRegistryTest extends TestCase
     {
         $givenRoute = "/";
         /**
-         * @var Stub&AbstractContentDelegate $handlerSpy
+         * @var Stub&AbstractContentDelegate $handlerStub
          */
-        $handlerSpy = $this->createStub(AbstractContentDelegate::class);
+        $handlerStub = $this->createStub(AbstractContentDelegate::class);
         $sut = new RouteRegistry();
-        $sut->add($methodA, $givenRoute, $handlerSpy);
+        $sut->add($methodA, $givenRoute, $handlerStub);
         $result = $sut->match(new RequestStub($methodB, $givenRoute), $givenRoute);
+        $this->assertInstanceOf(RouteNotRegistered::class, $result);
+    }
+
+    #[TestWith(["/some/path/{id}", "/some/path/123"])]
+    #[TestWith(["/some/path/{name}", "/some/path/abcdefg"])]
+    #[TestWith(["/some/path/{id}/something", "/some/path/67a8c963-a381-462d-9530-c2e6beb27a28/something"])]
+    #[TestWith(["/{id}", "/67a8c963-a381-462d-9530-c2e6beb27a28"])]
+    #[TestDox("Shall match a route with params to the correct handler with parsed route params. \$givenRoute matched \$givenRequestPath")]
+    public function testa(string $givenRoute, string $givenRequestPath)
+    {
+        /**
+         * @var Stub&AbstractContentDelegate $handlerStub
+         */
+        $handlerStub = $this->createStub(AbstractContentDelegate::class);
+        $sut = new RouteRegistry();
+        $sut->add("GET", $givenRoute, $handlerStub);
+        $result = $sut->match(new RequestStub("GET", $givenRequestPath));
+        $this->assertNotInstanceOf(RouteNotRegistered::class, $result);
+    }
+
+    #[TestWith(["/some/non-matching-path/{id}", "/some/path/123"])]
+    #[TestWith(["/some/path/that/does/not/match/{name}", "/some/path/abcdefg"])]
+    #[TestWith(["/some/path/{id}/something-else", "/some/path/67a8c963-a381-462d-9530-c2e6beb27a28/something"])]
+    #[TestWith(["/some/path/{id}", "/some/path/67a8c963-a381-462d-9530-c2e6beb27a28/an-extra-part"])]
+    #[TestWith(["", "67a8c963-a381-462d-9530-c2e6beb27a28"])]
+    #[TestWith(["", "/67a8c963-a381-462d-9530-c2e6beb27a28"])]
+    #[TestWith(["/", "/67a8c963-a381-462d-9530-c2e6beb27a28"])]
+    #[TestDox("Shall not match a route with params when the path is not a complete match. \$givenRoute did not match \$givenRequestPath")]
+    public function testb(string $givenRoute, string $givenRequestPath)
+    {
+        /**
+         * @var Stub&AbstractContentDelegate $handlerStub
+         */
+        $handlerStub = $this->createStub(AbstractContentDelegate::class);
+        $sut = new RouteRegistry();
+        $sut->add("GET", $givenRoute, $handlerStub);
+        $result = $sut->match(new RequestStub("GET", $givenRequestPath));
+        $this->assertInstanceOf(RouteNotRegistered::class, $result);
+    }
+
+    #[TestWith(["/some/path/123"])]
+    #[TestWith(["/some/path/abcdefg"])]
+    #[TestWith(["/some/path/67a8c963-a381-462d-9530-c2e6beb27a28/something"])]
+    #[TestWith(["/some/path/67a8c963-a381-462d-9530-c2e6beb27a28/an-extra-part"])]
+    #[TestWith(["67a8c963-a381-462d-9530-c2e6beb27a28"])]
+    #[TestWith(["/67a8c963-a381-462d-9530-c2e6beb27a28"])]
+    #[TestDox("Shall not match a route with params when the route was not registered. \$givenRequestPath did not match")]
+    public function testc(string $givenRequestPath)
+    {
+        $sut = new RouteRegistry();
+        $result = $sut->match(new RequestStub("GET", $givenRequestPath));
         $this->assertInstanceOf(RouteNotRegistered::class, $result);
     }
 }

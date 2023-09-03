@@ -18,6 +18,7 @@ use Phpolar\PurePhp\StreamContentStrategy;
 use Phpolar\PurePhp\TemplateEngine;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\MockObject\Stub;
@@ -132,5 +133,38 @@ final class RoutingHandlerTest extends TestCase
         $response = $sut->handle($request);
         $this->assertSame(ResponseCode::OK, $response->getStatusCode());
         $this->assertSame($responseContent, $response->getBody()->getContents());
+    }
+
+    #[TestDox("Shall pass the resolved route params to the handler when the names match")]
+    public function testa()
+    {
+        $givenIdRouteParam = "123";
+        $responseContent = $givenIdRouteParam;
+        /**
+         * @var MockObject&StreamFactoryStub
+         */
+        $streamFactoryStub = $this->createMock(StreamFactoryStub::class);
+        $streamFactoryStub->expects($this->once())->method("createStream")->with($responseContent)->willReturn(new MemoryStreamStub($responseContent));
+        $container = $this->getContainer($streamFactoryStub);
+        $registeredRouteHandler = new class () extends AbstractContentDelegate {
+            public function getResponseContent(ContainerInterface $container, string $id = ""): string
+            {
+                return $id;
+            }
+        };
+        $routeParamMap = new RouteParamMap("/some/path/{id}", "/some/path/$givenIdRouteParam");
+        $resolvedRoute = new ResolvedRoute($registeredRouteHandler, $routeParamMap);
+        /**
+         * @var Stub&RouteRegistry $routeRegistryStub
+         */
+        $routeRegistryStub = $this->createStub(RouteRegistry::class);
+        $routeRegistryStub->method("match")->willReturn($resolvedRoute);
+        $errorHandler = new ErrorHandler(404, "Not Found", $container);
+        $streamFactory = $container->get(StreamFactoryInterface::class);
+        $responseFactory = $container->get(ResponseFactoryInterface::class);
+        $sut = new RoutingHandler($routeRegistryStub, $responseFactory, $streamFactory, $errorHandler, $container);
+        $request = (new RequestStub())->withUri(new UriStub(uniqid()));
+        $response = $sut->handle($request);
+        $this->assertSame($givenIdRouteParam, $response->getBody()->getContents());
     }
 }
