@@ -53,13 +53,16 @@ class RouteMap
     }
 
     /**
-     * Attempts to locate an object associated with a given request.
+     * Attempts to locate an object associated with a given route.
+     *
+     * The object defines an action that will be executed for
+     * HTTP requests that match the associated route.
      *
      * ### Result matrix
      *
-     * | Not Parameterized |        Parameterized      |      Not Located     |
-     * |-------------------|---------------------------|----------------------|
-     * | Target Object     | Target Object w/ metadata | `RouteNotRegistered` |
+     * 1. Not Parameterized => Target Object
+     * 1. Parameterized => Target Object w/ metadata
+     * 1. Not Located => `RouteNotRegistered`
      */
     public function match(ServerRequestInterface $request): RoutableInterface | ResolvedRoute | RouteNotRegistered
     {

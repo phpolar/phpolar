@@ -218,7 +218,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\Http\\RouteMap\u003A\u003Amatch\u0028\u0029",
             "name": "match",
-            "summary": "Attempts\u0020to\u0020locate\u0020an\u0020object\u0020associated\u0020with\u0020a\u0020given\u0020request.",
+            "summary": "Attempts\u0020to\u0020locate\u0020an\u0020object\u0020associated\u0020with\u0020a\u0020given\u0020route.",
             "url": "classes/Phpolar-Phpolar-Http-RouteMap.html#method_match"
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\Http\\RoutingHandler",
