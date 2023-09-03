@@ -27,7 +27,7 @@ final class ModelParamResolverTest extends TestCase
         $emptyParsedBody = [];
         $expectedKey = "testClass";
         $reflectedObj = new class () {
-            public function testMethod(#[Model] ModelStub $testClass)
+            public function testMethod(#[Model] ?ModelStub $testClass = null)
             {
             }
         };
@@ -51,7 +51,7 @@ final class ModelParamResolverTest extends TestCase
             "prop3" => "what",
         ];
         $reflectedObj = new class () {
-            public function testMethod(#[Model] ModelStub $testClass)
+            public function testMethod(#[Model] ?ModelStub $testClass = null)
             {
             }
         };
@@ -112,7 +112,7 @@ final class ModelParamResolverTest extends TestCase
     {
         $this->expectException(RuntimeException::class);
         $reflectedObj = new class () {
-            public function testMethod(#[Model] object $testClass)
+            public function testMethod(#[Model] ?object $testClass = null)
             {
             }
         };
