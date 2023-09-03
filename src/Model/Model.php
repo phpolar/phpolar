@@ -9,7 +9,7 @@ use Attribute;
 /**
  * Marks a method argument as being a model.
  */
-#[Attribute(Attribute::TARGET_METHOD)]
+#[Attribute(Attribute::TARGET_PARAMETER)]
 final class Model
 {
 }
