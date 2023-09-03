@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace Phpolar\Phpolar\Model;
 
+use ArrayAccess;
+use DateTimeInterface;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
+use TypeError;
 
 #[CoversClass(AbstractModel::class)]
 final class AbstractModelTest extends TestCase
@@ -64,7 +67,7 @@ final class AbstractModelTest extends TestCase
         };
         $this->assertSame([], get_object_vars($model2));
     }
-    #[TestDox("Shall hydrate the model with the provided array")]
+    #[TestDox("Shall hydrate the model with the provided object")]
     public function test1b()
     {
         $props = (object) [
@@ -80,7 +83,7 @@ final class AbstractModelTest extends TestCase
         }
     }
 
-    #[TestDox("Shall not modify properties when an empty array is passed to the constructor")]
+    #[TestDox("Shall not modify properties when an empty array is passed to the constructor when given an object")]
     public function test2b()
     {
         $emptyArr = (object) [];
@@ -92,7 +95,7 @@ final class AbstractModelTest extends TestCase
         $this->assertSame("initial value", $model->prop2);
     }
 
-    #[TestDox("Shall not add properties to the the model")]
+    #[TestDox("Shall not add properties to the the model when given an object")]
     public function test3b()
     {
         $nonExistingData = (object) [
@@ -106,7 +109,7 @@ final class AbstractModelTest extends TestCase
         $this->assertSame(["prop1" => 0, "prop2" => "initial value"], get_object_vars($model1));
     }
 
-    #[TestDox("Shall not add properties to the the model")]
+    #[TestDox("Shall not add properties to the the model when given an object")]
     public function test4b()
     {
         $nonExistingData = (object) [
@@ -116,5 +119,137 @@ final class AbstractModelTest extends TestCase
         $model2 = new class ($nonExistingData) extends AbstractModel {
         };
         $this->assertSame([], get_object_vars($model2));
+    }
+
+    #[TestDox("Shall convert given string values from source object to the declared type of the target model")]
+    public function test5()
+    {
+        $stringVals = (object) [
+            "prop1" => "1",
+            "prop2" => "1.0",
+            "prop3" => "1",
+        ];
+        $model = new class ($stringVals) extends AbstractModel {
+            public int $prop1;
+            public float $prop2;
+            public bool $prop3;
+        };
+        $this->assertSame(1, $model->prop1);
+        $this->assertSame(1.0, $model->prop2);
+        $this->assertTrue($model->prop3);
+    }
+
+    #[TestDox("Shall convert given string values from source array to the declared type of the target model")]
+    public function test6()
+    {
+        $stringVals = [
+            "prop1" => "1",
+            "prop2" => "1.0",
+            "prop3" => "1",
+            "prop4" => "my string",
+        ];
+        $model = new class ($stringVals) extends AbstractModel {
+            public int $prop1;
+            public float $prop2;
+            public bool $prop3;
+            public string $prop4;
+        };
+        $this->assertSame(1, $model->prop1);
+        $this->assertSame(1.0, $model->prop2);
+        $this->assertTrue($model->prop3);
+        $this->assertSame("my string", $model->prop4);
+    }
+
+    #[TestDox("Shall throw an exception when intersection type is declared")]
+    public function test7()
+    {
+        $this->expectException(TypeError::class);
+        $stringVals = [
+            "prop1" => "1",
+        ];
+        new class ($stringVals) extends AbstractModel {
+            public DateTimeInterface&ArrayAccess $prop1;
+        };
+    }
+
+    #[TestDox("Shall use the string value if the type is not declared")]
+    public function test8()
+    {
+        $stringVals = [
+            "prop1" => "1",
+        ];
+        $model = new class ($stringVals) extends AbstractModel {
+            public $prop1;
+        };
+        $this->assertSame("1", $model->prop1);
+    }
+
+    #[TestDox("Shall convert given string values from source array to the declared type of the target model")]
+    public function test6b()
+    {
+        $stringVals = [
+            "prop1" => "1",
+            "prop2" => "1.0",
+            "prop3" => "1",
+            "prop4" => "my string",
+        ];
+        $model = new class ($stringVals) extends AbstractModel {
+            public int $prop1;
+            public float $prop2;
+            public bool $prop3;
+            public string $prop4;
+        };
+        $this->assertSame(1, $model->prop1);
+        $this->assertSame(1.0, $model->prop2);
+        $this->assertTrue($model->prop3);
+        $this->assertSame("my string", $model->prop4);
+    }
+
+    #[TestDox("Shall throw an exception when intersection type is declared")]
+    public function test7b()
+    {
+        $this->expectException(TypeError::class);
+        $stringVals = [
+            "prop1" => "1",
+        ];
+        new class ($stringVals) extends AbstractModel {
+            public DateTimeInterface&ArrayAccess $prop1;
+        };
+    }
+
+    #[TestDox("Shall use the string value if the type is not declared")]
+    public function test8b()
+    {
+        $stringVals = [
+            "prop1" => "1",
+        ];
+        $model = new class ($stringVals) extends AbstractModel {
+            public $prop1;
+        };
+        $this->assertSame("1", $model->prop1);
+    }
+
+    #[TestDox("Shall throw a type error if the type of the target property is non-scalar")]
+    public function test10a()
+    {
+        $this->expectException(TypeError::class);
+        $stringVals = [
+            "prop1" => "1",
+        ];
+        new class ($stringVals) extends AbstractModel {
+            public array $prop1;
+        };
+    }
+
+    #[TestDox("Shall throw a type error if the type of the target property is non-scalar")]
+    public function test10b()
+    {
+        $this->expectException(TypeError::class);
+        $stringVals = (object) [
+            "prop1" => "1",
+        ];
+        new class ($stringVals) extends AbstractModel {
+            public array $prop1;
+        };
     }
 }
