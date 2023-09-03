@@ -156,11 +156,11 @@ final class MemoryUsageTest extends TestCase
                 $saved = new FakeModel();
                 $saved->myInput = "something else";
                 $storage = new class () extends AbstractStorage {
-                    function commit(): void
+                    public function commit(): void
                     {
                         // no op
                     }
-                    function load(): void
+                    public function load(): void
                     {
                         // no op
                     }
