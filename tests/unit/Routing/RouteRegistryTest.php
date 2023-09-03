@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace Phpolar\Phpolar\Routing;
 
 use Generator;
+use Phpolar\HttpMessageTestUtils\RequestStub;
 use Phpolar\Phpolar\Core\Routing\RouteNotRegistered;
 use Phpolar\Phpolar\Core\Routing\RouteParamMap;
 use Phpolar\Phpolar\Tests\Stubs\ConfigurableContainerStub;
 use Phpolar\Phpolar\Tests\Stubs\ContainerConfigurationStub;
-use Phpolar\Phpolar\Tests\Stubs\RequestStub;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\TestDox;

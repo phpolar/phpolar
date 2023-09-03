@@ -6,7 +6,6 @@ namespace Phpolar\Validation\Exception;
 
 use Phpolar\Phpolar\Tests\Stubs\MessagesStub;
 use PHPUnit\Framework\Attributes\CoversFunction;
-use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 use ReflectionObject;

@@ -6,11 +6,11 @@ namespace Phpolar\Phpolar\Routing;
 
 use Exception;
 use Phpolar\HttpCodes\ResponseCode;
+use Phpolar\HttpMessageTestUtils\MemoryStreamStub;
+use Phpolar\HttpMessageTestUtils\RequestStub;
+use Phpolar\HttpMessageTestUtils\ResponseStub;
+use Phpolar\HttpMessageTestUtils\UriStub;
 use Phpolar\Phpolar\Http\ErrorHandler;
-use Phpolar\Phpolar\Tests\Stubs\MemoryStreamStub;
-use Phpolar\Phpolar\Tests\Stubs\ResponseStub;
-use Phpolar\Phpolar\Tests\Stubs\RequestStub;
-use Phpolar\Phpolar\Tests\Stubs\UriStub;
 use Phpolar\PurePhp\Binder;
 use Phpolar\PurePhp\Dispatcher;
 use Phpolar\PurePhp\StreamContentStrategy;
