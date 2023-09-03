@@ -20,6 +20,39 @@ use PHPUnit\Framework\TestCase;
  */
 class ConstructorArgsOneTest extends TestCase
 {
+    public static function constructorArgTestCases()
+    {
+        return [
+            [
+                <<<JAVASCRIPT
+                /**
+                 * @Label(A B C D)
+                 * @Another()
+                 */
+                JAVASCRIPT,
+                "A B C D",
+            ],
+            [
+                <<<JAVASCRIPT
+                /**
+                 * @Label("A B C D")
+                 * @Another()
+                 */
+                JAVASCRIPT,
+                "A B C D",
+            ],
+            [
+                <<<JAVASCRIPT
+                /**
+                 * @Label('A B C D')
+                 * @Another()
+                 */
+                JAVASCRIPT,
+                "A B C D",
+            ]
+        ];
+    }
+
     /**
      * @test
      */
@@ -34,6 +67,20 @@ class ConstructorArgsOneTest extends TestCase
         $sut = new ConstructorArgsOne(Label::class, "Label", DefaultLabel::class, ["nothing"], "");
         $actualInstance = $sut->toToken($givenDocComment)->newInstance();
         $this->assertInstanceOf($expectedClass, $actualInstance);
+    }
+
+    /**
+     * @test
+     * @dataProvider constructorArgTestCases
+     */
+    public function shouldParseStringIntoExpectedAttributeWithExpectedConstructorArgsWhenConstructorArgsAreNotQuotedAndAttributeIsAboveAnotherAttribute(
+        string $givenDocComment,
+        string $expectedConstructorArgs
+    ) {
+        $sut = new ConstructorArgsOne(Label::class, "Label", DefaultLabel::class, ["nothing"], "");
+        $actualInstance = $sut->toToken($givenDocComment)->newInstance();
+        $actualLabelText = $actualInstance();
+        $this->assertSame($expectedConstructorArgs, $actualLabelText);
     }
 
     /**
