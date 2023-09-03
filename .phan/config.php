@@ -349,6 +349,8 @@ return [
         'vendor/phpolar/core/src',
         'vendor/phpolar/pure-php/src',
         'vendor/phpolar/storage-driver/src',
+        'vendor/phpolar/authenticator/src',
+        'vendor/phpolar/routable/src',
         'vendor/phpolar/validator/src',
     ],
 
