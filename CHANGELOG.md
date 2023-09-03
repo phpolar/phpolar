@@ -1,3 +1,10 @@
+## 3.0.0rc2 (2023-07-18)
+
+### Fix
+
+- add support for configurable unauthorized handlers (#226)
+- **RoutingHandler**: set the user property (#225)
+
 ## 3.0.0rc1 (2023-07-18)
 
 ### Refactor
