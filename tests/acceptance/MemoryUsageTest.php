@@ -16,43 +16,30 @@ use Phpolar\Phpolar\Routing\AbstractContentDelegate;
 use Phpolar\Phpolar\Routing\RouteRegistry;
 use Phpolar\Phpolar\Routing\RoutingHandler;
 use Phpolar\Phpolar\Routing\RoutingMiddleware;
-use Phpolar\Phpolar\Storage\AbstractStorage;
-use Phpolar\Phpolar\Storage\Item;
-use Phpolar\Phpolar\Storage\ItemKey;
-use Phpolar\Phpolar\Tests\Fakes\FakeModel;
-use Phpolar\Phpolar\Tests\Fakes\ModelList;
 use Phpolar\Phpolar\Tests\Stubs\ConfigurableContainerStub;
 use Phpolar\Phpolar\Tests\Stubs\ContainerConfigurationStub;
 use Phpolar\Phpolar\Tests\Stubs\RequestStub;
 use Phpolar\Phpolar\WebServer\Http\ErrorHandler;
 use Phpolar\Phpolar\Tests\Stubs\ResponseFactoryStub;
 use Phpolar\Phpolar\Tests\Stubs\StreamFactoryStub;
-use Phpolar\Phpolar\Tests\Stubs\UriStub;
 use Phpolar\Phpolar\WebServer\ContainerFactory;
+use Phpolar\Phpolar\WebServer\ContainerManager;
 use Phpolar\Phpolar\WebServer\Http\PrimaryHandler;
 use Phpolar\Phpolar\WebServer\WebServer;
 use Phpolar\PurePhp\Binder;
 use Phpolar\PurePhp\Dispatcher;
-use Phpolar\PurePhp\HtmlSafeContext;
 use Phpolar\PurePhp\StreamContentStrategy;
 use Phpolar\PurePhp\TemplateEngine;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use PHPUnit\Framework\Attributes\TestDox;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseFactoryInterface;
-use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 
 use const Phpolar\CsrfProtection\REQUEST_ID_KEY;
 use const Phpolar\Phpolar\Tests\PROJECT_MEMORY_USAGE_THRESHOLD;
-use const Phpolar\Phpolar\Tests\TEST_GET_ROUTE;
-use const Phpolar\Phpolar\Tests\TEST_POST_ROUTE;
-use const Phpolar\Phpolar\Tests\FORM_TPL_PATH;
-use const Phpolar\Phpolar\Tests\LIST_TPL_PATH;
 
 final class MemoryUsageTest extends TestCase
 {
@@ -96,7 +83,7 @@ final class MemoryUsageTest extends TestCase
         $config[RouteRegistry::class] = $routes;
         $containerFac = $this->getContainerFactory($routes);
         $totalUsed = -memory_get_usage();
-        $server = WebServer::createApp($containerFac, $config);
+        $server = WebServer::createApp(new ContainerManager($containerFac, $config));
         $server->useRoutes($routes);
         $server->receive($request);
         $totalUsed += memory_get_usage();
