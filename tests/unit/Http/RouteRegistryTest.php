@@ -21,6 +21,7 @@ use PHPUnit\Framework\MockObject\Stub\Stub;
 use PHPUnit\Framework\TestCase;
 
 #[CoversClass(RouteRegistry::class)]
+#[CoversClass(ResolvedRoute::class)]
 #[UsesClass(RouteParamMap::class)]
 final class RouteRegistryTest extends TestCase
 {

@@ -29,6 +29,7 @@ use Phpolar\Phpolar\Tests\Stubs\ConfigurableContainerStub;
 use Phpolar\Phpolar\Tests\Stubs\ContainerConfigurationStub;
 use Phpolar\Phpolar\Http\ErrorHandler;
 use Phpolar\Phpolar\Http\MiddlewareQueueRequestHandler;
+use Phpolar\Phpolar\Http\RoutingHandler;
 use Phpolar\PurePhp\Binder;
 use Phpolar\PurePhp\Dispatcher;
 use Phpolar\PurePhp\StreamContentStrategy;
@@ -51,6 +52,11 @@ use Psr\Http\Server\RequestHandlerInterface;
 #[RunTestsInSeparateProcesses]
 #[CoversClass(App::class)]
 #[UsesClass(RouteRegistry::class)]
+#[UsesClass(ContainerLoader::class)]
+#[UsesClass(ErrorHandler::class)]
+#[UsesClass(MiddlewareQueueRequestHandler::class)]
+#[UsesClass(RoutingHandler::class)]
+#[UsesClass(RoutingMiddleware::class)]
 final class AppTest extends TestCase
 {
     public const RESPONSE_CONTENT = "it worked!";
