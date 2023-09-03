@@ -2,14 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Efortmeyer\Polar\Api\UIElements;
+namespace Efortmeyer\Polar\Api;
 
 use Efortmeyer\Polar\Api\DataStorage\CollectionStorageInterface;
 use Efortmeyer\Polar\Api\Model;
 use Efortmeyer\Polar\Api\Rendering\TemplateContext;
 use Efortmeyer\Polar\Api\UIElements\Banner;
+use Efortmeyer\Polar\Api\UIElements\DateFormControl;
 use Efortmeyer\Polar\Api\UIElements\ErrorBanner;
 use Efortmeyer\Polar\Api\UIElements\FormControl;
+use Efortmeyer\Polar\Api\UIElements\HiddenFormControl;
 use Efortmeyer\Polar\Api\UIElements\SuccessBanner;
 use Efortmeyer\Polar\Api\UIElements\TextAreaFormControl;
 use Efortmeyer\Polar\Api\UIElements\TextFormControl;

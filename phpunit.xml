@@ -24,6 +24,7 @@
             <directory suffix=".php">src</directory>
         </include>
         <exclude>
+            <file>src/Stock/Attributes/AutomaticDateValue.php</file>
             <file>src/Stock/Attributes/Config/ColumnKey.php</file>
             <file>src/Stock/Attributes/Config/DateFormatKey.php</file>
             <file>src/Stock/Attributes/Config/InputKey.php</file>
@@ -32,12 +33,6 @@
             <file>src/Stock/Attributes/Config/LabelKey.php</file>
             <file>src/Stock/Attributes/Config/TypeValidationKey.php</file>
             <file>src/Stock/Attributes/Config/AutomaticDateValueKey.php</file>
-            <file>src/Stock/Attributes/None.php</file>
-            <file>src/Stock/AutomaticDateField.php</file>
-            <file>src/Stock/DateField.php</file>
-            <file>src/Stock/NumberField.php</file>
-            <file>src/Stock/TextField.php</file>
-            <file>src/Stock/TextAreaField.php</file>
             <file>src/Api/UIElements/HiddenFormControl.php</file>
             <file>src/Api/UIElements/DateFormControl.php</file>
             <file>src/Api/UIElements/NumberFormControl.php</file>
