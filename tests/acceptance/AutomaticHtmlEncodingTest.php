@@ -9,12 +9,10 @@ use Phpolar\PhpTemplating\Dispatcher;
 use Phpolar\PhpTemplating\FileRenderingStrategy;
 use Phpolar\PhpTemplating\HtmlSafeContext;
 use Phpolar\PhpTemplating\TemplateEngine;
+use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @runTestsInSeparateProcesses
- * @coversNothing
- */
 final class AutomaticHtmlEncodingTest extends TestCase
 {
     protected function getTemplateEngine()
@@ -27,10 +25,8 @@ final class AutomaticHtmlEncodingTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     * @testdox Should prevent cross-site scripting injection
-     */
+    #[Test]
+    #[TestDox("Should prevent cross-site scripting injection")]
     public function criterion1()
     {
         $templatingEngine = $this->getTemplateEngine();

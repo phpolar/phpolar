@@ -4,17 +4,15 @@ declare(strict_types=1);
 
 namespace Phpolar\Phpolar\Routing;
 
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \Phpolar\Phpolar\Routing\RouteRegistry
- */
-final class RoutingRegistryTest extends TestCase
+#[CoversClass(RouteRegistry::class)]
+final class RouteRegistryTest extends TestCase
 {
-    /**
-     * @testdox Shall retrieve the request handlers associated with a route
-     */
+    #[TestDox("Shall retrieve the request handlers associated with a route")]
     public function test1()
     {
         $givenRoute = "/";
@@ -29,9 +27,7 @@ final class RoutingRegistryTest extends TestCase
         $registeredHandler->handle();
     }
 
-    /**
-     * @testdox Shall return a RouteNotRegistered instance when a route is not associated with any handlers.
-     */
+    #[TestDox("Shall return a RouteNotRegistered instance when a route is not associated with any handlers.")]
     public function test2()
     {
         $sut = new RouteRegistry();

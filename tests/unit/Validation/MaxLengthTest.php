@@ -8,21 +8,21 @@ use Phpolar\Phpolar\Model\ValidationTrait;
 use Phpolar\Phpolar\Model\FieldErrorMessageTrait;
 use Phpolar\Phpolar\Core\Validation\DefaultErrorMessages;
 use Phpolar\Phpolar\Tests\DataProviders\MaxLengthDataProvider;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProviderExternal;
+use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \Phpolar\Phpolar\Validation\MaxLength
- * @covers \Phpolar\Phpolar\Model\ValidationTrait
- * @uses \Phpolar\Phpolar\Model\FieldErrorMessageTrait
- * @uses \Phpolar\Phpolar\Validation\DefaultValidationError
- * @uses \Phpolar\Phpolar\Validation\AbstractValidationError
- */
-class MaxLengthTest extends TestCase
+#[CoversClass(MaxLength::class)]
+#[CoversClass(ValidationTrait::class)]
+#[UsesClass(FieldErrorMessageTrait::class)]
+#[UsesClass(DefaultValidationError::class)]
+#[UsesClass(AbstractValidationError::class)]
+final class MaxLengthTest extends TestCase
 {
-    /**
-     * @test
-     * @dataProvider Phpolar\Phpolar\Tests\DataProviders\MaxLengthDataProvider::strBelowMax()
-     */
+    #[Test]
+    #[DataProviderExternal(MaxLengthDataProvider::class, "strBelowMax")]
     public function shallBeValidIfPropIsLteMaxLen(string $valBelowMax)
     {
         $sut = new class($valBelowMax)
@@ -43,10 +43,8 @@ class MaxLengthTest extends TestCase
         $this->assertEmpty($sut->getFieldErrorMessage("property"));
     }
 
-    /**
-     * @test
-     * @dataProvider Phpolar\Phpolar\Tests\DataProviders\MaxLengthDataProvider::strAboveMax()
-     */
+    #[Test]
+    #[DataProviderExternal(MaxLengthDataProvider::class, "strAboveMax")]
     public function shallBeInvalidIfPropIsGtMaxLen(string $valAboveMax)
     {
         $sut = new class($valAboveMax)
@@ -67,10 +65,8 @@ class MaxLengthTest extends TestCase
         $this->assertNotEmpty($sut->getFieldErrorMessage("property"));
     }
 
-    /**
-     * @test
-     * @dataProvider Phpolar\Phpolar\Tests\DataProviders\MaxLengthDataProvider::numberBelowMax()
-     */
+    #[Test]
+    #[DataProviderExternal(MaxLengthDataProvider::class, "numberBelowMax")]
     public function shallBeValidIfNumericPropIsLteMaxLen(int|float $valBelowMax)
     {
         $sut = new class($valBelowMax)
@@ -91,10 +87,8 @@ class MaxLengthTest extends TestCase
         $this->assertEmpty($sut->getFieldErrorMessage("property"));
     }
 
-    /**
-     * @test
-     * @dataProvider Phpolar\Phpolar\Tests\DataProviders\MaxLengthDataProvider::numberAboveMax()
-     */
+    #[Test]
+    #[DataProviderExternal(MaxLengthDataProvider::class, "numberAboveMax")]
     public function shallBeInvalidIfNumericPropIsGtMaxLen(int|float $valAboveMax)
     {
         $sut = new class($valAboveMax)

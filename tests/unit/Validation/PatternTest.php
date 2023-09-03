@@ -7,22 +7,21 @@ namespace Phpolar\Phpolar\Validation;
 use Phpolar\Phpolar\Model\ValidationTrait;
 use Phpolar\Phpolar\Model\FieldErrorMessageTrait;
 use Phpolar\Phpolar\Tests\DataProviders\PatternDataProvider;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProviderExternal;
+use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \Phpolar\Phpolar\Validation\Pattern
- * @uses \Phpolar\Phpolar\Model\ValidationTrait
- * @uses \Phpolar\Phpolar\Model\FieldErrorMessageTrait
- * @uses \Phpolar\Phpolar\Validation\DefaultValidationError
- * @uses \Phpolar\Phpolar\Validation\AbstractValidationError
- */
-class PatternTest extends TestCase
+#[CoversClass(Pattern::class)]
+#[UsesClass(ValidationTrait::class)]
+#[UsesClass(FieldErrorMessageTrait::class)]
+#[UsesClass(DefaultValidationError::class)]
+#[UsesClass(AbstractValidationError::class)]
+final class PatternTest extends TestCase
 {
-    /**
-     * @test
-     * @testdox Shall know email is valid based on given pattern
-     * @dataProvider \Phpolar\Phpolar\Tests\DataProviders\PatternDataProvider::validEmails()
-     */
+    #[Test]
+    #[DataProviderExternal(PatternDataProvider::class, "validEmails")]
     public function shallBeValidEmailBasedOnPattern(string $val)
     {
         $sut = new class($val)
@@ -43,11 +42,8 @@ class PatternTest extends TestCase
         $this->assertEmpty($sut->getFieldErrorMessage("property"));
     }
 
-    /**
-     * @test
-     * @testdox Shall know phone number is valid based on given pattern
-     * @dataProvider \Phpolar\Phpolar\Tests\DataProviders\PatternDataProvider::validPhoneNumbers()
-     */
+    #[Test]
+    #[DataProviderExternal(PatternDataProvider::class, "validPhoneNumbers")]
     public function shallBeValidPhoneNumberBasedOnPattern(string $val)
     {
         $sut = new class($val)
@@ -68,10 +64,7 @@ class PatternTest extends TestCase
         $this->assertEmpty($sut->getFieldErrorMessage("property"));
     }
 
-    /**
-     * @test
-     * @testdox Shall be invalid if pattern validation is configured but property is not set
-     */
+    #[Test]
     public function shallBeInvalidIfPropIsNotSet()
     {
         $sut = new class()
@@ -87,11 +80,8 @@ class PatternTest extends TestCase
         $this->assertNotEmpty($sut->getFieldErrorMessage("property"));
     }
 
-    /**
-     * @test
-     * @testdox Shall be invalid if property does not match configured pattern
-     * @dataProvider \Phpolar\Phpolar\Tests\DataProviders\PatternDataProvider::invalidEmails()
-     */
+    #[Test]
+    #[DataProviderExternal(PatternDataProvider::class, "invalidEmails")]
     public function shallBeInvalidIfPropDoesNotMatchPattern(mixed $val)
     {
         $sut = new class($val)

@@ -9,17 +9,14 @@ use DateTime;
 use DateTimeImmutable;
 use DateTimeInterface;
 use Phpolar\Phpolar\Core\InputTypes;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \Phpolar\Phpolar\Model\FormInputTypeDetectionTrait
- */
+#[CoversClass(FormInputTypeDetectionTrait::class)]
 final class FormInputTypeDetectionTraitTest extends TestCase
 {
-    /**
-     * @test
-     * @testdox Shall detect form input types
-     */
+    #[TestDox("Shall detect form input types")]
     public function test1()
     {
         $model = new class()

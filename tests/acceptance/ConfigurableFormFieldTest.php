@@ -9,17 +9,24 @@ use DateTime;
 use DateTimeImmutable;
 use DateTimeInterface;
 use Phpolar\Phpolar\Core\InputTypes;
+use Phpolar\Phpolar\Model\AbstractModel;
+use Phpolar\Phpolar\Model\FormControlTypes;
+use Phpolar\Phpolar\Model\FormControlTypeDetectionTrait;
+use Phpolar\Phpolar\Model\FormInputTypeDetectionTrait;
+use Phpolar\Phpolar\Model\Hidden;
+use Phpolar\Phpolar\Model\Label;
+use Phpolar\Phpolar\Tests\DataProviders\FormFieldErrorMessageDataProvider;
+use Phpolar\Phpolar\Tests\DataProviders\FormValidationDataProvider;
+use PHPUnit\Framework\Attributes\DataProviderExternal;
+use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\Attributes\TestDox;
+use PHPUnit\Framework\Attributes\TestWith;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @coversNothing
- */
 final class ConfigurableFormFieldTest extends TestCase
 {
-    /**
-     * @test
-     * @testdox Shall support configurable form labels
-     */
+    #[Test]
+    #[TestDox("Shall support configurable form labels")]
     public function criterion1()
     {
         $model = new class() extends AbstractModel
@@ -40,31 +47,25 @@ final class ConfigurableFormFieldTest extends TestCase
         $this->assertSame($model::A_LABEL, $model->getLabel("prop3"));
     }
 
-    /**
-     * @test
-     * @testdox Shall support configurable form validation
-     * @dataProvider \Phpolar\Phpolar\Tests\DataProviders\FormValidationDataProvider::getTestCases()
-     */
+    #[Test]
+    #[TestDox("Shall support configurable form validation")]
+    #[DataProviderExternal(FormValidationDataProvider::class, "getTestCases")]
     public function criterion2(bool $expected, string $validationType, AbstractModel $model)
     {
         $this->assertSame($expected, $model->isValid(), "{$validationType} valildation failed");
     }
 
-    /**
-     * @test
-     * @testdox Shall support configurable form validation alerts
-     * @dataProvider \Phpolar\Phpolar\Tests\DataProviders\FormFieldErrorMessageDataProvider::invalidPropertyTestCases()
-     */
+    #[Test]
+    #[TestDox("Shall support configurable form validation alerts")]
+    #[DataProviderExternal(FormFieldErrorMessageDataProvider::class, "invalidPropertyTestCases")]
     public function criterion3(string $expectedMessage, object $model)
     {
         $fieldName = "prop";
         $this->assertSame($expectedMessage, $model->getFieldErrorMessage($fieldName));
     }
 
-    /**
-     * @test
-     * @testdox Shall support form field type detection
-     */
+    #[Test]
+    #[TestDox("Shall support form field type detection")]
     public function criterion4()
     {
         $model = new class()
@@ -100,14 +101,12 @@ final class ConfigurableFormFieldTest extends TestCase
         $this->assertInstanceOf(FormControlTypes::Invalid::class, $model->getFormControlType("funcProp"));
     }
 
-    /**
-     * @test
-     * @testdox Shall support converting detected input types to string
-     * @testWith ["datetime-local", "dateProp"]
-     *           ["number", "numProp"]
-     *           ["checkbox", "checkboxProp"]
-     *           ["text", "strProp"]
-     */
+    #[Test]
+    #[TestWith(["datetime-local", "dateProp"])]
+    #[TestWith(["number", "numProp"])]
+    #[TestWith(["checkbox", "checkboxProp"])]
+    #[TestWith(["text", "strProp"])]
+    #[TestDox("Shall support converting detected input types to string")]
     public function criterion5(string $expected, string $propName)
     {
         $model = new class()
@@ -122,10 +121,8 @@ final class ConfigurableFormFieldTest extends TestCase
         $this->assertSame($expected, $model->getInputType($propName)->asString());
     }
 
-    /**
-     * @test
-     * @testdox Shall support hidden form field configuration
-     */
+    #[Test]
+    #[TestDox("Shall support hidden form field configuration")]
     public function criterion6()
     {
         $model = new class()

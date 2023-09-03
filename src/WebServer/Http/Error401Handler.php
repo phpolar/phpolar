@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Phpolar\Phpolar\Http;
+namespace Phpolar\Phpolar\WebServer\Http;
 
 use Phpolar\HttpCodes\ResponseCode;
 use Phpolar\PhpTemplating\TemplateEngine;

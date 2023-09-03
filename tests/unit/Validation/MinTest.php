@@ -7,21 +7,21 @@ namespace Phpolar\Phpolar\Validation;
 use Phpolar\Phpolar\Model\ValidationTrait;
 use Phpolar\Phpolar\Model\FieldErrorMessageTrait;
 use Phpolar\Phpolar\Tests\DataProviders\MinDataProvider;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProviderExternal;
+use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \Phpolar\Phpolar\Validation\Min
- * @uses \Phpolar\Phpolar\Model\ValidationTrait
- * @uses \Phpolar\Phpolar\Model\FieldErrorMessageTrait
- * @uses \Phpolar\Phpolar\Validation\DefaultValidationError
- * @uses \Phpolar\Phpolar\Validation\AbstractValidationError
- */
+#[CoversClass(Min::class)]
+#[UsesClass(ValidationTrait::class)]
+#[UsesClass(FieldErrorMessageTrait::class)]
+#[UsesClass(DefaultValidationError::class)]
+#[UsesClass(AbstractValidationError::class)]
 class MinTest extends TestCase
 {
-    /**
-     * @test
-     * @dataProvider Phpolar\Phpolar\Tests\DataProviders\MinDataProvider::numberAboveMin
-     */
+    #[Test]
+    #[DataProviderExternal(MinDataProvider::class, "numberAboveMin")]
     public function shallBeValidIfNumericPropIsLteMax(int|float $valAboveMin)
     {
         $sut = new class($valAboveMin)
@@ -42,10 +42,8 @@ class MinTest extends TestCase
         $this->assertEmpty($sut->getFieldErrorMessage("property"));
     }
 
-    /**
-     * @test
-     * @dataProvider Phpolar\Phpolar\Tests\DataProviders\MinDataProvider::numberBelowMin
-     */
+    #[Test]
+    #[DataProviderExternal(MinDataProvider::class, "numberBelowMin")]
     public function shallBeInvalidIfNumericPropIsGtMax(int|float $valBelowMin)
     {
         $sut = new class($valBelowMin)

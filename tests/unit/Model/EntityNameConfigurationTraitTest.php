@@ -6,20 +6,18 @@ namespace Phpolar\Phpolar\Model;
 
 use Phpolar\Phpolar\Tests\Stubs\EntityNameConfigured;
 use Phpolar\Phpolar\Tests\Stubs\EntityNameNotConfigured;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 
-use const Phpolar\Phpolar\Tests\Stubs\ENTITY_NAME_TEST_CASE;
+use const Phpolar\Phpolar\Tests\ENTITY_NAME_TEST_CASE;
 
-/**
- * @covers \Phpolar\Phpolar\Model\EntityNameConfigurationTrait
- * @covers \Phpolar\Phpolar\Model\EntityName
- */
+#[CoversClass(EntityName::class)]
+#[CoversClass(EntityNameConfigurationTrait::class)]
 final class EntityNameConfigurationTraitTest extends TestCase
 {
-    /**
-     * @testdox Shall return the configured entity name
-     */
+    #[TestDox("Shall return the configured entity name")]
     public function test1()
     {
         $entity = new EntityNameConfigured();
@@ -27,9 +25,7 @@ final class EntityNameConfigurationTraitTest extends TestCase
         $this->assertSame(ENTITY_NAME_TEST_CASE, $actual);
     }
 
-    /**
-     * @testdox Shall return the configured entity name
-     */
+    #[TestDox("Shall return the configured entity name")]
     public function test2()
     {
         $entity = new EntityNameNotConfigured();

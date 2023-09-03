@@ -6,7 +6,7 @@ namespace Phpolar\Phpolar\Tests\DataProviders;
 
 final class RequiredDataProvider
 {
-    public function nonEmptyVals(): mixed
+    public static function nonEmptyVals(): mixed
     {
         return [
             [random_int(0, PHP_INT_MAX)],
@@ -16,7 +16,7 @@ final class RequiredDataProvider
         ];
     }
 
-    public function emptyVals(): mixed
+    public static function emptyVals(): mixed
     {
         return [
             [null],

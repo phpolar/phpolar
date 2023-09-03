@@ -14,7 +14,7 @@ use Phpolar\Phpolar\Validation\Required;
 
 final class FormValidationDataProvider
 {
-    public function getTestCases()
+    public static function getTestCases()
     {
         return [
             [

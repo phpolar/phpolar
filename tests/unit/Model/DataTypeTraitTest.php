@@ -10,16 +10,14 @@ use Stringable;
 use Phpolar\StorageDriver\DataTypeUnknown;
 use Phpolar\StorageDriver\StorageDriverInterface;
 use Phpolar\StorageDriver\TypeName;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \Phpolar\Phpolar\Model\DataTypeDetectionTrait
- */
+#[CoversClass(DataTypeDetectionTrait::class)]
 final class DataTypeTraitTest extends TestCase
 {
-    /**
-     * @testdox Shall generate column parameter string from declared property type
-     */
+    #[TestDox("Shall generate column parameter string from declared property type")]
     public function test1()
     {
         $model = new class()
@@ -47,9 +45,7 @@ final class DataTypeTraitTest extends TestCase
         $this->assertSame($expectedColumnDataTypeString, (string) $actual);
     }
 
-    /**
-     * @testdox Shall return unknown data type when type is unknown
-     */
+    #[TestDox("Shall return unknown data type when type is unknown")]
     public function test2()
     {
         $model = new class()
@@ -73,9 +69,7 @@ final class DataTypeTraitTest extends TestCase
         $this->assertInstanceOf(DataTypeUnknown::class, $actual);
     }
 
-    /**
-     * @testdox Shall return expected data type when property is initialized and type is undeclared
-     */
+    #[TestDox("Shall return expected data type when property is initialized and type is undeclared")]
     public function test3()
     {
         $varCharStub = new class() implements StorageDriverInterface
@@ -124,9 +118,7 @@ final class DataTypeTraitTest extends TestCase
         }
     }
 
-    /**
-     * @testdox Shall return unknown data type when property is an non-DateTime object
-     */
+    #[TestDox("Shall return unknown data type when property is an non-DateTime object")]
     public function test5()
     {
         $model = new class((object) [])
@@ -153,9 +145,7 @@ final class DataTypeTraitTest extends TestCase
         $this->assertInstanceOf(DataTypeUnknown::class, $actual);
     }
 
-    /**
-     * @testdox Shall return unknown data type when property is an array, callable, or closure
-     */
+    #[TestDox("Shall return unknown data type when property is an array, callable, or closure")]
     public function test6()
     {
         $testCases = [

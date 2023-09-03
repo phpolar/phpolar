@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Phpolar\Phpolar\Http;
+namespace Phpolar\Phpolar\WebServer\Http;
 
 use Closure;
 use Phpolar\Phpolar\Tests\Stubs\RequestStub;
@@ -13,19 +13,16 @@ use Phpolar\PhpTemplating\Dispatcher;
 use Phpolar\PhpTemplating\FileNotFound;
 use Phpolar\PhpTemplating\TemplateEngine;
 use Phpolar\PhpTemplating\TemplatingStrategyInterface;
-use PHPUnit\Framework\MockObject\Stub;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \Phpolar\Phpolar\Http\Error401Handler
- */
+#[CoversClass(Error401Handler::class)]
 final class Error401HandlerTest extends TestCase
 {
     public const FAKE_TEMPLATE = "FAKE TEMPLATE";
 
-    /**
-     * @tesdox Shall return default error message if the error template file does not exist.
-     */
+    #[TestDox("Shall return default error message if the error template file does not exist")]
     public function test1a()
     {
         $responseFactory = new ResponseFactoryStub();
@@ -78,9 +75,7 @@ final class Error401HandlerTest extends TestCase
     //     $this->assertSame(Error401Handler::DEFAULT_ERROR_MSG, $sut->handle(new RequestStub())->getBody()->getContents());
     // }
 
-    /**
-     * @testdox Shall return the default error message if the error template file exists.
-     */
+    #[TestDox("Shall return the default error message if the error template file exists.")]
     public function test2()
     {
         $responseFactory = new ResponseFactoryStub();

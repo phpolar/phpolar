@@ -8,18 +8,15 @@ use Closure;
 use DateTime;
 use DateTimeImmutable;
 use DateTimeInterface;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \Phpolar\Phpolar\Model\FormControlTypeDetectionTrait
- */
+#[CoversClass(FormControlTypeDetectionTrait::class)]
 final class FormControlTypeDetectionTraitTest extends TestCase
 {
-    /**
-     * @test
-     * @testdox Shall detect form control types
-     */
-    public function shallDetectFormControlType()
+    #[TestDox("Shall detect form control types")]
+    public function test1()
     {
         $model = new class()
         {
