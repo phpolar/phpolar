@@ -69,16 +69,16 @@ class Person extends Model
 
     /**
      * @var string
-     * @Column(Residential Address)
-     * @Label(Residential Address)
+     * @Column("Residential Address")
+     * @Label("Residential Address")
      * @MaxLength(200)
      */
     public $address1;
 
     /**
      * @var string
-     * @Column(Business Address)
-     * @Label(Business Address)
+     * @Column("Business Address")
+     * @Label("Business Address")
      * @MaxLength(200)
      */
     public $address2;
@@ -90,22 +90,16 @@ class Person extends Model
     public $dateOfBirth;
 
     /**
-     * @var DateTimeImmutabl
-     * @DateForma(Y-m-d h:i:s a)
+     * @var DateTimeImmutable
+     * @DateFormat("Y-m-d h:i:s a")
      */
     public $enteredOn;
 
     /**
-     * @var DateTimeImmutabl
-     * @DateForma(Y-m-d h:i:s a)
+     * @var DateTimeImmutable
+     * @DateFormat("Y-m-d h:i:s a")
      */
     public $modifiedOn;
-
-    /**
-     * @var Serializable
-     * @TypeValidation(Serializable)
-     */
-    public $metadata;
 }
 ```
 
