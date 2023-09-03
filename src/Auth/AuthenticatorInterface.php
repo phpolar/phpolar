@@ -11,8 +11,21 @@ namespace Phpolar\Phpolar\Auth;
 interface AuthenticatorInterface
 {
     /**
-     * Returns user information from
+     * Returns user credentials from
      * the authenticated session.
      */
     public function getCredentials(): ?object;
+
+    /**
+     * Returns user information from
+     * the authenticated session.
+     * @return array<string,string>|null
+     */
+    public function getUser(): ?array;
+
+    /**
+     * Determines if the session is
+     * authenticated.
+     */
+    public function isAuthenticated(): bool;
 }

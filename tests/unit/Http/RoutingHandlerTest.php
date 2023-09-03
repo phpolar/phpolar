@@ -429,13 +429,12 @@ final class RoutingHandlerTest extends TestCase
          * @var MockObject&AuthenticatorInterface
          */
         $authenticatorStub = $this->createStub(AuthenticatorInterface::class);
-        $authenticatorStub->method("getCredentials")->willReturn((object) [
-            "user" => (object) [
-                "name" => $fakeUserName,
-                "nickname" => "FAKE_NICKNAME",
-                "email" => "fake@fake.fake",
-                "avatarUrl" => "https://fake.fake/fake",
-            ],
+        $authenticatorStub->method("isAuthenticated")->willReturn(true);
+        $authenticatorStub->method("getUser")->willReturn([
+            "name" => $fakeUserName,
+            "nickname" => "FAKE_NICKNAME",
+            "email" => "fake@fake.fake",
+            "avatarUrl" => "https://fake.fake/fake",
         ]);
         $protectedRoutableResolver = new ProtectedRoutableResolver($authenticatorStub);
         /**
@@ -477,7 +476,7 @@ final class RoutingHandlerTest extends TestCase
          * @var MockObject&AuthenticatorInterface
          */
         $authenticatorStub = $this->createStub(AuthenticatorInterface::class);
-        $authenticatorStub->method("getCredentials")->willReturn(null);
+        $authenticatorStub->method("isAuthenticated")->willReturn(false);
         $protectedRoutableResolver = new ProtectedRoutableResolver($authenticatorStub);
         /**
          * @var Stub&RouteRegistry $routeRegistryStub
