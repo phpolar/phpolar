@@ -18,8 +18,6 @@ final class WebServer
 
     public const ERROR_HANDLER_401 = "ERROR_HANDLER_401";
 
-    public const ERROR_HANDLER_404 = "ERROR_HANDLER_404";
-
     private MiddlewareProcessingQueue $middlewareQueue;
 
     /**

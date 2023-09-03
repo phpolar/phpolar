@@ -26,20 +26,15 @@ use Psr\Container\ContainerInterface;
 return [
     Binder::class => new Binder(),
     Dispatcher::class => new Dispatcher(),
-    WebServer::ERROR_HANDLER_401 => static fn (ContainerInterface $container) => new ErrorHandler(
+    WebServer::ERROR_HANDLER_401 => static fn (ArrayAccess $config) => new ErrorHandler(
         ResponseCode::UNAUTHORIZED,
         "Unauthorized",
-        $container,
+        $config[ContainerInterface::class],
     ),
-    WebServer::ERROR_HANDLER_404 => static fn (ContainerInterface $container) => new ErrorHandler(
-        ResponseCode::NOT_FOUND,
-        "Not Found",
-        $container,
-    ),
-    MiddlewareProcessingQueue::class => static fn (ContainerInterface $container) => new MiddlewareProcessingQueue($container),
-    TemplateEngine::class => static fn (ContainerInterface $container) =>  new TemplateEngine(
-        $container->get(TemplatingStrategyInterface::class),
-        $container->get(Binder::class),
-        $container->get(Dispatcher::class),
+    MiddlewareProcessingQueue::class => static fn (ArrayAccess $config) => new MiddlewareProcessingQueue($config[ContainerInterface::class]),
+    TemplateEngine::class => static fn (ArrayAccess $config) =>  new TemplateEngine(
+        $config[TemplatingStrategyInterface::class],
+        $config[Binder::class],
+        $config[Dispatcher::class],
     ),
 ];

@@ -58,6 +58,7 @@ final class WebServerTest extends TestCase
         $streamFactory = new StreamFactoryStub();
         $config[TemplatingStrategyInterface::class] = new StreamContentStrategy();
         $config[Binder::class] = new Binder();
+        $config[ContainerInterface::class] = new ConfigurableContainerStub($config);
         $config[Dispatcher::class] = new Dispatcher();
         $config[WebServer::PRIMARY_REQUEST_HANDLER] = $handler;
         $config[ResponseFactoryInterface::class] = $responseFactory;
@@ -66,7 +67,7 @@ final class WebServerTest extends TestCase
         $config[CsrfPostRoutingMiddlewareFactory::class] = $csrfPostRoutingMiddlewareFactory ?? new CsrfPostRoutingMiddlewareFactory($responseFactory, $streamFactory);
 
         $containerFac = static fn (ArrayAccess $container): ContainerInterface =>
-            new ConfigurableContainerStub($container);
+        new ConfigurableContainerStub($container);
 
         return new class ($containerFac) extends AbstractContainerFactory {
         };
@@ -74,7 +75,11 @@ final class WebServerTest extends TestCase
 
     private function getNonConfiguredContainer(): AbstractContainerFactory
     {
-        $containerFac = static fn (ArrayAccess $c): ContainerInterface => new ConfigurableContainerStub($c);
+        $containerFac = static function (ArrayAccess $config): ContainerInterface {
+            $container = new ConfigurableContainerStub($config);
+            $config[ContainerInterface::class] = $container;
+            return $container;
+        };
         return new class ($containerFac) extends AbstractContainerFactory {
         };
     }

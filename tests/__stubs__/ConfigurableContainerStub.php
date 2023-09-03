@@ -25,6 +25,6 @@ final class ConfigurableContainerStub implements ContainerInterface
     public function get(string $id)
     {
         $configured = $this->config[$id];
-        return $configured instanceof Closure ? $configured($this) : $configured;
+        return $configured instanceof Closure ? $configured($this->config) : $configured;
     }
 }
