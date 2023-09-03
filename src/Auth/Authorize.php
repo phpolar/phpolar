@@ -6,7 +6,7 @@ namespace Phpolar\Phpolar\Auth;
 
 use Attribute;
 use Phpolar\Routable\RoutableInterface;
-use Phpolar\Authenticator\AuthenticatorInterface;
+use PhpContrib\Authenticator\AuthenticatorInterface;
 
 /**
  * Use to indicate that a route should

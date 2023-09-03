@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1d4bf0ce0fa12aca21201897afdfc6c4",
+    "content-hash": "101187f324e8274e01b039e01c2e68d3",
     "packages": [
         {
             "name": "guzzlehttp/psr7",
@@ -190,17 +190,17 @@
             "time": "2023-07-25T20:20:46+00:00"
         },
         {
-            "name": "phpolar/authenticator",
+            "name": "php-contrib/authenticator",
             "version": "1.0.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/phpolar/authenticator.git",
-                "reference": "de2a3594903cdef7ec8325840f53469b9c6d1f57"
+                "url": "https://github.com/php-contrib/authenticator.git",
+                "reference": "b6055bf7be6f1f0c4b55626e203d96336b9dc3cb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpolar/authenticator/zipball/de2a3594903cdef7ec8325840f53469b9c6d1f57",
-                "reference": "de2a3594903cdef7ec8325840f53469b9c6d1f57",
+                "url": "https://api.github.com/repos/php-contrib/authenticator/zipball/b6055bf7be6f1f0c4b55626e203d96336b9dc3cb",
+                "reference": "b6055bf7be6f1f0c4b55626e203d96336b9dc3cb",
                 "shasum": ""
             },
             "require": {
@@ -214,7 +214,7 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Phpolar\\Authenticator\\": "src/"
+                    "PhpContrib\\Authenticator\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -223,10 +223,88 @@
             ],
             "description": "Supports authentication interoperability.",
             "support": {
-                "issues": "https://github.com/phpolar/authenticator/issues",
-                "source": "https://github.com/phpolar/authenticator/tree/1.0.0"
+                "issues": "https://github.com/php-contrib/authenticator/issues",
+                "source": "https://github.com/php-contrib/authenticator/tree/1.0.0"
             },
-            "time": "2023-07-30T03:49:15+00:00"
+            "time": "2023-09-02T16:24:11+00:00"
+        },
+        {
+            "name": "php-contrib/response-filter",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-contrib/response-filter.git",
+                "reference": "5c06db4e40be1311d56ed7c88c8710bf16954bc1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-contrib/response-filter/zipball/5c06db4e40be1311d56ed7c88c8710bf16954bc1",
+                "reference": "5c06db4e40be1311d56ed7c88c8710bf16954bc1",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7",
+                "psr/http-message": "^2.0"
+            },
+            "require-dev": {
+                "squizlabs/php_codesniffer": "^3.7"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PhpContrib\\Http\\Message\\": "src/Http/Message/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Supports filtering PSR-7 HTTP Responses",
+            "support": {
+                "issues": "https://github.com/php-contrib/response-filter/issues",
+                "source": "https://github.com/php-contrib/response-filter/tree/1.0.0"
+            },
+            "time": "2023-09-02T16:05:48+00:00"
+        },
+        {
+            "name": "php-contrib/validator",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-contrib/validator.git",
+                "reference": "48899135fc93ad19fca120a85f836f09e6786b59"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-contrib/validator/zipball/48899135fc93ad19fca120a85f836f09e6786b59",
+                "reference": "48899135fc93ad19fca120a85f836f09e6786b59",
+                "shasum": ""
+            },
+            "suggest": {
+                "phpolar/validators": "A set of nifty validators"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PhpContrib\\Validator\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Eric Fortmeyer",
+                    "email": "e.fortmeyer01@gmail.com"
+                }
+            ],
+            "description": " Supports validation of property values ",
+            "support": {
+                "issues": "https://github.com/php-contrib/validator/issues",
+                "source": "https://github.com/php-contrib/validator/tree/1.0.0"
+            },
+            "time": "2023-09-02T16:00:07+00:00"
         },
         {
             "name": "phpolar/core",
@@ -497,46 +575,6 @@
                 "source": "https://github.com/phpolar/storage-driver/tree/1.0.0"
             },
             "time": "2023-02-06T04:46:21+00:00"
-        },
-        {
-            "name": "phpolar/validator",
-            "version": "1.0.5",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/phpolar/validator.git",
-                "reference": "c428593704727629e6a0b6aeba0770a0bebeeea9"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/phpolar/validator/zipball/c428593704727629e6a0b6aeba0770a0bebeeea9",
-                "reference": "c428593704727629e6a0b6aeba0770a0bebeeea9",
-                "shasum": ""
-            },
-            "suggest": {
-                "phpolar/validators": "A set of nifty validators"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Phpolar\\Validator\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Eric Fortmeyer",
-                    "email": "e.fortmeyer01@gmail.com"
-                }
-            ],
-            "description": "Unifies validator implementations",
-            "support": {
-                "issues": "https://github.com/phpolar/validator/issues",
-                "source": "https://github.com/phpolar/validator/tree/1.0.5"
-            },
-            "time": "2023-06-13T13:50:37+00:00"
         },
         {
             "name": "psr/container",
@@ -2177,23 +2215,23 @@
         },
         {
             "name": "phpolar/csrf-protection",
-            "version": "3.0.3",
+            "version": "3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpolar/csrf-protection.git",
-                "reference": "49c117ed9f07746732814bb8ffe8566eac1a5b63"
+                "reference": "2eae81bafa0e8bafcbc56c84d221ef2e782466d9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpolar/csrf-protection/zipball/49c117ed9f07746732814bb8ffe8566eac1a5b63",
-                "reference": "49c117ed9f07746732814bb8ffe8566eac1a5b63",
+                "url": "https://api.github.com/repos/phpolar/csrf-protection/zipball/2eae81bafa0e8bafcbc56c84d221ef2e782466d9",
+                "reference": "2eae81bafa0e8bafcbc56c84d221ef2e782466d9",
                 "shasum": ""
             },
             "require": {
                 "ext-mbstring": "*",
                 "php": ">=8.1",
+                "php-contrib/response-filter": "^1.0",
                 "phpolar/http-codes": "^0.0.6",
-                "phpolar/response-filter": "^1.0",
                 "psr/http-message": "^2.0",
                 "psr/http-server-handler": "^1.0",
                 "psr/http-server-middleware": "^1.0"
@@ -2248,9 +2286,9 @@
             ],
             "support": {
                 "issues": "https://github.com/phpolar/csrf-protection/issues",
-                "source": "https://github.com/phpolar/csrf-protection/tree/3.0.3"
+                "source": "https://github.com/phpolar/csrf-protection/tree/3.1.0"
             },
-            "time": "2023-06-13T13:33:29+00:00"
+            "time": "2023-09-02T19:06:32+00:00"
         },
         {
             "name": "phpolar/http-codes",
@@ -2343,24 +2381,24 @@
         },
         {
             "name": "phpolar/model",
-            "version": "1.1.1",
+            "version": "1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpolar/model.git",
-                "reference": "2326bb7c9aed356e5c46f3b84bd527604a0c8eaf"
+                "reference": "84e02b2f72b8b7ab3e2a36d7c597a635b4c11c78"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpolar/model/zipball/2326bb7c9aed356e5c46f3b84bd527604a0c8eaf",
-                "reference": "2326bb7c9aed356e5c46f3b84bd527604a0c8eaf",
+                "url": "https://api.github.com/repos/phpolar/model/zipball/84e02b2f72b8b7ab3e2a36d7c597a635b4c11c78",
+                "reference": "84e02b2f72b8b7ab3e2a36d7c597a635b4c11c78",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.1",
+                "php-contrib/validator": "^1.0",
                 "phpolar/core": "^3.0",
                 "phpolar/model-resolver": "^1.0",
-                "phpolar/storage-driver": "^1.0",
-                "phpolar/validator": "^1.0"
+                "phpolar/storage-driver": "^1.0"
             },
             "require-dev": {
                 "ext-ast": "*",
@@ -2387,9 +2425,9 @@
             "description": "Provides support for configuring the properties of an object for validation, formatting, and storage.",
             "support": {
                 "issues": "https://github.com/phpolar/model/issues",
-                "source": "https://github.com/phpolar/model/tree/1.1.1"
+                "source": "https://github.com/phpolar/model/tree/1.2.0"
             },
-            "time": "2023-07-04T01:05:01+00:00"
+            "time": "2023-09-02T17:39:25+00:00"
         },
         {
             "name": "phpolar/pure-php",
@@ -2445,44 +2483,6 @@
                 "source": "https://github.com/phpolar/pure-php/tree/2.0.0"
             },
             "time": "2023-09-02T01:48:55+00:00"
-        },
-        {
-            "name": "phpolar/response-filter",
-            "version": "1.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/phpolar/response-filter.git",
-                "reference": "40490cf5d246bc44c3809fefa9b81e17a1cd8670"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/phpolar/response-filter/zipball/40490cf5d246bc44c3809fefa9b81e17a1cd8670",
-                "reference": "40490cf5d246bc44c3809fefa9b81e17a1cd8670",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7",
-                "psr/http-message": "^2.0"
-            },
-            "require-dev": {
-                "squizlabs/php_codesniffer": "^3.7"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Phpolar\\Http\\Message\\": "src/Http/Message/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Supports filtering PSR-7 HTTP Responses",
-            "support": {
-                "issues": "https://github.com/phpolar/response-filter/issues",
-                "source": "https://github.com/phpolar/response-filter/tree/1.0.1"
-            },
-            "time": "2023-05-21T00:31:42+00:00"
         },
         {
             "name": "phpstan/phpdoc-parser",

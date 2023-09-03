@@ -7,7 +7,7 @@ namespace Phpolar\Phpolar\Auth;
 use Generator;
 use Phpolar\Phpolar\Tests\Stubs\ConfigurableContainerStub;
 use Phpolar\Phpolar\Tests\Stubs\ContainerConfigurationStub;
-use Phpolar\Authenticator\AuthenticatorInterface;
+use PhpContrib\Authenticator\AuthenticatorInterface;
 use Phpolar\Routable\RoutableInterface;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
