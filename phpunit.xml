@@ -49,9 +49,8 @@
         </exclude>
     </coverage>
     <php>
-        <const name="FAKE_ICO_FILE_PATH" value="/tmp/TEST_CASE.ico" />
-        <const name="FAKE_HTML_FILE_PATH" value="/tmp/TEST_CASE.html" />
-        <const name="FAKE_CSV_FILE_PATH" value="/tmp/TEST_CASE.csv" />
+        <const name="FAKE_ICO_FILE_PATH" value="/tests/__tmp__/TEST_CASE.ico" />
+        <const name="FAKE_HTML_FILE_PATH" value="/tests/__tmp__/TEST_CASE.html" />
         <const name="ATTRIBUTES_CONFIG_PATH" value="/tests/__configurations__/config.php" />
     </php>
 </phpunit>

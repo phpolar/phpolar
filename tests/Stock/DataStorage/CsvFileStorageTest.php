@@ -59,16 +59,19 @@ class CsvFileStorageTest extends PolarTestCaseExtension
      */
     protected static $attributesConfigMap;
 
+    protected static $fakeCsvFilePath;
+
     protected const CLASS_NAME_THAT_DOES_NOT_DERIVE_FROM_MODEL = IteratorIterator::class;
 
     public static function setUpBeforeClass(): void
     {
-        $attributesConfigFile = $_SERVER["PWD"] . ATTRIBUTES_CONFIG_PATH;
+        $attributesConfigFile = getcwd() . ATTRIBUTES_CONFIG_PATH;
         static::$attributesConfigMap = include $attributesConfigFile;
     }
 
     protected function setUp(): void
     {
+        static::$fakeCsvFilePath = self::getTestFileName(".csv");
         $this->record = new class(static::$attributesConfigMap) extends Model
         {
             /**
@@ -86,15 +89,15 @@ class CsvFileStorageTest extends PolarTestCaseExtension
              */
             public $property3 = "AGAIN... ANOTHER FAKE VALUE";
         };
-        $sut = new CsvFileStorage(FAKE_CSV_FILE_PATH, static::$attributesConfigMap);
+        $sut = new CsvFileStorage(static::$fakeCsvFilePath, static::$attributesConfigMap);
         $sut->save($this->record);
         $this->sut = $sut;
     }
 
     protected function tearDown(): void
     {
-        if (file_exists(FAKE_CSV_FILE_PATH) === true) {
-            unlink(FAKE_CSV_FILE_PATH);
+        if (file_exists(static::$fakeCsvFilePath) === true) {
+            unlink(static::$fakeCsvFilePath);
         }
     }
 
@@ -103,7 +106,7 @@ class CsvFileStorageTest extends PolarTestCaseExtension
      */
     public function shouldSaveDataToFile()
     {
-        $fileContents = file_get_contents(FAKE_CSV_FILE_PATH);
+        $fileContents = file_get_contents(static::$fakeCsvFilePath);
         $recordAsArray = get_object_vars($this->record);
         $this->assertStringArrayContainStrings($recordAsArray, $fileContents);
     }
@@ -122,8 +125,14 @@ class CsvFileStorageTest extends PolarTestCaseExtension
      */
     public function shouldReturnAnEmptyCollectionWhenTheFileDoesNotExist()
     {
-        unlink(FAKE_CSV_FILE_PATH);
-        $resultList = $this->sut->list(ModelSubclass::class);
+        // need the file handle to close before creating the new file
+        // See https://www.php.net/manual/en/function.unlink
+        unlink(static::$fakeCsvFilePath);
+        $this->sut->__destruct();
+        $newFile = self::getTestFileName(".csv");
+        $sut = new CsvFileStorage($newFile, static::$attributesConfigMap);
+        $resultList = $sut->list(ModelSubclass::class);
+        unlink($newFile);
         $this->assertEmpty($resultList);
     }
 
@@ -149,7 +158,7 @@ class CsvFileStorageTest extends PolarTestCaseExtension
             public $headerThatDoesNotExist = "FAKE STRING";
         };
         $this->sut->save($anotherRecord);
-        $fileContents = file_get_contents(FAKE_CSV_FILE_PATH);
+        $fileContents = file_get_contents(static::$fakeCsvFilePath);
         $this->assertStringNotContainsString("headerThatDoesNotExist", $fileContents);
     }
 
@@ -161,9 +170,9 @@ class CsvFileStorageTest extends PolarTestCaseExtension
         $recordWithoutProps = new class(static::$attributesConfigMap) extends Model
         {
         };
-        $fileContentsBeforeSave = file_get_contents(FAKE_CSV_FILE_PATH);
+        $fileContentsBeforeSave = file_get_contents(static::$fakeCsvFilePath);
         $this->sut->save($recordWithoutProps);
-        $fileContentsAfterSave = file_get_contents(FAKE_CSV_FILE_PATH);
+        $fileContentsAfterSave = file_get_contents(static::$fakeCsvFilePath);
         $this->assertSame($fileContentsBeforeSave, $fileContentsAfterSave);
     }
 
