@@ -1,0 +1,8 @@
+.DS_Store
+.vscode
+.phpunit.cache
+.phpdoc
+/vendor/
+/api/
+/build/
+/analysis/

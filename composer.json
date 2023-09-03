@@ -1,0 +1,47 @@
+{
+    "name": "efortmeyer/polar",
+    "description": "A super-tiny, lightweight microframework for PHP projects",
+    "type": "library",
+    "version": "1.0.0",
+    "license": "MIT",
+    "require": {
+        "php": ">=7.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Efortmeyer\\Polar\\": "src/",
+            "Efortmeyer\\Polar\\Tests\\DataProviders\\": "tests/__data-providers__",
+            "Efortmeyer\\Polar\\Tests\\Mocks\\": "tests/__mocks__",
+            "Efortmeyer\\Polar\\Tests\\Comparables\\": "tests/__comparables__",
+            "Efortmeyer\\Polar\\Tests\\Extensions\\": "tests/__extensions__"
+        },
+        "files": [
+            "src/Core/Polyfill/autoload.php"
+        ]
+    },
+    "authors": [
+        {
+            "name": "Eric Fortmeyer",
+            "email": "e.fortmeyer01@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "scripts": {
+        "analyze": "composer exec \"phan --no-progress-bar --strict-type-checking --analyze-twice --color --output-mode=text --color-scheme=light\"",
+        "analyze-dead-code": "composer exec -q \"phan --no-progress-bar --analyze-twice --color --output-mode=text --long-progress-bar --color-scheme=light --config-file=.phan/dead-code-config.php\"",
+        "lint": "composer exec \"phpcs\"",
+        "lint-fix": "composer exec \"phpcbf\"",
+        "test": "composer exec \"phpunit\"",
+        "ci:analyze": "composer exec \"phan --no-progress-bar --strict-type-checking --analyze-twice --allow-polyfill-parser\"",
+        "ci:lint": "composer exec \"phpcs\"",
+        "ci:lint-fix": "composer exec \"phpcbf\"",
+        "ci:test": "XDEBUG_MODE=coverage composer exec \"phpunit --coverage-clover=build/logs/clover.xml\"",
+        "ci:generate-coverage-badge": "composer exec \"php-coveralls -v\""
+    },
+    "require-dev": {
+        "phan/phan": "^5.3",
+        "phpunit/phpunit": "^9.5",
+        "squizlabs/php_codesniffer": "^3.7",
+        "php-coveralls/php-coveralls": "^2.5"
+    }
+}
