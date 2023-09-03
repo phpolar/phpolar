@@ -66,6 +66,7 @@ final class MemoryUsageTest extends TestCase
             $config[ContainerInterface::class],
             $config[ModelResolverInterface::class],
             routableResolver: $config[RoutableResolverInterface::class],
+            unauthHandler: $config[DiTokens::ERROR_HANDLER_401],
         );
         $config[MiddlewareQueueRequestHandler::class] = static fn (ArrayAccess $config) => new MiddlewareQueueRequestHandler($config[DiTokens::ERROR_HANDLER_404]);
         $config[DiTokens::ERROR_HANDLER_404] = static fn (ArrayAccess $config) => new ErrorHandler(ResponseCode::NOT_FOUND, "Not Found", $config[ContainerInterface::class]);

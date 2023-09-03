@@ -25,6 +25,7 @@ use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Message\StreamInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 
 #[TestDox("HTTP Request Routing")]
 final class RoutingTest extends TestCase
@@ -122,6 +123,7 @@ final class RoutingTest extends TestCase
                     return $target;
                 }
             },
+            unauthHandler: $this->createStub(RequestHandlerInterface::class),
         );
         $requestStub = (new RequestStub("GET"))->withUri(new UriStub($givenRoute));
         $response = $routingHandler->handle($requestStub);
@@ -148,6 +150,7 @@ final class RoutingTest extends TestCase
                     return $target;
                 }
             },
+            unauthHandler: $this->createStub(RequestHandlerInterface::class),
         );
         $requestStub = (new RequestStub("GET"))->withUri(new UriStub($givenRoute));
         $response = $routingHandler->handle($requestStub);
