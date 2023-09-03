@@ -11,7 +11,7 @@ use Serializable;
 /**
  * Provides a way to validate a property's type.
  */
-final class TypeValidation implements ValidationInterface
+class TypeValidation implements ValidationInterface
 {
     /**
      * @var mixed
@@ -41,36 +41,26 @@ final class TypeValidation implements ValidationInterface
         return $this->typeIsValid;
     }
 
-    private function handleError(string $errorMessage): bool
+    private function setState()
     {
-        $this->errorMessage = $errorMessage;
-        return false;
-    }
-
-    private function setState(): void
-    {
-        switch ($this->type) {
-            case ScalarTypes::STRING:
-                $this->typeIsValid = is_string($this->value) === false ? $this->handleError(Messages::INVALID_TYPE) : true;
-                break;
-            case ScalarTypes::INTEGER:
-                $this->typeIsValid = is_int($this->value) === false ? $this->handleError(Messages::INVALID_TYPE) : true;
-                break;
-            case ScalarTypes::FLOAT:
-            case ScalarTypes::DOUBLE:
-                $this->typeIsValid = is_float($this->value) === false ? $this->handleError(Messages::INVALID_TYPE) : true;
-                break;
-            case ScalarTypes::NULL:
-                $this->typeIsValid = $this->value !== null ? $this->handleError(Messages::INVALID_TYPE) : true;
-                break;
-            case ScalarTypes::BOOL:
-                $this->typeIsValid = is_bool($this->value) === false ? $this->handleError(Messages::INVALID_TYPE) : true;
-                break;
-            case Serializable::class:
-                $this->typeIsValid = is_subclass_of($this->value, Serializable::class) === false ? $this->handleError(Messages::INVALID_TYPE) : true;
-                break;
-            default:
-                $this->typeIsValid = $this->handleError(Messages::UKNOWN_TYPE);
+        // the functions will be used to validate their corresponding type
+        $typeCheckMap = [
+            ScalarTypes::STRING    => "is_string",
+            ScalarTypes::INTEGER   => "is_int",
+            ScalarTypes::FLOAT     => "is_float",
+            ScalarTypes::DOUBLE    => "is_float",
+            ScalarTypes::BOOL      => "is_bool",
+            ScalarTypes::NULL      => fn ($value) => $value === null,
+            Serializable::class    => fn ($value) => is_subclass_of($value, Serializable::class) === true,
+        ];
+        if (isset($typeCheckMap[$this->type]) === true) {
+            $this->typeIsValid = $typeCheckMap[$this->type]($this->value);
+            if ($this->typeIsValid === false) {
+                $this->errorMessage = Messages::INVALID_TYPE;
+            }
+        } else {
+            $this->typeIsValid = false;
+            $this->errorMessage = Messages::UKNOWN_TYPE;
         }
     }
 }
