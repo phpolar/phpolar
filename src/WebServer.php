@@ -59,6 +59,8 @@ final class WebServer
     }
 
     /**
+     * @param ContainerInterface $container
+     * @param string[] $depsToCheck
      * @throws WebServerConfigurationException
      */
     private static function checkContainer(ContainerInterface $container, array $depsToCheck): void

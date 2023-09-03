@@ -46,9 +46,8 @@ trait FormControlTypeDetectionTrait
             return in_array("string", $propertyType->getTypes()) === true &&
             in_array("array", $propertyType->getTypes()) === false ? FormControlTypes::Input : FormControlTypes::Invalid;
         }
-        // @codeCoverageIgnore
         if ($propertyType instanceof PropertyTypeNotDeclared) {
-            return $property->isInitialized($this) ? match (gettype($property->getValue($this))) {
+            return $property->isInitialized($this) === true ? match (gettype($property->getValue($this))) {
                 "string",
                 "integer",
                 "double",
