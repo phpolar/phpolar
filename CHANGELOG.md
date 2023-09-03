@@ -1,3 +1,9 @@
+## 1.6.2 (2022-12-04)
+
+### Fix
+
+- **composer.json**: exclude test classes from installation
+
 ## 1.6.1 (2022-10-22)
 
 ### Fix
