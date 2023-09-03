@@ -54,6 +54,7 @@ use PHPUnit\Framework\TestCase;
  * @uses \Efortmeyer\Polar\Stock\Attributes\TypeValidation
  * @uses \Efortmeyer\Polar\Stock\Attributes\DefaultMaxLength
  * @uses \Efortmeyer\Polar\Stock\Validation\MaxLength
+ * @uses \Efortmeyer\Polar\Stock\Validation\Noop
  * @uses \Efortmeyer\Polar\Stock\Validation\TypeValidation
  */
 class EntryTest extends TestCase
