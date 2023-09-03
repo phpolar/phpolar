@@ -8,7 +8,7 @@ use Efortmeyer\Polar\Core\Attributes\AttributeCollection;
 
 final class FieldMetadataFactory
 {
-    private FieldMetadataConfig $config;
+    private readonly FieldMetadataConfig $config;
 
     private function __construct(private FieldMetadata $field, AttributeCollection $attributes)
     {

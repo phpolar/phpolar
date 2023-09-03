@@ -23,7 +23,7 @@ class Form extends TemplateContext
     /**
      * @var FormControl[]
      */
-    private array $formControls;
+    private readonly array $formControls;
 
     public function __construct(private Model $model)
     {

@@ -42,7 +42,7 @@ use DateTimeInterface;
  */
 final class InMemoryAppConfig implements AppConfigInterface
 {
-    private Collection $configCollection;
+    private readonly Collection $configCollection;
 
     public function __construct()
     {
