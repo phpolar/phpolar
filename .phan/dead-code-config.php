@@ -342,9 +342,9 @@ return [
     'directory_list' => [
         'src',
         'vendor/psr',
+        'vendor/laminas/laminas-httphandlerrunner',
         'vendor/phpolar/csrf-protection/src',
         'vendor/phpolar/http-codes/src',
-        'vendor/phpolar/http-response-extensions/src',
         'vendor/phpolar/model-resolver/src',
         'vendor/phpolar/phpolar-core/src',
         'vendor/phpolar/pure-php/src',
