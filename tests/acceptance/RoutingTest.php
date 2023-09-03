@@ -83,7 +83,7 @@ final class RoutingTest extends TestCase
         $givenRoute = "/";
         $expectedResponse = "<h1>Found!</h1>";
         $routeRegistry = new RouteRegistry();
-        $indexHandler = new class ($expectedResponse) extends AbstractRequestHandler {
+        $indexHandler = new class ($expectedResponse) extends AbstractRouteDelegate {
             public function __construct(private string $responseTemplate)
             {
             }
