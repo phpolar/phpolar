@@ -16,7 +16,7 @@ use Efortmeyer\Polar\Core\Attributes\Attribute;
 #[GlobalAttribute(GlobalAttribute::TARGET_PROPERTY)]
 final class DateFormat extends Attribute
 {
-    public function __construct(private string $dateFormat)
+    public function __construct(private readonly string $dateFormat)
     {
     }
 

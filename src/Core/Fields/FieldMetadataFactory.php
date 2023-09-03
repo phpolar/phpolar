@@ -6,7 +6,7 @@ namespace Efortmeyer\Polar\Core\Fields;
 
 final class FieldMetadataFactory
 {
-    public function __construct(private FieldMetadata $field, private FieldMetadataConfig $config)
+    public function __construct(private readonly FieldMetadata $field, private readonly FieldMetadataConfig $config)
     {
     }
 
