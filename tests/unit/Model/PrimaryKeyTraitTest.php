@@ -48,6 +48,42 @@ final class PrimaryKeyTraitTest extends TestCase
         $this->assertSame($sut->getPrimaryKey(), $givenKeyVal);
     }
 
+    #[TestDox("Shall return the value of the string property configured as the primary key")]
+    public function testaaa()
+    {
+        $givenKeyVal = "123";
+        $sut = new class ($givenKeyVal) {
+            use PrimaryKeyTrait;
+
+            #[PrimaryKey]
+            public $id;
+
+            public function __construct(string $id)
+            {
+                $this->id = $id;
+            }
+        };
+        $this->assertSame($sut->getPrimaryKey(), $givenKeyVal);
+    }
+
+    #[TestDox("Shall return the value of the integer property configured as the primary key")]
+    public function testabb()
+    {
+        $givenKeyVal = 123;
+        $sut = new class ($givenKeyVal) {
+            use PrimaryKeyTrait;
+
+            #[PrimaryKey]
+            public $id;
+
+            public function __construct(int $id)
+            {
+                $this->id = $id;
+            }
+        };
+        $this->assertSame($sut->getPrimaryKey(), $givenKeyVal);
+    }
+
     #[TestDox("Shall return the empty string for string property configured as the primary key if no value is set")]
     public function testb()
     {
@@ -94,6 +130,31 @@ final class PrimaryKeyTraitTest extends TestCase
             use PrimaryKeyTrait;
 
             public string $id;
+        };
+
+        $this->assertNull($sut->getPrimaryKey());
+    }
+
+    #[TestDox("Shall return null for non-string, non-integer property configured as the primary key if no value is set")]
+    public function testdb()
+    {
+        $sut = new class () {
+            use PrimaryKeyTrait;
+
+            #[PrimaryKey]
+            public $id = true;
+        };
+
+        $this->assertNull($sut->getPrimaryKey());
+    }
+
+    #[TestDox("Shall return null when no property is configured as the primary key")]
+    public function testeb()
+    {
+        $sut = new class () {
+            use PrimaryKeyTrait;
+
+            public $id;
         };
 
         $this->assertNull($sut->getPrimaryKey());
