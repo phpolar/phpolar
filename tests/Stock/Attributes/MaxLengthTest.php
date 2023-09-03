@@ -10,6 +10,7 @@ use ReflectionProperty;
 /**
  * @covers \Efortmeyer\Polar\Stock\Attributes\MaxLength
  *
+ * @uses \Efortmeyer\Polar\Core\Attributes\Attributes
  * @uses \Efortmeyer\Polar\Stock\Validation\MaxLength
  * @testdox MaxLength
  */
