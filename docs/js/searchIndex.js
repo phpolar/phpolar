@@ -241,6 +241,21 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Phpolar-Phpolar-Http-ResolvedRoute.html#property_routeParamMap"
         },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\RoutableFactory",
+            "name": "RoutableFactory",
+            "summary": "Provides\u0020a\u0020type\u002Dsafe\u0020way\u0020to\u0020provide\nroute\u0020targets\u0020to\u0020the\u0020route\u0020map\u0020that\u0020will\nnot\u0020be\u0020instantiated\u0020immediately.",
+            "url": "classes/Phpolar-Phpolar-Http-RoutableFactory.html"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\RoutableFactory\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Phpolar-Phpolar-Http-RoutableFactory.html#method___construct"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\RoutableFactory\u003A\u003AcreateInstance\u0028\u0029",
+            "name": "createInstance",
+            "summary": "Create\u0020the\u0020route\u0020target",
+            "url": "classes/Phpolar-Phpolar-Http-RoutableFactory.html#method_createInstance"
+        },                {
             "fqsen": "\\Phpolar\\Phpolar\\Http\\RouteMap",
             "name": "RouteMap",
             "summary": "Contains\u0020route\u0020paths\u0020associated\u0020with\u0020target\u0020objects.",
