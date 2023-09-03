@@ -14,6 +14,7 @@ use Phpolar\Routable\RoutableInterface;
 use Phpolar\Phpolar\Http\RouteMap;
 use Phpolar\Phpolar\Http\RoutingHandler;
 use Phpolar\Phpolar\Http\RoutingMiddleware;
+use Phpolar\PropertyInjectorContract\PropertyInjectorInterface;
 use Phpolar\Routable\RoutableResolverInterface;
 use Phpolar\PurePhp\Binder;
 use Phpolar\PurePhp\Dispatcher;
@@ -40,7 +41,14 @@ return [
     TemplatingStrategyInterface::class => new StreamContentStrategy(),
     ResponseFactoryInterface::class => new ResponseFactoryStub((new StreamFactoryStub("+w"))->createStream()),
     StreamFactoryInterface::class => new StreamFactoryStub("+w"),
-    RouteMap::class => new RouteMap(),
+    RouteMap::class => new RouteMap(
+        new class () implements PropertyInjectorInterface {
+            public function inject(object $injectee): void
+            {
+                // noop
+            }
+        }
+    ),
     DiTokens::RESPONSE_EMITTER => new SapiEmitter(),
     AuthenticatorInterface::class => new class () implements AuthenticatorInterface {
         public function isAuthenticated(): bool
@@ -61,7 +69,6 @@ return [
         $container->get(RouteMap::class),
         $container->get(ResponseFactoryInterface::class),
         $container->get(StreamFactoryInterface::class),
-        $container,
         new class () implements ModelResolverInterface {
             public function resolve(object $it, string $methodName): array
             {

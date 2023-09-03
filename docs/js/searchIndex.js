@@ -231,6 +231,11 @@ Search.appendIndex(
             "summary": "Contains\u0020route\u0020paths\u0020associated\u0020with\u0020target\u0020objects.",
             "url": "classes/Phpolar-Phpolar-Http-RouteMap.html"
         },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\RouteMap\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Phpolar-Phpolar-Http-RouteMap.html#method___construct"
+        },                {
             "fqsen": "\\Phpolar\\Phpolar\\Http\\RouteMap\u003A\u003Aadd\u0028\u0029",
             "name": "add",
             "summary": "Associates\u0020a\u0020request\u0020method,\u0020route\u0020and\u0020a\u0020target\u0020object.",

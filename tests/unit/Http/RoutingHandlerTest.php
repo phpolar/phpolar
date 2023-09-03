@@ -102,7 +102,6 @@ final class RoutingHandlerTest extends TestCase
             $routeRegistryStub,
             $responseFactory,
             $streamFactory,
-            $container,
             $modelResolver,
             new AuthorizationChecker(
                 $this->createStub(RoutableResolverInterface::class),
@@ -141,7 +140,6 @@ final class RoutingHandlerTest extends TestCase
             $routeRegistryStub,
             $responseFactory,
             $streamFactory,
-            $container,
             $modelResolver,
             new AuthorizationChecker(
                 $routableResolver,
@@ -179,7 +177,6 @@ final class RoutingHandlerTest extends TestCase
             $routeRegistryStub,
             $responseFactory,
             $streamFactory,
-            $container,
             $modelResolver,
             new AuthorizationChecker(
                 $protectedRoutableResolver,
@@ -223,7 +220,6 @@ final class RoutingHandlerTest extends TestCase
             $routeRegistryStub,
             $responseFactory,
             $streamFactory,
-            $container,
             $modelResolver,
             new AuthorizationChecker(
                 $routableResolver,
@@ -248,7 +244,7 @@ final class RoutingHandlerTest extends TestCase
         $streamFactoryStub->expects($this->once())->method("createStream")->with($responseContent)->willReturn(new MemoryStreamStub($responseContent));
         $container = $this->getContainer($streamFactoryStub);
         $registeredRouteHandler = new class () implements RoutableInterface {
-            public function process(ContainerInterface $container, string $id = ""): string
+            public function process(string $id = ""): string
             {
                 return $id;
             }
@@ -272,7 +268,6 @@ final class RoutingHandlerTest extends TestCase
             $routeRegistryStub,
             $responseFactory,
             $streamFactory,
-            $container,
             $modelResolver,
             new AuthorizationChecker(
                 $routableResolver,
@@ -296,7 +291,7 @@ final class RoutingHandlerTest extends TestCase
         $streamFactoryStub->expects($this->once())->method("createStream")->with($responseContent)->willReturn(new MemoryStreamStub($responseContent));
         $container = $this->getContainer($streamFactoryStub);
         $registeredRouteHandler = new class () extends AbstractProtectedRoutable {
-            public function process(ContainerInterface $container, string $id = ""): string
+            public function process(string $id = ""): string
             {
                 return $id;
             }
@@ -320,7 +315,6 @@ final class RoutingHandlerTest extends TestCase
             $routeRegistryStub,
             $responseFactory,
             $streamFactory,
-            $container,
             $modelResolver,
             new AuthorizationChecker(
                 $protectedRoutableResolver,
@@ -339,7 +333,7 @@ final class RoutingHandlerTest extends TestCase
         $fakeModel = (object) ["name" => $expectedModelName];
         $container = $this->getContainer();
         $registeredRouteHandler = new class () implements RoutableInterface {
-            public function process(ContainerInterface $container, #[Model] object $form = null): string
+            public function process(#[Model] object $form = null): string
             {
                 return $form->name;
             }
@@ -370,7 +364,6 @@ final class RoutingHandlerTest extends TestCase
             $routeRegistryStub,
             $responseFactory,
             $streamFactoryMock,
-            $container,
             $modelResolverMock,
             new AuthorizationChecker(
                 $routableResolver,
@@ -388,7 +381,7 @@ final class RoutingHandlerTest extends TestCase
         $container = $this->getContainer();
         $registeredRouteHandler = new class () extends AbstractProtectedRoutable {
             #[Authorize]
-            public function process(ContainerInterface $container, #[Model] object $form = null): string
+            public function process(#[Model] object $form = null): string
             {
                 return $form->name;
             }
@@ -415,7 +408,6 @@ final class RoutingHandlerTest extends TestCase
             $routeRegistryStub,
             $responseFactory,
             $streamFactory,
-            $container,
             $modelResolverMock,
             new AuthorizationChecker(
                 $routableResolver,
@@ -433,7 +425,7 @@ final class RoutingHandlerTest extends TestCase
         $fakeUserName = "FAKE_NAME";
         $registeredRouteHandler = new class () extends AbstractProtectedRoutable {
             #[Authorize]
-            public function process(ContainerInterface $container): string
+            public function process(): string
             {
                 return $this->user->name;
             }
@@ -464,7 +456,6 @@ final class RoutingHandlerTest extends TestCase
             $routeRegistryStub,
             $responseFactory,
             $streamFactory,
-            $container,
             $modelResolver,
             new AuthorizationChecker(
                 $protectedRoutableResolver,
@@ -482,7 +473,7 @@ final class RoutingHandlerTest extends TestCase
     {
         $registeredRouteHandler = new class () extends AbstractProtectedRoutable {
             #[Authorize]
-            public function process(ContainerInterface $container): string
+            public function process(): string
             {
                 return "";
             }
@@ -513,7 +504,6 @@ final class RoutingHandlerTest extends TestCase
             $routeRegistryStub,
             $responseFactory,
             $streamFactory,
-            $container,
             $modelResolver,
             new AuthorizationChecker(
                 $protectedRoutableResolver,
@@ -531,7 +521,7 @@ final class RoutingHandlerTest extends TestCase
     {
         $routable = new class () extends AbstractProtectedRoutable {
             #[Authorize]
-            public function process(ContainerInterface $container): string
+            public function process(): string
             {
                 return "";
             }
@@ -565,7 +555,6 @@ final class RoutingHandlerTest extends TestCase
             $routeRegistryStub,
             $responseFactory,
             $streamFactory,
-            $container,
             $modelResolver,
             new AuthorizationChecker(
                 $protectedRoutableResolver,

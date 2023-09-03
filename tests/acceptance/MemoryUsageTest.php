@@ -31,6 +31,7 @@ use Phpolar\Phpolar\App;
 use Phpolar\Phpolar\DependencyInjection\ContainerLoader;
 use Phpolar\Phpolar\DependencyInjection\DiTokens;
 use Phpolar\Phpolar\Http\AuthorizationChecker;
+use Phpolar\PropertyInjectorContract\PropertyInjectorInterface;
 use Phpolar\PurePhp\Binder;
 use Phpolar\PurePhp\Dispatcher;
 use Phpolar\PurePhp\StreamContentStrategy;
@@ -67,7 +68,6 @@ final class MemoryUsageTest extends TestCase
             $config[RouteMap::class],
             $config[ResponseFactoryInterface::class],
             $config[StreamFactoryInterface::class],
-            $config[ContainerInterface::class],
             $config[ModelResolverInterface::class],
             new AuthorizationChecker(
                 routableResolver: $config[RoutableResolverInterface::class],
@@ -114,7 +114,8 @@ final class MemoryUsageTest extends TestCase
         $this->expectOutputString("content");
         $request = new RequestStub("GET", "/");
         $config = new ContainerConfigurationStub();
-        $routes = new RouteMap();
+        $propertyInjector = $this->createStub(PropertyInjectorInterface::class);
+        $routes = new RouteMap($propertyInjector);
         /**
          * @var Stub&RoutableInterface $contentDelStub
          */
