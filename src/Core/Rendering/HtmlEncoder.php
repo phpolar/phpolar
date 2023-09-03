@@ -26,26 +26,34 @@ class HtmlEncoder
      */
     private static function encode($it)
     {
-        switch (true) {
-            case $it instanceof Stringable:
-                return HtmlEncoder::encodeString((string) $it);
-            case $it instanceof Serializable:
-                return HtmlEncoder::encodeString($it->serialize() ?? "");
-            case $it instanceof Closure:
-                return HtmlEncoder::EMPTY_STRING;
-            case is_string($it):
-                return HtmlEncoder::encodeString($it);
-            case is_bool($it):
-            case is_float($it):
-            case is_integer($it):
-                return HtmlEncoder::skip($it);
-            case is_iterable($it):
-                return HtmlEncoder::encodeArray((array) $it);
-            case is_object($it):
-                return HtmlEncoder::encodeProperties($it); // @codeCoverageIgnore
-            default:
-                return HtmlEncoder::EMPTY_STRING;
+        if (HtmlEncoder::canEncode($it) === true) {
+            return HtmlEncoder::encodeString($it);
+        } else if (HtmlEncoder::shouldSkip($it) === true) {
+            return HtmlEncoder::skip($it);
+        } else if (HtmlEncoder::isSerializable($it) === true) {
+            return HtmlEncoder::serializeValue($it);
+        } else if (is_iterable($it) === true) {
+            return HtmlEncoder::encodeArray((array) $it);
+        } else if (is_object($it) === true && $it instanceof Closure === false) {
+            return HtmlEncoder::encodeProperties($it); // @codeCoverageIgnore
+        } else {
+            return HtmlEncoder::EMPTY_STRING;
         }
+    }
+
+    private static function isSerializable($it): bool
+    {
+        return $it instanceof Stringable || $it instanceof Serializable;
+    }
+
+    private static function shouldSkip($it): bool
+    {
+        return is_bool($it) === true || is_float($it) === true || is_integer($it) === true;
+    }
+
+    private static function canEncode($it): bool
+    {
+        return is_string($it) === true;
     }
 
     /**
@@ -55,6 +63,14 @@ class HtmlEncoder
     private static function skip($it)
     {
         return $it;
+    }
+
+    /**
+     * @param Serializable|Stringable $it
+     */
+    private static function serializeValue($it): string
+    {
+        return HtmlEncoder::encodeString($it instanceof Serializable ? (string) $it->serialize() : (string) $it);
     }
 
     private static function encodeString(string $str): string
