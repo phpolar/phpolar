@@ -20,6 +20,8 @@ final class FormFieldErrorMessageDataProvider
             "Value is greater than the maximum",
             new class () extends AbstractModel
             {
+                protected bool $isPosted = true;
+
                 #[Max(50)]
                 public int $prop = 51;
             }
@@ -28,6 +30,8 @@ final class FormFieldErrorMessageDataProvider
             "Value is greater than the maximum",
             new class () extends AbstractModel
             {
+                protected bool $isPosted = true;
+
                 #[Max(50)]
                 public int $prop = 51;
             }
@@ -36,6 +40,7 @@ final class FormFieldErrorMessageDataProvider
             "Maximum length validation failed",
             new class () extends AbstractModel
             {
+                protected bool $isPosted = true;
                 #[MaxLength(10)]
                 public string $prop = "9123456780a";
             },
@@ -44,6 +49,7 @@ final class FormFieldErrorMessageDataProvider
             "Value is less than the minimum",
             new class () extends AbstractModel
             {
+                protected bool $isPosted = true;
                 #[Min(5)]
                 public int $prop = 4;
             }
@@ -52,6 +58,7 @@ final class FormFieldErrorMessageDataProvider
             "Minimum length validation failed",
             new class () extends AbstractModel
             {
+                protected bool $isPosted = true;
                 #[MinLength(10)]
                 public string $prop = "123456780";
             },
@@ -60,6 +67,7 @@ final class FormFieldErrorMessageDataProvider
             "Pattern validation failed",
             new class () extends AbstractModel
             {
+                protected bool $isPosted = true;
                 #[Pattern("/^[[:alnum:]]+$/")]
                 public string $prop = "abcd1234$$;%";
             },
@@ -68,6 +76,69 @@ final class FormFieldErrorMessageDataProvider
             "Required value",
             new class () extends AbstractModel
             {
+                protected bool $isPosted = true;
+                #[Required]
+                public string $prop;
+            },
+        ];
+    }
+
+    public static function invalidPropertyNotPostedTestCases()
+    {
+        yield [
+            new class () extends AbstractModel
+            {
+                protected bool $isPosted = false;
+
+                #[Max(50)]
+                public int $prop = 51;
+            }
+        ];
+        yield [
+            new class () extends AbstractModel
+            {
+                protected bool $isPosted = false;
+
+                #[Max(50)]
+                public int $prop = 51;
+            }
+        ];
+        yield [
+            new class () extends AbstractModel
+            {
+                protected bool $isPosted = false;
+                #[MaxLength(10)]
+                public string $prop = "9123456780a";
+            },
+        ];
+        yield [
+            new class () extends AbstractModel
+            {
+                protected bool $isPosted = false;
+                #[Min(5)]
+                public int $prop = 4;
+            }
+        ];
+        yield [
+            new class () extends AbstractModel
+            {
+                protected bool $isPosted = false;
+                #[MinLength(10)]
+                public string $prop = "123456780";
+            },
+        ];
+        yield [
+            new class () extends AbstractModel
+            {
+                protected bool $isPosted = false;
+                #[Pattern("/^[[:alnum:]]+$/")]
+                public string $prop = "abcd1234$$;%";
+            },
+        ];
+        yield [
+            new class () extends AbstractModel
+            {
+                protected bool $isPosted = false;
                 #[Required]
                 public string $prop;
             },
@@ -80,6 +151,7 @@ final class FormFieldErrorMessageDataProvider
             "",
             new class () extends AbstractModel
             {
+                protected bool $isPosted = true;
                 #[Required]
                 public string $prop = "REQUIRED PROP IS SET";
             }
