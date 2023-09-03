@@ -38,6 +38,6 @@ class MaxLength implements ValidationInterface
 
     private function handleError(): void
     {
-        $this->errorMessage = Messages::OVERSIZED_VALUE;
+        $this->errorMessage = Messages::OversizedValue->value;
     }
 }

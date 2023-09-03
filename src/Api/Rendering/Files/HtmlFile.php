@@ -11,6 +11,6 @@ class HtmlFile extends File
 {
     protected function getContentType(): string
     {
-        return ContentTypes::HTML;
+        return ContentTypes::HTML->value;
     }
 }

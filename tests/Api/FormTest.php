@@ -148,7 +148,7 @@ class FormTest extends TestCase
     {
         $model = new class(static::$attributesConfigMap) extends Model
         {
-            #[Input(InputTypes::TEXT)]
+            #[Input(InputTypes::Text)]
             public string $property1 = "FAKE";
         };
         $storageStub = $this->createStub(StorageStub::class);
@@ -183,7 +183,7 @@ class FormTest extends TestCase
     {
         $model = new class(static::$attributesConfigMap) extends Model
         {
-            #[Input(InputTypes::TEXTAREA)]
+            #[Input(InputTypes::Textarea)]
             public string $property1 = "FAKE";
         };
         $storageStub = $this->createStub(StorageStub::class);
@@ -218,7 +218,7 @@ class FormTest extends TestCase
     {
         $model = new class(static::$attributesConfigMap) extends Model
         {
-            #[Input(InputTypes::DATE)]
+            #[Input(InputTypes::Date)]
             public DateTimeImmutable $property1;
         };
         $storageStub = $this->createStub(StorageStub::class);
@@ -254,7 +254,7 @@ class FormTest extends TestCase
     {
         $model = new class(static::$attributesConfigMap) extends Model
         {
-            #[Input(InputTypes::DATE)]
+            #[Input(InputTypes::Date)]
             #[AutomaticDateValue]
             public DateTimeImmutable $property1;
         };

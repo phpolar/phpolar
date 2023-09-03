@@ -7,15 +7,11 @@ namespace Efortmeyer\Polar\Stock\Attributes;
 /**
  * Contains text for messages.
  */
-final class Messages
+enum Messages: string
 {
-    public const OVERSIZED_VALUE = "Oversized value entered.";
+    case OversizedValue = "Oversized value entered.";
 
-    public const INVALID_TYPE = "Invalid input entered.";
+    case InvalidType = "Invalid input entered.";
 
-    public const UKNOWN_TYPE = "Value of unknown type entered.";
-
-    private function __construct()
-    {
-    }
+    case UknownType = "Value of unknown type entered.";
 }

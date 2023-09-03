@@ -142,7 +142,7 @@ class AttributeCollectionTest extends TestCase
      */
     public function shouldKnowIfCollectionContainsInput()
     {
-        $sut = new AttributeCollection([...RequiredAttributes::getWithoutFormControl(), new Input(InputTypes::NUMBER)]);
+        $sut = new AttributeCollection([...RequiredAttributes::getWithoutFormControl(), new Input(InputTypes::Number)]);
         $formControl = $sut->getFormControlAttribute();
         $this->assertSame($formControl->getFieldClassName(), NumberField::class);
     }

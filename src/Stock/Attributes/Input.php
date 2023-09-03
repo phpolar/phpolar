@@ -17,9 +17,9 @@ final class Input extends Attribute
 {
     protected readonly string $type;
 
-    public function __construct(string $type)
+    public function __construct(InputTypes | string $type)
     {
-        $this->type = $type === "date" ? InputTypes::DATE : $type;
+        $this->type = $type === "date" ? InputTypes::Date->value : (is_string($type) === true ? $type : $type->value);
     }
 
     public function __invoke(): string
@@ -35,10 +35,10 @@ final class Input extends Attribute
     public function getFieldClassName(): string
     {
         $fieldClassNameMap = [
-            InputTypes::TEXT => TextField::class,
-            InputTypes::TEXTAREA => TextAreaField::class,
-            InputTypes::NUMBER => NumberField::class,
-            InputTypes::DATE => DateField::class,
+            InputTypes::Text->value => TextField::class,
+            InputTypes::Textarea->value => TextAreaField::class,
+            InputTypes::Number->value => NumberField::class,
+            InputTypes::Date->value => DateField::class,
         ];
         return $fieldClassNameMap[$this->type];
     }
