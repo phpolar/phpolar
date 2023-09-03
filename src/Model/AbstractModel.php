@@ -37,7 +37,7 @@ abstract class AbstractModel implements IteratorAggregate
     /**
      * @param array<string|int,mixed>|object $data
      */
-    public function __construct(array | object $data = [])
+    public function __construct(null | array | object $data = [])
     {
         if (empty($data) === false) {
             $publicProps = (new ReflectionObject($this))->getProperties(ReflectionProperty::IS_PUBLIC);
