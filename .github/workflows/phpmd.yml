@@ -26,8 +26,6 @@ on:
       - 'examples/**'
       - 'config/**'
       - '.phan/**'
-  schedule:
-    - cron: '19 7 * * 6'
 
 permissions:
   contents: read
