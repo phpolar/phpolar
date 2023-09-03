@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Phpolar\Phpolar\Routing;
 
 use Exception;
+use Phan\Language\Element\ConstantInterface;
 use Phpolar\HttpCodes\ResponseCode;
 use Phpolar\Phpolar\Tests\Stubs\MemoryStreamStub;
 use Phpolar\Phpolar\Tests\Stubs\ResponseStub;
@@ -13,6 +14,7 @@ use Phpolar\Phpolar\Tests\Stubs\UriStub;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
+use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamFactoryInterface;
@@ -20,6 +22,32 @@ use Psr\Http\Message\StreamInterface;
 
 final class RoutingTest extends TestCase
 {
+    protected function getContainer(): ContainerInterface
+    {
+        return new class ($this->getResponseFactory(), $this->getStreamFactory()) implements ContainerInterface {
+            public function __construct(
+                private ResponseFactoryInterface $responseFactory,
+                private StreamFactoryInterface $streamFactory
+            ) {
+            }
+            public function has(string $id): bool
+            {
+                return true;
+            }
+
+            public function get(string $id)
+            {
+                if ($id === ResponseFactoryInterface::class) {
+                    return $this->responseFactory;
+                }
+
+                if ($id === StreamFactoryInterface::class) {
+                    return $this->streamFactory;
+                }
+            }
+        };
+    }
+
     protected function getResponseFactory(): ResponseFactoryInterface
     {
         return new class () implements ResponseFactoryInterface {
@@ -65,13 +93,10 @@ final class RoutingTest extends TestCase
                 return $this->responseTemplate;
             }
         };
-        $responseFactory = $this->getResponseFactory();
-        $streamFactory = $this->getStreamFactory();
         $routeRegistry->add($givenRoute, $indexHandler);
         $routingHandler = new DefaultRoutingHandler(
-            responseFactory: $responseFactory,
-            streamFactory: $streamFactory,
             routeRegistry: $routeRegistry,
+            container: $this->getContainer(),
         );
         $requestStub = (new RequestStub("GET"))->withUri(new UriStub($givenRoute));
         $response = $routingHandler->handle($requestStub);
@@ -85,12 +110,9 @@ final class RoutingTest extends TestCase
         $givenRoute = "an_unregistered_route";
         $expectedStatusCode = ResponseCode::NOT_FOUND;
         $routeRegistry = new RouteRegistry();
-        $responseFactory = $this->getResponseFactory();
-        $streamFactory = $this->getStreamFactory();
         $routingHandler = new DefaultRoutingHandler(
-            responseFactory: $responseFactory,
-            streamFactory: $streamFactory,
             routeRegistry: $routeRegistry,
+            container: $this->getContainer(),
         );
         $requestStub = (new RequestStub("GET"))->withUri(new UriStub($givenRoute));
         $response = $routingHandler->handle($requestStub);

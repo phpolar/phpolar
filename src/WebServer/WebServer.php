@@ -7,6 +7,8 @@ namespace Phpolar\Phpolar\WebServer;
 use Phpolar\CsrfProtection\Http\CsrfPostRoutingMiddlewareFactory;
 use Phpolar\CsrfProtection\Http\CsrfPreRoutingMiddleware;
 use Phpolar\Extensions\HttpResponse\ResponseExtension;
+use Phpolar\Phpolar\Routing\DefaultRoutingHandler;
+use Phpolar\Phpolar\Routing\RouteRegistry;
 use Phpolar\Phpolar\WebServer\Http\Error401Handler;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -21,7 +23,17 @@ final class WebServer
 
     private MiddlewareProcessingQueue $middlewareQueue;
 
-    private RequestHandlerInterface $primaryHandler;
+    /**
+     * A lookup table used to
+     * route requests to handlers.
+     *
+     * A custom routing handler can
+     * be provided, in which case
+     * this will likely be ignored.
+     */
+    private RouteRegistry $routes;
+
+    private bool $useRoutes = false;
 
     /**
      * Dependencies/services required
@@ -31,7 +43,6 @@ final class WebServer
      */
     private const REQUIRED_DEPS = [
         MiddlewareProcessingQueue::class,
-        self::PRIMARY_REQUEST_HANDLER,
         Error401Handler::class,
     ];
 
@@ -56,12 +67,7 @@ final class WebServer
          * @var MiddlewareProcessingQueue
          */
         $middlewareQueue = $this->container->get(MiddlewareProcessingQueue::class);
-        /**
-         * @var RequestHandlerInterface
-         */
-        $errorHandler = $this->container->get(self::PRIMARY_REQUEST_HANDLER);
         $this->middlewareQueue = $middlewareQueue;
-        $this->primaryHandler = $errorHandler;
     }
 
     /**
@@ -96,11 +102,15 @@ final class WebServer
      */
     public function receive(ServerRequestInterface $request): void
     {
+        /**
+         * @var RequestHandlerInterface
+         */
+        $primaryHandler = $this->useRoutes === true ? new DefaultRoutingHandler($this->routes, $this->container) : $this->container->get(self::PRIMARY_REQUEST_HANDLER);
         $result = $this->middlewareQueue->dequeuePreRoutingMiddleware($request);
         if ($result instanceof AbortProcessingRequest) {
             return;
         }
-        $routingResponse = $this->primaryHandler->handle($request);
+        $routingResponse = $primaryHandler->handle($request);
         $finalResponse = $this->middlewareQueue->dequeuePostRoutingMiddleware($request, $routingResponse);
         ResponseExtension::extend($finalResponse)->send();
     }
@@ -130,6 +140,17 @@ final class WebServer
          */
         $errorHandler = $this->container->get(Error401Handler::class);
         $this->middlewareQueue->addCsrfMiddleware($csrfPreRouting, $csrfPostRouting, $errorHandler);
+        return $this;
+    }
+
+    /**
+     * Configures the web server with associated
+     * routes and handlers.
+     */
+    public function useRoutes(RouteRegistry $routes): WebServer
+    {
+        $this->routes = $routes;
+        $this->useRoutes = true;
         return $this;
     }
 }
