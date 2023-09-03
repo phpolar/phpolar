@@ -1,3 +1,9 @@
+## 1.5.2 (2022-10-21)
+
+### Fix
+
+- use value of property when checking max length
+
 ## 1.5.1 (2022-10-20)
 
 ### Fix
