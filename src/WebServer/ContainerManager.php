@@ -9,7 +9,7 @@ use Phpolar\CsrfProtection\Http\CsrfPostRoutingMiddlewareFactory;
 use Phpolar\CsrfProtection\Http\CsrfPreRoutingMiddleware;
 use Phpolar\Phpolar\Routing\DefaultRoutingHandler;
 use Phpolar\Phpolar\Routing\RouteRegistry;
-use Phpolar\Phpolar\WebServer\Http\Error401Handler;
+use Phpolar\Phpolar\WebServer\Http\ErrorHandler;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
@@ -64,14 +64,14 @@ final class ContainerManager
     }
 
     /**
-     * Retrieves a 401 response error handler.
+     * Retrieves a 401 error handler.
      */
-    public function getErrorHandler(): Error401Handler
+    public function get401ErrorHandler(): ErrorHandler
     {
         /**
-         * @var Error401Handler $handler
+         * @var ErrorHandler $handler
          */
-        $handler = $this->container->get(Error401Handler::class);
+        $handler = $this->container->get(WebServer::ERROR_HANDLER_401);
         return $handler;
     }
 
