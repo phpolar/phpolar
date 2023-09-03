@@ -297,7 +297,7 @@ class PropertyAnnotationTest extends TestCase
                 return false;
             }
         };
-        $attributesConfigFile = $_SERVER["PWD"] . ATTRIBUTES_CONFIG_PATH;
+        $attributesConfigFile = getcwd() . ATTRIBUTES_CONFIG_PATH;
         $config = include $attributesConfigFile;
         $config->add(new LabelKey(), $attributeConfig);
         $sut = new PropertyAnnotation($instance, $propertyName, $config);

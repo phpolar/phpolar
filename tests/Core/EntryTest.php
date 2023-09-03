@@ -50,7 +50,7 @@ class EntryTest extends TestCase
 {
     public static function config()
     {
-        $attributesConfigFile = $_SERVER["PWD"] . ATTRIBUTES_CONFIG_PATH;
+        $attributesConfigFile = getcwd() . ATTRIBUTES_CONFIG_PATH;
         return [[require $attributesConfigFile]];
     }
 

@@ -61,7 +61,7 @@ class FormTest extends TestCase
 
     public static function setUpBeforeClass(): void
     {
-        $attributesConfigFile = $_SERVER["PWD"] . ATTRIBUTES_CONFIG_PATH;
+        $attributesConfigFile = getcwd() . ATTRIBUTES_CONFIG_PATH;
         static::$attributesConfigMap = include $attributesConfigFile;
     }
 
