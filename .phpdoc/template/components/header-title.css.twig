@@ -1,5 +1,5 @@
 .phpdocumentor-title {
-    {# box-sizing: border-box;
+    box-sizing: border-box;
     color: var(--pico-h1-color);
     font-size: var(--text-xxl);
     letter-spacing: .05rem;
@@ -7,7 +7,16 @@
     width: auto;
     margin: 0;
     display: flex;
-    align-items: center; #}
+    align-items: center;
+}
+
+body > header > nav > ul > li > a[role='brand logo'] {
+    margin-bottom: var(--pico-typography-spacing-vertical);
+    vertical-align: bottom;
+}
+body > header > nav > ul > li > a[role='brand logo'],
+body > header > nav > ul > li > hgroup {
+    display: inline-block;
 }
 
 .phpdocumentor-title .brand-icon {
