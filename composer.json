@@ -2,7 +2,6 @@
     "name": "efortmeyer/polar",
     "description": "A super-tiny, lightweight microframework for PHP projects",
     "type": "library",
-    "version": "1.0.0",
     "license": "MIT",
     "require": {
         "php": ">=7.3"
