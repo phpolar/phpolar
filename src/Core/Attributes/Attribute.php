@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 namespace Efortmeyer\Polar\Core\Attributes;
+
 /**
  * Provides a way to configure objects using Attributes.
  *

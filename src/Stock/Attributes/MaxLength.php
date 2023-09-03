@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Efortmeyer\Polar\Stock\Attributes;
 
+use Attribute as GlobalAttribute;
 use Efortmeyer\Polar\Core\Attributes\Attribute;
 use Efortmeyer\Polar\Api\Validation\ValidationInterface;
 use Efortmeyer\Polar\Stock\Validation\MaxLength as ValidationMaxLength;
@@ -11,6 +12,7 @@ use Efortmeyer\Polar\Stock\Validation\MaxLength as ValidationMaxLength;
 /**
  * Configures the max length of a property's value.
  */
+#[GlobalAttribute(GlobalAttribute::TARGET_PROPERTY)]
 final class MaxLength extends Attribute
 {
     public function __construct(private mixed $value, private int $maxLength)

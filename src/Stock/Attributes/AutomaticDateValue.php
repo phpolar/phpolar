@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Efortmeyer\Polar\Stock\Attributes;
 
+use Attribute as GlobalAttribute;
 use Efortmeyer\Polar\Core\Attributes\Attribute;
 
 use DateTimeImmutable;
@@ -15,6 +16,7 @@ use Efortmeyer\Polar\Core\Fields\AutomaticDateField;
  *
  * The value will be set to the current date.
  */
+#[GlobalAttribute(GlobalAttribute::TARGET_PROPERTY)]
 final class AutomaticDateValue extends Attribute
 {
     public string $type = InputTypes::DATE;
