@@ -37,6 +37,16 @@ class AttributeCollection
         );
     }
 
+    public function containsFormControlAttribute(): bool
+    {
+        return (bool) count(
+            array_filter(
+                $this->internalArray,
+                fn (Attribute $attribute) => is_a($attribute, Input::class)
+            )
+        );
+    }
+
     public function addDefaultsBasedOnMissingAttributes(string $propertyName): void
     {
         if ($this->containsClass(Label::class) === false) {
@@ -49,6 +59,10 @@ class AttributeCollection
 
         if ($this->containsClass(DateFormat::class) === false) {
             $this->internalArray[] = new DefaultDateFormat();
+        }
+
+        if ($this->containsFormControlAttribute() === false) {
+            $this->internalArray[] = new Input(InputTypes::Text);
         }
     }
 
@@ -120,7 +134,7 @@ class AttributeCollection
             $formControl = current($otherFormControls);
             return ($formControl !== false ? $formControl : new DefaultFormControl())->getFieldClassName();
         }
-        return "";
+        throw new AttributeNotConfiguredException();
     }
 
     /**
