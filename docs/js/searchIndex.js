@@ -8,7 +8,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\App\u003A\u003Acreate\u0028\u0029",
             "name": "create",
-            "summary": "Creates\u0020a\u0020singleton\u0020web\u0020server\u0020application.\u0020\u0020This\u0020framework\u0020targets\u0020the\n\u002Astateless,\u0020single\u002Dthreaded,\u0020server\u002Dside\u0020application\u0020use\u0020case\u002A.\u0020\u0020Therefore,\nonly\u0020a\u0020single\u0020instance\u0020is\u0020created\u0020on\u0020each\u0020request.",
+            "summary": "Creates\u0020a\u0020singleton\u0020web\u002Dbased\u0020application.",
             "url": "classes/Phpolar-Phpolar-App.html#method_create"
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\App\u003A\u003Areceive\u0028\u0029",
@@ -18,7 +18,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\App\u003A\u003AuseAuthorization\u0028\u0029",
             "name": "useAuthorization",
-            "summary": "Configures\u0020the\u0020application\nfor\u0020checking\u0020route\u0020authorization.",
+            "summary": "Configures\u0020the\u0020application\u0020for\u0020checking\u0020route\u0020authorization.",
             "url": "classes/Phpolar-Phpolar-App.html#method_useAuthorization"
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\App\u003A\u003AuseSession\u0028\u0029",
@@ -33,7 +33,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\Auth\\AbstractProtectedRoutable",
             "name": "AbstractProtectedRoutable",
-            "summary": "Represents\u0020an\u0020authenticated\u0020request\u0020delegate\nthat\u0020contains\u0020the\u0020credentials\u0020of\u0020an\u0020authenticated\nuser.",
+            "summary": "Represents\u0020a\u0020target\u0020object\u0020for\u0020a\u0020request\u0020route\nthat\u0020requires\u0020authorization.",
             "url": "classes/Phpolar-Phpolar-Auth-AbstractProtectedRoutable.html"
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\Auth\\AbstractProtectedRoutable\u003A\u003AwithUser\u0028\u0029",
@@ -48,7 +48,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\Auth\\Authenticate",
             "name": "Authenticate",
-            "summary": "Provides\u0020an\u0020authentication\u0020mechanism\nfor\u0020objects\u0020that\u0020handle\u0020requests.",
+            "summary": "Use\u0020to\u0020indicate\u0020that\u0020a\u0020route\u0020should\nonly\u0020be\u0020accessed\u0020by\u0020an\u0020authenticated\nuser.",
             "url": "classes/Phpolar-Phpolar-Auth-Authenticate.html"
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\Auth\\Authenticate\u003A\u003AgetResolvedRoutable\u0028\u0029",
