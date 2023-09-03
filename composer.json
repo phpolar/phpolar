@@ -57,7 +57,7 @@
         "phpolar/csrf-protection": "^3.0",
         "phpolar/http-message-test-utils": "^0.1.0 || ^0.2.0",
         "phpolar/model": "^1.0",
-        "phpolar/pure-php": "^1.0",
+        "phpolar/pure-php": "^2.0",
         "phpstan/phpstan": "^1.8",
         "phpunit/phpunit": "^10.0",
         "picocss/pico": "2.0.0alpha1",

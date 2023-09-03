@@ -33,8 +33,6 @@ use Phpolar\Phpolar\DependencyInjection\DiTokens;
 use Phpolar\Phpolar\Http\AuthorizationChecker;
 use Phpolar\Phpolar\Http\RequestMethods;
 use Phpolar\PropertyInjectorContract\PropertyInjectorInterface;
-use Phpolar\PurePhp\Binder;
-use Phpolar\PurePhp\Dispatcher;
 use Phpolar\PurePhp\StreamContentStrategy;
 use Phpolar\PurePhp\TemplateEngine;
 use Psr\Container\ContainerInterface;
@@ -92,7 +90,7 @@ final class MemoryUsageTest extends TestCase
         $config[ContainerInterface::class] = static fn (ArrayAccess $conf) => new ConfigurableContainerStub($conf);
         $config[ResponseFactoryInterface::class] = new ResponseFactoryStub();
         $config[StreamFactoryInterface::class] = new StreamFactoryStub("+w");
-        $config[TemplateEngine::class] = new TemplateEngine(new StreamContentStrategy(), new Binder(), new Dispatcher());
+        $config[TemplateEngine::class] = new TemplateEngine();
         $config[TemplatingStrategyInterface::class] = new StreamContentStrategy();
         $config[ContainerInterface::class] = new ConfigurableContainerStub($config);
         $config[DiTokens::CSRF_CHECK_MIDDLEWARE] = static fn (ArrayAccess $config) => new CsrfRequestCheckMiddleware($config[RequestHandlerInterface::class]);
