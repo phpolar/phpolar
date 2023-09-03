@@ -56,23 +56,29 @@ class RoutingHandler implements RequestHandlerInterface
 
     private function handleDelegate(RoutableInterface $delegate): ResponseInterface
     {
-        if ($this->routableResolver->resolve($delegate) === false) {
+        $authorizedDelegate = $this->routableResolver->resolve($delegate);
+
+        if ($authorizedDelegate === false) {
             return $this->responseFactory->createResponse(401, "Unauthorized");
         }
 
-        $modelParams = $this->modelResolver->resolve($delegate, "process");
+        $modelParams = $this->modelResolver->resolve($authorizedDelegate, "process");
         /**
          * @var string $responseContent
          */
-        $responseContent = empty($modelParams) === false ? (new ReflectionMethod($delegate, "process"))->invokeArgs($delegate, array_merge([$this->container], $modelParams)) : $delegate->process($this->container);
+        $responseContent = empty($modelParams) === false ? (new ReflectionMethod($authorizedDelegate, "process"))->invokeArgs($authorizedDelegate, array_merge([$this->container], $modelParams)) : $authorizedDelegate->process($this->container);
         return $this->getResponse($responseContent);
     }
 
     private function handleResolvedRoute(ResolvedRoute $resolvedRoute): ResponseInterface
     {
-        if ($this->routableResolver->resolve($resolvedRoute->delegate) === false) {
+        $authResult = $this->routableResolver->resolve($resolvedRoute->delegate);
+
+        if ($authResult === false) {
             return $this->responseFactory->createResponse(401);
         }
+
+        $resolvedRoute->delegate = $authResult;
 
         $reflectionMethod = new ReflectionMethod($resolvedRoute->delegate, "process");
         $args = array_merge([$this->container], $resolvedRoute->routeParamMap->toArray());
