@@ -1,3 +1,9 @@
+## 3.0.0a0 (2023-06-23)
+
+### Refactor
+
+- simplify project architecture (#180)
+
 ## 2.0.2 (2023-06-08)
 
 ### Fix
