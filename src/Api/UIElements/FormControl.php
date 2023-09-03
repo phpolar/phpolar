@@ -120,9 +120,7 @@ abstract class FormControl
     {
         $errors = array_filter(
             $this->field->validators,
-            function (ValidationInterface $validator) {
-                return $validator->isValid() === false;
-            }
+            fn (ValidationInterface $validator) => $validator->isValid() === false
         );
         array_walk(
             $errors,

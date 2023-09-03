@@ -44,8 +44,8 @@ abstract class Entry
 
         $this->fields = array_map(
             [$this, "createFieldFromAnnotation"],
-            array_map(function ($prop) { return $prop->getName(); }, $properties),
-            array_map(function ($prop) { return $prop->getValue($this); }, $properties)
+            array_map(fn ($prop) => $prop->getName(), $properties),
+            array_map(fn ($prop) => $prop->getValue($this), $properties)
         );
     }
 
@@ -99,9 +99,7 @@ abstract class Entry
      */
     public function getFieldValues(): array
     {
-        return array_map(function (Field $field) {
-            return $field->getValue();
-        }, $this->fields);
+        return array_map(fn (Field $field) => $field->getValue(), $this->fields);
     }
 
     /**
