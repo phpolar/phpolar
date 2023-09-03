@@ -40,22 +40,15 @@ abstract class FormControl
      */
     public static function create(FieldMetadata $field): FormControl
     {
-        switch (true)
+        return match (true)
         {
-            case $field instanceof TextField:
-                return new TextFormControl($field);
-            case $field instanceof TextAreaField:
-                return new TextAreaFormControl($field);
-            case $field instanceof NumberField:
-                return new NumberFormControl($field);
-            // automatic date field has greater precedence than date field
-            case $field instanceof AutomaticDateField:
-                return new HiddenFormControl($field);
-            case $field instanceof DateField:
-                return new DateFormControl($field);
-            default:
-                throw new RuntimeException(get_class($field) . " is not compatible");
-        }
+            $field instanceof TextField => new TextFormControl($field),
+            $field instanceof TextAreaField => new TextAreaFormControl($field),
+            $field instanceof NumberField => new NumberFormControl($field),
+            $field instanceof AutomaticDateField => new HiddenFormControl($field),
+            $field instanceof DateField => new DateFormControl($field),
+            default => throw new RuntimeException(get_class($field) . " is not compatible")
+        };
     }
 
     /**
