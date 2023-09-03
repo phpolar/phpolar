@@ -35,8 +35,8 @@ final class ContainerManager
         AbstractContainerFactory $containerFac,
         ArrayAccess $containerConfig
     ) {
-        $this->containerLoader = new ContainerLoader($containerConfig);
         $this->container = $containerFac->getContainer($containerConfig);
+        $this->containerLoader = new ContainerLoader($containerConfig, $this->container);
     }
 
     /**

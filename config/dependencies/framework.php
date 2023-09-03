@@ -28,35 +28,35 @@ return [
     /**
      * @suppress PhanUnreferencedClosure
      */
-    WebServer::ERROR_HANDLER_401 => static fn (ArrayAccess $config) => new ErrorHandler(
+    WebServer::ERROR_HANDLER_401 => static fn (ContainerInterface $container) => new ErrorHandler(
         ResponseCode::UNAUTHORIZED,
         "Unauthorized",
-        $config[ContainerInterface::class],
+        $container,
     ),
     /**
      * @suppress PhanUnreferencedClosure
      */
-    WebServer::ERROR_HANDLER_404 => static fn (ArrayAccess $config) => new ErrorHandler(
+    WebServer::ERROR_HANDLER_404 => static fn (ContainerInterface $container) => new ErrorHandler(
         ResponseCode::NOT_FOUND,
         "Not Found",
-        $config[ContainerInterface::class],
+        $container,
     ),
     /**
      * @suppress PhanUnreferencedClosure
      */
-    RoutingHandler::class => static fn (ArrayAccess $config) => new RoutingHandler(
-        $config[RouteRegistry::class],
-        $config[ResponseFactoryInterface::class],
-        $config[StreamFactoryInterface::class],
-        $config[WebServer::ERROR_HANDLER_404],
-        $config[ContainerInterface::class],
+    RoutingHandler::class => static fn (ContainerInterface $container) => new RoutingHandler(
+        $container->get(RouteRegistry::class),
+        $container->get(ResponseFactoryInterface::class),
+        $container->get(StreamFactoryInterface::class),
+        $container->get(WebServer::ERROR_HANDLER_404),
+        $container,
     ),
     /**
      * @suppress PhanUnreferencedClosure
      */
-    PrimaryHandler::class => static fn (ArrayAccess $config) => new PrimaryHandler($config[WebServer::ERROR_HANDLER_404]),
+    PrimaryHandler::class => static fn (ContainerInterface $container) => new PrimaryHandler($container->get(WebServer::ERROR_HANDLER_404)),
     /**
      * @suppress PhanUnreferencedClosure
      */
-    RoutingMiddleware::class => static fn (ArrayAccess $config) => new RoutingMiddleware($config[RoutingHandler::class])
+    RoutingMiddleware::class => static fn (ContainerInterface $container) => new RoutingMiddleware($container->get(RoutingHandler::class))
 ];

@@ -125,7 +125,7 @@ final class WebServerTest extends TestCase
         $containerFac = $this->getContainerFactory($config, $handler);
         // do not use the container config file
         chdir(__DIR__);
-        $server = WebServer::createApp($containerFac, $config);
+        $server = WebServer::createApp(new ContainerManager($containerFac, $config));
         $server->useRoutes($routes);
         $server->receive($request);
         $this->assertSame(ResponseCode::OK, http_response_code());
@@ -185,7 +185,7 @@ final class WebServerTest extends TestCase
         $containerFac = $this->getContainerFactory($config, $handler, $csrfPreRoutingMiddleware, $csrfPostRoutingMiddleware);
         // do not use the container config file
         chdir(__DIR__);
-        $server = WebServer::createApp($containerFac, $config);
+        $server = WebServer::createApp(new ContainerManager($containerFac, $config));
         $server->useCsrfMiddleware();
         $server->useRoutes($routes);
         $server->receive($request);
@@ -208,7 +208,7 @@ final class WebServerTest extends TestCase
         $config = new ContainerConfigurationStub();
         $containerFac = $this->getContainerFactory($config, $handlerStub);
         $container = $containerFac->getContainer($config);
-        $sut = WebServer::createApp($containerFac, $config);
+        $sut = WebServer::createApp(new ContainerManager($containerFac, $config));
         $sut->useRoutes($givenRoutes);
         /**
          * @var RouteRegistry $configuredRoutes
@@ -227,7 +227,7 @@ final class WebServerTest extends TestCase
         $config[ResponseFactoryInterface::class] = $this->createStub(ResponseFactoryInterface::class);
         $nonConfiguredContainerFac = $this->getNonConfiguredContainer();
         chdir("tests/__fakes__/");
-        $app = WebServer::createApp($nonConfiguredContainerFac, $config);
+        $app = WebServer::createApp(new ContainerManager($nonConfiguredContainerFac, $config));
         $app->receive(new RequestStub());
         $this->expectOutputString("<h1>Not Found</h1>");
     }
@@ -243,7 +243,7 @@ final class WebServerTest extends TestCase
         $handlerStub = $this->createStub(PrimaryHandler::class);
         $handlerStub->method("handle")->willReturn((new ResponseStub(404, "Not Found")));
         $container = $this->getContainerFactory($config, $handlerStub);
-        $sut = WebServer::createApp($container, $config);
+        $sut = WebServer::createApp(new ContainerManager($container, $config));
         $sut->receive(new RequestStub("GET", "/non-existing-route"));
         $this->assertSame(ResponseCode::NOT_FOUND, http_response_code());
     }
