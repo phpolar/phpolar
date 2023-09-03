@@ -6,6 +6,11 @@ Search.appendIndex(
             "summary": "Provides\u0020support\u0020for\u0020configuring\u0020the\u0020properties\nof\u0020an\u0020object\u0020for\u0020validation,\u0020formatting,\u0020and\u0020storage.",
             "url": "classes/Phpolar-Phpolar-Model-AbstractModel.html"
         },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Model\\AbstractModel\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Phpolar-Phpolar-Model-AbstractModel.html#method___construct"
+        },                {
             "fqsen": "\\Phpolar\\Phpolar\\Model\\Column",
             "name": "Column",
             "summary": "Provides\u0020support\u0020for\u0020configuring\u0020the\u0020text\u0020for\u0020column\u0020names\u0020in\u0020records.",
@@ -80,6 +85,11 @@ Search.appendIndex(
             "name": "hasError",
             "summary": "Determines\u0020if\u0020a\u0020property\u0020is\nnot\u0020valid.",
             "url": "classes/Phpolar-Phpolar-Model-FieldErrorMessageTrait.html#method_hasError"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Model\\FieldErrorMessageTrait\u003A\u003AisPosted\u0028\u0029",
+            "name": "isPosted",
+            "summary": "Changes\u0020the\u0020posted\u0020state\u0020of\u0020the\u0020model.",
+            "url": "classes/Phpolar-Phpolar-Model-FieldErrorMessageTrait.html#method_isPosted"
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\Model\\FormControlTypeDetectionTrait",
             "name": "FormControlTypeDetectionTrait",
@@ -371,35 +381,100 @@ Search.appendIndex(
             "summary": "Use\u0020to\u0020notify\u0020the\u0020web\u0020server\u0020that\u0020the\u0020request\u0020shall\u0020not\u0020be\u0020processed",
             "url": "classes/Phpolar-Phpolar-WebServer-AbortProcessingRequest.html"
         },                {
+            "fqsen": "\\Phpolar\\Phpolar\\WebServer\\AbstractContainerFactory",
+            "name": "AbstractContainerFactory",
+            "summary": "This\u0020allows\u0020for\u0020configuring\u0020the\u0020container\nbefore\u0020the\u0020server\u0020is\u0020initialized,\u0020afterwards,\u0020or\u0020both.",
+            "url": "classes/Phpolar-Phpolar-WebServer-AbstractContainerFactory.html"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\WebServer\\AbstractContainerFactory\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Phpolar-Phpolar-WebServer-AbstractContainerFactory.html#method___construct"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\WebServer\\AbstractContainerFactory\u003A\u003AgetContainer\u0028\u0029",
+            "name": "getContainer",
+            "summary": "Retrieve\u0020the\u0020configured\u0020PSR\u002D11\u0020container.",
+            "url": "classes/Phpolar-Phpolar-WebServer-AbstractContainerFactory.html#method_getContainer"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\WebServer\\ContainerConfigurator",
+            "name": "ContainerConfigurator",
+            "summary": "Configures\u0020a\u0020dependency\u0020injection\u0020container.",
+            "url": "classes/Phpolar-Phpolar-WebServer-ContainerConfigurator.html"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\WebServer\\ContainerConfigurator\u003A\u003AconfigureContainer\u0028\u0029",
+            "name": "configureContainer",
+            "summary": "Add\u0020services\/dependencies\u0020to\u0020the\u0020provided\u0020container.",
+            "url": "classes/Phpolar-Phpolar-WebServer-ContainerConfigurator.html#method_configureContainer"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\WebServer\\ContainerFactory",
+            "name": "ContainerFactory",
+            "summary": "A\u0020container\u0020factory\u0020implementation.",
+            "url": "classes/Phpolar-Phpolar-WebServer-ContainerFactory.html"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\WebServer\\ContainerManager",
+            "name": "ContainerManager",
+            "summary": "Manages\u0020the\u0020dependency\u0020injection\u0020container.",
+            "url": "classes/Phpolar-Phpolar-WebServer-ContainerManager.html"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\WebServer\\ContainerManager\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Phpolar-Phpolar-WebServer-ContainerManager.html#method___construct"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\WebServer\\ContainerManager\u003A\u003AgetCsrfPostRoutingMiddlewareFactory\u0028\u0029",
+            "name": "getCsrfPostRoutingMiddlewareFactory",
+            "summary": "Retrieves\u0020the\u0020CSRF\u0020post\u002Drouting\u0020middleware.",
+            "url": "classes/Phpolar-Phpolar-WebServer-ContainerManager.html#method_getCsrfPostRoutingMiddlewareFactory"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\WebServer\\ContainerManager\u003A\u003AgetCsrfPreRoutingMiddleware\u0028\u0029",
+            "name": "getCsrfPreRoutingMiddleware",
+            "summary": "Retrieves\u0020the\u0020CSRF\u0020pre\u002Drouting\u0020middleware.",
+            "url": "classes/Phpolar-Phpolar-WebServer-ContainerManager.html#method_getCsrfPreRoutingMiddleware"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\WebServer\\ContainerManager\u003A\u003Aget401ErrorHandler\u0028\u0029",
+            "name": "get401ErrorHandler",
+            "summary": "Retrieves\u0020a\u0020401\u0020error\u0020handler.",
+            "url": "classes/Phpolar-Phpolar-WebServer-ContainerManager.html#method_get401ErrorHandler"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\WebServer\\ContainerManager\u003A\u003AgetMiddlewareQueue\u0028\u0029",
+            "name": "getMiddlewareQueue",
+            "summary": "Retrieves\u0020the\u0020middleware\u0020processing\u0020queue",
+            "url": "classes/Phpolar-Phpolar-WebServer-ContainerManager.html#method_getMiddlewareQueue"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\WebServer\\ContainerManager\u003A\u003AgetPrimaryRequestHandler\u0028\u0029",
+            "name": "getPrimaryRequestHandler",
+            "summary": "Retrieves\u0020the\u0020primary\u0020request\u0020handler.",
+            "url": "classes/Phpolar-Phpolar-WebServer-ContainerManager.html#method_getPrimaryRequestHandler"
+        },                {
             "fqsen": "\\Phpolar\\Phpolar\\WebServer\\ContinueProcessingRequest",
             "name": "ContinueProcessingRequest",
             "summary": "Use\u0020to\u0020notify\u0020the\u0020web\u0020server\u0020that\u0020the\u0020request\u0020can\u0020be\u0020processed",
             "url": "classes/Phpolar-Phpolar-WebServer-ContinueProcessingRequest.html"
         },                {
-            "fqsen": "\\Phpolar\\Phpolar\\WebServer\\Http\\Error401Handler",
-            "name": "Error401Handler",
+            "fqsen": "\\Phpolar\\Phpolar\\WebServer\\Http\\ErrorHandler",
+            "name": "ErrorHandler",
             "summary": "Handles\u0020401\u0020errors.",
-            "url": "classes/Phpolar-Phpolar-WebServer-Http-Error401Handler.html"
+            "url": "classes/Phpolar-Phpolar-WebServer-Http-ErrorHandler.html"
         },                {
-            "fqsen": "\\Phpolar\\Phpolar\\WebServer\\Http\\Error401Handler\u003A\u003A__construct\u0028\u0029",
+            "fqsen": "\\Phpolar\\Phpolar\\WebServer\\Http\\ErrorHandler\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
             "summary": "",
-            "url": "classes/Phpolar-Phpolar-WebServer-Http-Error401Handler.html#method___construct"
+            "url": "classes/Phpolar-Phpolar-WebServer-Http-ErrorHandler.html#method___construct"
         },                {
-            "fqsen": "\\Phpolar\\Phpolar\\WebServer\\Http\\Error401Handler\u003A\u003Ahandle\u0028\u0029",
+            "fqsen": "\\Phpolar\\Phpolar\\WebServer\\Http\\ErrorHandler\u003A\u003Ahandle\u0028\u0029",
             "name": "handle",
             "summary": "Return\u0020a\u0020401\u0020response.",
-            "url": "classes/Phpolar-Phpolar-WebServer-Http-Error401Handler.html#method_handle"
+            "url": "classes/Phpolar-Phpolar-WebServer-Http-ErrorHandler.html#method_handle"
         },                {
-            "fqsen": "\\Phpolar\\Phpolar\\WebServer\\Http\\Error401Handler\u003A\u003ADEFAULT_ERROR_MSG",
+            "fqsen": "\\Phpolar\\Phpolar\\WebServer\\Http\\ErrorHandler\u003A\u003ADEFAULT_ERROR_MSG",
             "name": "DEFAULT_ERROR_MSG",
             "summary": "",
-            "url": "classes/Phpolar-Phpolar-WebServer-Http-Error401Handler.html#constant_DEFAULT_ERROR_MSG"
+            "url": "classes/Phpolar-Phpolar-WebServer-Http-ErrorHandler.html#constant_DEFAULT_ERROR_MSG"
         },                {
-            "fqsen": "\\Phpolar\\Phpolar\\WebServer\\Http\\Error401Handler\u003A\u003ADEFAULT_FORBIDDEN_TPL_PATH",
+            "fqsen": "\\Phpolar\\Phpolar\\WebServer\\Http\\ErrorHandler\u003A\u003ADEFAULT_FORBIDDEN_TPL_PATH",
             "name": "DEFAULT_FORBIDDEN_TPL_PATH",
             "summary": "",
-            "url": "classes/Phpolar-Phpolar-WebServer-Http-Error401Handler.html#constant_DEFAULT_FORBIDDEN_TPL_PATH"
+            "url": "classes/Phpolar-Phpolar-WebServer-Http-ErrorHandler.html#constant_DEFAULT_FORBIDDEN_TPL_PATH"
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\WebServer\\MiddlewareProcessingQueue",
             "name": "MiddlewareProcessingQueue",
@@ -433,12 +508,12 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\WebServer\\WebServer\u003A\u003AcreateApp\u0028\u0029",
             "name": "createApp",
-            "summary": "Creates\u0020a\u0020singleton\u0020server.",
+            "summary": "Creates\u0020a\u0020singleton\u0020web\u0020server\u0020application.\u0020\u0020This\u0020framework\u0020targets\u0020the\n\u002Astateless,\u0020single\u002Dthreaded,\u0020server\u002Dside\u0020application\u0020use\u0020case\u002A.\u0020\u0020Therefore,\nonly\u0020a\u0020single\u0020instance\u0020is\u0020created\u0020on\u0020each\u0020request.\u0020\u0020If\u0020the\u0020provided\nfactory\u0020used\u0020to\u0020create\u0020the\u0020dependency\u0020injection\u0020container\u0020is\u0020stateless,\ncaching\u0020this\u0020instance\u0020should\u0020be\u0020considered\u0020for\u0020performance\u0020reasons.",
             "url": "classes/Phpolar-Phpolar-WebServer-WebServer.html#method_createApp"
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\WebServer\\WebServer\u003A\u003Areceive\u0028\u0029",
             "name": "receive",
-            "summary": "Handle\u0020and\u0020respond\u0020to\u0020requests\u0020from\u0020clients",
+            "summary": "Handle\u0020and\u0020respond\u0020to\u0020requests\u0020from\u0020clients.",
             "url": "classes/Phpolar-Phpolar-WebServer-WebServer.html#method_receive"
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\WebServer\\WebServer\u003A\u003AuseCsrfMiddleware\u0028\u0029",
@@ -455,6 +530,11 @@ Search.appendIndex(
             "name": "PRIMARY_REQUEST_HANDLER",
             "summary": "",
             "url": "classes/Phpolar-Phpolar-WebServer-WebServer.html#constant_PRIMARY_REQUEST_HANDLER"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\WebServer\\WebServer\u003A\u003AERROR_HANDLER_401",
+            "name": "ERROR_HANDLER_401",
+            "summary": "",
+            "url": "classes/Phpolar-Phpolar-WebServer-WebServer.html#constant_ERROR_HANDLER_401"
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\WebServer\\WebServerConfigurationException",
             "name": "WebServerConfigurationException",

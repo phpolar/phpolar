@@ -93,11 +93,12 @@
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/phpolar.html">Phpolar</a></li>
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/phpolar-phpolar.html">Phpolar</a></li>
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/phpolar-phpolar-webserver.html">WebServer</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/phpolar-phpolar-webserver-http.html">Http</a></li>
     </ul>
 
     <article class="phpdocumentor-element -class">
         <h2 class="phpdocumentor-content__title">
-    WebServer
+    ErrorHandler
 
     
             <div class="phpdocumentor-element__package">
@@ -107,17 +108,20 @@
                             </ul>
         </div>
     
+            <span class="phpdocumentor-element__implements">
+            implements
+                            <abbr title="\Psr\Http\Server\RequestHandlerInterface">RequestHandlerInterface</abbr>                    </span>
     
     </h2>
 
         <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="WebServer/WebServer.php"><a href="files/webserver-webserver.html"><abbr title="WebServer/WebServer.php">WebServer.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="WebServer/Http/ErrorHandler.php"><a href="files/webserver-http-errorhandler.html"><abbr title="WebServer/Http/ErrorHandler.php">ErrorHandler.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">15</span>
+    <span class="phpdocumentor-element-found-in__line">18</span>
 
     </aside>
 
-            <p class="phpdocumentor-summary">Represents a server that handles and responds to request.</p>
+            <p class="phpdocumentor-summary">Handles 401 errors.</p>
 
 
 
@@ -125,6 +129,18 @@
 
 
 
+<h3 id="interfaces_class_traits">
+    Interfaces, Classes, Traits and Enums
+    <a href="#interfaces_class_traits" class="headerlink"><i class="fas fa-link"></i></a>
+</h3>
+
+<dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -interface"><abbr title="\Psr\Http\Server\RequestHandlerInterface">RequestHandlerInterface</abbr></dt>
+        <dd></dd>
+    
+    
+    
+    </dl>
 
 
 <h3 id="toc">
@@ -134,51 +150,32 @@
 
 <dl class="phpdocumentor-table-of-contents">
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
-    <a href="classes/Phpolar-Phpolar-WebServer-WebServer.html#constant_ERROR_HANDLER_401">ERROR_HANDLER_401</a>
+    <a href="classes/Phpolar-Phpolar-WebServer-Http-ErrorHandler.html#constant_DEFAULT_ERROR_MSG">DEFAULT_ERROR_MSG</a>
     <span>
-        &nbsp;= &quot;ERROR_HANDLER_401&quot;                            </span>
+        &nbsp;= &quot;&lt;h1&gt;%s&lt;/h1&gt;&quot;                            </span>
 </dt>
 <dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
-    <a href="classes/Phpolar-Phpolar-WebServer-WebServer.html#constant_PRIMARY_REQUEST_HANDLER">PRIMARY_REQUEST_HANDLER</a>
+    <a href="classes/Phpolar-Phpolar-WebServer-Http-ErrorHandler.html#constant_DEFAULT_FORBIDDEN_TPL_PATH">DEFAULT_FORBIDDEN_TPL_PATH</a>
     <span>
-        &nbsp;= &quot;PRIMARY_REQUEST_HANDLER&quot;                            </span>
+        &nbsp;= &quot;src/templates/%s.phtml&quot;                            </span>
 </dt>
 <dd></dd>
 
                         <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Phpolar-Phpolar-WebServer-WebServer.html#method_createApp">createApp()</a>
+    <a href="classes/Phpolar-Phpolar-WebServer-Http-ErrorHandler.html#method___construct">__construct()</a>
     <span>
-                                &nbsp;: <a href="classes/Phpolar-Phpolar-WebServer-WebServer.html"><abbr title="\Phpolar\Phpolar\WebServer\WebServer">WebServer</abbr></a>    </span>
+                                &nbsp;: mixed    </span>
 </dt>
-<dd>Creates a singleton web server application.  This framework targets the
-*stateless, single-threaded, server-side application use case*.  Therefore,
-only a single instance is created on each request.  If the provided
-factory used to create the dependency injection container is stateless,
-caching this instance should be considered for performance reasons.</dd>
+<dd></dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Phpolar-Phpolar-WebServer-WebServer.html#method_receive">receive()</a>
+    <a href="classes/Phpolar-Phpolar-WebServer-Http-ErrorHandler.html#method_handle">handle()</a>
     <span>
-                                &nbsp;: void    </span>
+                                &nbsp;: <abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr>    </span>
 </dt>
-<dd>Handle and respond to requests from clients.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Phpolar-Phpolar-WebServer-WebServer.html#method_useCsrfMiddleware">useCsrfMiddleware()</a>
-    <span>
-                                &nbsp;: <a href="classes/Phpolar-Phpolar-WebServer-WebServer.html"><abbr title="\Phpolar\Phpolar\WebServer\WebServer">WebServer</abbr></a>    </span>
-</dt>
-<dd>Configures the server for CSRF attack mitigation.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Phpolar-Phpolar-WebServer-WebServer.html#method_useRoutes">useRoutes()</a>
-    <span>
-                                &nbsp;: <a href="classes/Phpolar-Phpolar-WebServer-WebServer.html"><abbr title="\Phpolar\Phpolar\WebServer\WebServer">WebServer</abbr></a>    </span>
-</dt>
-<dd>Configures the web server with associated
-routes and handlers.</dd>
+<dd>Return a 401 response.</dd>
 
         </dl>
 
@@ -188,18 +185,18 @@ routes and handlers.</dd>
     <section class="phpdocumentor-constants">
         <h3 class="phpdocumentor-elements__header" id="constants">
             Constants
-            <a href="classes/Phpolar-Phpolar-WebServer-WebServer.html#constants" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/Phpolar-Phpolar-WebServer-Http-ErrorHandler.html#constants" class="headerlink"><i class="fas fa-link"></i></a>
         </h3>
                     <article class="phpdocumentor-element -constant -public ">
-    <h4 class="phpdocumentor-element__name" id="constant_ERROR_HANDLER_401">
-        ERROR_HANDLER_401
-        <a href="classes/Phpolar-Phpolar-WebServer-WebServer.html#constant_ERROR_HANDLER_401" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="constant_DEFAULT_ERROR_MSG">
+        DEFAULT_ERROR_MSG
+        <a href="classes/Phpolar-Phpolar-WebServer-Http-ErrorHandler.html#constant_DEFAULT_ERROR_MSG" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
 
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="WebServer/WebServer.php"><a href="files/webserver-webserver.html"><abbr title="WebServer/WebServer.php">WebServer.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="WebServer/Http/ErrorHandler.php"><a href="files/webserver-http-errorhandler.html"><abbr title="WebServer/Http/ErrorHandler.php">ErrorHandler.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">19</span>
+    <span class="phpdocumentor-element-found-in__line">20</span>
 
     </aside>
 
@@ -207,8 +204,8 @@ routes and handlers.</dd>
     <code class="phpdocumentor-signature phpdocumentor-code ">
     <span class="phpdocumentor-signature__visibility">public</span>
         <span class="phpdocumentor-signature__type">mixed</span>
-    <span class="phpdocumentor-signature__name">ERROR_HANDLER_401</span>
-    = <span class="phpdocumentor-signature__default-value">&quot;ERROR_HANDLER_401&quot;</span>
+    <span class="phpdocumentor-signature__name">DEFAULT_ERROR_MSG</span>
+    = <span class="phpdocumentor-signature__default-value">&quot;&lt;h1&gt;%s&lt;/h1&gt;&quot;</span>
 </code>
 
 
@@ -220,15 +217,15 @@ routes and handlers.</dd>
 
 </article>
                     <article class="phpdocumentor-element -constant -public ">
-    <h4 class="phpdocumentor-element__name" id="constant_PRIMARY_REQUEST_HANDLER">
-        PRIMARY_REQUEST_HANDLER
-        <a href="classes/Phpolar-Phpolar-WebServer-WebServer.html#constant_PRIMARY_REQUEST_HANDLER" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="constant_DEFAULT_FORBIDDEN_TPL_PATH">
+        DEFAULT_FORBIDDEN_TPL_PATH
+        <a href="classes/Phpolar-Phpolar-WebServer-Http-ErrorHandler.html#constant_DEFAULT_FORBIDDEN_TPL_PATH" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
 
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="WebServer/WebServer.php"><a href="files/webserver-webserver.html"><abbr title="WebServer/WebServer.php">WebServer.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="WebServer/Http/ErrorHandler.php"><a href="files/webserver-http-errorhandler.html"><abbr title="WebServer/Http/ErrorHandler.php">ErrorHandler.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">17</span>
+    <span class="phpdocumentor-element-found-in__line">22</span>
 
     </aside>
 
@@ -236,8 +233,8 @@ routes and handlers.</dd>
     <code class="phpdocumentor-signature phpdocumentor-code ">
     <span class="phpdocumentor-signature__visibility">public</span>
         <span class="phpdocumentor-signature__type">mixed</span>
-    <span class="phpdocumentor-signature__name">PRIMARY_REQUEST_HANDLER</span>
-    = <span class="phpdocumentor-signature__default-value">&quot;PRIMARY_REQUEST_HANDLER&quot;</span>
+    <span class="phpdocumentor-signature__name">DEFAULT_FORBIDDEN_TPL_PATH</span>
+    = <span class="phpdocumentor-signature__default-value">&quot;src/templates/%s.phtml&quot;</span>
 </code>
 
 
@@ -255,57 +252,56 @@ routes and handlers.</dd>
             <section class="phpdocumentor-methods">
         <h3 class="phpdocumentor-elements__header" id="methods">
             Methods
-            <a href="classes/Phpolar-Phpolar-WebServer-WebServer.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/Phpolar-Phpolar-WebServer-Http-ErrorHandler.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
         </h3>
                     <article
         class="phpdocumentor-element
             -method
             -public
-                                    -static                    "
+                                                        "
 >
-    <h4 class="phpdocumentor-element__name" id="method_createApp">
-        createApp()
-        <a href="classes/Phpolar-Phpolar-WebServer-WebServer.html#method_createApp" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method___construct">
+        __construct()
+        <a href="classes/Phpolar-Phpolar-WebServer-Http-ErrorHandler.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="WebServer/WebServer.php"><a href="files/webserver-webserver.html"><abbr title="WebServer/WebServer.php">WebServer.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="WebServer/Http/ErrorHandler.php"><a href="files/webserver-http-errorhandler.html"><abbr title="WebServer/Http/ErrorHandler.php">ErrorHandler.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">66</span>
+    <span class="phpdocumentor-element-found-in__line">30</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Creates a singleton web server application.  This framework targets the
-*stateless, single-threaded, server-side application use case*.  Therefore,
-only a single instance is created on each request.  If the provided
-factory used to create the dependency injection container is stateless,
-caching this instance should be considered for performance reasons.</p>
-
+    
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">createApp</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Phpolar-Phpolar-WebServer-AbstractContainerFactory.html"><abbr title="\Phpolar\Phpolar\WebServer\AbstractContainerFactory">AbstractContainerFactory</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$containerFactory</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\ArrayAccess">ArrayAccess</abbr>&lt;string, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$containerConfig</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Phpolar-Phpolar-WebServer-WebServer.html"><abbr title="\Phpolar\Phpolar\WebServer\WebServer">WebServer</abbr></a></span></code>
+                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$responseCode</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$reasonPhrase</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Container\ContainerInterface">ContainerInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$container</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
 
-    
+        <section class="phpdocumentor-description"></section>
+
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$containerFactory</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Phpolar-Phpolar-WebServer-AbstractContainerFactory.html"><abbr title="\Phpolar\Phpolar\WebServer\AbstractContainerFactory">AbstractContainerFactory</abbr></a></span>
+                <span class="phpdocumentor-signature__argument__name">$responseCode</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>Adds support for configuring
-a <strong>PSR-11</strong> dependency injection container before the app is initialized, afterwards,
-or both.</p>
-</section>
+                    <section class="phpdocumentor-description"></section>
 
             </dd>
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$containerConfig</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\ArrayAccess">ArrayAccess</abbr>&lt;string, mixed&gt;</span>
+                <span class="phpdocumentor-signature__argument__name">$reasonPhrase</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>The framework will configure some
-services/dependencies after the application is initialized.</p>
-</section>
+                    <section class="phpdocumentor-description"></section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$container</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Container\ContainerInterface">ContainerInterface</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"></section>
 
             </dd>
             </dl>
@@ -313,7 +309,7 @@ services/dependencies after the application is initialized.</p>
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><a href="classes/Phpolar-Phpolar-WebServer-WebServer.html"><abbr title="\Phpolar\Phpolar\WebServer\WebServer">WebServer</abbr></a></span>
+    <span class="phpdocumentor-signature__response_type">mixed</span>
             &mdash;
         
     
@@ -324,22 +320,22 @@ services/dependencies after the application is initialized.</p>
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_receive">
-        receive()
-        <a href="classes/Phpolar-Phpolar-WebServer-WebServer.html#method_receive" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_handle">
+        handle()
+        <a href="classes/Phpolar-Phpolar-WebServer-Http-ErrorHandler.html#method_handle" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="WebServer/WebServer.php"><a href="files/webserver-webserver.html"><abbr title="WebServer/WebServer.php">WebServer.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="WebServer/Http/ErrorHandler.php"><a href="files/webserver-http-errorhandler.html"><abbr title="WebServer/Http/ErrorHandler.php">ErrorHandler.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">76</span>
+    <span class="phpdocumentor-element-found-in__line">57</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Handle and respond to requests from clients.</p>
+        <p class="phpdocumentor-summary">Return a 401 response.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">receive</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\ServerRequestInterface">ServerRequestInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$request</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+                    <span class="phpdocumentor-signature__name">handle</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\ServerRequestInterface">ServerRequestInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$request</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr></span></code>
 
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
@@ -355,105 +351,24 @@ services/dependencies after the application is initialized.</p>
             </dl>
 
     
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">void</span>
-            &mdash;
-        
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_useCsrfMiddleware">
-        useCsrfMiddleware()
-        <a href="classes/Phpolar-Phpolar-WebServer-WebServer.html#method_useCsrfMiddleware" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="WebServer/WebServer.php"><a href="files/webserver-webserver.html"><abbr title="WebServer/WebServer.php">WebServer.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">97</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Configures the server for CSRF attack mitigation.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">useCsrfMiddleware</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Phpolar-Phpolar-WebServer-WebServer.html"><abbr title="\Phpolar\Phpolar\WebServer\WebServer">WebServer</abbr></a></span></code>
-
-        <section class="phpdocumentor-description"><p>The server will not process the request if the
-CSRF check fails.  The current response
-will be set up for CSRF detection.</p>
-</section>
-
-    
-    
     <h5 class="phpdocumentor-tag-list__heading" id="tags">
         Tags
         <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
     </h5>
     <dl class="phpdocumentor-tag-list">
                                     <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">throws</span>
+                    <span class="phpdocumentor-tag__name">suppress</span>
                 </dt>
                 <dd class="phpdocumentor-tag-list__definition">
-                                                                <span class="phpdocumentor-tag-link"><a href="classes/Phpolar-Phpolar-WebServer-WebServerConfigurationException.html"><abbr title="\Phpolar\Phpolar\WebServer\WebServerConfigurationException">WebServerConfigurationException</abbr></a></span>
-                                                            
-                                             
+                                                                                
+                                                 <section class="phpdocumentor-description"><p>PhanUnusedPublicFinalMethodParameter</p>
+</section>
+
                                     </dd>
                         </dl>
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><a href="classes/Phpolar-Phpolar-WebServer-WebServer.html"><abbr title="\Phpolar\Phpolar\WebServer\WebServer">WebServer</abbr></a></span>
-            &mdash;
-        
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_useRoutes">
-        useRoutes()
-        <a href="classes/Phpolar-Phpolar-WebServer-WebServer.html#method_useRoutes" class="headerlink"><i class="fas fa-link"></i></a>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="WebServer/WebServer.php"><a href="files/webserver-webserver.html"><abbr title="WebServer/WebServer.php">WebServer.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">110</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Configures the web server with associated
-routes and handlers.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">useRoutes</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Phpolar-Phpolar-Routing-RouteRegistry.html"><abbr title="\Phpolar\Phpolar\Routing\RouteRegistry">RouteRegistry</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$routes</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Phpolar-Phpolar-WebServer-WebServer.html"><abbr title="\Phpolar\Phpolar\WebServer\WebServer">WebServer</abbr></a></span></code>
-
-    
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$routes</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Phpolar-Phpolar-Routing-RouteRegistry.html"><abbr title="\Phpolar\Phpolar\Routing\RouteRegistry">RouteRegistry</abbr></a></span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"></section>
-
-            </dd>
-            </dl>
-
-    
-
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><a href="classes/Phpolar-Phpolar-WebServer-WebServer.html"><abbr title="\Phpolar\Phpolar\WebServer\WebServer">WebServer</abbr></a></span>
+    <span class="phpdocumentor-signature__response_type"><abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr></span>
             &mdash;
         
     
@@ -536,7 +451,7 @@ routes and handlers.</p>
 </section>
             </div>
         </div>
-        <a href="classes/Phpolar-Phpolar-WebServer-WebServer.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+        <a href="classes/Phpolar-Phpolar-WebServer-Http-ErrorHandler.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
     </main>
 
