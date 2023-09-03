@@ -25,7 +25,7 @@ use Phpolar\Authenticator\AuthenticatorInterface;
 use Phpolar\Phpolar\Auth\AbstractProtectedRoutable;
 use Phpolar\Phpolar\DependencyInjection\ContainerLoader;
 use Phpolar\Phpolar\DependencyInjection\DiTokens;
-use Phpolar\Phpolar\Http\RouteRegistry;
+use Phpolar\Phpolar\Http\RouteMap;
 use Phpolar\Phpolar\Http\RoutingMiddleware;
 use Phpolar\Phpolar\Tests\Stubs\ConfigurableContainerStub;
 use Phpolar\Phpolar\Tests\Stubs\ContainerConfigurationStub;
@@ -53,7 +53,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 #[RunTestsInSeparateProcesses]
 #[CoversClass(App::class)]
-#[UsesClass(RouteRegistry::class)]
+#[UsesClass(RouteMap::class)]
 #[UsesClass(ContainerLoader::class)]
 #[UsesClass(MiddlewareQueueRequestHandler::class)]
 #[UsesClass(RoutingHandler::class)]
@@ -127,8 +127,8 @@ final class AppTest extends TestCase
                     ->withBody($streamFactory->createStream())
             );
         $config = new ContainerConfigurationStub();
-        $routes = new RouteRegistry();
-        $config[RouteRegistry::class] = $routes;
+        $routes = new RouteMap();
+        $config[RouteMap::class] = $routes;
         $config[RoutingMiddleware::class] = $routingMiddlewareSpy;
         $config[CsrfProtectionRequestHandler::class] = static fn (ArrayAccess $config) =>
             new CsrfProtectionRequestHandler(
@@ -186,10 +186,10 @@ final class AppTest extends TestCase
                     ->withBody($streamFactory->createStream())
             );
         $config = new ContainerConfigurationStub();
-        $routes = new RouteRegistry();
-        $config[RouteRegistry::class] = $routes;
+        $routes = new RouteMap();
+        $config[RouteMap::class] = $routes;
         $config[RoutingMiddleware::class] = $routingMiddlewareSpy;
-        $config[RouteRegistry::class] = $routes;
+        $config[RouteMap::class] = $routes;
         $config[CsrfProtectionRequestHandler::class] = static fn (ArrayAccess $config) =>
             new CsrfProtectionRequestHandler(
                 new CsrfToken(new DateTimeImmutable("now")),
@@ -214,7 +214,7 @@ final class AppTest extends TestCase
     public function test3()
     {
         $expectedContent = "EXPECTED CONTENT";
-        $givenRoutes = new RouteRegistry();
+        $givenRoutes = new RouteMap();
         /**
          * @var Stub&RoutableInterface $handlerStub
          */
@@ -225,15 +225,15 @@ final class AppTest extends TestCase
         $handlerStub = $this->createStub(MiddlewareQueueRequestHandler::class);
         $config = new ContainerConfigurationStub();
         $config[ModelResolverInterface::class] = $this->createStub(ModelResolverInterface::class);
-        $config[RouteRegistry::class] = $givenRoutes;
+        $config[RouteMap::class] = $givenRoutes;
         $container = $this->getContainerFactory($config, $handlerStub);
         App::create(
             $this->configureContainer($container, $config),
         );
         /**
-         * @var RouteRegistry $configuredRoutes
+         * @var RouteMap $configuredRoutes
          */
-        $configuredRoutes = $config[RouteRegistry::class];
+        $configuredRoutes = $config[RouteMap::class];
         $configuredHandler = $configuredRoutes->match($givenRequest);
         $this->assertSame($expectedContent, $configuredHandler->process($container));
     }
@@ -257,7 +257,7 @@ final class AppTest extends TestCase
         $config = new ContainerConfigurationStub();
         $config[ModelResolverInterface::class] = $this->createStub(ModelResolverInterface::class);
         $config[DiTokens::UNAUTHORIZED_HANDLER] = $this->createStub(RequestHandlerInterface::class);
-        $config[RouteRegistry::class] = new RouteRegistry();
+        $config[RouteMap::class] = new RouteMap();
         /**
          * @var Stub&MiddlewareQueueRequestHandler $handlerStub
          */
@@ -296,9 +296,9 @@ final class AppTest extends TestCase
         $config = new ContainerConfigurationStub();
         $config[ModelResolverInterface::class] = $this->createStub(ModelResolverInterface::class);
         $config[DiTokens::UNAUTHORIZED_HANDLER] = $this->createStub(RequestHandlerInterface::class);
-        $routes = new RouteRegistry();
+        $routes = new RouteMap();
         $routes->add("GET", "/", $this->createStub(AbstractProtectedRoutable::class));
-        $config[RouteRegistry::class] = $routes;
+        $config[RouteMap::class] = $routes;
         $container = $this->configureContainer($this->getContainerFactory($config, $handler), $config);
         $sut = App::create($container);
         $sut->useAuthorization();

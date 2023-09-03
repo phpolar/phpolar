@@ -10,7 +10,7 @@ use Phpolar\Authenticator\AuthenticatorInterface;
 use Phpolar\Phpolar\Http\MiddlewareQueueRequestHandler;
 use Phpolar\Phpolar\DependencyInjection\DiTokens;
 use Phpolar\Routable\RoutableInterface;
-use Phpolar\Phpolar\Http\RouteRegistry;
+use Phpolar\Phpolar\Http\RouteMap;
 use Phpolar\Phpolar\Http\RoutingHandler;
 use Phpolar\Phpolar\Http\RoutingMiddleware;
 use Phpolar\Routable\RoutableResolverInterface;
@@ -39,7 +39,7 @@ return [
     TemplatingStrategyInterface::class => new StreamContentStrategy(),
     ResponseFactoryInterface::class => new ResponseFactoryStub((new StreamFactoryStub("+w"))->createStream()),
     StreamFactoryInterface::class => new StreamFactoryStub("+w"),
-    RouteRegistry::class => new RouteRegistry(),
+    RouteMap::class => new RouteMap(),
     DiTokens::RESPONSE_EMITTER => new SapiEmitter(),
     AuthenticatorInterface::class => new class () implements AuthenticatorInterface {
         public function isAuthenticated(): bool
@@ -57,7 +57,7 @@ return [
     },
     RoutingMiddleware::class => static fn (ContainerInterface $container) => new RoutingMiddleware($container->get(RoutingHandler::class)),
     RoutingHandler::class => static fn (ContainerInterface $container) => new RoutingHandler(
-        $container->get(RouteRegistry::class),
+        $container->get(RouteMap::class),
         $container->get(ResponseFactoryInterface::class),
         $container->get(StreamFactoryInterface::class),
         $container,

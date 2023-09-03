@@ -21,10 +21,10 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\MockObject\Stub\Stub;
 use PHPUnit\Framework\TestCase;
 
-#[CoversClass(RouteRegistry::class)]
+#[CoversClass(RouteMap::class)]
 #[CoversClass(ResolvedRoute::class)]
 #[UsesClass(RouteParamMap::class)]
-final class RouteRegistryTest extends TestCase
+final class RouteMapTest extends TestCase
 {
     public static function requestMethods(): Generator
     {
@@ -55,7 +55,7 @@ final class RouteRegistryTest extends TestCase
          */
         $handlerSpy = $this->createMock(RoutableInterface::class);
         $handlerSpy->expects($this->once())->method("process")->willReturn("");
-        $sut = new RouteRegistry();
+        $sut = new RouteMap();
         $sut->add($requestMethod, $givenRoute, $handlerSpy);
         $registeredHandler = $sut->match(new RequestStub($requestMethod, $givenRoute), $givenRoute);
         $registeredHandler->process(new ConfigurableContainerStub(new ContainerConfigurationStub()));
@@ -65,7 +65,7 @@ final class RouteRegistryTest extends TestCase
     #[DataProvider("requestMethods")]
     public function test2(string $requestMethod)
     {
-        $sut = new RouteRegistry();
+        $sut = new RouteMap();
         $result = $sut->match(new RequestStub($requestMethod), "an_unregistered_path");
         $this->assertInstanceOf(RouteNotRegistered::class, $result);
     }
@@ -79,7 +79,7 @@ final class RouteRegistryTest extends TestCase
          * @var Stub&RoutableInterface $handlerStub
          */
         $handlerStub = $this->createStub(RoutableInterface::class);
-        $sut = new RouteRegistry();
+        $sut = new RouteMap();
         $sut->add($methodA, $givenRoute, $handlerStub);
         $result = $sut->match(new RequestStub($methodB, $givenRoute), $givenRoute);
         $this->assertInstanceOf(RouteNotRegistered::class, $result);
@@ -101,7 +101,7 @@ final class RouteRegistryTest extends TestCase
          * @var Stub&RoutableInterface $handlerStub
          */
         $handlerStub = $this->createStub(RoutableInterface::class);
-        $sut = new RouteRegistry();
+        $sut = new RouteMap();
         $sut->add($method, $givenRoute, $handlerStub);
         $result = $sut->match(new RequestStub($method, $givenRequestPath));
         $this->assertNotInstanceOf(RouteNotRegistered::class, $result);
@@ -128,7 +128,7 @@ final class RouteRegistryTest extends TestCase
          * @var Stub&RoutableInterface $handlerStub
          */
         $handlerStub = $this->createStub(RoutableInterface::class);
-        $sut = new RouteRegistry();
+        $sut = new RouteMap();
         $sut->add($method, $givenRoute, $handlerStub);
         $result = $sut->match(new RequestStub($method, $givenRequestPath));
         $this->assertInstanceOf(RouteNotRegistered::class, $result, $givenRequestPath);
@@ -149,7 +149,7 @@ final class RouteRegistryTest extends TestCase
     #[TestDox("Shall not match a route with params when the route was not registered. \$givenRequestPath did not match")]
     public function testc(string $method, string $givenRequestPath)
     {
-        $sut = new RouteRegistry();
+        $sut = new RouteMap();
         $result = $sut->match(new RequestStub($method, $givenRequestPath));
         $this->assertInstanceOf(RouteNotRegistered::class, $result);
     }
@@ -163,7 +163,7 @@ final class RouteRegistryTest extends TestCase
          * @var Stub&RoutableInterface $handlerStub
          */
         $handlerStub = $this->createStub(RoutableInterface::class);
-        $sut = new RouteRegistry();
+        $sut = new RouteMap();
         $sut->add($method, $givenRoute, $handlerStub);
         $result = $sut->match(new RequestStub($method, $givenRequestPath));
         $this->assertInstanceOf(RouteNotRegistered::class, $result);
@@ -178,7 +178,7 @@ final class RouteRegistryTest extends TestCase
          * @var Stub&RoutableInterface $handlerStub
          */
         $handlerStub = $this->createStub(RoutableInterface::class);
-        $sut = new RouteRegistry();
+        $sut = new RouteMap();
         $sut->add($method, $givenRoute, $handlerStub);
     }
 
@@ -190,7 +190,7 @@ final class RouteRegistryTest extends TestCase
          * @var Stub&RoutableInterface $handlerStub
          */
         $handlerStub = $this->createStub(RoutableInterface::class);
-        $sut = new RouteRegistry();
+        $sut = new RouteMap();
 
         $routes = [
             "/",

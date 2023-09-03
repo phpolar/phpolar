@@ -42,7 +42,7 @@ use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
 #[CoversClass(RoutingHandler::class)]
-#[CoversClass(RouteRegistry::class)]
+#[CoversClass(RouteMap::class)]
 #[UsesClass(ResolvedRoute::class)]
 final class RoutingHandlerTest extends TestCase
 {
@@ -90,9 +90,9 @@ final class RoutingHandlerTest extends TestCase
     public function test1(string $requestMethod)
     {
         /**
-         * @var Stub&RouteRegistry $routeRegistryStub
+         * @var Stub&RouteMap $routeRegistryStub
          */
-        $routeRegistryStub = $this->createStub(RouteRegistry::class);
+        $routeRegistryStub = $this->createStub(RouteMap::class);
         $routeRegistryStub->method("match")->willReturn(new RouteNotRegistered());
         $container = $this->getContainer();
         $responseFactory = $container->get(ResponseFactoryInterface::class);
@@ -122,9 +122,9 @@ final class RoutingHandlerTest extends TestCase
         $registeredRouteHandler = $this->createMock(RoutableInterface::class);
         $registeredRouteHandler->expects($this->once())->method("process");
         /**
-         * @var Stub&RouteRegistry $routeRegistryStub
+         * @var Stub&RouteMap $routeRegistryStub
          */
-        $routeRegistryStub = $this->createStub(RouteRegistry::class);
+        $routeRegistryStub = $this->createStub(RouteMap::class);
         $routeRegistryStub->method("match")->willReturn($registeredRouteHandler);
         /**
          * @var Stub&RoutableResolverInterface
@@ -163,9 +163,9 @@ final class RoutingHandlerTest extends TestCase
         $protectedRoutableResolver = $this->createMock(RoutableResolverInterface::class);
         $protectedRoutableResolver->expects($this->once())->method("resolve")->willReturn($registeredRouteHandler);
         /**
-         * @var Stub&RouteRegistry $routeRegistryStub
+         * @var Stub&RouteMap $routeRegistryStub
          */
-        $routeRegistryStub = $this->createStub(RouteRegistry::class);
+        $routeRegistryStub = $this->createStub(RouteMap::class);
         $routeRegistryStub->method("match")->willReturn($registeredRouteHandler);
         $container = $this->getContainer();
         $responseFactory = $container->get(ResponseFactoryInterface::class);
@@ -200,9 +200,9 @@ final class RoutingHandlerTest extends TestCase
         $registeredRouteHandler = $this->createStub(RoutableInterface::class);
         $registeredRouteHandler->method("process")->willReturn($responseContent);
         /**
-         * @var Stub&RouteRegistry $routeRegistryStub
+         * @var Stub&RouteMap $routeRegistryStub
          */
-        $routeRegistryStub = $this->createStub(RouteRegistry::class);
+        $routeRegistryStub = $this->createStub(RouteMap::class);
         $routeRegistryStub->method("match")->willReturn($registeredRouteHandler);
         /**
          * @var Stub&RoutableResolverInterface
@@ -248,9 +248,9 @@ final class RoutingHandlerTest extends TestCase
         $routeParamMap = new RouteParamMap("/some/path/{id}", "/some/path/$givenIdRouteParam");
         $resolvedRoute = new ResolvedRoute($registeredRouteHandler, $routeParamMap);
         /**
-         * @var Stub&RouteRegistry $routeRegistryStub
+         * @var Stub&RouteMap $routeRegistryStub
          */
-        $routeRegistryStub = $this->createStub(RouteRegistry::class);
+        $routeRegistryStub = $this->createStub(RouteMap::class);
         $routeRegistryStub->method("match")->willReturn($resolvedRoute);
         /**
          * @var Stub&RoutableResolverInterface
@@ -299,9 +299,9 @@ final class RoutingHandlerTest extends TestCase
         $routeParamMap = new RouteParamMap("/some/path/{id}", "/some/path/$givenIdRouteParam");
         $resolvedRoute = new ResolvedRoute($registeredRouteHandler, $routeParamMap);
         /**
-         * @var Stub&RouteRegistry $routeRegistryStub
+         * @var Stub&RouteMap $routeRegistryStub
          */
-        $routeRegistryStub = $this->createStub(RouteRegistry::class);
+        $routeRegistryStub = $this->createStub(RouteMap::class);
         $routeRegistryStub->method("match")->willReturn($resolvedRoute);
         $streamFactory = $container->get(StreamFactoryInterface::class);
         $responseFactory = $container->get(ResponseFactoryInterface::class);
@@ -343,9 +343,9 @@ final class RoutingHandlerTest extends TestCase
         $streamFactoryMock = $this->createMock(StreamFactoryInterface::class);
         $streamFactoryMock->expects($this->once())->method("createStream")->with($fakeModel->name);
         /**
-         * @var Stub&RouteRegistry
+         * @var Stub&RouteMap
          */
-        $routeRegistryStub = $this->createStub(RouteRegistry::class);
+        $routeRegistryStub = $this->createStub(RouteMap::class);
         $routeRegistryStub->method("match")->willReturn($registeredRouteHandler);
         /**
          * @var Stub&RoutableResolverInterface
@@ -385,9 +385,9 @@ final class RoutingHandlerTest extends TestCase
         $modelResolverMock = $this->createMock(ModelResolverInterface::class);
         $modelResolverMock->method("resolve")->willReturn(["form" => $fakeModel]);
         /**
-         * @var Stub&RouteRegistry
+         * @var Stub&RouteMap
          */
-        $routeRegistryStub = $this->createStub(RouteRegistry::class);
+        $routeRegistryStub = $this->createStub(RouteMap::class);
         $routeRegistryStub->method("match")->willReturn($registeredRouteHandler);
         /**
          * @var Stub&RoutableResolverInterface
@@ -436,9 +436,9 @@ final class RoutingHandlerTest extends TestCase
         ]);
         $protectedRoutableResolver = new ProtectedRoutableResolver($authenticatorStub);
         /**
-         * @var Stub&RouteRegistry $routeRegistryStub
+         * @var Stub&RouteMap $routeRegistryStub
          */
-        $routeRegistryStub = $this->createStub(RouteRegistry::class);
+        $routeRegistryStub = $this->createStub(RouteMap::class);
         $routeRegistryStub->method("match")->willReturn($registeredRouteHandler);
         $container = $this->getContainer();
         $responseFactory = $container->get(ResponseFactoryInterface::class);
@@ -477,9 +477,9 @@ final class RoutingHandlerTest extends TestCase
         $authenticatorStub->method("isAuthenticated")->willReturn(false);
         $protectedRoutableResolver = new ProtectedRoutableResolver($authenticatorStub);
         /**
-         * @var Stub&RouteRegistry $routeRegistryStub
+         * @var Stub&RouteMap $routeRegistryStub
          */
-        $routeRegistryStub = $this->createStub(RouteRegistry::class);
+        $routeRegistryStub = $this->createStub(RouteMap::class);
         $routeRegistryStub->method("match")->willReturn($registeredRouteHandler);
         $container = $this->getContainer();
         $responseFactory = $container->get(ResponseFactoryInterface::class);
@@ -527,9 +527,9 @@ final class RoutingHandlerTest extends TestCase
         $authenticatorStub->method("isAuthenticated")->willReturn(false);
         $protectedRoutableResolver = new ProtectedRoutableResolver($authenticatorStub);
         /**
-         * @var Stub&RouteRegistry $routeRegistryStub
+         * @var Stub&RouteMap $routeRegistryStub
          */
-        $routeRegistryStub = $this->createStub(RouteRegistry::class);
+        $routeRegistryStub = $this->createStub(RouteMap::class);
         $routeRegistryStub->method("match")->willReturn($resololvedRoute);
         $container = $this->getContainer();
         $responseFactory = $container->get(ResponseFactoryInterface::class);

@@ -17,7 +17,7 @@ use Phpolar\ModelResolver\ModelResolverInterface;
 use Phpolar\Authenticator\AuthenticatorInterface;
 use Phpolar\HttpCodes\ResponseCode;
 use Phpolar\Phpolar\Auth\ProtectedRoutableResolver;
-use Phpolar\Phpolar\Http\RouteRegistry;
+use Phpolar\Phpolar\Http\RouteMap;
 use Phpolar\Phpolar\Http\RoutingHandler;
 use Phpolar\Phpolar\Http\RoutingMiddleware;
 use Phpolar\Phpolar\Http\MiddlewareQueueRequestHandler;
@@ -36,7 +36,7 @@ return [
      * @suppress PhanUnreferencedClosure
      */
     RoutingHandler::class => static fn (ContainerInterface $container) => new RoutingHandler(
-        routeRegistry: $container->get(RouteRegistry::class),
+        routeRegistry: $container->get(RouteMap::class),
         responseFactory: $container->get(ResponseFactoryInterface::class),
         streamFactory: $container->get(StreamFactoryInterface::class),
         modelResolver: $container->get(ModelResolverInterface::class),
@@ -63,7 +63,7 @@ return [
      * @suppress PhanUnreferencedClosure
      */
     DiTokens::AUTHENTICATED_ROUTING_HANDLER => static fn (ContainerInterface $container) => new RoutingHandler(
-        routeRegistry: $container->get(RouteRegistry::class),
+        routeRegistry: $container->get(RouteMap::class),
         responseFactory: $container->get(ResponseFactoryInterface::class),
         streamFactory: $container->get(StreamFactoryInterface::class),
         modelResolver: $container->get(ModelResolverInterface::class),

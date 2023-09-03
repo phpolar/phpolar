@@ -22,7 +22,7 @@ use ReflectionMethod;
 class RoutingHandler implements RequestHandlerInterface
 {
     public function __construct(
-        private RouteRegistry $routeRegistry,
+        private RouteMap $routeRegistry,
         private ResponseFactoryInterface $responseFactory,
         private StreamFactoryInterface $streamFactory,
         private ContainerInterface $container,
