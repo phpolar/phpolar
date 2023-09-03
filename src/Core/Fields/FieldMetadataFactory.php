@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Efortmeyer\Polar\Core\Fields;
 
-use Efortmeyer\Polar\Core\Attributes\AttributeCollection;
-
 final class FieldMetadataFactory
 {
     public function __construct(private FieldMetadata $field, private FieldMetadataConfig $config)
