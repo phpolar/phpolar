@@ -106,14 +106,14 @@
     
             <span class="phpdocumentor-element__implements">
             implements
-                            <a href="classes/Phpolar-Phpolar-RoutableResolverInterface.html"><abbr title="\Phpolar\Phpolar\RoutableResolverInterface">RoutableResolverInterface</abbr></a>                    </span>
+                            <abbr title="\Phpolar\Routable\RoutableResolverInterface">RoutableResolverInterface</abbr>                    </span>
     
     </h2>
 
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Auth/ProtectedRoutableResolver.php"><a href="files/auth-protectedroutableresolver.html"><abbr title="Auth/ProtectedRoutableResolver.php">ProtectedRoutableResolver.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">20</span>
+    <span class="phpdocumentor-element-found-in__line">21</span>
 
     </aside>
 
@@ -143,10 +143,7 @@ an <code class="prettyprint">Authenticate</code> attribute.</p>
 
     </h4>
     <dl class="phpdocumentor-table-of-contents">
-                    <dt class="phpdocumentor-table-of-contents__entry -interface"><a href="classes/Phpolar-Phpolar-RoutableResolverInterface.html"><abbr title="\Phpolar\Phpolar\RoutableResolverInterface">RoutableResolverInterface</abbr></a></dt><dd>Used by the application to determine which
-routable/handler to use.  This can be
-used for authenticating routes after
-the route has been resolved.</dd>    </dl>
+                    <dt class="phpdocumentor-table-of-contents__entry -interface"><abbr title="\Phpolar\Routable\RoutableResolverInterface">RoutableResolverInterface</abbr></dt>    </dl>
 
 
 
@@ -170,9 +167,9 @@ the route has been resolved.</dd>    </dl>
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a href="classes/Phpolar-Phpolar-Auth-ProtectedRoutableResolver.html#method_resolve">resolve()</a>
     <span>
-                                &nbsp;: <a href="classes/Phpolar-Phpolar-RoutableInterface.html"><abbr title="\Phpolar\Phpolar\RoutableInterface">RoutableInterface</abbr></a>|false    </span>
+                                &nbsp;: <abbr title="\Phpolar\Routable\RoutableInterface">RoutableInterface</abbr>|false    </span>
 </dt>
-<dd>Return the given routable or false.</dd>
+<dd></dd>
 
     </dl>
 
@@ -201,14 +198,14 @@ the route has been resolved.</dd>    </dl>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Auth/ProtectedRoutableResolver.php"><a href="files/auth-protectedroutableresolver.html"><abbr title="Auth/ProtectedRoutableResolver.php">ProtectedRoutableResolver.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">24</span>
+    <span class="phpdocumentor-element-found-in__line">25</span>
 
     </aside>
 
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Phpolar-Phpolar-Auth-AuthenticatorInterface.html"><abbr title="\Phpolar\Phpolar\Auth\AuthenticatorInterface">AuthenticatorInterface</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$authenticator</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Phpolar\Authenticator\AuthenticatorInterface">AuthenticatorInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$authenticator</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
 
         <section class="phpdocumentor-description"></section>
 
@@ -216,7 +213,7 @@ the route has been resolved.</dd>    </dl>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$authenticator</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Phpolar-Phpolar-Auth-AuthenticatorInterface.html"><abbr title="\Phpolar\Phpolar\Auth\AuthenticatorInterface">AuthenticatorInterface</abbr></a></span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Phpolar\Authenticator\AuthenticatorInterface">AuthenticatorInterface</abbr></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"></section>
@@ -245,22 +242,22 @@ the route has been resolved.</dd>    </dl>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Auth/ProtectedRoutableResolver.php"><a href="files/auth-protectedroutableresolver.html"><abbr title="Auth/ProtectedRoutableResolver.php">ProtectedRoutableResolver.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">28</span>
+    <span class="phpdocumentor-element-found-in__line">29</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Return the given routable or false.</p>
-
+    
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">resolve</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Phpolar-Phpolar-RoutableInterface.html"><abbr title="\Phpolar\Phpolar\RoutableInterface">RoutableInterface</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$target</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Phpolar-Phpolar-RoutableInterface.html"><abbr title="\Phpolar\Phpolar\RoutableInterface">RoutableInterface</abbr></a>|false</span></code>
+                    <span class="phpdocumentor-signature__name">resolve</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Phpolar\Routable\RoutableInterface">RoutableInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$target</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Phpolar\Routable\RoutableInterface">RoutableInterface</abbr>|false</span></code>
 
-    
+        <section class="phpdocumentor-description"></section>
+
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$target</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Phpolar-Phpolar-RoutableInterface.html"><abbr title="\Phpolar\Phpolar\RoutableInterface">RoutableInterface</abbr></a></span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Phpolar\Routable\RoutableInterface">RoutableInterface</abbr></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"></section>
@@ -271,7 +268,7 @@ the route has been resolved.</dd>    </dl>
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><a href="classes/Phpolar-Phpolar-RoutableInterface.html"><abbr title="\Phpolar\Phpolar\RoutableInterface">RoutableInterface</abbr></a>|false</span>
+    <span class="phpdocumentor-signature__response_type"><abbr title="\Phpolar\Routable\RoutableInterface">RoutableInterface</abbr>|false</span>
             &mdash;
         
     
