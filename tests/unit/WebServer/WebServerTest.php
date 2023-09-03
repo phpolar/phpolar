@@ -289,7 +289,6 @@ final class WebServerTest extends TestCase
     }
 
     #[TestDox("Shall respond to POST requests")]
-    #[Group("me")]
     public function test6b()
     {
         $expectedResponse = "<h1>Responding to POST request!</h1>";
