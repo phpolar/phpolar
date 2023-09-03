@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Phpolar\Phpolar\Model;;
+namespace Phpolar\Phpolar\Model;
+
+;
 
 use Attribute;
 use Phpolar\Phpolar\Core\AbstractPropertyNameExtractor;
@@ -15,7 +17,7 @@ use Phpolar\Phpolar\Core\DefaultColumnName;
 #[Attribute(Attribute::TARGET_PROPERTY)]
 final class Column extends AbstractPropertyNameExtractor
 {
-    public function __construct(private string|ColumnConfig $arg = ColumnConfig::Default)
+    public function __construct(private string|ColumnConfig $arg = ColumnConfig::T_Default)
     {
     }
 
@@ -27,7 +29,7 @@ final class Column extends AbstractPropertyNameExtractor
     public function getColumnName(): string
     {
         return match ($this->arg) {
-            ColumnConfig::Default => (new DefaultColumnName($this->propName))->getColumnName(),
+            ColumnConfig::T_Default => (new DefaultColumnName($this->propName))->getColumnName(),
             default => (string) $this->arg
         };
     }

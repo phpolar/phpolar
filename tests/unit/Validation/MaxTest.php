@@ -24,7 +24,7 @@ final class MaxTest extends TestCase
     #[DataProviderExternal(MaxDataProvider::class, "numberBelowMax")]
     public function shallBeValidIfNumericPropIsLteMax(int|float $valBelowMax)
     {
-        $sut = new class($valBelowMax)
+        $sut = new class ($valBelowMax)
         {
             use ValidationTrait;
             use FieldErrorMessageTrait;
@@ -46,7 +46,7 @@ final class MaxTest extends TestCase
     #[DataProviderExternal(MaxDataProvider::class, "numberAboveMax")]
     public function shallBeInvalidIfNumericPropIsGtMax(int|float $valAboveMax)
     {
-        $sut = new class($valAboveMax)
+        $sut = new class ($valAboveMax)
         {
             use ValidationTrait;
             use FieldErrorMessageTrait;

@@ -40,6 +40,7 @@
     <rule ref="PSR12.Classes.OpeningBraceSpace"/>
     <rule ref="PSR12.Classes.ClosingBrace"/>
     <rule ref="PSR12.Classes.ClassInstantiation"/>
+    <rule ref="PSR12" />
 
     <rule ref="Generic.Files.OneClassPerFile">
         <properties>

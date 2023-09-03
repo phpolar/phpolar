@@ -15,7 +15,7 @@ final class LabelDataProvider
             [
                 "Prop",
                 "prop",
-                new class() extends AbstractModel
+                new class () extends AbstractModel
                 {
                     public string $prop;
                 }
@@ -29,7 +29,7 @@ final class LabelDataProvider
             [
                 "Prop",
                 "prop",
-                new class() extends AbstractModel
+                new class () extends AbstractModel
                 {
                     #[Label]
                     public string $prop;
@@ -38,7 +38,7 @@ final class LabelDataProvider
             [
                 "AnotherProp",
                 "anotherProp",
-                new class() extends AbstractModel
+                new class () extends AbstractModel
                 {
                     #[Label]
                     public string $anotherProp;
@@ -47,7 +47,7 @@ final class LabelDataProvider
             [
                 "AndAgainAnotherProp",
                 "andAgainAnotherProp",
-                new class() extends AbstractModel
+                new class () extends AbstractModel
                 {
                     #[Label]
                     public string $andAgainAnotherProp;
@@ -63,7 +63,7 @@ final class LabelDataProvider
             [
                 "sOmethingELSE",
                 "prop",
-                new class() extends AbstractModel
+                new class () extends AbstractModel
                 {
                     #[Label("sOmethingELSE")]
                     public string $prop;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Phpolar\Phpolar\Model;;
+namespace Phpolar\Phpolar\Model;
 
 use DateTimeInterface;
 use Phpolar\Phpolar\Core\InputTypes;
@@ -51,7 +51,7 @@ trait FormInputTypeDetectionTrait
                     "boolean" => InputTypes::Checkbox,
                     "object" => $property->getValue($this) instanceof DateTimeInterface ? InputTypes::Date : InputTypes::Invalid,
                     default => InputTypes::Invalid,
-                } : InputTypes::Invalid;
+            } : InputTypes::Invalid;
         }
         return InputTypes::Invalid;
     }

@@ -25,7 +25,7 @@ final class MaxLengthTest extends TestCase
     #[DataProviderExternal(MaxLengthDataProvider::class, "strBelowMax")]
     public function shallBeValidIfPropIsLteMaxLen(string $valBelowMax)
     {
-        $sut = new class($valBelowMax)
+        $sut = new class ($valBelowMax)
         {
             use ValidationTrait;
             use FieldErrorMessageTrait;
@@ -47,7 +47,7 @@ final class MaxLengthTest extends TestCase
     #[DataProviderExternal(MaxLengthDataProvider::class, "strAboveMax")]
     public function shallBeInvalidIfPropIsGtMaxLen(string $valAboveMax)
     {
-        $sut = new class($valAboveMax)
+        $sut = new class ($valAboveMax)
         {
             use ValidationTrait;
             use FieldErrorMessageTrait;
@@ -69,7 +69,7 @@ final class MaxLengthTest extends TestCase
     #[DataProviderExternal(MaxLengthDataProvider::class, "numberBelowMax")]
     public function shallBeValidIfNumericPropIsLteMaxLen(int|float $valBelowMax)
     {
-        $sut = new class($valBelowMax)
+        $sut = new class ($valBelowMax)
         {
             use ValidationTrait;
             use FieldErrorMessageTrait;
@@ -91,7 +91,7 @@ final class MaxLengthTest extends TestCase
     #[DataProviderExternal(MaxLengthDataProvider::class, "numberAboveMax")]
     public function shallBeInvalidIfNumericPropIsGtMaxLen(int|float $valAboveMax)
     {
-        $sut = new class($valAboveMax)
+        $sut = new class ($valAboveMax)
         {
             use ValidationTrait;
             use FieldErrorMessageTrait;

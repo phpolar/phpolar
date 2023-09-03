@@ -30,18 +30,17 @@ use Phpolar\PhpTemplating\StreamContentStrategy;
 use Phpolar\PhpTemplating\TemplateEngine;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 
-use const \Phpolar\Phpolar\Tests\PROJECT_MEMORY_USAGE_THRESHOLD;
-use const \Phpolar\Phpolar\Tests\TEST_GET_ROUTE;
-use const \Phpolar\Phpolar\Tests\TEST_POST_ROUTE;
-use const \Phpolar\Phpolar\Tests\FORM_TPL_PATH;
-use const \Phpolar\Phpolar\Tests\LIST_TPL_PATH;
+use const Phpolar\Phpolar\Tests\PROJECT_MEMORY_USAGE_THRESHOLD;
+use const Phpolar\Phpolar\Tests\TEST_GET_ROUTE;
+use const Phpolar\Phpolar\Tests\TEST_POST_ROUTE;
+use const Phpolar\Phpolar\Tests\FORM_TPL_PATH;
+use const Phpolar\Phpolar\Tests\LIST_TPL_PATH;
 
 final class MemoryUsageTest extends TestCase
 {
@@ -97,7 +96,7 @@ final class MemoryUsageTest extends TestCase
         $templateEngine = new TemplateEngine(new StreamContentStrategy(), new Binder(), new Dispatcher());
         $routeRegistry = new RouteRegistry();
         $context = new HtmlSafeContext(new FakeModel());
-        $routeHandler = new class($templateEngine, $context) extends AbstractRequestHandler
+        $routeHandler = new class ($templateEngine, $context) extends AbstractRequestHandler
         {
             public function __construct(private TemplateEngine $templateEngine, private HtmlSafeContext $context)
             {
@@ -135,7 +134,7 @@ final class MemoryUsageTest extends TestCase
         $routeRegistry = new RouteRegistry();
         $csrfPreRouting = new CsrfPreRoutingMiddleware($responseFactory, $streamFactory);
         $csrfPostRouting = new CsrfPostRoutingMiddlewareFactory($responseFactory, $streamFactory);
-        $routeHandler = new class($templateEngine) extends AbstractRequestHandler {
+        $routeHandler = new class ($templateEngine) extends AbstractRequestHandler {
             public function __construct(private TemplateEngine $templateEngine)
             {
             }
@@ -144,7 +143,8 @@ final class MemoryUsageTest extends TestCase
             {
                 $saved = new FakeModel();
                 $saved->myInput = "something else";
-                $storage = new class() extends AbstractStorage {};
+                $storage = new class () extends AbstractStorage {
+                };
                 $key = new ItemKey(uniqid());
                 $storage->storeByKey($key, Item::unit($saved));
                 $modelList = new ModelList();

@@ -30,7 +30,7 @@ final class AutomaticHtmlEncodingTest extends TestCase
     public function criterion1()
     {
         $templatingEngine = $this->getTemplateEngine();
-        $objWithHacks = new class() {
+        $objWithHacks = new class () {
             public string $hack1 = "<script>alert('hacked');</script>";
             public string $directiveHack1 = "javascript:alert('hacked');";
             public string $directiveHack2 = "# javascript:alert('hacked');";

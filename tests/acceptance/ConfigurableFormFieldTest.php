@@ -29,7 +29,7 @@ final class ConfigurableFormFieldTest extends TestCase
     #[TestDox("Shall support configurable form labels")]
     public function criterion1()
     {
-        $model = new class() extends AbstractModel
+        $model = new class () extends AbstractModel
         {
             public const A_LABEL = "something";
 
@@ -68,7 +68,7 @@ final class ConfigurableFormFieldTest extends TestCase
     #[TestDox("Shall support form field type detection")]
     public function criterion4()
     {
-        $model = new class()
+        $model = new class ()
         {
             use FormControlTypeDetectionTrait;
 
@@ -109,7 +109,7 @@ final class ConfigurableFormFieldTest extends TestCase
     #[TestDox("Shall support converting detected input types to string")]
     public function criterion5(string $expected, string $propName)
     {
-        $model = new class()
+        $model = new class ()
         {
             use FormInputTypeDetectionTrait;
 
@@ -125,7 +125,7 @@ final class ConfigurableFormFieldTest extends TestCase
     #[TestDox("Shall support hidden form field configuration")]
     public function criterion6()
     {
-        $model = new class()
+        $model = new class ()
         {
             use FormInputTypeDetectionTrait;
 

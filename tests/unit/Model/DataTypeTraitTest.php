@@ -20,19 +20,20 @@ final class DataTypeTraitTest extends TestCase
     #[TestDox("Shall generate column parameter string from declared property type")]
     public function test1()
     {
-        $model = new class()
+        $model = new class ()
         {
             use DataTypeDetectionTrait;
+
             public string $someProp;
         };
         $expectedColumnDataTypeString = <<<SQL
         VARCHAR
         SQL;
-        $storageDriverStub = new class() implements StorageDriverInterface
+        $storageDriverStub = new class () implements StorageDriverInterface
         {
             public function getDataType(TypeName $typeName): Stringable
             {
-                return new class() implements Stringable
+                return new class () implements Stringable
                 {
                     public function __toString(): string
                     {
@@ -48,16 +49,17 @@ final class DataTypeTraitTest extends TestCase
     #[TestDox("Shall return unknown data type when type is unknown")]
     public function test2()
     {
-        $model = new class()
+        $model = new class ()
         {
             use DataTypeDetectionTrait;
+
             public object $someProp;
         };
-        $storageDriverStub = new class() implements StorageDriverInterface
+        $storageDriverStub = new class () implements StorageDriverInterface
         {
             public function getDataType(TypeName $typeName): Stringable
             {
-                return new class() implements Stringable {
+                return new class () implements Stringable {
                     public function __toString(): string
                     {
                         return "";
@@ -72,11 +74,11 @@ final class DataTypeTraitTest extends TestCase
     #[TestDox("Shall return expected data type when property is initialized and type is undeclared")]
     public function test3()
     {
-        $varCharStub = new class() implements StorageDriverInterface
+        $varCharStub = new class () implements StorageDriverInterface
         {
             public function getDataType(TypeName $typeName): Stringable
             {
-                return new class() implements Stringable
+                return new class () implements Stringable
                 {
                     public function __toString(): string
                     {
@@ -85,11 +87,11 @@ final class DataTypeTraitTest extends TestCase
                 };
             }
         };
-        $dateTimeStub = new class() implements StorageDriverInterface
+        $dateTimeStub = new class () implements StorageDriverInterface
         {
             public function getDataType(TypeName $typeName): Stringable
             {
-                return new class() implements Stringable
+                return new class () implements Stringable
                 {
                     public function __toString(): string
                     {
@@ -108,9 +110,9 @@ final class DataTypeTraitTest extends TestCase
             $model = new class ($propertyValue)
             {
                 use DataTypeDetectionTrait;
+
                 public function __construct(public $someProp)
                 {
-
                 }
             };
             $actual = $model->getDataType("someProp", $storageDriverStub);
@@ -121,19 +123,19 @@ final class DataTypeTraitTest extends TestCase
     #[TestDox("Shall return unknown data type when property is an non-DateTime object")]
     public function test5()
     {
-        $model = new class((object) [])
+        $model = new class ((object) [])
         {
             use DataTypeDetectionTrait;
+
             public function __construct(public $someProp)
             {
-
             }
         };
-        $storageDriverStub = new class() implements StorageDriverInterface
+        $storageDriverStub = new class () implements StorageDriverInterface
         {
             public function getDataType(TypeName $typeName): Stringable
             {
-                return new class() implements Stringable {
+                return new class () implements Stringable {
                     public function __toString(): string
                     {
                         return "";
@@ -154,15 +156,15 @@ final class DataTypeTraitTest extends TestCase
         array_walk(
             $testCases,
             function ($propertyValue) {
-                $model = new class($propertyValue)
+                $model = new class ($propertyValue)
                 {
                     use DataTypeDetectionTrait;
+
                     public function __construct(public $someProp)
                     {
-
                     }
                 };
-                $storageDriverStub = new class() implements StorageDriverInterface
+                $storageDriverStub = new class () implements StorageDriverInterface
                 {
                     public function getDataType(TypeName $typeName): Stringable|DataTypeUnknown
                     {

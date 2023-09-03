@@ -18,7 +18,7 @@ final class FormFieldErrorMessageDataProvider
     {
         yield [
             "Value is greater than the maximum",
-            new class() extends AbstractModel
+            new class () extends AbstractModel
             {
                 #[Max(50)]
                 public int $prop = 51;
@@ -26,7 +26,7 @@ final class FormFieldErrorMessageDataProvider
         ];
         yield [
             "Value is greater than the maximum",
-            new class() extends AbstractModel
+            new class () extends AbstractModel
             {
                 #[Max(50)]
                 public int $prop = 51;
@@ -34,7 +34,7 @@ final class FormFieldErrorMessageDataProvider
         ];
         yield [
             "Maximum length validation failed",
-            new class() extends AbstractModel
+            new class () extends AbstractModel
             {
                 #[MaxLength(10)]
                 public string $prop = "9123456780a";
@@ -42,7 +42,7 @@ final class FormFieldErrorMessageDataProvider
         ];
         yield [
             "Value is less than the minimum",
-            new class() extends AbstractModel
+            new class () extends AbstractModel
             {
                 #[Min(5)]
                 public int $prop = 4;
@@ -50,7 +50,7 @@ final class FormFieldErrorMessageDataProvider
         ];
         yield [
             "Minimum length validation failed",
-            new class() extends AbstractModel
+            new class () extends AbstractModel
             {
                 #[MinLength(10)]
                 public string $prop = "123456780";
@@ -58,7 +58,7 @@ final class FormFieldErrorMessageDataProvider
         ];
         yield [
             "Pattern validation failed",
-            new class() extends AbstractModel
+            new class () extends AbstractModel
             {
                 #[Pattern("/^[[:alnum:]]+$/")]
                 public string $prop = "abcd1234$$;%";
@@ -66,7 +66,7 @@ final class FormFieldErrorMessageDataProvider
         ];
         yield [
             "Required value",
-            new class() extends AbstractModel
+            new class () extends AbstractModel
             {
                 #[Required]
                 public string $prop;
@@ -78,7 +78,7 @@ final class FormFieldErrorMessageDataProvider
     {
         yield [
             "",
-            new class() extends AbstractModel
+            new class () extends AbstractModel
             {
                 #[Required]
                 public string $prop = "REQUIRED PROP IS SET";

@@ -17,7 +17,7 @@ final class SizeConfigurationTraitTest extends TestCase
     #[TestDox("Shall return the given argument as size")]
     public function test1()
     {
-        $entity = new class()
+        $entity = new class ()
         {
             use SizeConfigurationTrait;
 
@@ -31,7 +31,7 @@ final class SizeConfigurationTraitTest extends TestCase
     #[TestDox("Shall return the given max length as size")]
     public function test2()
     {
-        $entity = new class()
+        $entity = new class ()
         {
             use SizeConfigurationTrait;
 
@@ -45,7 +45,7 @@ final class SizeConfigurationTraitTest extends TestCase
     #[TestDox("Shall give Size attribute configuration preference over MaxLength configuration")]
     public function test3()
     {
-        $entity = new class()
+        $entity = new class ()
         {
             use SizeConfigurationTrait;
 
@@ -60,7 +60,7 @@ final class SizeConfigurationTraitTest extends TestCase
     #[TestDox("Shall return SizeNotConfigured instance when Size attribute does not exist")]
     public function test4()
     {
-        $entity = new class()
+        $entity = new class ()
         {
             use SizeConfigurationTrait;
 

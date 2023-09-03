@@ -24,7 +24,7 @@ final class MinLengthTest extends TestCase
     #[DataProviderExternal(MinLengthDataProvider::class, "strAboveMin")]
     public function shallBeValidIfPropIsGteMinLen(string $valAboveMin)
     {
-        $sut = new class($valAboveMin)
+        $sut = new class ($valAboveMin)
         {
             use ValidationTrait;
 
@@ -44,7 +44,7 @@ final class MinLengthTest extends TestCase
     #[DataProviderExternal(MinLengthDataProvider::class, "strBelowMin")]
     public function shallBeInvalidIfPropIsLtMinLen(string $valBelowMin)
     {
-        $sut = new class($valBelowMin)
+        $sut = new class ($valBelowMin)
         {
             use ValidationTrait;
 
@@ -64,7 +64,7 @@ final class MinLengthTest extends TestCase
     #[DataProviderExternal(MinLengthDataProvider::class, "numberAboveMin")]
     public function shallBeValidIfNumericPropIsGteMinLen(int|float $valAboveMin)
     {
-        $sut = new class($valAboveMin)
+        $sut = new class ($valAboveMin)
         {
             use ValidationTrait;
             use FieldErrorMessageTrait;
@@ -86,7 +86,7 @@ final class MinLengthTest extends TestCase
     #[DataProviderExternal(MinLengthDataProvider::class, "numberBelowMin")]
     public function shallBeInvalidIfNumericPropIsLtMinLen(int|float $valBelowMin)
     {
-        $sut = new class($valBelowMin)
+        $sut = new class ($valBelowMin)
         {
             use ValidationTrait;
             use FieldErrorMessageTrait;

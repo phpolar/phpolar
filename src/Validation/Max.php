@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Phpolar\Phpolar\Validation;
 
 use Attribute;
-
 use Phpolar\Phpolar\Core\AbstractPropertyValueExtractor;
 
 /**
@@ -18,9 +17,6 @@ final class Max extends AbstractPropertyValueExtractor implements ValidatorInter
     {
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public function isValid(): bool
     {
         return $this->max >= match (true) {

@@ -59,7 +59,7 @@ final class MiddlewareProcessingQueue
         $preRoutingResponses = array_map(
             fn (MiddlewareInterface $middleware): ResponseInterface =>
                 $middleware->process($request, $this->errorHandler),
-                $this->preRoutingMiddleware,
+            $this->preRoutingMiddleware,
         );
         foreach ($preRoutingResponses as $preRoutingResponse) {
             if ($preRoutingResponse->getStatusCode() >= ResponseCode::BAD_REQUEST) {
@@ -77,9 +77,8 @@ final class MiddlewareProcessingQueue
     public function dequeuePostRoutingMiddleware(
         ServerRequestInterface $request,
         ResponseInterface $response,
-        ): ResponseInterface {
+    ): ResponseInterface {
             return $this->useCsrfProtection === false ? $response : $this->csrfPostRouting->getMiddleware($response)
             ->process($request, $this->errorHandler);
     }
-
 }
