@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace Efortmeyer\Polar\Api;
 
-use Efortmeyer\Polar\Core\Entry;
+use Efortmeyer\Polar\Core\{
+    Entry,
+    Comparable,
+};
 
 /**
  * Represents a unit of data.
