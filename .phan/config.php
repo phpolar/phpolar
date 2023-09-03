@@ -276,7 +276,9 @@ return [
     //
     // This is useful for excluding hopelessly unanalyzable
     // files that can't be removed for whatever reason.
-    'exclude_file_list' => [],
+    'exclude_file_list' => [
+        'vendor/phpolar/phpolar-core/vendor/',
+    ],
 
     // A directory list that defines files that will be excluded
     // from static analysis, but whose class and method
@@ -341,6 +343,12 @@ return [
     'directory_list' => [
         'src',
         'vendor/psr',
+        'vendor/phpolar/csrf-protection/src',
+        'vendor/phpolar/http-codes/src',
+        'vendor/phpolar/http-response-extensions/src',
+        'vendor/phpolar/phpolar-core/src',
+        'vendor/phpolar/php-templating/src',
+        'vendor/phpolar/storage-driver/src',
     ],
 
     // A list of individual files to include in analysis

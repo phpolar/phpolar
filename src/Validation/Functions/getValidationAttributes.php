@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Phpolar\Phpolar\Validation\Functions;
 
-use Phpolar\Phpolar\PropertyValueSetterInterface;
 use Phpolar\Phpolar\Validation\Max;
 use Phpolar\Phpolar\Validation\MaxLength;
 use Phpolar\Phpolar\Validation\Min;
@@ -25,19 +24,15 @@ use ReflectionProperty;
 function getValidationAttributes(ReflectionProperty $prop, object $obj): array
 {
     return array_map(
-        fn (PropertyValueSetterInterface $vAttr): Max|MaxLength|Min|MinLength|Pattern|Required =>
-        $vAttr->withPropVal($prop, $obj),
-        array_map(
-            fn (ReflectionAttribute $attr): PropertyValueSetterInterface =>
-            $attr->newInstance(),
-            array_merge(
-                $prop->getAttributes(Max::class),
-                $prop->getAttributes(MaxLength::class),
-                $prop->getAttributes(Min::class),
-                $prop->getAttributes(MinLength::class),
-                $prop->getAttributes(Pattern::class),
-                $prop->getAttributes(Required::class),
-            ),
-        )
+        static fn (ReflectionAttribute $attr): Max|MaxLength|Min|MinLength|Pattern|Required =>
+            $attr->newInstance()->withPropVal($prop, $obj),
+        array_merge(
+            $prop->getAttributes(Max::class),
+            $prop->getAttributes(MaxLength::class),
+            $prop->getAttributes(Min::class),
+            $prop->getAttributes(MinLength::class),
+            $prop->getAttributes(Pattern::class),
+            $prop->getAttributes(Required::class),
+        ),
     );
 }

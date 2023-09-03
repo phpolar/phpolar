@@ -7,7 +7,7 @@ namespace Phpolar\Phpolar\Validation;
 use Attribute;
 use ReflectionProperty;
 
-use Phpolar\Phpolar\PropertyValueSetterInterface;
+use Phpolar\Phpolar\Core\PropertyValueSetterInterface;
 
 /**
  * Provides support for marking a property as requiring a value.
