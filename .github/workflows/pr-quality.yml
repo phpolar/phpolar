@@ -1,10 +1,11 @@
-name: PHP Composer
+name: Pull Request Quality Check
 
 on:
-  push:
-    branches: [ main ]
   pull_request:
     branches: [ main ]
+    paths:
+      - 'composer.*'
+      - '**.php'
 
 jobs:
   build:
