@@ -1,4 +1,4 @@
-<p style="text-align:center">
+<p align="center">
     <img width="240" src="./phpolar.svg" />
 </p>
 
