@@ -9,9 +9,6 @@
             "email": "e.fortmeyer01@gmail.com"
         }
     ],
-    "non-feature-branches": [
-        "releases/php7-4"
-    ],
     "minimum-stability": "stable",
     "config": {
         "sort-packages": true
@@ -26,9 +23,7 @@
             "Phpolar\\Phpolar\\Tests\\DataProviders\\": "tests/__data-providers__",
             "Phpolar\\Phpolar\\Tests\\Mocks\\": "tests/__mocks__",
             "Phpolar\\Phpolar\\Tests\\Fakes\\": "tests/__fakes__",
-            "Phpolar\\Phpolar\\Tests\\Stubs\\": "tests/__stubs__",
-            "Phpolar\\Phpolar\\Tests\\Comparables\\": "tests/__comparables__",
-            "Phpolar\\Phpolar\\Tests\\Extensions\\": "tests/__extensions__"
+            "Phpolar\\Phpolar\\Tests\\Stubs\\": "tests/__stubs__"
         }
     },
     "require": {
@@ -84,7 +79,7 @@
         "docs:generate": "composer exec \"phpdoc --setting graphs.enabled=true\"",
         "lint": "phpcs",
         "lint-fix": "phpcbf",
-        "semgrep": "semgrep --config auto -l php ./src",
+        "semgrep": "semgrep --config auto ./src",
         "smell": "phpmd ./src ansi design,cleancode,codesize,naming",
         "start:test": [
             "Composer\\Config::disableProcessTimeout",
