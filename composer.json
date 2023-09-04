@@ -50,8 +50,8 @@
     },
     "require-dev": {
         "ext-ast": "*",
-        "ext-openssl": "*",
         "ext-mbstring": "*",
+        "ext-openssl": "*",
         "phan/phan": "^5.3",
         "php-coveralls/php-coveralls": "^2.5",
         "phpmd/phpmd": "^2.13",
@@ -60,7 +60,7 @@
         "phpolar/model": "^1.2",
         "phpolar/pure-php": "^2.0",
         "phpstan/phpstan": "^1.8",
-        "phpunit/phpunit": "^10.0",
+        "phpunit/phpunit": "dev-main",
         "picocss/pico": "2.0.0alpha1",
         "squizlabs/php_codesniffer": "^3.7"
     },
