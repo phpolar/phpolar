@@ -2,7 +2,7 @@ name: PHP Build Latest and Nightly
 
 on:
   schedule:
-    - cron: '10 3 * * 1'
+    - cron: '19 7 * * 1'
 
 jobs:
   build_php_latest_nightly:
