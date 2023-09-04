@@ -5,7 +5,7 @@ on:
     - cron: '19 7 * * 6'
 
 jobs:
-  build:
+  build_php_latest_nightly:
     runs-on: ${{ matrix.operating-system }}
     continue-on-error: true
     strategy:
