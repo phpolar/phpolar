@@ -8,7 +8,7 @@ on:
       - '**.php'
 
 jobs:
-  build:
+  pr_quality:
 
     runs-on: ubuntu-latest
 
