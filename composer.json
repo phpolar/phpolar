@@ -26,6 +26,7 @@
             "Phpolar\\Phpolar\\Tests\\DataProviders\\": "tests/__data-providers__",
             "Phpolar\\Phpolar\\Tests\\Mocks\\": "tests/__mocks__",
             "Phpolar\\Phpolar\\Tests\\Fakes\\": "tests/__fakes__",
+            "Phpolar\\Phpolar\\Tests\\Stubs\\": "tests/__stubs__",
             "Phpolar\\Phpolar\\Tests\\Comparables\\": "tests/__comparables__",
             "Phpolar\\Phpolar\\Tests\\Extensions\\": "tests/__extensions__"
         }
