@@ -1,6 +1,6 @@
 ---
 commitizen:
+  gpg_sign: true
   name: cz_conventional_commits
   tag_format: $version
-  version: 4.0.0
-  gpg_sign: true
+  version: 5.0.0
