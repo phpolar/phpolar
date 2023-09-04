@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Phpolar\Phpolar;
 
+use Phpolar\PurePhp\Binder;
+use Phpolar\PurePhp\Dispatcher;
 use Phpolar\PurePhp\FileRenderingStrategy;
 use Phpolar\PurePhp\HtmlSafeContext;
 use Phpolar\PurePhp\TemplateEngine;
