@@ -7,51 +7,33 @@ use Phpolar\Phpolar\Model\Label;
 use Phpolar\Phpolar\Validation\MaxLength;
 use Phpolar\Phpolar\Validation\Required;
 
-class Person extends Model
+class Person extends AbstractModel
 {
-    /**
-     * @var string
-     * @MaxLength(20)
-     */
-    public $firstName;
+    #[Required]
+    #[MaxLength(20)]
+    public string $firstName;
 
-    /**
-     * @var string
-     * @MaxLength(20)
-     */
-    public $lastName;
+    #[Required]
+    #[MaxLength(20)]
+    public string $lastName;
 
-    /**
-     * @var string
-     * @Column("Residential Address")
-     * @Label("Residential Address")
-     * @MaxLength(200)
-     */
-    public $address1;
+    #[Column("Residential Address")]
+    #[Label("Residential Address")]
+    #[MaxLength(200)]
+    public string $address1;
 
-    /**
-     * @var string
-     * @Column("Business Address")
-     * @Label("Business Address")
-     * @MaxLength(200)
-     */
+    #[Column("Business Address")]
+    #[Label("Business Address")]
+    #[MaxLength(200)]
     public $address2;
 
-    /**
-     * @var DateTimeImmutable
-     * @DateFormat(Y-m-d)
-     */
-    public $dateOfBirth;
+    #[DateFormat("Y-m-d")]
+    public DateTimeImmutable $dateOfBirth;
 
-    /**
-     * @var DateTimeImmutable
-     * @DateFormat("Y-m-d h:i:s a")
-     */
-    public $enteredOn;
+    #[Hidden]
+    #[DateFormat("Y-m-d h:i:s a")]
+    public DateTimeImmutable $enteredOn;
 
-    /**
-     * @var DateTimeImmutable
-     * @DateFormat("Y-m-d h:i:s a")
-     */
-    public $modifiedOn;
+    #[DateFormat("Y-m-d h:i:s a")]
+    public DateTimeImmutable $modifiedOn;
 }
