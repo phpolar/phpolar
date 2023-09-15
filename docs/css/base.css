@@ -466,7 +466,8 @@ body > header {
 body > header {
     padding-top: 0;
     padding-bottom: 0;
-}.phpdocumentor-title {
+}
+.phpdocumentor-title {
     box-sizing: border-box;
     color: var(--pico-h1-color);
     font-size: var(--text-xxl);
