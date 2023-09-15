@@ -2,8 +2,8 @@
     <aside>
     <nav>
         {% for version in project.versions %}
-            <details role="list" dir="rtl" class="phpdocumentor-sidebar__category">
             {% for toc in version.tableOfContents %}
+            <details role="list" dir="rtl" class="phpdocumentor-sidebar__category">
                 <summary aria-haspop="listbox" role="link" class="contrast phpdocumentor-sidebar__category-header">{{ toc.name }}</summary>
                     <ul role="listbox">
                         {% for root in toc.roots %}
@@ -17,11 +17,11 @@
         <details role="list" dir="rtl" class="phpdocumentor-sidebar__category">
             <summary aria-haspop="listbox" role="link" class="contrast phpdocumentor-sidebar__category-header">Reports</summary>
             <ul role="listbox">
-            {% if project.settings.custom['graphs.enabled'] %}
-            <li class="phpdocumentor-sidebar__root-package"><a href="graphs/classes.html">Class Diagram</a></li>
-            {% endif %}
-            <li class="phpdocumentor-sidebar__root-package"><a href="reports/deprecated.html">Deprecated</a></li>
-            <li class="phpdocumentor-sidebar__root-package"><a href="reports/errors.html">Errors</a></li>
+                {% if project.settings.custom['graphs.enabled'] %}
+                <li class="phpdocumentor-sidebar__root-package"><a href="graphs/classes.html">Class Diagram</a></li>
+                {% endif %}
+                <li class="phpdocumentor-sidebar__root-package"><a href="reports/deprecated.html">Deprecated</a></li>
+                <li class="phpdocumentor-sidebar__root-package"><a href="reports/errors.html">Errors</a></li>
             </ul>
         </details>
     </nav>
