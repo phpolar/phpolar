@@ -2,24 +2,28 @@
     <aside>
     <nav>
         {% for version in project.versions %}
-            <section class="phpdocumentor-sidebar__category">
+            <details role="list" dir="rtl" class="phpdocumentor-sidebar__category">
             {% for toc in version.tableOfContents %}
-                <h2 class="phpdocumentor-sidebar__category-header">{{ toc.name }}</h2>
-                    {% for root in toc.roots %}
-                        {{ toc(root, 'components/menu.html.twig', 1) }}
-                    {% endfor %}
-            </section>
+                <summary aria-haspop="listbox" role="link" class="contrast phpdocumentor-sidebar__category-header">{{ toc.name }}</summary>
+                    <ul role="listbox">
+                        {% for root in toc.roots %}
+                            {{ toc(root, 'components/menu.html.twig', 1) }}
+                        {% endfor %}
+                    </ul>
+            </details>
             {% endfor %}
         {% endfor %}
 
-        <section class="phpdocumentor-sidebar__category">
-            <h2 class="phpdocumentor-sidebar__category-header">Reports</h2>
+        <details role="list" dir="rtl" class="phpdocumentor-sidebar__category">
+            <summary aria-haspop="listbox" role="link" class="contrast phpdocumentor-sidebar__category-header">Reports</summary>
+            <ul role="listbox">
             {% if project.settings.custom['graphs.enabled'] %}
-            <h3 class="phpdocumentor-sidebar__root-package"><a href="graphs/classes.html">Class Diagram</a></h3>
+            <li class="phpdocumentor-sidebar__root-package"><a href="graphs/classes.html">Class Diagram</a></li>
             {% endif %}
-            <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/deprecated.html">Deprecated</a></h3>
-            <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/errors.html">Errors</a></h3>
-        </section>
+            <li class="phpdocumentor-sidebar__root-package"><a href="reports/deprecated.html">Deprecated</a></li>
+            <li class="phpdocumentor-sidebar__root-package"><a href="reports/errors.html">Errors</a></li>
+            </ul>
+        </details>
     </nav>
     </aside>
 </div>

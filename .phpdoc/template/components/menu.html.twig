@@ -1,7 +1,7 @@
 {% if depth == 1 %}
-<h4 class="phpdocumentor-sidebar__root-namespace">
+<li class="phpdocumentor-sidebar__root-namespace">
     <a href="{{ entry.url }}" class="{{ destinationPath|trim('/', 'left') == entry.url ? '-active' }}">{{ entry.title | shortFQSEN }}</a>
-</h4>
+</li>
 {% endif %}
 {% if entry.children.count > 0 %}
     <ul class="">
