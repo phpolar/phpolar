@@ -12,8 +12,8 @@
          beStrictAboutCoverageMetadata="true">
   <testsuites>
     <testsuite name="default">
-      <directory>tests/uni</directory>
-      <directory>tests/acceptanc</directory>
+      <directory>tests/unit</directory>
+      <directory>tests/acceptance</directory>
     </testsuite>
   </testsuites>
   <php>
