@@ -11,7 +11,7 @@
     </paths>
     <version number="1.6.5">
         <api format="php">
-            <source dsn="./src"></source>
+            <source dsn="./src" />
           <default-package-name>Phpolar</default-package-name>
           <visibility>public</visibility>
         </api>
