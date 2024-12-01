@@ -36,10 +36,7 @@ composer create-project phpolar/skeleton <target-directory>
 ```php
 <!DOCTYPE html>
 <?php
-/**
- * @var Page $view
- */
-$view = $this;
+(function (Page $view) {
 ?>
 <html>
     // ...
@@ -49,6 +46,8 @@ $view = $this;
         </div>
     </body>
 </html>
+<?php
+})($this);
 ```
 
 ### Use Attributes to Configure Models
