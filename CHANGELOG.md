@@ -1,20 +1,61 @@
-## 3.0.1 (2023-07-31)
+## 5.0.1 (2024-12-01)
+
+### Fix
+
+- **composer**: upgrade dependencies
+
+## 5.0.0 (2023-09-04)
+
+### Feat
+
+- upgrade laminas-httphandlerrunner to 2.9 (#299)
+- use php-contrib interfaces (#292)
+- use routable factory interface (#285)
+- add support for route target factories (#284)
+- **ContainerLoader**: reorder method parameters (#283)
+
+### Fix
+
+- Rebase fix (#295)
+- remove unused files (#294)
+- **RouteMap**: correct parameterized path matching (#290)
+- **RouteMap**: create instances on demand (#286)
+
+### Refactor
+
+- use pure-php v2 (#291)
+
+## 4.0.0 (2023-09-03)
+
+### BREAKING CHANGE
+
+- Declare properties that need to be injected for routables and use an implementation of https://packagist.org/providers/phpolar/property-injector-contract-implementation.  A PSR-11 container will no longer be provided to routables.
+- `RouteRegistry` has been renamed to `RouteMap`.
+- The `ErrorHandler` class has been removed. Templates with response code names will no longer be used for error handling. Most servers support error pages based on response codes.
+- `ClosureContainerFactory` and `ContainerFactoryInterface` were removed.  Using `ContainerLoader` is required to include framework and custom dependencies in the DI container.
+- All classes in the `Routing` namespace have been moved to the `Http` namespace.  `ModelParamResolver` has been renamed to `ModelResolver`.  The `ModelResolver` now takes the parsed request body as the second constructor argument instead of the server request.  The `PrimaryHandler` has been renamed to `MiddlewareQueueRequestHandler`.  Issue #174.
+- Add the `RouteRegistry` in a dependency injection configuration file instead of calling `App::useRoutes`.
+- All classes in the `Model` namespace have been moved to the `phpolar/model` project.  An implementation of `ModelResolverInterface` MUST added to the dependency injection configuration.  Closes #174.
+
+### Feat
+
+- use request method enums instead of string (#272)
+- use property injector instead of service locator pattern (#271)
+- **App**: add support for queueing middleware (#248)
+- add support for route authorization (#243)
+- move interfaces out of project (#238)
+- add support for authenticated routables (#218)
 
 ### Fix
 
 - **di**: correct dependency ids (#250)
-
-## 3.0.0 (2023-07-31)
-
-### Feat
-
-- **App**: add support for queueing middleware (#248)
-- add support for route authorization (#243)
-- move interfaces out of project (#238)
-
-### Fix
-
 - remove bin folder (#237)
+- **RouteRegistry**: reindex projected array (#232)
+- retrieve the user object directly (#228)
+- **AbstractProtectedRoutable**: use session user object (#227)
+- add support for configurable unauthorized handlers (#226)
+- **RoutingHandler**: set the user property (#225)
+- prune dist (#201)
 
 ### Refactor
 
@@ -22,123 +63,25 @@
 - rename authenticate attribute to authorize (#247)
 - **RouteRegistry**: rename to route map (#245)
 - remove error handler class (#241)
-
-## 3.0.0rc5 (2023-07-24)
-
-### Fix
-
-- **RouteRegistry**: reindex projected array (#232)
-
-## 3.0.0rc4 (2023-07-18)
-
-### Fix
-
-- retrieve the user object directly (#228)
-
-## 3.0.0rc3 (2023-07-18)
-
-### Fix
-
-- **AbstractProtectedRoutable**: use session user object (#227)
-
-## 3.0.0rc2 (2023-07-18)
-
-### Fix
-
-- add support for configurable unauthorized handlers (#226)
-- **RoutingHandler**: set the user property (#225)
-
-## 3.0.0rc1 (2023-07-18)
-
-### Refactor
-
 - **RoutableInterface**: move interface out of http namespace (#220)
-
-## 3.0.0rc0 (2023-07-17)
-
-### Feat
-
-- add support for authenticated routables (#218)
-
-## 3.0.0b0 (2023-07-03)
-
-### Fix
-
-- prune dist (#201)
-
-### Refactor
-
 - use newly renamed core library (#209)
 - **RouteRegistry**: reduce complexity (#206)
 - remove unused test helpers (#205)
-
-## 3.0.0a1 (2023-06-23)
-
-### Refactor
-
 - remove unused classes (#199)
-
-## 3.0.0a0 (2023-06-23)
-
-### Refactor
-
 - simplify project architecture (#180)
 
-## 2.0.2 (2023-06-08)
-
-### Fix
-
-- remove .phpdoc from dist (#173)
-
-## 2.0.1 (2023-05-22)
-
-### Fix
-
-- use csrf-protection 3
-
-## 2.0.0 (2023-05-01)
+## 2.0.2 (2023-09-03)
 
 ### BREAKING CHANGE
 
 - Please see https://api.phpolar.org and https://docs.phpolar.org.
-
-### Feat
-
-- project rewrite
-
-## 2.0.0b2 (2023-04-29)
-
-### Fix
-
-- **AbstractModel**: add null to constructor parameter type hint
-
-## 2.0.0b1 (2023-04-29)
-
-### Fix
-
-- **Model**: use correct attribute target
-
-## 2.0.0b0 (2023-04-04)
-
-### Feat
-
-- add support for model attributes
-
-### Refactor
-
-- **RoutingHandler**: use type doc annotation instead of casting with strval
-
-## 2.0.0a1 (2023-04-01)
-
-## 2.0.0a0.dev0 (2023-04-01)
-
-### BREAKING CHANGE
-
 - https://github.com/phpolar/phpolar-core/issues/12
 - Issue #58
 
 ### Feat
 
+- project rewrite
+- add support for model attributes
 - pass psr 11 container instead of config array
 - add support for configuring properties as primary keys
 - add support for parameterized routes
@@ -164,6 +107,10 @@
 
 ### Fix
 
+- remove .phpdoc from dist (#173)
+- use csrf-protection 3
+- **AbstractModel**: add null to constructor parameter type hint
+- **Model**: use correct attribute target
 - **WebServer**: make web server singleton
 - bump alpha version
 - bump alpha version
@@ -195,6 +142,7 @@
 
 ### Refactor
 
+- **RoutingHandler**: use type doc annotation instead of casting with strval
 - move validators to lib
 - rename web server to app
 - move formats to core
@@ -217,132 +165,46 @@
 - create model and webserver namespaces
 - remove classes
 
-## 1.6.5 (2023-01-16)
-
-### Fix
-
-- change package name
-
-## 1.6.4 (2022-12-04)
-
-### Fix
-
-- fix tests
-
-## 1.6.3 (2022-12-04)
-
-### Fix
-
-- fix tests
-
-## 1.6.2 (2022-12-04)
-
-### Fix
-
-- **composer.json**: exclude test classes from installation
-
-## 1.6.1 (2022-10-22)
-
-### Fix
-
-- remove duplicate property setting
-
-## 1.6.0 (2022-10-22)
+## 1.6.5 (2023-09-03)
 
 ### Feat
 
 - **Entry.php**: ensure order of fields is maintained
-
-## 1.5.2 (2022-10-21)
+- add support for enumerations
+- add support for php 8 attributes
+- **App.php**: use in-memory configuration by default
+- **app.php**: use csv-file-storage by default
+- **app.php**: use csv-file-storage by default
+- **csv-file-storage.php**: move csv-file-storage
+- **htmlencoder.php**: move to core/rendering
+- **automatic-date-field.php**: remove dependency to date field
+- **polar**: use typed properties
+- **polar**: use arrow functions
 
 ### Fix
 
+- change package name
+- fix tests
+- fix tests
+- **composer.json**: exclude test classes from installation
+- remove duplicate property setting
 - use value of property when checking max length
-
-## 1.5.1 (2022-10-20)
-
-### Fix
-
 - properly configure fields when using native attributes
+- php 8 deprecations
+- file permission errors windows (#37)
+- **Core/Parsers/ConstructorArgsOne**: allow unquoted constructor args in annotations
 
 ### Refactor
 
 - remove unused imports, use phpstan in ci
 - fix phpmd errors, add pre-commit-config
-
-## 1.5.0 (2022-08-08)
-
-### Feat
-
-- add support for enumerations
-
-### Refactor
-
 - use readonly properties
-
-### Fix
-
-- php 8 deprecations
-
-## php8-0 (2022-08-06)
-
-## 1.4.0 (2022-08-06)
-
-### Feat
-
-- add support for php 8 attributes
-
-## 1.3.1 (2022-08-05)
-
-### Fix
-
-- file permission errors windows (#37)
-
-## 1.3.0 (2022-08-01)
-
-### Feat
-
-- **App.php**: use in-memory configuration by default
-
-### Refactor
-
+- use constructor property promotion
+- use union types
+- use match expressions
+- remove stringable polyfill
 - **Form.php**: move to root folder of Api namespace
 - **Comparable.php**: move to core
-- **Comparable.php**: move to core
 - **HtmlEncoder.php**: reduce cyclomatic complexity (#29)
-
-## 1.2.0 (2022-07-31)
-
-### Refactor
-
-- **HtmlEncoder.php**: reduce cyclomatic complexity
 - **TypeValidation.php**: reduce cyclomatic complexity
-- **TypeValidation.php**: reduce cyclomatic complexity
-- **Field.php**: reduce cyclomatic complexity (#27)
-
-### Feat
-
-- **App.php**: use csv-file-storage by default
-- **CsvFileStorage.php**: move csv-file-storage
-- **HtmlEncoder.php**: move to core/rendering
-- **AutomaticDateField.php**: remove dependency to date field
-
-## 1.1.0 (2022-07-17)
-
-## php7-4 (2022-07-17)
-
-### Feat
-
-- **polar**: use arrow functions
-- **polar**: use arrow functions
-- **polar**: use typed properties
-
-## 1.0.1 (2022-07-17)
-
-## php7-3 (2022-07-17)
-
-### Fix
-
-- **Core/Parsers/ConstructorArgsOne**: allow unquoted constructor args in annotations
-
-## 1.0.0 (2022-07-09)
+- **field.php**: reduce cyclomatic complexity (#27)
