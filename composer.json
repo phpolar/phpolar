@@ -21,7 +21,6 @@
     "autoload-dev": {
         "psr-4": {
             "Phpolar\\Phpolar\\Tests\\DataProviders\\": "tests/__data-providers__",
-            "Phpolar\\Phpolar\\Tests\\Mocks\\": "tests/__mocks__",
             "Phpolar\\Phpolar\\Tests\\Fakes\\": "tests/__fakes__",
             "Phpolar\\Phpolar\\Tests\\Stubs\\": "tests/__stubs__"
         }
@@ -33,7 +32,7 @@
         "php-contrib/authenticator": "^1.0",
         "php-contrib/response-filter": "^1.0",
         "php-contrib/validator": "^1.0",
-        "phpolar/core": "^3.0",
+        "phpolar/core": "^4.0.0",
         "phpolar/model-resolver": "^1.0",
         "phpolar/property-injector-contract": "^1.0",
         "phpolar/routable": "^2.0",
@@ -52,9 +51,9 @@
         "phpmd/phpmd": "^2.13",
         "phpolar/csrf-protection": "^3.1",
         "phpolar/http-message-test-utils": "^0.1.0 || ^0.2.0",
-        "phpolar/model": "^1.2",
-        "phpolar/pure-php": "^2.0",
-        "phpstan/phpstan": "^1.8",
+        "phpolar/model": "^1.2.2",
+        "phpolar/pure-php": "^3.0",
+        "phpstan/phpstan": "^2.0.3",
         "phpunit/phpunit": "^11.1.3",
         "picocss/pico": "^2.0.6",
         "squizlabs/php_codesniffer": "^3.7"
