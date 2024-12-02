@@ -308,16 +308,16 @@
         },
         {
             "name": "phpolar/core",
-          "version": "4.0.1",
+            "version": "4.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpolar/core.git",
-              "reference": "fcb3f229133cafb135efe35a18b18cf2fe8ecf6b"
+                "reference": "fcb3f229133cafb135efe35a18b18cf2fe8ecf6b"
             },
             "dist": {
                 "type": "zip",
-              "url": "https://api.github.com/repos/phpolar/core/zipball/fcb3f229133cafb135efe35a18b18cf2fe8ecf6b",
-              "reference": "fcb3f229133cafb135efe35a18b18cf2fe8ecf6b",
+                "url": "https://api.github.com/repos/phpolar/core/zipball/fcb3f229133cafb135efe35a18b18cf2fe8ecf6b",
+                "reference": "fcb3f229133cafb135efe35a18b18cf2fe8ecf6b",
                 "shasum": ""
             },
             "require": {
@@ -360,9 +360,9 @@
             "description": "The internal components of the PHPolar Microframework",
             "support": {
                 "issues": "https://github.com/phpolar/core/issues",
-              "source": "https://github.com/phpolar/core/tree/4.0.1"
+                "source": "https://github.com/phpolar/core/tree/4.0.1"
             },
-          "time": "2024-12-02T02:39:30+00:00"
+            "time": "2024-12-02T02:39:30+00:00"
         },
         {
             "name": "phpolar/model-resolver",
@@ -2407,16 +2407,16 @@
         },
         {
             "name": "phpolar/model",
-            "version": "1.2.2",
+            "version": "1.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpolar/model.git",
-                "reference": "c98f60559fdc28cd9d58169e2f4b8119e8d938a4"
+                "reference": "1463ed227b8cf1caae7e5f2f907d951d12f274d0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpolar/model/zipball/c98f60559fdc28cd9d58169e2f4b8119e8d938a4",
-                "reference": "c98f60559fdc28cd9d58169e2f4b8119e8d938a4",
+                "url": "https://api.github.com/repos/phpolar/model/zipball/1463ed227b8cf1caae7e5f2f907d951d12f274d0",
+                "reference": "1463ed227b8cf1caae7e5f2f907d951d12f274d0",
                 "shasum": ""
             },
             "require": {
@@ -2451,9 +2451,9 @@
             "description": "Provides support for configuring the properties of an object for validation, formatting, and storage.",
             "support": {
                 "issues": "https://github.com/phpolar/model/issues",
-                "source": "https://github.com/phpolar/model/tree/1.2.2"
+                "source": "https://github.com/phpolar/model/tree/1.2.3"
             },
-            "time": "2024-12-01T21:33:41+00:00"
+            "time": "2024-12-02T02:47:58+00:00"
         },
         {
             "name": "phpolar/pure-php",
