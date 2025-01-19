@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <?php
-/**
- * @var Page $view
- */
-$view = $this;
+(function (Page $view) {
 ?>
 <html>
     <head>
@@ -31,3 +28,5 @@ $view = $this;
         </div>
     </body>
 </html>
+<?php
+})($this);
