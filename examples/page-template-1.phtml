@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <?php
-/**
- * @var Page $view
- */
-$view = $this;
+(function (Page $view) {
 ?>
 <html>
     <body style="text-align:center">
         <h1><?= $view->title ?></h1>
     </body>
 </html>
+<?php
+})($this);

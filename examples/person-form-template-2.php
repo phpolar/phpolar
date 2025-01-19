@@ -1,15 +1,11 @@
-<!DOCTYPE html>
 <?php
 
 namespace MyApp;
 
 use Phpolar\Phpolar\Model\FormControlTypes;
-
-/**
- * @var Person
- */
-$view = $this;
+(function (Person $view) {
 ?>
+<!DOCTYPE html>
 <html>
     <body style="text-align:center">
         <h1><?= $view->title ?></h1>
@@ -38,3 +34,5 @@ $view = $this;
         </div>
     </body>
 </html>
+<?php
+})($this);

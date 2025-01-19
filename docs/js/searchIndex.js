@@ -164,12 +164,12 @@ Search.appendIndex(
             "fqsen": "\\Phpolar\\Phpolar\\DependencyInjection\\Globs\u003A\u003AFrameworkDeps",
             "name": "FrameworkDeps",
             "summary": "The\u0020frameworks\u0020dependencies\u0020configuration\nis\u0020located\u0020in\u0020the\u0020source\u0020files\u0020of\u0020the\u0020framework.",
-            "url": ""
+            "url": "classes/Phpolar-Phpolar-DependencyInjection-Globs.html#enumcase_FrameworkDeps"
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\DependencyInjection\\Globs\u003A\u003ACustomDeps",
             "name": "CustomDeps",
             "summary": "The\u0020custom\u0020dependencies\u0020directory\u0020should\u0020be\nset\u0020up\u0020in\u0020the\u0020application\u0020using\u0020the\u0020framework.",
-            "url": ""
+            "url": "classes/Phpolar-Phpolar-DependencyInjection-Globs.html#enumcase_CustomDeps"
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\Http\\AuthorizationChecker",
             "name": "AuthorizationChecker",
@@ -214,12 +214,12 @@ Search.appendIndex(
             "fqsen": "\\Phpolar\\Phpolar\\Http\\RequestMethods\u003A\u003AGET",
             "name": "GET",
             "summary": "",
-            "url": ""
+            "url": "classes/Phpolar-Phpolar-Http-RequestMethods.html#enumcase_GET"
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\Http\\RequestMethods\u003A\u003APOST",
             "name": "POST",
             "summary": "",
-            "url": ""
+            "url": "classes/Phpolar-Phpolar-Http-RequestMethods.html#enumcase_POST"
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\Http\\ResolvedRoute",
             "name": "ResolvedRoute",

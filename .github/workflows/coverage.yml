@@ -1,14 +1,15 @@
-name: Pull Request Quality Check
+name: Generate Unit Test Coverage
 
 on:
-  pull_request:
+  push:
     branches: [ main ]
     paths:
       - 'composer.json'
+      - '.github/workflows/coverage.yml'
       - '**.php'
 
 jobs:
-  pr_quality:
+  coverage:
 
     runs-on: ubuntu-latest
 
@@ -34,8 +35,10 @@ jobs:
     - name: Install dependencies
       run: composer install --no-ansi --no-interaction --prefer-dist --no-progress --ignore-platform-req=ext-ast
 
-    - name: Scanning for lint errors
-      run: composer ci:lint
-
     - name: Run test suite
       run: composer ci:test
+
+    - name: Generate Code Coverage Badge
+      env:
+        COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: composer ci:generate-coverage-badge
