@@ -5,7 +5,7 @@ on:
     branches: [main]
 
 jobs:
-  build_php_latest_nightly:
+  build_php_old_stable:
     runs-on: ${{ matrix.operating-system }}
     continue-on-error: true
     strategy:
