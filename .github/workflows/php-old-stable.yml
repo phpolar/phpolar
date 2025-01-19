@@ -7,7 +7,6 @@ on:
 jobs:
   build_php_latest_nightly:
     runs-on: ${{ matrix.operating-system }}
-    run-name: PHP ${{ matrix.php-versions }}
     continue-on-error: true
     strategy:
       matrix:
