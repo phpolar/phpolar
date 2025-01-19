@@ -1,4 +1,4 @@
-name: PHP Build Latest and Nightly
+name: PHP Nightly Version Build
 
 on:
   schedule:
@@ -10,8 +10,8 @@ jobs:
     continue-on-error: true
     strategy:
       matrix:
-        operating-system: [ 'ubuntu-24.10', 'ubuntu-22.04', 'ubuntu-20.04', 'windows-latest', 'macos-latest' ]
-        php-versions: ['8.1', '8.2', latest, nightly]
+        operating-system: [ 'ubuntu-latest', 'windows-latest', 'macos-latest' ]
+        php-versions: [nightly]
         phpunit-versions: ['latest']
     steps:
     - uses: actions/checkout@v4
