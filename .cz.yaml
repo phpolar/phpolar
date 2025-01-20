@@ -3,4 +3,4 @@ commitizen:
   gpg_sign: true
   name: cz_conventional_commits
   tag_format: $version
-  version: 5.0.4
+  version: 5.1.0

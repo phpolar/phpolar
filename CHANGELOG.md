@@ -1,3 +1,9 @@
+## 5.1.0 (2025-01-20)
+
+### Feat
+
+- **composer**: upgrade dependencies
+
 ## 5.0.4 (2025-01-19)
 
 ### Fix
