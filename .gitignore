@@ -9,3 +9,5 @@
 /analysis/
 /.idea/
 /.vscode/
+/node_modules/
+/.cypress/

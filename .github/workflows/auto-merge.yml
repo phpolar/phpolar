@@ -2,7 +2,7 @@ name: Dependabot auto-merge
 on:
   pull_request:
     branches: [ main ]
-    paths: composer.lock
+    paths: [ composer.lock ]
 
 permissions:
   contents: write

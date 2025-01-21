@@ -1,0 +1,43 @@
+name: E2E Tests
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'composer.json'
+      - '**.php'
+      - 'tests/e2e/**/*.*'
+env:
+  E2E_SERVER: 'http://127.0.0.1:3444'
+  PROJECT_FOLDER: e2e-app
+
+jobs:
+  E2E:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - uses: shivammathur/setup-php@v2
+      with:
+        php-version: 8.3
+    - name: Install System dependencies
+      run: |
+        apt-get -qq update
+        apt-get -qq install -y libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libnss3 libxss1 libasound2 libxtst6 xauth xvfb
+    - name: Cache Composer packages
+      id: composer-cache
+      uses: actions/cache@v2
+      with:
+        path: vendor
+        key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-php-
+
+    - name: Create project
+      run: composer create-project --no-ansi --no-interaction --prefer-dist --no-progress --no-audit --no-dev  phpolar/skeleton $PROJECT_FOLDER
+
+    - name: Run E2E tests
+      uses: cypress-io/github-action@v6
+      with:
+        start: php -S 0.0.0.0:3444 -t ./e2e-app/public
+        wait-on: 'http://127.0.0.1:3444'

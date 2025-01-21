@@ -1,0 +1,15 @@
+{
+  "cypress-cucumber-preprocessor": {
+    "e2e": {
+      "stepDefinitions": [
+        "tests/e2e/[filepath].steps.{js,mjs,ts,tsx}",
+        "tests/e2e/shared/*.steps.{js,mjs,ts,tsx}"
+      ]
+    }
+  },
+  "devDependencies": {
+    "@badeball/cypress-cucumber-preprocessor": "^22.0.0",
+    "@bahmutov/cypress-esbuild-preprocessor": "^2.2.4",
+    "cypress": "^14.0.0"
+  }
+}
