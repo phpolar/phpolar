@@ -40,5 +40,5 @@ jobs:
     - name: Run E2E tests
       uses: cypress-io/github-action@v6
       with:
-        start: php -S 0.0.0.0:3444 -t ./e2e-app/public
+        start: composer ci:start
         wait-on: 'http://127.0.0.1:3444'
