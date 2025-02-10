@@ -1,3 +1,9 @@
+## 5.2.0 (2025-02-09)
+
+### Feat
+
+- **ContainerLoader**: add alpine linux support
+
 ## 5.1.0 (2025-01-20)
 
 ### Feat
