@@ -188,7 +188,6 @@ final class AppTest extends TestCase
             );
         $config = new ContainerConfigurationStub();
         $routes = new RouteMap($this->getPropertyInjectorStub());
-        $config[RouteMap::class] = $routes;
         $config[RoutingMiddleware::class] = $routingMiddlewareSpy;
         $config[RouteMap::class] = $routes;
         $config[CsrfProtectionRequestHandler::class] = static fn (ArrayAccess $config) =>
@@ -228,6 +227,7 @@ final class AppTest extends TestCase
         $config[DiTokens::UNAUTHORIZED_HANDLER] = $this->createStub(RequestHandlerInterface::class);
         $config[ModelResolverInterface::class] = $this->createStub(ModelResolverInterface::class);
         $config[RouteMap::class] = $givenRoutes;
+        $config[RoutingMiddleware::class] = $this->createStub(RoutingMiddleware::class);
         $container = $this->getContainerFactory($config, $handlerStub);
         App::create(
             $this->configureContainer($container, $config),
@@ -260,6 +260,7 @@ final class AppTest extends TestCase
         $config[ModelResolverInterface::class] = $this->createStub(ModelResolverInterface::class);
         $config[DiTokens::UNAUTHORIZED_HANDLER] = $this->createStub(RequestHandlerInterface::class);
         $config[RouteMap::class] = new RouteMap($this->getPropertyInjectorStub());
+        $config[RoutingMiddleware::class] = $this->createStub(RoutingMiddleware::class);
         /**
          * @var Stub&MiddlewareQueueRequestHandler $handlerStub
          */
@@ -269,7 +270,9 @@ final class AppTest extends TestCase
         $sut = App::create(
             $this->configureContainer($containerFac, $config),
         );
-        $sut->receive(new RequestStub("GET", "/non-existing-route"));
+        $requestStub = new RequestStub("GET", "/non-existing-route");
+        $requestStub->body = null;
+        $sut->receive($requestStub);
         $this->assertSame(ResponseCode::NOT_FOUND, http_response_code());
     }
 
@@ -318,6 +321,7 @@ final class AppTest extends TestCase
         $routes = new RouteMap($this->getPropertyInjectorStub());
         $routes->add(RequestMethods::GET, "/", $this->createStub(AbstractProtectedRoutable::class));
         $config[RouteMap::class] = $routes;
+        $config[RoutingMiddleware::class] = $this->createStub(RoutingMiddleware::class);
         $container = $this->configureContainer($this->getContainerFactory($config, $handler), $config);
         /**
          * @var Stub&MiddlewareInterface

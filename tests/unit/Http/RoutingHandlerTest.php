@@ -333,7 +333,7 @@ final class RoutingHandlerTest extends TestCase
         $fakeModel = (object) ["name" => $expectedModelName];
         $container = $this->getContainer();
         $registeredRouteHandler = new class () implements RoutableInterface {
-            public function process(#[Model] object $form = null): string
+            public function process(#[Model] ?object $form = null): string
             {
                 return $form->name;
             }
@@ -381,7 +381,7 @@ final class RoutingHandlerTest extends TestCase
         $container = $this->getContainer();
         $registeredRouteHandler = new class () extends AbstractProtectedRoutable {
             #[Authorize]
-            public function process(#[Model] object $form = null): string
+            public function process(#[Model] ?object $form = null): string
             {
                 return $form->name;
             }

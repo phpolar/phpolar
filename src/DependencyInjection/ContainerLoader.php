@@ -22,8 +22,14 @@ final class ContainerLoader
         ContainerInterface $container,
         ArrayAccess $containerConfig,
     ): void {
-        $frameworkDepFiles = glob(Globs::FrameworkDeps->value, GLOB_BRACE);
-        $customDepFiles = glob(Globs::CustomDeps->value, GLOB_BRACE);
+        $frameworkDepFiles = [
+            ...glob(Globs::FrameworkDeps->value),
+            ...glob(Globs::UserFrameworkDeps->value),
+        ];
+        $customDepFiles = [
+            ...glob(Globs::CustomDeps->value),
+            ...glob(Globs::RootCustomDeps->value),
+        ];
 
         if ($frameworkDepFiles === false || $customDepFiles === false) {
             return; // @codeCoverageIgnore
