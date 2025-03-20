@@ -24,6 +24,7 @@ use PHPUnit\Framework\TestCase;
 
 #[CoversClass(RouteMap::class)]
 #[CoversClass(ResolvedRoute::class)]
+#[CoversClass(RouteParamMap::class)]
 #[UsesClass(RouteParamMap::class)]
 final class RouteMapTest extends TestCase
 {
