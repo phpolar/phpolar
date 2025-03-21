@@ -3040,16 +3040,16 @@
         },
         {
             "name": "picocss/pico",
-            "version": "v2.0.6",
+            "version": "v2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/picocss/pico.git",
-                "reference": "6dc6489e69cc1f22daa938ebd38c02400032428c"
+                "reference": "1039a4788d6abc368d5485ae6bac84a8f0e3096f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/picocss/pico/zipball/6dc6489e69cc1f22daa938ebd38c02400032428c",
-                "reference": "6dc6489e69cc1f22daa938ebd38c02400032428c",
+                "url": "https://api.github.com/repos/picocss/pico/zipball/1039a4788d6abc368d5485ae6bac84a8f0e3096f",
+                "reference": "1039a4788d6abc368d5485ae6bac84a8f0e3096f",
                 "shasum": ""
             },
             "type": "library",
@@ -3082,9 +3082,9 @@
             ],
             "support": {
                 "issues": "https://github.com/picocss/pico/issues/",
-                "source": "https://github.com/picocss/pico/tree/v2.0.6"
+                "source": "https://github.com/picocss/pico/tree/v2.1.1"
             },
-            "time": "2024-03-03T15:09:25+00:00"
+            "time": "2025-03-15T06:44:28+00:00"
         },
         {
             "name": "psr/http-client",
@@ -5644,7 +5644,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {},
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
@@ -5655,5 +5655,5 @@
         "ext-ast": "*",
         "ext-openssl": "*"
     },
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.3.0"
 }
