@@ -1,9 +1,15 @@
 version: 2
 updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "sunday"
+    groups:
+      all-actions:
+        patterns: [ "*" ]
 
   - package-ecosystem: "composer"
     directory: "/"
-    labels:
-      - "dev-dependency-update"
     schedule:
       interval: "daily"
