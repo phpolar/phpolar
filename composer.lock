@@ -2239,21 +2239,21 @@
         },
         {
             "name": "phpolar/csrf-protection",
-            "version": "3.1.4",
+            "version": "3.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpolar/csrf-protection.git",
-                "reference": "732171d30d780afe20a710170fdf86b749259933"
+                "reference": "80eeaf1b5d1c003342f5c5292d095b500d064b04"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpolar/csrf-protection/zipball/732171d30d780afe20a710170fdf86b749259933",
-                "reference": "732171d30d780afe20a710170fdf86b749259933",
+                "url": "https://api.github.com/repos/phpolar/csrf-protection/zipball/80eeaf1b5d1c003342f5c5292d095b500d064b04",
+                "reference": "80eeaf1b5d1c003342f5c5292d095b500d064b04",
                 "shasum": ""
             },
             "require": {
                 "ext-mbstring": "*",
-                "php": "^7.4 || ^8.0",
+                "php": ">=8.3",
                 "php-contrib/response-filter": "^2.0",
                 "phpolar/http-codes": "^0.0.6",
                 "psr/http-message": "^2.0",
@@ -2310,9 +2310,9 @@
             ],
             "support": {
                 "issues": "https://github.com/phpolar/csrf-protection/issues",
-                "source": "https://github.com/phpolar/csrf-protection/tree/3.1.4"
+                "source": "https://github.com/phpolar/csrf-protection/tree/3.1.5"
             },
-            "time": "2025-01-20T16:25:09+00:00"
+            "time": "2025-03-20T04:25:52+00:00"
         },
         {
             "name": "phpolar/http-codes",
