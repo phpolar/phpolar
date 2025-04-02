@@ -253,29 +253,6 @@ final class AppTest extends TestCase
         $this->assertSame(ResponseCode::NOT_FOUND, http_response_code());
     }
 
-    #[TestDox("Shall process the 404 error handler if the request path does not exist")]
-    public function test5()
-    {
-        $config = new ContainerConfigurationStub();
-        $config[ModelResolverInterface::class] = $this->createStub(ModelResolverInterface::class);
-        $config[DiTokens::UNAUTHORIZED_HANDLER] = $this->createStub(RequestHandlerInterface::class);
-        $config[RouteMap::class] = new RouteMap($this->getPropertyInjectorStub());
-        $config[RoutingMiddleware::class] = $this->createStub(RoutingMiddleware::class);
-        /**
-         * @var Stub&MiddlewareQueueRequestHandler $handlerStub
-         */
-        $handlerStub = $this->createStub(MiddlewareQueueRequestHandler::class);
-        $handlerStub->method("handle")->willReturn((new ResponseStub(404, "Not Found")));
-        $containerFac = $this->getContainerFactory($config, $handlerStub);
-        $sut = App::create(
-            $this->configureContainer($containerFac, $config),
-        );
-        $requestStub = new RequestStub("GET", "/non-existing-route");
-        $requestStub->body = null;
-        $sut->receive($requestStub);
-        $this->assertSame(ResponseCode::NOT_FOUND, http_response_code());
-    }
-
     #[TestDox("Shall be a singleton object")]
     public function test6()
     {
