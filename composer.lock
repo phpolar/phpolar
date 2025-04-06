@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6fce958e032937d773080bbf0e9454ef",
+    "content-hash": "3c426ebceeb2b8de12bd65759f357e33",
     "packages": [
         {
             "name": "guzzlehttp/psr7",
@@ -2455,28 +2455,28 @@
         },
         {
             "name": "phpolar/pure-php",
-            "version": "2.0.0",
+            "version": "3.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpolar/pure-php.git",
-                "reference": "e356addc05c8c8a3abcdb3e1783a57e5f9c4f0bc"
+                "reference": "0cac1d9547c9ec7e30a8fcf848eb82899276997e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpolar/pure-php/zipball/e356addc05c8c8a3abcdb3e1783a57e5f9c4f0bc",
-                "reference": "e356addc05c8c8a3abcdb3e1783a57e5f9c4f0bc",
+                "url": "https://api.github.com/repos/phpolar/pure-php/zipball/0cac1d9547c9ec7e30a8fcf848eb82899276997e",
+                "reference": "0cac1d9547c9ec7e30a8fcf848eb82899276997e",
                 "shasum": ""
             },
             "require": {
-                "php": ">= 8.1"
+                "php": ">=8.3"
             },
             "require-dev": {
                 "ext-mbstring": "*",
                 "phan/phan": "^5.4",
                 "php-coveralls/php-coveralls": "^2.5",
                 "phpmd/phpmd": "^2.13",
-                "phpstan/phpstan": "^1.9",
-                "phpunit/phpunit": "^10.0",
+                "phpstan/phpstan": "^1.9 || ^2.0",
+                "phpunit/phpunit": "^10.0 || ^11.4",
                 "squizlabs/php_codesniffer": "^3.7"
             },
             "type": "library",
@@ -2504,9 +2504,9 @@
             ],
             "support": {
                 "issues": "https://github.com/phpolar/pure-php/issues",
-                "source": "https://github.com/phpolar/pure-php/tree/2.0.0"
+                "source": "https://github.com/phpolar/pure-php/tree/3.1.2"
             },
-            "time": "2023-09-02T23:44:22+00:00"
+            "time": "2025-03-21T03:18:04+00:00"
         },
         {
             "name": "phpstan/phpdoc-parser",
