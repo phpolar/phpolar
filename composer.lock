@@ -2239,16 +2239,16 @@
         },
         {
             "name": "phpolar/csrf-protection",
-            "version": "3.1.5",
+            "version": "3.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpolar/csrf-protection.git",
-                "reference": "80eeaf1b5d1c003342f5c5292d095b500d064b04"
+                "reference": "62c995fe9dab8a9f792a5461ee7eb74a2f11f3ec"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpolar/csrf-protection/zipball/80eeaf1b5d1c003342f5c5292d095b500d064b04",
-                "reference": "80eeaf1b5d1c003342f5c5292d095b500d064b04",
+                "url": "https://api.github.com/repos/phpolar/csrf-protection/zipball/62c995fe9dab8a9f792a5461ee7eb74a2f11f3ec",
+                "reference": "62c995fe9dab8a9f792a5461ee7eb74a2f11f3ec",
                 "shasum": ""
             },
             "require": {
@@ -2273,7 +2273,7 @@
                 "phpolar/csrf-response-filter": "^1.1.2",
                 "phpolar/http-message-test-utils": "^0.2.0",
                 "phpstan/phpstan": "^2.1",
-                "phpunit/phpunit": "^10.0 || ^11.4",
+                "phpunit/phpunit": "^10.0 || ^11.4 || ^12.0",
                 "squizlabs/php_codesniffer": "^3.7"
             },
             "suggest": {
@@ -2310,9 +2310,9 @@
             ],
             "support": {
                 "issues": "https://github.com/phpolar/csrf-protection/issues",
-                "source": "https://github.com/phpolar/csrf-protection/tree/3.1.5"
+                "source": "https://github.com/phpolar/csrf-protection/tree/3.1.6"
             },
-            "time": "2025-03-20T04:25:52+00:00"
+            "time": "2025-04-16T04:11:21+00:00"
         },
         {
             "name": "phpolar/http-codes",
