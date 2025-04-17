@@ -309,16 +309,16 @@
         },
         {
             "name": "phpolar/core",
-            "version": "4.0.2",
+            "version": "4.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpolar/core.git",
-                "reference": "53c753a5a85b9a5f173d5642f397d33f0e5991bc"
+                "reference": "1737e19e288169e229c854dec289f268f681ea8a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpolar/core/zipball/53c753a5a85b9a5f173d5642f397d33f0e5991bc",
-                "reference": "53c753a5a85b9a5f173d5642f397d33f0e5991bc",
+                "url": "https://api.github.com/repos/phpolar/core/zipball/1737e19e288169e229c854dec289f268f681ea8a",
+                "reference": "1737e19e288169e229c854dec289f268f681ea8a",
                 "shasum": ""
             },
             "require": {
@@ -335,7 +335,7 @@
                 "phpmd/phpmd": "^2.13",
                 "phpolar/http-message-test-utils": "^0.1.0 || ^0.2.0",
                 "phpstan/phpstan": "^1.9.14 || ^2.0.0",
-                "phpunit/phpunit": "^11.4",
+                "phpunit/phpunit": "^11.4 || ^12.0",
                 "squizlabs/php_codesniffer": "^3.7.1"
             },
             "type": "library",
@@ -360,9 +360,9 @@
             "description": "The internal components of the PHPolar Microframework",
             "support": {
                 "issues": "https://github.com/phpolar/core/issues",
-                "source": "https://github.com/phpolar/core/tree/4.0.2"
+                "source": "https://github.com/phpolar/core/tree/4.0.3"
             },
-            "time": "2025-03-20T03:55:55+00:00"
+            "time": "2025-04-16T04:09:36+00:00"
         },
         {
             "name": "phpolar/model-resolver",
