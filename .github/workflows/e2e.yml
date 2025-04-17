@@ -5,6 +5,7 @@ on:
     branches: [ main ]
     paths:
       - 'composer.json'
+      - 'package.json'
       - '**.php'
       - 'tests/e2e/**/*.*'
       - '.github/workflows/e2e.yml'

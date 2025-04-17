@@ -1,7 +1,8 @@
 name: Prod Upgrade Release
 on:
   schedule:
-    - cron: '30 3 * * 3'
+    # every Monday at 2AM UTC
+    - cron: '0 2 * * 1'
 permissions:
   contents: write
 jobs:
