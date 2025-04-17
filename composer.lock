@@ -2455,16 +2455,16 @@
         },
         {
             "name": "phpolar/pure-php",
-            "version": "3.1.2",
+            "version": "3.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpolar/pure-php.git",
-                "reference": "0cac1d9547c9ec7e30a8fcf848eb82899276997e"
+                "reference": "24427c6dd84885559d6cdccf49302db205c5c2a1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpolar/pure-php/zipball/0cac1d9547c9ec7e30a8fcf848eb82899276997e",
-                "reference": "0cac1d9547c9ec7e30a8fcf848eb82899276997e",
+                "url": "https://api.github.com/repos/phpolar/pure-php/zipball/24427c6dd84885559d6cdccf49302db205c5c2a1",
+                "reference": "24427c6dd84885559d6cdccf49302db205c5c2a1",
                 "shasum": ""
             },
             "require": {
@@ -2476,7 +2476,7 @@
                 "php-coveralls/php-coveralls": "^2.5",
                 "phpmd/phpmd": "^2.13",
                 "phpstan/phpstan": "^1.9 || ^2.0",
-                "phpunit/phpunit": "^10.0 || ^11.4",
+                "phpunit/phpunit": "^10.0 || ^11.4 || ^12.0",
                 "squizlabs/php_codesniffer": "^3.7"
             },
             "type": "library",
@@ -2504,9 +2504,9 @@
             ],
             "support": {
                 "issues": "https://github.com/phpolar/pure-php/issues",
-                "source": "https://github.com/phpolar/pure-php/tree/3.1.2"
+                "source": "https://github.com/phpolar/pure-php/tree/3.1.3"
             },
-            "time": "2025-03-21T03:18:04+00:00"
+            "time": "2025-04-16T04:07:58+00:00"
         },
         {
             "name": "phpstan/phpdoc-parser",
