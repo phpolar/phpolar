@@ -23,7 +23,7 @@ final class ContainerLoader
         ArrayAccess $containerConfig,
     ): void {
         $frameworkDepFiles = glob(Globs::FrameworkDeps->value);
-        $userFrameworkDepFiles = glob(Globs::UserFrameworkDeps->value);
+        $userDepFiles = glob(Globs::UserFrameworkDeps->value);
         $customDepFiles = glob(Globs::CustomDeps->value);
         $rootCustomDepFiles = glob(Globs::RootCustomDeps->value);
 
@@ -33,7 +33,7 @@ final class ContainerLoader
                     static fn (string $configFile) => require $configFile,
                     [
                         ...($frameworkDepFiles === false ? [] : $frameworkDepFiles),
-                        ...($userFrameworkDepFiles === false ? [] : $userFrameworkDepFiles),
+                        ...($userDepFiles === false ? [] : $userDepFiles),
                         ...($customDepFiles === false ? [] : $customDepFiles),
                         ...($rootCustomDepFiles === false ? [] : $rootCustomDepFiles),
                     ]
