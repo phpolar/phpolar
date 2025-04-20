@@ -9,6 +9,8 @@ on:
       - '!examples/**'
       - '!config/**'
       - '!.phan/**'
+permissions:
+  contents: write
 jobs:
   PHPMD:
     uses: phpolar/github-workflows/.github/workflows/phpmd.yml@v1
