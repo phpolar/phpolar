@@ -531,16 +531,16 @@
         },
         {
             "name": "phpolar/storage-driver",
-            "version": "1.0.2",
+            "version": "1.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpolar/storage-driver.git",
-                "reference": "9486c75b122433d02e5fc413fd163ecabc9dac23"
+                "reference": "fb053eeb38079a26ef2a9f852d9dbb6da759d4eb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpolar/storage-driver/zipball/9486c75b122433d02e5fc413fd163ecabc9dac23",
-                "reference": "9486c75b122433d02e5fc413fd163ecabc9dac23",
+                "url": "https://api.github.com/repos/phpolar/storage-driver/zipball/fb053eeb38079a26ef2a9f852d9dbb6da759d4eb",
+                "reference": "fb053eeb38079a26ef2a9f852d9dbb6da759d4eb",
                 "shasum": ""
             },
             "require": {
@@ -548,7 +548,7 @@
             },
             "require-dev": {
                 "php-coveralls/php-coveralls": "^2.7",
-                "phpunit/phpunit": "^10.0 || ^11.4"
+                "phpunit/phpunit": "^10.0 || ^11.4 || ^12.0"
             },
             "type": "library",
             "autoload": {
@@ -572,9 +572,9 @@
             "description": "Provides an interface for database storage driver implementations.",
             "support": {
                 "issues": "https://github.com/phpolar/storage-driver/issues",
-                "source": "https://github.com/phpolar/storage-driver/tree/1.0.2"
+                "source": "https://github.com/phpolar/storage-driver/tree/1.0.3"
             },
-            "time": "2025-03-20T04:42:30+00:00"
+            "time": "2025-04-17T02:17:29+00:00"
         },
         {
             "name": "psr/container",
