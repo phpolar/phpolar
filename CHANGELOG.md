@@ -1,3 +1,21 @@
+## 6.1.0 (2025-04-23)
+
+### Feat
+
+- add delete and put request methods (#411)
+
+## 6.0.2 (2025-04-21)
+
+### Fix
+
+- **ContainerLoader**: improve dependency loading type safety (#403)
+
+### Refactor
+
+- **ContainerLoader**: shorten variable name (#405)
+
+## 6.0.1 (2025-04-16)
+
 ## 6.0.0 (2025-03-19)
 
 ### BREAKING CHANGE
