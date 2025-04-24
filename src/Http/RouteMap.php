@@ -25,6 +25,11 @@ class RouteMap
     }
 
     /**
+     * @var array<string,RoutableInterface|RoutableFactoryInterface> Stores actions for `DELETE` requests.
+     */
+    private array $registryForDelete = [];
+
+    /**
      * @var array<string,RoutableInterface|RoutableFactoryInterface> Stores actions for `GET` requests.
      */
     private array $registryForGet = [];
@@ -33,6 +38,11 @@ class RouteMap
      * @var array<string,RoutableInterface|RoutableFactoryInterface> Stores actions for `POST` requests.
      */
     private array $registryForPost = [];
+
+    /**
+     * @var array<string,RoutableInterface|RoutableFactoryInterface> Stores actions for `PUT` requests.
+     */
+    private array $registryForPut = [];
 
     private bool $containsParamRoutes = false;
 
@@ -43,8 +53,10 @@ class RouteMap
     {
         $this->containsParamRoutes = $this->containsParamRoutes || preg_match(ROUTE_PARAM_PATTERN, $route) === 1;
         match ($method) {
+            RequestMethods::DELETE => $this->registryForDelete[$route] = $entry,
             RequestMethods::GET => $this->registryForGet[$route] = $entry,
             RequestMethods::POST => $this->registryForPost[$route] = $entry,
+            RequestMethods::PUT => $this->registryForPut[$route] = $entry,
         };
     }
 
@@ -64,7 +76,18 @@ class RouteMap
     {
         $method = $request->getMethod();
         $route = $request->getUri()->getPath();
-        return strtoupper($method) === "GET" ? $this->matchGetRoute($route) : $this->matchPostRoute($route);
+        return match(strtoupper($method)) {
+            "DELETE" => $this->matchDeleteRoute($route),
+            "GET" => $this->matchGetRoute($route),
+            "POST" => $this->matchPostRoute($route),
+            "PUT" => $this->matchPutRoute($route),
+            default => new RouteNotRegistered(),
+        };
+    }
+
+    private function matchDeleteRoute(string $route): RoutableInterface | ResolvedRoute | RouteNotRegistered
+    {
+        return $this->getInstanceFromRegistry($this->registryForDelete, $route);
     }
 
     private function matchGetRoute(string $route): RoutableInterface | ResolvedRoute | RouteNotRegistered
@@ -75,6 +98,11 @@ class RouteMap
     private function matchPostRoute(string $route): RoutableInterface | ResolvedRoute | RouteNotRegistered
     {
         return $this->getInstanceFromRegistry($this->registryForPost, $route);
+    }
+
+    private function matchPutRoute(string $route): RoutableInterface | ResolvedRoute | RouteNotRegistered
+    {
+        return $this->getInstanceFromRegistry($this->registryForPut, $route);
     }
 
     /**

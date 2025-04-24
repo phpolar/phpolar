@@ -11,6 +11,8 @@ namespace Phpolar\Phpolar\Http;
  */
 enum RequestMethods
 {
+    case DELETE;
     case GET;
     case POST;
+    case PUT;
 }
