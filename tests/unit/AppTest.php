@@ -188,7 +188,6 @@ final class AppTest extends TestCase
             );
         $config = new ContainerConfigurationStub();
         $routes = new RouteMap($this->getPropertyInjectorStub());
-        $config[RouteMap::class] = $routes;
         $config[RoutingMiddleware::class] = $routingMiddlewareSpy;
         $config[RouteMap::class] = $routes;
         $config[CsrfProtectionRequestHandler::class] = static fn (ArrayAccess $config) =>
@@ -228,6 +227,7 @@ final class AppTest extends TestCase
         $config[DiTokens::UNAUTHORIZED_HANDLER] = $this->createStub(RequestHandlerInterface::class);
         $config[ModelResolverInterface::class] = $this->createStub(ModelResolverInterface::class);
         $config[RouteMap::class] = $givenRoutes;
+        $config[RoutingMiddleware::class] = $this->createStub(RoutingMiddleware::class);
         $container = $this->getContainerFactory($config, $handlerStub);
         App::create(
             $this->configureContainer($container, $config),
@@ -250,26 +250,6 @@ final class AppTest extends TestCase
             $this->configureContainer($nonConfiguredContainerFac, $config),
         );
         $app->receive(new RequestStub());
-        $this->assertSame(ResponseCode::NOT_FOUND, http_response_code());
-    }
-
-    #[TestDox("Shall process the 404 error handler if the request path does not exist")]
-    public function test5()
-    {
-        $config = new ContainerConfigurationStub();
-        $config[ModelResolverInterface::class] = $this->createStub(ModelResolverInterface::class);
-        $config[DiTokens::UNAUTHORIZED_HANDLER] = $this->createStub(RequestHandlerInterface::class);
-        $config[RouteMap::class] = new RouteMap($this->getPropertyInjectorStub());
-        /**
-         * @var Stub&MiddlewareQueueRequestHandler $handlerStub
-         */
-        $handlerStub = $this->createStub(MiddlewareQueueRequestHandler::class);
-        $handlerStub->method("handle")->willReturn((new ResponseStub(404, "Not Found")));
-        $containerFac = $this->getContainerFactory($config, $handlerStub);
-        $sut = App::create(
-            $this->configureContainer($containerFac, $config),
-        );
-        $sut->receive(new RequestStub("GET", "/non-existing-route"));
         $this->assertSame(ResponseCode::NOT_FOUND, http_response_code());
     }
 
@@ -318,6 +298,7 @@ final class AppTest extends TestCase
         $routes = new RouteMap($this->getPropertyInjectorStub());
         $routes->add(RequestMethods::GET, "/", $this->createStub(AbstractProtectedRoutable::class));
         $config[RouteMap::class] = $routes;
+        $config[RoutingMiddleware::class] = $this->createStub(RoutingMiddleware::class);
         $container = $this->configureContainer($this->getContainerFactory($config, $handler), $config);
         /**
          * @var Stub&MiddlewareInterface

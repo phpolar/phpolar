@@ -22,20 +22,21 @@ final class ContainerLoader
         ContainerInterface $container,
         ArrayAccess $containerConfig,
     ): void {
-        $frameworkDepFiles = glob(Globs::FrameworkDeps->value, GLOB_BRACE);
-        $customDepFiles = glob(Globs::CustomDeps->value, GLOB_BRACE);
+        $frameworkDepFiles = glob(Globs::FrameworkDeps->value);
+        $userDepFiles = glob(Globs::UserFrameworkDeps->value);
+        $customDepFiles = glob(Globs::CustomDeps->value);
+        $rootCustomDepFiles = glob(Globs::RootCustomDeps->value);
 
-        if ($frameworkDepFiles === false || $customDepFiles === false) {
-            return; // @codeCoverageIgnore
-        }
         $validConfs = array_merge(
             ...array_filter(
                 array_map(
                     static fn (string $configFile) => require $configFile,
-                    array_merge(
-                        $frameworkDepFiles,
-                        $customDepFiles,
-                    ),
+                    [
+                        ...($frameworkDepFiles === false ? [] : $frameworkDepFiles),
+                        ...($userDepFiles === false ? [] : $userDepFiles),
+                        ...($customDepFiles === false ? [] : $customDepFiles),
+                        ...($rootCustomDepFiles === false ? [] : $rootCustomDepFiles),
+                    ]
                 ),
                 is_array(...)
             )

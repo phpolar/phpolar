@@ -26,12 +26,12 @@
         }
     },
     "require": {
-        "php": ">=8.1",
+        "php": ">=8.3",
         "ext-mbstring": "*",
         "laminas/laminas-httphandlerrunner": "^2.9",
-        "php-contrib/authenticator": "^1.0",
-        "php-contrib/response-filter": "^1.0",
-        "php-contrib/validator": "^1.0",
+        "php-contrib/authenticator": "^2.0",
+        "php-contrib/response-filter": "^2.0",
+        "php-contrib/validator": "^2.0",
         "phpolar/core": "^4.0.0",
         "phpolar/model-resolver": "^1.0",
         "phpolar/property-injector-contract": "^1.0",
@@ -51,10 +51,10 @@
         "phpmd/phpmd": "^2.13",
         "phpolar/csrf-protection": "^3.1",
         "phpolar/http-message-test-utils": "^0.1.0 || ^0.2.0",
-        "phpolar/model": "^1.2.2",
-        "phpolar/pure-php": "^3.0",
+        "phpolar/model": "^1.2.4",
+        "phpolar/pure-php": "^2.0 || ^3.0",
         "phpstan/phpstan": "^2.0.3",
-        "phpunit/phpunit": "^11.1.3",
+        "phpunit/phpunit": "^10 || ^11.4 || ^12",
         "picocss/pico": "^2.0.6",
         "squizlabs/php_codesniffer": "^3.7"
     },
@@ -70,6 +70,7 @@
             "@smell"
         ],
         "ci:analyze": "composer exec \"@analyze\"",
+        "ci:start": "@php -S 0.0.0.0:3444 -t ./e2e-app/public 2>/dev/null",
         "ci:lint": "composer exec \"@lint\"",
         "ci:lint-fix": "composer exec \"@lint-fix\"",
         "ci:test-build": "composer exec \"@test --configuration=phpunit.ci.xml\"",

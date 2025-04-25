@@ -1,3 +1,51 @@
+## 6.1.0 (2025-04-23)
+
+### Feat
+
+- add delete and put request methods (#411)
+
+## 6.0.2 (2025-04-21)
+
+### Fix
+
+- **ContainerLoader**: improve dependency loading type safety (#403)
+
+### Refactor
+
+- **ContainerLoader**: shorten variable name (#405)
+
+## 6.0.1 (2025-04-16)
+
+## 6.0.0 (2025-03-19)
+
+### BREAKING CHANGE
+
+- PHP >= 8.3 required
+
+## 5.2.0 (2025-02-09)
+
+### Feat
+
+- **ContainerLoader**: add alpine linux support (#373)
+
+## 5.1.0 (2025-01-20)
+
+### Feat
+
+- **composer**: upgrade dependencies
+
+## 5.0.4 (2025-01-19)
+
+### Fix
+
+- **pure-php**: rollback to 2.0 (#371)
+
+## 5.0.3 (2025-01-19)
+
+### Fix
+
+- **readme**: update badges (#369)
+
 ## 5.0.2 (2024-12-01)
 
 ### Fix

@@ -107,7 +107,6 @@ final class App
             "cookie_secure" => true,
             "cookie_path" => true,
             "use_strict_mode" => true,
-            "referer_check" => true,
         ]
     ): App {
         session_status() !== PHP_SESSION_ACTIVE && session_start($options); // @codeCoverageIgnore
@@ -130,7 +129,6 @@ final class App
             "cookie_secure" => true,
             "cookie_path" => true,
             "use_strict_mode" => true,
-            "referer_check" => true,
         ]
     ): App {
         $this->useSession($sessionOpts);
