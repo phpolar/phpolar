@@ -166,10 +166,20 @@ Search.appendIndex(
             "summary": "The\u0020frameworks\u0020dependencies\u0020configuration\nis\u0020located\u0020in\u0020the\u0020source\u0020files\u0020of\u0020the\u0020framework.",
             "url": "classes/Phpolar-Phpolar-DependencyInjection-Globs.html#enumcase_FrameworkDeps"
         },                {
+            "fqsen": "\\Phpolar\\Phpolar\\DependencyInjection\\Globs\u003A\u003AUserFrameworkDeps",
+            "name": "UserFrameworkDeps",
+            "summary": "",
+            "url": "classes/Phpolar-Phpolar-DependencyInjection-Globs.html#enumcase_UserFrameworkDeps"
+        },                {
             "fqsen": "\\Phpolar\\Phpolar\\DependencyInjection\\Globs\u003A\u003ACustomDeps",
             "name": "CustomDeps",
             "summary": "The\u0020custom\u0020dependencies\u0020directory\u0020should\u0020be\nset\u0020up\u0020in\u0020the\u0020application\u0020using\u0020the\u0020framework.",
             "url": "classes/Phpolar-Phpolar-DependencyInjection-Globs.html#enumcase_CustomDeps"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\DependencyInjection\\Globs\u003A\u003ARootCustomDeps",
+            "name": "RootCustomDeps",
+            "summary": "",
+            "url": "classes/Phpolar-Phpolar-DependencyInjection-Globs.html#enumcase_RootCustomDeps"
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\Http\\AuthorizationChecker",
             "name": "AuthorizationChecker",
@@ -211,6 +221,11 @@ Search.appendIndex(
             "summary": "Contains\u0020the\u0020currently\u0020supported\nHTTP\u0020request\u0020methods\u0020supported\u0020for\nrouting.",
             "url": "classes/Phpolar-Phpolar-Http-RequestMethods.html"
         },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\RequestMethods\u003A\u003ADELETE",
+            "name": "DELETE",
+            "summary": "",
+            "url": "classes/Phpolar-Phpolar-Http-RequestMethods.html#enumcase_DELETE"
+        },                {
             "fqsen": "\\Phpolar\\Phpolar\\Http\\RequestMethods\u003A\u003AGET",
             "name": "GET",
             "summary": "",
@@ -220,6 +235,11 @@ Search.appendIndex(
             "name": "POST",
             "summary": "",
             "url": "classes/Phpolar-Phpolar-Http-RequestMethods.html#enumcase_POST"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\RequestMethods\u003A\u003APUT",
+            "name": "PUT",
+            "summary": "",
+            "url": "classes/Phpolar-Phpolar-Http-RequestMethods.html#enumcase_PUT"
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\Http\\ResolvedRoute",
             "name": "ResolvedRoute",
