@@ -11,5 +11,14 @@ updates:
 
   - package-ecosystem: "composer"
     directory: "/"
+    ignore: 
+      - dependency-name: "phpolar/*"
     schedule:
       interval: "daily"
+  - package-ecosystem: "composer"
+    directory: "/"
+    allow:
+      - dependency-name: "phpolar/*"
+    schedule:
+      interval: "cron"
+      cronjob: "0 0 * * 1"
