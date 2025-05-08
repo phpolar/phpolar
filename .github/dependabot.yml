@@ -22,5 +22,5 @@ updates:
       - dependency-type: "production"
     schedule:
       interval: "weekly"
-      day: "saturday"
-      time: "23:00"
+      day: "monday"
+      time: "1:00"
