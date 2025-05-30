@@ -51,7 +51,7 @@
         "phpmd/phpmd": "^2.13",
         "phpolar/csrf-protection": "^3.1",
         "phpolar/http-message-test-utils": "^0.1.0 || ^0.2.0",
-        "phpolar/model": "^1.2.4",
+        "phpolar/model": "^1.2.4 || ^2.0.0",
         "phpolar/pure-php": "^2.0 || ^3.0",
         "phpstan/phpstan": "^2.0.3",
         "phpunit/phpunit": "^10 || ^11.4 || ^12",
