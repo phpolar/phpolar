@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3c426ebceeb2b8de12bd65759f357e33",
+    "content-hash": "e7acd963b9fdd2f3e57f551a9bb91aa9",
     "packages": [
         {
             "name": "guzzlehttp/psr7",
@@ -2406,16 +2406,16 @@
         },
         {
             "name": "phpolar/model",
-            "version": "1.3.3",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpolar/model.git",
-                "reference": "1c2137ce92f0db1b5d582e6340220fad92fff77a"
+                "reference": "106fb195a2e150e27501522074024029fff6bf4d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpolar/model/zipball/1c2137ce92f0db1b5d582e6340220fad92fff77a",
-                "reference": "1c2137ce92f0db1b5d582e6340220fad92fff77a",
+                "url": "https://api.github.com/repos/phpolar/model/zipball/106fb195a2e150e27501522074024029fff6bf4d",
+                "reference": "106fb195a2e150e27501522074024029fff6bf4d",
                 "shasum": ""
             },
             "require": {
@@ -2423,7 +2423,8 @@
                 "php-contrib/validator": "^2.0",
                 "phpolar/core": "^4.0.0",
                 "phpolar/model-resolver": "^1.0",
-                "phpolar/storage-driver": "^1.0"
+                "phpolar/storage-driver": "^1.0",
+                "psr/http-message": "^2.0"
             },
             "require-dev": {
                 "ext-ast": "*",
@@ -2450,9 +2451,9 @@
             "description": "Provides support for configuring the properties of an object for validation, formatting, and storage.",
             "support": {
                 "issues": "https://github.com/phpolar/model/issues",
-                "source": "https://github.com/phpolar/model/tree/1.3.3"
+                "source": "https://github.com/phpolar/model/tree/2.0.0"
             },
-            "time": "2025-04-22T16:40:57+00:00"
+            "time": "2025-05-30T03:26:14+00:00"
         },
         {
             "name": "phpolar/pure-php",
