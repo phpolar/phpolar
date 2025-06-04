@@ -6,7 +6,7 @@
  * the framework is bootstrapped allows its users
  * not to have to worry about it.
  *
- * The framework is any PSR-11 container for
+ * The framework uses any PSR-11 container for
  * interoperability with other frameworks and to allow
  * users to use whatever implementation they want.
  * @phan-file-suppress PhanUnreferencedClosure
@@ -34,28 +34,23 @@ use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
 return [
-    /**
-     *
-     */
-    RoutingHandler::class => static fn (ContainerInterface $container) => new RoutingHandler(
+    RoutingHandler::class => static fn(ContainerInterface $container) => new RoutingHandler(
         routeRegistry: $container->get(RouteMap::class),
         responseFactory: $container->get(ResponseFactoryInterface::class),
         streamFactory: $container->get(StreamFactoryInterface::class),
         modelResolver: $container->get(ModelResolverInterface::class),
         authChecker: $container->get(DiTokens::NOOP_AUTH_CHECKER),
     ),
-    DiTokens::NOOP_AUTH_CHECKER => static fn (ContainerInterface $container) => new AuthorizationChecker(
-        routableResolver: new class () implements RoutableResolverInterface {
+    DiTokens::NOOP_AUTH_CHECKER => static fn(ContainerInterface $container) => new AuthorizationChecker(
+        routableResolver: new class() implements RoutableResolverInterface {
             public function resolve(RoutableInterface $target): RoutableInterface|false
             {
                 // authorized by default
                 return $target;
             }
         },
-        unauthHandler: new class ($container->get(ResponseFactoryInterface::class)) implements RequestHandlerInterface {
-            public function __construct(private ResponseFactoryInterface $responseFactory)
-            {
-            }
+        unauthHandler: new class($container->get(ResponseFactoryInterface::class)) implements RequestHandlerInterface {
+            public function __construct(private ResponseFactoryInterface $responseFactory) {}
 
             public function handle(ServerRequestInterface $request): ResponseInterface
             {
@@ -63,11 +58,11 @@ return [
             }
         },
     ),
-    AuthorizationChecker::class => static fn (ContainerInterface $container) => new AuthorizationChecker(
+    AuthorizationChecker::class => static fn(ContainerInterface $container) => new AuthorizationChecker(
         routableResolver: new ProtectedRoutableResolver($container->get(AuthenticatorInterface::class)),
         unauthHandler: $container->get(DiTokens::UNAUTHORIZED_HANDLER),
     ),
-    DiTokens::AUTHENTICATED_ROUTING_HANDLER => static fn (ContainerInterface $container) => new RoutingHandler(
+    DiTokens::AUTHENTICATED_ROUTING_HANDLER => static fn(ContainerInterface $container) => new RoutingHandler(
         routeRegistry: $container->get(RouteMap::class),
         responseFactory: $container->get(ResponseFactoryInterface::class),
         streamFactory: $container->get(StreamFactoryInterface::class),
@@ -76,10 +71,8 @@ return [
     ),
     MiddlewareQueueRequestHandler::class => static function (ContainerInterface $container) {
         $responseFactory = $container->get(ResponseFactoryInterface::class);
-        $fallbackHandler = new class ($responseFactory) implements RequestHandlerInterface {
-            public function __construct(private ResponseFactoryInterface $responseFactory)
-            {
-            }
+        $fallbackHandler = new class($responseFactory) implements RequestHandlerInterface {
+            public function __construct(private ResponseFactoryInterface $responseFactory) {}
 
             public function handle(ServerRequestInterface $request): ResponseInterface
             {
@@ -88,6 +81,6 @@ return [
         };
         return new MiddlewareQueueRequestHandler($fallbackHandler);
     },
-    RoutingMiddleware::class => static fn (ContainerInterface $container) => new RoutingMiddleware($container->get(RoutingHandler::class)),
+    RoutingMiddleware::class => static fn(ContainerInterface $container) => new RoutingMiddleware($container->get(RoutingHandler::class)),
     DiTokens::RESPONSE_EMITTER => new Laminas\HttpHandlerRunner\Emitter\SapiEmitter(),
 ];

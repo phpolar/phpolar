@@ -31,6 +31,8 @@
     <rule ref="Generic.PHP.LowerCaseType"/>
     <rule ref="Generic.ControlStructures.InlineControlStructure"/>
     <rule ref="Squiz.Operators.ComparisonOperatorUsage"/>
+    <rule ref="PSR1"/>
+    <rule ref="PSR12"/>
     <rule ref="PSR12.Files.OpenTag"/>
     <rule ref="PSR12.Files.DeclareStatement"/>
     <rule ref="PSR12.ControlStructures.ControlStructureSpacing"/>
