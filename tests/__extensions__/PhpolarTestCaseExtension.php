@@ -23,7 +23,7 @@ class PhpolarTestCaseExtension extends TestCase
     {
         array_walk(
             $needles,
-            fn ($needle,  $a, $haystack) => $this->assertStringContainsString($needle, $haystack, $message),
+            fn ($needle, $a, $haystack) => $this->assertStringContainsString($needle, $haystack, $message),
             $haystack
         );
     }
@@ -37,7 +37,7 @@ class PhpolarTestCaseExtension extends TestCase
     {
         array_walk(
             $haystack,
-            fn ($object,  $a, $needle) => $this->assertObjectEquals($needle, $object, "equals", $message),
+            fn ($object, $a, $needle) => $this->assertObjectEquals($needle, $object, "equals", $message),
             $needle
         );
     }

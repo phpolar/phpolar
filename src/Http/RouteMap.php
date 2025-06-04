@@ -76,7 +76,7 @@ class RouteMap
     {
         $method = $request->getMethod();
         $route = $request->getUri()->getPath();
-        return match(strtoupper($method)) {
+        return match (strtoupper($method)) {
             "DELETE" => $this->matchDeleteRoute($route),
             "GET" => $this->matchGetRoute($route),
             "POST" => $this->matchPostRoute($route),
@@ -117,7 +117,7 @@ class RouteMap
         if (isset($registry[$key]) === false) {
             return new RouteNotRegistered();
         }
-        $isParamRoute = preg_match("/\{([[:alpha:]]+)\}/", $key) === 1;
+        $isParamRoute = preg_match(ROUTE_PARAM_PATTERN, $key) === 1;
         $targetOrFactory = $registry[$key];
         $target = $targetOrFactory instanceof RoutableFactoryInterface ? $targetOrFactory->createInstance() : $targetOrFactory;
         $this->propertyInjector->inject($target);
@@ -134,7 +134,7 @@ class RouteMap
         return current(array_values(
             array_filter(
                 array_keys($registry),
-                static fn (string $registeredRoute) => self::partsMatch($registeredRoute, $path),
+                static fn(string $registeredRoute) => self::partsMatch($registeredRoute, $path),
             )
         ));
     }
@@ -150,7 +150,7 @@ class RouteMap
         return count(
             array_filter(
                 array_combine($routeParts, $pathParts),
-                static fn (string $pathPart, string $routePart) => $routePart === $pathPart || preg_match(ROUTE_PARAM_PATTERN, $routePart) === 1,
+                static fn(string $pathPart, string $routePart) => $routePart === $pathPart || preg_match(ROUTE_PARAM_PATTERN, $routePart) === 1,
                 ARRAY_FILTER_USE_BOTH,
             )
         ) === count($routeParts);
