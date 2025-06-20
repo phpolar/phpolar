@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Laminas\HttpHandlerRunner\Emitter\SapiEmitter;
 use Phpolar\HttpCodes\ResponseCode;
 use Phpolar\HttpMessageTestUtils\ResponseFactoryStub;
@@ -7,13 +9,17 @@ use Phpolar\HttpMessageTestUtils\ResponseStub;
 use Phpolar\HttpMessageTestUtils\StreamFactoryStub;
 use Phpolar\ModelResolver\ModelResolverInterface;
 use PhpContrib\Authenticator\AuthenticatorInterface;
+use Phpolar\Model\ParsedBodyResolver;
 use Phpolar\Phpolar\Http\MiddlewareQueueRequestHandler;
 use Phpolar\Phpolar\DependencyInjection\DiTokens;
 use Phpolar\Phpolar\Http\AuthorizationChecker;
+use Phpolar\Phpolar\Http\RequestProcessingHandler;
+use Phpolar\Phpolar\Http\RequestProcessorExecutor;
+use Phpolar\Phpolar\Http\ResponseBuilder;
 use Phpolar\Routable\RoutableInterface;
-use Phpolar\Phpolar\Http\RouteMap;
-use Phpolar\Phpolar\Http\RoutingHandler;
 use Phpolar\Phpolar\Http\RoutingMiddleware;
+use Phpolar\Phpolar\Http\Server;
+use Phpolar\Phpolar\Http\ServerInterface;
 use Phpolar\PropertyInjectorContract\PropertyInjectorInterface;
 use Phpolar\Routable\RoutableResolverInterface;
 use Phpolar\PurePhp\TemplateEngine;
@@ -25,27 +31,23 @@ use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
 return [
+    ModelResolverInterface::class => new ParsedBodyResolver($_REQUEST),
     MiddlewareQueueRequestHandler::class => new MiddlewareQueueRequestHandler(
-        new class () implements RequestHandlerInterface {
+        new class() implements RequestHandlerInterface {
             public function handle(ServerRequestInterface $request): ResponseInterface
             {
                 return (new ResponseFactoryStub((new StreamFactoryStub("+w"))->createStream()))->createResponse(ResponseCode::NOT_FOUND);
             }
         }
     ),
-    TemplateEngine::class => static fn () => new TemplateEngine(),
+    TemplateEngine::class => static fn() => new TemplateEngine(),
     ResponseFactoryInterface::class => new ResponseFactoryStub((new StreamFactoryStub("+w"))->createStream()),
     StreamFactoryInterface::class => new StreamFactoryStub("+w"),
-    RouteMap::class => new RouteMap(
-        new class () implements PropertyInjectorInterface {
-            public function inject(object $injectee): void
-            {
-                // noop
-            }
-        }
+    ServerInterface::class => new Server(
+        interface: []
     ),
     DiTokens::RESPONSE_EMITTER => new SapiEmitter(),
-    AuthenticatorInterface::class => new class () implements AuthenticatorInterface {
+    AuthenticatorInterface::class => new class() implements AuthenticatorInterface {
         public function isAuthenticated(): bool
         {
             return false;
@@ -59,27 +61,28 @@ return [
             return null;
         }
     },
-    RoutingMiddleware::class => static fn (ContainerInterface $container) => new RoutingMiddleware($container->get(RoutingHandler::class)),
-    RoutingHandler::class => static fn (ContainerInterface $container) => new RoutingHandler(
-        $container->get(RouteMap::class),
+    RoutingMiddleware::class => static fn(ContainerInterface $container) => new RoutingMiddleware($container->get(RequestProcessingHandler::class)),
+    ResponseBuilder::class => static fn(ContainerInterface $container) => new ResponseBuilder(
         $container->get(ResponseFactoryInterface::class),
         $container->get(StreamFactoryInterface::class),
-        new class () implements ModelResolverInterface {
-            public function resolve(object $it, string $methodName): array
-            {
-                return [];
-            }
-        },
-        $container->get(AuthorizationChecker::class),
     ),
-    AuthorizationChecker::class => static fn (ContainerInterface $container) => new AuthorizationChecker(
-        new class () implements RoutableResolverInterface {
+    RequestProcessingHandler::class => static fn(ContainerInterface $container) => new RequestProcessingHandler(
+        server: $container->get(ServerInterface::class),
+        processorExecutor: $container->get(RequestProcessorExecutor::class),
+        responseBuilder: $container->get(ResponseBuilder::class),
+        authChecker: $container->get(AuthorizationChecker::class),
+        propertyInjector: $container->get(PropertyInjectorInterface::class),
+        modelResolver: $container->get(ModelResolverInterface::class),
+    ),
+    RequestProcessorExecutor::class => new RequestProcessorExecutor(),
+    AuthorizationChecker::class => static fn() => new AuthorizationChecker(
+        new class() implements RoutableResolverInterface {
             public function resolve(RoutableInterface $target): RoutableInterface | false
             {
                 return $target;
             }
         },
-        new class () implements RequestHandlerInterface {
+        new class() implements RequestHandlerInterface {
             public function handle(ServerRequestInterface $request): ResponseInterface
             {
                 return new ResponseStub();

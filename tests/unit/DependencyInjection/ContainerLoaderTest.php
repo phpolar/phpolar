@@ -16,6 +16,7 @@ use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 
 #[CoversClass(ContainerLoader::class)]
+#[CoversClass(Globs::class)]
 #[RunTestsInSeparateProcesses]
 final class ContainerLoaderTest extends TestCase
 {
@@ -44,8 +45,20 @@ final class ContainerLoaderTest extends TestCase
         $this->assertNotEmpty($container->get(StreamFactoryInterface::class));
     }
 
-    #[TestDox("Shall not load the container if the files do not exist")]
+    #[TestDox("Shall load vendored framework dependencies into container")]
     public function test3()
+    {
+        $dir = getcwd();
+        chdir("tests/__fakes__");
+        $containerConfig = new ContainerConfigurationStub();
+        $container = new ConfigurableContainerStub($containerConfig);
+        (new ContainerLoader())->load($container, $containerConfig);
+        chdir($dir);
+        $this->assertNotEmpty($container->get("I_AM_A_VENDOR_FRAMEWORK_DEPENDENCY"));
+    }
+
+    #[TestDox("Shall not load the container if the files do not exist")]
+    public function test4()
     {
         $dir = getcwd();
         chdir(__DIR__);

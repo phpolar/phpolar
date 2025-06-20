@@ -15,6 +15,7 @@ use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 
 #[CoversClass(ProtectedRoutableResolver::class)]
+#[CoversClass(AbstractProtectedRoutable::class)]
 final class ProtectedRoutableResolverTest extends TestCase
 {
     #[TestDox("Shall return the false when the authenticator returns null")]

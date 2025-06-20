@@ -14,6 +14,8 @@ use Phpolar\Routable\RoutableInterface;
  * to metadata associated with the authenticated
  * user.  Route target objects that require
  * authorization should extend this class.
+ *
+ * @phan-file-suppress PhanWriteOnlyPublicProperty
  */
 abstract class AbstractProtectedRoutable implements RoutableInterface
 {

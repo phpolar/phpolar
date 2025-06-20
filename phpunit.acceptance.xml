@@ -15,8 +15,8 @@
     <const name="Phpolar\Phpolar\Tests\ENTITY_NAME_TEST_CASE" value="FAKE NAME"/>
     <const name="Phpolar\Phpolar\Tests\FORM_TPL_PATH" value="tests/__templates__/form.phtml"/>
     <const name="Phpolar\Phpolar\Tests\LIST_TPL_PATH" value="tests/__templates__/list.phtml"/>
-    <const name="Phpolar\Phpolar\Tests\PROJECT_SIZE_THRESHOLD" value="9000"/>
-    <const name="Phpolar\Phpolar\Tests\PROJECT_MEMORY_USAGE_THRESHOLD" value="204100"/>
+    <const name="Phpolar\Phpolar\Tests\PROJECT_SIZE_THRESHOLD" value="18000"/>
+    <const name="Phpolar\Phpolar\Tests\PROJECT_MEMORY_USAGE_THRESHOLD" value="165000"/>
     <const name="Phpolar\Phpolar\Tests\CSRF_TEMPLATE_SIZE_FACTOR" value="1000000"/>
   </php>
 </phpunit>

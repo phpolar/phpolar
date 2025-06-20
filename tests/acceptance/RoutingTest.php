@@ -5,12 +5,13 @@ declare(strict_types=1);
 namespace Phpolar\Phpolar\Http;
 
 use Exception;
-use Phpolar\HttpCodes\ResponseCode;
+use PhpCommonEnums\HttpMethod\Enumeration\HttpMethodEnum as HttpMethod;
+use PhpCommonEnums\HttpResponseCode\Enumeration\HttpResponseCodeEnum as HttpResponseCode;
+use PhpCommonEnums\MimeType\Enumeration\MimeTypeEnum as MimeType;
 use Phpolar\HttpMessageTestUtils\MemoryStreamStub;
-use Phpolar\HttpMessageTestUtils\RequestStub;
 use Phpolar\HttpMessageTestUtils\ResponseStub;
-use Phpolar\HttpMessageTestUtils\UriStub;
 use Phpolar\ModelResolver\ModelResolverInterface;
+use Phpolar\Phpolar\Serializers\JsonSerializer;
 use Phpolar\PropertyInjectorContract\PropertyInjectorInterface;
 use Phpolar\Routable\RoutableResolverInterface;
 use Phpolar\Routable\RoutableInterface;
@@ -19,13 +20,23 @@ use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Message\StreamInterface;
+use Psr\Http\Message\UriInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
 #[TestDox("HTTP Request Routing")]
 final class RoutingTest extends TestCase
 {
+    protected function getResponseBuilder(): ResponseBuilderInterface
+    {
+        return new ResponseBuilder(
+            responseFactory: $this->getResponseFactory(),
+            streamFactory: $this->getStreamFactory(),
+        );
+    }
+
     protected function getResponseFactory(): ResponseFactoryInterface
     {
         return new class () implements ResponseFactoryInterface {
@@ -54,11 +65,6 @@ final class RoutingTest extends TestCase
         };
     }
 
-    protected function getModelResolver(): ModelResolverInterface
-    {
-        return $this->createStub(ModelResolverInterface::class);
-    }
-
     #[Test]
     #[TestDox("Shall invoke the routable object registered to the given request path")]
     public function criterion1()
@@ -66,7 +72,35 @@ final class RoutingTest extends TestCase
         $givenRoute = "/";
         $expectedResponse = "<h1>Found!</h1>";
         $propertyInjector = $this->createStub(PropertyInjectorInterface::class);
-        $routeRegistry = new RouteMap($propertyInjector);
+        $modelResolver = $this->createStub(ModelResolverInterface::class);
+        $uriStub = $this->createStub(UriInterface::class);
+        $streamStub = $this->createStub(StreamInterface::class);
+        $responseStub = $this->createStub(ResponseInterface::class);
+        $requestStub = $this->createStub(ServerRequestInterface::class);
+        $responseBuilderStub = $this->createStub(ResponseBuilderInterface::class);
+        $responseBuilderStub
+            ->method("build")
+            ->willReturn($responseStub);
+        $requestStub
+            ->method("getMethod")
+            ->willReturn(HttpMethod::Get->value);
+        $requestStub
+            ->method("getUri")
+            ->willReturn($uriStub);
+        $requestStub
+            ->method("getHeader")
+            ->willReturn([MimeType::TextHtml->value]);
+        $uriStub
+            ->method("getPath")
+            ->willReturn($givenRoute);
+
+        $streamStub
+            ->method("getContents")
+            ->willReturn($expectedResponse);
+        $responseStub
+            ->method("getBody")
+            ->willReturn($streamStub);
+
         $indexHandler = new class ($expectedResponse) implements RoutableInterface {
             public function __construct(private string $responseTemplate)
             {
@@ -77,12 +111,20 @@ final class RoutingTest extends TestCase
                 return $this->responseTemplate;
             }
         };
-        $routeRegistry->add(RequestMethods::GET, $givenRoute, $indexHandler);
-        $routingHandler = new RoutingHandler(
-            routeRegistry: $routeRegistry,
-            responseFactory: $this->getResponseFactory(),
-            streamFactory: $this->getStreamFactory(),
-            modelResolver: $this->getModelResolver(),
+
+        $routingHandler = new RequestProcessingHandler(
+            processorExecutor: new RequestProcessorExecutor(),
+            server: new Server([
+                new Target(
+                    location: $givenRoute,
+                    method: HttpMethod::Get,
+                    representations: new Representations([
+                        MimeType::TextHtml,
+                    ]),
+                    requestProcessor: $indexHandler,
+                ),
+            ]),
+            responseBuilder: $this->getResponseBuilder(),
             authChecker: new AuthorizationChecker(
                 routableResolver: new class () implements RoutableResolverInterface {
                     public function resolve(RoutableInterface $target): RoutableInterface|false
@@ -92,25 +134,66 @@ final class RoutingTest extends TestCase
                 },
                 unauthHandler: $this->createStub(RequestHandlerInterface::class),
             ),
+            propertyInjector: $propertyInjector,
+            htmlResponse: new HtmlResponseDecorator($modelResolver),
+            serializedResponse: new SerializedResponseDecorator(serializer: new JsonSerializer(), modelResolver: $modelResolver),
         );
-        $requestStub = (new RequestStub("GET"))->withUri(new UriStub($givenRoute));
+
         $response = $routingHandler->handle($requestStub);
+
+        $this->assertSame(HttpResponseCode::Ok->value, $response->getStatusCode());
         $this->assertSame($expectedResponse, $response->getBody()->getContents());
     }
 
     #[Test]
-    #[TestDox("Shall return a \"not found\" response when the given route has not been registered")]
+    #[TestDox("Shall return a \"not found\" response when the given location has not been registered")]
     public function criterion2()
     {
-        $givenRoute = "an_unregistered_route";
-        $expectedStatusCode = ResponseCode::NOT_FOUND;
+        $givenLocation = "AN_UNREGISTERED_ROUTE";
+        $registeredLocation = "A_REGISTERED_ROUTE";
+
+        $uriStub = $this->createStub(UriInterface::class);
+        $requestStub = $this->createStub(ServerRequestInterface::class);
+        $requestStub
+            ->method("getMethod")
+            ->willReturn(HttpMethod::Get->value);
+        $requestStub
+            ->method("getUri")
+            ->willReturn($uriStub);
+        $requestStub
+            ->method("getHeader")
+            ->willReturn([MimeType::TextHtml->value]);
+        $uriStub
+            ->method("getPath")
+            ->willReturn($givenLocation);
+
         $propertyInjector = $this->createStub(PropertyInjectorInterface::class);
-        $routeRegistry = new RouteMap($propertyInjector);
-        $routingHandler = new RoutingHandler(
-            routeRegistry: $routeRegistry,
-            responseFactory: $this->getResponseFactory(),
-            streamFactory: $this->getStreamFactory(),
-            modelResolver: $this->getModelResolver(),
+        $modelResolver = $this->createStub(ModelResolverInterface::class);
+        $indexHandler = new class () implements RoutableInterface {
+            public function __construct()
+            {
+            }
+
+            public function process(): string
+            {
+                // intentionally returning an empty string
+                return "";
+            }
+        };
+
+        $routingHandler = new RequestProcessingHandler(
+            processorExecutor: new RequestProcessorExecutor(),
+            server: new Server([
+                new Target(
+                    location: $registeredLocation,
+                    method: HttpMethod::Get,
+                    representations: new Representations([
+                        MimeType::TextHtml,
+                    ]),
+                    requestProcessor: $indexHandler,
+                ),
+            ]),
+            responseBuilder: $this->getResponseBuilder(),
             authChecker: new AuthorizationChecker(
                 routableResolver: new class () implements RoutableResolverInterface {
                     public function resolve(RoutableInterface $target): RoutableInterface|false
@@ -120,10 +203,14 @@ final class RoutingTest extends TestCase
                 },
                 unauthHandler: $this->createStub(RequestHandlerInterface::class),
             ),
+            propertyInjector: $propertyInjector,
+            htmlResponse: new HtmlResponseDecorator($modelResolver),
+            serializedResponse: new SerializedResponseDecorator(serializer: new JsonSerializer(), modelResolver: $modelResolver),
         );
-        $requestStub = (new RequestStub("GET"))->withUri(new UriStub($givenRoute));
+
         $response = $routingHandler->handle($requestStub);
-        $this->assertSame($expectedStatusCode, $response->getStatusCode());
-        $this->assertSame("Not Found", $response->getReasonPhrase());
+
+        $this->assertSame(HttpResponseCode::NotFound->value, $response->getStatusCode());
+        $this->assertSame(HttpResponseCode::NotFound->getLabel(), $response->getReasonPhrase());
     }
 }
