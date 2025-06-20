@@ -8,13 +8,15 @@ use ArrayAccess;
 use Closure;
 use DateTimeImmutable;
 use Laminas\HttpHandlerRunner\Emitter\SapiEmitter;
+use PhpCommonEnums\HttpMethod\Enumeration\HttpMethodEnum;
+use PhpCommonEnums\HttpResponseCode\Enumeration\HttpResponseCodeEnum;
+use PhpCommonEnums\MimeType\Enumeration\MimeTypeEnum;
 use PhpContrib\Http\Message\ResponseFilterInterface;
 use Phpolar\CsrfProtection\CsrfToken;
 use Phpolar\CsrfProtection\Http\CsrfProtectionRequestHandler;
 use Phpolar\CsrfProtection\Http\CsrfRequestCheckMiddleware;
 use Phpolar\CsrfProtection\Http\CsrfResponseFilterMiddleware;
 use Phpolar\CsrfProtection\Storage\AbstractTokenStorage;
-use Phpolar\HttpCodes\ResponseCode;
 use Phpolar\HttpMessageTestUtils\RequestStub;
 use Phpolar\HttpMessageTestUtils\ResponseFactoryStub;
 use Phpolar\HttpMessageTestUtils\ResponseStub;
@@ -24,38 +26,38 @@ use PhpContrib\Authenticator\AuthenticatorInterface;
 use Phpolar\Phpolar\Auth\AbstractProtectedRoutable;
 use Phpolar\Phpolar\DependencyInjection\ContainerLoader;
 use Phpolar\Phpolar\DependencyInjection\DiTokens;
-use Phpolar\Phpolar\Http\RouteMap;
 use Phpolar\Phpolar\Http\RoutingMiddleware;
 use Phpolar\Phpolar\Tests\Stubs\ConfigurableContainerStub;
 use Phpolar\Phpolar\Tests\Stubs\ContainerConfigurationStub;
 use Phpolar\Phpolar\Http\MiddlewareQueueRequestHandler;
-use Phpolar\Phpolar\Http\RequestMethods;
-use Phpolar\Phpolar\Http\RoutingHandler;
+use Phpolar\Phpolar\Http\Representations;
+use Phpolar\Phpolar\Http\RequestProcessingHandler;
+use Phpolar\Phpolar\Http\Server;
+use Phpolar\Phpolar\Http\ServerInterface;
+use Phpolar\Phpolar\Http\Target;
 use Phpolar\PropertyInjectorContract\PropertyInjectorInterface;
 use Phpolar\PurePhp\TemplateEngine;
 use Phpolar\PurePhp\TemplatingStrategyInterface;
-use Phpolar\Routable\RoutableInterface;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\Attributes\UsesClass;
-use PHPUnit\Framework\MockObject\MockObject;
-use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamFactoryInterface;
+use Psr\Http\Message\UriInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
 #[RunTestsInSeparateProcesses]
 #[CoversClass(App::class)]
-#[UsesClass(RouteMap::class)]
+#[UsesClass(Server::class)]
 #[UsesClass(ContainerLoader::class)]
 #[UsesClass(MiddlewareQueueRequestHandler::class)]
-#[UsesClass(RoutingHandler::class)]
+#[UsesClass(RequestProcessingHandler::class)]
 #[UsesClass(RoutingMiddleware::class)]
 final class AppTest extends TestCase
 {
@@ -65,18 +67,13 @@ final class AppTest extends TestCase
     const HEADER_VALUE = "bytes 21010-47021/47022";
     const ERROR_HANDLER_404 = "ERROR_HANDLER_404";
 
-    private function getPropertyInjectorStub(): PropertyInjectorInterface
-    {
-        return $this->createStub(PropertyInjectorInterface::class);
-    }
-
     protected function getContainerFactory(
         ArrayAccess $config,
         MiddlewareQueueRequestHandler|Closure $handler,
         CsrfRequestCheckMiddleware|Closure|null $csrfPreRoutingMiddleware = null,
         CsrfResponseFilterMiddleware|Closure|null $csrfPostRoutingMiddleware = null,
     ): ContainerInterface {
-        $config[TemplateEngine::class] = static fn () => new TemplateEngine();
+        $config[TemplateEngine::class] = static fn() => new TemplateEngine();
         $config[ContainerInterface::class] = new ConfigurableContainerStub($config);
         $config[ResponseFactoryInterface::class] = new ResponseFactoryStub((new StreamFactoryStub("+w"))->createStream());
         $config[StreamFactoryInterface::class] = new StreamFactoryStub("+w");
@@ -85,7 +82,7 @@ final class AppTest extends TestCase
         $config[self::ERROR_HANDLER_404] = new class () implements RequestHandlerInterface {
             public function handle(ServerRequestInterface $request): ResponseInterface
             {
-                return new ResponseStub(ResponseCode::NOT_FOUND);
+                return new ResponseStub(HttpResponseCodeEnum::NotFound->value);
             }
         };
         $config[DiTokens::CSRF_CHECK_MIDDLEWARE] = $csrfPreRoutingMiddleware;
@@ -93,6 +90,7 @@ final class AppTest extends TestCase
         $config[AbstractTokenStorage::class] = $this->createStub(AbstractTokenStorage::class);
         $config[ResponseFilterInterface::class] = $this->createStub(ResponseFilterInterface::class);
         $config[AuthenticatorInterface::class] = $this->createStub(AuthenticatorInterface::class);
+        $config[PropertyInjectorInterface::class] = $this->createStub(PropertyInjectorInterface::class);
 
         return new ConfigurableContainerStub($config);
     }
@@ -116,29 +114,25 @@ final class AppTest extends TestCase
         $responseFactory = new ResponseFactoryStub();
         $streamFactory = new StreamFactoryStub("+w");
         $request = new RequestStub();
-        /**
-         * @var MockObject&RoutingMiddleware $routingMiddlewareSpy
-         */
-        $routingMiddlewareSpy = $this->createMock(RoutingMiddleware::class);
+        $routingMiddlewareSpy = $this->createMock(MiddlewareInterface::class);
         $routingMiddlewareSpy
             ->expects($this->once())
             ->method("process")
             ->willReturn(
-                $responseFactory->createResponse(ResponseCode::OK)
+                $responseFactory->createResponse(HttpResponseCodeEnum::Ok->value)
                     ->withBody($streamFactory->createStream())
             );
         $config = new ContainerConfigurationStub();
-        $routes = new RouteMap($this->getPropertyInjectorStub());
-        $config[RouteMap::class] = $routes;
+        $config[ServerInterface::class] = $this->createStub(ServerInterface::class);
         $config[RoutingMiddleware::class] = $routingMiddlewareSpy;
-        $config[CsrfProtectionRequestHandler::class] = static fn (ArrayAccess $config) =>
-            new CsrfProtectionRequestHandler(
-                new CsrfToken(new DateTimeImmutable("now")),
-                $config[AbstractTokenStorage::class],
-                $config[ResponseFactoryInterface::class],
-                "",
-            );
-        $handler = static fn (ArrayAccess $config) => new MiddlewareQueueRequestHandler($config[self::ERROR_HANDLER_404]);
+        $config[CsrfProtectionRequestHandler::class] = static fn(ArrayAccess $config) =>
+        new CsrfProtectionRequestHandler(
+            new CsrfToken(new DateTimeImmutable("now")),
+            $config[AbstractTokenStorage::class],
+            $config[ResponseFactoryInterface::class],
+            "",
+        );
+        $handler = static fn(ArrayAccess $config) => new MiddlewareQueueRequestHandler($config[self::ERROR_HANDLER_404]);
         $containerFac = $this->getContainerFactory($config, $handler);
         // do not use the container config file
         chdir(__DIR__);
@@ -146,7 +140,7 @@ final class AppTest extends TestCase
             $this->configureContainer($containerFac, $config),
         );
         $server->receive($request);
-        $this->assertSame(ResponseCode::OK, http_response_code());
+        $this->assertSame(HttpResponseCodeEnum::Ok->value, http_response_code());
     }
 
     #[TestDox("Shall allow for configuring the server to use CSRF middleware (2)")]
@@ -155,50 +149,43 @@ final class AppTest extends TestCase
         $responseFactory = new ResponseFactoryStub();
         $streamFactory = new StreamFactoryStub("+w");
         $request = new RequestStub();
-        $csrfPreRoutingMiddleware = static fn (ArrayAccess $config) => new class ($config[CsrfProtectionRequestHandler::class]) extends CsrfRequestCheckMiddleware {
+        $csrfPreRoutingMiddleware = static fn(ArrayAccess $config) => new class ($config[CsrfProtectionRequestHandler::class]) extends CsrfRequestCheckMiddleware {
             public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
             {
                 return $handler->handle($request);
             }
         };
-        /**
-         * @var MockObject&CsrfResponseFilterMiddleware $csrfPostRoutingMiddlewareSpy
-         */
-        $csrfPostRoutingMiddleware = static fn (ArrayAccess $config) =>
-            new class (
-                $config[ResponseFilterInterface::class],
-            ) extends CsrfResponseFilterMiddleware {
-                public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
-                {
-                    $response = $handler->handle($request);
-                    // do something with it...
-                    return $response;
-                }
-            };
-        /**
-         * @var MockObject&RoutingMiddleware $routingMiddlewareSpy
-         */
-        $routingMiddlewareSpy = $this->createMock(RoutingMiddleware::class);
+        $csrfPostRoutingMiddleware = static fn(ArrayAccess $config) =>
+        new class (
+            $config[ResponseFilterInterface::class],
+        ) extends CsrfResponseFilterMiddleware {
+            public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
+            {
+                $response = $handler->handle($request);
+                // do something with it...
+                return $response;
+            }
+        };
+        $routingMiddlewareSpy = $this->createMock(MiddlewareInterface::class);
         $routingMiddlewareSpy
             ->expects($this->once())
             ->method("process")
             ->willReturn(
-                $responseFactory->createResponse(ResponseCode::OK)
+                $responseFactory->createResponse(HttpResponseCodeEnum::Ok->value)
                     ->withBody($streamFactory->createStream())
             );
         $config = new ContainerConfigurationStub();
-        $routes = new RouteMap($this->getPropertyInjectorStub());
         $config[RoutingMiddleware::class] = $routingMiddlewareSpy;
-        $config[RouteMap::class] = $routes;
-        $config[CsrfProtectionRequestHandler::class] = static fn (ArrayAccess $config) =>
-            new CsrfProtectionRequestHandler(
-                new CsrfToken(new DateTimeImmutable("now")),
-                $config[AbstractTokenStorage::class],
-                $config[ResponseFactoryInterface::class],
-                "",
-                "",
-            );
-        $handler = static fn (ArrayAccess $config) => new MiddlewareQueueRequestHandler($config[self::ERROR_HANDLER_404]);
+        $config[ServerInterface::class] = $this->createStub(ServerInterface::class);
+        $config[CsrfProtectionRequestHandler::class] = static fn(ArrayAccess $config) =>
+        new CsrfProtectionRequestHandler(
+            new CsrfToken(new DateTimeImmutable("now")),
+            $config[AbstractTokenStorage::class],
+            $config[ResponseFactoryInterface::class],
+            "",
+            "",
+        );
+        $handler = static fn(ArrayAccess $config) => new MiddlewareQueueRequestHandler($config[self::ERROR_HANDLER_404]);
         $containerFac = $this->getContainerFactory($config, $handler, $csrfPreRoutingMiddleware, $csrfPostRoutingMiddleware);
         // do not use the container config file
         chdir(__DIR__);
@@ -207,50 +194,35 @@ final class AppTest extends TestCase
         );
         $server->useCsrfMiddleware();
         $server->receive($request);
-        $this->assertSame(ResponseCode::OK, http_response_code());
-    }
-
-    #[TestDox("Shall add given routes to default route handler")]
-    public function test3()
-    {
-        $expectedContent = "EXPECTED CONTENT";
-        $givenRoutes = new RouteMap($this->getPropertyInjectorStub());
-        /**
-         * @var Stub&RoutableInterface $handlerStub
-         */
-        $handlerStub = $this->createStub(RoutableInterface::class);
-        $handlerStub->method("process")->willReturn($expectedContent);
-        $givenRoutes->add(RequestMethods::GET, "/", $handlerStub);
-        $givenRequest = new RequestStub("GET", "/");
-        $handlerStub = $this->createStub(MiddlewareQueueRequestHandler::class);
-        $config = new ContainerConfigurationStub();
-        $config[DiTokens::UNAUTHORIZED_HANDLER] = $this->createStub(RequestHandlerInterface::class);
-        $config[ModelResolverInterface::class] = $this->createStub(ModelResolverInterface::class);
-        $config[RouteMap::class] = $givenRoutes;
-        $config[RoutingMiddleware::class] = $this->createStub(RoutingMiddleware::class);
-        $container = $this->getContainerFactory($config, $handlerStub);
-        App::create(
-            $this->configureContainer($container, $config),
-        );
-        /**
-         * @var RouteMap $configuredRoutes
-         */
-        $configuredRoutes = $config[RouteMap::class];
-        $configuredHandler = $configuredRoutes->match($givenRequest);
-        $this->assertSame($expectedContent, $configuredHandler->process($container));
+        $this->assertSame(HttpResponseCodeEnum::Ok->value, http_response_code());
     }
 
     #[TestDox("Shall add custom services to the provided dependency injection container")]
     public function test4()
     {
         $config = new ContainerConfigurationStub();
+        $config[PropertyInjectorInterface::class] = $this->createStub(PropertyInjectorInterface::class);
         $nonConfiguredContainerFac = $this->getNonConfiguredContainer($config);
+        $requestStub = $this->createStub(ServerRequestInterface::class);
+        $uriStub = $this->createStub(UriInterface::class);
+        $uriStub
+            ->method("getPath")
+            ->willReturn("/");
+        $requestStub
+            ->method("getMethod")
+            ->willReturn(HttpMethodEnum::Get->value);
+        $requestStub
+            ->method("getUri")
+            ->willReturn($uriStub);
+        $requestStub
+            ->method("getHeader")
+            ->willReturn([MimeTypeEnum::TextHtml->value]);
         chdir("tests/__fakes__/");
         $app = App::create(
             $this->configureContainer($nonConfiguredContainerFac, $config),
         );
-        $app->receive(new RequestStub());
-        $this->assertSame(ResponseCode::NOT_FOUND, http_response_code());
+        $app->receive($requestStub);
+        $this->assertSame(HttpResponseCodeEnum::NotFound->value, http_response_code());
     }
 
     #[TestDox("Shall be a singleton object")]
@@ -260,6 +232,7 @@ final class AppTest extends TestCase
         $config[TemplatingStrategyInterface::class] = $this->createStub(TemplatingStrategyInterface::class);
         $config[StreamFactoryInterface::class] = $this->createStub(StreamFactoryInterface::class);
         $config[ResponseFactoryInterface::class] = $this->createStub(ResponseFactoryInterface::class);
+        $config[PropertyInjectorInterface::class] = $this->createStub(PropertyInjectorInterface::class);
         $containerFac = $this->getNonConfiguredContainer($config);
         chdir("tests/__fakes__/");
         $app1 = App::create(
@@ -274,43 +247,72 @@ final class AppTest extends TestCase
     #[TestDox("Shall support opt-in authorization")]
     public function test7()
     {
-        $handler = static fn (ArrayAccess $config) => new MiddlewareQueueRequestHandler($config[self::ERROR_HANDLER_404]);
+        $handler = static fn(ArrayAccess $config) => new MiddlewareQueueRequestHandler($config[self::ERROR_HANDLER_404]);
         $config = new ContainerConfigurationStub();
         $config[ModelResolverInterface::class] = $this->createStub(ModelResolverInterface::class);
         $config[DiTokens::UNAUTHORIZED_HANDLER] = $this->createStub(RequestHandlerInterface::class);
-        $routes = new RouteMap($this->getPropertyInjectorStub());
-        $routes->add(RequestMethods::GET, "/", $this->createStub(AbstractProtectedRoutable::class));
-        $config[RouteMap::class] = $routes;
+        $routable = $this->createStub(AbstractProtectedRoutable::class);
+        $routable
+            ->method("process")
+            ->willReturn("");
+        $config[ServerInterface::class] = new Server(
+            interface: [
+                new Target(
+                    location: "/",
+                    method: HttpMethodEnum::Get,
+                    representations: new Representations([MimeTypeEnum::TextHtml]),
+                    requestProcessor: $routable,
+                ),
+            ],
+        );
         $container = $this->configureContainer($this->getContainerFactory($config, $handler), $config);
+        $requestStub = $this->createStub(ServerRequestInterface::class);
+        $uriStub = $this->createStub(UriInterface::class);
+        $uriStub
+            ->method("getPath")
+            ->willReturn("/");
+        $requestStub
+            ->method("getMethod")
+            ->willReturn(HttpMethodEnum::Get->value);
+        $requestStub
+            ->method("getUri")
+            ->willReturn($uriStub);
+        $requestStub
+            ->method("getHeader")
+            ->willReturn([MimeTypeEnum::TextHtml->value]);
         $sut = App::create($container);
         $sut->useAuthorization();
-        $sut->receive(new RequestStub("GET", "/"));
-        $this->assertSame(ResponseCode::OK, http_response_code());
+        $sut->receive($requestStub);
+        $this->assertSame(HttpResponseCodeEnum::Ok->value, http_response_code());
     }
 
     #[TestDox("Shall support queueing any PSR-15 middleware")]
     public function test8()
     {
-        $handler = static fn (ArrayAccess $config) => new MiddlewareQueueRequestHandler($config[self::ERROR_HANDLER_404]);
+        $handler = static fn(ArrayAccess $config) => new MiddlewareQueueRequestHandler($config[self::ERROR_HANDLER_404]);
         $config = new ContainerConfigurationStub();
         $config[ModelResolverInterface::class] = $this->createStub(ModelResolverInterface::class);
         $config[DiTokens::UNAUTHORIZED_HANDLER] = $this->createStub(RequestHandlerInterface::class);
-        $routes = new RouteMap($this->getPropertyInjectorStub());
-        $routes->add(RequestMethods::GET, "/", $this->createStub(AbstractProtectedRoutable::class));
-        $config[RouteMap::class] = $routes;
-        $config[RoutingMiddleware::class] = $this->createStub(RoutingMiddleware::class);
+        $config[ServerInterface::class] = new Server(
+            interface: [
+                new Target(
+                    location: "/",
+                    method: HttpMethodEnum::Get,
+                    representations: new Representations([]),
+                    requestProcessor: $this->createStub(AbstractProtectedRoutable::class),
+                ),
+            ],
+        );
+        $config[RoutingMiddleware::class] = $this->createStub(MiddlewareInterface::class);
         $container = $this->configureContainer($this->getContainerFactory($config, $handler), $config);
-        /**
-         * @var Stub&MiddlewareInterface
-         */
         $givenMiddleware = $this->createStub(MiddlewareInterface::class);
-        $expectedResponse = new ResponseStub(ResponseCode::IM_A_TEAPOT);
+        $expectedResponse = new ResponseStub(HttpResponseCodeEnum::ImATeapot->value);
         $givenMiddleware->method("process")->willReturn(
             $expectedResponse->withBody((new StreamFactoryStub("+w"))->createStream())
         );
         $sut = App::create($container);
         $sut->use($givenMiddleware);
         $sut->receive(new RequestStub());
-        $this->assertSame(ResponseCode::IM_A_TEAPOT, http_response_code());
+        $this->assertSame(HttpResponseCodeEnum::ImATeapot->value, http_response_code());
     }
 }

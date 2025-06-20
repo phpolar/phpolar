@@ -22,7 +22,7 @@ final class ProtectedRoutableResolver implements RoutableResolverInterface
 {
     private const ROUTABLE_METHOD_NAME = "process";
 
-    public function __construct(private AuthenticatorInterface $authenticator)
+    public function __construct(private readonly AuthenticatorInterface $authenticator)
     {
     }
 

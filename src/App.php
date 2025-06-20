@@ -87,9 +87,7 @@ final class App
      */
     public function useAuthorization(): App
     {
-        /**
-         * @var \Phpolar\Phpolar\Http\RoutingHandler
-         */
+        /** @var \Phpolar\Phpolar\Http\RequestProcessingHandler */
         $authRoutingHandler = $this->container->get(DiTokens::AUTHENTICATED_ROUTING_HANDLER);
         $this->routingMiddleware = new RoutingMiddleware($authRoutingHandler);
         return $this;

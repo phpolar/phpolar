@@ -7,12 +7,12 @@ namespace Phpolar\Phpolar\Http;
 use Phpolar\HttpCodes\ResponseCode;
 use Phpolar\HttpMessageTestUtils\RequestStub;
 use Phpolar\HttpMessageTestUtils\ResponseStub;
+use Phpolar\ModelResolver\ModelResolverInterface;
 use Phpolar\Phpolar\Http\AuthorizationChecker;
 use Phpolar\Routable\RoutableInterface;
 use Phpolar\Routable\RoutableResolverInterface;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\TestDox;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\RequestHandlerInterface;
@@ -24,18 +24,12 @@ final class AuthorizationCheckerTest extends TestCase
     public function testa()
     {
         $givenRoutable = $this->createStub(RoutableInterface::class);
-        /**
-         * @var MockObject&RoutableResolverInterface
-         */
         $routableResolverMock = $this->createMock(RoutableResolverInterface::class);
         $routableResolverMock->method("resolve")->willReturn($givenRoutable);
-        /**
-         * @var MockObject&RequestHandlerInterface
-         */
         $unauthHander = $this->createMock(RequestHandlerInterface::class);
         $unauthHander->method("handle")->willReturn(new ResponseStub(ResponseCode::UNAUTHORIZED));
         $sut = new AuthorizationChecker($routableResolverMock, $unauthHander);
-        $result = $sut->check($givenRoutable, new RequestStub());
+        $result = $sut->authorize($givenRoutable, new RequestStub());
         $this->assertInstanceOf(RoutableInterface::class, $result);
     }
 
@@ -43,18 +37,12 @@ final class AuthorizationCheckerTest extends TestCase
     public function testb()
     {
         $givenRoutable = $this->createStub(RoutableInterface::class);
-        /**
-         * @var MockObject&RoutableResolverInterface
-         */
         $routableResolverMock = $this->createMock(RoutableResolverInterface::class);
         $routableResolverMock->method("resolve")->willReturn(false);
-        /**
-         * @var MockObject&RequestHandlerInterface
-         */
         $unauthHander = $this->createMock(RequestHandlerInterface::class);
         $unauthHander->method("handle")->willReturn(new ResponseStub(ResponseCode::UNAUTHORIZED));
         $sut = new AuthorizationChecker($routableResolverMock, $unauthHander);
-        $result = $sut->check($givenRoutable, new RequestStub());
+        $result = $sut->authorize($givenRoutable, new RequestStub());
         $this->assertInstanceOf(ResponseInterface::class, $result);
         $this->assertSame(ResponseCode::UNAUTHORIZED, $result->getStatusCode());
     }
