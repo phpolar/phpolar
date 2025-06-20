@@ -78,8 +78,8 @@ final class RequestProcessingHandler implements RequestHandlerInterface
          * Get model from parsed body
          */
         $models = $this->modelResolver->resolve(
-            it: $requestProcessor,
-            methodName: "process",
+            $requestProcessor,
+            "process",
         );
 
         /**
