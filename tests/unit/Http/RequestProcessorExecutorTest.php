@@ -34,7 +34,7 @@ final class RequestProcessorExecutorTest extends TestCase
     #[TestWith([["id" => "123", "name" => "John"], "id", "name"])]
     public function testb(array $argumentArray, string $key0, string $key1)
     {
-        $requestProcessor = new class() implements RoutableInterface {
+        $requestProcessor = new class () implements RoutableInterface {
             public function process(string $id = "", string $name = ""): array|bool|int|null|object|string
             {
                 return sprintf("%s_%s", $id, $name);

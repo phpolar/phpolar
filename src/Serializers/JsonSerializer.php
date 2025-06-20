@@ -11,7 +11,9 @@ final class JsonSerializer implements SerializerInterface
      * @param int<1,max> $depth
      * @param callable(mixed $data): string | null $failureHandler
      */
-    public function __construct(private int $flags = 0, private int $depth = 512, private $failureHandler = null) {}
+    public function __construct(private int $flags = 0, private int $depth = 512, private $failureHandler = null)
+    {
+    }
 
     public function serialize(mixed $data): string
     {

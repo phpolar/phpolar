@@ -10,7 +10,8 @@ final class JsonRepresentation implements RepresentationInterface
 {
     public function __construct(
         private readonly mixed $resource,
-    ) {}
+    ) {
+    }
 
     public function __toString(): string
     {

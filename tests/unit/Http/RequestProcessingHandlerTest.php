@@ -40,8 +40,10 @@ final class RequestProcessingHandlerTest extends TestCase
 {
     public function getContainer(?StreamFactoryInterface $streamFactory = null): ContainerInterface
     {
-        return new class($streamFactory) implements ContainerInterface {
-            public function __construct(private ?StreamFactoryInterface $streamFactory) {}
+        return new class ($streamFactory) implements ContainerInterface {
+            public function __construct(private ?StreamFactoryInterface $streamFactory)
+            {
+            }
             public function has(string $id): bool
             {
                 return true;
@@ -58,7 +60,7 @@ final class RequestProcessingHandlerTest extends TestCase
                     return new TemplateEngine();
                 }
                 if ($id === DiTokens::UNAUTHORIZED_HANDLER) {
-                    return new class() implements RequestHandlerInterface {
+                    return new class () implements RequestHandlerInterface {
                         public function handle(ServerRequestInterface $request): ResponseInterface
                         {
                             return (new ResponseStub())->withBody((new StreamFactoryStub("w"))->createStream("BANG!"));

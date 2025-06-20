@@ -79,7 +79,7 @@ final class AppTest extends TestCase
         $config[StreamFactoryInterface::class] = new StreamFactoryStub("+w");
         $config[MiddlewareQueueRequestHandler::class] = $handler;
         $config[DiTokens::RESPONSE_EMITTER] = new SapiEmitter();
-        $config[self::ERROR_HANDLER_404] = new class() implements RequestHandlerInterface {
+        $config[self::ERROR_HANDLER_404] = new class () implements RequestHandlerInterface {
             public function handle(ServerRequestInterface $request): ResponseInterface
             {
                 return new ResponseStub(HttpResponseCodeEnum::NotFound->value);
@@ -149,14 +149,14 @@ final class AppTest extends TestCase
         $responseFactory = new ResponseFactoryStub();
         $streamFactory = new StreamFactoryStub("+w");
         $request = new RequestStub();
-        $csrfPreRoutingMiddleware = static fn(ArrayAccess $config) => new class($config[CsrfProtectionRequestHandler::class]) extends CsrfRequestCheckMiddleware {
+        $csrfPreRoutingMiddleware = static fn(ArrayAccess $config) => new class ($config[CsrfProtectionRequestHandler::class]) extends CsrfRequestCheckMiddleware {
             public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
             {
                 return $handler->handle($request);
             }
         };
         $csrfPostRoutingMiddleware = static fn(ArrayAccess $config) =>
-        new class(
+        new class (
             $config[ResponseFilterInterface::class],
         ) extends CsrfResponseFilterMiddleware {
             public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface

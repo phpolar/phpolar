@@ -15,7 +15,9 @@ use Psr\Http\Server\RequestHandlerInterface;
  */
 final class RoutingMiddleware implements MiddlewareInterface
 {
-    public function __construct(private RequestHandlerInterface $requestHandler) {}
+    public function __construct(private RequestHandlerInterface $requestHandler)
+    {
+    }
 
     /**
      * Handle routing a request.
