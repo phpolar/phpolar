@@ -21,6 +21,7 @@ use Phpolar\PurePhp\TemplateEngine;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\TestDox;
+use PHPUnit\Framework\Attributes\TestWith;
 use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\Attributes\UsesClassesThatImplementInterface;
 use PHPUnit\Framework\TestCase;
@@ -30,6 +31,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Message\StreamInterface;
+use Psr\Http\Message\UriInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
 #[CoversClass(RequestProcessingHandler::class)]
@@ -270,5 +272,324 @@ final class RequestProcessingHandlerTest extends TestCase
 
         $this->assertSame(HttpResponseCode::Ok->value, $response->getStatusCode());
         $this->assertSame($content, $response->getBody()->getContents());
+    }
+
+    #[TestDox("Shall provide the path variables as arguments when executing the request processor")]
+    #[TestWith(["/path/{name}/{id}", "/path/SOME_NAME/123", ["id" => "123", "name" => "SOME_NAME"]])]
+    public function test1d(string $location, string $requestPath, array $expectedArgs)
+    {
+        $content = "";
+        $authCheckStub = $this->createStub(AuthorizationCheckerInterface::class);
+        $requestStub = $this->createStub(ServerRequestInterface::class);
+        $serverStub = $this->createStub(ServerInterface::class);
+        $modelResolverStub = $this->createStub(ModelResolverInterface::class);
+        $propertyInjectorStub = $this->createStub(PropertyInjectorInterface::class);
+        $responseStub = $this->createStub(ResponseInterface::class);
+        $responseBuilderStub = $this->createStub(ResponseBuilderInterface::class);
+        $requestProcessorStub = $this->createStub(RoutableInterface::class);
+        $streamStub = $this->createStub(StreamInterface::class);
+        $uriStub = $this->createStub(UriInterface::class);
+        $requestProcessorExecutorMock = $this->createMock(RequestProcessorExecutorInterface::class);
+        $requestProcessorExecutorMock
+            ->expects($this->once())
+            ->method("execute")
+            ->with(
+                $requestProcessorStub,
+                $expectedArgs,
+            )
+            ->willReturn($content);
+        $target = new Target(
+            location: $location,
+            method: HttpMethod::Get,
+            representations: new Representations([MimeType::TextHtml]),
+            requestProcessor: $requestProcessorStub,
+        );
+        $requestStub
+            ->method("getHeader")
+            ->willReturn([MimeType::TextHtml->value]);
+        $requestStub
+            ->method("getUri")
+            ->willReturn($uriStub);
+        $serverStub
+            ->method("findTarget")
+            ->willReturn($target);
+        $responseBuilderStub
+            ->method("build")
+            ->willReturn($responseStub);
+        $responseStub
+            ->method("withStatus")
+            ->willReturn($responseStub);
+        $responseStub
+            ->method("getStatusCode")
+            ->willReturn(HttpResponseCode::Ok->value);
+        $responseStub
+            ->method("getBody")
+            ->willReturn($streamStub);
+        $authCheckStub
+            ->method("authorize")
+            ->willReturn($requestProcessorStub);
+        $requestProcessorStub
+            ->method("process")
+            ->willReturn($content);
+        $streamStub
+            ->method("getContents")
+            ->willReturn($content);
+        $uriStub
+            ->method("getPath")
+            ->willReturn($requestPath);
+
+        $sut = new RequestProcessingHandler(
+            server: $serverStub,
+            processorExecutor: $requestProcessorExecutorMock,
+            responseBuilder: $responseBuilderStub,
+            authChecker: $authCheckStub,
+            propertyInjector: $propertyInjectorStub,
+            modelResolver: $modelResolverStub,
+        );
+
+        $sut->handle($requestStub);
+    }
+
+    #[TestDox("Shall provide the model as an argument when executing the request processor")]
+    #[TestWith(["/path", "/path", ["id" => "123", "name" => "SOME_NAME"], ["id" => "123", "name" => "SOME_NAME"]])]
+    public function test1e(string $location, string $requestPath, array $modelVars, array $expectedArgs)
+    {
+        $content = "";
+        $authCheckStub = $this->createStub(AuthorizationCheckerInterface::class);
+        $requestStub = $this->createStub(ServerRequestInterface::class);
+        $serverStub = $this->createStub(ServerInterface::class);
+        $modelResolverStub = $this->createStub(ModelResolverInterface::class);
+        $propertyInjectorStub = $this->createStub(PropertyInjectorInterface::class);
+        $responseStub = $this->createStub(ResponseInterface::class);
+        $responseBuilderStub = $this->createStub(ResponseBuilderInterface::class);
+        $requestProcessorStub = $this->createStub(RoutableInterface::class);
+        $streamStub = $this->createStub(StreamInterface::class);
+        $uriStub = $this->createStub(UriInterface::class);
+        $requestProcessorExecutorMock = $this->createMock(RequestProcessorExecutorInterface::class);
+        $target = new Target(
+            location: $location,
+            method: HttpMethod::Get,
+            representations: new Representations([MimeType::TextHtml]),
+            requestProcessor: $requestProcessorStub,
+        );
+
+        $requestProcessorExecutorMock
+            ->expects($this->once())
+            ->method("execute")
+            ->with(
+                $requestProcessorStub,
+                $expectedArgs,
+            )
+            ->willReturn($content);
+
+        $requestStub
+            ->method("getHeader")
+            ->willReturn([MimeType::TextHtml->value]);
+        $requestStub
+            ->method("getUri")
+            ->willReturn($uriStub);
+        $serverStub
+            ->method("findTarget")
+            ->willReturn($target);
+        $responseBuilderStub
+            ->method("build")
+            ->willReturn($responseStub);
+        $responseStub
+            ->method("withStatus")
+            ->willReturn($responseStub);
+        $responseStub
+            ->method("getStatusCode")
+            ->willReturn(HttpResponseCode::Ok->value);
+        $responseStub
+            ->method("getBody")
+            ->willReturn($streamStub);
+        $authCheckStub
+            ->method("authorize")
+            ->willReturn($requestProcessorStub);
+        $requestProcessorStub
+            ->method("process")
+            ->willReturn($content);
+        $streamStub
+            ->method("getContents")
+            ->willReturn($content);
+        $uriStub
+            ->method("getPath")
+            ->willReturn($requestPath);
+        $modelResolverStub
+            ->method("resolve")
+            ->willReturn($modelVars);
+
+        $sut = new RequestProcessingHandler(
+            server: $serverStub,
+            processorExecutor: $requestProcessorExecutorMock,
+            responseBuilder: $responseBuilderStub,
+            authChecker: $authCheckStub,
+            propertyInjector: $propertyInjectorStub,
+            modelResolver: $modelResolverStub,
+        );
+
+        $sut->handle($requestStub);
+    }
+
+    #[TestDox("Shall provide the path variables as arguments when executing the request processor")]
+    #[TestWith(["/path/{id}", "/path/123",  ["id" => "123"]])]
+    public function test1f(string $location, string $requestPath, array $expectedArgs)
+    {
+        $content = "";
+        $authCheckStub = $this->createStub(AuthorizationCheckerInterface::class);
+        $requestStub = $this->createStub(ServerRequestInterface::class);
+        $serverStub = $this->createStub(ServerInterface::class);
+        $modelResolverStub = $this->createStub(ModelResolverInterface::class);
+        $propertyInjectorStub = $this->createStub(PropertyInjectorInterface::class);
+        $responseStub = $this->createStub(ResponseInterface::class);
+        $responseBuilderStub = $this->createStub(ResponseBuilderInterface::class);
+        $requestProcessorStub = $this->createStub(RoutableInterface::class);
+        $streamStub = $this->createStub(StreamInterface::class);
+        $uriStub = $this->createStub(UriInterface::class);
+        $requestProcessorExecutorMock = $this->createMock(RequestProcessorExecutorInterface::class);
+        $target = new Target(
+            location: $location,
+            method: HttpMethod::Get,
+            representations: new Representations([MimeType::TextHtml]),
+            requestProcessor: $requestProcessorStub,
+        );
+
+        $requestProcessorExecutorMock
+            ->expects($this->once())
+            ->method("execute")
+            ->with(
+                $requestProcessorStub,
+                $expectedArgs,
+            )
+            ->willReturn($content);
+
+        $requestStub
+            ->method("getHeader")
+            ->willReturn([MimeType::TextHtml->value]);
+        $requestStub
+            ->method("getUri")
+            ->willReturn($uriStub);
+        $serverStub
+            ->method("findTarget")
+            ->willReturn($target);
+        $responseBuilderStub
+            ->method("build")
+            ->willReturn($responseStub);
+        $responseStub
+            ->method("withStatus")
+            ->willReturn($responseStub);
+        $responseStub
+            ->method("getStatusCode")
+            ->willReturn(HttpResponseCode::Ok->value);
+        $responseStub
+            ->method("getBody")
+            ->willReturn($streamStub);
+        $authCheckStub
+            ->method("authorize")
+            ->willReturn($requestProcessorStub);
+        $requestProcessorStub
+            ->method("process")
+            ->willReturn($content);
+        $streamStub
+            ->method("getContents")
+            ->willReturn($content);
+        $uriStub
+            ->method("getPath")
+            ->willReturn($requestPath);
+        $modelResolverStub
+            ->method("resolve")
+            ->willReturn([]);
+
+        $sut = new RequestProcessingHandler(
+            server: $serverStub,
+            processorExecutor: $requestProcessorExecutorMock,
+            responseBuilder: $responseBuilderStub,
+            authChecker: $authCheckStub,
+            propertyInjector: $propertyInjectorStub,
+            modelResolver: $modelResolverStub,
+        );
+
+        $sut->handle($requestStub);
+    }
+
+    #[TestDox("Shall provide the path variables as arguments that override model variables when executing the request processor")]
+    #[TestWith(["/path/{id}", "/path/123", ["id" => "9999", "name" => "SOME_NAME"], ["id" => "123", "name" => "SOME_NAME"]])]
+    public function test1g(string $location, string $requestPath, array $resolvedModelVars, array $expectedArgs)
+    {
+        $content = "";
+        $authCheckStub = $this->createStub(AuthorizationCheckerInterface::class);
+        $requestStub = $this->createStub(ServerRequestInterface::class);
+        $serverStub = $this->createStub(ServerInterface::class);
+        $modelResolverStub = $this->createStub(ModelResolverInterface::class);
+        $propertyInjectorStub = $this->createStub(PropertyInjectorInterface::class);
+        $responseStub = $this->createStub(ResponseInterface::class);
+        $responseBuilderStub = $this->createStub(ResponseBuilderInterface::class);
+        $requestProcessorStub = $this->createStub(RoutableInterface::class);
+        $streamStub = $this->createStub(StreamInterface::class);
+        $uriStub = $this->createStub(UriInterface::class);
+        $requestProcessorExecutorMock = $this->createMock(RequestProcessorExecutorInterface::class);
+        $target = new Target(
+            location: $location,
+            method: HttpMethod::Get,
+            representations: new Representations([MimeType::TextHtml]),
+            requestProcessor: $requestProcessorStub,
+        );
+
+        $requestProcessorExecutorMock
+            ->expects($this->once())
+            ->method("execute")
+            ->with(
+                $requestProcessorStub,
+                $expectedArgs,
+            )
+            ->willReturn($content);
+
+        $requestStub
+            ->method("getHeader")
+            ->willReturn([MimeType::TextHtml->value]);
+        $requestStub
+            ->method("getUri")
+            ->willReturn($uriStub);
+        $serverStub
+            ->method("findTarget")
+            ->willReturn($target);
+        $responseBuilderStub
+            ->method("build")
+            ->willReturn($responseStub);
+        $responseStub
+            ->method("withStatus")
+            ->willReturn($responseStub);
+        $responseStub
+            ->method("getStatusCode")
+            ->willReturn(HttpResponseCode::Ok->value);
+        $responseStub
+            ->method("getBody")
+            ->willReturn($streamStub);
+        $authCheckStub
+            ->method("authorize")
+            ->willReturn($requestProcessorStub);
+        $requestProcessorStub
+            ->method("process")
+            ->willReturn($content);
+        $streamStub
+            ->method("getContents")
+            ->willReturn($content);
+        $uriStub
+            ->method("getPath")
+            ->willReturn($requestPath);
+        $modelResolverStub
+            ->method("resolve")
+            ->willReturn($resolvedModelVars);
+
+        $sut = new RequestProcessingHandler(
+            server: $serverStub,
+            processorExecutor: $requestProcessorExecutorMock,
+            responseBuilder: $responseBuilderStub,
+            authChecker: $authCheckStub,
+            propertyInjector: $propertyInjectorStub,
+            modelResolver: $modelResolverStub,
+        );
+
+        $sut->handle($requestStub);
     }
 }
