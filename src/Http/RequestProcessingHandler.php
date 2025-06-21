@@ -85,9 +85,9 @@ final class RequestProcessingHandler implements RequestHandlerInterface
         /**
          * Merge path variables and models
          */
-        $args = array_intersect_key(
-            $pathVariables->toArray(),
+        $args = array_merge(
             $models,
+            $pathVariables->toArray(),
         );
 
         /**
