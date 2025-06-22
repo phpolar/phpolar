@@ -5,6 +5,7 @@ on:
       - 'main'
     paths:
       - '*.php'
+      - '.github/workflows/push.yml'
       - 'composer.lock'
 jobs:
   coverage:
