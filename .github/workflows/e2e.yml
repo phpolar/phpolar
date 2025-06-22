@@ -2,7 +2,7 @@ name: E2E Tests
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
     paths:
       - 'composer.json'
       - 'package.json'
@@ -18,28 +18,28 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
-    - uses: actions/checkout@v4
-    - uses: shivammathur/setup-php@v2
-      with:
-        php-version: 8.4
-    - name: Install System dependencies
-      run: |
-        sudo apt-get -qq update
-        sudo apt-get -qq install -y libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libnss3 libxss1 libasound2 libxtst6 xauth xvfb
-    - name: Cache Composer packages
-      id: composer-cache
-      uses: actions/cache@v4
-      with:
-        path: vendor
-        key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-php-
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.4
+      - name: Install System dependencies
+        run: |
+          sudo apt-get -qq update
+          sudo apt-get -qq install -y libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libnss3 libxss1 libasound2 libxtst6 xauth xvfb
+      - name: Cache Composer packages
+        id: composer-cache
+        uses: actions/cache@v4
+        with:
+          path: vendor
+          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-
 
-    - name: Create project
-      run: composer create-project --no-ansi --no-interaction --prefer-dist --no-progress --no-audit --no-dev  phpolar/skeleton $PROJECT_FOLDER
+      - name: Create project
+        run: composer create-project --no-ansi --no-interaction --prefer-dist --no-progress --no-audit --no-dev  phpolar/skeleton $PROJECT_FOLDER
 
-    - name: Run E2E tests
-      uses: cypress-io/github-action@v6
-      with:
-        start: composer ci:start
-        wait-on: 'http://127.0.0.1:3444'
+      - name: Run E2E tests
+        uses: cypress-io/github-action@v6
+        with:
+          start: composer ci:start
+          wait-on: $E2E_SERVER
