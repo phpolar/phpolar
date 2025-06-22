@@ -79,7 +79,10 @@
             "@test --configuration=phpunit.dev.xml --testsuite unit",
             "@test --configuration=phpunit.acceptance.xml --testsuite acceptance"
         ],
-        "ci:generate-coverage-badge": "composer exec \"php-coveralls -v\"",
+        "ci:generate-coverage-badge": [
+            "@test --configuration=phpunit.ci.xml",
+            "composer exec \"php-coveralls -v\""
+        ],
         "docs:generate": "composer exec \"docker run --rm -v \"$(pwd):/data\" \"phpdoc/phpdoc:3\" --setting graphs.enabled=true\"",
         "lint": "phpcs",
         "lint-fix": "phpcbf",
