@@ -75,7 +75,7 @@
         "ci:start": "@php -S 0.0.0.0:3444 -t ./e2e-app/public 2>/dev/null",
         "ci:lint": "composer exec \"@lint\"",
         "ci:lint-fix": "composer exec \"@lint-fix\"",
-        "ci:test-build": "composer exec \"@test --configuration=phpunit.ci.xml\"",
+        "ci:test-build": "composer exec \"@test --configuration=phpunit.xml\"",
         "ci:test": "XDEBUG_MODE=coverage composer exec \"@test --configuration=phpunit.ci.xml\"",
         "ci:generate-coverage-badge": "composer exec \"php-coveralls -v\"",
         "docs:generate": "composer exec \"docker run --rm -v \"$(pwd):/data\" \"phpdoc/phpdoc:3\" --setting graphs.enabled=true\"",
