@@ -2323,63 +2323,6 @@
             "time": "2023-12-11T08:22:20+00:00"
         },
         {
-            "name": "phpolar/core",
-            "version": "4.0.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/phpolar/core.git",
-                "reference": "1737e19e288169e229c854dec289f268f681ea8a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/phpolar/core/zipball/1737e19e288169e229c854dec289f268f681ea8a",
-                "reference": "1737e19e288169e229c854dec289f268f681ea8a",
-                "shasum": ""
-            },
-            "require": {
-                "ext-mbstring": "*",
-                "psr/http-message": "^2.0",
-                "psr/http-server-handler": "^1.0",
-                "psr/http-server-middleware": "^1.0"
-            },
-            "require-dev": {
-                "ext-ast": "*",
-                "ext-openssl": "*",
-                "phan/phan": "^5.4.1",
-                "php-coveralls/php-coveralls": "^2.5.3",
-                "phpmd/phpmd": "^2.13",
-                "phpolar/http-message-test-utils": "^0.1.0 || ^0.2.0",
-                "phpstan/phpstan": "^1.9.14 || ^2.0.0",
-                "phpunit/phpunit": "^11.4 || ^12.0",
-                "squizlabs/php_codesniffer": "^3.7.1"
-            },
-            "type": "library",
-            "autoload": {
-                "files": [
-                    "src/Routing/constants.php"
-                ],
-                "psr-4": {
-                    "Phpolar\\Phpolar\\Core\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Eric Fortmeyer",
-                    "email": "e.fortmeyer01@gmail.com"
-                }
-            ],
-            "description": "The internal components of the PHPolar Microframework",
-            "support": {
-                "issues": "https://github.com/phpolar/core/issues",
-                "source": "https://github.com/phpolar/core/tree/4.0.3"
-            },
-            "time": "2025-04-16T04:09:36+00:00"
-        },
-        {
             "name": "phpolar/csrf-protection",
             "version": "3.1.6",
             "source": {
@@ -2547,22 +2490,21 @@
         },
         {
             "name": "phpolar/model",
-            "version": "2.0.0",
+            "version": "2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpolar/model.git",
-                "reference": "106fb195a2e150e27501522074024029fff6bf4d"
+                "reference": "6f07259e6d70e5fa4fdff93d8959908830703992"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpolar/model/zipball/106fb195a2e150e27501522074024029fff6bf4d",
-                "reference": "106fb195a2e150e27501522074024029fff6bf4d",
+                "url": "https://api.github.com/repos/phpolar/model/zipball/6f07259e6d70e5fa4fdff93d8959908830703992",
+                "reference": "6f07259e6d70e5fa4fdff93d8959908830703992",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.3",
                 "php-contrib/validator": "^2.0",
-                "phpolar/core": "^4.0.0",
                 "phpolar/model-resolver": "^1.0",
                 "phpolar/storage-driver": "^1.0",
                 "psr/http-message": "^2.0"
@@ -2592,9 +2534,9 @@
             "description": "Provides support for configuring the properties of an object for validation, formatting, and storage.",
             "support": {
                 "issues": "https://github.com/phpolar/model/issues",
-                "source": "https://github.com/phpolar/model/tree/2.0.0"
+                "source": "https://github.com/phpolar/model/tree/2.1.0"
             },
-            "time": "2025-05-30T03:26:14+00:00"
+            "time": "2025-06-22T21:58:08+00:00"
         },
         {
             "name": "phpolar/pure-php",

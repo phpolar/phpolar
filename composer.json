@@ -1,4 +1,5 @@
 {
+    "$schema": "https://getcomposer.org/schema.json",
     "name": "phpolar/phpolar",
     "description": "A minimal PHP framework",
     "type": "library",
