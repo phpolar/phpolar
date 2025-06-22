@@ -38,7 +38,7 @@ final class RoutingTest extends TestCase
 
     protected function getResponseFactory(): ResponseFactoryInterface
     {
-        return new class() implements ResponseFactoryInterface {
+        return new class () implements ResponseFactoryInterface {
             public function createResponse(int $code = 200, string $reasonPhrase = ''): ResponseInterface
             {
                 return new ResponseStub($code, $reasonPhrase);
@@ -48,7 +48,7 @@ final class RoutingTest extends TestCase
 
     protected function getStreamFactory(): StreamFactoryInterface
     {
-        return new class() implements StreamFactoryInterface {
+        return new class () implements StreamFactoryInterface {
             public function createStream(string $content = ''): StreamInterface
             {
                 return new MemoryStreamStub($content);
@@ -100,8 +100,10 @@ final class RoutingTest extends TestCase
             ->method("getBody")
             ->willReturn($streamStub);
 
-        $indexHandler = new class($expectedResponse) implements RoutableInterface {
-            public function __construct(private string $responseTemplate) {}
+        $indexHandler = new class ($expectedResponse) implements RoutableInterface {
+            public function __construct(private string $responseTemplate)
+            {
+            }
 
             public function process(): string
             {
@@ -123,7 +125,7 @@ final class RoutingTest extends TestCase
             processorExecutor: new RequestProcessorExecutor(),
             responseBuilder: $this->getResponseBuilder(),
             authChecker: new AuthorizationChecker(
-                routableResolver: new class() implements RoutableResolverInterface {
+                routableResolver: new class () implements RoutableResolverInterface {
                     public function resolve(RoutableInterface $target): RoutableInterface|false
                     {
                         return $target;
@@ -165,8 +167,10 @@ final class RoutingTest extends TestCase
 
         $propertyInjector = $this->createStub(PropertyInjectorInterface::class);
         $modelResolver = $this->createStub(ModelResolverInterface::class);
-        $indexHandler = new class() implements RoutableInterface {
-            public function __construct() {}
+        $indexHandler = new class () implements RoutableInterface {
+            public function __construct()
+            {
+            }
 
             public function process(): string
             {
@@ -189,7 +193,7 @@ final class RoutingTest extends TestCase
             ]),
             responseBuilder: $this->getResponseBuilder(),
             authChecker: new AuthorizationChecker(
-                routableResolver: new class() implements RoutableResolverInterface {
+                routableResolver: new class () implements RoutableResolverInterface {
                     public function resolve(RoutableInterface $target): RoutableInterface|false
                     {
                         return $target;

@@ -65,7 +65,7 @@ final class MemoryUsageTest extends TestCase
         $config[ServerInterface::class] = $server;
         $config[RoutingMiddleware::class] = static fn(ArrayAccess $config) => new RoutingMiddleware($config[RequestProcessingHandler::class]);
         $config[ModelResolverInterface::class] = $modelResolver;
-        $config[RoutableResolverInterface::class] = new class() implements RoutableResolverInterface {
+        $config[RoutableResolverInterface::class] = new class () implements RoutableResolverInterface {
             public function resolve(RoutableInterface $target): RoutableInterface|false
             {
                 return $target;
@@ -78,7 +78,7 @@ final class MemoryUsageTest extends TestCase
             responseBuilder: $config[ResponseBuilderInterface::class],
             authChecker: new AuthorizationChecker(
                 routableResolver: $config[RoutableResolverInterface::class],
-                unauthHandler: new class() implements RequestHandlerInterface {
+                unauthHandler: new class () implements RequestHandlerInterface {
                     public function handle(ServerRequestInterface $request): ResponseInterface
                     {
                         return new ResponseStub(ResponseCode::UNAUTHORIZED, "Unauthorized");
@@ -88,7 +88,7 @@ final class MemoryUsageTest extends TestCase
             modelResolver: $modelResolver,
         );
         $config[MiddlewareQueueRequestHandler::class] = new MiddlewareQueueRequestHandler(
-            new class() implements RequestHandlerInterface {
+            new class () implements RequestHandlerInterface {
                 public function handle(ServerRequestInterface $request): ResponseInterface
                 {
                     return new ResponseStub(ResponseCode::NOT_FOUND, "Not Found");
@@ -111,7 +111,7 @@ final class MemoryUsageTest extends TestCase
         $session = [REQUEST_ID_KEY => ""];
         $config[AbstractTokenStorage::class] = new SessionTokenStorage(new SessionWrapper($session));
         $config[RequestProcessorExecutor::class] = new RequestProcessorExecutor();
-        $config[PropertyInjectorInterface::class] = new class() implements PropertyInjectorInterface {
+        $config[PropertyInjectorInterface::class] = new class () implements PropertyInjectorInterface {
             public function inject(object $injectee): void
             {
                 // intentionally empty
@@ -141,7 +141,7 @@ final class MemoryUsageTest extends TestCase
                 representations: new Representations([
                     MimeType::TextHtml,
                 ]),
-                requestProcessor: new class() implements RoutableInterface {
+                requestProcessor: new class () implements RoutableInterface {
                     public function process(): string
                     {
                         return "content";

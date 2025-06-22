@@ -23,7 +23,8 @@ final class RequestProcessingHandler implements RequestHandlerInterface
         private readonly AuthorizationCheckerInterface $authChecker,
         private readonly PropertyInjectorInterface $propertyInjector,
         private readonly ModelResolverInterface $modelResolver,
-    ) {}
+    ) {
+    }
 
     /**
      * Attempts to locate and execute the target request processor.
