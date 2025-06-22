@@ -100,6 +100,9 @@ final class RequestProcessingHandlerTest extends TestCase
             ->method("withStatus")
             ->willReturn($responseStub);
         $responseStub
+            ->method("withHeader")
+            ->willReturn($responseStub);
+        $responseStub
             ->method("getStatusCode")
             ->willReturn(HttpResponseCode::NotFound->value);
 
@@ -147,6 +150,9 @@ final class RequestProcessingHandlerTest extends TestCase
             ->method("withStatus")
             ->willReturn($responseStub);
         $responseStub
+            ->method("withHeader")
+            ->willReturn($responseStub);
+        $responseStub
             ->method("getStatusCode")
             ->willReturn(HttpResponseCode::NotAcceptable->value);
 
@@ -189,6 +195,9 @@ final class RequestProcessingHandlerTest extends TestCase
             ->willReturn($target);
         $responseStub
             ->method("withStatus")
+            ->willReturn($responseStub);
+        $responseStub
+            ->method("withHeader")
             ->willReturn($responseStub);
         $responseStub
             ->method("getStatusCode")
@@ -242,6 +251,9 @@ final class RequestProcessingHandlerTest extends TestCase
             ->willReturn($responseStub);
         $responseStub
             ->method("withStatus")
+            ->willReturn($responseStub);
+        $responseStub
+            ->method("withHeader")
             ->willReturn($responseStub);
         $responseStub
             ->method("getStatusCode")
@@ -320,6 +332,9 @@ final class RequestProcessingHandlerTest extends TestCase
             ->method("withStatus")
             ->willReturn($responseStub);
         $responseStub
+            ->method("withHeader")
+            ->willReturn($responseStub);
+        $responseStub
             ->method("getStatusCode")
             ->willReturn(HttpResponseCode::Ok->value);
         $responseStub
@@ -396,6 +411,9 @@ final class RequestProcessingHandlerTest extends TestCase
             ->willReturn($responseStub);
         $responseStub
             ->method("withStatus")
+            ->willReturn($responseStub);
+        $responseStub
+            ->method("withHeader")
             ->willReturn($responseStub);
         $responseStub
             ->method("getStatusCode")
@@ -479,6 +497,9 @@ final class RequestProcessingHandlerTest extends TestCase
             ->method("withStatus")
             ->willReturn($responseStub);
         $responseStub
+            ->method("withHeader")
+            ->willReturn($responseStub);
+        $responseStub
             ->method("getStatusCode")
             ->willReturn(HttpResponseCode::Ok->value);
         $responseStub
@@ -558,6 +579,9 @@ final class RequestProcessingHandlerTest extends TestCase
             ->willReturn($responseStub);
         $responseStub
             ->method("withStatus")
+            ->willReturn($responseStub);
+        $responseStub
+            ->method("withHeader")
             ->willReturn($responseStub);
         $responseStub
             ->method("getStatusCode")

@@ -11,7 +11,6 @@ use PhpCommonEnums\MimeType\Enumeration\MimeTypeEnum as MimeType;
 use Phpolar\HttpMessageTestUtils\MemoryStreamStub;
 use Phpolar\HttpMessageTestUtils\ResponseStub;
 use Phpolar\ModelResolver\ModelResolverInterface;
-use Phpolar\Phpolar\Serializers\JsonSerializer;
 use Phpolar\PropertyInjectorContract\PropertyInjectorInterface;
 use Phpolar\Routable\RoutableResolverInterface;
 use Phpolar\Routable\RoutableInterface;
@@ -112,8 +111,7 @@ final class RoutingTest extends TestCase
             }
         };
 
-        $routingHandler = new RequestProcessingHandler(
-            processorExecutor: new RequestProcessorExecutor(),
+        $requestProcessor = new RequestProcessingHandler(
             server: new Server([
                 new Target(
                     location: $givenRoute,
@@ -124,6 +122,7 @@ final class RoutingTest extends TestCase
                     requestProcessor: $indexHandler,
                 ),
             ]),
+            processorExecutor: new RequestProcessorExecutor(),
             responseBuilder: $this->getResponseBuilder(),
             authChecker: new AuthorizationChecker(
                 routableResolver: new class () implements RoutableResolverInterface {
@@ -135,11 +134,10 @@ final class RoutingTest extends TestCase
                 unauthHandler: $this->createStub(RequestHandlerInterface::class),
             ),
             propertyInjector: $propertyInjector,
-            htmlResponse: new HtmlResponseDecorator($modelResolver),
-            serializedResponse: new SerializedResponseDecorator(serializer: new JsonSerializer(), modelResolver: $modelResolver),
+            modelResolver: $modelResolver,
         );
 
-        $response = $routingHandler->handle($requestStub);
+        $response = $requestProcessor->handle($requestStub);
 
         $this->assertSame(HttpResponseCode::Ok->value, $response->getStatusCode());
         $this->assertSame($expectedResponse, $response->getBody()->getContents());
@@ -181,7 +179,7 @@ final class RoutingTest extends TestCase
             }
         };
 
-        $routingHandler = new RequestProcessingHandler(
+        $requestProcessor = new RequestProcessingHandler(
             processorExecutor: new RequestProcessorExecutor(),
             server: new Server([
                 new Target(
@@ -204,11 +202,10 @@ final class RoutingTest extends TestCase
                 unauthHandler: $this->createStub(RequestHandlerInterface::class),
             ),
             propertyInjector: $propertyInjector,
-            htmlResponse: new HtmlResponseDecorator($modelResolver),
-            serializedResponse: new SerializedResponseDecorator(serializer: new JsonSerializer(), modelResolver: $modelResolver),
+            modelResolver: $modelResolver,
         );
 
-        $response = $routingHandler->handle($requestStub);
+        $response = $requestProcessor->handle($requestStub);
 
         $this->assertSame(HttpResponseCode::NotFound->value, $response->getStatusCode());
         $this->assertSame(HttpResponseCode::NotFound->getLabel(), $response->getReasonPhrase());

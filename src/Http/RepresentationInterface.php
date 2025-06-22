@@ -11,4 +11,5 @@ use Stringable;
  */
 interface RepresentationInterface extends Stringable
 {
+    public function getMimeType(): string;
 }

@@ -42,7 +42,9 @@ final class RequestProcessingHandler implements RequestHandlerInterface
          */
         $target = $this->server->findTarget($request);
         if ($target instanceof HttpResponseCode) {
-            return $this->buildResponse((int) $target->value, $target->getLabel());
+            return $this->responseBuilder
+                ->build()
+                ->withStatus((int) $target->value, $target->getLabel());
         }
 
         /**
@@ -52,7 +54,9 @@ final class RequestProcessingHandler implements RequestHandlerInterface
          */
         $responseCode = $target->negotiate($request);
         if ($responseCode === HttpResponseCode::NotAcceptable) {
-            return $this->buildResponse((int) $responseCode->value, $responseCode->getLabel());
+            return $this->responseBuilder
+                ->build()
+                ->withStatus((int) $responseCode->value, $responseCode->getLabel());
         }
 
         $requestProcessor = $target->requestProcessor;
@@ -102,15 +106,11 @@ final class RequestProcessingHandler implements RequestHandlerInterface
 
         $representation = $target->getRepresentation($resource);
 
-        return $this->buildResponse(
-            code: (int) $responseCode->value,
-            reasonPhrase: $responseCode->getLabel(),
-            content: (string) $representation,
-        );
-    }
-
-    private function buildResponse(int $code, string $reasonPhrase, string $content = ""): ResponseInterface
-    {
-        return $this->responseBuilder->build($content)->withStatus($code, $reasonPhrase);
+        return $this->responseBuilder->build(content: (string) $representation)
+            ->withStatus(
+                code: (int) $responseCode->value,
+                reasonPhrase: $responseCode->getLabel()
+            )
+            ->withHeader("Content-Type", $representation->getMimeType());
     }
 }
