@@ -16,7 +16,6 @@
       <directory>tests/unit</directory>
     </testsuite>
   </testsuites>
-  <coverage pathCoverage="true" />
   <php>
     <const name="Phpolar\Phpolar\Tests\ENTITY_NAME_TEST_CASE" value="FAKE NAME" />
   </php>
