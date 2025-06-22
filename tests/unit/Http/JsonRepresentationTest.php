@@ -2,6 +2,7 @@
 
 namespace Phpolar\Phpolar\Http;
 
+use PhpCommonEnums\MimeType\Enumeration\MimeTypeEnum as MimeType;
 use Phpolar\Phpolar\Serializers\JsonSerializer;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\CoversClassesThatImplementInterface;
@@ -30,5 +31,15 @@ final class JsonRepresentationTest extends TestCase
         $result = (string) $sut;
 
         $this->assertSame($expectedResult, $result);
+    }
+
+    #[TestDox("Shall return its mime type")]
+    public function testd()
+    {
+        $sut = new JsonRepresentation("");
+
+        $result = $sut->getMimeType();
+
+        $this->assertSame(MimeType::ApplicationJson->value, $result);
     }
 }

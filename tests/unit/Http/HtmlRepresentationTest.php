@@ -2,6 +2,7 @@
 
 namespace Phpolar\Phpolar\Http;
 
+use PhpCommonEnums\MimeType\Enumeration\MimeTypeEnum as MimeType;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\CoversClassesThatImplementInterface;
 use PHPUnit\Framework\Attributes\TestDox;
@@ -33,5 +34,15 @@ final class HtmlRepresentationTest extends TestCase
         $this->expectException(InvalidHtmlResponseException::class);
 
         new HtmlRepresentation($invalidResult);
+    }
+
+    #[TestDox("Shall return its mime type")]
+    public function testd()
+    {
+        $sut = new HtmlRepresentation("");
+
+        $result = $sut->getMimeType();
+
+        $this->assertSame(MimeType::TextHtml->value, $result);
     }
 }

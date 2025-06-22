@@ -8,23 +8,21 @@ use ArrayAccess;
 use Laminas\HttpHandlerRunner\Emitter\SapiEmitter;
 use PhpCommonEnums\HttpMethod\Enumeration\HttpMethodEnum as HttpMethod;
 use PhpCommonEnums\MimeType\Enumeration\MimeTypeEnum as MimeType;
-use Phpolar\CsrfProtection\CsrfTokenGenerator;
+use PhpContrib\Http\Message\ResponseFilterInterface;
 use Phpolar\CsrfProtection\Http\CsrfRequestCheckMiddleware;
 use Phpolar\CsrfProtection\Http\CsrfResponseFilterMiddleware;
 use Phpolar\CsrfProtection\Storage\AbstractTokenStorage;
 use Phpolar\CsrfProtection\Storage\SessionTokenStorage;
 use Phpolar\CsrfProtection\Storage\SessionWrapper;
-use PhpContrib\Http\Message\ResponseFilterStrategyInterface;
 use Phpolar\HttpCodes\ResponseCode;
 use Phpolar\HttpMessageTestUtils\RequestStub;
 use Phpolar\HttpMessageTestUtils\ResponseFactoryStub;
 use Phpolar\HttpMessageTestUtils\ResponseStub;
 use Phpolar\HttpMessageTestUtils\StreamFactoryStub;
+use Phpolar\Model\ParsedBodyResolver;
 use Phpolar\ModelResolver\ModelResolverInterface;
 use Phpolar\Routable\RoutableInterface;
 use Phpolar\Routable\RoutableResolverInterface;
-use Phpolar\Phpolar\Http\RouteMap;
-use Phpolar\Phpolar\Http\RoutingHandler;
 use Phpolar\Phpolar\Http\RoutingMiddleware;
 use Phpolar\Phpolar\Tests\Stubs\ConfigurableContainerStub;
 use Phpolar\Phpolar\Tests\Stubs\ContainerConfigurationStub;
@@ -33,18 +31,14 @@ use Phpolar\Phpolar\App;
 use Phpolar\Phpolar\DependencyInjection\ContainerLoader;
 use Phpolar\Phpolar\DependencyInjection\DiTokens;
 use Phpolar\Phpolar\Http\AuthorizationChecker;
-use Phpolar\Phpolar\Http\HtmlResponseDecorator;
 use Phpolar\Phpolar\Http\Representations;
-use Phpolar\Phpolar\Http\RequestMethods;
 use Phpolar\Phpolar\Http\RequestProcessingHandler;
 use Phpolar\Phpolar\Http\RequestProcessorExecutor;
 use Phpolar\Phpolar\Http\ResponseBuilder;
 use Phpolar\Phpolar\Http\ResponseBuilderInterface;
-use Phpolar\Phpolar\Http\SerializedResponseDecorator;
 use Phpolar\Phpolar\Http\Server;
 use Phpolar\Phpolar\Http\ServerInterface;
 use Phpolar\Phpolar\Http\Target;
-use Phpolar\Phpolar\Serializers\JsonSerializer;
 use Phpolar\PropertyInjectorContract\PropertyInjectorInterface;
 use Phpolar\PurePhp\StreamContentStrategy;
 use Phpolar\PurePhp\TemplateEngine;
@@ -66,42 +60,35 @@ final class MemoryUsageTest extends TestCase
 {
     protected function getContainerFactory(ServerInterface $server): ContainerInterface
     {
+        $modelResolver = new ParsedBodyResolver($_REQUEST);
         $config = new ContainerConfigurationStub();
         $config[ServerInterface::class] = $server;
         $config[RoutingMiddleware::class] = static fn(ArrayAccess $config) => new RoutingMiddleware($config[RequestProcessingHandler::class]);
-        $config[ModelResolverInterface::class] = $this->createStub(ModelResolverInterface::class);
-        $config[RoutableResolverInterface::class] = new class () implements RoutableResolverInterface {
+        $config[ModelResolverInterface::class] = $modelResolver;
+        $config[RoutableResolverInterface::class] = new class() implements RoutableResolverInterface {
             public function resolve(RoutableInterface $target): RoutableInterface|false
             {
                 return $target;
             }
         };
-        $config[HtmlResponseDecorator::class] = new HtmlResponseDecorator(
-            modelResolver: $this->createStub(ModelResolverInterface::class)
-        );
-        $config[SerializedResponseDecorator::class] = new SerializedResponseDecorator(
-            serializer: new JsonSerializer(),
-            modelResolver: $this->createStub(ModelResolverInterface::class)
-        );
         $config[RequestProcessingHandler::class] = static fn(ArrayAccess $config) => new RequestProcessingHandler(
             propertyInjector: $config[PropertyInjectorInterface::class],
             processorExecutor: $config[RequestProcessorExecutor::class],
             server: $config[ServerInterface::class],
-            htmlResponse: $config[HtmlResponseDecorator::class],
-            serializedResponse: $config[SerializedResponseDecorator::class],
             responseBuilder: $config[ResponseBuilderInterface::class],
             authChecker: new AuthorizationChecker(
                 routableResolver: $config[RoutableResolverInterface::class],
-                unauthHandler: new class () implements RequestHandlerInterface {
+                unauthHandler: new class() implements RequestHandlerInterface {
                     public function handle(ServerRequestInterface $request): ResponseInterface
                     {
                         return new ResponseStub(ResponseCode::UNAUTHORIZED, "Unauthorized");
                     }
                 },
             ),
+            modelResolver: $modelResolver,
         );
         $config[MiddlewareQueueRequestHandler::class] = new MiddlewareQueueRequestHandler(
-            new class () implements RequestHandlerInterface {
+            new class() implements RequestHandlerInterface {
                 public function handle(ServerRequestInterface $request): ResponseInterface
                 {
                     return new ResponseStub(ResponseCode::NOT_FOUND, "Not Found");
@@ -120,12 +107,16 @@ final class MemoryUsageTest extends TestCase
         $config[TemplatingStrategyInterface::class] = new StreamContentStrategy();
         $config[ContainerInterface::class] = new ConfigurableContainerStub($config);
         $config[DiTokens::CSRF_CHECK_MIDDLEWARE] = static fn(ArrayAccess $config) => new CsrfRequestCheckMiddleware($config[RequestHandlerInterface::class]);
-        $config[DiTokens::CSRF_RESPONSE_FILTER_MIDDLEWARE] = static fn(ArrayAccess $config) => new CsrfResponseFilterMiddleware($config[AbstractTokenStorage::class], $config[CsrfTokenGenerator::class], $config[ResponseFilterStrategyInterface::class]);
+        $config[DiTokens::CSRF_RESPONSE_FILTER_MIDDLEWARE] = static fn(ArrayAccess $config) => new CsrfResponseFilterMiddleware(responseFilter: $config[ResponseFilterInterface::class]);
         $session = [REQUEST_ID_KEY => ""];
         $config[AbstractTokenStorage::class] = new SessionTokenStorage(new SessionWrapper($session));
         $config[RequestProcessorExecutor::class] = new RequestProcessorExecutor();
-        $config[ResponseFilterStrategyInterface::class] = $this->createStub(ResponseFilterStrategyInterface::class);
-        $config[PropertyInjectorInterface::class] = $this->createStub(PropertyInjectorInterface::class);
+        $config[PropertyInjectorInterface::class] = new class() implements PropertyInjectorInterface {
+            public function inject(object $injectee): void
+            {
+                // intentionally empty
+            }
+        };
         return new ConfigurableContainerStub($config);
     }
 
@@ -143,8 +134,6 @@ final class MemoryUsageTest extends TestCase
         $request->withHeader("Accept", MimeType::TextHtml->value);
         $config = new ContainerConfigurationStub();
 
-        $modelResolverStub = $this->createStub(ModelResolverInterface::class);
-
         $server = new Server([
             new Target(
                 location: "/",
@@ -152,14 +141,12 @@ final class MemoryUsageTest extends TestCase
                 representations: new Representations([
                     MimeType::TextHtml,
                 ]),
-                requestProcessor: new HtmlResponseDecorator($modelResolverStub)->decorate(
-                    new class () implements RoutableInterface {
-                        public function process(): string
-                        {
-                            return "content";
-                        }
+                requestProcessor: new class() implements RoutableInterface {
+                    public function process(): string
+                    {
+                        return "content";
                     }
-                ),
+                }
             ),
         ]);
 

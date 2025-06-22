@@ -11,7 +11,6 @@ use PhpCommonEnums\MimeType\Enumeration\MimeTypeEnum as MimeType;
 use Phpolar\HttpMessageTestUtils\MemoryStreamStub;
 use Phpolar\HttpMessageTestUtils\ResponseStub;
 use Phpolar\ModelResolver\ModelResolverInterface;
-use Phpolar\Phpolar\Serializers\JsonSerializer;
 use Phpolar\PropertyInjectorContract\PropertyInjectorInterface;
 use Phpolar\Routable\RoutableResolverInterface;
 use Phpolar\Routable\RoutableInterface;
@@ -39,7 +38,7 @@ final class RoutingTest extends TestCase
 
     protected function getResponseFactory(): ResponseFactoryInterface
     {
-        return new class () implements ResponseFactoryInterface {
+        return new class() implements ResponseFactoryInterface {
             public function createResponse(int $code = 200, string $reasonPhrase = ''): ResponseInterface
             {
                 return new ResponseStub($code, $reasonPhrase);
@@ -49,7 +48,7 @@ final class RoutingTest extends TestCase
 
     protected function getStreamFactory(): StreamFactoryInterface
     {
-        return new class () implements StreamFactoryInterface {
+        return new class() implements StreamFactoryInterface {
             public function createStream(string $content = ''): StreamInterface
             {
                 return new MemoryStreamStub($content);
@@ -101,10 +100,8 @@ final class RoutingTest extends TestCase
             ->method("getBody")
             ->willReturn($streamStub);
 
-        $indexHandler = new class ($expectedResponse) implements RoutableInterface {
-            public function __construct(private string $responseTemplate)
-            {
-            }
+        $indexHandler = new class($expectedResponse) implements RoutableInterface {
+            public function __construct(private string $responseTemplate) {}
 
             public function process(): string
             {
@@ -112,8 +109,7 @@ final class RoutingTest extends TestCase
             }
         };
 
-        $routingHandler = new RequestProcessingHandler(
-            processorExecutor: new RequestProcessorExecutor(),
+        $requestProcessor = new RequestProcessingHandler(
             server: new Server([
                 new Target(
                     location: $givenRoute,
@@ -124,9 +120,10 @@ final class RoutingTest extends TestCase
                     requestProcessor: $indexHandler,
                 ),
             ]),
+            processorExecutor: new RequestProcessorExecutor(),
             responseBuilder: $this->getResponseBuilder(),
             authChecker: new AuthorizationChecker(
-                routableResolver: new class () implements RoutableResolverInterface {
+                routableResolver: new class() implements RoutableResolverInterface {
                     public function resolve(RoutableInterface $target): RoutableInterface|false
                     {
                         return $target;
@@ -135,11 +132,10 @@ final class RoutingTest extends TestCase
                 unauthHandler: $this->createStub(RequestHandlerInterface::class),
             ),
             propertyInjector: $propertyInjector,
-            htmlResponse: new HtmlResponseDecorator($modelResolver),
-            serializedResponse: new SerializedResponseDecorator(serializer: new JsonSerializer(), modelResolver: $modelResolver),
+            modelResolver: $modelResolver,
         );
 
-        $response = $routingHandler->handle($requestStub);
+        $response = $requestProcessor->handle($requestStub);
 
         $this->assertSame(HttpResponseCode::Ok->value, $response->getStatusCode());
         $this->assertSame($expectedResponse, $response->getBody()->getContents());
@@ -169,10 +165,8 @@ final class RoutingTest extends TestCase
 
         $propertyInjector = $this->createStub(PropertyInjectorInterface::class);
         $modelResolver = $this->createStub(ModelResolverInterface::class);
-        $indexHandler = new class () implements RoutableInterface {
-            public function __construct()
-            {
-            }
+        $indexHandler = new class() implements RoutableInterface {
+            public function __construct() {}
 
             public function process(): string
             {
@@ -181,7 +175,7 @@ final class RoutingTest extends TestCase
             }
         };
 
-        $routingHandler = new RequestProcessingHandler(
+        $requestProcessor = new RequestProcessingHandler(
             processorExecutor: new RequestProcessorExecutor(),
             server: new Server([
                 new Target(
@@ -195,7 +189,7 @@ final class RoutingTest extends TestCase
             ]),
             responseBuilder: $this->getResponseBuilder(),
             authChecker: new AuthorizationChecker(
-                routableResolver: new class () implements RoutableResolverInterface {
+                routableResolver: new class() implements RoutableResolverInterface {
                     public function resolve(RoutableInterface $target): RoutableInterface|false
                     {
                         return $target;
@@ -204,11 +198,10 @@ final class RoutingTest extends TestCase
                 unauthHandler: $this->createStub(RequestHandlerInterface::class),
             ),
             propertyInjector: $propertyInjector,
-            htmlResponse: new HtmlResponseDecorator($modelResolver),
-            serializedResponse: new SerializedResponseDecorator(serializer: new JsonSerializer(), modelResolver: $modelResolver),
+            modelResolver: $modelResolver,
         );
 
-        $response = $routingHandler->handle($requestStub);
+        $response = $requestProcessor->handle($requestStub);
 
         $this->assertSame(HttpResponseCode::NotFound->value, $response->getStatusCode());
         $this->assertSame(HttpResponseCode::NotFound->getLabel(), $response->getReasonPhrase());
