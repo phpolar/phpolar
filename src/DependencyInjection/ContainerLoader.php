@@ -22,17 +22,17 @@ final class ContainerLoader
         ContainerInterface $container,
         ArrayAccess $containerConfig,
     ): void {
-        $frameworkDepFiles = glob(Globs::FrameworkDeps->value);
-        $userDepFiles = glob(Globs::UserFrameworkDeps->value);
-        $customDepFiles = glob(Globs::CustomDeps->value);
+        $frameworkDepFiles = glob(Globs::FrameworkDeps->value, GLOB_ERR);
+        $userDepFiles = glob(Globs::UserFrameworkDeps->value, GLOB_ERR);
+        $customDepFiles = glob(Globs::CustomDeps->value, GLOB_ERR);
         $rootCustomDepFiles = glob(Globs::RootCustomDeps->value);
 
         $validConfs = array_merge(
             ...array_filter(
                 array_map(
-                    static fn (string $configFile) => require $configFile,
+                    static fn(string $configFile) => require $configFile,
                     [
-                        ...($frameworkDepFiles === false ? [] : $frameworkDepFiles),
+                        ...($frameworkDepFiles === false ? [] : $frameworkDepFiles), // @codeCoverageIgnore
                         ...($userDepFiles === false ? [] : $userDepFiles),
                         ...($customDepFiles === false ? [] : $customDepFiles),
                         ...($rootCustomDepFiles === false ? [] : $rootCustomDepFiles),
@@ -41,13 +41,17 @@ final class ContainerLoader
                 is_array(...)
             )
         );
-        array_walk(
-            $validConfs,
-            static fn (mixed $configured, string $depId) =>
-            /**
-             * @suppress PhanUnreferencedClosure
-             */
-            $containerConfig[$depId] = $configured instanceof Closure ? static fn () => $configured($container) : $configured // @codeCoverageIgnore
-        );
+
+        foreach ($validConfs as $depId => $configured) {
+            $dependency = $configured;
+            if ($configured instanceof Closure) {
+                /**
+                 * @suppress PhanUnreferencedClosure
+                 * @codeCoverageIgnore
+                 */
+                $dependency = static fn() => $configured($container);
+            }
+            $containerConfig[$depId] = $dependency;
+        }
     }
 }

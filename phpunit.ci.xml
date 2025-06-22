@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.1/phpunit.xsd" bootstrap="vendor/autoload.php" executionOrder="depends,defects" beStrictAboutOutputDuringTests="false" failOnRisky="false" failOnWarning="false" colors="false" cacheDirectory=".phpunit.cache" requireCoverageMetadata="false" beStrictAboutCoverageMetadata="false">
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.1/phpunit.xsd"
+  bootstrap="vendor/autoload.php" executionOrder="depends,defects"
+  beStrictAboutOutputDuringTests="false" failOnRisky="false" failOnWarning="false" colors="false"
+  cacheDirectory=".phpunit.cache" requireCoverageMetadata="false"
+  beStrictAboutCoverageMetadata="false">
   <testsuites>
     <testsuite name="default">
       <directory>tests/unit</directory>
     </testsuite>
   </testsuites>
-  <coverage pathCoverage="true"/>
+  <coverage pathCoverage="true">
+    <report>
+      <clover outputFile="build/logs/clover.xml" />
+    </report>
+  </coverage>
   <php>
-    <const name="Phpolar\Phpolar\Tests\ENTITY_NAME_TEST_CASE" value="FAKE NAME"/>
+    <const name="Phpolar\Phpolar\Tests\ENTITY_NAME_TEST_CASE" value="FAKE NAME" />
   </php>
   <source>
     <include>

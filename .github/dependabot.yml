@@ -11,5 +11,16 @@ updates:
 
   - package-ecosystem: "composer"
     directory: "/"
+    allow: 
+      - dependency-type: "development"
     schedule:
       interval: "daily"
+  - package-ecosystem: "composer"
+    directory: "/"
+    target-branch: "main"
+    allow:
+      - dependency-type: "production"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "01:00"

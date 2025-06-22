@@ -6,6 +6,8 @@ namespace Phpolar\Phpolar\Auth;
 
 /**
  * Represents an authenticated user.
+ *
+ * @phan-file-suppress PhanWriteOnlyPublicProperty
  */
 final class User
 {
