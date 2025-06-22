@@ -197,12 +197,12 @@
                                 <ul class="phpdocumentor-breadcrumbs">
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/phpolar.html">Phpolar</a></li>
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/phpolar-phpolar.html">Phpolar</a></li>
-            <li class="phpdocumentor-breadcrumb"><a href="namespaces/phpolar-phpolar-auth.html">Auth</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/phpolar-phpolar-http.html">Http</a></li>
     </ul>
 
     <article class="phpdocumentor-element -class">
         <h2 class="phpdocumentor-content__title">
-    AbstractProtectedRoutable
+    RequestProcessingHandler
 
     
             <div class="phpdocumentor-element__package">
@@ -214,51 +214,29 @@
     
             <span class="phpdocumentor-element__implements">
             implements
-                            <abbr title="\Phpolar\Routable\RoutableInterface">RoutableInterface</abbr>                    </span>
+                            <abbr title="\Psr\Http\Server\RequestHandlerInterface">RequestHandlerInterface</abbr>                    </span>
     
     </h2>
 
 <div class="phpdocumentor-label-line">
 
+    <div class="phpdocumentor-label phpdocumentor-label--success"><span>Final</span><span>Yes</span></div>
 
-    <div class="phpdocumentor-label phpdocumentor-label--success"><span>Abstract</span><span>Yes</span></div>
 
 </div>
 
         <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="Auth/AbstractProtectedRoutable.php"><a href="files/auth-abstractprotectedroutable.html"><abbr title="Auth/AbstractProtectedRoutable.php">AbstractProtectedRoutable.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="Http/RequestProcessingHandler.php"><a href="files/http-requestprocessinghandler.html"><abbr title="Http/RequestProcessingHandler.php">RequestProcessingHandler.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">20</span>
+    <span class="phpdocumentor-element-found-in__line">17</span>
 
     </aside>
 
-            <p class="phpdocumentor-summary">Represents a target object for a request route
-that requires authorization.</p>
+            <p class="phpdocumentor-summary">Handles request routing for the application.</p>
 
 
-    <section class="phpdocumentor-description"><p>Objects that extend this class will have access
-to metadata associated with the authenticated
-user.  Route target objects that require
-authorization should extend this class.</p>
-</section>
 
 
-    <h5 class="phpdocumentor-tag-list__heading" id="tags">
-        Tags
-        <a href="classes/Phpolar-Phpolar-Auth-AbstractProtectedRoutable.html#tags" class=""><i class="fas fa-link"></i></a>
-
-    </h5>
-    <dl class="phpdocumentor-tag-list">
-                                    <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">phan-file-suppress</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
-                                                                                
-                                                 <section class="phpdocumentor-description"><p>PhanWriteOnlyPublicProperty</p>
-</section>
-
-                                    </dd>
-                                            </dl>
 
 
 
@@ -266,7 +244,7 @@ authorization should extend this class.</p>
 
 <h3 id="toc">
     Table of Contents
-    <a href="classes/Phpolar-Phpolar-Auth-AbstractProtectedRoutable.html#toc" class=""><i class="fas fa-link"></i></a>
+    <a href="classes/Phpolar-Phpolar-Http-RequestProcessingHandler.html#toc" class=""><i class="fas fa-link"></i></a>
 
 </h3>
 
@@ -274,45 +252,36 @@ authorization should extend this class.</p>
 
     <h4 id="toc-interfaces">
         Interfaces
-        <a href="classes/Phpolar-Phpolar-Auth-AbstractProtectedRoutable.html#toc-interfaces" class=""><i class="fas fa-link"></i></a>
+        <a href="classes/Phpolar-Phpolar-Http-RequestProcessingHandler.html#toc-interfaces" class=""><i class="fas fa-link"></i></a>
 
     </h4>
     <dl class="phpdocumentor-table-of-contents">
-                    <dt class="phpdocumentor-table-of-contents__entry -interface"><abbr title="\Phpolar\Routable\RoutableInterface">RoutableInterface</abbr></dt>    </dl>
+                    <dt class="phpdocumentor-table-of-contents__entry -interface"><abbr title="\Psr\Http\Server\RequestHandlerInterface">RequestHandlerInterface</abbr></dt>    </dl>
 
 
 
 
 
 
-<h4 id="toc-properties">
-    Properties
-    <a href="classes/Phpolar-Phpolar-Auth-AbstractProtectedRoutable.html#toc-properties" class=""><i class="fas fa-link"></i></a>
-
-</h4>
-<dl class="">
-            <dt class="phpdocumentor-table-of-contents__entry -property -public">
-    <a class="" href="classes/Phpolar-Phpolar-Auth-AbstractProtectedRoutable.html#property_user">$user</a>
-    <span>
-                        &nbsp;: <a href="classes/Phpolar-Phpolar-Auth-User.html"><abbr title="\Phpolar\Phpolar\Auth\User">User</abbr></a>            </span>
-</dt>
-<dd>Contains credentials for an authenticated user</dd>
-
-    </dl>
 
 <h4 id="toc-methods">
     Methods
-    <a href="classes/Phpolar-Phpolar-Auth-AbstractProtectedRoutable.html#toc-methods" class=""><i class="fas fa-link"></i></a>
+    <a href="classes/Phpolar-Phpolar-Http-RequestProcessingHandler.html#toc-methods" class=""><i class="fas fa-link"></i></a>
 
 </h4>
 <dl class="phpdocumentor-table-of-contents">
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/Phpolar-Phpolar-Auth-AbstractProtectedRoutable.html#method_withUser">withUser()</a>
+    <a class="" href="classes/Phpolar-Phpolar-Http-RequestProcessingHandler.html#method___construct">__construct()</a>
     <span>
-                                &nbsp;: self    </span>
+                                &nbsp;: mixed    </span>
 </dt>
-<dd>Create a `User` from the given user object
-and assign it to the user property.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/Phpolar-Phpolar-Http-RequestProcessingHandler.html#method_handle">handle()</a>
+    <span>
+                                &nbsp;: <abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr>    </span>
+</dt>
+<dd>Attempts to locate and execute the target request processor.</dd>
 
     </dl>
 
@@ -321,55 +290,11 @@ and assign it to the user property.</dd>
         
 
         
-    <section class="phpdocumentor-properties">
-        <h3 class="phpdocumentor-elements__header" id="properties">
-            Properties
-            <a href="classes/Phpolar-Phpolar-Auth-AbstractProtectedRoutable.html#properties" class=""><i class="fas fa-link"></i></a>
-
-        </h3>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="property_user">
-        $user
-        <a href="classes/Phpolar-Phpolar-Auth-AbstractProtectedRoutable.html#property_user" class=""><i class="fas fa-link"></i></a>
-
-        <span class="phpdocumentor-element__modifiers">
-                                </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="Auth/AbstractProtectedRoutable.php"><a href="files/auth-abstractprotectedroutable.html"><abbr title="Auth/AbstractProtectedRoutable.php">AbstractProtectedRoutable.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">25</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Contains credentials for an authenticated user</p>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-        <span class="phpdocumentor-signature__type"><a href="classes/Phpolar-Phpolar-Auth-User.html"><abbr title="\Phpolar\Phpolar\Auth\User">User</abbr></a></span>
-    <span class="phpdocumentor-signature__name">$user</span>
-    </code>
-
-    
-    
-    
-
-    
-
-</article>
-            </section>
 
             <section class="phpdocumentor-methods">
         <h3 class="phpdocumentor-elements__header" id="methods">
             Methods
-            <a href="classes/Phpolar-Phpolar-Auth-AbstractProtectedRoutable.html#methods" class=""><i class="fas fa-link"></i></a>
+            <a href="classes/Phpolar-Phpolar-Http-RequestProcessingHandler.html#methods" class=""><i class="fas fa-link"></i></a>
 
         </h3>
                     <article
@@ -378,24 +303,22 @@ and assign it to the user property.</dd>
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_withUser">
-        withUser()
-        <a href="classes/Phpolar-Phpolar-Auth-AbstractProtectedRoutable.html#method_withUser" class=""><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method___construct">
+        __construct()
+        <a href="classes/Phpolar-Phpolar-Http-RequestProcessingHandler.html#method___construct" class=""><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="Auth/AbstractProtectedRoutable.php"><a href="files/auth-abstractprotectedroutable.html"><abbr title="Auth/AbstractProtectedRoutable.php">AbstractProtectedRoutable.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="Http/RequestProcessingHandler.php"><a href="files/http-requestprocessinghandler.html"><abbr title="Http/RequestProcessingHandler.php">RequestProcessingHandler.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">31</span>
+    <span class="phpdocumentor-element-found-in__line">19</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Create a `User` from the given user object
-and assign it to the user property.</p>
-
+    
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">withUser</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">object&nbsp;</span><span class="phpdocumentor-signature__argument__name">$user</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">self</span></code>
+                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Phpolar-Phpolar-Http-ServerInterface.html"><abbr title="\Phpolar\Phpolar\Http\ServerInterface">ServerInterface</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$server</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Phpolar-Phpolar-Http-RequestProcessorExecutorInterface.html"><abbr title="\Phpolar\Phpolar\Http\RequestProcessorExecutorInterface">RequestProcessorExecutorInterface</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$processorExecutor</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Phpolar-Phpolar-Http-ResponseBuilderInterface.html"><abbr title="\Phpolar\Phpolar\Http\ResponseBuilderInterface">ResponseBuilderInterface</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$responseBuilder</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Phpolar-Phpolar-Http-AuthorizationCheckerInterface.html"><abbr title="\Phpolar\Phpolar\Http\AuthorizationCheckerInterface">AuthorizationCheckerInterface</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$authChecker</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Phpolar\PropertyInjectorContract\PropertyInjectorInterface">PropertyInjectorInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$propertyInjector</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Phpolar\ModelResolver\ModelResolverInterface">ModelResolverInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$modelResolver</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -404,8 +327,88 @@ and assign it to the user property.</p>
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$user</span>
-                : <span class="phpdocumentor-signature__argument__return-type">object</span>
+                <span class="phpdocumentor-signature__argument__name">$server</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Phpolar-Phpolar-Http-ServerInterface.html"><abbr title="\Phpolar\Phpolar\Http\ServerInterface">ServerInterface</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$processorExecutor</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Phpolar-Phpolar-Http-RequestProcessorExecutorInterface.html"><abbr title="\Phpolar\Phpolar\Http\RequestProcessorExecutorInterface">RequestProcessorExecutorInterface</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$responseBuilder</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Phpolar-Phpolar-Http-ResponseBuilderInterface.html"><abbr title="\Phpolar\Phpolar\Http\ResponseBuilderInterface">ResponseBuilderInterface</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$authChecker</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Phpolar-Phpolar-Http-AuthorizationCheckerInterface.html"><abbr title="\Phpolar\Phpolar\Http\AuthorizationCheckerInterface">AuthorizationCheckerInterface</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$propertyInjector</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Phpolar\PropertyInjectorContract\PropertyInjectorInterface">PropertyInjectorInterface</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$modelResolver</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Phpolar\ModelResolver\ModelResolverInterface">ModelResolverInterface</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_handle">
+        handle()
+        <a href="classes/Phpolar-Phpolar-Http-RequestProcessingHandler.html#method_handle" class=""><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="Http/RequestProcessingHandler.php"><a href="files/http-requestprocessinghandler.html"><abbr title="Http/RequestProcessingHandler.php">RequestProcessingHandler.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">34</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Attempts to locate and execute the target request processor.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">handle</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\ServerRequestInterface">ServerRequestInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$request</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$request</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\ServerRequestInterface">ServerRequestInterface</abbr></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
@@ -418,7 +421,7 @@ and assign it to the user property.</p>
 
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type">self</span>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr></span>
             </section>
 
 </article>
@@ -428,7 +431,7 @@ and assign it to the user property.</p>
     <div class="phpdocumentor-modal-bg" data-exit-button></div>
     <div class="phpdocumentor-modal-container">
         <div class="phpdocumentor-modal-content">
-            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/Auth/AbstractProtectedRoutable.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
+            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/Http/RequestProcessingHandler.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
         </div>
         <button data-exit-button class="phpdocumentor-modal__close">&times;</button>
     </div>
@@ -527,22 +530,16 @@ and assign it to the user property.</p>
             <li class="phpdocumentor-on-this-page-section__title">Table Of Contents</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
-                                                            <li><a href="classes/Phpolar-Phpolar-Auth-AbstractProtectedRoutable.html#toc-properties">Properties</a></li>
-                                                            <li><a href="classes/Phpolar-Phpolar-Auth-AbstractProtectedRoutable.html#toc-methods">Methods</a></li>
+                                                                                <li><a href="classes/Phpolar-Phpolar-Http-RequestProcessingHandler.html#toc-methods">Methods</a></li>
                                     </ul>
             </li>
             
-                            <li class="phpdocumentor-on-this-page-section__title">Properties</li>
-                <li>
-                    <ul class="phpdocumentor-list -clean">
-                                                    <li class=""><a href="classes/Phpolar-Phpolar-Auth-AbstractProtectedRoutable.html#property_user">$user</a></li>
-                                            </ul>
-                </li>
             
                         <li class="phpdocumentor-on-this-page-section__title">Methods</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
-                                            <li class=""><a href="classes/Phpolar-Phpolar-Auth-AbstractProtectedRoutable.html#method_withUser">withUser()</a></li>
+                                            <li class=""><a href="classes/Phpolar-Phpolar-Http-RequestProcessingHandler.html#method___construct">__construct()</a></li>
+                                            <li class=""><a href="classes/Phpolar-Phpolar-Http-RequestProcessingHandler.html#method_handle">handle()</a></li>
                                     </ul>
             </li>
                     </ul>
@@ -561,7 +558,7 @@ and assign it to the user property.</p>
         </section>
     </section>
 </section>
-        <a href="classes/Phpolar-Phpolar-Auth-AbstractProtectedRoutable.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+        <a href="classes/Phpolar-Phpolar-Http-RequestProcessingHandler.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
     </main>
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/prism.min.js"></script>

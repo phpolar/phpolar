@@ -197,11 +197,12 @@
                                 <ul class="phpdocumentor-breadcrumbs">
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/phpolar.html">Phpolar</a></li>
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/phpolar-phpolar.html">Phpolar</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/phpolar-phpolar-http.html">Http</a></li>
     </ul>
 
     <article class="phpdocumentor-element -class">
         <h2 class="phpdocumentor-content__title">
-    App
+    Target
 
     
             <div class="phpdocumentor-element__package">
@@ -222,17 +223,35 @@
 </div>
 
         <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="App.php"><a href="files/app.html">App.php</a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="Http/Target.php"><a href="files/http-target.html"><abbr title="Http/Target.php">Target.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">17</span>
+    <span class="phpdocumentor-element-found-in__line">21</span>
 
     </aside>
 
-            <p class="phpdocumentor-summary">Represents a web application that handles and responds to HTTP requests.</p>
+            <p class="phpdocumentor-summary">The target of an HTTP request.</p>
 
 
+    <section class="phpdocumentor-description"><p>The target is sometimes referred to as the &quot;resource&quot;.
+This &quot;resource&quot; may have one or more representations.</p>
+</section>
 
 
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/Phpolar-Phpolar-Http-Target.html#tags" class=""><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">see</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                    <span class="phpdocumentor-tag-link"><a href="https://datatracker.ietf.org/doc/html/rfc7231#section-2">https://datatracker.ietf.org/doc/html/rfc7231#section-2</a></span>
+                                        
+                                             
+                                    </dd>
+                                            </dl>
 
 
 
@@ -240,7 +259,7 @@
 
 <h3 id="toc">
     Table of Contents
-    <a href="classes/Phpolar-Phpolar-App.html#toc" class=""><i class="fas fa-link"></i></a>
+    <a href="classes/Phpolar-Phpolar-Http-Target.html#toc" class=""><i class="fas fa-link"></i></a>
 
 </h3>
 
@@ -252,54 +271,61 @@
 
 
 
+<h4 id="toc-properties">
+    Properties
+    <a href="classes/Phpolar-Phpolar-Http-Target.html#toc-properties" class=""><i class="fas fa-link"></i></a>
+
+</h4>
+<dl class="">
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/Phpolar-Phpolar-Http-Target.html#property_location">$location</a>
+    <span>
+                        &nbsp;: string            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/Phpolar-Phpolar-Http-Target.html#property_requestProcessor">$requestProcessor</a>
+    <span>
+                        &nbsp;: <abbr title="\Phpolar\Routable\RoutableInterface">RoutableInterface</abbr>            </span>
+</dt>
+
+    </dl>
 
 <h4 id="toc-methods">
     Methods
-    <a href="classes/Phpolar-Phpolar-App.html#toc-methods" class=""><i class="fas fa-link"></i></a>
+    <a href="classes/Phpolar-Phpolar-Http-Target.html#toc-methods" class=""><i class="fas fa-link"></i></a>
 
 </h4>
 <dl class="phpdocumentor-table-of-contents">
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/Phpolar-Phpolar-App.html#method_create">create()</a>
+    <a class="" href="classes/Phpolar-Phpolar-Http-Target.html#method___construct">__construct()</a>
     <span>
-                                &nbsp;: <a href="classes/Phpolar-Phpolar-App.html"><abbr title="\Phpolar\Phpolar\App">App</abbr></a>    </span>
+                                &nbsp;: mixed    </span>
 </dt>
-<dd>Creates a singleton web-based application.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/Phpolar-Phpolar-App.html#method_receive">receive()</a>
+    <a class="" href="classes/Phpolar-Phpolar-Http-Target.html#method_getRepresentation">getRepresentation()</a>
     <span>
-                                &nbsp;: void    </span>
+                                &nbsp;: <a href="classes/Phpolar-Phpolar-Http-RepresentationInterface.html"><abbr title="\Phpolar\Phpolar\Http\RepresentationInterface">RepresentationInterface</abbr></a>    </span>
 </dt>
-<dd>Handle and respond to requests from clients.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/Phpolar-Phpolar-App.html#method_use">use()</a>
+    <a class="" href="classes/Phpolar-Phpolar-Http-Target.html#method_matchesLocation">matchesLocation()</a>
     <span>
-                                &nbsp;: <a href="classes/Phpolar-Phpolar-App.html"><abbr title="\Phpolar\Phpolar\App">App</abbr></a>    </span>
+                                &nbsp;: bool    </span>
 </dt>
-<dd>Queue the given PSR-15 middleware.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/Phpolar-Phpolar-App.html#method_useAuthorization">useAuthorization()</a>
+    <a class="" href="classes/Phpolar-Phpolar-Http-Target.html#method_matchesMethod">matchesMethod()</a>
     <span>
-                                &nbsp;: <a href="classes/Phpolar-Phpolar-App.html"><abbr title="\Phpolar\Phpolar\App">App</abbr></a>    </span>
+                                &nbsp;: bool    </span>
 </dt>
-<dd>Configures the application for checking route authorization.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/Phpolar-Phpolar-App.html#method_useCsrfMiddleware">useCsrfMiddleware()</a>
+    <a class="" href="classes/Phpolar-Phpolar-Http-Target.html#method_negotiate">negotiate()</a>
     <span>
-                                &nbsp;: <a href="classes/Phpolar-Phpolar-App.html"><abbr title="\Phpolar\Phpolar\App">App</abbr></a>    </span>
+                                &nbsp;: <abbr title="\PhpCommonEnums\HttpResponseCode\Enumeration\HttpResponseCodeEnum">HttpResponseCodeEnum</abbr>    </span>
 </dt>
-<dd>Configures the server for CSRF attack mitigation.</dd>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/Phpolar-Phpolar-App.html#method_useSession">useSession()</a>
-    <span>
-                                &nbsp;: <a href="classes/Phpolar-Phpolar-App.html"><abbr title="\Phpolar\Phpolar\App">App</abbr></a>    </span>
-</dt>
-<dd>Configures a session.</dd>
 
     </dl>
 
@@ -308,36 +334,114 @@
         
 
         
+    <section class="phpdocumentor-properties">
+        <h3 class="phpdocumentor-elements__header" id="properties">
+            Properties
+            <a href="classes/Phpolar-Phpolar-Http-Target.html#properties" class=""><i class="fas fa-link"></i></a>
+
+        </h3>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                -read-only        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_location">
+        $location
+        <a href="classes/Phpolar-Phpolar-Http-Target.html#property_location" class=""><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                        <small class="phpdocumentor-element__modifier">read-only</small>        </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="Http/Target.php"><a href="files/http-target.html"><abbr title="Http/Target.php">Target.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">29</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">$location</span>
+    </code>
+
+    
+    
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                -read-only        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_requestProcessor">
+        $requestProcessor
+        <a href="classes/Phpolar-Phpolar-Http-Target.html#property_requestProcessor" class=""><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                        <small class="phpdocumentor-element__modifier">read-only</small>        </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="Http/Target.php"><a href="files/http-target.html"><abbr title="Http/Target.php">Target.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">32</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type"><abbr title="\Phpolar\Routable\RoutableInterface">RoutableInterface</abbr></span>
+    <span class="phpdocumentor-signature__name">$requestProcessor</span>
+    </code>
+
+    
+    
+    
+
+    
+
+</article>
+            </section>
 
             <section class="phpdocumentor-methods">
         <h3 class="phpdocumentor-elements__header" id="methods">
             Methods
-            <a href="classes/Phpolar-Phpolar-App.html#methods" class=""><i class="fas fa-link"></i></a>
+            <a href="classes/Phpolar-Phpolar-Http-Target.html#methods" class=""><i class="fas fa-link"></i></a>
 
         </h3>
                     <article
         class="phpdocumentor-element
             -method
             -public
-                                    -static                    "
+                                                        "
 >
-    <h4 class="phpdocumentor-element__name" id="method_create">
-        create()
-        <a href="classes/Phpolar-Phpolar-App.html#method_create" class=""><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method___construct">
+        __construct()
+        <a href="classes/Phpolar-Phpolar-Http-Target.html#method___construct" class=""><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="App.php"><a href="files/app.html">App.php</a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="Http/Target.php"><a href="files/http-target.html"><abbr title="Http/Target.php">Target.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">51</span>
+    <span class="phpdocumentor-element-found-in__line">28</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Creates a singleton web-based application.</p>
-
+    
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">create</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Container\ContainerInterface">ContainerInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$container</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Phpolar-Phpolar-App.html"><abbr title="\Phpolar\Phpolar\App">App</abbr></a></span></code>
+                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$location</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\PhpCommonEnums\HttpMethod\Enumeration\HttpMethodEnum">HttpMethodEnum</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$method</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Phpolar-Phpolar-Http-Representations.html"><abbr title="\Phpolar\Phpolar\Http\Representations">Representations</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$representations</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Phpolar\Routable\RoutableInterface">RoutableInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$requestProcessor</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -346,8 +450,73 @@
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$container</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Container\ContainerInterface">ContainerInterface</abbr></span>
+                <span class="phpdocumentor-signature__argument__name">$location</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$method</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\PhpCommonEnums\HttpMethod\Enumeration\HttpMethodEnum">HttpMethodEnum</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$representations</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Phpolar-Phpolar-Http-Representations.html"><abbr title="\Phpolar\Phpolar\Http\Representations">Representations</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$requestProcessor</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Phpolar\Routable\RoutableInterface">RoutableInterface</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getRepresentation">
+        getRepresentation()
+        <a href="classes/Phpolar-Phpolar-Http-Target.html#method_getRepresentation" class=""><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="Http/Target.php"><a href="files/http-target.html"><abbr title="Http/Target.php">Target.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">54</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getRepresentation</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$resource</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Phpolar-Phpolar-Http-RepresentationInterface.html"><abbr title="\Phpolar\Phpolar\Http\RepresentationInterface">RepresentationInterface</abbr></a></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$resource</span>
+                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
@@ -360,7 +529,7 @@
 
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type"><a href="classes/Phpolar-Phpolar-App.html"><abbr title="\Phpolar\Phpolar\App">App</abbr></a></span>
+        <span class="phpdocumentor-signature__response_type"><a href="classes/Phpolar-Phpolar-Http-RepresentationInterface.html"><abbr title="\Phpolar\Phpolar\Http\RepresentationInterface">RepresentationInterface</abbr></a></span>
             </section>
 
 </article>
@@ -370,23 +539,118 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_receive">
-        receive()
-        <a href="classes/Phpolar-Phpolar-App.html#method_receive" class=""><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_matchesLocation">
+        matchesLocation()
+        <a href="classes/Phpolar-Phpolar-Http-Target.html#method_matchesLocation" class=""><i class="fas fa-link"></i></a>
 
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="App.php"><a href="files/app.html">App.php</a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="Http/Target.php"><a href="files/http-target.html"><abbr title="Http/Target.php">Target.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">60</span>
+    <span class="phpdocumentor-element-found-in__line">67</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Handle and respond to requests from clients.</p>
-
+    
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">receive</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\ServerRequestInterface">ServerRequestInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$request</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+                    <span class="phpdocumentor-signature__name">matchesLocation</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$testLocation</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$testLocation</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_matchesMethod">
+        matchesMethod()
+        <a href="classes/Phpolar-Phpolar-Http-Target.html#method_matchesMethod" class=""><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="Http/Target.php"><a href="files/http-target.html"><abbr title="Http/Target.php">Target.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">74</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">matchesMethod</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$method</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$method</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_negotiate">
+        negotiate()
+        <a href="classes/Phpolar-Phpolar-Http-Target.html#method_negotiate" class=""><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="Http/Target.php"><a href="files/http-target.html"><abbr title="Http/Target.php">Target.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">40</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">negotiate</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\ServerRequestInterface">ServerRequestInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$request</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\PhpCommonEnums\HttpResponseCode\Enumeration\HttpResponseCodeEnum">HttpResponseCodeEnum</abbr></span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -407,212 +671,9 @@
 
     
 
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_use">
-        use()
-        <a href="classes/Phpolar-Phpolar-App.html#method_use" class=""><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="App.php"><a href="files/app.html">App.php</a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">79</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Queue the given PSR-15 middleware.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">use</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Server\MiddlewareInterface">MiddlewareInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$middleware</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Phpolar-Phpolar-App.html"><abbr title="\Phpolar\Phpolar\App">App</abbr></a></span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-    
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$middleware</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Server\MiddlewareInterface">MiddlewareInterface</abbr></span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
-            </dl>
-
-    
-    <h5 class="phpdocumentor-tag-list__heading" id="tags">
-        Tags
-        <a href="classes/Phpolar-Phpolar-App.html#method_use#tags" class=""><i class="fas fa-link"></i></a>
-
-    </h5>
-    <dl class="phpdocumentor-tag-list">
-                                    <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">see</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
-                                                                                    <span class="phpdocumentor-tag-link"><a href="https://www.php-fig.org/psr/psr-15/#22-psrhttpservermiddlewareinterface">https://www.php-fig.org/psr/psr-15/#22-psrhttpservermiddlewareinterface</a></span>
-                                        
-                                                 <section class="phpdocumentor-description"><p>for more information on PSR-15 middleware.</p>
-</section>
-
-                                    </dd>
-                                            </dl>
-
-    
-
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type"><a href="classes/Phpolar-Phpolar-App.html"><abbr title="\Phpolar\Phpolar\App">App</abbr></a></span>
-            </section>
-
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_useAuthorization">
-        useAuthorization()
-        <a href="classes/Phpolar-Phpolar-App.html#method_useAuthorization" class=""><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="App.php"><a href="files/app.html">App.php</a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">88</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Configures the application for checking route authorization.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">useAuthorization</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Phpolar-Phpolar-App.html"><abbr title="\Phpolar\Phpolar\App">App</abbr></a></span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-    
-    
-    
-
-    
-
-            <section>
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type"><a href="classes/Phpolar-Phpolar-App.html"><abbr title="\Phpolar\Phpolar\App">App</abbr></a></span>
-            </section>
-
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_useCsrfMiddleware">
-        useCsrfMiddleware()
-        <a href="classes/Phpolar-Phpolar-App.html#method_useCsrfMiddleware" class=""><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="App.php"><a href="files/app.html">App.php</a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">123</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Configures the server for CSRF attack mitigation.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">useCsrfMiddleware</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type">array&lt;string, bool|int|float|string&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$sessionOpts</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">[&quot;cookie_httponly&quot; =&gt; true, &quot;cookie_samesite&quot; =&gt; &quot;Strict&quot;, &quot;cookie_secure&quot; =&gt; true, &quot;cookie_path&quot; =&gt; true, &quot;use_strict_mode&quot; =&gt; true]</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Phpolar-Phpolar-App.html"><abbr title="\Phpolar\Phpolar\App">App</abbr></a></span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-        <section class="phpdocumentor-description"><p>The server will not process the request if the
-CSRF check fails.  The current response
-will be set up for CSRF detection.</p>
-</section>
-
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$sessionOpts</span>
-                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string, bool|int|float|string&gt;</span>
-                 = <span class="phpdocumentor-signature__argument__default-value">[&quot;cookie_httponly&quot; =&gt; true, &quot;cookie_samesite&quot; =&gt; &quot;Strict&quot;, &quot;cookie_secure&quot; =&gt; true, &quot;cookie_path&quot; =&gt; true, &quot;use_strict_mode&quot; =&gt; true]</span>            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
-            </dl>
-
-    
-
-    
-
-            <section>
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type"><a href="classes/Phpolar-Phpolar-App.html"><abbr title="\Phpolar\Phpolar\App">App</abbr></a></span>
-            </section>
-
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_useSession">
-        useSession()
-        <a href="classes/Phpolar-Phpolar-App.html#method_useSession" class=""><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="App.php"><a href="files/app.html">App.php</a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">101</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Configures a session.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">useSession</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type">array&lt;string, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$options</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">[&quot;cookie_httponly&quot; =&gt; true, &quot;cookie_samesite&quot; =&gt; &quot;Strict&quot;, &quot;cookie_secure&quot; =&gt; true, &quot;cookie_path&quot; =&gt; true, &quot;use_strict_mode&quot; =&gt; true]</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Phpolar-Phpolar-App.html"><abbr title="\Phpolar\Phpolar\App">App</abbr></a></span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-    
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$options</span>
-                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string, mixed&gt;</span>
-                 = <span class="phpdocumentor-signature__argument__default-value">[&quot;cookie_httponly&quot; =&gt; true, &quot;cookie_samesite&quot; =&gt; &quot;Strict&quot;, &quot;cookie_secure&quot; =&gt; true, &quot;cookie_path&quot; =&gt; true, &quot;use_strict_mode&quot; =&gt; true]</span>            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
-            </dl>
-
-    
-
-    
-
-            <section>
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type"><a href="classes/Phpolar-Phpolar-App.html"><abbr title="\Phpolar\Phpolar\App">App</abbr></a></span>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\PhpCommonEnums\HttpResponseCode\Enumeration\HttpResponseCodeEnum">HttpResponseCodeEnum</abbr></span>
             </section>
 
 </article>
@@ -622,7 +683,7 @@ will be set up for CSRF detection.</p>
     <div class="phpdocumentor-modal-bg" data-exit-button></div>
     <div class="phpdocumentor-modal-container">
         <div class="phpdocumentor-modal-content">
-            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/App.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
+            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/Http/Target.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
         </div>
         <button data-exit-button class="phpdocumentor-modal__close">&times;</button>
     </div>
@@ -721,20 +782,27 @@ will be set up for CSRF detection.</p>
             <li class="phpdocumentor-on-this-page-section__title">Table Of Contents</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
-                                                                                <li><a href="classes/Phpolar-Phpolar-App.html#toc-methods">Methods</a></li>
+                                                            <li><a href="classes/Phpolar-Phpolar-Http-Target.html#toc-properties">Properties</a></li>
+                                                            <li><a href="classes/Phpolar-Phpolar-Http-Target.html#toc-methods">Methods</a></li>
                                     </ul>
             </li>
             
+                            <li class="phpdocumentor-on-this-page-section__title">Properties</li>
+                <li>
+                    <ul class="phpdocumentor-list -clean">
+                                                    <li class=""><a href="classes/Phpolar-Phpolar-Http-Target.html#property_location">$location</a></li>
+                                                    <li class=""><a href="classes/Phpolar-Phpolar-Http-Target.html#property_requestProcessor">$requestProcessor</a></li>
+                                            </ul>
+                </li>
             
                         <li class="phpdocumentor-on-this-page-section__title">Methods</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
-                                            <li class=""><a href="classes/Phpolar-Phpolar-App.html#method_create">create()</a></li>
-                                            <li class=""><a href="classes/Phpolar-Phpolar-App.html#method_receive">receive()</a></li>
-                                            <li class=""><a href="classes/Phpolar-Phpolar-App.html#method_use">use()</a></li>
-                                            <li class=""><a href="classes/Phpolar-Phpolar-App.html#method_useAuthorization">useAuthorization()</a></li>
-                                            <li class=""><a href="classes/Phpolar-Phpolar-App.html#method_useCsrfMiddleware">useCsrfMiddleware()</a></li>
-                                            <li class=""><a href="classes/Phpolar-Phpolar-App.html#method_useSession">useSession()</a></li>
+                                            <li class=""><a href="classes/Phpolar-Phpolar-Http-Target.html#method___construct">__construct()</a></li>
+                                            <li class=""><a href="classes/Phpolar-Phpolar-Http-Target.html#method_getRepresentation">getRepresentation()</a></li>
+                                            <li class=""><a href="classes/Phpolar-Phpolar-Http-Target.html#method_matchesLocation">matchesLocation()</a></li>
+                                            <li class=""><a href="classes/Phpolar-Phpolar-Http-Target.html#method_matchesMethod">matchesMethod()</a></li>
+                                            <li class=""><a href="classes/Phpolar-Phpolar-Http-Target.html#method_negotiate">negotiate()</a></li>
                                     </ul>
             </li>
                     </ul>
@@ -753,7 +821,7 @@ will be set up for CSRF detection.</p>
         </section>
     </section>
 </section>
-        <a href="classes/Phpolar-Phpolar-App.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+        <a href="classes/Phpolar-Phpolar-Http-Target.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
     </main>
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/prism.min.js"></script>
