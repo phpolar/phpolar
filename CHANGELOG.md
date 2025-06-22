@@ -1,3 +1,19 @@
+## 7.0.0 (2025-06-22)
+
+### Feat
+
+- attach content types to responses (#440)
+- add support for http request negotiation (#435)
+
+### Fix
+
+- merge model and path variables instead of intersecting (#438)
+- **RequestProcessingHandler**: remove model resolver named arguments (#437)
+
+## 6.1.2 (2025-05-19)
+
+## 6.1.1 (2025-05-05)
+
 ## 6.1.0 (2025-04-23)
 
 ### Feat
