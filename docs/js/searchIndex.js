@@ -221,26 +221,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Phpolar-Phpolar-Http-AuthorizationCheckerInterface.html#method_authorize"
         },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Http\\HtmlRepresentation",
-            "name": "HtmlRepresentation",
-            "summary": "",
-            "url": "classes/Phpolar-Phpolar-Http-HtmlRepresentation.html"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Http\\HtmlRepresentation\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/Phpolar-Phpolar-Http-HtmlRepresentation.html#method___construct"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Http\\HtmlRepresentation\u003A\u003AgetMimeType\u0028\u0029",
-            "name": "getMimeType",
-            "summary": "",
-            "url": "classes/Phpolar-Phpolar-Http-HtmlRepresentation.html#method_getMimeType"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Http\\HtmlRepresentation\u003A\u003A__toString\u0028\u0029",
-            "name": "__toString",
-            "summary": "",
-            "url": "classes/Phpolar-Phpolar-Http-HtmlRepresentation.html#method___toString"
-        },                {
             "fqsen": "\\Phpolar\\Phpolar\\Http\\InvalidHtmlResponseException",
             "name": "InvalidHtmlResponseException",
             "summary": "",
@@ -250,26 +230,6 @@ Search.appendIndex(
             "name": "__construct",
             "summary": "",
             "url": "classes/Phpolar-Phpolar-Http-InvalidHtmlResponseException.html#method___construct"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Http\\JsonRepresentation",
-            "name": "JsonRepresentation",
-            "summary": "",
-            "url": "classes/Phpolar-Phpolar-Http-JsonRepresentation.html"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Http\\JsonRepresentation\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/Phpolar-Phpolar-Http-JsonRepresentation.html#method___construct"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Http\\JsonRepresentation\u003A\u003AgetMimeType\u0028\u0029",
-            "name": "getMimeType",
-            "summary": "",
-            "url": "classes/Phpolar-Phpolar-Http-JsonRepresentation.html#method_getMimeType"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Http\\JsonRepresentation\u003A\u003A__toString\u0028\u0029",
-            "name": "__toString",
-            "summary": "",
-            "url": "classes/Phpolar-Phpolar-Http-JsonRepresentation.html#method___toString"
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\Http\\MiddlewareQueueRequestHandler",
             "name": "MiddlewareQueueRequestHandler",
@@ -310,16 +270,6 @@ Search.appendIndex(
             "name": "PATH_VARIABLE_PATTERN",
             "summary": "",
             "url": "classes/Phpolar-Phpolar-Http-PathVariableBindings.html#constant_PATH_VARIABLE_PATTERN"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Http\\RepresentationInterface",
-            "name": "RepresentationInterface",
-            "summary": "A\u0020representation\u0020of\u0020the\u0020requested\u0020resource.",
-            "url": "classes/Phpolar-Phpolar-Http-RepresentationInterface.html"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Http\\RepresentationInterface\u003A\u003AgetMimeType\u0028\u0029",
-            "name": "getMimeType",
-            "summary": "",
-            "url": "classes/Phpolar-Phpolar-Http-RepresentationInterface.html#method_getMimeType"
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\Http\\Representations",
             "name": "Representations",
@@ -476,31 +426,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Phpolar-Phpolar-Http-Target.html#property_requestProcessor"
         },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Serializers\\JsonSerializer",
-            "name": "JsonSerializer",
-            "summary": "Converts\u0020data\u0020into\u0020the\u0020JSON\u0020data\u002Dinterchange\u0020format.",
-            "url": "classes/Phpolar-Phpolar-Serializers-JsonSerializer.html"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Serializers\\JsonSerializer\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/Phpolar-Phpolar-Serializers-JsonSerializer.html#method___construct"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Serializers\\JsonSerializer\u003A\u003Aserialize\u0028\u0029",
-            "name": "serialize",
-            "summary": "Serialize\u0020the\u0020given\u0020data.",
-            "url": "classes/Phpolar-Phpolar-Serializers-JsonSerializer.html#method_serialize"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Serializers\\SerializerInterface",
-            "name": "SerializerInterface",
-            "summary": "Provides\u0020serialization",
-            "url": "classes/Phpolar-Phpolar-Serializers-SerializerInterface.html"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Serializers\\SerializerInterface\u003A\u003Aserialize\u0028\u0029",
-            "name": "serialize",
-            "summary": "Serialize\u0020the\u0020given\u0020data.",
-            "url": "classes/Phpolar-Phpolar-Serializers-SerializerInterface.html#method_serialize"
-        },                {
             "fqsen": "\\",
             "name": "\\",
             "summary": "",
@@ -530,10 +455,5 @@ Search.appendIndex(
             "name": "Http",
             "summary": "",
             "url": "namespaces/phpolar-phpolar-http.html"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Serializers",
-            "name": "Serializers",
-            "summary": "",
-            "url": "namespaces/phpolar-phpolar-serializers.html"
         }            ]
 );
