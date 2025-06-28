@@ -4,10 +4,9 @@
   xmlns:xlink="http://www.w3.org/1999/xlink"
   xmlns:ev="http://www.w3.org/2001/xml-events"
   baseProfile="full"
-  viewBox="0 0 100 100"
-  fill="#FFFFFF"
+  viewBox="-1 -1 100 100"
   >
-    <rect width="100%" height="100%" rx="12"/>
+    <rect fill="#FFFFFF" stroke="gray" stroke-width="0.25" width="98" height="98" rx="12"/>
     <!-- #147CEB is kind of like dodger blue -->
     <g stroke="#147CEB" fill="#147CEB">
       <circle cx="50" cy="50" r="12" />
