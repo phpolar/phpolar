@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "940333a536e7fd0372f799e0f35ed303",
+    "content-hash": "33a3f8e307a40e09dfb9ab5ccc7f80d5",
     "packages": [
         {
             "name": "guzzlehttp/psr7",
@@ -365,6 +365,43 @@
             "time": "2025-01-20T14:03:54+00:00"
         },
         {
+            "name": "php-contrib/http-representation",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-contrib/http-representation.git",
+                "reference": "6c971106303efd7f33e8b3bd01302236a7a78fef"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-contrib/http-representation/zipball/6c971106303efd7f33e8b3bd01302236a7a78fef",
+                "reference": "6c971106303efd7f33e8b3bd01302236a7a78fef",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "squizlabs/php_codesniffer": "^3.13"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PhpContrib\\Http\\Representation\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Supports HTTP resource representation interoperability",
+            "support": {
+                "issues": "https://github.com/php-contrib/http-representation/issues",
+                "source": "https://github.com/php-contrib/http-representation/tree/1.0.2"
+            },
+            "time": "2025-06-28T01:30:36+00:00"
+        },
+        {
             "name": "php-contrib/response-filter",
             "version": "2.0.0",
             "source": {
@@ -401,6 +438,43 @@
                 "source": "https://github.com/php-contrib/response-filter/tree/2.0.0"
             },
             "time": "2025-01-20T13:46:10+00:00"
+        },
+        {
+            "name": "php-contrib/serializer",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-contrib/serializer.git",
+                "reference": "984571079cbf60987d54a8041fed63939c6f6c13"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-contrib/serializer/zipball/984571079cbf60987d54a8041fed63939c6f6c13",
+                "reference": "984571079cbf60987d54a8041fed63939c6f6c13",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "squizlabs/php_codesniffer": "^3.13"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PhpContrib\\Serializer\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Supports serialization interoperability.",
+            "support": {
+                "issues": "https://github.com/php-contrib/serializer/issues",
+                "source": "https://github.com/php-contrib/serializer/tree/1.0.1"
+            },
+            "time": "2025-06-27T20:19:05+00:00"
         },
         {
             "name": "php-contrib/validator",
@@ -526,6 +600,53 @@
             "time": "2023-09-02T19:41:59+00:00"
         },
         {
+            "name": "phpolar/representations",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpolar/representations.git",
+                "reference": "4282ac0e730cee1f12b93eb6db7e1a7c69ab6ff6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpolar/representations/zipball/4282ac0e730cee1f12b93eb6db7e1a7c69ab6ff6",
+                "reference": "4282ac0e730cee1f12b93eb6db7e1a7c69ab6ff6",
+                "shasum": ""
+            },
+            "require": {
+                "php-common-enums/mime-type": "^1.0.0",
+                "php-contrib/http-representation": "^1.0",
+                "phpolar/serializers": "^1.0"
+            },
+            "provide": {
+                "php-contrib/http-representation-implementation": "^1.0"
+            },
+            "require-dev": {
+                "phan/phan": "^5.4",
+                "php-coveralls/php-coveralls": "^2.8",
+                "phpmd/phpmd": "^2.15",
+                "phpstan/phpstan": "^2.1",
+                "phpunit/phpunit": "^12.2",
+                "squizlabs/php_codesniffer": "^3.13"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Phpolar\\Http\\Representations\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A set of HTTP representations",
+            "support": {
+                "issues": "https://github.com/phpolar/representations/issues",
+                "source": "https://github.com/phpolar/representations/tree/1.0.0"
+            },
+            "time": "2025-06-28T03:58:27+00:00"
+        },
+        {
             "name": "phpolar/routable",
             "version": "3.0.0",
             "source": {
@@ -609,6 +730,52 @@
                 "source": "https://github.com/phpolar/routable-factory/tree/1.1.0"
             },
             "time": "2025-06-05T03:38:49+00:00"
+        },
+        {
+            "name": "phpolar/serializers",
+            "version": "1.0.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpolar/serializers.git",
+                "reference": "36d4caa139ca746ce8864d4cece5b93675edabe0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpolar/serializers/zipball/36d4caa139ca746ce8864d4cece5b93675edabe0",
+                "reference": "36d4caa139ca746ce8864d4cece5b93675edabe0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.3",
+                "php-contrib/serializer": "^1.0"
+            },
+            "provide": {
+                "php-contrib/serializer-implementation": "^1.0"
+            },
+            "require-dev": {
+                "phan/phan": "^5.4",
+                "php-coveralls/php-coveralls": "^2.8",
+                "phpmd/phpmd": "^2.15",
+                "phpstan/phpstan": "^2.1",
+                "phpunit/phpunit": "^12.2",
+                "squizlabs/php_codesniffer": "^3.13"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Phpolar\\Serializers\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A set of serializers",
+            "support": {
+                "issues": "https://github.com/phpolar/serializers/issues",
+                "source": "https://github.com/phpolar/serializers/tree/1.0.5"
+            },
+            "time": "2025-06-28T03:53:28+00:00"
         },
         {
             "name": "phpolar/storage-driver",
@@ -2323,63 +2490,6 @@
             "time": "2023-12-11T08:22:20+00:00"
         },
         {
-            "name": "phpolar/core",
-            "version": "4.0.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/phpolar/core.git",
-                "reference": "1737e19e288169e229c854dec289f268f681ea8a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/phpolar/core/zipball/1737e19e288169e229c854dec289f268f681ea8a",
-                "reference": "1737e19e288169e229c854dec289f268f681ea8a",
-                "shasum": ""
-            },
-            "require": {
-                "ext-mbstring": "*",
-                "psr/http-message": "^2.0",
-                "psr/http-server-handler": "^1.0",
-                "psr/http-server-middleware": "^1.0"
-            },
-            "require-dev": {
-                "ext-ast": "*",
-                "ext-openssl": "*",
-                "phan/phan": "^5.4.1",
-                "php-coveralls/php-coveralls": "^2.5.3",
-                "phpmd/phpmd": "^2.13",
-                "phpolar/http-message-test-utils": "^0.1.0 || ^0.2.0",
-                "phpstan/phpstan": "^1.9.14 || ^2.0.0",
-                "phpunit/phpunit": "^11.4 || ^12.0",
-                "squizlabs/php_codesniffer": "^3.7.1"
-            },
-            "type": "library",
-            "autoload": {
-                "files": [
-                    "src/Routing/constants.php"
-                ],
-                "psr-4": {
-                    "Phpolar\\Phpolar\\Core\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Eric Fortmeyer",
-                    "email": "e.fortmeyer01@gmail.com"
-                }
-            ],
-            "description": "The internal components of the PHPolar Microframework",
-            "support": {
-                "issues": "https://github.com/phpolar/core/issues",
-                "source": "https://github.com/phpolar/core/tree/4.0.3"
-            },
-            "time": "2025-04-16T04:09:36+00:00"
-        },
-        {
             "name": "phpolar/csrf-protection",
             "version": "3.1.6",
             "source": {
@@ -2506,16 +2616,16 @@
         },
         {
             "name": "phpolar/http-message-test-utils",
-            "version": "0.2.1",
+            "version": "0.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpolar/http-message-test-utils.git",
-                "reference": "69c5e89d311a25601794d9ad10d0f254c9e3a6e5"
+                "reference": "1a080e8ccd9860a79b7dd2205ac566a0fd266a31"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpolar/http-message-test-utils/zipball/69c5e89d311a25601794d9ad10d0f254c9e3a6e5",
-                "reference": "69c5e89d311a25601794d9ad10d0f254c9e3a6e5",
+                "url": "https://api.github.com/repos/phpolar/http-message-test-utils/zipball/1a080e8ccd9860a79b7dd2205ac566a0fd266a31",
+                "reference": "1a080e8ccd9860a79b7dd2205ac566a0fd266a31",
                 "shasum": ""
             },
             "require": {
@@ -2541,28 +2651,27 @@
             "description": "A PSR-7 Http Message Stub Library",
             "support": {
                 "issues": "https://github.com/phpolar/http-message-test-utils/issues",
-                "source": "https://github.com/phpolar/http-message-test-utils/tree/0.2.1"
+                "source": "https://github.com/phpolar/http-message-test-utils/tree/0.3.0"
             },
-            "time": "2024-12-01T21:13:34+00:00"
+            "time": "2025-06-22T20:27:58+00:00"
         },
         {
             "name": "phpolar/model",
-            "version": "2.0.0",
+            "version": "2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpolar/model.git",
-                "reference": "106fb195a2e150e27501522074024029fff6bf4d"
+                "reference": "6f07259e6d70e5fa4fdff93d8959908830703992"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpolar/model/zipball/106fb195a2e150e27501522074024029fff6bf4d",
-                "reference": "106fb195a2e150e27501522074024029fff6bf4d",
+                "url": "https://api.github.com/repos/phpolar/model/zipball/6f07259e6d70e5fa4fdff93d8959908830703992",
+                "reference": "6f07259e6d70e5fa4fdff93d8959908830703992",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.3",
                 "php-contrib/validator": "^2.0",
-                "phpolar/core": "^4.0.0",
                 "phpolar/model-resolver": "^1.0",
                 "phpolar/storage-driver": "^1.0",
                 "psr/http-message": "^2.0"
@@ -2592,9 +2701,9 @@
             "description": "Provides support for configuring the properties of an object for validation, formatting, and storage.",
             "support": {
                 "issues": "https://github.com/phpolar/model/issues",
-                "source": "https://github.com/phpolar/model/tree/2.0.0"
+                "source": "https://github.com/phpolar/model/tree/2.1.0"
             },
-            "time": "2025-05-30T03:26:14+00:00"
+            "time": "2025-06-22T21:58:08+00:00"
         },
         {
             "name": "phpolar/pure-php",
@@ -3092,16 +3201,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "12.2.2",
+            "version": "12.2.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "19e25c2da3f8071a683ee1e445b0e24bba25de61"
+                "reference": "b71849b29f7a8d7574e4401873cb8b539896613f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/19e25c2da3f8071a683ee1e445b0e24bba25de61",
-                "reference": "19e25c2da3f8071a683ee1e445b0e24bba25de61",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/b71849b29f7a8d7574e4401873cb8b539896613f",
+                "reference": "b71849b29f7a8d7574e4401873cb8b539896613f",
                 "shasum": ""
             },
             "require": {
@@ -3115,13 +3224,13 @@
                 "phar-io/manifest": "^2.0.4",
                 "phar-io/version": "^3.2.1",
                 "php": ">=8.3",
-                "phpunit/php-code-coverage": "^12.3.0",
+                "phpunit/php-code-coverage": "^12.3.1",
                 "phpunit/php-file-iterator": "^6.0.0",
                 "phpunit/php-invoker": "^6.0.0",
                 "phpunit/php-text-template": "^5.0.0",
                 "phpunit/php-timer": "^8.0.0",
                 "sebastian/cli-parser": "^4.0.0",
-                "sebastian/comparator": "^7.0.1",
+                "sebastian/comparator": "^7.1.0",
                 "sebastian/diff": "^7.0.0",
                 "sebastian/environment": "^8.0.2",
                 "sebastian/exporter": "^7.0.0",
@@ -3169,7 +3278,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/12.2.2"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/12.2.5"
             },
             "funding": [
                 {
@@ -3193,7 +3302,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-06-13T05:49:28+00:00"
+            "time": "2025-06-27T04:37:55+00:00"
         },
         {
             "name": "picocss/pico",
@@ -4461,16 +4570,16 @@
         },
         {
             "name": "symfony/console",
-            "version": "v7.3.0",
+            "version": "v7.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "66c1440edf6f339fd82ed6c7caa76cb006211b44"
+                "reference": "9e27aecde8f506ba0fd1d9989620c04a87697101"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/66c1440edf6f339fd82ed6c7caa76cb006211b44",
-                "reference": "66c1440edf6f339fd82ed6c7caa76cb006211b44",
+                "url": "https://api.github.com/repos/symfony/console/zipball/9e27aecde8f506ba0fd1d9989620c04a87697101",
+                "reference": "9e27aecde8f506ba0fd1d9989620c04a87697101",
                 "shasum": ""
             },
             "require": {
@@ -4535,7 +4644,7 @@
                 "terminal"
             ],
             "support": {
-                "source": "https://github.com/symfony/console/tree/v7.3.0"
+                "source": "https://github.com/symfony/console/tree/v7.3.1"
             },
             "funding": [
                 {
@@ -4551,20 +4660,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-05-24T10:34:04+00:00"
+            "time": "2025-06-27T19:55:54+00:00"
         },
         {
             "name": "symfony/dependency-injection",
-            "version": "v7.3.0",
+            "version": "v7.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dependency-injection.git",
-                "reference": "f64a8f3fa7d4ad5e85de1b128a0e03faed02b732"
+                "reference": "8656c4848b48784c4bb8c4ae50d2b43f832cead8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/dependency-injection/zipball/f64a8f3fa7d4ad5e85de1b128a0e03faed02b732",
-                "reference": "f64a8f3fa7d4ad5e85de1b128a0e03faed02b732",
+                "url": "https://api.github.com/repos/symfony/dependency-injection/zipball/8656c4848b48784c4bb8c4ae50d2b43f832cead8",
+                "reference": "8656c4848b48784c4bb8c4ae50d2b43f832cead8",
                 "shasum": ""
             },
             "require": {
@@ -4615,7 +4724,7 @@
             "description": "Allows you to standardize and centralize the way objects are constructed in your application",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/dependency-injection/tree/v7.3.0"
+                "source": "https://github.com/symfony/dependency-injection/tree/v7.3.1"
             },
             "funding": [
                 {
@@ -4631,7 +4740,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-05-19T13:28:56+00:00"
+            "time": "2025-06-24T04:04:43+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",
@@ -5476,16 +5585,16 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "v7.3.0",
+            "version": "v7.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "cea40a48279d58dc3efee8112634cb90141156c2"
+                "reference": "0c3555045a46ab3cd4cc5a69d161225195230edb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/cea40a48279d58dc3efee8112634cb90141156c2",
-                "reference": "cea40a48279d58dc3efee8112634cb90141156c2",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/0c3555045a46ab3cd4cc5a69d161225195230edb",
+                "reference": "0c3555045a46ab3cd4cc5a69d161225195230edb",
                 "shasum": ""
             },
             "require": {
@@ -5528,7 +5637,7 @@
             "description": "Loads and dumps YAML files",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/yaml/tree/v7.3.0"
+                "source": "https://github.com/symfony/yaml/tree/v7.3.1"
             },
             "funding": [
                 {
@@ -5544,7 +5653,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-04-04T10:10:33+00:00"
+            "time": "2025-06-03T06:57:57+00:00"
         },
         {
             "name": "theseer/tokenizer",

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.0/phpunit.xsd"
-         bootstrap="vendor/autoload.php"
-         executionOrder="depends,defects"
-         beStrictAboutOutputDuringTests="true"
-         failOnRisky="true"
-         failOnWarning="false"
-         colors="true"
-         cacheDirectory=".phpunit.cache"
-         requireCoverageMetadata="true"
-         beStrictAboutCoverageMetadata="true">
+  xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.0/phpunit.xsd"
+  bootstrap="vendor/autoload.php"
+  executionOrder="depends,defects"
+  beStrictAboutOutputDuringTests="true"
+  failOnRisky="true"
+  failOnWarning="false"
+  colors="true"
+  cacheDirectory=".phpunit.cache"
+  requireCoverageMetadata="true"
+  beStrictAboutCoverageMetadata="true">
   <testsuites>
     <testsuite name="default">
       <directory>tests/unit</directory>
@@ -17,6 +17,6 @@
     </testsuite>
   </testsuites>
   <php>
-    <const name="Phpolar\Phpolar\Tests\ENTITY_NAME_TEST_CASE" value="FAKE NAME"/>
+    <const name="Phpolar\Phpolar\Tests\ENTITY_NAME_TEST_CASE" value="FAKE NAME" />
   </php>
 </phpunit>

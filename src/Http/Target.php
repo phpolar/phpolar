@@ -7,6 +7,9 @@ namespace Phpolar\Phpolar\Http;
 use PhpCommonEnums\HttpMethod\Enumeration\HttpMethodEnum as HttpMethod;
 use PhpCommonEnums\HttpResponseCode\Enumeration\HttpResponseCodeEnum as HttpResponseCode;
 use PhpCommonEnums\MimeType\Enumeration\MimeTypeEnum as MimeType;
+use PhpContrib\Http\Representation\RepresentationInterface;
+use Phpolar\Http\Representations\HtmlRepresentation;
+use Phpolar\Http\Representations\JsonRepresentation;
 use Phpolar\Routable\RoutableInterface;
 use Psr\Http\Message\ServerRequestInterface;
 

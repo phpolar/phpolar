@@ -1,3 +1,15 @@
+## 7.2.0 (2025-06-28)
+
+### Feat
+
+- move representations and serialzers into packages (#443)
+
+## 7.1.0 (2025-06-22)
+
+### Feat
+
+- use phpolar/model  2.1.0
+
 ## 7.0.0 (2025-06-22)
 
 ### Feat

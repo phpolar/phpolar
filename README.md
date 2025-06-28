@@ -1,10 +1,11 @@
-<p align="center">
+<p align="center" style="background-color:#292929;padding-block:1rem">
     <img width="240" src="./phpolar.svg" alt="PHPolar logo" />
 </p>
 
-# Polar
+# PHPolar
 
 ## A minimal PHP framework
+
 [![Coverage Status](https://coveralls.io/repos/github/phpolar/phpolar/badge.svg?branch=main)](https://coveralls.io/github/phpolar/phpolar?branch=main) [![Latest Stable Version](https://poser.pugx.org/phpolar/phpolar/v)][def] [![Total Downloads](https://poser.pugx.org/phpolar/phpolar/downloads)][def] [![License](https://poser.pugx.org/phpolar/phpolar/license)][def] [![PHP Version Require](https://poser.pugx.org/phpolar/phpolar/require/php)][def] [![Weekly Check](https://github.com/phpolar/phpolar/actions/workflows/weekly.yml/badge.svg)](https://github.com/phpolar/phpolar/actions/workflows/weekly.yml)
 
 [Quick Start](https://docs.phpolar.org/quick-start/) <br/>
@@ -78,10 +79,9 @@ class Person extends AbstractModel
 
 |      Module    |Source Code Size * |Memory Usage|  Required |
 |----------------|-------------------|------------|-----------|
-|     phpolar    |        9 kB       |   200 kB   |      x    |
-|  phpolar/core  |        4 kB       |            |      x    |
+|     phpolar    |       12 kB       |   250 kB   |      x    |
 |  phplar/model  |       19 kB       |   108 kB   |           |
-|     **TOTAL**  |     **32 kB**     | **308 kB** |           |
+|     **TOTAL**  |     **37 kB**     | **358 kB** |           |
 
 * Note: Does not include comments.
 
