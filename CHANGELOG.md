@@ -1,3 +1,9 @@
+## 7.2.1 (2025-06-28)
+
+### Fix
+
+- remove unused exception class (#444)
+
 ## 7.2.0 (2025-06-28)
 
 ### Feat
