@@ -1,3 +1,9 @@
+## 7.2.0 (2025-06-28)
+
+### Feat
+
+- move representations and serialzers into packages (#443)
+
 ## 7.1.0 (2025-06-22)
 
 ### Feat
