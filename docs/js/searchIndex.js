@@ -221,16 +221,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Phpolar-Phpolar-Http-AuthorizationCheckerInterface.html#method_authorize"
         },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Http\\InvalidHtmlResponseException",
-            "name": "InvalidHtmlResponseException",
-            "summary": "",
-            "url": "classes/Phpolar-Phpolar-Http-InvalidHtmlResponseException.html"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Http\\InvalidHtmlResponseException\u003A\u003A__construct\u0028\u0029",
-            "name": "__construct",
-            "summary": "",
-            "url": "classes/Phpolar-Phpolar-Http-InvalidHtmlResponseException.html#method___construct"
-        },                {
             "fqsen": "\\Phpolar\\Phpolar\\Http\\MiddlewareQueueRequestHandler",
             "name": "MiddlewareQueueRequestHandler",
             "summary": "The\u0020HTTP\u0020Server\u0020request\u0020handling\u0020starting\u0020point\nfor\u0020the\u0020application.",
