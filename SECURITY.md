@@ -10,4 +10,4 @@
 
 ## Reporting a Vulnerability
 
-Please contact me at e.fortmeyer01@gmail.com
+Please contact me at <e.fortmeyer01@gmail.com>

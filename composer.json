@@ -38,6 +38,7 @@
         "php-contrib/validator": "^2.0",
         "phpolar/model-resolver": "^1.0",
         "phpolar/property-injector-contract": "^1.0",
+        "phpolar/representations": "^1.0",
         "phpolar/routable": "^3.0",
         "phpolar/routable-factory": "^1.0",
         "phpolar/storage-driver": "^1.0",
