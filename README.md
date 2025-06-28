@@ -1,4 +1,4 @@
-<p align="center" style="background-color:#292929;padding-block:1rem">
+<p align="center">
     <img width="240" src="./phpolar.svg" alt="PHPolar logo" />
 </p>
 
