@@ -2,7 +2,7 @@
     <img width="240" src="./phpolar.svg" alt="PHPolar logo" />
 </p>
 
-# Polar
+# PHPolar
 
 ## A minimal PHP framework
 
