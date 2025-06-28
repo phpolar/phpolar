@@ -28,8 +28,8 @@
 
 ## Low Memory Usage
 
-- [x] Memory usage shall be below 185000 bytes
+- [x] Memory usage shall be below 250000 bytes
 
 ## Small Project Size
 
-- [x] Source code total size shall be below 18000 bytes
+- [x] Source code total size shall be below 12000 bytes

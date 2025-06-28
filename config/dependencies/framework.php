@@ -27,8 +27,6 @@ use Phpolar\Phpolar\Http\RequestProcessingHandler;
 use Phpolar\Phpolar\Http\RequestProcessorExecutor;
 use Phpolar\Phpolar\Http\ResponseBuilder;
 use Phpolar\Phpolar\Http\ServerInterface;
-use Phpolar\Phpolar\Serializers\JsonSerializer;
-use Phpolar\Phpolar\Serializers\SerializerInterface;
 use Phpolar\PropertyInjectorContract\PropertyInjectorInterface;
 use Phpolar\Routable\RoutableInterface;
 use Phpolar\Routable\RoutableResolverInterface;
@@ -40,7 +38,6 @@ use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
 return [
-    SerializerInterface::class => new JsonSerializer(),
     RequestProcessorExecutor::class => new RequestProcessorExecutor(),
     RoutableResolverInterface::class => static fn(ContainerInterface $container) => new ProtectedRoutableResolver($container->get(AuthenticatorInterface::class)),
     DiTokens::RESPONSE_EMITTER => new Laminas\HttpHandlerRunner\Emitter\SapiEmitter(),

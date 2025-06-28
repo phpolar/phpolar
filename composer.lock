@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e7340923b7c12e7240e795b30aae4390",
+    "content-hash": "33a3f8e307a40e09dfb9ab5ccc7f80d5",
     "packages": [
         {
             "name": "guzzlehttp/psr7",
@@ -365,6 +365,43 @@
             "time": "2025-01-20T14:03:54+00:00"
         },
         {
+            "name": "php-contrib/http-representation",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-contrib/http-representation.git",
+                "reference": "6c971106303efd7f33e8b3bd01302236a7a78fef"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-contrib/http-representation/zipball/6c971106303efd7f33e8b3bd01302236a7a78fef",
+                "reference": "6c971106303efd7f33e8b3bd01302236a7a78fef",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "squizlabs/php_codesniffer": "^3.13"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PhpContrib\\Http\\Representation\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Supports HTTP resource representation interoperability",
+            "support": {
+                "issues": "https://github.com/php-contrib/http-representation/issues",
+                "source": "https://github.com/php-contrib/http-representation/tree/1.0.2"
+            },
+            "time": "2025-06-28T01:30:36+00:00"
+        },
+        {
             "name": "php-contrib/response-filter",
             "version": "2.0.0",
             "source": {
@@ -401,6 +438,43 @@
                 "source": "https://github.com/php-contrib/response-filter/tree/2.0.0"
             },
             "time": "2025-01-20T13:46:10+00:00"
+        },
+        {
+            "name": "php-contrib/serializer",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-contrib/serializer.git",
+                "reference": "984571079cbf60987d54a8041fed63939c6f6c13"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-contrib/serializer/zipball/984571079cbf60987d54a8041fed63939c6f6c13",
+                "reference": "984571079cbf60987d54a8041fed63939c6f6c13",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "squizlabs/php_codesniffer": "^3.13"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PhpContrib\\Serializer\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Supports serialization interoperability.",
+            "support": {
+                "issues": "https://github.com/php-contrib/serializer/issues",
+                "source": "https://github.com/php-contrib/serializer/tree/1.0.1"
+            },
+            "time": "2025-06-27T20:19:05+00:00"
         },
         {
             "name": "php-contrib/validator",
@@ -526,6 +600,53 @@
             "time": "2023-09-02T19:41:59+00:00"
         },
         {
+            "name": "phpolar/representations",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpolar/representations.git",
+                "reference": "4282ac0e730cee1f12b93eb6db7e1a7c69ab6ff6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpolar/representations/zipball/4282ac0e730cee1f12b93eb6db7e1a7c69ab6ff6",
+                "reference": "4282ac0e730cee1f12b93eb6db7e1a7c69ab6ff6",
+                "shasum": ""
+            },
+            "require": {
+                "php-common-enums/mime-type": "^1.0.0",
+                "php-contrib/http-representation": "^1.0",
+                "phpolar/serializers": "^1.0"
+            },
+            "provide": {
+                "php-contrib/http-representation-implementation": "^1.0"
+            },
+            "require-dev": {
+                "phan/phan": "^5.4",
+                "php-coveralls/php-coveralls": "^2.8",
+                "phpmd/phpmd": "^2.15",
+                "phpstan/phpstan": "^2.1",
+                "phpunit/phpunit": "^12.2",
+                "squizlabs/php_codesniffer": "^3.13"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Phpolar\\Http\\Representations\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A set of HTTP representations",
+            "support": {
+                "issues": "https://github.com/phpolar/representations/issues",
+                "source": "https://github.com/phpolar/representations/tree/1.0.0"
+            },
+            "time": "2025-06-28T03:58:27+00:00"
+        },
+        {
             "name": "phpolar/routable",
             "version": "3.0.0",
             "source": {
@@ -609,6 +730,52 @@
                 "source": "https://github.com/phpolar/routable-factory/tree/1.1.0"
             },
             "time": "2025-06-05T03:38:49+00:00"
+        },
+        {
+            "name": "phpolar/serializers",
+            "version": "1.0.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpolar/serializers.git",
+                "reference": "36d4caa139ca746ce8864d4cece5b93675edabe0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpolar/serializers/zipball/36d4caa139ca746ce8864d4cece5b93675edabe0",
+                "reference": "36d4caa139ca746ce8864d4cece5b93675edabe0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.3",
+                "php-contrib/serializer": "^1.0"
+            },
+            "provide": {
+                "php-contrib/serializer-implementation": "^1.0"
+            },
+            "require-dev": {
+                "phan/phan": "^5.4",
+                "php-coveralls/php-coveralls": "^2.8",
+                "phpmd/phpmd": "^2.15",
+                "phpstan/phpstan": "^2.1",
+                "phpunit/phpunit": "^12.2",
+                "squizlabs/php_codesniffer": "^3.13"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Phpolar\\Serializers\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A set of serializers",
+            "support": {
+                "issues": "https://github.com/phpolar/serializers/issues",
+                "source": "https://github.com/phpolar/serializers/tree/1.0.5"
+            },
+            "time": "2025-06-28T03:53:28+00:00"
         },
         {
             "name": "phpolar/storage-driver",
@@ -3034,16 +3201,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "12.2.3",
+            "version": "12.2.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "60a8ea2d8b2f070000051b56778009e11576e7d1"
+                "reference": "b71849b29f7a8d7574e4401873cb8b539896613f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/60a8ea2d8b2f070000051b56778009e11576e7d1",
-                "reference": "60a8ea2d8b2f070000051b56778009e11576e7d1",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/b71849b29f7a8d7574e4401873cb8b539896613f",
+                "reference": "b71849b29f7a8d7574e4401873cb8b539896613f",
                 "shasum": ""
             },
             "require": {
@@ -3111,7 +3278,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/12.2.3"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/12.2.5"
             },
             "funding": [
                 {
@@ -3135,7 +3302,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-06-20T11:33:06+00:00"
+            "time": "2025-06-27T04:37:55+00:00"
         },
         {
             "name": "picocss/pico",
