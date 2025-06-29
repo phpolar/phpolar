@@ -8,14 +8,18 @@ use PhpContrib\Authenticator\AuthenticatorInterface;
 use Phpolar\Phpolar\Auth\AbstractProtectedRoutable;
 use Phpolar\Phpolar\Auth\Authorize;
 use Phpolar\Phpolar\Auth\ProtectedRoutableResolver;
+use Phpolar\Phpolar\Auth\User;
 use Phpolar\Routable\RoutableInterface;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\TestDox;
+use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 
 #[CoversClass(ProtectedRoutableResolver::class)]
 #[CoversClass(AbstractProtectedRoutable::class)]
+#[UsesClass(Authorize::class)]
+#[UsesClass(User::class)]
 final class ProtectedRoutableResolverTest extends TestCase
 {
     #[TestDox("Shall return the false when the authenticator returns null")]

@@ -28,8 +28,6 @@ final class RequestProcessingHandler implements RequestHandlerInterface
 
     /**
      * Attempts to locate and execute the target request processor.
-     *
-     *
      */
     public function handle(ServerRequestInterface $request): ResponseInterface
     {

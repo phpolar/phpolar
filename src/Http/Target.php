@@ -97,7 +97,8 @@ final class Target
         return count(
             array_filter(
                 array_combine($routeParts, $pathParts),
-                fn(string $pathPart, string $routePart) => $routePart === $pathPart || $this->containsPathVariables($routePart),
+                fn(string $pathPart, string $routePart) => $routePart === $pathPart
+                    || $this->containsPathVariables($routePart),
                 ARRAY_FILTER_USE_BOTH,
             )
         ) === count($routeParts);

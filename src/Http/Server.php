@@ -14,8 +14,7 @@ final class Server implements ServerInterface
      */
     public function __construct(
         private readonly array $interface,
-    ) {
-    }
+    ) {}
 
     public function findTarget(ServerRequestInterface $request): Target | HttpResponseCode
     {
@@ -39,10 +38,11 @@ final class Server implements ServerInterface
     }
 
     /**
-     * @param array<int, Target> $targetsMatching
+     * @param array<int,Target> $targetsMatching
      */
     private function getTarget(string $method, array $targetsMatching): Target
     {
-        return $this->interface[array_find_key($targetsMatching, static fn(Target $target) => $target->matchesMethod($method))];
+        $key = array_find_key($targetsMatching, static fn(Target $target) => $target->matchesMethod($method));
+        return $this->interface[$key];
     }
 }

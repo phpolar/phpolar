@@ -38,6 +38,9 @@ use Psr\Http\Server\RequestHandlerInterface;
 #[CoversClass(PathVariableBindings::class)]
 #[UsesClassesThatImplementInterface(ServerInterface::class)]
 #[UsesClass(AuthorizationChecker::class)]
+#[UsesClass(Representations::class)]
+#[UsesClass(Target::class)]
+#[UsesClass(RequestProcessorExecutor::class)]
 final class RequestProcessingHandlerTest extends TestCase
 {
     public function getContainer(?StreamFactoryInterface $streamFactory = null): ContainerInterface

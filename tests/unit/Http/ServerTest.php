@@ -16,13 +16,15 @@ use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\CoversClassesThatImplementInterface;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\Attributes\TestWith;
+use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\UriInterface;
 
 #[CoversClass(Server::class)]
 #[CoversClassesThatImplementInterface(ServerInterface::class)]
-#[CoversClass(Target::class)]
+#[UsesClass(Target::class)]
+#[UsesClass(Representations::class)]
 final class ServerTest extends TestCase
 {
     #[TestWith([HttpMethod::Get, "GET", "/some/path/{id}", "/some/path/123"])]
