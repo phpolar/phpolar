@@ -6,6 +6,10 @@ namespace Phpolar\Phpolar\Http;
 
 use PhpCommonEnums\HttpResponseCode\Enumeration\HttpResponseCodeEnum as HttpResponseCode;
 use Phpolar\ModelResolver\ModelResolverInterface;
+use Phpolar\Phpolar\Http\Status\ClientError\BadRequest;
+use Phpolar\Phpolar\Http\Status\ClientError\Forbidden;
+use Phpolar\Phpolar\Http\Status\ClientError\NotFound;
+use Phpolar\Phpolar\Http\Status\ClientError\Unauthorized;
 use Phpolar\PropertyInjectorContract\PropertyInjectorInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -23,8 +27,7 @@ final class RequestProcessingHandler implements RequestHandlerInterface
         private readonly AuthorizationCheckerInterface $authChecker,
         private readonly PropertyInjectorInterface $propertyInjector,
         private readonly ModelResolverInterface $modelResolver,
-    ) {
-    }
+    ) {}
 
     /**
      * Attempts to locate and execute the target request processor.
@@ -101,6 +104,38 @@ final class RequestProcessingHandler implements RequestHandlerInterface
             $requestProcessor,
             $args,
         );
+
+        if ($resource instanceof NotFound) {
+            return $this->responseBuilder->build()
+                ->withStatus(
+                    code: HttpResponseCode::NotFound->value,
+                    reasonPhrase: HttpResponseCode::NotFound->getLabel()
+                );
+        }
+
+        if ($resource instanceof Unauthorized) {
+            return $this->responseBuilder->build()
+                ->withStatus(
+                    code: HttpResponseCode::Unauthorized->value,
+                    reasonPhrase: HttpResponseCode::Unauthorized->getLabel()
+                );
+        }
+
+        if ($resource instanceof Forbidden) {
+            return $this->responseBuilder->build()
+                ->withStatus(
+                    code: HttpResponseCode::Forbidden->value,
+                    reasonPhrase: HttpResponseCode::Forbidden->getLabel()
+                );
+        }
+
+        if ($resource instanceof BadRequest) {
+            return $this->responseBuilder->build()
+                ->withStatus(
+                    code: HttpResponseCode::BadRequest->value,
+                    reasonPhrase: HttpResponseCode::BadRequest->getLabel()
+                );
+        }
 
         $representation = $target->getRepresentation($resource);
 
