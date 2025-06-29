@@ -6,17 +6,22 @@ namespace Phpolar\Phpolar\DependencyInjection;
 
 use Phpolar\HttpMessageTestUtils\ResponseFactoryStub;
 use Phpolar\HttpMessageTestUtils\StreamFactoryStub;
+use Phpolar\Phpolar\Http\MiddlewareQueueRequestHandler;
+use Phpolar\Phpolar\Http\Server;
 use Phpolar\Phpolar\Tests\Stubs\ConfigurableContainerStub;
 use Phpolar\Phpolar\Tests\Stubs\ContainerConfigurationStub;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 use PHPUnit\Framework\Attributes\TestDox;
+use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 
 #[CoversClass(ContainerLoader::class)]
 #[CoversClass(Globs::class)]
+#[UsesClass(MiddlewareQueueRequestHandler::class)]
+#[UsesClass(Server::class)]
 #[RunTestsInSeparateProcesses]
 final class ContainerLoaderTest extends TestCase
 {

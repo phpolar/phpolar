@@ -12,6 +12,7 @@ use Phpolar\Routable\RoutableInterface;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\TestDox;
+use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
@@ -20,6 +21,7 @@ use ReflectionMethod;
 
 #[CoversClass(Authorize::class)]
 #[CoversClass(User::class)]
+#[UsesClass(AbstractProtectedRoutable::class)]
 final class AuthorizeTest extends TestCase
 {
     public static function getContainerStub(): Generator
