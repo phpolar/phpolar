@@ -4,7 +4,7 @@
 
 # PHPolar
 
-## A minimal PHP framework
+## A PHP framework for minimalists
 
 [![Coverage Status](https://coveralls.io/repos/github/phpolar/phpolar/badge.svg?branch=main)](https://coveralls.io/github/phpolar/phpolar?branch=main) [![Latest Stable Version](https://poser.pugx.org/phpolar/phpolar/v)][def] [![Total Downloads](https://poser.pugx.org/phpolar/phpolar/downloads)][def] [![License](https://poser.pugx.org/phpolar/phpolar/license)][def] [![PHP Version Require](https://poser.pugx.org/phpolar/phpolar/require/php)][def] [![Weekly Check](https://github.com/phpolar/phpolar/actions/workflows/weekly.yml/badge.svg)](https://github.com/phpolar/phpolar/actions/workflows/weekly.yml)
 

@@ -1,7 +1,7 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
     "name": "phpolar/phpolar",
-    "description": "A minimal PHP framework",
+    "description": "A PHP framework for minimalists",
     "type": "library",
     "license": "MIT",
     "authors": [
