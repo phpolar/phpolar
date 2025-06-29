@@ -9,15 +9,15 @@ use PhpCommonEnums\HttpMethod\Enumeration\HttpMethodEnum as HttpMethod;
 use PhpCommonEnums\HttpResponseCode\Enumeration\HttpResponseCodeEnum as HttpResponseCode;
 use PhpCommonEnums\MimeType\Enumeration\MimeTypeEnum as MimeType;
 use Phpolar\HttpMessageTestUtils\RequestStub;
-use Phpolar\HttpMessageTestUtils\ResponseFactoryStub;
 use Phpolar\HttpMessageTestUtils\ResponseStub;
-use Phpolar\HttpMessageTestUtils\StreamFactoryStub;
 use Phpolar\HttpMessageTestUtils\UriStub;
 use Phpolar\ModelResolver\ModelResolverInterface;
-use Phpolar\Phpolar\DependencyInjection\DiTokens;
+use Phpolar\Phpolar\Http\Status\ClientError\BadRequest;
+use Phpolar\Phpolar\Http\Status\ClientError\Forbidden;
+use Phpolar\Phpolar\Http\Status\ClientError\NotFound;
+use Phpolar\Phpolar\Http\Status\ClientError\Unauthorized;
 use Phpolar\PropertyInjectorContract\PropertyInjectorInterface;
 use Phpolar\Routable\RoutableInterface;
-use Phpolar\PurePhp\TemplateEngine;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\TestDox;
@@ -25,54 +25,20 @@ use PHPUnit\Framework\Attributes\TestWith;
 use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\Attributes\UsesClassesThatImplementInterface;
 use PHPUnit\Framework\TestCase;
-use Psr\Container\ContainerInterface;
-use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\UriInterface;
-use Psr\Http\Server\RequestHandlerInterface;
 
 #[CoversClass(RequestProcessingHandler::class)]
 #[CoversClass(PathVariableBindings::class)]
 #[UsesClassesThatImplementInterface(ServerInterface::class)]
 #[UsesClass(AuthorizationChecker::class)]
+#[UsesClass(Representations::class)]
+#[UsesClass(Target::class)]
+#[UsesClass(RequestProcessorExecutor::class)]
 final class RequestProcessingHandlerTest extends TestCase
 {
-    public function getContainer(?StreamFactoryInterface $streamFactory = null): ContainerInterface
-    {
-        return new class ($streamFactory) implements ContainerInterface {
-            public function __construct(private ?StreamFactoryInterface $streamFactory)
-            {
-            }
-            public function has(string $id): bool
-            {
-                return true;
-            }
-            public function get(string $id)
-            {
-                if ($id === ResponseFactoryInterface::class) {
-                    return new ResponseFactoryStub();
-                }
-                if ($id === StreamFactoryInterface::class) {
-                    return $this->streamFactory ?? new StreamFactoryStub("w");
-                }
-                if ($id === TemplateEngine::class) {
-                    return new TemplateEngine();
-                }
-                if ($id === DiTokens::UNAUTHORIZED_HANDLER) {
-                    return new class () implements RequestHandlerInterface {
-                        public function handle(ServerRequestInterface $request): ResponseInterface
-                        {
-                            return (new ResponseStub())->withBody((new StreamFactoryStub("w"))->createStream("BANG!"));
-                        }
-                    };
-                }
-            }
-        };
-    }
-
     public static function requestMethods(): Generator
     {
         yield ["GET"];
@@ -615,5 +581,257 @@ final class RequestProcessingHandlerTest extends TestCase
         );
 
         $sut->handle($requestStub);
+    }
+
+    #[TestDox("Shall produce a NOT FOUND status when the request processor returns an instance of NotFound")]
+    public function test2a()
+    {
+        $requestStub = $this->createStub(ServerRequestInterface::class);
+        $uriStub = $this->createStub(UriInterface::class);
+        $serverStub = $this->createStub(ServerInterface::class);
+        $processorExecutorStub =
+            $this->createStub(RequestProcessorExecutorInterface::class);
+        $responseBuilderStub = $this->createStub(ResponseBuilderInterface::class);
+        $authCheckStub = $this->createStub(AuthorizationCheckerInterface::class);
+        $propertyInjectorStub = $this->createStub(PropertyInjectorInterface::class);
+        $modelResolverStub = $this->createStub(ModelResolverInterface::class);
+        $requestProcessorStub = $this->createStub(RoutableInterface::class);
+
+        $processorExecutorStub
+            ->method("execute")
+            ->willReturn(new NotFound());
+
+
+        $target = new Target(
+            location: "/",
+            method: HttpMethod::Get,
+            representations: new Representations([MimeType::ApplicationJson]),
+            requestProcessor: $requestProcessorStub,
+        );
+
+        $requestStub
+            ->method("getHeader")
+            ->willReturn([MimeType::ApplicationJson->value]);
+        $requestStub
+            ->method("getUri")
+            ->willReturn($uriStub);
+        $serverStub
+            ->method("findTarget")
+            ->willReturn($target);
+        $responseBuilderStub
+            ->method("build")
+            ->willReturn(new ResponseStub());
+        $authCheckStub
+            ->method("authorize")
+            ->willReturn($requestProcessorStub);
+        $uriStub
+            ->method("getPath")
+            ->willReturn("/");
+        $modelResolverStub
+            ->method("resolve")
+            ->willReturn([]);
+
+        $sut = new RequestProcessingHandler(
+            server: $serverStub,
+            processorExecutor: $processorExecutorStub,
+            responseBuilder: $responseBuilderStub,
+            authChecker: $authCheckStub,
+            propertyInjector: $propertyInjectorStub,
+            modelResolver: $modelResolverStub,
+        );
+
+        $result = $sut->handle($requestStub);
+
+        $this->assertSame(HttpResponseCode::NotFound->value, $result->getStatusCode());
+        $this->assertSame(HttpResponseCode::NotFound->getLabel(), $result->getReasonPhrase());
+    }
+
+    #[TestDox("Shall produce a UNAUTHORIZED status when the request processor returns an instance of Unauthorized")]
+    public function test2b()
+    {
+        $requestStub = $this->createStub(ServerRequestInterface::class);
+        $uriStub = $this->createStub(UriInterface::class);
+        $serverStub = $this->createStub(ServerInterface::class);
+        $processorExecutorStub =
+            $this->createStub(RequestProcessorExecutorInterface::class);
+        $responseBuilderStub = $this->createStub(ResponseBuilderInterface::class);
+        $authCheckStub = $this->createStub(AuthorizationCheckerInterface::class);
+        $propertyInjectorStub = $this->createStub(PropertyInjectorInterface::class);
+        $modelResolverStub = $this->createStub(ModelResolverInterface::class);
+        $requestProcessorStub = $this->createStub(RoutableInterface::class);
+
+        $processorExecutorStub
+            ->method("execute")
+            ->willReturn(new Unauthorized());
+
+
+        $target = new Target(
+            location: "/",
+            method: HttpMethod::Get,
+            representations: new Representations([MimeType::ApplicationJson]),
+            requestProcessor: $requestProcessorStub,
+        );
+
+        $requestStub
+            ->method("getHeader")
+            ->willReturn([MimeType::ApplicationJson->value]);
+        $requestStub
+            ->method("getUri")
+            ->willReturn($uriStub);
+        $serverStub
+            ->method("findTarget")
+            ->willReturn($target);
+        $responseBuilderStub
+            ->method("build")
+            ->willReturn(new ResponseStub());
+        $authCheckStub
+            ->method("authorize")
+            ->willReturn($requestProcessorStub);
+        $uriStub
+            ->method("getPath")
+            ->willReturn("/");
+        $modelResolverStub
+            ->method("resolve")
+            ->willReturn([]);
+
+        $sut = new RequestProcessingHandler(
+            server: $serverStub,
+            processorExecutor: $processorExecutorStub,
+            responseBuilder: $responseBuilderStub,
+            authChecker: $authCheckStub,
+            propertyInjector: $propertyInjectorStub,
+            modelResolver: $modelResolverStub,
+        );
+
+        $result = $sut->handle($requestStub);
+
+        $this->assertSame(HttpResponseCode::Unauthorized->value, $result->getStatusCode());
+        $this->assertSame(HttpResponseCode::Unauthorized->getLabel(), $result->getReasonPhrase());
+    }
+
+    #[TestDox("Shall produce a FORBIDDEN status when the request processor returns an instance of Forbidden")]
+    public function test2c()
+    {
+        $requestStub = $this->createStub(ServerRequestInterface::class);
+        $uriStub = $this->createStub(UriInterface::class);
+        $serverStub = $this->createStub(ServerInterface::class);
+        $processorExecutorStub =
+            $this->createStub(RequestProcessorExecutorInterface::class);
+        $responseBuilderStub = $this->createStub(ResponseBuilderInterface::class);
+        $authCheckStub = $this->createStub(AuthorizationCheckerInterface::class);
+        $propertyInjectorStub = $this->createStub(PropertyInjectorInterface::class);
+        $modelResolverStub = $this->createStub(ModelResolverInterface::class);
+        $requestProcessorStub = $this->createStub(RoutableInterface::class);
+
+        $processorExecutorStub
+            ->method("execute")
+            ->willReturn(new Forbidden());
+
+
+        $target = new Target(
+            location: "/",
+            method: HttpMethod::Get,
+            representations: new Representations([MimeType::ApplicationJson]),
+            requestProcessor: $requestProcessorStub,
+        );
+
+        $requestStub
+            ->method("getHeader")
+            ->willReturn([MimeType::ApplicationJson->value]);
+        $requestStub
+            ->method("getUri")
+            ->willReturn($uriStub);
+        $serverStub
+            ->method("findTarget")
+            ->willReturn($target);
+        $responseBuilderStub
+            ->method("build")
+            ->willReturn(new ResponseStub());
+        $authCheckStub
+            ->method("authorize")
+            ->willReturn($requestProcessorStub);
+        $uriStub
+            ->method("getPath")
+            ->willReturn("/");
+        $modelResolverStub
+            ->method("resolve")
+            ->willReturn([]);
+
+        $sut = new RequestProcessingHandler(
+            server: $serverStub,
+            processorExecutor: $processorExecutorStub,
+            responseBuilder: $responseBuilderStub,
+            authChecker: $authCheckStub,
+            propertyInjector: $propertyInjectorStub,
+            modelResolver: $modelResolverStub,
+        );
+
+        $result = $sut->handle($requestStub);
+
+        $this->assertSame(HttpResponseCode::Forbidden->value, $result->getStatusCode());
+        $this->assertSame(HttpResponseCode::Forbidden->getLabel(), $result->getReasonPhrase());
+    }
+
+    #[TestDox("Shall produce a BAD REQUEST status when the request processor returns an instance of BadRequest")]
+    public function test2d()
+    {
+        $requestStub = $this->createStub(ServerRequestInterface::class);
+        $uriStub = $this->createStub(UriInterface::class);
+        $serverStub = $this->createStub(ServerInterface::class);
+        $processorExecutorStub =
+            $this->createStub(RequestProcessorExecutorInterface::class);
+        $responseBuilderStub = $this->createStub(ResponseBuilderInterface::class);
+        $authCheckStub = $this->createStub(AuthorizationCheckerInterface::class);
+        $propertyInjectorStub = $this->createStub(PropertyInjectorInterface::class);
+        $modelResolverStub = $this->createStub(ModelResolverInterface::class);
+        $requestProcessorStub = $this->createStub(RoutableInterface::class);
+
+        $processorExecutorStub
+            ->method("execute")
+            ->willReturn(new BadRequest());
+
+
+        $target = new Target(
+            location: "/",
+            method: HttpMethod::Get,
+            representations: new Representations([MimeType::ApplicationJson]),
+            requestProcessor: $requestProcessorStub,
+        );
+
+        $requestStub
+            ->method("getHeader")
+            ->willReturn([MimeType::ApplicationJson->value]);
+        $requestStub
+            ->method("getUri")
+            ->willReturn($uriStub);
+        $serverStub
+            ->method("findTarget")
+            ->willReturn($target);
+        $responseBuilderStub
+            ->method("build")
+            ->willReturn(new ResponseStub());
+        $authCheckStub
+            ->method("authorize")
+            ->willReturn($requestProcessorStub);
+        $uriStub
+            ->method("getPath")
+            ->willReturn("/");
+        $modelResolverStub
+            ->method("resolve")
+            ->willReturn([]);
+
+        $sut = new RequestProcessingHandler(
+            server: $serverStub,
+            processorExecutor: $processorExecutorStub,
+            responseBuilder: $responseBuilderStub,
+            authChecker: $authCheckStub,
+            propertyInjector: $propertyInjectorStub,
+            modelResolver: $modelResolverStub,
+        );
+
+        $result = $sut->handle($requestStub);
+
+        $this->assertSame(HttpResponseCode::BadRequest->value, $result->getStatusCode());
+        $this->assertSame(HttpResponseCode::BadRequest->getLabel(), $result->getReasonPhrase());
     }
 }

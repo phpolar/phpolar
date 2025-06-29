@@ -4,7 +4,7 @@
 
 # PHPolar
 
-## A minimal PHP framework
+## A PHP framework for minimalists
 
 [![Coverage Status](https://coveralls.io/repos/github/phpolar/phpolar/badge.svg?branch=main)](https://coveralls.io/github/phpolar/phpolar?branch=main) [![Latest Stable Version](https://poser.pugx.org/phpolar/phpolar/v)][def] [![Total Downloads](https://poser.pugx.org/phpolar/phpolar/downloads)][def] [![License](https://poser.pugx.org/phpolar/phpolar/license)][def] [![PHP Version Require](https://poser.pugx.org/phpolar/phpolar/require/php)][def] [![Weekly Check](https://github.com/phpolar/phpolar/actions/workflows/weekly.yml/badge.svg)](https://github.com/phpolar/phpolar/actions/workflows/weekly.yml)
 
@@ -79,9 +79,9 @@ class Person extends AbstractModel
 
 |      Module    |Source Code Size * |Memory Usage|  Required |
 |----------------|-------------------|------------|-----------|
-|     phpolar    |       12 kB       |   250 kB   |      x    |
+|     phpolar    |       13 kB       |   250 kB   |      x    |
 |  phplar/model  |       19 kB       |   108 kB   |           |
-|     **TOTAL**  |     **37 kB**     | **358 kB** |           |
+|     **TOTAL**  |     **38 kB**     | **358 kB** |           |
 
 * Note: Does not include comments.
 

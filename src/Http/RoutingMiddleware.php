@@ -15,9 +15,7 @@ use Psr\Http\Server\RequestHandlerInterface;
  */
 final class RoutingMiddleware implements MiddlewareInterface
 {
-    public function __construct(private RequestHandlerInterface $requestHandler)
-    {
-    }
+    public function __construct(private RequestHandlerInterface $requestHandler) {}
 
     /**
      * Handle routing a request.
@@ -25,6 +23,8 @@ final class RoutingMiddleware implements MiddlewareInterface
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $response = $this->requestHandler->handle($request);
-        return $response->getStatusCode() === HttpResponseCode::NotFound->value ? $handler->handle($request) : $response;
+        return $response->getStatusCode() === HttpResponseCode::NotFound->value
+            ? $handler->handle($request)
+            : $response;
     }
 }

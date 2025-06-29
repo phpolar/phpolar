@@ -11,10 +11,12 @@ use Phpolar\Routable\RoutableInterface;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\Attributes\TestWith;
+use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface;
 
 #[CoversClass(Target::class)]
+#[UsesClass(Representations::class)]
 final class TargetTest extends TestCase
 {
     #[TestDox("Shall return \"not acceptable\" if the Accept header does not contain a configured representation")]
@@ -195,6 +197,42 @@ final class TargetTest extends TestCase
         );
 
         $result = $sut->matchesLocation($requestPath);
+
+        $this->assertFalse($result);
+    }
+
+    #[TestDox("Shall know if the given method matches the configured HTTP method. Test case: \$methodAsString")]
+    #[TestWith([HttpMethod::Get, HttpMethod::Get->value])]
+    #[TestWith([HttpMethod::Post, HttpMethod::Post->value])]
+    #[TestWith([HttpMethod::Delete, HttpMethod::Delete->value])]
+    public function testi(HttpMethod $method, string $methodAsString)
+    {
+        $sut = new Target(
+            location: "/",
+            method: $method,
+            representations: new Representations([]),
+            requestProcessor: $this->createStub(RoutableInterface::class),
+        );
+
+        $result = $sut->matchesMethod($methodAsString);
+
+        $this->assertTrue($result);
+    }
+
+    #[TestDox("Shall know if the given method matches the configured HTTP method. Test case: \$methodAsString")]
+    #[TestWith([HttpMethod::Get, HttpMethod::Delete->value])]
+    #[TestWith([HttpMethod::Post, HttpMethod::Get->value])]
+    #[TestWith([HttpMethod::Delete, HttpMethod::Post->value])]
+    public function testj(HttpMethod $method, string $methodAsString)
+    {
+        $sut = new Target(
+            location: "/",
+            method: $method,
+            representations: new Representations([]),
+            requestProcessor: $this->createStub(RoutableInterface::class),
+        );
+
+        $result = $sut->matchesMethod($methodAsString);
 
         $this->assertFalse($result);
     }

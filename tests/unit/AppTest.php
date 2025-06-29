@@ -24,14 +24,19 @@ use Phpolar\HttpMessageTestUtils\StreamFactoryStub;
 use Phpolar\ModelResolver\ModelResolverInterface;
 use PhpContrib\Authenticator\AuthenticatorInterface;
 use Phpolar\Phpolar\Auth\AbstractProtectedRoutable;
+use Phpolar\Phpolar\Auth\ProtectedRoutableResolver;
 use Phpolar\Phpolar\DependencyInjection\ContainerLoader;
 use Phpolar\Phpolar\DependencyInjection\DiTokens;
+use Phpolar\Phpolar\Http\AuthorizationChecker;
 use Phpolar\Phpolar\Http\RoutingMiddleware;
 use Phpolar\Phpolar\Tests\Stubs\ConfigurableContainerStub;
 use Phpolar\Phpolar\Tests\Stubs\ContainerConfigurationStub;
 use Phpolar\Phpolar\Http\MiddlewareQueueRequestHandler;
+use Phpolar\Phpolar\Http\PathVariableBindings;
 use Phpolar\Phpolar\Http\Representations;
 use Phpolar\Phpolar\Http\RequestProcessingHandler;
+use Phpolar\Phpolar\Http\RequestProcessorExecutor;
+use Phpolar\Phpolar\Http\ResponseBuilder;
 use Phpolar\Phpolar\Http\Server;
 use Phpolar\Phpolar\Http\ServerInterface;
 use Phpolar\Phpolar\Http\Target;
@@ -59,6 +64,13 @@ use Psr\Http\Server\RequestHandlerInterface;
 #[UsesClass(MiddlewareQueueRequestHandler::class)]
 #[UsesClass(RequestProcessingHandler::class)]
 #[UsesClass(RoutingMiddleware::class)]
+#[UsesClass(ProtectedRoutableResolver::class)]
+#[UsesClass(AuthorizationChecker::class)]
+#[UsesClass(PathVariableBindings::class)]
+#[UsesClass(Representations::class)]
+#[UsesClass(RequestProcessorExecutor::class)]
+#[UsesClass(ResponseBuilder::class)]
+#[UsesClass(Target::class)]
 final class AppTest extends TestCase
 {
     public const RESPONSE_CONTENT = "it worked!";
