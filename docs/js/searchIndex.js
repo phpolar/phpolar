@@ -376,6 +376,26 @@ Search.appendIndex(
             "summary": "Attempts\u0020to\u0020locate\u0020an\u0020object\u0020associated\u0020with\u0020a\u0020given\u0020route.",
             "url": "classes/Phpolar-Phpolar-Http-ServerInterface.html#method_findTarget"
         },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\Status\\ClientError\\BadRequest",
+            "name": "BadRequest",
+            "summary": "Indicates\u0020that\u0020the\u0020origin\u0020server\nserver\u0020cannot\u0020or\u0020will\u0020not\u0020process\u0020the\u0020request\u0020due\u0020to\u0020something\u0020that\u0020is\u0020perceived\u0020to\u0020be\u0020a\u0020client\u0020error\u0020\u0028e.g.,\u0020malformed\u0020request\u0020syntax,\u0020invalid\u0020request\u0020message\u0020framing,\u0020or\u0020deceptive\u0020request\u0020routing\u0029\u0020did\u0020not\u0020find\u0020a\u0020current\u0020representation\u0020for\u0020the\u0020target\u0020resource\u0020or\u0020is\u0020not\u0020willing\u0020to\u0020disclose\u0020that\u0020one\u0020exists.",
+            "url": "classes/Phpolar-Phpolar-Http-Status-ClientError-BadRequest.html"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\Status\\ClientError\\Forbidden",
+            "name": "Forbidden",
+            "summary": "Indicates\u0020that\u0020the\u0020origin\u0020server\u0020understood\u0020the\u0020request\u0020but\u0020refuses\u0020to\u0020authorize\u0020it.",
+            "url": "classes/Phpolar-Phpolar-Http-Status-ClientError-Forbidden.html"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\Status\\ClientError\\NotFound",
+            "name": "NotFound",
+            "summary": "Indicates\u0020that\u0020the\u0020origin\u0020server\u0020did\u0020not\u0020find\u0020a\u0020current\u0020representation\nfor\u0020the\u0020target\u0020resource\u0020or\u0020is\u0020not\u0020willing\u0020to\u0020disclose\u0020that\u0020one\u0020exists.",
+            "url": "classes/Phpolar-Phpolar-Http-Status-ClientError-NotFound.html"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\Status\\ClientError\\Unauthorized",
+            "name": "Unauthorized",
+            "summary": "indicates\u0020that\u0020the\u0020request\u0020has\u0020not\u0020been\u0020applied\u0020because\u0020it\u0020lacks\u0020valid\u0020authentication\u0020credentials\u0020for\u0020the\u0020target\u0020resource.",
+            "url": "classes/Phpolar-Phpolar-Http-Status-ClientError-Unauthorized.html"
+        },                {
             "fqsen": "\\Phpolar\\Phpolar\\Http\\Target",
             "name": "Target",
             "summary": "The\u0020target\u0020of\u0020an\u0020HTTP\u0020request.",
@@ -445,5 +465,15 @@ Search.appendIndex(
             "name": "Http",
             "summary": "",
             "url": "namespaces/phpolar-phpolar-http.html"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\Status\\ClientError",
+            "name": "ClientError",
+            "summary": "",
+            "url": "namespaces/phpolar-phpolar-http-status-clienterror.html"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\Status",
+            "name": "Status",
+            "summary": "",
+            "url": "namespaces/phpolar-phpolar-http-status.html"
         }            ]
 );

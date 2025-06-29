@@ -191,11 +191,13 @@
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/phpolar.html">Phpolar</a></li>
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/phpolar-phpolar.html">Phpolar</a></li>
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/phpolar-phpolar-http.html">Http</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/phpolar-phpolar-http-status.html">Status</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/phpolar-phpolar-http-status-clienterror.html">ClientError</a></li>
     </ul>
 
     <article class="phpdocumentor-element -class">
         <h2 class="phpdocumentor-content__title">
-    RequestProcessingHandler
+    BadRequest
 
     
             <div class="phpdocumentor-element__package">
@@ -205,9 +207,6 @@
                             </ul>
         </div>
     
-            <span class="phpdocumentor-element__implements">
-            implements
-                            <abbr title="\Psr\Http\Server\RequestHandlerInterface">RequestHandlerInterface</abbr>                    </span>
     
     </h2>
 
@@ -219,17 +218,32 @@
 </div>
 
         <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="Http/RequestProcessingHandler.php"><a href="files/http-requestprocessinghandler.html"><abbr title="Http/RequestProcessingHandler.php">RequestProcessingHandler.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="Http/Status/ClientError/BadRequest.php"><a href="files/http-status-clienterror-badrequest.html"><abbr title="Http/Status/ClientError/BadRequest.php">BadRequest.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">21</span>
+    <span class="phpdocumentor-element-found-in__line">13</span>
 
     </aside>
 
-            <p class="phpdocumentor-summary">Handles request routing for the application.</p>
+            <p class="phpdocumentor-summary">Indicates that the origin server
+server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing) did not find a current representation for the target resource or is not willing to disclose that one exists.</p>
 
 
 
 
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/Phpolar-Phpolar-Http-Status-ClientError-BadRequest.html#tags" class=""><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">link</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                                        <a class="phpdocumentor-tag-link" href="https://datatracker.ietf.org/doc/html/rfc7231#section-6.5.1"> https://datatracker.ietf.org/doc/html/rfc7231#section-6.5.1 </a>
+                    
+                                    </dd>
+                                            </dl>
 
 
 
@@ -237,19 +251,12 @@
 
 <h3 id="toc">
     Table of Contents
-    <a href="classes/Phpolar-Phpolar-Http-RequestProcessingHandler.html#toc" class=""><i class="fas fa-link"></i></a>
+    <a href="classes/Phpolar-Phpolar-Http-Status-ClientError-BadRequest.html#toc" class=""><i class="fas fa-link"></i></a>
 
 </h3>
 
 
 
-    <h4 id="toc-interfaces">
-        Interfaces
-        <a href="classes/Phpolar-Phpolar-Http-RequestProcessingHandler.html#toc-interfaces" class=""><i class="fas fa-link"></i></a>
-
-    </h4>
-    <dl class="phpdocumentor-table-of-contents">
-                    <dt class="phpdocumentor-table-of-contents__entry -interface"><abbr title="\Psr\Http\Server\RequestHandlerInterface">RequestHandlerInterface</abbr></dt>    </dl>
 
 
 
@@ -257,26 +264,6 @@
 
 
 
-<h4 id="toc-methods">
-    Methods
-    <a href="classes/Phpolar-Phpolar-Http-RequestProcessingHandler.html#toc-methods" class=""><i class="fas fa-link"></i></a>
-
-</h4>
-<dl class="phpdocumentor-table-of-contents">
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/Phpolar-Phpolar-Http-RequestProcessingHandler.html#method___construct">__construct()</a>
-    <span>
-                                &nbsp;: mixed    </span>
-</dt>
-
-            <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a class="" href="classes/Phpolar-Phpolar-Http-RequestProcessingHandler.html#method_handle">handle()</a>
-    <span>
-                                &nbsp;: <abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr>    </span>
-</dt>
-<dd>Attempts to locate and execute the target request processor.</dd>
-
-    </dl>
 
 
 
@@ -284,147 +271,12 @@
 
         
 
-            <section class="phpdocumentor-methods">
-        <h3 class="phpdocumentor-elements__header" id="methods">
-            Methods
-            <a href="classes/Phpolar-Phpolar-Http-RequestProcessingHandler.html#methods" class=""><i class="fas fa-link"></i></a>
-
-        </h3>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method___construct">
-        __construct()
-        <a href="classes/Phpolar-Phpolar-Http-RequestProcessingHandler.html#method___construct" class=""><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="Http/RequestProcessingHandler.php"><a href="files/http-requestprocessinghandler.html"><abbr title="Http/RequestProcessingHandler.php">RequestProcessingHandler.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">23</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Phpolar-Phpolar-Http-ServerInterface.html"><abbr title="\Phpolar\Phpolar\Http\ServerInterface">ServerInterface</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$server</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Phpolar-Phpolar-Http-RequestProcessorExecutorInterface.html"><abbr title="\Phpolar\Phpolar\Http\RequestProcessorExecutorInterface">RequestProcessorExecutorInterface</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$processorExecutor</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Phpolar-Phpolar-Http-ResponseBuilderInterface.html"><abbr title="\Phpolar\Phpolar\Http\ResponseBuilderInterface">ResponseBuilderInterface</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$responseBuilder</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Phpolar-Phpolar-Http-AuthorizationCheckerInterface.html"><abbr title="\Phpolar\Phpolar\Http\AuthorizationCheckerInterface">AuthorizationCheckerInterface</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$authChecker</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Phpolar\PropertyInjectorContract\PropertyInjectorInterface">PropertyInjectorInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$propertyInjector</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Phpolar\ModelResolver\ModelResolverInterface">ModelResolverInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$modelResolver</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-    
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$server</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Phpolar-Phpolar-Http-ServerInterface.html"><abbr title="\Phpolar\Phpolar\Http\ServerInterface">ServerInterface</abbr></a></span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$processorExecutor</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Phpolar-Phpolar-Http-RequestProcessorExecutorInterface.html"><abbr title="\Phpolar\Phpolar\Http\RequestProcessorExecutorInterface">RequestProcessorExecutorInterface</abbr></a></span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$responseBuilder</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Phpolar-Phpolar-Http-ResponseBuilderInterface.html"><abbr title="\Phpolar\Phpolar\Http\ResponseBuilderInterface">ResponseBuilderInterface</abbr></a></span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$authChecker</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Phpolar-Phpolar-Http-AuthorizationCheckerInterface.html"><abbr title="\Phpolar\Phpolar\Http\AuthorizationCheckerInterface">AuthorizationCheckerInterface</abbr></a></span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$propertyInjector</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Phpolar\PropertyInjectorContract\PropertyInjectorInterface">PropertyInjectorInterface</abbr></span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$modelResolver</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Phpolar\ModelResolver\ModelResolverInterface">ModelResolverInterface</abbr></span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
-            </dl>
-
-    
-
-    
-
-    
-</article>
-                    <article
-        class="phpdocumentor-element
-            -method
-            -public
-                                                        "
->
-    <h4 class="phpdocumentor-element__name" id="method_handle">
-        handle()
-        <a href="classes/Phpolar-Phpolar-Http-RequestProcessingHandler.html#method_handle" class=""><i class="fas fa-link"></i></a>
-
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="Http/RequestProcessingHandler.php"><a href="files/http-requestprocessinghandler.html"><abbr title="Http/RequestProcessingHandler.php">RequestProcessingHandler.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">35</span>
-
-    </aside>
-
-        <p class="phpdocumentor-summary">Attempts to locate and execute the target request processor.</p>
-
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">handle</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\ServerRequestInterface">ServerRequestInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$request</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr></span></code>
-
-    <div class="phpdocumentor-label-line">
-        </div>
-    
-    
-        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
-    <dl class="phpdocumentor-argument-list">
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$request</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\ServerRequestInterface">ServerRequestInterface</abbr></span>
-                            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                
-            </dd>
-            </dl>
-
-    
-
-    
-
-            <section>
-        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type"><abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr></span>
-            </section>
-
-</article>
-            </section>
-
+        
         <div class="phpdocumentor-modal" id="source-view">
     <div class="phpdocumentor-modal-bg" data-exit-button></div>
     <div class="phpdocumentor-modal-container">
         <div class="phpdocumentor-modal-content">
-            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/Http/RequestProcessingHandler.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
+            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/Http/Status/ClientError/BadRequest.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
         </div>
         <button data-exit-button class="phpdocumentor-modal__close">&times;</button>
     </div>
@@ -523,18 +375,10 @@
             <li class="phpdocumentor-on-this-page-section__title">Table Of Contents</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
-                                                                                <li><a href="classes/Phpolar-Phpolar-Http-RequestProcessingHandler.html#toc-methods">Methods</a></li>
-                                    </ul>
+                                                                            </ul>
             </li>
             
             
-                        <li class="phpdocumentor-on-this-page-section__title">Methods</li>
-            <li>
-                <ul class="phpdocumentor-list -clean">
-                                            <li class=""><a href="classes/Phpolar-Phpolar-Http-RequestProcessingHandler.html#method___construct">__construct()</a></li>
-                                            <li class=""><a href="classes/Phpolar-Phpolar-Http-RequestProcessingHandler.html#method_handle">handle()</a></li>
-                                    </ul>
-            </li>
                     </ul>
     </section>
 
@@ -551,7 +395,7 @@
         </section>
     </section>
 </section>
-        <a href="classes/Phpolar-Phpolar-Http-RequestProcessingHandler.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+        <a href="classes/Phpolar-Phpolar-Http-Status-ClientError-BadRequest.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
     </main>
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/prism.min.js"></script>
