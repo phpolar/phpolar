@@ -27,5 +27,7 @@
 /.vscode                    export-ignore
 *.png                       export-ignore
 *.svg                       export-ignore
+phpunit.local-coverage.xml  export-ignore
 
 *.php diff=php
+
