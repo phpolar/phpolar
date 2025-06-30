@@ -10,10 +10,10 @@ use PhpCommonEnums\HttpResponseCode\Enumeration\HttpResponseCodeEnum as HttpResp
 use PhpCommonEnums\MimeType\Enumeration\MimeTypeEnum as MimeType;
 use Phpolar\HttpMessageTestUtils\MemoryStreamStub;
 use Phpolar\HttpMessageTestUtils\ResponseStub;
+use Phpolar\HttpRequestProcessor\RequestProcessorInterface;
+use Phpolar\HttpRequestProcessor\RequestProcessorResolverInterface;
 use Phpolar\ModelResolver\ModelResolverInterface;
 use Phpolar\PropertyInjectorContract\PropertyInjectorInterface;
-use Phpolar\Routable\RoutableResolverInterface;
-use Phpolar\Routable\RoutableInterface;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
@@ -100,10 +100,8 @@ final class RoutingTest extends TestCase
             ->method("getBody")
             ->willReturn($streamStub);
 
-        $indexHandler = new class ($expectedResponse) implements RoutableInterface {
-            public function __construct(private string $responseTemplate)
-            {
-            }
+        $indexHandler = new class ($expectedResponse) implements RequestProcessorInterface {
+            public function __construct(private string $responseTemplate) {}
 
             public function process(): string
             {
@@ -125,8 +123,8 @@ final class RoutingTest extends TestCase
             processorExecutor: new RequestProcessorExecutor(),
             responseBuilder: $this->getResponseBuilder(),
             authChecker: new AuthorizationChecker(
-                routableResolver: new class () implements RoutableResolverInterface {
-                    public function resolve(RoutableInterface $target): RoutableInterface|false
+                routableResolver: new class () implements RequestProcessorResolverInterface {
+                    public function resolve(RequestProcessorInterface $target): RequestProcessorInterface|false
                     {
                         return $target;
                     }
@@ -167,10 +165,8 @@ final class RoutingTest extends TestCase
 
         $propertyInjector = $this->createStub(PropertyInjectorInterface::class);
         $modelResolver = $this->createStub(ModelResolverInterface::class);
-        $indexHandler = new class () implements RoutableInterface {
-            public function __construct()
-            {
-            }
+        $indexHandler = new class () implements RequestProcessorInterface {
+            public function __construct() {}
 
             public function process(): string
             {
@@ -193,8 +189,8 @@ final class RoutingTest extends TestCase
             ]),
             responseBuilder: $this->getResponseBuilder(),
             authChecker: new AuthorizationChecker(
-                routableResolver: new class () implements RoutableResolverInterface {
-                    public function resolve(RoutableInterface $target): RoutableInterface|false
+                routableResolver: new class () implements RequestProcessorResolverInterface {
+                    public function resolve(RequestProcessorInterface $target): RequestProcessorInterface|false
                     {
                         return $target;
                     }

@@ -7,11 +7,11 @@ namespace Phpolar\Phpolar\Http;
 use PhpCommonEnums\HttpMethod\Enumeration\HttpMethodEnum as HttpMethod;
 use PhpCommonEnums\HttpResponseCode\Enumeration\HttpResponseCodeEnum as HttpResponseCode;
 use PhpCommonEnums\MimeType\Enumeration\MimeTypeEnum as MimeType;
+use Phpolar\HttpRequestProcessor\RequestProcessorInterface;
 use Phpolar\Phpolar\Http\Representations;
 use Phpolar\Phpolar\Http\Server;
 use Phpolar\Phpolar\Http\ServerInterface;
 use Phpolar\Phpolar\Http\Target;
-use Phpolar\Routable\RoutableInterface;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\CoversClassesThatImplementInterface;
 use PHPUnit\Framework\Attributes\TestDox;
@@ -41,7 +41,7 @@ final class ServerTest extends TestCase
     #[TestDox("Shall match a route with params to the correct handler with parsed route params. \$location matched \$givenRequestPath")]
     public function testa(HttpMethod $method, string $methodString, string $location, string $givenRequestPath)
     {
-        $handlerStub = $this->createStub(RoutableInterface::class);
+        $handlerStub = $this->createStub(RequestProcessorInterface::class);
         $uriStub = $this->createStub(UriInterface::class);
         $requestStub = $this->createStub(ServerRequestInterface::class);
 
@@ -95,7 +95,7 @@ final class ServerTest extends TestCase
     #[TestDox("Shall not match a route with params when the path is not a complete match. \$location did not match \$givenRequestPath")]
     public function testb(HttpMethod $method, string $methodString, string $location, string $givenRequestPath)
     {
-        $handlerStub = $this->createStub(RoutableInterface::class);
+        $handlerStub = $this->createStub(RequestProcessorInterface::class);
         $uriStub = $this->createStub(UriInterface::class);
         $requestStub = $this->createStub(ServerRequestInterface::class);
 
@@ -138,7 +138,7 @@ final class ServerTest extends TestCase
     #[TestDox("Shall return \"method not allowed\" when the request method is not configured on the target. \$location did not match \$givenRequestPath")]
     public function testc(HttpMethod $method, string $methodString, string $location, string $givenRequestPath)
     {
-        $handlerStub = $this->createStub(RoutableInterface::class);
+        $handlerStub = $this->createStub(RequestProcessorInterface::class);
         $uriStub = $this->createStub(UriInterface::class);
         $requestStub = $this->createStub(ServerRequestInterface::class);
 

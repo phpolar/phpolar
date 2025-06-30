@@ -19,10 +19,10 @@ use Phpolar\HttpMessageTestUtils\RequestStub;
 use Phpolar\HttpMessageTestUtils\ResponseFactoryStub;
 use Phpolar\HttpMessageTestUtils\ResponseStub;
 use Phpolar\HttpMessageTestUtils\StreamFactoryStub;
+use Phpolar\HttpRequestProcessor\RequestProcessorInterface;
+use Phpolar\HttpRequestProcessor\RequestProcessorResolverInterface;
 use Phpolar\Model\ParsedBodyResolver;
 use Phpolar\ModelResolver\ModelResolverInterface;
-use Phpolar\Routable\RoutableInterface;
-use Phpolar\Routable\RoutableResolverInterface;
 use Phpolar\Phpolar\Http\RoutingMiddleware;
 use Phpolar\Phpolar\Tests\Stubs\ConfigurableContainerStub;
 use Phpolar\Phpolar\Tests\Stubs\ContainerConfigurationStub;
@@ -65,8 +65,8 @@ final class MemoryUsageTest extends TestCase
         $config[ServerInterface::class] = $server;
         $config[RoutingMiddleware::class] = static fn(ArrayAccess $config) => new RoutingMiddleware($config[RequestProcessingHandler::class]);
         $config[ModelResolverInterface::class] = $modelResolver;
-        $config[RoutableResolverInterface::class] = new class () implements RoutableResolverInterface {
-            public function resolve(RoutableInterface $target): RoutableInterface|false
+        $config[RequestProcessorResolverInterface::class] = new class () implements RequestProcessorResolverInterface {
+            public function resolve(RequestProcessorInterface $target): RequestProcessorInterface|false
             {
                 return $target;
             }
@@ -77,7 +77,7 @@ final class MemoryUsageTest extends TestCase
             server: $config[ServerInterface::class],
             responseBuilder: $config[ResponseBuilderInterface::class],
             authChecker: new AuthorizationChecker(
-                routableResolver: $config[RoutableResolverInterface::class],
+                routableResolver: $config[RequestProcessorResolverInterface::class],
                 unauthHandler: new class () implements RequestHandlerInterface {
                     public function handle(ServerRequestInterface $request): ResponseInterface
                     {
@@ -141,7 +141,7 @@ final class MemoryUsageTest extends TestCase
                 representations: new Representations([
                     MimeType::TextHtml,
                 ]),
-                requestProcessor: new class () implements RoutableInterface {
+                requestProcessor: new class () implements RequestProcessorInterface {
                     public function process(): string
                     {
                         return "content";

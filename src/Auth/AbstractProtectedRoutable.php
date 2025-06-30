@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Phpolar\Phpolar\Auth;
 
-use Phpolar\Routable\RoutableInterface;
+use Phpolar\HttpRequestProcessor\RequestProcessorInterface;
 
 /**
  * Represents a target object for a request route
@@ -17,7 +17,7 @@ use Phpolar\Routable\RoutableInterface;
  *
  * @phan-file-suppress PhanWriteOnlyPublicProperty
  */
-abstract class AbstractProtectedRoutable implements RoutableInterface
+abstract class AbstractProtectedRoutable implements RequestProcessorInterface
 {
     /**
      * Contains credentials for an authenticated user
