@@ -36,7 +36,7 @@
         "php-contrib/authenticator": "^2.0",
         "php-contrib/response-filter": "^2.0",
         "php-contrib/validator": "^2.0",
-        "phpolar/http-request-processor": "^1.0",
+        "phpolar/http-request-processor": "^1.1",
         "phpolar/model-resolver": "^1.0",
         "phpolar/property-injector-contract": "^1.0",
         "phpolar/representations": "^1.0",
