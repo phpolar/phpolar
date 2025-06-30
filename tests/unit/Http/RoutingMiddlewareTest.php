@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Phpolar\Phpolar\Http;
 
-use Phpolar\HttpCodes\ResponseCode;
+use PhpCommonEnums\HttpResponseCode\Enumeration\HttpResponseCodeEnum as ResponseCode;
 use Phpolar\HttpMessageTestUtils\RequestStub;
 use Phpolar\HttpMessageTestUtils\ResponseStub;
 use Phpolar\HttpMessageTestUtils\StreamFactoryStub;
@@ -33,7 +33,7 @@ final class RoutingMiddlewareTest extends TestCase
         $nextHandlerSpy = $this->createMock(RequestHandlerInterface::class);
         $nextHandlerSpy->expects($this->once())->method("handle");
         $routingHandlerStub = $this->createStub(RequestHandlerInterface::class);
-        $matchingRouteResponse = new ResponseStub(ResponseCode::NOT_FOUND);
+        $matchingRouteResponse = new ResponseStub(ResponseCode::NotFound->value);
         $routingHandlerStub->method("handle")->willReturn($matchingRouteResponse);
         $sut = new RoutingMiddleware($routingHandlerStub, new StreamFactoryStub("r"));
         $sut->process(new RequestStub(), $nextHandlerSpy);
@@ -46,7 +46,7 @@ final class RoutingMiddlewareTest extends TestCase
         $nextHandlerSpy->expects($this->never())->method("handle");
         $routingHandlerStub = $this->createStub(RequestHandlerInterface::class);
         $routingHandlerStub->method("handle")->willReturn(
-            new ResponseStub(ResponseCode::OK)
+            new ResponseStub(ResponseCode::Ok->value)
         );
         $sut = new RoutingMiddleware($routingHandlerStub, new StreamFactoryStub("r"));
         $response = $sut->process(new RequestStub(), $nextHandlerSpy);

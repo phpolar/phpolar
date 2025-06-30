@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Phpolar\Phpolar\Http;
 
-use Phpolar\HttpCodes\ResponseCode;
+use PhpCommonEnums\HttpResponseCode\Enumeration\HttpResponseCodeEnum as ResponseCode;
 use Phpolar\HttpMessageTestUtils\RequestStub;
 use Phpolar\HttpMessageTestUtils\ResponseStub;
 use Phpolar\HttpRequestProcessor\RequestProcessorInterface;
@@ -26,7 +26,7 @@ final class AuthorizationCheckerTest extends TestCase
         $routableResolverMock = $this->createMock(RequestProcessorResolverInterface::class);
         $routableResolverMock->method("resolve")->willReturn($givenRoutable);
         $unauthHander = $this->createMock(RequestHandlerInterface::class);
-        $unauthHander->method("handle")->willReturn(new ResponseStub(ResponseCode::UNAUTHORIZED));
+        $unauthHander->method("handle")->willReturn(new ResponseStub(ResponseCode::Unauthorized->value));
         $sut = new AuthorizationChecker($routableResolverMock, $unauthHander);
         $result = $sut->authorize($givenRoutable, new RequestStub());
         $this->assertInstanceOf(RequestProcessorInterface::class, $result);
@@ -39,10 +39,10 @@ final class AuthorizationCheckerTest extends TestCase
         $routableResolverMock = $this->createMock(RequestProcessorResolverInterface::class);
         $routableResolverMock->method("resolve")->willReturn(false);
         $unauthHander = $this->createMock(RequestHandlerInterface::class);
-        $unauthHander->method("handle")->willReturn(new ResponseStub(ResponseCode::UNAUTHORIZED));
+        $unauthHander->method("handle")->willReturn(new ResponseStub(ResponseCode::Unauthorized->value));
         $sut = new AuthorizationChecker($routableResolverMock, $unauthHander);
         $result = $sut->authorize($givenRoutable, new RequestStub());
         $this->assertInstanceOf(ResponseInterface::class, $result);
-        $this->assertSame(ResponseCode::UNAUTHORIZED, $result->getStatusCode());
+        $this->assertSame(ResponseCode::Unauthorized->value, $result->getStatusCode());
     }
 }
