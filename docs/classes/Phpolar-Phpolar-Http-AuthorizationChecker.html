@@ -273,7 +273,7 @@ for a given Routable.</p>
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/Phpolar-Phpolar-Http-AuthorizationChecker.html#method_authorize">authorize()</a>
     <span>
-                                &nbsp;: <abbr title="\Phpolar\Routable\RoutableInterface">RoutableInterface</abbr>|<abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr>    </span>
+                                &nbsp;: <abbr title="\Phpolar\HttpRequestProcessor\RequestProcessorInterface">RequestProcessorInterface</abbr>|<abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr>    </span>
 </dt>
 <dd>Returns Routable when authorization is successful
 and an Unauthorized HTTP response when it is not.</dd>
@@ -313,7 +313,7 @@ and an Unauthorized HTTP response when it is not.</dd>
     
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Phpolar\Routable\RoutableResolverInterface">RoutableResolverInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$routableResolver</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Server\RequestHandlerInterface">RequestHandlerInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$unauthHandler</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Phpolar\HttpRequestProcessor\RequestProcessorResolverInterface">RequestProcessorResolverInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$routableResolver</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Server\RequestHandlerInterface">RequestHandlerInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$unauthHandler</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -323,7 +323,7 @@ and an Unauthorized HTTP response when it is not.</dd>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$routableResolver</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Phpolar\Routable\RoutableResolverInterface">RoutableResolverInterface</abbr></span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Phpolar\HttpRequestProcessor\RequestProcessorResolverInterface">RequestProcessorResolverInterface</abbr></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
@@ -357,7 +357,7 @@ and an Unauthorized HTTP response when it is not.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Http/AuthorizationChecker.php"><a href="files/http-authorizationchecker.html"><abbr title="Http/AuthorizationChecker.php">AuthorizationChecker.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">29</span>
+    <span class="phpdocumentor-element-found-in__line">28</span>
 
     </aside>
 
@@ -366,7 +366,7 @@ and an Unauthorized HTTP response when it is not.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">authorize</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Phpolar\Routable\RoutableInterface">RoutableInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$routable</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\ServerRequestInterface">ServerRequestInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$request</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Phpolar\Routable\RoutableInterface">RoutableInterface</abbr>|<abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr></span></code>
+                    <span class="phpdocumentor-signature__name">authorize</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Phpolar\HttpRequestProcessor\RequestProcessorInterface">RequestProcessorInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$routable</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\ServerRequestInterface">ServerRequestInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$request</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Phpolar\HttpRequestProcessor\RequestProcessorInterface">RequestProcessorInterface</abbr>|<abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr></span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -376,7 +376,7 @@ and an Unauthorized HTTP response when it is not.</p>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
                 <span class="phpdocumentor-signature__argument__name">$routable</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Phpolar\Routable\RoutableInterface">RoutableInterface</abbr></span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Phpolar\HttpRequestProcessor\RequestProcessorInterface">RequestProcessorInterface</abbr></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                 
@@ -396,7 +396,7 @@ and an Unauthorized HTTP response when it is not.</p>
 
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type"><abbr title="\Phpolar\Routable\RoutableInterface">RoutableInterface</abbr>|<abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr></span>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\Phpolar\HttpRequestProcessor\RequestProcessorInterface">RequestProcessorInterface</abbr>|<abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr></span>
             </section>
 
 </article>
