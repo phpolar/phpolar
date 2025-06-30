@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Phpolar\Phpolar\Http;
 
 use PhpCommonEnums\HttpResponseCode\Enumeration\HttpResponseCodeEnum as HttpResponseCode;
+use Phpolar\HttpRequestProcessor\RequestProcessorExecutorInterface;
 use Phpolar\ModelResolver\ModelResolverInterface;
 use Phpolar\Phpolar\Http\Status\ClientError\BadRequest;
 use Phpolar\Phpolar\Http\Status\ClientError\Forbidden;

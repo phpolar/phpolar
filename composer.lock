@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "317253a1946a31ff0706b461dcae76f2",
+    "content-hash": "0157bd9a40645c4772dc625d85009392",
     "packages": [
         {
             "name": "guzzlehttp/psr7",
@@ -521,16 +521,16 @@
         },
         {
             "name": "phpolar/http-request-processor",
-            "version": "1.0.1",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpolar/http-request-processor.git",
-                "reference": "a19661795088414e97d28775bc656fbfb83bd216"
+                "reference": "4b57d68ccbe080aa531dc658eabd016b04b34ac5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpolar/http-request-processor/zipball/a19661795088414e97d28775bc656fbfb83bd216",
-                "reference": "a19661795088414e97d28775bc656fbfb83bd216",
+                "url": "https://api.github.com/repos/phpolar/http-request-processor/zipball/4b57d68ccbe080aa531dc658eabd016b04b34ac5",
+                "reference": "4b57d68ccbe080aa531dc658eabd016b04b34ac5",
                 "shasum": ""
             },
             "require": {
@@ -552,9 +552,9 @@
             "description": "Supports request processing interoperability.",
             "support": {
                 "issues": "https://github.com/phpolar/http-request-processor/issues",
-                "source": "https://github.com/phpolar/http-request-processor/tree/1.0.1"
+                "source": "https://github.com/phpolar/http-request-processor/tree/1.1.0"
             },
-            "time": "2025-06-29T22:48:06+00:00"
+            "time": "2025-06-30T00:56:01+00:00"
         },
         {
             "name": "phpolar/model-resolver",
