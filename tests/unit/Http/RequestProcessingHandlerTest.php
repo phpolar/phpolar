@@ -11,6 +11,7 @@ use PhpCommonEnums\MimeType\Enumeration\MimeTypeEnum as MimeType;
 use Phpolar\HttpMessageTestUtils\RequestStub;
 use Phpolar\HttpMessageTestUtils\ResponseStub;
 use Phpolar\HttpMessageTestUtils\UriStub;
+use Phpolar\HttpRequestProcessor\RequestProcessorExecutorInterface;
 use Phpolar\HttpRequestProcessor\RequestProcessorInterface;
 use Phpolar\ModelResolver\ModelResolverInterface;
 use Phpolar\Phpolar\Http\Status\ClientError\BadRequest;
