@@ -1,3 +1,9 @@
+## 8.0.0 (2025-06-29)
+
+### Feat
+
+- use http request processor (#447)
+
 ## 7.3.0 (2025-06-29)
 
 ### Feat
