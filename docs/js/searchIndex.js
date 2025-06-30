@@ -301,16 +301,6 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Phpolar-Phpolar-Http-RequestProcessorExecutor.html#method_execute"
         },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Http\\RequestProcessorExecutorInterface",
-            "name": "RequestProcessorExecutorInterface",
-            "summary": "Invokes\u0020the\u0020process\u0020method\u0020with\u0020given\u0020arguments.",
-            "url": "classes/Phpolar-Phpolar-Http-RequestProcessorExecutorInterface.html"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Http\\RequestProcessorExecutorInterface\u003A\u003Aexecute\u0028\u0029",
-            "name": "execute",
-            "summary": "",
-            "url": "classes/Phpolar-Phpolar-Http-RequestProcessorExecutorInterface.html#method_execute"
-        },                {
             "fqsen": "\\Phpolar\\Phpolar\\Http\\ResponseBuilder",
             "name": "ResponseBuilder",
             "summary": "",
