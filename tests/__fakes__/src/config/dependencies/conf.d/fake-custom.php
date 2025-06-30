@@ -3,12 +3,13 @@
 declare(strict_types=1);
 
 use Laminas\HttpHandlerRunner\Emitter\SapiEmitter;
-use Phpolar\HttpCodes\ResponseCode;
 use Phpolar\HttpMessageTestUtils\ResponseFactoryStub;
 use Phpolar\HttpMessageTestUtils\ResponseStub;
 use Phpolar\HttpMessageTestUtils\StreamFactoryStub;
 use Phpolar\ModelResolver\ModelResolverInterface;
 use PhpContrib\Authenticator\AuthenticatorInterface;
+use Phpolar\HttpRequestProcessor\RequestProcessorInterface;
+use Phpolar\HttpRequestProcessor\RequestProcessorResolverInterface;
 use Phpolar\Model\ParsedBodyResolver;
 use Phpolar\Phpolar\Http\MiddlewareQueueRequestHandler;
 use Phpolar\Phpolar\DependencyInjection\DiTokens;
@@ -16,12 +17,10 @@ use Phpolar\Phpolar\Http\AuthorizationChecker;
 use Phpolar\Phpolar\Http\RequestProcessingHandler;
 use Phpolar\Phpolar\Http\RequestProcessorExecutor;
 use Phpolar\Phpolar\Http\ResponseBuilder;
-use Phpolar\Routable\RoutableInterface;
 use Phpolar\Phpolar\Http\RoutingMiddleware;
 use Phpolar\Phpolar\Http\Server;
 use Phpolar\Phpolar\Http\ServerInterface;
 use Phpolar\PropertyInjectorContract\PropertyInjectorInterface;
-use Phpolar\Routable\RoutableResolverInterface;
 use Phpolar\PurePhp\TemplateEngine;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
@@ -36,7 +35,7 @@ return [
         new class () implements RequestHandlerInterface {
             public function handle(ServerRequestInterface $request): ResponseInterface
             {
-                return (new ResponseFactoryStub((new StreamFactoryStub("+w"))->createStream()))->createResponse(ResponseCode::NOT_FOUND);
+                return (new ResponseFactoryStub((new StreamFactoryStub("+w"))->createStream()))->createResponse(404);
             }
         }
     ),
@@ -76,8 +75,8 @@ return [
     ),
     RequestProcessorExecutor::class => new RequestProcessorExecutor(),
     AuthorizationChecker::class => static fn() => new AuthorizationChecker(
-        new class () implements RoutableResolverInterface {
-            public function resolve(RoutableInterface $target): RoutableInterface | false
+        new class () implements RequestProcessorResolverInterface {
+            public function resolve(RequestProcessorInterface $target): RequestProcessorInterface | false
             {
                 return $target;
             }

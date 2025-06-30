@@ -11,13 +11,13 @@ use PhpCommonEnums\MimeType\Enumeration\MimeTypeEnum as MimeType;
 use Phpolar\HttpMessageTestUtils\RequestStub;
 use Phpolar\HttpMessageTestUtils\ResponseStub;
 use Phpolar\HttpMessageTestUtils\UriStub;
+use Phpolar\HttpRequestProcessor\RequestProcessorInterface;
 use Phpolar\ModelResolver\ModelResolverInterface;
 use Phpolar\Phpolar\Http\Status\ClientError\BadRequest;
 use Phpolar\Phpolar\Http\Status\ClientError\Forbidden;
 use Phpolar\Phpolar\Http\Status\ClientError\NotFound;
 use Phpolar\Phpolar\Http\Status\ClientError\Unauthorized;
 use Phpolar\PropertyInjectorContract\PropertyInjectorInterface;
-use Phpolar\Routable\RoutableInterface;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\TestDox;
@@ -101,7 +101,7 @@ final class RequestProcessingHandlerTest extends TestCase
             location: $location,
             method: HttpMethod::Get,
             representations: new Representations([MimeType::ApplicationJson]),
-            requestProcessor: $this->createStub(RoutableInterface::class),
+            requestProcessor: $this->createStub(RequestProcessorInterface::class),
         );
         $requestStub
             ->method("getHeader")
@@ -151,7 +151,7 @@ final class RequestProcessingHandlerTest extends TestCase
             location: $location,
             method: HttpMethod::Get,
             representations: new Representations([MimeType::TextHtml]),
-            requestProcessor: $this->createStub(RoutableInterface::class),
+            requestProcessor: $this->createStub(RequestProcessorInterface::class),
         );
         $requestStub
             ->method("getHeader")
@@ -198,7 +198,7 @@ final class RequestProcessingHandlerTest extends TestCase
         $propertyInjectorStub = $this->createStub(PropertyInjectorInterface::class);
         $responseStub = $this->createStub(ResponseInterface::class);
         $responseBuilderStub = $this->createStub(ResponseBuilderInterface::class);
-        $requestProcessorStub = $this->createStub(RoutableInterface::class);
+        $requestProcessorStub = $this->createStub(RequestProcessorInterface::class);
         $streamStub = $this->createStub(StreamInterface::class);
         $target = new Target(
             location: $location,
@@ -264,7 +264,7 @@ final class RequestProcessingHandlerTest extends TestCase
         $propertyInjectorStub = $this->createStub(PropertyInjectorInterface::class);
         $responseStub = $this->createStub(ResponseInterface::class);
         $responseBuilderStub = $this->createStub(ResponseBuilderInterface::class);
-        $requestProcessorStub = $this->createStub(RoutableInterface::class);
+        $requestProcessorStub = $this->createStub(RequestProcessorInterface::class);
         $streamStub = $this->createStub(StreamInterface::class);
         $uriStub = $this->createStub(UriInterface::class);
         $requestProcessorExecutorMock = $this->createMock(RequestProcessorExecutorInterface::class);
@@ -343,7 +343,7 @@ final class RequestProcessingHandlerTest extends TestCase
         $propertyInjectorStub = $this->createStub(PropertyInjectorInterface::class);
         $responseStub = $this->createStub(ResponseInterface::class);
         $responseBuilderStub = $this->createStub(ResponseBuilderInterface::class);
-        $requestProcessorStub = $this->createStub(RoutableInterface::class);
+        $requestProcessorStub = $this->createStub(RequestProcessorInterface::class);
         $streamStub = $this->createStub(StreamInterface::class);
         $uriStub = $this->createStub(UriInterface::class);
         $requestProcessorExecutorMock = $this->createMock(RequestProcessorExecutorInterface::class);
@@ -427,7 +427,7 @@ final class RequestProcessingHandlerTest extends TestCase
         $propertyInjectorStub = $this->createStub(PropertyInjectorInterface::class);
         $responseStub = $this->createStub(ResponseInterface::class);
         $responseBuilderStub = $this->createStub(ResponseBuilderInterface::class);
-        $requestProcessorStub = $this->createStub(RoutableInterface::class);
+        $requestProcessorStub = $this->createStub(RequestProcessorInterface::class);
         $streamStub = $this->createStub(StreamInterface::class);
         $uriStub = $this->createStub(UriInterface::class);
         $requestProcessorExecutorMock = $this->createMock(RequestProcessorExecutorInterface::class);
@@ -511,7 +511,7 @@ final class RequestProcessingHandlerTest extends TestCase
         $propertyInjectorStub = $this->createStub(PropertyInjectorInterface::class);
         $responseStub = $this->createStub(ResponseInterface::class);
         $responseBuilderStub = $this->createStub(ResponseBuilderInterface::class);
-        $requestProcessorStub = $this->createStub(RoutableInterface::class);
+        $requestProcessorStub = $this->createStub(RequestProcessorInterface::class);
         $streamStub = $this->createStub(StreamInterface::class);
         $uriStub = $this->createStub(UriInterface::class);
         $requestProcessorExecutorMock = $this->createMock(RequestProcessorExecutorInterface::class);
@@ -595,7 +595,7 @@ final class RequestProcessingHandlerTest extends TestCase
         $authCheckStub = $this->createStub(AuthorizationCheckerInterface::class);
         $propertyInjectorStub = $this->createStub(PropertyInjectorInterface::class);
         $modelResolverStub = $this->createStub(ModelResolverInterface::class);
-        $requestProcessorStub = $this->createStub(RoutableInterface::class);
+        $requestProcessorStub = $this->createStub(RequestProcessorInterface::class);
 
         $processorExecutorStub
             ->method("execute")
@@ -658,7 +658,7 @@ final class RequestProcessingHandlerTest extends TestCase
         $authCheckStub = $this->createStub(AuthorizationCheckerInterface::class);
         $propertyInjectorStub = $this->createStub(PropertyInjectorInterface::class);
         $modelResolverStub = $this->createStub(ModelResolverInterface::class);
-        $requestProcessorStub = $this->createStub(RoutableInterface::class);
+        $requestProcessorStub = $this->createStub(RequestProcessorInterface::class);
 
         $processorExecutorStub
             ->method("execute")
@@ -721,7 +721,7 @@ final class RequestProcessingHandlerTest extends TestCase
         $authCheckStub = $this->createStub(AuthorizationCheckerInterface::class);
         $propertyInjectorStub = $this->createStub(PropertyInjectorInterface::class);
         $modelResolverStub = $this->createStub(ModelResolverInterface::class);
-        $requestProcessorStub = $this->createStub(RoutableInterface::class);
+        $requestProcessorStub = $this->createStub(RequestProcessorInterface::class);
 
         $processorExecutorStub
             ->method("execute")
@@ -784,7 +784,7 @@ final class RequestProcessingHandlerTest extends TestCase
         $authCheckStub = $this->createStub(AuthorizationCheckerInterface::class);
         $propertyInjectorStub = $this->createStub(PropertyInjectorInterface::class);
         $modelResolverStub = $this->createStub(ModelResolverInterface::class);
-        $requestProcessorStub = $this->createStub(RoutableInterface::class);
+        $requestProcessorStub = $this->createStub(RequestProcessorInterface::class);
 
         $processorExecutorStub
             ->method("execute")

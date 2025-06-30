@@ -18,6 +18,8 @@ declare(strict_types=1);
 use PhpCommonEnums\HttpResponseCode\Enumeration\HttpResponseCodeEnum as HttpResponseCode;
 use Phpolar\ModelResolver\ModelResolverInterface;
 use PhpContrib\Authenticator\AuthenticatorInterface;
+use Phpolar\HttpRequestProcessor\RequestProcessorInterface;
+use Phpolar\HttpRequestProcessor\RequestProcessorResolverInterface;
 use Phpolar\Phpolar\Auth\ProtectedRoutableResolver;
 use Phpolar\Phpolar\Http\RoutingMiddleware;
 use Phpolar\Phpolar\Http\MiddlewareQueueRequestHandler;
@@ -28,8 +30,6 @@ use Phpolar\Phpolar\Http\RequestProcessorExecutor;
 use Phpolar\Phpolar\Http\ResponseBuilder;
 use Phpolar\Phpolar\Http\ServerInterface;
 use Phpolar\PropertyInjectorContract\PropertyInjectorInterface;
-use Phpolar\Routable\RoutableInterface;
-use Phpolar\Routable\RoutableResolverInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -39,10 +39,10 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 return [
     RequestProcessorExecutor::class => new RequestProcessorExecutor(),
-    RoutableResolverInterface::class => static fn(ContainerInterface $container) => new ProtectedRoutableResolver($container->get(AuthenticatorInterface::class)),
+    RequestProcessorResolverInterface::class => static fn(ContainerInterface $container) => new ProtectedRoutableResolver($container->get(AuthenticatorInterface::class)),
     DiTokens::RESPONSE_EMITTER => new Laminas\HttpHandlerRunner\Emitter\SapiEmitter(),
-    DiTokens::NOOP_ROUTABLE_RESOLVER => new class() implements RoutableResolverInterface {
-        public function resolve(RoutableInterface $target): RoutableInterface|false
+    DiTokens::NOOP_ROUTABLE_RESOLVER => new class() implements RequestProcessorResolverInterface {
+        public function resolve(RequestProcessorInterface $target): RequestProcessorInterface|false
         {
             // authorized by default
             return $target;
@@ -99,7 +99,7 @@ return [
         modelResolver: $container->get(ModelResolverInterface::class),
     ),
     AuthorizationChecker::class => static fn(ContainerInterface $container) => new AuthorizationChecker(
-        routableResolver: $container->get(RoutableResolverInterface::class),
+        routableResolver: $container->get(RequestProcessorResolverInterface::class),
         unauthHandler: $container->get(DiTokens::UNAUTHORIZED_HANDLER),
     ),
     RoutingMiddleware::class => static fn(ContainerInterface $container) => new RoutingMiddleware($container->get(RequestProcessingHandler::class)),

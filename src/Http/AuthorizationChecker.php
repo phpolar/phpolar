@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Phpolar\Phpolar\Http;
 
-use Phpolar\Routable\RoutableInterface;
-use Phpolar\Routable\RoutableResolverInterface;
+use Phpolar\HttpRequestProcessor\RequestProcessorInterface;
+use Phpolar\HttpRequestProcessor\RequestProcessorResolverInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
@@ -17,16 +17,15 @@ use Psr\Http\Server\RequestHandlerInterface;
 final class AuthorizationChecker implements AuthorizationCheckerInterface
 {
     public function __construct(
-        private readonly RoutableResolverInterface $routableResolver,
+        private readonly RequestProcessorResolverInterface $routableResolver,
         private readonly RequestHandlerInterface $unauthHandler,
-    ) {
-    }
+    ) {}
 
     /**
      * Returns Routable when authorization is successful
      * and an Unauthorized HTTP response when it is not.
      */
-    public function authorize(RoutableInterface $routable, ServerRequestInterface $request): RoutableInterface|ResponseInterface
+    public function authorize(RequestProcessorInterface $routable, ServerRequestInterface $request): RequestProcessorInterface|ResponseInterface
     {
         $authResult = $this->routableResolver->resolve($routable);
 
