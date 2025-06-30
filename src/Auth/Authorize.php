@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Phpolar\Phpolar\Auth;
 
 use Attribute;
-use Phpolar\Routable\RoutableInterface;
 use PhpContrib\Authenticator\AuthenticatorInterface;
+use Phpolar\HttpRequestProcessor\RequestProcessorInterface;
 
 /**
  * Use to indicate that a route should
@@ -26,7 +26,7 @@ final class Authorize
     public function getResolvedRoutable(
         AbstractProtectedRoutable $target,
         AuthenticatorInterface $authenticator,
-    ): RoutableInterface | false {
+    ): RequestProcessorInterface | false {
         return $authenticator->isAuthenticated() === false ? false : $target->withUser((object) $authenticator->getUser());
     }
 }

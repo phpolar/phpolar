@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace Phpolar\Phpolar\Http;
 
 use PhpContrib\Authenticator\AuthenticatorInterface;
+use Phpolar\HttpRequestProcessor\RequestProcessorInterface;
 use Phpolar\Phpolar\Auth\AbstractProtectedRoutable;
 use Phpolar\Phpolar\Auth\Authorize;
 use Phpolar\Phpolar\Auth\ProtectedRoutableResolver;
 use Phpolar\Phpolar\Auth\User;
-use Phpolar\Routable\RoutableInterface;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\Attributes\UsesClass;
@@ -94,7 +94,7 @@ final class ProtectedRoutableResolverTest extends TestCase
         $authenticatorMock = $this->createStub(AuthenticatorInterface::class);
         $authenticatorMock->method("isAuthenticated")->willReturn(false);
         $sut = new ProtectedRoutableResolver($authenticatorMock);
-        $target = new class () implements RoutableInterface
+        $target = new class () implements RequestProcessorInterface
         {
             public function process(): string
             {

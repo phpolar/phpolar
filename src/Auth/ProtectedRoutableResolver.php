@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Phpolar\Phpolar\Auth;
 
 use PhpContrib\Authenticator\AuthenticatorInterface;
-use Phpolar\Routable\RoutableInterface;
-use Phpolar\Routable\RoutableResolverInterface;
+use Phpolar\HttpRequestProcessor\RequestProcessorInterface;
+use Phpolar\HttpRequestProcessor\RequestProcessorResolverInterface;
 use ReflectionMethod;
 use ReflectionAttribute;
 
@@ -18,15 +18,13 @@ use ReflectionAttribute;
  * will be returned if it is not configured with
  * an Authorize attribute.
  */
-final class ProtectedRoutableResolver implements RoutableResolverInterface
+final class ProtectedRoutableResolver implements RequestProcessorResolverInterface
 {
     private const ROUTABLE_METHOD_NAME = "process";
 
-    public function __construct(private readonly AuthenticatorInterface $authenticator)
-    {
-    }
+    public function __construct(private readonly AuthenticatorInterface $authenticator) {}
 
-    public function resolve(RoutableInterface $target): RoutableInterface | false
+    public function resolve(RequestProcessorInterface $target): RequestProcessorInterface | false
     {
         $isNotProtected = $target instanceof AbstractProtectedRoutable === false;
 
@@ -50,7 +48,7 @@ final class ProtectedRoutableResolver implements RoutableResolverInterface
     /**
      * @return ReflectionAttribute<Authorize>[]
      */
-    private function getAuthenticateAttributes(RoutableInterface $routable): array
+    private function getAuthenticateAttributes(RequestProcessorInterface $routable): array
     {
         $reflectionMethod = new ReflectionMethod($routable, self::ROUTABLE_METHOD_NAME);
         return $reflectionMethod->getAttributes(Authorize::class);
@@ -62,7 +60,7 @@ final class ProtectedRoutableResolver implements RoutableResolverInterface
     private function resolveRoutable(
         array $authenticateAttrs,
         AbstractProtectedRoutable $target,
-    ): RoutableInterface | false {
+    ): RequestProcessorInterface | false {
         /**
          * @var Authorize
          */

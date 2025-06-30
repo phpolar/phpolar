@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Phpolar\Phpolar\Http;
 
-use Phpolar\Routable\RoutableInterface;
+use Phpolar\HttpRequestProcessor\RequestProcessorInterface;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\Attributes\TestWith;
@@ -17,7 +17,7 @@ final class RequestProcessorExecutorTest extends TestCase
     #[TestWith([[]])]
     public function testa(array $emptyArgumentArray)
     {
-        $requestProcessorMock = $this->createMock(RoutableInterface::class);
+        $requestProcessorMock = $this->createMock(RequestProcessorInterface::class);
 
         $requestProcessorMock
             ->expects($this->once())
@@ -34,7 +34,7 @@ final class RequestProcessorExecutorTest extends TestCase
     #[TestWith([["id" => "123", "name" => "John"], "id", "name"])]
     public function testb(array $argumentArray, string $key0, string $key1)
     {
-        $requestProcessor = new class () implements RoutableInterface {
+        $requestProcessor = new class () implements RequestProcessorInterface {
             public function process(string $id = "", string $name = ""): array|bool|int|null|object|string
             {
                 return sprintf("%s_%s", $id, $name);

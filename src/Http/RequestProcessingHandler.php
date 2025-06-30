@@ -106,35 +106,19 @@ final class RequestProcessingHandler implements RequestHandlerInterface
         );
 
         if ($resource instanceof NotFound) {
-            return $this->responseBuilder->build()
-                ->withStatus(
-                    code: HttpResponseCode::NotFound->value,
-                    reasonPhrase: HttpResponseCode::NotFound->getLabel()
-                );
+            $responseCode = HttpResponseCode::NotFound;
         }
 
         if ($resource instanceof Unauthorized) {
-            return $this->responseBuilder->build()
-                ->withStatus(
-                    code: HttpResponseCode::Unauthorized->value,
-                    reasonPhrase: HttpResponseCode::Unauthorized->getLabel()
-                );
+            $responseCode = HttpResponseCode::Unauthorized;
         }
 
         if ($resource instanceof Forbidden) {
-            return $this->responseBuilder->build()
-                ->withStatus(
-                    code: HttpResponseCode::Forbidden->value,
-                    reasonPhrase: HttpResponseCode::Forbidden->getLabel()
-                );
+            $responseCode = HttpResponseCode::Forbidden;
         }
 
         if ($resource instanceof BadRequest) {
-            return $this->responseBuilder->build()
-                ->withStatus(
-                    code: HttpResponseCode::BadRequest->value,
-                    reasonPhrase: HttpResponseCode::BadRequest->getLabel()
-                );
+            $responseCode = HttpResponseCode::BadRequest;
         }
 
         $representation = $target->getRepresentation($resource);

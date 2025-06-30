@@ -10,7 +10,7 @@ use PhpCommonEnums\MimeType\Enumeration\MimeTypeEnum as MimeType;
 use PhpContrib\Http\Representation\RepresentationInterface;
 use Phpolar\Http\Representations\HtmlRepresentation;
 use Phpolar\Http\Representations\JsonRepresentation;
-use Phpolar\Routable\RoutableInterface;
+use Phpolar\HttpRequestProcessor\RequestProcessorInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
 /**
@@ -32,7 +32,7 @@ final class Target
         public readonly string $location,
         private readonly HttpMethod $method,
         private readonly Representations $representations,
-        public readonly RoutableInterface $requestProcessor,
+        public readonly RequestProcessorInterface $requestProcessor,
     ) {
         $this->accepted = [
             MimeType::TextHtml,

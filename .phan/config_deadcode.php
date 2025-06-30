@@ -364,9 +364,11 @@ return [
         'vendor/phpolar/property-injector-contract/src',
         'vendor/phpolar/pure-php/src',
         'vendor/phpolar/storage-driver/src',
-        'vendor/phpolar/routable/src',
         'vendor/phpolar/routable-factory/src',
+        'vendor/phpolar/representations/src',
+        'vendor/phpolar/http-request-processor/src',
         'vendor/php-contrib/authenticator/src',
+        'vendor/php-contrib/http-representation/src',
         'vendor/php-contrib/validator/src',
     ],
 

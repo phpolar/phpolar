@@ -7,7 +7,7 @@ namespace Phpolar\Phpolar\Http;
 use PhpCommonEnums\HttpMethod\Enumeration\HttpMethodEnum as HttpMethod;
 use PhpCommonEnums\HttpResponseCode\Enumeration\HttpResponseCodeEnum as HttpResponseCode;
 use PhpCommonEnums\MimeType\Enumeration\MimeTypeEnum as MimeType;
-use Phpolar\Routable\RoutableInterface;
+use Phpolar\HttpRequestProcessor\RequestProcessorInterface;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\Attributes\TestWith;
@@ -23,7 +23,7 @@ final class TargetTest extends TestCase
     #[TestWith([[MimeType::ApplicationJson->value], [MimeType::ApplicationEpubZip]])]
     public function testa(array $acceptableRepresentations, array $representations)
     {
-        $requestProcessorStub = $this->createStub(RoutableInterface::class);
+        $requestProcessorStub = $this->createStub(RequestProcessorInterface::class);
         $requestStub = $this->createStub(ServerRequestInterface::class);
         $requestStub
             ->method("getHeader")
@@ -45,7 +45,7 @@ final class TargetTest extends TestCase
     #[TestWith([[MimeType::ApplicationEpubZip->value], [MimeType::ApplicationEpubZip]])]
     public function testb(array $acceptableRepresentations, array $representations)
     {
-        $requestProcessorStub = $this->createStub(RoutableInterface::class);
+        $requestProcessorStub = $this->createStub(RequestProcessorInterface::class);
         $requestStub = $this->createStub(ServerRequestInterface::class);
         $requestStub
             ->method("getHeader")
@@ -67,7 +67,7 @@ final class TargetTest extends TestCase
     #[TestWith([HttpMethod::Post, [MimeType::ApplicationJson->value], [MimeType::ApplicationJson]])]
     public function testc(HttpMethod $httpMethod, array $acceptableRepresentations, array $representations)
     {
-        $requestProcessorStub = $this->createStub(RoutableInterface::class);
+        $requestProcessorStub = $this->createStub(RequestProcessorInterface::class);
         $requestStub = $this->createStub(ServerRequestInterface::class);
         $requestStub
             ->method("getHeader")
@@ -92,7 +92,7 @@ final class TargetTest extends TestCase
     #[TestWith([HttpMethod::Get, [MimeType::ApplicationJson->value], [MimeType::ApplicationJson]])]
     public function testcb(HttpMethod $httpMethod, array $acceptableRepresentations, array $representations)
     {
-        $requestProcessorStub = $this->createStub(RoutableInterface::class);
+        $requestProcessorStub = $this->createStub(RequestProcessorInterface::class);
         $requestStub = $this->createStub(ServerRequestInterface::class);
         $requestStub
             ->method("getHeader")
@@ -117,7 +117,7 @@ final class TargetTest extends TestCase
     #[TestDox('Shall return return the $type representation if given representations include $mimeType')]
     public function testd(string $location, string $type, HttpMethod $method, MimeType $mimeType, string $resource, string $expected)
     {
-        $requestProcessorStub = $this->createStub(RoutableInterface::class);
+        $requestProcessorStub = $this->createStub(RequestProcessorInterface::class);
 
         $sut = new Target(
             location: $location,
@@ -135,7 +135,7 @@ final class TargetTest extends TestCase
     #[TestDox('Shall return return the $type representation if given representations include $mimeType')]
     public function teste(string $location, string $type, HttpMethod $method, MimeType $mimeType, mixed $resource, string $expected)
     {
-        $requestProcessorStub = $this->createStub(RoutableInterface::class);
+        $requestProcessorStub = $this->createStub(RequestProcessorInterface::class);
 
         $sut = new Target(
             location: $location,
@@ -153,7 +153,7 @@ final class TargetTest extends TestCase
     #[TestDox('Shall return return the $type representation if given representations include $mimeType')]
     public function testf(string $location, string $type, HttpMethod $method, MimeType $mimeType, mixed $resource, string $expected)
     {
-        $requestProcessorStub = $this->createStub(RoutableInterface::class);
+        $requestProcessorStub = $this->createStub(RequestProcessorInterface::class);
 
         $sut = new Target(
             location: $location,
@@ -176,7 +176,7 @@ final class TargetTest extends TestCase
             location: $location,
             method: HttpMethod::Get,
             representations: new Representations([]),
-            requestProcessor: $this->createStub(RoutableInterface::class),
+            requestProcessor: $this->createStub(RequestProcessorInterface::class),
         );
 
         $result = $sut->matchesLocation($requestPath);
@@ -193,7 +193,7 @@ final class TargetTest extends TestCase
             location: $location,
             method: HttpMethod::Get,
             representations: new Representations([]),
-            requestProcessor: $this->createStub(RoutableInterface::class),
+            requestProcessor: $this->createStub(RequestProcessorInterface::class),
         );
 
         $result = $sut->matchesLocation($requestPath);
@@ -211,7 +211,7 @@ final class TargetTest extends TestCase
             location: "/",
             method: $method,
             representations: new Representations([]),
-            requestProcessor: $this->createStub(RoutableInterface::class),
+            requestProcessor: $this->createStub(RequestProcessorInterface::class),
         );
 
         $result = $sut->matchesMethod($methodAsString);
@@ -229,7 +229,7 @@ final class TargetTest extends TestCase
             location: "/",
             method: $method,
             representations: new Representations([]),
-            requestProcessor: $this->createStub(RoutableInterface::class),
+            requestProcessor: $this->createStub(RequestProcessorInterface::class),
         );
 
         $result = $sut->matchesMethod($methodAsString);
