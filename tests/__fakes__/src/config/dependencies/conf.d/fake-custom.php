@@ -32,7 +32,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 return [
     ModelResolverInterface::class => new ParsedBodyResolver($_REQUEST),
     MiddlewareQueueRequestHandler::class => new MiddlewareQueueRequestHandler(
-        new class() implements RequestHandlerInterface {
+        new class () implements RequestHandlerInterface {
             public function handle(ServerRequestInterface $request): ResponseInterface
             {
                 return (new ResponseFactoryStub((new StreamFactoryStub("+w"))->createStream()))->createResponse(404);
@@ -46,7 +46,7 @@ return [
         interface: []
     ),
     DiTokens::RESPONSE_EMITTER => new SapiEmitter(),
-    AuthenticatorInterface::class => new class() implements AuthenticatorInterface {
+    AuthenticatorInterface::class => new class () implements AuthenticatorInterface {
         public function isAuthenticated(): bool
         {
             return false;
@@ -75,13 +75,13 @@ return [
     ),
     RequestProcessorExecutor::class => new RequestProcessorExecutor(),
     AuthorizationChecker::class => static fn() => new AuthorizationChecker(
-        new class() implements RequestProcessorResolverInterface {
+        new class () implements RequestProcessorResolverInterface {
             public function resolve(RequestProcessorInterface $target): RequestProcessorInterface | false
             {
                 return $target;
             }
         },
-        new class() implements RequestHandlerInterface {
+        new class () implements RequestHandlerInterface {
             public function handle(ServerRequestInterface $request): ResponseInterface
             {
                 return new ResponseStub();
