@@ -207,11 +207,13 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Http/AuthorizationCheckerInterface.php"><a href="files/http-authorizationcheckerinterface.html"><abbr title="Http/AuthorizationCheckerInterface.php">AuthorizationCheckerInterface.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">11</span>
+    <span class="phpdocumentor-element-found-in__line">15</span>
 
     </aside>
 
-        
+            <p class="phpdocumentor-summary">Determines if authorization is successful
+for a given request processor.</p>
+
 
 
 
@@ -246,6 +248,8 @@
     <span>
                                 &nbsp;: <abbr title="\Phpolar\HttpRequestProcessor\RequestProcessorInterface">RequestProcessorInterface</abbr>|<abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr>    </span>
 </dt>
+<dd>Returns the request processor when authorization is successful
+or a PSR-7 HTTP response when it is not.</dd>
 
     </dl>
 
@@ -274,14 +278,16 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Http/AuthorizationCheckerInterface.php"><a href="files/http-authorizationcheckerinterface.html"><abbr title="Http/AuthorizationCheckerInterface.php">AuthorizationCheckerInterface.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">13</span>
+    <span class="phpdocumentor-element-found-in__line">21</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Returns the request processor when authorization is successful
+or a PSR-7 HTTP response when it is not.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">authorize</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Phpolar\HttpRequestProcessor\RequestProcessorInterface">RequestProcessorInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$routable</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\ServerRequestInterface">ServerRequestInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$request</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Phpolar\HttpRequestProcessor\RequestProcessorInterface">RequestProcessorInterface</abbr>|<abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr></span></code>
+                    <span class="phpdocumentor-signature__name">authorize</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Phpolar\HttpRequestProcessor\RequestProcessorInterface">RequestProcessorInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$requestProcessor</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\ServerRequestInterface">ServerRequestInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$request</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Phpolar\HttpRequestProcessor\RequestProcessorInterface">RequestProcessorInterface</abbr>|<abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr></span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -290,7 +296,7 @@
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$routable</span>
+                <span class="phpdocumentor-signature__argument__name">$requestProcessor</span>
                 : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Phpolar\HttpRequestProcessor\RequestProcessorInterface">RequestProcessorInterface</abbr></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">

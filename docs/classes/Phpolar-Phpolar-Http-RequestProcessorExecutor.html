@@ -221,12 +221,18 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Http/RequestProcessorExecutor.php"><a href="files/http-requestprocessorexecutor.html"><abbr title="Http/RequestProcessorExecutor.php">RequestProcessorExecutor.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">11</span>
+    <span class="phpdocumentor-element-found-in__line">19</span>
 
     </aside>
 
-        
+            <p class="phpdocumentor-summary">Handles execution of a request processor.</p>
 
+
+    <section class="phpdocumentor-description"><p>This implementation uses reflection so that
+arguments to the <code class="prettyprint">process</code> method that are
+decorated with attributes can be passed in
+after the attributes are invoked.</p>
+</section>
 
 
 
@@ -267,6 +273,7 @@
     <span>
                                 &nbsp;: mixed    </span>
 </dt>
+<dd>Execute the request processor.</dd>
 
     </dl>
 
@@ -296,11 +303,12 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Http/RequestProcessorExecutor.php"><a href="files/http-requestprocessorexecutor.html"><abbr title="Http/RequestProcessorExecutor.php">RequestProcessorExecutor.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">13</span>
+    <span class="phpdocumentor-element-found-in__line">26</span>
 
     </aside>
 
-    
+        <p class="phpdocumentor-summary">Execute the request processor.</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
                     <span class="phpdocumentor-signature__name">execute</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Phpolar\HttpRequestProcessor\RequestProcessorInterface">RequestProcessorInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$requestProcessor</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$args</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
@@ -308,7 +316,9 @@
     <div class="phpdocumentor-label-line">
         </div>
     
-    
+        <section class="phpdocumentor-description"><p>Invokes the <code class="prettyprint">process</code> method with the given arguments.</p>
+</section>
+
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
     <dl class="phpdocumentor-argument-list">
                     <dt class="phpdocumentor-argument-list__entry">

@@ -198,7 +198,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\Http\\AuthorizationChecker",
             "name": "AuthorizationChecker",
-            "summary": "Determines\u0020if\u0020authorization\u0020is\u0020successful\nfor\u0020a\u0020given\u0020Routable.",
+            "summary": "Determines\u0020if\u0020authorization\u0020is\u0020successful\nfor\u0020a\u0020given\u0020request\u0020processor.",
             "url": "classes/Phpolar-Phpolar-Http-AuthorizationChecker.html"
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\Http\\AuthorizationChecker\u003A\u003A__construct\u0028\u0029",
@@ -208,17 +208,17 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\Http\\AuthorizationChecker\u003A\u003Aauthorize\u0028\u0029",
             "name": "authorize",
-            "summary": "Returns\u0020Routable\u0020when\u0020authorization\u0020is\u0020successful\nand\u0020an\u0020Unauthorized\u0020HTTP\u0020response\u0020when\u0020it\u0020is\u0020not.",
+            "summary": "Returns\u0020request\u0020processor\u0020when\u0020authorization\u0020is\u0020successful\nand\u0020an\u0020Unauthorized\u0020HTTP\u0020response\u0020when\u0020it\u0020is\u0020not.",
             "url": "classes/Phpolar-Phpolar-Http-AuthorizationChecker.html#method_authorize"
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\Http\\AuthorizationCheckerInterface",
             "name": "AuthorizationCheckerInterface",
-            "summary": "",
+            "summary": "Determines\u0020if\u0020authorization\u0020is\u0020successful\nfor\u0020a\u0020given\u0020request\u0020processor.",
             "url": "classes/Phpolar-Phpolar-Http-AuthorizationCheckerInterface.html"
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\Http\\AuthorizationCheckerInterface\u003A\u003Aauthorize\u0028\u0029",
             "name": "authorize",
-            "summary": "",
+            "summary": "Returns\u0020the\u0020request\u0020processor\u0020when\u0020authorization\u0020is\u0020successful\nor\u0020a\u0020PSR\u002D7\u0020HTTP\u0020response\u0020when\u0020it\u0020is\u0020not.",
             "url": "classes/Phpolar-Phpolar-Http-AuthorizationCheckerInterface.html#method_authorize"
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\Http\\MiddlewareQueueRequestHandler",
@@ -293,12 +293,12 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\Http\\RequestProcessorExecutor",
             "name": "RequestProcessorExecutor",
-            "summary": "",
+            "summary": "Handles\u0020execution\u0020of\u0020a\u0020request\u0020processor.",
             "url": "classes/Phpolar-Phpolar-Http-RequestProcessorExecutor.html"
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\Http\\RequestProcessorExecutor\u003A\u003Aexecute\u0028\u0029",
             "name": "execute",
-            "summary": "",
+            "summary": "Execute\u0020the\u0020request\u0020processor.",
             "url": "classes/Phpolar-Phpolar-Http-RequestProcessorExecutor.html#method_execute"
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\Http\\ResponseBuilder",
@@ -343,7 +343,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\Http\\Server",
             "name": "Server",
-            "summary": "",
+            "summary": "Declares\u0020the\u0020capabilities\u0020of\u0020the\u0020resource\u0020server.",
             "url": "classes/Phpolar-Phpolar-Http-Server.html"
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\Http\\Server\u003A\u003A__construct\u0028\u0029",
