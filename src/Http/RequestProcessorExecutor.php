@@ -10,7 +10,7 @@ use ReflectionMethod;
 
 /**
  * Handles execution of a request processor.
- * 
+ *
  * This implementation uses reflection so that
  * arguments to the `process` method that are
  * decorated with attributes can be passed in
@@ -20,7 +20,7 @@ final class RequestProcessorExecutor implements RequestProcessorExecutorInterfac
 {
     /**
      * Execute the request processor.
-     * 
+     *
      * Invokes the `process` method with the given arguments.
      */
     public function execute(
