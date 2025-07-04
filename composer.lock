@@ -366,16 +366,16 @@
         },
         {
             "name": "php-contrib/http-representation",
-            "version": "1.0.2",
+            "version": "1.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-contrib/http-representation.git",
-                "reference": "6c971106303efd7f33e8b3bd01302236a7a78fef"
+                "reference": "588fec0658bac7a829c9e69f04ed4ada6ddce51f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-contrib/http-representation/zipball/6c971106303efd7f33e8b3bd01302236a7a78fef",
-                "reference": "6c971106303efd7f33e8b3bd01302236a7a78fef",
+                "url": "https://api.github.com/repos/php-contrib/http-representation/zipball/588fec0658bac7a829c9e69f04ed4ada6ddce51f",
+                "reference": "588fec0658bac7a829c9e69f04ed4ada6ddce51f",
                 "shasum": ""
             },
             "require": {
@@ -397,9 +397,9 @@
             "description": "Supports HTTP resource representation interoperability",
             "support": {
                 "issues": "https://github.com/php-contrib/http-representation/issues",
-                "source": "https://github.com/php-contrib/http-representation/tree/1.0.2"
+                "source": "https://github.com/php-contrib/http-representation/tree/1.0.3"
             },
-            "time": "2025-06-28T01:30:36+00:00"
+            "time": "2025-06-30T01:38:48+00:00"
         },
         {
             "name": "php-contrib/response-filter",
@@ -638,16 +638,16 @@
         },
         {
             "name": "phpolar/representations",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpolar/representations.git",
-                "reference": "4282ac0e730cee1f12b93eb6db7e1a7c69ab6ff6"
+                "reference": "dbb2c73b52a4009940d5bdd500549df5c8ae0522"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpolar/representations/zipball/4282ac0e730cee1f12b93eb6db7e1a7c69ab6ff6",
-                "reference": "4282ac0e730cee1f12b93eb6db7e1a7c69ab6ff6",
+                "url": "https://api.github.com/repos/phpolar/representations/zipball/dbb2c73b52a4009940d5bdd500549df5c8ae0522",
+                "reference": "dbb2c73b52a4009940d5bdd500549df5c8ae0522",
                 "shasum": ""
             },
             "require": {
@@ -679,9 +679,9 @@
             "description": "A set of HTTP representations",
             "support": {
                 "issues": "https://github.com/phpolar/representations/issues",
-                "source": "https://github.com/phpolar/representations/tree/1.0.0"
+                "source": "https://github.com/phpolar/representations/tree/1.0.1"
             },
-            "time": "2025-06-28T03:58:27+00:00"
+            "time": "2025-06-30T01:43:18+00:00"
         },
         {
             "name": "phpolar/serializers",
@@ -1903,16 +1903,16 @@
         },
         {
             "name": "phan/phan",
-            "version": "5.4.6",
+            "version": "5.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phan/phan.git",
-                "reference": "5963ad2e55f7c4b3fd8349d25ddd7b43414d2d79"
+                "reference": "d27e93d3284d7eec9fd9647605d86cb6e6f2ea92"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phan/phan/zipball/5963ad2e55f7c4b3fd8349d25ddd7b43414d2d79",
-                "reference": "5963ad2e55f7c4b3fd8349d25ddd7b43414d2d79",
+                "url": "https://api.github.com/repos/phan/phan/zipball/d27e93d3284d7eec9fd9647605d86cb6e6f2ea92",
+                "reference": "d27e93d3284d7eec9fd9647605d86cb6e6f2ea92",
                 "shasum": ""
             },
             "require": {
@@ -1977,9 +1977,9 @@
             ],
             "support": {
                 "issues": "https://github.com/phan/phan/issues",
-                "source": "https://github.com/phan/phan/tree/5.4.6"
+                "source": "https://github.com/phan/phan/tree/5.5.0"
             },
-            "time": "2025-06-09T13:26:52+00:00"
+            "time": "2025-06-30T14:18:36+00:00"
         },
         {
             "name": "phar-io/manifest",
@@ -5732,7 +5732,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {},
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
@@ -5743,5 +5743,5 @@
         "ext-ast": "*",
         "ext-openssl": "*"
     },
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.3.0"
 }
