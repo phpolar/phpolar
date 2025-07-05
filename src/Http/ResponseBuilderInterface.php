@@ -6,6 +6,8 @@ use Psr\Http\Message\ResponseInterface;
 
 /**
  * Builds a PSR-7 Response
+ *
+ * @deprecated
  */
 interface ResponseBuilderInterface
 {

@@ -68,7 +68,8 @@ return [
         server: $container->get(ServerInterface::class),
         processorExecutor: $container->get(RequestProcessorExecutor::class),
         authChecker: $container->get(AuthorizationChecker::class),
-        responseBuilder: $container->get(ResponseBuilder::class),
+        responseFactory: $container->get(ResponseFactoryInterface::class),
+        streamFactory: $container->get(StreamFactoryInterface::class),
         propertyInjector: $container->get(PropertyInjectorInterface::class),
         modelResolver: $container->get(ModelResolverInterface::class),
     ),
@@ -86,14 +87,11 @@ return [
             // intentionally empty
         }
     },
-    ResponseBuilder::class => static fn(ContainerInterface $container) => new ResponseBuilder(
-        responseFactory: $container->get(ResponseFactoryInterface::class),
-        streamFactory: $container->get(StreamFactoryInterface::class),
-    ),
     RequestProcessingHandler::class => static fn(ContainerInterface $container) => new RequestProcessingHandler(
         server: $container->get(ServerInterface::class),
         processorExecutor: $container->get(RequestProcessorExecutor::class),
-        responseBuilder: $container->get(ResponseBuilder::class),
+        responseFactory: $container->get(ResponseFactoryInterface::class),
+        streamFactory: $container->get(StreamFactoryInterface::class),
         authChecker: $container->get(DiTokens::NOOP_AUTH_CHECKER),
         propertyInjector: $container->get(PropertyInjectorInterface::class),
         modelResolver: $container->get(ModelResolverInterface::class),

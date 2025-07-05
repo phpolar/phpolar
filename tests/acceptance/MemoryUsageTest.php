@@ -7,6 +7,7 @@ namespace Phpolar\Phpolar;
 use ArrayAccess;
 use Laminas\HttpHandlerRunner\Emitter\SapiEmitter;
 use PhpCommonEnums\HttpMethod\Enumeration\HttpMethodEnum as HttpMethod;
+use PhpCommonEnums\HttpResponseCode\Enumeration\HttpResponseCodeEnum as HttpResponseCode;
 use PhpCommonEnums\MimeType\Enumeration\MimeTypeEnum as MimeType;
 use PhpContrib\Http\Message\ResponseFilterInterface;
 use Phpolar\CsrfProtection\Http\CsrfRequestCheckMiddleware;
@@ -75,13 +76,14 @@ final class MemoryUsageTest extends TestCase
             propertyInjector: $config[PropertyInjectorInterface::class],
             processorExecutor: $config[RequestProcessorExecutor::class],
             server: $config[ServerInterface::class],
-            responseBuilder: $config[ResponseBuilderInterface::class],
+            responseFactory: $config[ResponseFactoryInterface::class],
+            streamFactory: $config[StreamFactoryInterface::class],
             authChecker: new AuthorizationChecker(
                 routableResolver: $config[RequestProcessorResolverInterface::class],
                 unauthHandler: new class () implements RequestHandlerInterface {
                     public function handle(ServerRequestInterface $request): ResponseInterface
                     {
-                        return new ResponseStub(ResponseCode::UNAUTHORIZED, "Unauthorized");
+                        return new ResponseStub(HttpResponseCode::Unauthorized->value, HttpResponseCode::Unauthorized->getLabel());
                     }
                 },
             ),
@@ -91,16 +93,12 @@ final class MemoryUsageTest extends TestCase
             new class () implements RequestHandlerInterface {
                 public function handle(ServerRequestInterface $request): ResponseInterface
                 {
-                    return new ResponseStub(ResponseCode::NOT_FOUND, "Not Found");
+                    return new ResponseStub(HttpResponseCode::NotFound->value, HttpResponseCode::NotFound->getLabel());
                 }
             }
         );
         $config[DiTokens::RESPONSE_EMITTER] = new SapiEmitter();
         $config[ContainerInterface::class] = static fn(ArrayAccess $conf) => new ConfigurableContainerStub($conf);
-        $config[ResponseBuilderInterface::class] = static fn(ArrayAccess $conf) => new ResponseBuilder(
-            responseFactory: $conf[ResponseFactoryInterface::class],
-            streamFactory: $conf[StreamFactoryInterface::class],
-        );
         $config[ResponseFactoryInterface::class] = new ResponseFactoryStub();
         $config[StreamFactoryInterface::class] = new StreamFactoryStub("+w");
         $config[TemplateEngine::class] = new TemplateEngine();
