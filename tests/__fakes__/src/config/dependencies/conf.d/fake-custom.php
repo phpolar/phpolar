@@ -16,7 +16,6 @@ use Phpolar\Phpolar\DependencyInjection\DiTokens;
 use Phpolar\Phpolar\Http\AuthorizationChecker;
 use Phpolar\Phpolar\Http\RequestProcessingHandler;
 use Phpolar\Phpolar\Http\RequestProcessorExecutor;
-use Phpolar\Phpolar\Http\ResponseBuilder;
 use Phpolar\Phpolar\Http\RoutingMiddleware;
 use Phpolar\Phpolar\Http\Server;
 use Phpolar\Phpolar\Http\ServerInterface;
@@ -61,14 +60,11 @@ return [
         }
     },
     RoutingMiddleware::class => static fn(ContainerInterface $container) => new RoutingMiddleware($container->get(RequestProcessingHandler::class)),
-    ResponseBuilder::class => static fn(ContainerInterface $container) => new ResponseBuilder(
-        $container->get(ResponseFactoryInterface::class),
-        $container->get(StreamFactoryInterface::class),
-    ),
     RequestProcessingHandler::class => static fn(ContainerInterface $container) => new RequestProcessingHandler(
         server: $container->get(ServerInterface::class),
         processorExecutor: $container->get(RequestProcessorExecutor::class),
-        responseBuilder: $container->get(ResponseBuilder::class),
+        responseFactory: $container->get(ResponseFactoryInterface::class),
+        streamFactory: $container->get(StreamFactoryInterface::class),
         authChecker: $container->get(AuthorizationChecker::class),
         propertyInjector: $container->get(PropertyInjectorInterface::class),
         modelResolver: $container->get(ModelResolverInterface::class),

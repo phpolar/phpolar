@@ -69,7 +69,6 @@ use Psr\Http\Server\RequestHandlerInterface;
 #[UsesClass(PathVariableBindings::class)]
 #[UsesClass(Representations::class)]
 #[UsesClass(RequestProcessorExecutor::class)]
-#[UsesClass(ResponseBuilder::class)]
 #[UsesClass(Target::class)]
 final class AppTest extends TestCase
 {

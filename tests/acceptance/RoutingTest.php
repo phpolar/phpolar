@@ -28,14 +28,6 @@ use Psr\Http\Server\RequestHandlerInterface;
 #[TestDox("HTTP Request Routing")]
 final class RoutingTest extends TestCase
 {
-    protected function getResponseBuilder(): ResponseBuilderInterface
-    {
-        return new ResponseBuilder(
-            responseFactory: $this->getResponseFactory(),
-            streamFactory: $this->getStreamFactory(),
-        );
-    }
-
     protected function getResponseFactory(): ResponseFactoryInterface
     {
         return new class () implements ResponseFactoryInterface {
@@ -121,7 +113,8 @@ final class RoutingTest extends TestCase
                 ),
             ]),
             processorExecutor: new RequestProcessorExecutor(),
-            responseBuilder: $this->getResponseBuilder(),
+            responseFactory: $this->getResponseFactory(),
+            streamFactory: $this->getStreamFactory(),
             authChecker: new AuthorizationChecker(
                 routableResolver: new class () implements RequestProcessorResolverInterface {
                     public function resolve(RequestProcessorInterface $target): RequestProcessorInterface|false
@@ -187,7 +180,8 @@ final class RoutingTest extends TestCase
                     requestProcessor: $indexHandler,
                 ),
             ]),
-            responseBuilder: $this->getResponseBuilder(),
+            responseFactory: $this->getResponseFactory(),
+            streamFactory: $this->getStreamFactory(),
             authChecker: new AuthorizationChecker(
                 routableResolver: new class () implements RequestProcessorResolverInterface {
                     public function resolve(RequestProcessorInterface $target): RequestProcessorInterface|false

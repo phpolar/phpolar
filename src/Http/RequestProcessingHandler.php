@@ -12,8 +12,10 @@ use Phpolar\Phpolar\Http\Status\ClientError\Forbidden;
 use Phpolar\Phpolar\Http\Status\ClientError\NotFound;
 use Phpolar\Phpolar\Http\Status\ClientError\Unauthorized;
 use Phpolar\PropertyInjectorContract\PropertyInjectorInterface;
+use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
 /**
@@ -24,7 +26,8 @@ final class RequestProcessingHandler implements RequestHandlerInterface
     public function __construct(
         private readonly ServerInterface $server,
         private readonly RequestProcessorExecutorInterface $processorExecutor,
-        private readonly ResponseBuilderInterface $responseBuilder,
+        private readonly StreamFactoryInterface $streamFactory,
+        private readonly ResponseFactoryInterface $responseFactory,
         private readonly AuthorizationCheckerInterface $authChecker,
         private readonly PropertyInjectorInterface $propertyInjector,
         private readonly ModelResolverInterface $modelResolver,
@@ -44,9 +47,10 @@ final class RequestProcessingHandler implements RequestHandlerInterface
          */
         $target = $this->server->findTarget($request);
         if ($target instanceof HttpResponseCode) {
-            return $this->responseBuilder
-                ->build()
-                ->withStatus((int) $target->value, $target->getLabel());
+            return $this->responseFactory->createResponse(
+                (int) $target->value,
+                $target->getLabel()
+            );
         }
 
         /**
@@ -56,9 +60,8 @@ final class RequestProcessingHandler implements RequestHandlerInterface
          */
         $responseCode = $target->negotiate($request);
         if ($responseCode === HttpResponseCode::NotAcceptable) {
-            return $this->responseBuilder
-                ->build()
-                ->withStatus((int) $responseCode->value, $responseCode->getLabel());
+            return $this->responseFactory
+                ->createResponse((int) $responseCode->value, $responseCode->getLabel());
         }
 
         $requestProcessor = $target->requestProcessor;
@@ -124,11 +127,12 @@ final class RequestProcessingHandler implements RequestHandlerInterface
 
         $representation = $target->getRepresentation($resource);
 
-        return $this->responseBuilder->build(content: (string) $representation)
-            ->withStatus(
+        return $this->responseFactory
+            ->createResponse(
                 code: (int) $responseCode->value,
                 reasonPhrase: $responseCode->getLabel()
             )
+            ->withBody($this->streamFactory->createStream((string) $representation))
             ->withHeader("Content-Type", $representation->getMimeType());
     }
 }
