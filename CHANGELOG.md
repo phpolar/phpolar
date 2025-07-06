@@ -1,3 +1,21 @@
+## 8.1.0 (2025-07-05)
+
+### Feat
+
+- deprecate response builder (#451)
+
+## 8.0.2 (2025-06-29)
+
+### Fix
+
+- reduce distributed package size
+
+## 8.0.1 (2025-06-29)
+
+### Fix
+
+- move interface to http-request-processor (#448)
+
 ## 8.0.0 (2025-06-29)
 
 ### Feat

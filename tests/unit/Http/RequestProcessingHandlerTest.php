@@ -26,8 +26,10 @@ use PHPUnit\Framework\Attributes\TestWith;
 use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\Attributes\UsesClassesThatImplementInterface;
 use PHPUnit\Framework\TestCase;
+use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Message\StreamInterface;
 use Psr\Http\Message\UriInterface;
 
@@ -46,6 +48,29 @@ final class RequestProcessingHandlerTest extends TestCase
         yield ["POST"];
     }
 
+    public static function getResponses(): array
+    {
+        return array_map(
+            static fn(HttpResponseCode $responseCode, object $status) => [
+                new ResponseStub($responseCode->value, $responseCode->getLabel()),
+                $responseCode,
+                $status,
+            ],
+            [
+                HttpResponseCode::NotFound,
+                HttpResponseCode::Unauthorized,
+                HttpResponseCode::Forbidden,
+                HttpResponseCode::BadRequest,
+            ],
+            [
+                new NotFound(),
+                new Unauthorized(),
+                new Forbidden(),
+                new BadRequest(),
+            ],
+        );
+    }
+
     #[TestDox("Shall respond with \"Not Found\" if the route is not registered for \$requestMethod requests")]
     #[DataProvider("requestMethods")]
     public function test1(string $requestMethod)
@@ -55,19 +80,13 @@ final class RequestProcessingHandlerTest extends TestCase
         $modelResolverStub = $this->createStub(ModelResolverInterface::class);
         $propertyInjectorStub = $this->createStub(PropertyInjectorInterface::class);
         $responseStub = $this->createStub(ResponseInterface::class);
-        $responseBuilderStub = $this->createStub(ResponseBuilderInterface::class);
+        $responseFactoryStub = $this->createStub(ResponseFactoryInterface::class);
         $authCheckStub = $this->createStub(AuthorizationCheckerInterface::class);
         $serverStub
             ->method("findTarget")
             ->willReturn(HttpResponseCode::NotFound);
-        $responseBuilderStub
-            ->method("build")
-            ->willReturn($responseStub);
-        $responseStub
-            ->method("withStatus")
-            ->willReturn($responseStub);
-        $responseStub
-            ->method("withHeader")
+        $responseFactoryStub
+            ->method("createResponse")
             ->willReturn($responseStub);
         $responseStub
             ->method("getStatusCode")
@@ -76,7 +95,8 @@ final class RequestProcessingHandlerTest extends TestCase
         $sut = new RequestProcessingHandler(
             server: $serverStub,
             processorExecutor: new RequestProcessorExecutor(),
-            responseBuilder: $responseBuilderStub,
+            responseFactory: $responseFactoryStub,
+            streamFactory: $this->createStub(StreamFactoryInterface::class),
             authChecker: $authCheckStub,
             propertyInjector: $propertyInjectorStub,
             modelResolver: $modelResolverStub,
@@ -97,7 +117,7 @@ final class RequestProcessingHandlerTest extends TestCase
         $modelResolverStub = $this->createStub(ModelResolverInterface::class);
         $propertyInjectorStub = $this->createStub(PropertyInjectorInterface::class);
         $responseStub = $this->createStub(ResponseInterface::class);
-        $responseBuilderStub = $this->createStub(ResponseBuilderInterface::class);
+        $responseFactoryStub = $this->createStub(ResponseFactoryInterface::class);
         $target = new Target(
             location: $location,
             method: HttpMethod::Get,
@@ -110,14 +130,8 @@ final class RequestProcessingHandlerTest extends TestCase
         $serverStub
             ->method("findTarget")
             ->willReturn($target);
-        $responseBuilderStub
-            ->method("build")
-            ->willReturn($responseStub);
-        $responseStub
-            ->method("withStatus")
-            ->willReturn($responseStub);
-        $responseStub
-            ->method("withHeader")
+        $responseFactoryStub
+            ->method("createResponse")
             ->willReturn($responseStub);
         $responseStub
             ->method("getStatusCode")
@@ -126,7 +140,8 @@ final class RequestProcessingHandlerTest extends TestCase
         $sut = new RequestProcessingHandler(
             server: $serverStub,
             processorExecutor: new RequestProcessorExecutor(),
-            responseBuilder: $responseBuilderStub,
+            responseFactory: $responseFactoryStub,
+            streamFactory: $this->createStub(StreamFactoryInterface::class),
             authChecker: $authCheckStub,
             propertyInjector: $propertyInjectorStub,
             modelResolver: $modelResolverStub,
@@ -147,7 +162,6 @@ final class RequestProcessingHandlerTest extends TestCase
         $modelResolverStub = $this->createStub(ModelResolverInterface::class);
         $propertyInjectorStub = $this->createStub(PropertyInjectorInterface::class);
         $responseStub = $this->createStub(ResponseInterface::class);
-        $responseBuilderStub = $this->createStub(ResponseBuilderInterface::class);
         $target = new Target(
             location: $location,
             method: HttpMethod::Get,
@@ -176,7 +190,8 @@ final class RequestProcessingHandlerTest extends TestCase
         $sut = new RequestProcessingHandler(
             server: $serverStub,
             processorExecutor: new RequestProcessorExecutor(),
-            responseBuilder: $responseBuilderStub,
+            responseFactory: $this->createStub(ResponseFactoryInterface::class),
+            streamFactory: $this->createStub(StreamFactoryInterface::class),
             authChecker: $authCheckStub,
             propertyInjector: $propertyInjectorStub,
             modelResolver: $modelResolverStub,
@@ -198,7 +213,7 @@ final class RequestProcessingHandlerTest extends TestCase
         $modelResolverStub = $this->createStub(ModelResolverInterface::class);
         $propertyInjectorStub = $this->createStub(PropertyInjectorInterface::class);
         $responseStub = $this->createStub(ResponseInterface::class);
-        $responseBuilderStub = $this->createStub(ResponseBuilderInterface::class);
+        $responseFactoryStub = $this->createStub(ResponseFactoryInterface::class);
         $requestProcessorStub = $this->createStub(RequestProcessorInterface::class);
         $streamStub = $this->createStub(StreamInterface::class);
         $target = new Target(
@@ -213,14 +228,8 @@ final class RequestProcessingHandlerTest extends TestCase
         $serverStub
             ->method("findTarget")
             ->willReturn($target);
-        $responseBuilderStub
-            ->method("build")
-            ->willReturn($responseStub);
-        $responseStub
-            ->method("withStatus")
-            ->willReturn($responseStub);
-        $responseStub
-            ->method("withHeader")
+        $responseFactoryStub
+            ->method("createResponse")
             ->willReturn($responseStub);
         $responseStub
             ->method("getStatusCode")
@@ -228,6 +237,12 @@ final class RequestProcessingHandlerTest extends TestCase
         $responseStub
             ->method("getBody")
             ->willReturn($streamStub);
+        $responseStub
+            ->method("withBody")
+            ->willReturn($responseStub);
+        $responseStub
+            ->method("withHeader")
+            ->willReturn($responseStub);
         $authCheckStub
             ->method("authorize")
             ->willReturn($requestProcessorStub);
@@ -241,7 +256,8 @@ final class RequestProcessingHandlerTest extends TestCase
         $sut = new RequestProcessingHandler(
             server: $serverStub,
             processorExecutor: new RequestProcessorExecutor(),
-            responseBuilder: $responseBuilderStub,
+            responseFactory: $responseFactoryStub,
+            streamFactory: $this->createStub(StreamFactoryInterface::class),
             authChecker: $authCheckStub,
             propertyInjector: $propertyInjectorStub,
             modelResolver: $modelResolverStub,
@@ -264,7 +280,8 @@ final class RequestProcessingHandlerTest extends TestCase
         $modelResolverStub = $this->createStub(ModelResolverInterface::class);
         $propertyInjectorStub = $this->createStub(PropertyInjectorInterface::class);
         $responseStub = $this->createStub(ResponseInterface::class);
-        $responseBuilderStub = $this->createStub(ResponseBuilderInterface::class);
+        $responseFactoryStub = $this->createStub(ResponseFactoryInterface::class);
+        $streamFactoryStub = $this->createStub(StreamFactoryInterface::class);
         $requestProcessorStub = $this->createStub(RequestProcessorInterface::class);
         $streamStub = $this->createStub(StreamInterface::class);
         $uriStub = $this->createStub(UriInterface::class);
@@ -292,15 +309,18 @@ final class RequestProcessingHandlerTest extends TestCase
         $serverStub
             ->method("findTarget")
             ->willReturn($target);
-        $responseBuilderStub
-            ->method("build")
+        $responseFactoryStub
+            ->method("createResponse")
             ->willReturn($responseStub);
         $responseStub
-            ->method("withStatus")
+            ->method("withBody")
             ->willReturn($responseStub);
         $responseStub
             ->method("withHeader")
             ->willReturn($responseStub);
+        $streamFactoryStub
+            ->method("createStream")
+            ->willReturn($streamStub);
         $responseStub
             ->method("getStatusCode")
             ->willReturn(HttpResponseCode::Ok->value);
@@ -323,7 +343,8 @@ final class RequestProcessingHandlerTest extends TestCase
         $sut = new RequestProcessingHandler(
             server: $serverStub,
             processorExecutor: $requestProcessorExecutorMock,
-            responseBuilder: $responseBuilderStub,
+            responseFactory: $responseFactoryStub,
+            streamFactory: $streamFactoryStub,
             authChecker: $authCheckStub,
             propertyInjector: $propertyInjectorStub,
             modelResolver: $modelResolverStub,
@@ -343,7 +364,8 @@ final class RequestProcessingHandlerTest extends TestCase
         $modelResolverStub = $this->createStub(ModelResolverInterface::class);
         $propertyInjectorStub = $this->createStub(PropertyInjectorInterface::class);
         $responseStub = $this->createStub(ResponseInterface::class);
-        $responseBuilderStub = $this->createStub(ResponseBuilderInterface::class);
+        $responseFactoryStub = $this->createStub(ResponseFactoryInterface::class);
+        $streamFactoryStub = $this->createStub(StreamFactoryInterface::class);
         $requestProcessorStub = $this->createStub(RequestProcessorInterface::class);
         $streamStub = $this->createStub(StreamInterface::class);
         $uriStub = $this->createStub(UriInterface::class);
@@ -373,15 +395,18 @@ final class RequestProcessingHandlerTest extends TestCase
         $serverStub
             ->method("findTarget")
             ->willReturn($target);
-        $responseBuilderStub
-            ->method("build")
+        $responseFactoryStub
+            ->method("createResponse")
             ->willReturn($responseStub);
         $responseStub
-            ->method("withStatus")
+            ->method("withBody")
             ->willReturn($responseStub);
         $responseStub
             ->method("withHeader")
             ->willReturn($responseStub);
+        $streamFactoryStub
+            ->method("createStream")
+            ->willReturn($streamStub);
         $responseStub
             ->method("getStatusCode")
             ->willReturn(HttpResponseCode::Ok->value);
@@ -407,7 +432,8 @@ final class RequestProcessingHandlerTest extends TestCase
         $sut = new RequestProcessingHandler(
             server: $serverStub,
             processorExecutor: $requestProcessorExecutorMock,
-            responseBuilder: $responseBuilderStub,
+            responseFactory: $responseFactoryStub,
+            streamFactory: $streamFactoryStub,
             authChecker: $authCheckStub,
             propertyInjector: $propertyInjectorStub,
             modelResolver: $modelResolverStub,
@@ -427,7 +453,8 @@ final class RequestProcessingHandlerTest extends TestCase
         $modelResolverStub = $this->createStub(ModelResolverInterface::class);
         $propertyInjectorStub = $this->createStub(PropertyInjectorInterface::class);
         $responseStub = $this->createStub(ResponseInterface::class);
-        $responseBuilderStub = $this->createStub(ResponseBuilderInterface::class);
+        $responseFactoryStub = $this->createStub(ResponseFactoryInterface::class);
+        $streamFactoryStub = $this->createStub(StreamFactoryInterface::class);
         $requestProcessorStub = $this->createStub(RequestProcessorInterface::class);
         $streamStub = $this->createStub(StreamInterface::class);
         $uriStub = $this->createStub(UriInterface::class);
@@ -457,15 +484,18 @@ final class RequestProcessingHandlerTest extends TestCase
         $serverStub
             ->method("findTarget")
             ->willReturn($target);
-        $responseBuilderStub
-            ->method("build")
+        $responseFactoryStub
+            ->method("createResponse")
             ->willReturn($responseStub);
         $responseStub
-            ->method("withStatus")
+            ->method("withBody")
             ->willReturn($responseStub);
         $responseStub
             ->method("withHeader")
             ->willReturn($responseStub);
+        $streamFactoryStub
+            ->method("createStream")
+            ->willReturn($streamStub);
         $responseStub
             ->method("getStatusCode")
             ->willReturn(HttpResponseCode::Ok->value);
@@ -491,7 +521,8 @@ final class RequestProcessingHandlerTest extends TestCase
         $sut = new RequestProcessingHandler(
             server: $serverStub,
             processorExecutor: $requestProcessorExecutorMock,
-            responseBuilder: $responseBuilderStub,
+            responseFactory: $responseFactoryStub,
+            streamFactory: $streamFactoryStub,
             authChecker: $authCheckStub,
             propertyInjector: $propertyInjectorStub,
             modelResolver: $modelResolverStub,
@@ -511,7 +542,8 @@ final class RequestProcessingHandlerTest extends TestCase
         $modelResolverStub = $this->createStub(ModelResolverInterface::class);
         $propertyInjectorStub = $this->createStub(PropertyInjectorInterface::class);
         $responseStub = $this->createStub(ResponseInterface::class);
-        $responseBuilderStub = $this->createStub(ResponseBuilderInterface::class);
+        $responseFactoryStub = $this->createStub(ResponseFactoryInterface::class);
+        $streamFactoryStub = $this->createStub(StreamFactoryInterface::class);
         $requestProcessorStub = $this->createStub(RequestProcessorInterface::class);
         $streamStub = $this->createStub(StreamInterface::class);
         $uriStub = $this->createStub(UriInterface::class);
@@ -541,15 +573,18 @@ final class RequestProcessingHandlerTest extends TestCase
         $serverStub
             ->method("findTarget")
             ->willReturn($target);
-        $responseBuilderStub
-            ->method("build")
+        $responseFactoryStub
+            ->method("createResponse")
             ->willReturn($responseStub);
         $responseStub
-            ->method("withStatus")
+            ->method("withBody")
             ->willReturn($responseStub);
         $responseStub
             ->method("withHeader")
             ->willReturn($responseStub);
+        $streamFactoryStub
+            ->method("createStream")
+            ->willReturn($streamStub);
         $responseStub
             ->method("getStatusCode")
             ->willReturn(HttpResponseCode::Ok->value);
@@ -575,7 +610,8 @@ final class RequestProcessingHandlerTest extends TestCase
         $sut = new RequestProcessingHandler(
             server: $serverStub,
             processorExecutor: $requestProcessorExecutorMock,
-            responseBuilder: $responseBuilderStub,
+            responseFactory: $responseFactoryStub,
+            streamFactory: $streamFactoryStub,
             authChecker: $authCheckStub,
             propertyInjector: $propertyInjectorStub,
             modelResolver: $modelResolverStub,
@@ -584,15 +620,16 @@ final class RequestProcessingHandlerTest extends TestCase
         $sut->handle($requestStub);
     }
 
-    #[TestDox("Shall produce a NOT FOUND status when the request processor returns an instance of NotFound")]
-    public function test2a()
+    #[TestDox("Shall produce a \$responseCode status when the request processor returns an instance of \$status")]
+    #[DataProvider("getResponses")]
+    public function test1h(ResponseStub $responseStub, HttpResponseCode $responseCode, object $status)
     {
         $requestStub = $this->createStub(ServerRequestInterface::class);
         $uriStub = $this->createStub(UriInterface::class);
         $serverStub = $this->createStub(ServerInterface::class);
         $processorExecutorStub =
             $this->createStub(RequestProcessorExecutorInterface::class);
-        $responseBuilderStub = $this->createStub(ResponseBuilderInterface::class);
+        $responseFactoryStub = $this->createStub(ResponseFactoryInterface::class);
         $authCheckStub = $this->createStub(AuthorizationCheckerInterface::class);
         $propertyInjectorStub = $this->createStub(PropertyInjectorInterface::class);
         $modelResolverStub = $this->createStub(ModelResolverInterface::class);
@@ -600,8 +637,7 @@ final class RequestProcessingHandlerTest extends TestCase
 
         $processorExecutorStub
             ->method("execute")
-            ->willReturn(new NotFound());
-
+            ->willReturn($status);
 
         $target = new Target(
             location: "/",
@@ -619,9 +655,9 @@ final class RequestProcessingHandlerTest extends TestCase
         $serverStub
             ->method("findTarget")
             ->willReturn($target);
-        $responseBuilderStub
-            ->method("build")
-            ->willReturn(new ResponseStub());
+        $responseFactoryStub
+            ->method("createResponse")
+            ->willReturn($responseStub);
         $authCheckStub
             ->method("authorize")
             ->willReturn($requestProcessorStub);
@@ -635,7 +671,8 @@ final class RequestProcessingHandlerTest extends TestCase
         $sut = new RequestProcessingHandler(
             server: $serverStub,
             processorExecutor: $processorExecutorStub,
-            responseBuilder: $responseBuilderStub,
+            responseFactory: $responseFactoryStub,
+            streamFactory: $this->createStub(StreamFactoryInterface::class),
             authChecker: $authCheckStub,
             propertyInjector: $propertyInjectorStub,
             modelResolver: $modelResolverStub,
@@ -643,196 +680,7 @@ final class RequestProcessingHandlerTest extends TestCase
 
         $result = $sut->handle($requestStub);
 
-        $this->assertSame(HttpResponseCode::NotFound->value, $result->getStatusCode());
-        $this->assertSame(HttpResponseCode::NotFound->getLabel(), $result->getReasonPhrase());
-    }
-
-    #[TestDox("Shall produce a UNAUTHORIZED status when the request processor returns an instance of Unauthorized")]
-    public function test2b()
-    {
-        $requestStub = $this->createStub(ServerRequestInterface::class);
-        $uriStub = $this->createStub(UriInterface::class);
-        $serverStub = $this->createStub(ServerInterface::class);
-        $processorExecutorStub =
-            $this->createStub(RequestProcessorExecutorInterface::class);
-        $responseBuilderStub = $this->createStub(ResponseBuilderInterface::class);
-        $authCheckStub = $this->createStub(AuthorizationCheckerInterface::class);
-        $propertyInjectorStub = $this->createStub(PropertyInjectorInterface::class);
-        $modelResolverStub = $this->createStub(ModelResolverInterface::class);
-        $requestProcessorStub = $this->createStub(RequestProcessorInterface::class);
-
-        $processorExecutorStub
-            ->method("execute")
-            ->willReturn(new Unauthorized());
-
-
-        $target = new Target(
-            location: "/",
-            method: HttpMethod::Get,
-            representations: new Representations([MimeType::ApplicationJson]),
-            requestProcessor: $requestProcessorStub,
-        );
-
-        $requestStub
-            ->method("getHeader")
-            ->willReturn([MimeType::ApplicationJson->value]);
-        $requestStub
-            ->method("getUri")
-            ->willReturn($uriStub);
-        $serverStub
-            ->method("findTarget")
-            ->willReturn($target);
-        $responseBuilderStub
-            ->method("build")
-            ->willReturn(new ResponseStub());
-        $authCheckStub
-            ->method("authorize")
-            ->willReturn($requestProcessorStub);
-        $uriStub
-            ->method("getPath")
-            ->willReturn("/");
-        $modelResolverStub
-            ->method("resolve")
-            ->willReturn([]);
-
-        $sut = new RequestProcessingHandler(
-            server: $serverStub,
-            processorExecutor: $processorExecutorStub,
-            responseBuilder: $responseBuilderStub,
-            authChecker: $authCheckStub,
-            propertyInjector: $propertyInjectorStub,
-            modelResolver: $modelResolverStub,
-        );
-
-        $result = $sut->handle($requestStub);
-
-        $this->assertSame(HttpResponseCode::Unauthorized->value, $result->getStatusCode());
-        $this->assertSame(HttpResponseCode::Unauthorized->getLabel(), $result->getReasonPhrase());
-    }
-
-    #[TestDox("Shall produce a FORBIDDEN status when the request processor returns an instance of Forbidden")]
-    public function test2c()
-    {
-        $requestStub = $this->createStub(ServerRequestInterface::class);
-        $uriStub = $this->createStub(UriInterface::class);
-        $serverStub = $this->createStub(ServerInterface::class);
-        $processorExecutorStub =
-            $this->createStub(RequestProcessorExecutorInterface::class);
-        $responseBuilderStub = $this->createStub(ResponseBuilderInterface::class);
-        $authCheckStub = $this->createStub(AuthorizationCheckerInterface::class);
-        $propertyInjectorStub = $this->createStub(PropertyInjectorInterface::class);
-        $modelResolverStub = $this->createStub(ModelResolverInterface::class);
-        $requestProcessorStub = $this->createStub(RequestProcessorInterface::class);
-
-        $processorExecutorStub
-            ->method("execute")
-            ->willReturn(new Forbidden());
-
-
-        $target = new Target(
-            location: "/",
-            method: HttpMethod::Get,
-            representations: new Representations([MimeType::ApplicationJson]),
-            requestProcessor: $requestProcessorStub,
-        );
-
-        $requestStub
-            ->method("getHeader")
-            ->willReturn([MimeType::ApplicationJson->value]);
-        $requestStub
-            ->method("getUri")
-            ->willReturn($uriStub);
-        $serverStub
-            ->method("findTarget")
-            ->willReturn($target);
-        $responseBuilderStub
-            ->method("build")
-            ->willReturn(new ResponseStub());
-        $authCheckStub
-            ->method("authorize")
-            ->willReturn($requestProcessorStub);
-        $uriStub
-            ->method("getPath")
-            ->willReturn("/");
-        $modelResolverStub
-            ->method("resolve")
-            ->willReturn([]);
-
-        $sut = new RequestProcessingHandler(
-            server: $serverStub,
-            processorExecutor: $processorExecutorStub,
-            responseBuilder: $responseBuilderStub,
-            authChecker: $authCheckStub,
-            propertyInjector: $propertyInjectorStub,
-            modelResolver: $modelResolverStub,
-        );
-
-        $result = $sut->handle($requestStub);
-
-        $this->assertSame(HttpResponseCode::Forbidden->value, $result->getStatusCode());
-        $this->assertSame(HttpResponseCode::Forbidden->getLabel(), $result->getReasonPhrase());
-    }
-
-    #[TestDox("Shall produce a BAD REQUEST status when the request processor returns an instance of BadRequest")]
-    public function test2d()
-    {
-        $requestStub = $this->createStub(ServerRequestInterface::class);
-        $uriStub = $this->createStub(UriInterface::class);
-        $serverStub = $this->createStub(ServerInterface::class);
-        $processorExecutorStub =
-            $this->createStub(RequestProcessorExecutorInterface::class);
-        $responseBuilderStub = $this->createStub(ResponseBuilderInterface::class);
-        $authCheckStub = $this->createStub(AuthorizationCheckerInterface::class);
-        $propertyInjectorStub = $this->createStub(PropertyInjectorInterface::class);
-        $modelResolverStub = $this->createStub(ModelResolverInterface::class);
-        $requestProcessorStub = $this->createStub(RequestProcessorInterface::class);
-
-        $processorExecutorStub
-            ->method("execute")
-            ->willReturn(new BadRequest());
-
-
-        $target = new Target(
-            location: "/",
-            method: HttpMethod::Get,
-            representations: new Representations([MimeType::ApplicationJson]),
-            requestProcessor: $requestProcessorStub,
-        );
-
-        $requestStub
-            ->method("getHeader")
-            ->willReturn([MimeType::ApplicationJson->value]);
-        $requestStub
-            ->method("getUri")
-            ->willReturn($uriStub);
-        $serverStub
-            ->method("findTarget")
-            ->willReturn($target);
-        $responseBuilderStub
-            ->method("build")
-            ->willReturn(new ResponseStub());
-        $authCheckStub
-            ->method("authorize")
-            ->willReturn($requestProcessorStub);
-        $uriStub
-            ->method("getPath")
-            ->willReturn("/");
-        $modelResolverStub
-            ->method("resolve")
-            ->willReturn([]);
-
-        $sut = new RequestProcessingHandler(
-            server: $serverStub,
-            processorExecutor: $processorExecutorStub,
-            responseBuilder: $responseBuilderStub,
-            authChecker: $authCheckStub,
-            propertyInjector: $propertyInjectorStub,
-            modelResolver: $modelResolverStub,
-        );
-
-        $result = $sut->handle($requestStub);
-
-        $this->assertSame(HttpResponseCode::BadRequest->value, $result->getStatusCode());
-        $this->assertSame(HttpResponseCode::BadRequest->getLabel(), $result->getReasonPhrase());
+        $this->assertSame($responseCode->value, $result->getStatusCode());
+        $this->assertSame($responseCode->getLabel(), $result->getReasonPhrase());
     }
 }
