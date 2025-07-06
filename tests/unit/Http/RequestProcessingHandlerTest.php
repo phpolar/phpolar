@@ -54,6 +54,7 @@ final class RequestProcessingHandlerTest extends TestCase
             HttpResponseCode::BadRequest,
         ];
         foreach ($responseCodes as $responseCode) {
+
             yield [
                 new ResponseStub($responseCode->value, $responseCode->getLabel()),
                 $responseCode,
