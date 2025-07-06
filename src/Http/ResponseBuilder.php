@@ -7,6 +7,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 
 /**
+ * @codeCoverageIgnore
  * @deprecated
  */
 final class ResponseBuilder implements ResponseBuilderInterface
