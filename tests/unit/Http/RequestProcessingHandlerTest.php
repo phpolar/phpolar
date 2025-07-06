@@ -15,6 +15,9 @@ use Phpolar\HttpRequestProcessor\RequestProcessorExecutorInterface;
 use Phpolar\HttpRequestProcessor\RequestProcessorInterface;
 use Phpolar\ModelResolver\ModelResolverInterface;
 use Phpolar\Phpolar\Http\Status\ClientError\BadRequest;
+use Phpolar\Phpolar\Http\Status\ClientError\Forbidden;
+use Phpolar\Phpolar\Http\Status\ClientError\NotFound;
+use Phpolar\Phpolar\Http\Status\ClientError\Unauthorized;
 use Phpolar\PropertyInjectorContract\PropertyInjectorInterface;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -45,22 +48,27 @@ final class RequestProcessingHandlerTest extends TestCase
         yield ["POST"];
     }
 
-    public static function getResponses(): Generator
+    public static function getResponses(): array
     {
-        $responseCodes = [
-            HttpResponseCode::NotFound,
-            HttpResponseCode::Unauthorized,
-            HttpResponseCode::Forbidden,
-            HttpResponseCode::BadRequest,
-        ];
-        foreach ($responseCodes as $responseCode) {
-
-            yield [
+        return array_map(
+            static fn(HttpResponseCode $responseCode, object $status) => [
                 new ResponseStub($responseCode->value, $responseCode->getLabel()),
                 $responseCode,
-                str_replace(" ", "", $responseCode->getLabel()),
-            ];
-        }
+                $status,
+            ],
+            [
+                HttpResponseCode::NotFound,
+                HttpResponseCode::Unauthorized,
+                HttpResponseCode::Forbidden,
+                HttpResponseCode::BadRequest,
+            ],
+            [
+                new NotFound(),
+                new Unauthorized(),
+                new Forbidden(),
+                new BadRequest(),
+            ],
+        );
     }
 
     #[TestDox("Shall respond with \"Not Found\" if the route is not registered for \$requestMethod requests")]
@@ -612,9 +620,9 @@ final class RequestProcessingHandlerTest extends TestCase
         $sut->handle($requestStub);
     }
 
-    #[TestDox("Shall produce a \$responseCode status when the request processor returns an instance of \$reasonPhrase")]
+    #[TestDox("Shall produce a \$responseCode status when the request processor returns an instance of \$status")]
     #[DataProvider("getResponses")]
-    public function test1h(ResponseStub $responseStub, HttpResponseCode $responseCode, string $reasonPhrase)
+    public function test1h(ResponseStub $responseStub, HttpResponseCode $responseCode, object $status)
     {
         $requestStub = $this->createStub(ServerRequestInterface::class);
         $uriStub = $this->createStub(UriInterface::class);
@@ -629,7 +637,7 @@ final class RequestProcessingHandlerTest extends TestCase
 
         $processorExecutorStub
             ->method("execute")
-            ->willReturn(new BadRequest());
+            ->willReturn($status);
 
         $target = new Target(
             location: "/",
