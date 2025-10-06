@@ -638,16 +638,16 @@
         },
         {
             "name": "phpolar/representations",
-            "version": "1.0.1",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpolar/representations.git",
-                "reference": "dbb2c73b52a4009940d5bdd500549df5c8ae0522"
+                "reference": "9bf94102400dd9c6f56e69fd98f150bb8c1c1cb4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpolar/representations/zipball/dbb2c73b52a4009940d5bdd500549df5c8ae0522",
-                "reference": "dbb2c73b52a4009940d5bdd500549df5c8ae0522",
+                "url": "https://api.github.com/repos/phpolar/representations/zipball/9bf94102400dd9c6f56e69fd98f150bb8c1c1cb4",
+                "reference": "9bf94102400dd9c6f56e69fd98f150bb8c1c1cb4",
                 "shasum": ""
             },
             "require": {
@@ -664,7 +664,7 @@
                 "phpmd/phpmd": "^2.15",
                 "phpstan/phpstan": "^2.1",
                 "phpunit/phpunit": "^12.2",
-                "squizlabs/php_codesniffer": "^3.13"
+                "squizlabs/php_codesniffer": "^3.13 || ^4.0"
             },
             "type": "library",
             "autoload": {
@@ -679,22 +679,22 @@
             "description": "A set of HTTP representations",
             "support": {
                 "issues": "https://github.com/phpolar/representations/issues",
-                "source": "https://github.com/phpolar/representations/tree/1.0.1"
+                "source": "https://github.com/phpolar/representations/tree/1.0.2"
             },
-            "time": "2025-06-30T01:43:18+00:00"
+            "time": "2025-10-03T20:18:12+00:00"
         },
         {
             "name": "phpolar/serializers",
-            "version": "1.0.5",
+            "version": "1.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpolar/serializers.git",
-                "reference": "36d4caa139ca746ce8864d4cece5b93675edabe0"
+                "reference": "8064ce5ba7ec090f9d48e3aebb37be61dfbcd77f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpolar/serializers/zipball/36d4caa139ca746ce8864d4cece5b93675edabe0",
-                "reference": "36d4caa139ca746ce8864d4cece5b93675edabe0",
+                "url": "https://api.github.com/repos/phpolar/serializers/zipball/8064ce5ba7ec090f9d48e3aebb37be61dfbcd77f",
+                "reference": "8064ce5ba7ec090f9d48e3aebb37be61dfbcd77f",
                 "shasum": ""
             },
             "require": {
@@ -710,7 +710,7 @@
                 "phpmd/phpmd": "^2.15",
                 "phpstan/phpstan": "^2.1",
                 "phpunit/phpunit": "^12.2",
-                "squizlabs/php_codesniffer": "^3.13"
+                "squizlabs/php_codesniffer": "^3.13 || ^4.0"
             },
             "type": "library",
             "autoload": {
@@ -725,9 +725,9 @@
             "description": "A set of serializers",
             "support": {
                 "issues": "https://github.com/phpolar/serializers/issues",
-                "source": "https://github.com/phpolar/serializers/tree/1.0.5"
+                "source": "https://github.com/phpolar/serializers/tree/1.0.6"
             },
-            "time": "2025-06-28T03:53:28+00:00"
+            "time": "2025-10-03T07:25:54+00:00"
         },
         {
             "name": "phpolar/storage-driver",
