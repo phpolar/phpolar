@@ -638,16 +638,16 @@
         },
         {
             "name": "phpolar/representations",
-            "version": "1.0.2",
+            "version": "1.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpolar/representations.git",
-                "reference": "9bf94102400dd9c6f56e69fd98f150bb8c1c1cb4"
+                "reference": "09b4e351050ec7bcc3d51be6be6239edef8d476e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpolar/representations/zipball/9bf94102400dd9c6f56e69fd98f150bb8c1c1cb4",
-                "reference": "9bf94102400dd9c6f56e69fd98f150bb8c1c1cb4",
+                "url": "https://api.github.com/repos/phpolar/representations/zipball/09b4e351050ec7bcc3d51be6be6239edef8d476e",
+                "reference": "09b4e351050ec7bcc3d51be6be6239edef8d476e",
                 "shasum": ""
             },
             "require": {
@@ -679,9 +679,9 @@
             "description": "A set of HTTP representations",
             "support": {
                 "issues": "https://github.com/phpolar/representations/issues",
-                "source": "https://github.com/phpolar/representations/tree/1.0.2"
+                "source": "https://github.com/phpolar/representations/tree/1.0.3"
             },
-            "time": "2025-10-03T20:18:12+00:00"
+            "time": "2025-10-10T20:20:02+00:00"
         },
         {
             "name": "phpolar/serializers",
