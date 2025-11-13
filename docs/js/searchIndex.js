@@ -151,10 +151,25 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Phpolar-Phpolar-DependencyInjection-DiTokens.html#constant_UNAUTHORIZED_HANDLER"
         },                {
+            "fqsen": "\\Phpolar\\Phpolar\\DependencyInjection\\DiTokens\u003A\u003ANOT_FOUND_HANDLER",
+            "name": "NOT_FOUND_HANDLER",
+            "summary": "",
+            "url": "classes/Phpolar-Phpolar-DependencyInjection-DiTokens.html#constant_NOT_FOUND_HANDLER"
+        },                {
             "fqsen": "\\Phpolar\\Phpolar\\DependencyInjection\\DiTokens\u003A\u003ANOOP_AUTH_CHECKER",
             "name": "NOOP_AUTH_CHECKER",
             "summary": "",
             "url": "classes/Phpolar-Phpolar-DependencyInjection-DiTokens.html#constant_NOOP_AUTH_CHECKER"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\DependencyInjection\\DiTokens\u003A\u003ANOOP_PROPERTY_INJECTOR",
+            "name": "NOOP_PROPERTY_INJECTOR",
+            "summary": "",
+            "url": "classes/Phpolar-Phpolar-DependencyInjection-DiTokens.html#constant_NOOP_PROPERTY_INJECTOR"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\DependencyInjection\\DiTokens\u003A\u003ANOOP_ROUTABLE_RESOLVER",
+            "name": "NOOP_ROUTABLE_RESOLVER",
+            "summary": "",
+            "url": "classes/Phpolar-Phpolar-DependencyInjection-DiTokens.html#constant_NOOP_ROUTABLE_RESOLVER"
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\DependencyInjection\\Globs",
             "name": "Globs",
@@ -166,14 +181,24 @@ Search.appendIndex(
             "summary": "The\u0020frameworks\u0020dependencies\u0020configuration\nis\u0020located\u0020in\u0020the\u0020source\u0020files\u0020of\u0020the\u0020framework.",
             "url": "classes/Phpolar-Phpolar-DependencyInjection-Globs.html#enumcase_FrameworkDeps"
         },                {
+            "fqsen": "\\Phpolar\\Phpolar\\DependencyInjection\\Globs\u003A\u003AUserFrameworkDeps",
+            "name": "UserFrameworkDeps",
+            "summary": "",
+            "url": "classes/Phpolar-Phpolar-DependencyInjection-Globs.html#enumcase_UserFrameworkDeps"
+        },                {
             "fqsen": "\\Phpolar\\Phpolar\\DependencyInjection\\Globs\u003A\u003ACustomDeps",
             "name": "CustomDeps",
             "summary": "The\u0020custom\u0020dependencies\u0020directory\u0020should\u0020be\nset\u0020up\u0020in\u0020the\u0020application\u0020using\u0020the\u0020framework.",
             "url": "classes/Phpolar-Phpolar-DependencyInjection-Globs.html#enumcase_CustomDeps"
         },                {
+            "fqsen": "\\Phpolar\\Phpolar\\DependencyInjection\\Globs\u003A\u003ARootCustomDeps",
+            "name": "RootCustomDeps",
+            "summary": "",
+            "url": "classes/Phpolar-Phpolar-DependencyInjection-Globs.html#enumcase_RootCustomDeps"
+        },                {
             "fqsen": "\\Phpolar\\Phpolar\\Http\\AuthorizationChecker",
             "name": "AuthorizationChecker",
-            "summary": "Determines\u0020if\u0020authorization\u0020is\u0020successful\nfor\u0020a\u0020given\u0020Routable.",
+            "summary": "Determines\u0020if\u0020authorization\u0020is\u0020successful\nfor\u0020a\u0020given\u0020request\u0020processor.",
             "url": "classes/Phpolar-Phpolar-Http-AuthorizationChecker.html"
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\Http\\AuthorizationChecker\u003A\u003A__construct\u0028\u0029",
@@ -181,10 +206,20 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Phpolar-Phpolar-Http-AuthorizationChecker.html#method___construct"
         },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Http\\AuthorizationChecker\u003A\u003Acheck\u0028\u0029",
-            "name": "check",
-            "summary": "Returns\u0020Routable\u0020when\u0020authorization\u0020is\u0020successful\nand\u0020an\u0020Unauthorized\u0020HTTP\u0020response\u0020when\u0020it\u0020is\u0020not.",
-            "url": "classes/Phpolar-Phpolar-Http-AuthorizationChecker.html#method_check"
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\AuthorizationChecker\u003A\u003Aauthorize\u0028\u0029",
+            "name": "authorize",
+            "summary": "Returns\u0020request\u0020processor\u0020when\u0020authorization\u0020is\u0020successful\nand\u0020an\u0020Unauthorized\u0020HTTP\u0020response\u0020when\u0020it\u0020is\u0020not.",
+            "url": "classes/Phpolar-Phpolar-Http-AuthorizationChecker.html#method_authorize"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\AuthorizationCheckerInterface",
+            "name": "AuthorizationCheckerInterface",
+            "summary": "Determines\u0020if\u0020authorization\u0020is\u0020successful\nfor\u0020a\u0020given\u0020request\u0020processor.",
+            "url": "classes/Phpolar-Phpolar-Http-AuthorizationCheckerInterface.html"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\AuthorizationCheckerInterface\u003A\u003Aauthorize\u0028\u0029",
+            "name": "authorize",
+            "summary": "Returns\u0020the\u0020request\u0020processor\u0020when\u0020authorization\u0020is\u0020successful\nor\u0020a\u0020PSR\u002D7\u0020HTTP\u0020response\u0020when\u0020it\u0020is\u0020not.",
+            "url": "classes/Phpolar-Phpolar-Http-AuthorizationCheckerInterface.html#method_authorize"
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\Http\\MiddlewareQueueRequestHandler",
             "name": "MiddlewareQueueRequestHandler",
@@ -206,75 +241,100 @@ Search.appendIndex(
             "summary": "Load\u0020the\u0020provided\u0020middleware\non\u0020the\u0020queue\u0020for\u0020processing.",
             "url": "classes/Phpolar-Phpolar-Http-MiddlewareQueueRequestHandler.html#method_queue"
         },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Http\\RequestMethods",
-            "name": "RequestMethods",
-            "summary": "Contains\u0020the\u0020currently\u0020supported\nHTTP\u0020request\u0020methods\u0020supported\u0020for\nrouting.",
-            "url": "classes/Phpolar-Phpolar-Http-RequestMethods.html"
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\PathVariableBindings",
+            "name": "PathVariableBindings",
+            "summary": "Contains\u0020route\u0020parameters",
+            "url": "classes/Phpolar-Phpolar-Http-PathVariableBindings.html"
         },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Http\\RequestMethods\u003A\u003AGET",
-            "name": "GET",
-            "summary": "",
-            "url": "classes/Phpolar-Phpolar-Http-RequestMethods.html#enumcase_GET"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Http\\RequestMethods\u003A\u003APOST",
-            "name": "POST",
-            "summary": "",
-            "url": "classes/Phpolar-Phpolar-Http-RequestMethods.html#enumcase_POST"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Http\\ResolvedRoute",
-            "name": "ResolvedRoute",
-            "summary": "Contains\u0020a\u0020routable\u0020that\u0020is\u0020the\u0020target\u0020of\u0020a\u0020route\nand\u0020bound\u0020route\u0020parameters.",
-            "url": "classes/Phpolar-Phpolar-Http-ResolvedRoute.html"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Http\\ResolvedRoute\u003A\u003A__construct\u0028\u0029",
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\PathVariableBindings\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
             "summary": "",
-            "url": "classes/Phpolar-Phpolar-Http-ResolvedRoute.html#method___construct"
+            "url": "classes/Phpolar-Phpolar-Http-PathVariableBindings.html#method___construct"
         },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Http\\ResolvedRoute\u003A\u003A\u0024delegate",
-            "name": "delegate",
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\PathVariableBindings\u003A\u003AtoArray\u0028\u0029",
+            "name": "toArray",
+            "summary": "Retrieve\u0020the\u0020entire\u0020contents\u0020of\u0020the\u0020route\u0020parameter\u0020map\nas\u0020an\u0020associative\u0020array.",
+            "url": "classes/Phpolar-Phpolar-Http-PathVariableBindings.html#method_toArray"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\PathVariableBindings\u003A\u003APATH_VARIABLE_PATTERN",
+            "name": "PATH_VARIABLE_PATTERN",
             "summary": "",
-            "url": "classes/Phpolar-Phpolar-Http-ResolvedRoute.html#property_delegate"
+            "url": "classes/Phpolar-Phpolar-Http-PathVariableBindings.html#constant_PATH_VARIABLE_PATTERN"
         },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Http\\ResolvedRoute\u003A\u003A\u0024routeParamMap",
-            "name": "routeParamMap",
-            "summary": "",
-            "url": "classes/Phpolar-Phpolar-Http-ResolvedRoute.html#property_routeParamMap"
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\Representations",
+            "name": "Representations",
+            "summary": "A\u0020collection\u0020of\u0020information\u0020that\u0020is\u0020intended\u0020to\nreflect\u0020a\u0020past,\u0020current,\u0020or\u0020desired\u0020state\u0020of\u0020resources.",
+            "url": "classes/Phpolar-Phpolar-Http-Representations.html"
         },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Http\\RouteMap",
-            "name": "RouteMap",
-            "summary": "Contains\u0020route\u0020paths\u0020associated\u0020with\u0020target\u0020objects.",
-            "url": "classes/Phpolar-Phpolar-Http-RouteMap.html"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Http\\RouteMap\u003A\u003A__construct\u0028\u0029",
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\Representations\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
             "summary": "",
-            "url": "classes/Phpolar-Phpolar-Http-RouteMap.html#method___construct"
+            "url": "classes/Phpolar-Phpolar-Http-Representations.html#method___construct"
         },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Http\\RouteMap\u003A\u003Aadd\u0028\u0029",
-            "name": "add",
-            "summary": "Associates\u0020a\u0020request\u0020method,\u0020route\u0020and\u0020a\u0020target\u0020object.",
-            "url": "classes/Phpolar-Phpolar-Http-RouteMap.html#method_add"
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\Representations\u003A\u003Acontains\u0028\u0029",
+            "name": "contains",
+            "summary": "",
+            "url": "classes/Phpolar-Phpolar-Http-Representations.html#method_contains"
         },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Http\\RouteMap\u003A\u003Amatch\u0028\u0029",
-            "name": "match",
-            "summary": "Attempts\u0020to\u0020locate\u0020an\u0020object\u0020associated\u0020with\u0020a\u0020given\u0020route.",
-            "url": "classes/Phpolar-Phpolar-Http-RouteMap.html#method_match"
-        },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Http\\RoutingHandler",
-            "name": "RoutingHandler",
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\RequestProcessingHandler",
+            "name": "RequestProcessingHandler",
             "summary": "Handles\u0020request\u0020routing\u0020for\u0020the\u0020application.",
-            "url": "classes/Phpolar-Phpolar-Http-RoutingHandler.html"
+            "url": "classes/Phpolar-Phpolar-Http-RequestProcessingHandler.html"
         },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Http\\RoutingHandler\u003A\u003A__construct\u0028\u0029",
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\RequestProcessingHandler\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
             "summary": "",
-            "url": "classes/Phpolar-Phpolar-Http-RoutingHandler.html#method___construct"
+            "url": "classes/Phpolar-Phpolar-Http-RequestProcessingHandler.html#method___construct"
         },                {
-            "fqsen": "\\Phpolar\\Phpolar\\Http\\RoutingHandler\u003A\u003Ahandle\u0028\u0029",
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\RequestProcessingHandler\u003A\u003Ahandle\u0028\u0029",
             "name": "handle",
-            "summary": "Locates\u0020and\u0020executes\u0020the\u0020registered\u0020route\u0020handler.",
-            "url": "classes/Phpolar-Phpolar-Http-RoutingHandler.html#method_handle"
+            "summary": "Attempts\u0020to\u0020locate\u0020and\u0020execute\u0020the\u0020target\u0020request\u0020processor.",
+            "url": "classes/Phpolar-Phpolar-Http-RequestProcessingHandler.html#method_handle"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\RequestProcessorExecutor",
+            "name": "RequestProcessorExecutor",
+            "summary": "Handles\u0020execution\u0020of\u0020a\u0020request\u0020processor.",
+            "url": "classes/Phpolar-Phpolar-Http-RequestProcessorExecutor.html"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\RequestProcessorExecutor\u003A\u003Aexecute\u0028\u0029",
+            "name": "execute",
+            "summary": "Execute\u0020the\u0020request\u0020processor.",
+            "url": "classes/Phpolar-Phpolar-Http-RequestProcessorExecutor.html#method_execute"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\ResponseBuilder",
+            "name": "ResponseBuilder",
+            "summary": "",
+            "url": "classes/Phpolar-Phpolar-Http-ResponseBuilder.html"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\ResponseBuilder\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Phpolar-Phpolar-Http-ResponseBuilder.html#method___construct"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\ResponseBuilder\u003A\u003Abuild\u0028\u0029",
+            "name": "build",
+            "summary": "Build\u0020a\u0020PSR\u002D7\u0020Response\nusing\u0020the\u0020given\u0020string\nas\u0020the\u0020response\u0020body.",
+            "url": "classes/Phpolar-Phpolar-Http-ResponseBuilder.html#method_build"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\ResponseBuilderInterface",
+            "name": "ResponseBuilderInterface",
+            "summary": "Builds\u0020a\u0020PSR\u002D7\u0020Response",
+            "url": "classes/Phpolar-Phpolar-Http-ResponseBuilderInterface.html"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\ResponseBuilderInterface\u003A\u003Abuild\u0028\u0029",
+            "name": "build",
+            "summary": "Build\u0020a\u0020PSR\u002D7\u0020Response\nusing\u0020the\u0020given\u0020string\nas\u0020the\u0020response\u0020body.",
+            "url": "classes/Phpolar-Phpolar-Http-ResponseBuilderInterface.html#method_build"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\ResponseCodeResolver",
+            "name": "ResponseCodeResolver",
+            "summary": "Determines\u0020the\u0020appropriate\u0020HTTP\u0020response\u0020code\nfor\u0020a\u0020given\u0020situation.",
+            "url": "classes/Phpolar-Phpolar-Http-ResponseCodeResolver.html"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\ResponseCodeResolver\u003A\u003Aresolve\u0028\u0029",
+            "name": "resolve",
+            "summary": "Resolve\u0020the\u0020appropriate\u0020HTTP\u0020response\u0020code.",
+            "url": "classes/Phpolar-Phpolar-Http-ResponseCodeResolver.html#method_resolve"
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\Http\\RoutingMiddleware",
             "name": "RoutingMiddleware",
@@ -290,6 +350,91 @@ Search.appendIndex(
             "name": "process",
             "summary": "Handle\u0020routing\u0020a\u0020request.",
             "url": "classes/Phpolar-Phpolar-Http-RoutingMiddleware.html#method_process"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\Server",
+            "name": "Server",
+            "summary": "Declares\u0020the\u0020capabilities\u0020of\u0020the\u0020resource\u0020server.",
+            "url": "classes/Phpolar-Phpolar-Http-Server.html"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\Server\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Phpolar-Phpolar-Http-Server.html#method___construct"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\Server\u003A\u003AfindTarget\u0028\u0029",
+            "name": "findTarget",
+            "summary": "Attempts\u0020to\u0020locate\u0020an\u0020object\u0020associated\u0020with\u0020a\u0020given\u0020route.",
+            "url": "classes/Phpolar-Phpolar-Http-Server.html#method_findTarget"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\ServerInterface",
+            "name": "ServerInterface",
+            "summary": "Declares\u0020the\u0020capabilities\u0020of\u0020the\u0020resource\u0020server.",
+            "url": "classes/Phpolar-Phpolar-Http-ServerInterface.html"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\ServerInterface\u003A\u003AfindTarget\u0028\u0029",
+            "name": "findTarget",
+            "summary": "Attempts\u0020to\u0020locate\u0020an\u0020object\u0020associated\u0020with\u0020a\u0020given\u0020route.",
+            "url": "classes/Phpolar-Phpolar-Http-ServerInterface.html#method_findTarget"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\Status\\ClientError\\BadRequest",
+            "name": "BadRequest",
+            "summary": "Indicates\u0020that\u0020the\u0020origin\u0020server\nserver\u0020cannot\u0020or\u0020will\u0020not\u0020process\u0020the\u0020request\u0020due\u0020to\u0020something\u0020that\u0020is\u0020perceived\u0020to\u0020be\u0020a\u0020client\u0020error\u0020\u0028e.g.,\u0020malformed\u0020request\u0020syntax,\u0020invalid\u0020request\u0020message\u0020framing,\u0020or\u0020deceptive\u0020request\u0020routing\u0029\u0020did\u0020not\u0020find\u0020a\u0020current\u0020representation\u0020for\u0020the\u0020target\u0020resource\u0020or\u0020is\u0020not\u0020willing\u0020to\u0020disclose\u0020that\u0020one\u0020exists.",
+            "url": "classes/Phpolar-Phpolar-Http-Status-ClientError-BadRequest.html"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\Status\\ClientError\\Forbidden",
+            "name": "Forbidden",
+            "summary": "Indicates\u0020that\u0020the\u0020origin\u0020server\u0020understood\u0020the\u0020request\u0020but\u0020refuses\u0020to\u0020authorize\u0020it.",
+            "url": "classes/Phpolar-Phpolar-Http-Status-ClientError-Forbidden.html"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\Status\\ClientError\\NotFound",
+            "name": "NotFound",
+            "summary": "Indicates\u0020that\u0020the\u0020origin\u0020server\u0020did\u0020not\u0020find\u0020a\u0020current\u0020representation\nfor\u0020the\u0020target\u0020resource\u0020or\u0020is\u0020not\u0020willing\u0020to\u0020disclose\u0020that\u0020one\u0020exists.",
+            "url": "classes/Phpolar-Phpolar-Http-Status-ClientError-NotFound.html"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\Status\\ClientError\\Unauthorized",
+            "name": "Unauthorized",
+            "summary": "indicates\u0020that\u0020the\u0020request\u0020has\u0020not\u0020been\u0020applied\u0020because\u0020it\u0020lacks\u0020valid\u0020authentication\u0020credentials\u0020for\u0020the\u0020target\u0020resource.",
+            "url": "classes/Phpolar-Phpolar-Http-Status-ClientError-Unauthorized.html"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\Target",
+            "name": "Target",
+            "summary": "The\u0020target\u0020of\u0020an\u0020HTTP\u0020request.",
+            "url": "classes/Phpolar-Phpolar-Http-Target.html"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\Target\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Phpolar-Phpolar-Http-Target.html#method___construct"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\Target\u003A\u003Anegotiate\u0028\u0029",
+            "name": "negotiate",
+            "summary": "",
+            "url": "classes/Phpolar-Phpolar-Http-Target.html#method_negotiate"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\Target\u003A\u003AgetRepresentation\u0028\u0029",
+            "name": "getRepresentation",
+            "summary": "",
+            "url": "classes/Phpolar-Phpolar-Http-Target.html#method_getRepresentation"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\Target\u003A\u003AmatchesLocation\u0028\u0029",
+            "name": "matchesLocation",
+            "summary": "",
+            "url": "classes/Phpolar-Phpolar-Http-Target.html#method_matchesLocation"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\Target\u003A\u003AmatchesMethod\u0028\u0029",
+            "name": "matchesMethod",
+            "summary": "",
+            "url": "classes/Phpolar-Phpolar-Http-Target.html#method_matchesMethod"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\Target\u003A\u003A\u0024location",
+            "name": "location",
+            "summary": "",
+            "url": "classes/Phpolar-Phpolar-Http-Target.html#property_location"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\Target\u003A\u003A\u0024requestProcessor",
+            "name": "requestProcessor",
+            "summary": "",
+            "url": "classes/Phpolar-Phpolar-Http-Target.html#property_requestProcessor"
         },                {
             "fqsen": "\\",
             "name": "\\",
@@ -320,5 +465,15 @@ Search.appendIndex(
             "name": "Http",
             "summary": "",
             "url": "namespaces/phpolar-phpolar-http.html"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\Status\\ClientError",
+            "name": "ClientError",
+            "summary": "",
+            "url": "namespaces/phpolar-phpolar-http-status-clienterror.html"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\Status",
+            "name": "Status",
+            "summary": "",
+            "url": "namespaces/phpolar-phpolar-http-status.html"
         }            ]
 );

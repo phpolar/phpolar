@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="utf-8">
+            <title>Documentation</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="../">
+    <link rel="icon" href="https://phpolar.org/resources/images/icon.svg"/>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/template.css">
+    <style>
+        article {
+          box-shadow: none !important;
+        }
+        body > main > section > p,
+        body > main > section > header {
+          text-align: center;
+        }
+        body > main > article > footer img,
+        body > footer > address img,
+        body > footer > header img {
+          width: 2.5rem;
+        }
+        body > header svg,
+        body > header img,
+        body > main > header img {
+          width: 3rem;
+          bottom: -0.3rem;
+          margin-right: 0.2rem;
+        }
+        body > header svg,
+        body > header img {
+          bottom: -0.3rem;
+          position: relative;
+        }
+        body > header {
+          position: sticky;
+          top: 0;
+          background-color: white;
+          border-bottom: 1px solid var(--pico-muted-border-color);
+        }
+        body > header > nav > ul > li > a {
+            vertical-align: top;
+        }
+        body > header > nav > ul > li > a,
+        body > header > nav > ul > li > hgroup {
+            display: inline-block;
+        }
+        body > header {
+          padding-top: 0;
+          padding-bottom: 0;
+        }
+        body > footer > header img {
+          bottom: -0.5rem;
+          margin-right: 0.2rem;
+        }
+        body > main > header img,
+        body > footer > header img {
+          position: relative;
+        }
+        body > main > article > section > footer {
+          position: relative;
+          bottom: 0;
+        }
+        [role=grid-container] {
+          display: grid;
+          grid-template-columns: 1fr 4fr;
+          column-gap: 1em;
+        }
+        [role=side-nav] > aside {
+           position: sticky;
+           top: 10rem;
+        }
+        @media (max-width: 768px) {
+          .closed-on-mobile {
+             display: none;
+          }
+          body > main > aside {
+            display: none;
+          }
+          body > main aside + section {
+            width: 100%;
+            margin-left: 0;
+          }
+        }
+
+    body {
+        font-family: var(--pico-font-family);
+        font-size: inherit;
+        letter-spacing: initial;
+        line-height: var(--pico-line-height);
+    }
+
+    </style>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/themes/prism-okaidia.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-numbers/prism-line-numbers.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-highlight/prism-line-highlight.css">
+                <script src="js/template.js"></script>
+    </head>
+<body id="top">
+    <header class="container-fluid">
+    <nav>
+        <ul>
+          <li>
+              <a href="" alt="brand logo" role="brand logo">
+      <svg
+  version="1.1"
+  xmlns="http://www.w3.org/2000/svg"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns:ev="http://www.w3.org/2001/xml-events"
+  baseProfile="full"
+  viewBox="0 0 100 100"
+  fill="#FFFFFF"
+  >
+    <rect width="100%" height="100%" rx="12"/>
+    <!-- #147CEB is kind of like dodger blue -->
+    <g stroke="#147CEB" fill="#147CEB">
+      <circle cx="50" cy="50" r="12" />
+    </g>
+</svg>
+  </a>
+  <hgroup>
+    <h1>PHPolar</h1>
+    <h2>API Documentation</h2>
+  </hgroup>
+          </li>
+        </ul>
+        <ul>
+  <li>
+    <a href="https://docs.phpolar.org/#quick-start/" rel="noreferrer noopener" class="contrast">Quick Start</a>
+  </li>
+  <li>
+    <a href="https://docs.phpolar.org/#libraries/" rel="noreferrer noopener" class="contrast">Libraries</a>
+  </li>
+  <li>
+    <a href="https://docs.phpolar.org/#overriding/" rel="noreferrer noopener" class="contrast">Overriding Framework Defaults</a>
+  </li>
+  <li>
+    <a href="https://docs.phpolar.org/#objectives/" rel="noreferrer noopener" class="contrast">Design Goals and Intent</a>
+  </li>
+  <li>
+    <a href="/">API Documentation</a>
+  </li>
+</ul>
+    </nav>
+</header>
+    <main class="container" role="grid-container">
+        <div class="closed-on-mobile" role="side-nav">
+    <aside>
+    <nav>
+                                <details role="list" dir="rtl" class="phpdocumentor-sidebar__category">
+                <summary aria-haspop="listbox" role="link" class="contrast phpdocumentor-sidebar__category-header">Namespaces</summary>
+                    <ul role="listbox">
+                                                    <li class="phpdocumentor-sidebar__root-namespace">
+    <a href="namespaces/phpolar.html" class="">Phpolar</a>
+</li>
+    <ul class="">
+                    <li>
+                <a href="namespaces/phpolar-phpolar.html" class="">Phpolar</a>
+                
+            </li>
+            </ul>
+
+                                            </ul>
+            </details>
+                        <details role="list" dir="rtl" class="phpdocumentor-sidebar__category">
+                <summary aria-haspop="listbox" role="link" class="contrast phpdocumentor-sidebar__category-header">Packages</summary>
+                    <ul role="listbox">
+                                                    <li class="phpdocumentor-sidebar__root-namespace">
+    <a href="packages/Phpolar.html" class="">Phpolar</a>
+</li>
+
+                                            </ul>
+            </details>
+                    
+        <details role="list" dir="rtl" class="phpdocumentor-sidebar__category">
+            <summary aria-haspop="listbox" role="link" class="contrast phpdocumentor-sidebar__category-header">Reports</summary>
+            <ul role="listbox">
+                                <li class="phpdocumentor-sidebar__root-package"><a href="graphs/classes.html">Class Diagram</a></li>
+                                <li class="phpdocumentor-sidebar__root-package"><a href="reports/deprecated.html">Deprecated</a></li>
+                <li class="phpdocumentor-sidebar__root-package"><a href="reports/errors.html">Errors</a></li>
+            </ul>
+        </details>
+    </nav>
+    </aside>
+</div>
+        <div role="document">
+                        <section>
+                                <ul class="phpdocumentor-breadcrumbs">
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/phpolar.html">Phpolar</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/phpolar-phpolar.html">Phpolar</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/phpolar-phpolar-http.html">Http</a></li>
+    </ul>
+
+    <article class="phpdocumentor-element -class">
+        <h2 class="phpdocumentor-content__title">
+    Target
+
+    
+            <div class="phpdocumentor-element__package">
+            in package
+            <ul class="phpdocumentor-breadcrumbs">
+                                    <li class="phpdocumentor-breadcrumb"><a href="packages/Phpolar.html">Phpolar</a></li>
+                            </ul>
+        </div>
+    
+    
+    </h2>
+
+<div class="phpdocumentor-label-line">
+
+    <div class="phpdocumentor-label phpdocumentor-label--success"><span>Final</span><span>Yes</span></div>
+
+
+</div>
+
+        <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="Http/Target.php"><a href="files/http-target.html"><abbr title="Http/Target.php">Target.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">24</span>
+
+    </aside>
+
+            <p class="phpdocumentor-summary">The target of an HTTP request.</p>
+
+
+    <section class="phpdocumentor-description"><p>The target is sometimes referred to as the &quot;resource&quot;.
+This &quot;resource&quot; may have one or more representations.</p>
+</section>
+
+
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/Phpolar-Phpolar-Http-Target.html#tags" class=""><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">see</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                    <span class="phpdocumentor-tag-link"><a href="https://datatracker.ietf.org/doc/html/rfc7231#section-2">https://datatracker.ietf.org/doc/html/rfc7231#section-2</a></span>
+                                        
+                                             
+                                    </dd>
+                                            </dl>
+
+
+
+
+
+<h3 id="toc">
+    Table of Contents
+    <a href="classes/Phpolar-Phpolar-Http-Target.html#toc" class=""><i class="fas fa-link"></i></a>
+
+</h3>
+
+
+
+
+
+
+
+
+
+<h4 id="toc-properties">
+    Properties
+    <a href="classes/Phpolar-Phpolar-Http-Target.html#toc-properties" class=""><i class="fas fa-link"></i></a>
+
+</h4>
+<dl class="">
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/Phpolar-Phpolar-Http-Target.html#property_location">$location</a>
+    <span>
+                        &nbsp;: string            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/Phpolar-Phpolar-Http-Target.html#property_requestProcessor">$requestProcessor</a>
+    <span>
+                        &nbsp;: <abbr title="\Phpolar\HttpRequestProcessor\RequestProcessorInterface">RequestProcessorInterface</abbr>            </span>
+</dt>
+
+    </dl>
+
+<h4 id="toc-methods">
+    Methods
+    <a href="classes/Phpolar-Phpolar-Http-Target.html#toc-methods" class=""><i class="fas fa-link"></i></a>
+
+</h4>
+<dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/Phpolar-Phpolar-Http-Target.html#method___construct">__construct()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/Phpolar-Phpolar-Http-Target.html#method_getRepresentation">getRepresentation()</a>
+    <span>
+                                &nbsp;: <abbr title="\PhpContrib\Http\Representation\RepresentationInterface">RepresentationInterface</abbr>    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/Phpolar-Phpolar-Http-Target.html#method_matchesLocation">matchesLocation()</a>
+    <span>
+                                &nbsp;: bool    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/Phpolar-Phpolar-Http-Target.html#method_matchesMethod">matchesMethod()</a>
+    <span>
+                                &nbsp;: bool    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/Phpolar-Phpolar-Http-Target.html#method_negotiate">negotiate()</a>
+    <span>
+                                &nbsp;: <abbr title="\PhpCommonEnums\HttpResponseCode\Enumeration\HttpResponseCodeEnum">HttpResponseCodeEnum</abbr>    </span>
+</dt>
+
+    </dl>
+
+
+
+        
+
+        
+    <section class="phpdocumentor-properties">
+        <h3 class="phpdocumentor-elements__header" id="properties">
+            Properties
+            <a href="classes/Phpolar-Phpolar-Http-Target.html#properties" class=""><i class="fas fa-link"></i></a>
+
+        </h3>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                -read-only        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_location">
+        $location
+        <a href="classes/Phpolar-Phpolar-Http-Target.html#property_location" class=""><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                        <small class="phpdocumentor-element__modifier">read-only</small>        </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="Http/Target.php"><a href="files/http-target.html"><abbr title="Http/Target.php">Target.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">32</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">string</span>
+    <span class="phpdocumentor-signature__name">$location</span>
+    </code>
+
+    
+    
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                -read-only        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_requestProcessor">
+        $requestProcessor
+        <a href="classes/Phpolar-Phpolar-Http-Target.html#property_requestProcessor" class=""><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                        <small class="phpdocumentor-element__modifier">read-only</small>        </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="Http/Target.php"><a href="files/http-target.html"><abbr title="Http/Target.php">Target.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">35</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type"><abbr title="\Phpolar\HttpRequestProcessor\RequestProcessorInterface">RequestProcessorInterface</abbr></span>
+    <span class="phpdocumentor-signature__name">$requestProcessor</span>
+    </code>
+
+    
+    
+    
+
+    
+
+</article>
+            </section>
+
+            <section class="phpdocumentor-methods">
+        <h3 class="phpdocumentor-elements__header" id="methods">
+            Methods
+            <a href="classes/Phpolar-Phpolar-Http-Target.html#methods" class=""><i class="fas fa-link"></i></a>
+
+        </h3>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method___construct">
+        __construct()
+        <a href="classes/Phpolar-Phpolar-Http-Target.html#method___construct" class=""><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="Http/Target.php"><a href="files/http-target.html"><abbr title="Http/Target.php">Target.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">31</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$location</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\PhpCommonEnums\HttpMethod\Enumeration\HttpMethodEnum">HttpMethodEnum</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$method</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Phpolar-Phpolar-Http-Representations.html"><abbr title="\Phpolar\Phpolar\Http\Representations">Representations</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$representations</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Phpolar\HttpRequestProcessor\RequestProcessorInterface">RequestProcessorInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$requestProcessor</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$location</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$method</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\PhpCommonEnums\HttpMethod\Enumeration\HttpMethodEnum">HttpMethodEnum</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$representations</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Phpolar-Phpolar-Http-Representations.html"><abbr title="\Phpolar\Phpolar\Http\Representations">Representations</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$requestProcessor</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Phpolar\HttpRequestProcessor\RequestProcessorInterface">RequestProcessorInterface</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getRepresentation">
+        getRepresentation()
+        <a href="classes/Phpolar-Phpolar-Http-Target.html#method_getRepresentation" class=""><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="Http/Target.php"><a href="files/http-target.html"><abbr title="Http/Target.php">Target.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">57</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getRepresentation</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$resource</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\PhpContrib\Http\Representation\RepresentationInterface">RepresentationInterface</abbr></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$resource</span>
+                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\PhpContrib\Http\Representation\RepresentationInterface">RepresentationInterface</abbr></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_matchesLocation">
+        matchesLocation()
+        <a href="classes/Phpolar-Phpolar-Http-Target.html#method_matchesLocation" class=""><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="Http/Target.php"><a href="files/http-target.html"><abbr title="Http/Target.php">Target.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">70</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">matchesLocation</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$testLocation</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$testLocation</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_matchesMethod">
+        matchesMethod()
+        <a href="classes/Phpolar-Phpolar-Http-Target.html#method_matchesMethod" class=""><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="Http/Target.php"><a href="files/http-target.html"><abbr title="Http/Target.php">Target.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">77</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">matchesMethod</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$method</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$method</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_negotiate">
+        negotiate()
+        <a href="classes/Phpolar-Phpolar-Http-Target.html#method_negotiate" class=""><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="Http/Target.php"><a href="files/http-target.html"><abbr title="Http/Target.php">Target.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">43</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">negotiate</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\ServerRequestInterface">ServerRequestInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$request</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\PhpCommonEnums\HttpResponseCode\Enumeration\HttpResponseCodeEnum">HttpResponseCodeEnum</abbr></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$request</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\ServerRequestInterface">ServerRequestInterface</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\PhpCommonEnums\HttpResponseCode\Enumeration\HttpResponseCodeEnum">HttpResponseCodeEnum</abbr></span>
+            </section>
+
+</article>
+            </section>
+
+        <div class="phpdocumentor-modal" id="source-view">
+    <div class="phpdocumentor-modal-bg" data-exit-button></div>
+    <div class="phpdocumentor-modal-container">
+        <div class="phpdocumentor-modal-content">
+            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/Http/Target.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
+        </div>
+        <button data-exit-button class="phpdocumentor-modal__close">&times;</button>
+    </div>
+</div>
+
+    <script type="text/javascript">
+        (function () {
+            function loadExternalCodeSnippet(el, url, line) {
+                Array.prototype.slice.call(el.querySelectorAll('pre[data-src]')).forEach((pre) => {
+                    const src = url || pre.getAttribute('data-src').replace(/\\/g, '/');
+                    const language = 'php';
+
+                    const code = document.createElement('code');
+                    code.className = 'language-' + language;
+                    pre.textContent = '';
+                    pre.setAttribute('data-line', line)
+                    code.textContent = 'Loading…';
+                    pre.appendChild(code);
+
+                    var xhr = new XMLHttpRequest();
+
+                    xhr.open('GET', src, true);
+
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState !== 4) {
+                            return;
+                        }
+
+                        if (xhr.status < 400 && xhr.responseText) {
+                            code.textContent = xhr.responseText;
+                            Prism.highlightElement(code);
+                            return;
+                        }
+
+                        if (xhr.status === 404) {
+                            code.textContent = '✖ Error: File could not be found';
+                            return;
+                        }
+
+                        if (xhr.status >= 400) {
+                            code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                            return;
+                        }
+
+                        code.textContent = '✖ Error: An unknown error occurred';
+                    };
+
+                    xhr.send(null);
+                });
+            }
+
+            const modalButtons = document.querySelectorAll("[data-modal]");
+            const openedAsLocalFile = window.location.protocol === 'file:';
+            if (modalButtons.length > 0 && openedAsLocalFile) {
+                console.warn(
+                    'Viewing the source code is unavailable because you are opening this page from the file:// scheme; ' +
+                    'browsers block XHR requests when a page is opened this way'
+                );
+            }
+
+            modalButtons.forEach(function (trigger) {
+                if (openedAsLocalFile) {
+                    trigger.setAttribute("hidden", "hidden");
+                }
+
+                trigger.addEventListener("click", function (event) {
+                    event.preventDefault();
+                    const modal = document.getElementById(trigger.dataset.modal);
+                    if (!modal) {
+                        console.error(`Modal with id "${trigger.dataset.modal}" could not be found`);
+                        return;
+                    }
+                    modal.classList.add("phpdocumentor-modal__open");
+
+                    loadExternalCodeSnippet(modal, trigger.dataset.src || null, trigger.dataset.line)
+                    const exits = modal.querySelectorAll("[data-exit-button]");
+                    exits.forEach(function (exit) {
+                        exit.addEventListener("click", function (event) {
+                            event.preventDefault();
+                            modal.classList.remove("phpdocumentor-modal__open");
+                        });
+                    });
+                });
+            });
+        })();
+    </script>
+
+    </article>
+                        </section>
+            <section class="phpdocumentor-on-this-page__sidebar">
+                            
+    <section class="phpdocumentor-on-this-page__content">
+        <strong class="phpdocumentor-on-this-page__title">On this page</strong>
+
+        <ul class="phpdocumentor-list -clean">
+            <li class="phpdocumentor-on-this-page-section__title">Table Of Contents</li>
+            <li>
+                <ul class="phpdocumentor-list -clean">
+                                                            <li><a href="classes/Phpolar-Phpolar-Http-Target.html#toc-properties">Properties</a></li>
+                                                            <li><a href="classes/Phpolar-Phpolar-Http-Target.html#toc-methods">Methods</a></li>
+                                    </ul>
+            </li>
+            
+                            <li class="phpdocumentor-on-this-page-section__title">Properties</li>
+                <li>
+                    <ul class="phpdocumentor-list -clean">
+                                                    <li class=""><a href="classes/Phpolar-Phpolar-Http-Target.html#property_location">$location</a></li>
+                                                    <li class=""><a href="classes/Phpolar-Phpolar-Http-Target.html#property_requestProcessor">$requestProcessor</a></li>
+                                            </ul>
+                </li>
+            
+                        <li class="phpdocumentor-on-this-page-section__title">Methods</li>
+            <li>
+                <ul class="phpdocumentor-list -clean">
+                                            <li class=""><a href="classes/Phpolar-Phpolar-Http-Target.html#method___construct">__construct()</a></li>
+                                            <li class=""><a href="classes/Phpolar-Phpolar-Http-Target.html#method_getRepresentation">getRepresentation()</a></li>
+                                            <li class=""><a href="classes/Phpolar-Phpolar-Http-Target.html#method_matchesLocation">matchesLocation()</a></li>
+                                            <li class=""><a href="classes/Phpolar-Phpolar-Http-Target.html#method_matchesMethod">matchesMethod()</a></li>
+                                            <li class=""><a href="classes/Phpolar-Phpolar-Http-Target.html#method_negotiate">negotiate()</a></li>
+                                    </ul>
+            </li>
+                    </ul>
+    </section>
+
+            </section>
+                    </div>
+        <section data-search-results class="phpdocumentor-search-results phpdocumentor-search-results--hidden">
+    <section class="phpdocumentor-search-results__dialog">
+        <header class="phpdocumentor-search-results__header">
+            <h2 class="phpdocumentor-search-results__title">Search results</h2>
+            <button class="phpdocumentor-search-results__close"><i class="fas fa-times"></i></button>
+        </header>
+        <section class="phpdocumentor-search-results__body">
+            <ul class="phpdocumentor-search-results__entries"></ul>
+        </section>
+    </section>
+</section>
+        <a href="classes/Phpolar-Phpolar-Http-Target.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/prism.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-highlight/prism-line-highlight.min.js"></script>
+</body>
+</html>

@@ -7,10 +7,6 @@ namespace Phpolar\Phpolar\Http;
 use PhpCommonEnums\HttpResponseCode\Enumeration\HttpResponseCodeEnum as HttpResponseCode;
 use Phpolar\HttpRequestProcessor\RequestProcessorExecutorInterface;
 use Phpolar\ModelResolver\ModelResolverInterface;
-use Phpolar\Phpolar\Http\Status\ClientError\BadRequest;
-use Phpolar\Phpolar\Http\Status\ClientError\Forbidden;
-use Phpolar\Phpolar\Http\Status\ClientError\NotFound;
-use Phpolar\Phpolar\Http\Status\ClientError\Unauthorized;
 use Phpolar\PropertyInjectorContract\PropertyInjectorInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -31,6 +27,7 @@ final class RequestProcessingHandler implements RequestHandlerInterface
         private readonly AuthorizationCheckerInterface $authChecker,
         private readonly PropertyInjectorInterface $propertyInjector,
         private readonly ModelResolverInterface $modelResolver,
+        private readonly ResponseCodeResolver $responseCodeResolver,
     ) {}
 
     /**
@@ -102,28 +99,18 @@ final class RequestProcessingHandler implements RequestHandlerInterface
         /**
          * Handle property dependency injection
          */
-        $this->propertyInjector->inject($requestProcessor);
+        $this->propertyInjector->inject($authCheckResult);
 
         $resource = $this->processorExecutor->execute(
-            $requestProcessor,
+            $authCheckResult,
             $args,
         );
 
-        if ($resource instanceof NotFound) {
-            $responseCode = HttpResponseCode::NotFound;
-        }
 
-        if ($resource instanceof Unauthorized) {
-            $responseCode = HttpResponseCode::Unauthorized;
-        }
-
-        if ($resource instanceof Forbidden) {
-            $responseCode = HttpResponseCode::Forbidden;
-        }
-
-        if ($resource instanceof BadRequest) {
-            $responseCode = HttpResponseCode::BadRequest;
-        }
+        $responseCode = $this->responseCodeResolver->resolve(
+            resource: $resource,
+            default: $responseCode,
+        );
 
         $representation = $target->getRepresentation($resource);
 

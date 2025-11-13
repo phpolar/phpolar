@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="utf-8">
+            <title>Documentation</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="../">
+    <link rel="icon" href="https://phpolar.org/resources/images/icon.svg"/>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/template.css">
+    <style>
+        article {
+          box-shadow: none !important;
+        }
+        body > main > section > p,
+        body > main > section > header {
+          text-align: center;
+        }
+        body > main > article > footer img,
+        body > footer > address img,
+        body > footer > header img {
+          width: 2.5rem;
+        }
+        body > header svg,
+        body > header img,
+        body > main > header img {
+          width: 3rem;
+          bottom: -0.3rem;
+          margin-right: 0.2rem;
+        }
+        body > header svg,
+        body > header img {
+          bottom: -0.3rem;
+          position: relative;
+        }
+        body > header {
+          position: sticky;
+          top: 0;
+          background-color: white;
+          border-bottom: 1px solid var(--pico-muted-border-color);
+        }
+        body > header > nav > ul > li > a {
+            vertical-align: top;
+        }
+        body > header > nav > ul > li > a,
+        body > header > nav > ul > li > hgroup {
+            display: inline-block;
+        }
+        body > header {
+          padding-top: 0;
+          padding-bottom: 0;
+        }
+        body > footer > header img {
+          bottom: -0.5rem;
+          margin-right: 0.2rem;
+        }
+        body > main > header img,
+        body > footer > header img {
+          position: relative;
+        }
+        body > main > article > section > footer {
+          position: relative;
+          bottom: 0;
+        }
+        [role=grid-container] {
+          display: grid;
+          grid-template-columns: 1fr 4fr;
+          column-gap: 1em;
+        }
+        [role=side-nav] > aside {
+           position: sticky;
+           top: 10rem;
+        }
+        @media (max-width: 768px) {
+          .closed-on-mobile {
+             display: none;
+          }
+          body > main > aside {
+            display: none;
+          }
+          body > main aside + section {
+            width: 100%;
+            margin-left: 0;
+          }
+        }
+
+    body {
+        font-family: var(--pico-font-family);
+        font-size: inherit;
+        letter-spacing: initial;
+        line-height: var(--pico-line-height);
+    }
+
+    </style>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/themes/prism-okaidia.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-numbers/prism-line-numbers.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-highlight/prism-line-highlight.css">
+                <script src="js/template.js"></script>
+    </head>
+<body id="top">
+    <header class="container-fluid">
+    <nav>
+        <ul>
+          <li>
+              <a href="" alt="brand logo" role="brand logo">
+      <svg
+  version="1.1"
+  xmlns="http://www.w3.org/2000/svg"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns:ev="http://www.w3.org/2001/xml-events"
+  baseProfile="full"
+  viewBox="0 0 100 100"
+  fill="#FFFFFF"
+  >
+    <rect width="100%" height="100%" rx="12"/>
+    <!-- #147CEB is kind of like dodger blue -->
+    <g stroke="#147CEB" fill="#147CEB">
+      <circle cx="50" cy="50" r="12" />
+    </g>
+</svg>
+  </a>
+  <hgroup>
+    <h1>PHPolar</h1>
+    <h2>API Documentation</h2>
+  </hgroup>
+          </li>
+        </ul>
+        <ul>
+  <li>
+    <a href="https://docs.phpolar.org/#quick-start/" rel="noreferrer noopener" class="contrast">Quick Start</a>
+  </li>
+  <li>
+    <a href="https://docs.phpolar.org/#libraries/" rel="noreferrer noopener" class="contrast">Libraries</a>
+  </li>
+  <li>
+    <a href="https://docs.phpolar.org/#overriding/" rel="noreferrer noopener" class="contrast">Overriding Framework Defaults</a>
+  </li>
+  <li>
+    <a href="https://docs.phpolar.org/#objectives/" rel="noreferrer noopener" class="contrast">Design Goals and Intent</a>
+  </li>
+  <li>
+    <a href="/">API Documentation</a>
+  </li>
+</ul>
+    </nav>
+</header>
+    <main class="container" role="grid-container">
+        <div class="closed-on-mobile" role="side-nav">
+    <aside>
+    <nav>
+                                <details role="list" dir="rtl" class="phpdocumentor-sidebar__category">
+                <summary aria-haspop="listbox" role="link" class="contrast phpdocumentor-sidebar__category-header">Namespaces</summary>
+                    <ul role="listbox">
+                                                    <li class="phpdocumentor-sidebar__root-namespace">
+    <a href="namespaces/phpolar.html" class="">Phpolar</a>
+</li>
+    <ul class="">
+                    <li>
+                <a href="namespaces/phpolar-phpolar.html" class="">Phpolar</a>
+                
+            </li>
+            </ul>
+
+                                            </ul>
+            </details>
+                        <details role="list" dir="rtl" class="phpdocumentor-sidebar__category">
+                <summary aria-haspop="listbox" role="link" class="contrast phpdocumentor-sidebar__category-header">Packages</summary>
+                    <ul role="listbox">
+                                                    <li class="phpdocumentor-sidebar__root-namespace">
+    <a href="packages/Phpolar.html" class="">Phpolar</a>
+</li>
+
+                                            </ul>
+            </details>
+                    
+        <details role="list" dir="rtl" class="phpdocumentor-sidebar__category">
+            <summary aria-haspop="listbox" role="link" class="contrast phpdocumentor-sidebar__category-header">Reports</summary>
+            <ul role="listbox">
+                                <li class="phpdocumentor-sidebar__root-package"><a href="graphs/classes.html">Class Diagram</a></li>
+                                <li class="phpdocumentor-sidebar__root-package"><a href="reports/deprecated.html">Deprecated</a></li>
+                <li class="phpdocumentor-sidebar__root-package"><a href="reports/errors.html">Errors</a></li>
+            </ul>
+        </details>
+    </nav>
+    </aside>
+</div>
+        <div role="document">
+                        <section>
+                                <ul class="phpdocumentor-breadcrumbs">
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/phpolar.html">Phpolar</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/phpolar-phpolar.html">Phpolar</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/phpolar-phpolar-http.html">Http</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/phpolar-phpolar-http-status.html">Status</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/phpolar-phpolar-http-status-clienterror.html">ClientError</a></li>
+    </ul>
+
+    <article class="phpdocumentor-element -class">
+        <h2 class="phpdocumentor-content__title">
+    Unauthorized
+
+    
+            <div class="phpdocumentor-element__package">
+            in package
+            <ul class="phpdocumentor-breadcrumbs">
+                                    <li class="phpdocumentor-breadcrumb"><a href="packages/Phpolar.html">Phpolar</a></li>
+                            </ul>
+        </div>
+    
+    
+    </h2>
+
+<div class="phpdocumentor-label-line">
+
+    <div class="phpdocumentor-label phpdocumentor-label--success"><span>Final</span><span>Yes</span></div>
+
+
+</div>
+
+        <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="Http/Status/ClientError/Unauthorized.php"><a href="files/http-status-clienterror-unauthorized.html"><abbr title="Http/Status/ClientError/Unauthorized.php">Unauthorized.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">12</span>
+
+    </aside>
+
+            <p class="phpdocumentor-summary">indicates that the request has not been applied because it lacks valid authentication credentials for the target resource.</p>
+
+
+
+
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/Phpolar-Phpolar-Http-Status-ClientError-Unauthorized.html#tags" class=""><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">link</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                                        <a class="phpdocumentor-tag-link" href="https://datatracker.ietf.org/doc/html/rfc7235#section-3.1"> https://datatracker.ietf.org/doc/html/rfc7235#section-3.1 </a>
+                    
+                                    </dd>
+                                            </dl>
+
+
+
+
+
+<h3 id="toc">
+    Table of Contents
+    <a href="classes/Phpolar-Phpolar-Http-Status-ClientError-Unauthorized.html#toc" class=""><i class="fas fa-link"></i></a>
+
+</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+
+        
+
+        
+        <div class="phpdocumentor-modal" id="source-view">
+    <div class="phpdocumentor-modal-bg" data-exit-button></div>
+    <div class="phpdocumentor-modal-container">
+        <div class="phpdocumentor-modal-content">
+            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/Http/Status/ClientError/Unauthorized.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
+        </div>
+        <button data-exit-button class="phpdocumentor-modal__close">&times;</button>
+    </div>
+</div>
+
+    <script type="text/javascript">
+        (function () {
+            function loadExternalCodeSnippet(el, url, line) {
+                Array.prototype.slice.call(el.querySelectorAll('pre[data-src]')).forEach((pre) => {
+                    const src = url || pre.getAttribute('data-src').replace(/\\/g, '/');
+                    const language = 'php';
+
+                    const code = document.createElement('code');
+                    code.className = 'language-' + language;
+                    pre.textContent = '';
+                    pre.setAttribute('data-line', line)
+                    code.textContent = 'Loading…';
+                    pre.appendChild(code);
+
+                    var xhr = new XMLHttpRequest();
+
+                    xhr.open('GET', src, true);
+
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState !== 4) {
+                            return;
+                        }
+
+                        if (xhr.status < 400 && xhr.responseText) {
+                            code.textContent = xhr.responseText;
+                            Prism.highlightElement(code);
+                            return;
+                        }
+
+                        if (xhr.status === 404) {
+                            code.textContent = '✖ Error: File could not be found';
+                            return;
+                        }
+
+                        if (xhr.status >= 400) {
+                            code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                            return;
+                        }
+
+                        code.textContent = '✖ Error: An unknown error occurred';
+                    };
+
+                    xhr.send(null);
+                });
+            }
+
+            const modalButtons = document.querySelectorAll("[data-modal]");
+            const openedAsLocalFile = window.location.protocol === 'file:';
+            if (modalButtons.length > 0 && openedAsLocalFile) {
+                console.warn(
+                    'Viewing the source code is unavailable because you are opening this page from the file:// scheme; ' +
+                    'browsers block XHR requests when a page is opened this way'
+                );
+            }
+
+            modalButtons.forEach(function (trigger) {
+                if (openedAsLocalFile) {
+                    trigger.setAttribute("hidden", "hidden");
+                }
+
+                trigger.addEventListener("click", function (event) {
+                    event.preventDefault();
+                    const modal = document.getElementById(trigger.dataset.modal);
+                    if (!modal) {
+                        console.error(`Modal with id "${trigger.dataset.modal}" could not be found`);
+                        return;
+                    }
+                    modal.classList.add("phpdocumentor-modal__open");
+
+                    loadExternalCodeSnippet(modal, trigger.dataset.src || null, trigger.dataset.line)
+                    const exits = modal.querySelectorAll("[data-exit-button]");
+                    exits.forEach(function (exit) {
+                        exit.addEventListener("click", function (event) {
+                            event.preventDefault();
+                            modal.classList.remove("phpdocumentor-modal__open");
+                        });
+                    });
+                });
+            });
+        })();
+    </script>
+
+    </article>
+                        </section>
+            <section class="phpdocumentor-on-this-page__sidebar">
+                            
+    <section class="phpdocumentor-on-this-page__content">
+        <strong class="phpdocumentor-on-this-page__title">On this page</strong>
+
+        <ul class="phpdocumentor-list -clean">
+            <li class="phpdocumentor-on-this-page-section__title">Table Of Contents</li>
+            <li>
+                <ul class="phpdocumentor-list -clean">
+                                                                            </ul>
+            </li>
+            
+            
+                    </ul>
+    </section>
+
+            </section>
+                    </div>
+        <section data-search-results class="phpdocumentor-search-results phpdocumentor-search-results--hidden">
+    <section class="phpdocumentor-search-results__dialog">
+        <header class="phpdocumentor-search-results__header">
+            <h2 class="phpdocumentor-search-results__title">Search results</h2>
+            <button class="phpdocumentor-search-results__close"><i class="fas fa-times"></i></button>
+        </header>
+        <section class="phpdocumentor-search-results__body">
+            <ul class="phpdocumentor-search-results__entries"></ul>
+        </section>
+    </section>
+</section>
+        <a href="classes/Phpolar-Phpolar-Http-Status-ClientError-Unauthorized.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/prism.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-highlight/prism-line-highlight.min.js"></script>
+</body>
+</html>

@@ -110,20 +110,13 @@
   xmlns:xlink="http://www.w3.org/1999/xlink"
   xmlns:ev="http://www.w3.org/2001/xml-events"
   baseProfile="full"
-  width="48"
   viewBox="0 0 100 100"
-  fill="#000000"
+  fill="#FFFFFF"
   >
-    <rect width="100%" height="100%" rx="2"/>
+    <rect width="100%" height="100%" rx="12"/>
     <!-- #147CEB is kind of like dodger blue -->
-    <g stroke="#147CEB">
-      <path
-        stroke-width="4"
-        d="M 20,60
-        A 10,20 0,0,1 40,60
-        C 50,30 60,40 60,60
-        A 15,70 0,0,1 80,60
-        "/>
+    <g stroke="#147CEB" fill="#147CEB">
+      <circle cx="50" cy="50" r="12" />
     </g>
 </svg>
   </a>
@@ -281,7 +274,7 @@ each Routable that requires authorization.</p>
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
     <a class="" href="classes/Phpolar-Phpolar-Auth-Authorize.html#method_getResolvedRoutable">getResolvedRoutable()</a>
     <span>
-                                &nbsp;: <abbr title="\Phpolar\Routable\RoutableInterface">RoutableInterface</abbr>|false    </span>
+                                &nbsp;: <abbr title="\Phpolar\HttpRequestProcessor\RequestProcessorInterface">RequestProcessorInterface</abbr>|false    </span>
 </dt>
 <dd>Return the target Routable when the request
 has been authenticated.  Otherwise, return
@@ -325,7 +318,7 @@ the fallback Routable.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                    <span class="phpdocumentor-signature__name">getResolvedRoutable</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Phpolar-Phpolar-Auth-AbstractProtectedRoutable.html"><abbr title="\Phpolar\Phpolar\Auth\AbstractProtectedRoutable">AbstractProtectedRoutable</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$target</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\PhpContrib\Authenticator\AuthenticatorInterface">AuthenticatorInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$authenticator</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Phpolar\Routable\RoutableInterface">RoutableInterface</abbr>|false</span></code>
+                    <span class="phpdocumentor-signature__name">getResolvedRoutable</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Phpolar-Phpolar-Auth-AbstractProtectedRoutable.html"><abbr title="\Phpolar\Phpolar\Auth\AbstractProtectedRoutable">AbstractProtectedRoutable</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$target</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\PhpContrib\Authenticator\AuthenticatorInterface">AuthenticatorInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$authenticator</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Phpolar\HttpRequestProcessor\RequestProcessorInterface">RequestProcessorInterface</abbr>|false</span></code>
 
     <div class="phpdocumentor-label-line">
         </div>
@@ -355,7 +348,7 @@ the fallback Routable.</p>
 
             <section>
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-        <span class="phpdocumentor-signature__response_type"><abbr title="\Phpolar\Routable\RoutableInterface">RoutableInterface</abbr>|false</span>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\Phpolar\HttpRequestProcessor\RequestProcessorInterface">RequestProcessorInterface</abbr>|false</span>
             </section>
 
 </article>
