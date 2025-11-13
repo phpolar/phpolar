@@ -16,6 +16,7 @@ use Phpolar\Phpolar\DependencyInjection\DiTokens;
 use Phpolar\Phpolar\Http\AuthorizationChecker;
 use Phpolar\Phpolar\Http\RequestProcessingHandler;
 use Phpolar\Phpolar\Http\RequestProcessorExecutor;
+use Phpolar\Phpolar\Http\ResponseCodeResolver;
 use Phpolar\Phpolar\Http\RoutingMiddleware;
 use Phpolar\Phpolar\Http\Server;
 use Phpolar\Phpolar\Http\ServerInterface;
@@ -68,6 +69,7 @@ return [
         authChecker: $container->get(AuthorizationChecker::class),
         propertyInjector: $container->get(PropertyInjectorInterface::class),
         modelResolver: $container->get(ModelResolverInterface::class),
+        responseCodeResolver: $container->get(ResponseCodeResolver::class)
     ),
     RequestProcessorExecutor::class => new RequestProcessorExecutor(),
     AuthorizationChecker::class => static fn() => new AuthorizationChecker(

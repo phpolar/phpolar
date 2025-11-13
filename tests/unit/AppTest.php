@@ -36,10 +36,10 @@ use Phpolar\Phpolar\Http\PathVariableBindings;
 use Phpolar\Phpolar\Http\Representations;
 use Phpolar\Phpolar\Http\RequestProcessingHandler;
 use Phpolar\Phpolar\Http\RequestProcessorExecutor;
-use Phpolar\Phpolar\Http\ResponseBuilder;
 use Phpolar\Phpolar\Http\Server;
 use Phpolar\Phpolar\Http\ServerInterface;
 use Phpolar\Phpolar\Http\Target;
+use Phpolar\Phpolar\Http\ResponseCodeResolver;
 use Phpolar\PropertyInjectorContract\PropertyInjectorInterface;
 use Phpolar\PurePhp\TemplateEngine;
 use Phpolar\PurePhp\TemplatingStrategyInterface;
@@ -102,6 +102,7 @@ final class AppTest extends TestCase
         $config[ResponseFilterInterface::class] = $this->createStub(ResponseFilterInterface::class);
         $config[AuthenticatorInterface::class] = $this->createStub(AuthenticatorInterface::class);
         $config[PropertyInjectorInterface::class] = $this->createStub(PropertyInjectorInterface::class);
+        $config[ResponseCodeResolver::class] = new ResponseCodeResolver();
 
         return new ConfigurableContainerStub($config);
     }
@@ -213,6 +214,7 @@ final class AppTest extends TestCase
     {
         $config = new ContainerConfigurationStub();
         $config[PropertyInjectorInterface::class] = $this->createStub(PropertyInjectorInterface::class);
+        $config[ResponseCodeResolver::class] = new ResponseCodeResolver();
         $nonConfiguredContainerFac = $this->getNonConfiguredContainer($config);
         $requestStub = $this->createStub(ServerRequestInterface::class);
         $uriStub = $this->createStub(UriInterface::class);
@@ -244,6 +246,7 @@ final class AppTest extends TestCase
         $config[StreamFactoryInterface::class] = $this->createStub(StreamFactoryInterface::class);
         $config[ResponseFactoryInterface::class] = $this->createStub(ResponseFactoryInterface::class);
         $config[PropertyInjectorInterface::class] = $this->createStub(PropertyInjectorInterface::class);
+        $config[ResponseCodeResolver::class] = new ResponseCodeResolver();
         $containerFac = $this->getNonConfiguredContainer($config);
         chdir("tests/__fakes__/");
         $app1 = App::create(

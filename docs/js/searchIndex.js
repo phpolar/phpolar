@@ -326,6 +326,16 @@ Search.appendIndex(
             "summary": "Build\u0020a\u0020PSR\u002D7\u0020Response\nusing\u0020the\u0020given\u0020string\nas\u0020the\u0020response\u0020body.",
             "url": "classes/Phpolar-Phpolar-Http-ResponseBuilderInterface.html#method_build"
         },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\ResponseCodeResolver",
+            "name": "ResponseCodeResolver",
+            "summary": "Determines\u0020the\u0020appropriate\u0020HTTP\u0020response\u0020code\nfor\u0020a\u0020given\u0020situation.",
+            "url": "classes/Phpolar-Phpolar-Http-ResponseCodeResolver.html"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\ResponseCodeResolver\u003A\u003Aresolve\u0028\u0029",
+            "name": "resolve",
+            "summary": "Resolve\u0020the\u0020appropriate\u0020HTTP\u0020response\u0020code.",
+            "url": "classes/Phpolar-Phpolar-Http-ResponseCodeResolver.html#method_resolve"
+        },                {
             "fqsen": "\\Phpolar\\Phpolar\\Http\\RoutingMiddleware",
             "name": "RoutingMiddleware",
             "summary": "Takes\u0020care\u0020of\u0020routing\u0020requests\u0020to\u0020handlers",

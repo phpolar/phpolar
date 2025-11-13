@@ -27,7 +27,7 @@ use Phpolar\Phpolar\DependencyInjection\DiTokens;
 use Phpolar\Phpolar\Http\AuthorizationChecker;
 use Phpolar\Phpolar\Http\RequestProcessingHandler;
 use Phpolar\Phpolar\Http\RequestProcessorExecutor;
-use Phpolar\Phpolar\Http\ResponseBuilder;
+use Phpolar\Phpolar\Http\ResponseCodeResolver;
 use Phpolar\Phpolar\Http\ServerInterface;
 use Phpolar\PropertyInjectorContract\PropertyInjectorInterface;
 use Psr\Container\ContainerInterface;
@@ -72,6 +72,7 @@ return [
         streamFactory: $container->get(StreamFactoryInterface::class),
         propertyInjector: $container->get(PropertyInjectorInterface::class),
         modelResolver: $container->get(ModelResolverInterface::class),
+        responseCodeResolver: $container->get(ResponseCodeResolver::class),
     ),
     DiTokens::UNAUTHORIZED_HANDLER => static fn(ContainerInterface $container) => new class($container->get(ResponseFactoryInterface::class)) implements RequestHandlerInterface {
         public function __construct(private ResponseFactoryInterface $responseFactory) {}
@@ -95,10 +96,12 @@ return [
         authChecker: $container->get(DiTokens::NOOP_AUTH_CHECKER),
         propertyInjector: $container->get(PropertyInjectorInterface::class),
         modelResolver: $container->get(ModelResolverInterface::class),
+        responseCodeResolver: $container->get(ResponseCodeResolver::class),
     ),
     AuthorizationChecker::class => static fn(ContainerInterface $container) => new AuthorizationChecker(
         routableResolver: $container->get(RequestProcessorResolverInterface::class),
         unauthHandler: $container->get(DiTokens::UNAUTHORIZED_HANDLER),
     ),
     RoutingMiddleware::class => static fn(ContainerInterface $container) => new RoutingMiddleware($container->get(RequestProcessingHandler::class)),
+    ResponseCodeResolver::class => new ResponseCodeResolver(),
 ];
