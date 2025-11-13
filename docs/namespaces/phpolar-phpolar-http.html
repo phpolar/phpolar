@@ -110,20 +110,13 @@
   xmlns:xlink="http://www.w3.org/1999/xlink"
   xmlns:ev="http://www.w3.org/2001/xml-events"
   baseProfile="full"
-  width="48"
   viewBox="0 0 100 100"
-  fill="#000000"
+  fill="#FFFFFF"
   >
-    <rect width="100%" height="100%" rx="2"/>
+    <rect width="100%" height="100%" rx="12"/>
     <!-- #147CEB is kind of like dodger blue -->
-    <g stroke="#147CEB">
-      <path
-        stroke-width="4"
-        d="M 20,60
-        A 10,20 0,0,1 40,60
-        C 50,30 60,40 60,60
-        A 15,70 0,0,1 80,60
-        "/>
+    <g stroke="#147CEB" fill="#147CEB">
+      <circle cx="50" cy="50" r="12" />
     </g>
 </svg>
   </a>
@@ -210,7 +203,25 @@
 </h3>
 
 
+<header>
+    <h4 id="namespaces">
+        Namespaces
+        <a href="namespaces/phpolar-phpolar-http.html#namespaces" class=""><i class="fas fa-link"></i></a>
 
+    </h4>
+</header>
+<dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -namespace"><a href="namespaces/phpolar-phpolar-http-status.html"><abbr title="\Phpolar\Phpolar\Http\Status">Status</abbr></a></dt>
+    </dl>
+
+    <h4 id="toc-interfaces">
+        Interfaces
+        <a href="namespaces/phpolar-phpolar-http.html#toc-interfaces" class=""><i class="fas fa-link"></i></a>
+
+    </h4>
+    <dl class="phpdocumentor-table-of-contents">
+                    <dt class="phpdocumentor-table-of-contents__entry -interface"><a href="classes/Phpolar-Phpolar-Http-AuthorizationCheckerInterface.html"><abbr title="\Phpolar\Phpolar\Http\AuthorizationCheckerInterface">AuthorizationCheckerInterface</abbr></a></dt><dd>Determines if authorization is successful
+for a given request processor.</dd>            <dt class="phpdocumentor-table-of-contents__entry -interface"><a href="classes/Phpolar-Phpolar-Http-ResponseBuilderInterface.html"><abbr title="\Phpolar\Phpolar\Http\ResponseBuilderInterface">ResponseBuilderInterface</abbr></a></dt><dd>Builds a PSR-7 Response</dd>            <dt class="phpdocumentor-table-of-contents__entry -interface"><a href="classes/Phpolar-Phpolar-Http-ServerInterface.html"><abbr title="\Phpolar\Phpolar\Http\ServerInterface">ServerInterface</abbr></a></dt><dd>Declares the capabilities of the resource server.</dd>    </dl>
 
     <h4 id="toc-classes">
         Classes
@@ -219,20 +230,12 @@
     </h4>
     <dl class="phpdocumentor-table-of-contents">
                     <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Phpolar-Phpolar-Http-AuthorizationChecker.html"><abbr title="\Phpolar\Phpolar\Http\AuthorizationChecker">AuthorizationChecker</abbr></a></dt><dd>Determines if authorization is successful
-for a given Routable.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Phpolar-Phpolar-Http-MiddlewareQueueRequestHandler.html"><abbr title="\Phpolar\Phpolar\Http\MiddlewareQueueRequestHandler">MiddlewareQueueRequestHandler</abbr></a></dt><dd>The HTTP Server request handling starting point
-for the application.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Phpolar-Phpolar-Http-ResolvedRoute.html"><abbr title="\Phpolar\Phpolar\Http\ResolvedRoute">ResolvedRoute</abbr></a></dt><dd>Contains a routable that is the target of a route
-and bound route parameters.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Phpolar-Phpolar-Http-RouteMap.html"><abbr title="\Phpolar\Phpolar\Http\RouteMap">RouteMap</abbr></a></dt><dd>Contains route paths associated with target objects.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Phpolar-Phpolar-Http-RoutingHandler.html"><abbr title="\Phpolar\Phpolar\Http\RoutingHandler">RoutingHandler</abbr></a></dt><dd>Handles request routing for the application.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Phpolar-Phpolar-Http-RoutingMiddleware.html"><abbr title="\Phpolar\Phpolar\Http\RoutingMiddleware">RoutingMiddleware</abbr></a></dt><dd>Takes care of routing requests to handlers</dd>    </dl>
+for a given request processor.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Phpolar-Phpolar-Http-MiddlewareQueueRequestHandler.html"><abbr title="\Phpolar\Phpolar\Http\MiddlewareQueueRequestHandler">MiddlewareQueueRequestHandler</abbr></a></dt><dd>The HTTP Server request handling starting point
+for the application.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Phpolar-Phpolar-Http-PathVariableBindings.html"><abbr title="\Phpolar\Phpolar\Http\PathVariableBindings">PathVariableBindings</abbr></a></dt><dd>Contains route parameters</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Phpolar-Phpolar-Http-Representations.html"><abbr title="\Phpolar\Phpolar\Http\Representations">Representations</abbr></a></dt><dd>A collection of information that is intended to
+reflect a past, current, or desired state of resources.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Phpolar-Phpolar-Http-RequestProcessingHandler.html"><abbr title="\Phpolar\Phpolar\Http\RequestProcessingHandler">RequestProcessingHandler</abbr></a></dt><dd>Handles request routing for the application.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Phpolar-Phpolar-Http-RequestProcessorExecutor.html"><abbr title="\Phpolar\Phpolar\Http\RequestProcessorExecutor">RequestProcessorExecutor</abbr></a></dt><dd>Handles execution of a request processor.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Phpolar-Phpolar-Http-ResponseBuilder.html"><abbr title="\Phpolar\Phpolar\Http\ResponseBuilder">ResponseBuilder</abbr></a></dt>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Phpolar-Phpolar-Http-ResponseCodeResolver.html"><abbr title="\Phpolar\Phpolar\Http\ResponseCodeResolver">ResponseCodeResolver</abbr></a></dt><dd>Determines the appropriate HTTP response code
+for a given situation.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Phpolar-Phpolar-Http-RoutingMiddleware.html"><abbr title="\Phpolar\Phpolar\Http\RoutingMiddleware">RoutingMiddleware</abbr></a></dt><dd>Takes care of routing requests to handlers</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Phpolar-Phpolar-Http-Server.html"><abbr title="\Phpolar\Phpolar\Http\Server">Server</abbr></a></dt><dd>Declares the capabilities of the resource server.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Phpolar-Phpolar-Http-Target.html"><abbr title="\Phpolar\Phpolar\Http\Target">Target</abbr></a></dt><dd>The target of an HTTP request.</dd>    </dl>
 
 
-    <h4 id="toc-enums">
-        Enums
-        <a href="namespaces/phpolar-phpolar-http.html#toc-enums" class=""><i class="fas fa-link"></i></a>
-
-    </h4>
-    <dl class="phpdocumentor-table-of-contents">
-            <dt class="phpdocumentor-table-of-contents__entry -enum"><a href="classes/Phpolar-Phpolar-Http-RequestMethods.html"><abbr title="\Phpolar\Phpolar\Http\RequestMethods">RequestMethods</abbr></a></dt><dd>Contains the currently supported
-HTTP request methods supported for
-routing.</dd></dl>phpdocumentor-green
 
 
 
@@ -345,9 +348,9 @@ routing.</dd></dl>phpdocumentor-green
             <li class="phpdocumentor-on-this-page-section__title">Table Of Contents</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
-                                                                                                    <li><a href="namespaces/phpolar-phpolar-http.html#toc-classes">Classes</a></li>
-                                                                                <li><a href="namespaces/phpolar-phpolar-http.html#toc-enums">Enums</a></li>
-                                                                            </ul>
+                                                                                <li><a href="namespaces/phpolar-phpolar-http.html#toc-interfaces">Interfaces</a></li>
+                                                            <li><a href="namespaces/phpolar-phpolar-http.html#toc-classes">Classes</a></li>
+                                                                                                                    </ul>
             </li>
 
             

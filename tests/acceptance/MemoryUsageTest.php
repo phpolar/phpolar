@@ -35,8 +35,7 @@ use Phpolar\Phpolar\Http\AuthorizationChecker;
 use Phpolar\Phpolar\Http\Representations;
 use Phpolar\Phpolar\Http\RequestProcessingHandler;
 use Phpolar\Phpolar\Http\RequestProcessorExecutor;
-use Phpolar\Phpolar\Http\ResponseBuilder;
-use Phpolar\Phpolar\Http\ResponseBuilderInterface;
+use Phpolar\Phpolar\Http\ResponseCodeResolver;
 use Phpolar\Phpolar\Http\Server;
 use Phpolar\Phpolar\Http\ServerInterface;
 use Phpolar\Phpolar\Http\Target;
@@ -88,6 +87,7 @@ final class MemoryUsageTest extends TestCase
                 },
             ),
             modelResolver: $modelResolver,
+            responseCodeResolver: new ResponseCodeResolver(),
         );
         $config[MiddlewareQueueRequestHandler::class] = new MiddlewareQueueRequestHandler(
             new class () implements RequestHandlerInterface {

@@ -126,6 +126,7 @@ final class RoutingTest extends TestCase
             ),
             propertyInjector: $propertyInjector,
             modelResolver: $modelResolver,
+            responseCodeResolver: new ResponseCodeResolver(),
         );
 
         $response = $requestProcessor->handle($requestStub);
@@ -193,6 +194,7 @@ final class RoutingTest extends TestCase
             ),
             propertyInjector: $propertyInjector,
             modelResolver: $modelResolver,
+            responseCodeResolver: new ResponseCodeResolver(),
         );
 
         $response = $requestProcessor->handle($requestStub);

@@ -25,14 +25,14 @@ final class AuthorizationChecker implements AuthorizationCheckerInterface
      * Returns request processor when authorization is successful
      * and an Unauthorized HTTP response when it is not.
      */
-    public function authorize(RequestProcessorInterface $routable, ServerRequestInterface $request): RequestProcessorInterface|ResponseInterface
+    public function authorize(RequestProcessorInterface $requestProcessor, ServerRequestInterface $request): RequestProcessorInterface|ResponseInterface
     {
-        $authResult = $this->routableResolver->resolve($routable);
+        $result = $this->routableResolver->resolve($requestProcessor);
 
-        if ($authResult === false) {
+        if ($result === false) {
             return $this->unauthHandler->handle($request);
         }
 
-        return $routable;
+        return $result;
     }
 }
