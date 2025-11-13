@@ -10,7 +10,6 @@ use Phpolar\Phpolar\Http\Status\ClientError\Forbidden;
 use Phpolar\Phpolar\Http\Status\ClientError\NotFound;
 use Phpolar\Phpolar\Http\Status\ClientError\Unauthorized;
 
-
 /**
  * Determines the appropriate HTTP response code
  * for a given situation.
