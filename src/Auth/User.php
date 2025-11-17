@@ -4,19 +4,25 @@ declare(strict_types=1);
 
 namespace Phpolar\Phpolar\Auth;
 
+use SensitiveParameter;
+
 /**
  * Represents an authenticated user.
  *
  * @phan-file-suppress PhanWriteOnlyPublicProperty
  */
-final class User
+final readonly class User
 {
     public function __construct(
-        public readonly string $name,
-        public readonly string $nickname,
-        public readonly string $email,
-        public readonly string $avatarUrl,
-        public readonly ?string $picture = null,
-    ) {
-    }
+        #[SensitiveParameter]
+        public string $name,
+        #[SensitiveParameter]
+        public string $nickname,
+        #[SensitiveParameter]
+        public string $email,
+        #[SensitiveParameter]
+        public string $avatarUrl,
+        #[SensitiveParameter]
+        public ?string $picture = null,
+    ) {}
 }
