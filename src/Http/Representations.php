@@ -12,15 +12,14 @@ use PhpCommonEnums\MimeType\Enumeration\MimeTypeEnum as MimeType;
  *
  * @see https://datatracker.ietf.org/doc/html/rfc7231#section-3
  */
-final class Representations
+final readonly class Representations
 {
     /**
      * @param MimeType[] $representations
      */
     public function __construct(
-        private readonly array $representations,
-    ) {
-    }
+        private array $representations,
+    ) {}
 
     /**
      * @param string[] $acceptable

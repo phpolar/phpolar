@@ -13,7 +13,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 /**
  * Takes care of routing requests to handlers
  */
-final class RoutingMiddleware implements MiddlewareInterface
+final readonly class RoutingMiddleware implements MiddlewareInterface
 {
     public function __construct(private RequestHandlerInterface $requestHandler) {}
 

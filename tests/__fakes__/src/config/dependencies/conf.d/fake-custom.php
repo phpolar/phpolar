@@ -13,7 +13,7 @@ use Phpolar\HttpRequestProcessor\RequestProcessorResolverInterface;
 use Phpolar\Model\ParsedBodyResolver;
 use Phpolar\Phpolar\Http\MiddlewareQueueRequestHandler;
 use Phpolar\Phpolar\DependencyInjection\DiTokens;
-use Phpolar\Phpolar\Http\AuthorizationChecker;
+use Phpolar\Phpolar\Http\RequestAuthorizer;
 use Phpolar\Phpolar\Http\RequestProcessingHandler;
 use Phpolar\Phpolar\Http\RequestProcessorExecutor;
 use Phpolar\Phpolar\Http\ResponseCodeResolver;
@@ -66,13 +66,13 @@ return [
         processorExecutor: $container->get(RequestProcessorExecutor::class),
         responseFactory: $container->get(ResponseFactoryInterface::class),
         streamFactory: $container->get(StreamFactoryInterface::class),
-        authChecker: $container->get(AuthorizationChecker::class),
+        requestAuthorizer: $container->get(RequestAuthorizer::class),
         propertyInjector: $container->get(PropertyInjectorInterface::class),
         modelResolver: $container->get(ModelResolverInterface::class),
         responseCodeResolver: $container->get(ResponseCodeResolver::class)
     ),
     RequestProcessorExecutor::class => new RequestProcessorExecutor(),
-    AuthorizationChecker::class => static fn() => new AuthorizationChecker(
+    RequestAuthorizer::class => static fn() => new RequestAuthorizer(
         new class () implements RequestProcessorResolverInterface {
             public function resolve(RequestProcessorInterface $target): RequestProcessorInterface | false
             {

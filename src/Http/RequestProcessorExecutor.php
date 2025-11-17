@@ -16,7 +16,7 @@ use ReflectionMethod;
  * decorated with attributes can be passed in
  * after the attributes are invoked.
  */
-final class RequestProcessorExecutor implements RequestProcessorExecutorInterface
+final readonly class RequestProcessorExecutor implements RequestProcessorExecutorInterface
 {
     /**
      * Execute the request processor.

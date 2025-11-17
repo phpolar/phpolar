@@ -17,7 +17,7 @@ use Psr\Http\Server\RequestHandlerInterface;
  * [queue-based handler](https://www.php-fig.org/psr/psr-15/meta/#queue-based-request-handler)
  * that processes [PSR-15 middleware](https://www.php-fig.org/psr/psr-15/#22-psrhttpservermiddlewareinterface).
  */
-class MiddlewareQueueRequestHandler implements RequestHandlerInterface
+final class MiddlewareQueueRequestHandler implements RequestHandlerInterface
 {
     /**
      * A collection of middleware to
@@ -27,9 +27,7 @@ class MiddlewareQueueRequestHandler implements RequestHandlerInterface
      */
     private array $middlewareQueue = [];
 
-    public function __construct(private RequestHandlerInterface $fallbackHandler)
-    {
-    }
+    public function __construct(private RequestHandlerInterface $fallbackHandler) {}
 
     /**
      * Gets the next middleware from the processing queue.

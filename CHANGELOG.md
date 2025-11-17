@@ -2,6 +2,12 @@
 
 This file documents changes to the PHPolar project
 
+## 8.2.1 (2025-11-17)
+
+### Refactor
+
+- rename to request authorizer (#512)
+
 ## 8.2.0 (2025-11-17)
 
 ### Feat

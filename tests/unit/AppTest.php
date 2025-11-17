@@ -27,7 +27,7 @@ use Phpolar\Phpolar\Auth\AbstractRestrictedAccessRequestProcessor;
 use Phpolar\Phpolar\Auth\RestrictedAccessRequestProcessorResolver;
 use Phpolar\Phpolar\DependencyInjection\ContainerLoader;
 use Phpolar\Phpolar\DependencyInjection\DiTokens;
-use Phpolar\Phpolar\Http\AuthorizationChecker;
+use Phpolar\Phpolar\Http\RequestAuthorizer;
 use Phpolar\Phpolar\Http\RoutingMiddleware;
 use Phpolar\Phpolar\Tests\Stubs\ConfigurableContainerStub;
 use Phpolar\Phpolar\Tests\Stubs\ContainerConfigurationStub;
@@ -65,7 +65,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 #[UsesClass(RequestProcessingHandler::class)]
 #[UsesClass(RoutingMiddleware::class)]
 #[UsesClass(RestrictedAccessRequestProcessorResolver::class)]
-#[UsesClass(AuthorizationChecker::class)]
+#[UsesClass(RequestAuthorizer::class)]
 #[UsesClass(PathVariableBindings::class)]
 #[UsesClass(Representations::class)]
 #[UsesClass(RequestProcessorExecutor::class)]

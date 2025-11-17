@@ -10,13 +10,13 @@ use Psr\Http\Message\ServerRequestInterface;
 /**
  * Declares the capabilities of the resource server.
  */
-final class Server implements ServerInterface
+final readonly class Server implements ServerInterface
 {
     /**
      * @param Target[] $interface
      */
     public function __construct(
-        private readonly array $interface,
+        private array $interface,
     ) {}
 
     /**
