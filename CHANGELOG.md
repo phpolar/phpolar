@@ -2,6 +2,12 @@
 
 This file documents changes to the PHPolar project
 
+## 8.2.0 (2025-11-17)
+
+### Feat
+
+- make class readonly and add sensitive parameter attributes (#510)
+
 ## 8.1.5 (2025-11-12)
 
 ### Fix
