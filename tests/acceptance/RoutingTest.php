@@ -115,7 +115,7 @@ final class RoutingTest extends TestCase
             processorExecutor: new RequestProcessorExecutor(),
             responseFactory: $this->getResponseFactory(),
             streamFactory: $this->getStreamFactory(),
-            authChecker: new AuthorizationChecker(
+            requestAuthorizer: new RequestAuthorizer(
                 routableResolver: new class () implements RequestProcessorResolverInterface {
                     public function resolve(RequestProcessorInterface $target): RequestProcessorInterface|false
                     {
@@ -183,7 +183,7 @@ final class RoutingTest extends TestCase
             ]),
             responseFactory: $this->getResponseFactory(),
             streamFactory: $this->getStreamFactory(),
-            authChecker: new AuthorizationChecker(
+            requestAuthorizer: new RequestAuthorizer(
                 routableResolver: new class () implements RequestProcessorResolverInterface {
                     public function resolve(RequestProcessorInterface $target): RequestProcessorInterface|false
                     {

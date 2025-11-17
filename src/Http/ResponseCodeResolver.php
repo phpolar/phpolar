@@ -14,7 +14,7 @@ use Phpolar\Phpolar\Http\Status\ClientError\Unauthorized;
  * Determines the appropriate HTTP response code
  * for a given situation.
  */
-final class ResponseCodeResolver
+final readonly class ResponseCodeResolver
 {
     /**
      * Resolve the appropriate HTTP response code.

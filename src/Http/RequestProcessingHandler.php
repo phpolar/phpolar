@@ -17,17 +17,17 @@ use Psr\Http\Server\RequestHandlerInterface;
 /**
  * Handles request routing for the application.
  */
-final class RequestProcessingHandler implements RequestHandlerInterface
+final readonly class RequestProcessingHandler implements RequestHandlerInterface
 {
     public function __construct(
-        private readonly ServerInterface $server,
-        private readonly RequestProcessorExecutorInterface $processorExecutor,
-        private readonly StreamFactoryInterface $streamFactory,
-        private readonly ResponseFactoryInterface $responseFactory,
-        private readonly AuthorizationCheckerInterface $authChecker,
-        private readonly PropertyInjectorInterface $propertyInjector,
-        private readonly ModelResolverInterface $modelResolver,
-        private readonly ResponseCodeResolver $responseCodeResolver,
+        private ServerInterface $server,
+        private RequestProcessorExecutorInterface $processorExecutor,
+        private StreamFactoryInterface $streamFactory,
+        private ResponseFactoryInterface $responseFactory,
+        private RequestAuthorizerInterface $requestAuthorizer,
+        private PropertyInjectorInterface $propertyInjector,
+        private ModelResolverInterface $modelResolver,
+        private ResponseCodeResolver $responseCodeResolver,
     ) {}
 
     /**
@@ -63,14 +63,15 @@ final class RequestProcessingHandler implements RequestHandlerInterface
 
         $requestProcessor = $target->requestProcessor;
 
-        /**
-         * Use "not authorized" response if the request is not authorized
-         * or continue
-         */
-        $authCheckResult = $this->authChecker->authorize($requestProcessor, $request);
-        if ($authCheckResult instanceof ResponseInterface) {
-            return $authCheckResult;
+        $authorizeResult = $this->requestAuthorizer->authorize($requestProcessor, $request);
+        if ($authorizeResult instanceof ResponseInterface) {
+            /**
+             * Respond with "not authorized" message if the request is not authorized
+             */
+            return $authorizeResult;
         }
+
+        $authorized = $authorizeResult;
 
         /**
          * Get path variables
@@ -99,10 +100,10 @@ final class RequestProcessingHandler implements RequestHandlerInterface
         /**
          * Handle property dependency injection
          */
-        $this->propertyInjector->inject($authCheckResult);
+        $this->propertyInjector->inject($authorized);
 
         $resource = $this->processorExecutor->execute(
-            $authCheckResult,
+            $authorized,
             $args,
         );
 

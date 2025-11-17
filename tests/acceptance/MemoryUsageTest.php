@@ -31,7 +31,7 @@ use Phpolar\Phpolar\Http\MiddlewareQueueRequestHandler;
 use Phpolar\Phpolar\App;
 use Phpolar\Phpolar\DependencyInjection\ContainerLoader;
 use Phpolar\Phpolar\DependencyInjection\DiTokens;
-use Phpolar\Phpolar\Http\AuthorizationChecker;
+use Phpolar\Phpolar\Http\RequestAuthorizer;
 use Phpolar\Phpolar\Http\Representations;
 use Phpolar\Phpolar\Http\RequestProcessingHandler;
 use Phpolar\Phpolar\Http\RequestProcessorExecutor;
@@ -77,7 +77,7 @@ final class MemoryUsageTest extends TestCase
             server: $config[ServerInterface::class],
             responseFactory: $config[ResponseFactoryInterface::class],
             streamFactory: $config[StreamFactoryInterface::class],
-            authChecker: new AuthorizationChecker(
+            requestAuthorizer: new RequestAuthorizer(
                 routableResolver: $config[RequestProcessorResolverInterface::class],
                 unauthHandler: new class () implements RequestHandlerInterface {
                     public function handle(ServerRequestInterface $request): ResponseInterface

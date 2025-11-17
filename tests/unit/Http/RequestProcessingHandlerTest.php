@@ -37,7 +37,7 @@ use Psr\Http\Message\UriInterface;
 #[CoversClass(RequestProcessingHandler::class)]
 #[CoversClass(PathVariableBindings::class)]
 #[UsesClassesThatImplementInterface(ServerInterface::class)]
-#[UsesClass(AuthorizationChecker::class)]
+#[UsesClass(RequestAuthorizer::class)]
 #[UsesClass(Representations::class)]
 #[UsesClass(Target::class)]
 #[UsesClass(RequestProcessorExecutor::class)]
@@ -83,7 +83,7 @@ final class RequestProcessingHandlerTest extends TestCase
         $propertyInjectorStub = $this->createStub(PropertyInjectorInterface::class);
         $responseStub = $this->createStub(ResponseInterface::class);
         $responseFactoryStub = $this->createStub(ResponseFactoryInterface::class);
-        $authCheckStub = $this->createStub(AuthorizationCheckerInterface::class);
+        $authCheckStub = $this->createStub(RequestAuthorizerInterface::class);
         $serverStub
             ->method("findTarget")
             ->willReturn(HttpResponseCode::NotFound);
@@ -99,7 +99,7 @@ final class RequestProcessingHandlerTest extends TestCase
             processorExecutor: new RequestProcessorExecutor(),
             responseFactory: $responseFactoryStub,
             streamFactory: $this->createStub(StreamFactoryInterface::class),
-            authChecker: $authCheckStub,
+            requestAuthorizer: $authCheckStub,
             propertyInjector: $propertyInjectorStub,
             modelResolver: $modelResolverStub,
             responseCodeResolver: new ResponseCodeResolver(),
@@ -114,7 +114,7 @@ final class RequestProcessingHandlerTest extends TestCase
     public function test1a()
     {
         $location = uniqid();
-        $authCheckStub = $this->createStub(AuthorizationCheckerInterface::class);
+        $authCheckStub = $this->createStub(RequestAuthorizerInterface::class);
         $requestStub = $this->createStub(ServerRequestInterface::class);
         $serverStub = $this->createStub(ServerInterface::class);
         $modelResolverStub = $this->createStub(ModelResolverInterface::class);
@@ -145,7 +145,7 @@ final class RequestProcessingHandlerTest extends TestCase
             processorExecutor: new RequestProcessorExecutor(),
             responseFactory: $responseFactoryStub,
             streamFactory: $this->createStub(StreamFactoryInterface::class),
-            authChecker: $authCheckStub,
+            requestAuthorizer: $authCheckStub,
             propertyInjector: $propertyInjectorStub,
             modelResolver: $modelResolverStub,
             responseCodeResolver: new ResponseCodeResolver(),
@@ -160,7 +160,7 @@ final class RequestProcessingHandlerTest extends TestCase
     public function test1b()
     {
         $location = uniqid();
-        $authCheckStub = $this->createStub(AuthorizationCheckerInterface::class);
+        $authCheckStub = $this->createStub(RequestAuthorizerInterface::class);
         $requestStub = $this->createStub(ServerRequestInterface::class);
         $serverStub = $this->createStub(ServerInterface::class);
         $modelResolverStub = $this->createStub(ModelResolverInterface::class);
@@ -196,7 +196,7 @@ final class RequestProcessingHandlerTest extends TestCase
             processorExecutor: new RequestProcessorExecutor(),
             responseFactory: $this->createStub(ResponseFactoryInterface::class),
             streamFactory: $this->createStub(StreamFactoryInterface::class),
-            authChecker: $authCheckStub,
+            requestAuthorizer: $authCheckStub,
             propertyInjector: $propertyInjectorStub,
             modelResolver: $modelResolverStub,
             responseCodeResolver: new ResponseCodeResolver(),
@@ -211,7 +211,7 @@ final class RequestProcessingHandlerTest extends TestCase
     #[TestWith(["<h1>text</h1>", "/path"])]
     public function test1c(string $content, string $location)
     {
-        $authCheckStub = $this->createStub(AuthorizationCheckerInterface::class);
+        $authCheckStub = $this->createStub(RequestAuthorizerInterface::class);
         $requestStub = $this->createStub(ServerRequestInterface::class);
         $serverStub = $this->createStub(ServerInterface::class);
         $modelResolverStub = $this->createStub(ModelResolverInterface::class);
@@ -262,7 +262,7 @@ final class RequestProcessingHandlerTest extends TestCase
             processorExecutor: new RequestProcessorExecutor(),
             responseFactory: $responseFactoryStub,
             streamFactory: $this->createStub(StreamFactoryInterface::class),
-            authChecker: $authCheckStub,
+            requestAuthorizer: $authCheckStub,
             propertyInjector: $propertyInjectorStub,
             modelResolver: $modelResolverStub,
             responseCodeResolver: new ResponseCodeResolver(),
@@ -278,7 +278,7 @@ final class RequestProcessingHandlerTest extends TestCase
     #[TestWith(["<h1>text</h1>", "/path", ["id" => 123]])]
     public function test1cc(string $content, string $location, array $userInfo)
     {
-        $authCheckStub = $this->createStub(AuthorizationCheckerInterface::class);
+        $authCheckStub = $this->createStub(RequestAuthorizerInterface::class);
         $requestStub = $this->createStub(ServerRequestInterface::class);
         $serverStub = $this->createStub(ServerInterface::class);
         $modelResolverStub = $this->createStub(ModelResolverInterface::class);
@@ -339,7 +339,7 @@ final class RequestProcessingHandlerTest extends TestCase
             processorExecutor: $processorExecutorMock,
             responseFactory: $responseFactoryStub,
             streamFactory: $this->createStub(StreamFactoryInterface::class),
-            authChecker: $authCheckStub,
+            requestAuthorizer: $authCheckStub,
             propertyInjector: $propertyInjectorStub,
             modelResolver: $modelResolverStub,
             responseCodeResolver: new ResponseCodeResolver(),
@@ -352,7 +352,7 @@ final class RequestProcessingHandlerTest extends TestCase
     #[TestWith(["<h1>text</h1>", "/path", ["id" => 123]])]
     public function test1ccc(string $content, string $location, array $userInfo)
     {
-        $authCheckStub = $this->createStub(AuthorizationCheckerInterface::class);
+        $authCheckStub = $this->createStub(RequestAuthorizerInterface::class);
         $requestStub = $this->createStub(ServerRequestInterface::class);
         $serverStub = $this->createStub(ServerInterface::class);
         $modelResolverStub = $this->createStub(ModelResolverInterface::class);
@@ -412,7 +412,7 @@ final class RequestProcessingHandlerTest extends TestCase
             processorExecutor: $processorExecutorStub,
             responseFactory: $responseFactoryStub,
             streamFactory: $this->createStub(StreamFactoryInterface::class),
-            authChecker: $authCheckStub,
+            requestAuthorizer: $authCheckStub,
             propertyInjector: $propertyInjectorMock,
             modelResolver: $modelResolverStub,
             responseCodeResolver: new ResponseCodeResolver(),
@@ -426,7 +426,7 @@ final class RequestProcessingHandlerTest extends TestCase
     public function test1d(string $location, string $requestPath, array $expectedArgs)
     {
         $content = "";
-        $authCheckStub = $this->createStub(AuthorizationCheckerInterface::class);
+        $authCheckStub = $this->createStub(RequestAuthorizerInterface::class);
         $requestStub = $this->createStub(ServerRequestInterface::class);
         $serverStub = $this->createStub(ServerInterface::class);
         $modelResolverStub = $this->createStub(ModelResolverInterface::class);
@@ -497,7 +497,7 @@ final class RequestProcessingHandlerTest extends TestCase
             processorExecutor: $requestProcessorExecutorMock,
             responseFactory: $responseFactoryStub,
             streamFactory: $streamFactoryStub,
-            authChecker: $authCheckStub,
+            requestAuthorizer: $authCheckStub,
             propertyInjector: $propertyInjectorStub,
             modelResolver: $modelResolverStub,
             responseCodeResolver: new ResponseCodeResolver(),
@@ -511,7 +511,7 @@ final class RequestProcessingHandlerTest extends TestCase
     public function test1e(string $location, string $requestPath, array $modelVars, array $expectedArgs)
     {
         $content = "";
-        $authCheckStub = $this->createStub(AuthorizationCheckerInterface::class);
+        $authCheckStub = $this->createStub(RequestAuthorizerInterface::class);
         $requestStub = $this->createStub(ServerRequestInterface::class);
         $serverStub = $this->createStub(ServerInterface::class);
         $modelResolverStub = $this->createStub(ModelResolverInterface::class);
@@ -587,7 +587,7 @@ final class RequestProcessingHandlerTest extends TestCase
             processorExecutor: $requestProcessorExecutorMock,
             responseFactory: $responseFactoryStub,
             streamFactory: $streamFactoryStub,
-            authChecker: $authCheckStub,
+            requestAuthorizer: $authCheckStub,
             propertyInjector: $propertyInjectorStub,
             modelResolver: $modelResolverStub,
             responseCodeResolver: new ResponseCodeResolver(),
@@ -601,7 +601,7 @@ final class RequestProcessingHandlerTest extends TestCase
     public function test1f(string $location, string $requestPath, array $expectedArgs)
     {
         $content = "";
-        $authCheckStub = $this->createStub(AuthorizationCheckerInterface::class);
+        $authCheckStub = $this->createStub(RequestAuthorizerInterface::class);
         $requestStub = $this->createStub(ServerRequestInterface::class);
         $serverStub = $this->createStub(ServerInterface::class);
         $modelResolverStub = $this->createStub(ModelResolverInterface::class);
@@ -677,7 +677,7 @@ final class RequestProcessingHandlerTest extends TestCase
             processorExecutor: $requestProcessorExecutorMock,
             responseFactory: $responseFactoryStub,
             streamFactory: $streamFactoryStub,
-            authChecker: $authCheckStub,
+            requestAuthorizer: $authCheckStub,
             propertyInjector: $propertyInjectorStub,
             modelResolver: $modelResolverStub,
             responseCodeResolver: new ResponseCodeResolver(),
@@ -691,7 +691,7 @@ final class RequestProcessingHandlerTest extends TestCase
     public function test1g(string $location, string $requestPath, array $resolvedModelVars, array $expectedArgs)
     {
         $content = "";
-        $authCheckStub = $this->createStub(AuthorizationCheckerInterface::class);
+        $authCheckStub = $this->createStub(RequestAuthorizerInterface::class);
         $requestStub = $this->createStub(ServerRequestInterface::class);
         $serverStub = $this->createStub(ServerInterface::class);
         $modelResolverStub = $this->createStub(ModelResolverInterface::class);
@@ -767,7 +767,7 @@ final class RequestProcessingHandlerTest extends TestCase
             processorExecutor: $requestProcessorExecutorMock,
             responseFactory: $responseFactoryStub,
             streamFactory: $streamFactoryStub,
-            authChecker: $authCheckStub,
+            requestAuthorizer: $authCheckStub,
             propertyInjector: $propertyInjectorStub,
             modelResolver: $modelResolverStub,
             responseCodeResolver: new ResponseCodeResolver(),
@@ -786,7 +786,7 @@ final class RequestProcessingHandlerTest extends TestCase
         $processorExecutorStub =
             $this->createStub(RequestProcessorExecutorInterface::class);
         $responseFactoryStub = $this->createStub(ResponseFactoryInterface::class);
-        $authCheckStub = $this->createStub(AuthorizationCheckerInterface::class);
+        $authCheckStub = $this->createStub(RequestAuthorizerInterface::class);
         $propertyInjectorStub = $this->createStub(PropertyInjectorInterface::class);
         $modelResolverStub = $this->createStub(ModelResolverInterface::class);
         $requestProcessorStub = $this->createStub(RequestProcessorInterface::class);
@@ -829,7 +829,7 @@ final class RequestProcessingHandlerTest extends TestCase
             processorExecutor: $processorExecutorStub,
             responseFactory: $responseFactoryStub,
             streamFactory: $this->createStub(StreamFactoryInterface::class),
-            authChecker: $authCheckStub,
+            requestAuthorizer: $authCheckStub,
             propertyInjector: $propertyInjectorStub,
             modelResolver: $modelResolverStub,
             responseCodeResolver: new ResponseCodeResolver(),

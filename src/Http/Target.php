@@ -21,18 +21,18 @@ use Psr\Http\Message\ServerRequestInterface;
  *
  * @see https://datatracker.ietf.org/doc/html/rfc7231#section-2
  */
-final class Target
+final readonly class Target
 {
     /**
      * @var MimeType[]
      */
-    private readonly array $accepted;
+    private array $accepted;
 
     public function __construct(
-        public readonly string $location,
-        private readonly HttpMethod $method,
-        private readonly Representations $representations,
-        public readonly RequestProcessorInterface $requestProcessor,
+        public string $location,
+        private HttpMethod $method,
+        private Representations $representations,
+        public RequestProcessorInterface $requestProcessor,
     ) {
         $this->accepted = [
             MimeType::TextHtml,
@@ -98,7 +98,7 @@ final class Target
             array_filter(
                 array_combine($routeParts, $pathParts),
                 fn(string $pathPart, string $routePart) => $routePart === $pathPart
-                    || $this->containsPathVariables($routePart),
+                    || $this->containsPathVariables((string) $routePart),
                 ARRAY_FILTER_USE_BOTH,
             )
         ) === count($routeParts);
