@@ -191,13 +191,11 @@
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/phpolar.html">Phpolar</a></li>
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/phpolar-phpolar.html">Phpolar</a></li>
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/phpolar-phpolar-http.html">Http</a></li>
-            <li class="phpdocumentor-breadcrumb"><a href="namespaces/phpolar-phpolar-http-status.html">Status</a></li>
-            <li class="phpdocumentor-breadcrumb"><a href="namespaces/phpolar-phpolar-http-status-clienterror.html">ClientError</a></li>
     </ul>
 
     <article class="phpdocumentor-element -class">
         <h2 class="phpdocumentor-content__title">
-    BadRequest
+    RequestAuthorizer
 
     
             <div class="phpdocumentor-element__package">
@@ -207,6 +205,9 @@
                             </ul>
         </div>
     
+            <span class="phpdocumentor-element__implements">
+            implements
+                            <a href="classes/Phpolar-Phpolar-Http-RequestAuthorizerInterface.html"><abbr title="\Phpolar\Phpolar\Http\RequestAuthorizerInterface">RequestAuthorizerInterface</abbr></a>                    </span>
     
     </h2>
 
@@ -220,32 +221,18 @@
 </div>
 
         <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="Http/Status/ClientError/BadRequest.php"><a href="files/http-status-clienterror-badrequest.html"><abbr title="Http/Status/ClientError/BadRequest.php">BadRequest.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="Http/RequestAuthorizer.php"><a href="files/http-requestauthorizer.html"><abbr title="Http/RequestAuthorizer.php">RequestAuthorizer.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">13</span>
+    <span class="phpdocumentor-element-found-in__line">17</span>
 
     </aside>
 
-            <p class="phpdocumentor-summary">Indicates that the origin server
-server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing) did not find a current representation for the target resource or is not willing to disclose that one exists.</p>
+            <p class="phpdocumentor-summary">Determines if authorization is successful
+for a given request processor.</p>
 
 
 
 
-    <h5 class="phpdocumentor-tag-list__heading" id="tags">
-        Tags
-        <a href="classes/Phpolar-Phpolar-Http-Status-ClientError-BadRequest.html#tags" class=""><i class="fas fa-link"></i></a>
-
-    </h5>
-    <dl class="phpdocumentor-tag-list">
-                                    <dt class="phpdocumentor-tag-list__entry">
-                    <span class="phpdocumentor-tag__name">link</span>
-                </dt>
-                <dd class="phpdocumentor-tag-list__definition">
-                                                                                                        <a class="phpdocumentor-tag-link" href="https://datatracker.ietf.org/doc/html/rfc7231#section-6.5.1"> https://datatracker.ietf.org/doc/html/rfc7231#section-6.5.1 </a>
-                    
-                                    </dd>
-                                            </dl>
 
 
 
@@ -253,12 +240,20 @@ server cannot or will not process the request due to something that is perceived
 
 <h3 id="toc">
     Table of Contents
-    <a href="classes/Phpolar-Phpolar-Http-Status-ClientError-BadRequest.html#toc" class=""><i class="fas fa-link"></i></a>
+    <a href="classes/Phpolar-Phpolar-Http-RequestAuthorizer.html#toc" class=""><i class="fas fa-link"></i></a>
 
 </h3>
 
 
 
+    <h4 id="toc-interfaces">
+        Interfaces
+        <a href="classes/Phpolar-Phpolar-Http-RequestAuthorizer.html#toc-interfaces" class=""><i class="fas fa-link"></i></a>
+
+    </h4>
+    <dl class="phpdocumentor-table-of-contents">
+                    <dt class="phpdocumentor-table-of-contents__entry -interface"><a href="classes/Phpolar-Phpolar-Http-RequestAuthorizerInterface.html"><abbr title="\Phpolar\Phpolar\Http\RequestAuthorizerInterface">RequestAuthorizerInterface</abbr></a></dt><dd>Determines if authorization is successful
+for a given request processor.</dd>    </dl>
 
 
 
@@ -266,6 +261,27 @@ server cannot or will not process the request due to something that is perceived
 
 
 
+<h4 id="toc-methods">
+    Methods
+    <a href="classes/Phpolar-Phpolar-Http-RequestAuthorizer.html#toc-methods" class=""><i class="fas fa-link"></i></a>
+
+</h4>
+<dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/Phpolar-Phpolar-Http-RequestAuthorizer.html#method___construct">__construct()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/Phpolar-Phpolar-Http-RequestAuthorizer.html#method_authorize">authorize()</a>
+    <span>
+                                &nbsp;: <abbr title="\Phpolar\HttpRequestProcessor\RequestProcessorInterface">RequestProcessorInterface</abbr>|<abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr>    </span>
+</dt>
+<dd>Returns request processor when authorization is successful
+and an Unauthorized HTTP response when it is not.</dd>
+
+    </dl>
 
 
 
@@ -273,12 +289,127 @@ server cannot or will not process the request due to something that is perceived
 
         
 
-        
+            <section class="phpdocumentor-methods">
+        <h3 class="phpdocumentor-elements__header" id="methods">
+            Methods
+            <a href="classes/Phpolar-Phpolar-Http-RequestAuthorizer.html#methods" class=""><i class="fas fa-link"></i></a>
+
+        </h3>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method___construct">
+        __construct()
+        <a href="classes/Phpolar-Phpolar-Http-RequestAuthorizer.html#method___construct" class=""><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="Http/RequestAuthorizer.php"><a href="files/http-requestauthorizer.html"><abbr title="Http/RequestAuthorizer.php">RequestAuthorizer.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">19</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Phpolar\HttpRequestProcessor\RequestProcessorResolverInterface">RequestProcessorResolverInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$routableResolver</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Server\RequestHandlerInterface">RequestHandlerInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$unauthHandler</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$routableResolver</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Phpolar\HttpRequestProcessor\RequestProcessorResolverInterface">RequestProcessorResolverInterface</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$unauthHandler</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Server\RequestHandlerInterface">RequestHandlerInterface</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_authorize">
+        authorize()
+        <a href="classes/Phpolar-Phpolar-Http-RequestAuthorizer.html#method_authorize" class=""><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="Http/RequestAuthorizer.php"><a href="files/http-requestauthorizer.html"><abbr title="Http/RequestAuthorizer.php">RequestAuthorizer.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">28</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns request processor when authorization is successful
+and an Unauthorized HTTP response when it is not.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">authorize</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Phpolar\HttpRequestProcessor\RequestProcessorInterface">RequestProcessorInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$requestProcessor</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\ServerRequestInterface">ServerRequestInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$request</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Phpolar\HttpRequestProcessor\RequestProcessorInterface">RequestProcessorInterface</abbr>|<abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$requestProcessor</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Phpolar\HttpRequestProcessor\RequestProcessorInterface">RequestProcessorInterface</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$request</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Psr\Http\Message\ServerRequestInterface">ServerRequestInterface</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\Phpolar\HttpRequestProcessor\RequestProcessorInterface">RequestProcessorInterface</abbr>|<abbr title="\Psr\Http\Message\ResponseInterface">ResponseInterface</abbr></span>
+            </section>
+
+</article>
+            </section>
+
         <div class="phpdocumentor-modal" id="source-view">
     <div class="phpdocumentor-modal-bg" data-exit-button></div>
     <div class="phpdocumentor-modal-container">
         <div class="phpdocumentor-modal-content">
-            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/Http/Status/ClientError/BadRequest.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
+            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/Http/RequestAuthorizer.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
         </div>
         <button data-exit-button class="phpdocumentor-modal__close">&times;</button>
     </div>
@@ -379,10 +510,18 @@ server cannot or will not process the request due to something that is perceived
             <li class="phpdocumentor-on-this-page-section__title">Table Of Contents</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
-                                                                            </ul>
+                                                                                <li><a href="classes/Phpolar-Phpolar-Http-RequestAuthorizer.html#toc-methods">Methods</a></li>
+                                    </ul>
             </li>
             
             
+                        <li class="phpdocumentor-on-this-page-section__title">Methods</li>
+            <li>
+                <ul class="phpdocumentor-list -clean">
+                                            <li class=""><a href="classes/Phpolar-Phpolar-Http-RequestAuthorizer.html#method___construct">__construct()</a></li>
+                                            <li class=""><a href="classes/Phpolar-Phpolar-Http-RequestAuthorizer.html#method_authorize">authorize()</a></li>
+                                    </ul>
+            </li>
                     </ul>
     </section>
 
@@ -399,7 +538,7 @@ server cannot or will not process the request due to something that is perceived
         </section>
     </section>
 </section>
-        <a href="classes/Phpolar-Phpolar-Http-Status-ClientError-BadRequest.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+        <a href="classes/Phpolar-Phpolar-Http-RequestAuthorizer.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
     </main>
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/prism.min.js"></script>

@@ -306,6 +306,31 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/Phpolar-Phpolar-Http-Representations.html#method_contains"
         },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\RequestAuthorizer",
+            "name": "RequestAuthorizer",
+            "summary": "Determines\u0020if\u0020authorization\u0020is\u0020successful\nfor\u0020a\u0020given\u0020request\u0020processor.",
+            "url": "classes/Phpolar-Phpolar-Http-RequestAuthorizer.html"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\RequestAuthorizer\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Phpolar-Phpolar-Http-RequestAuthorizer.html#method___construct"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\RequestAuthorizer\u003A\u003Aauthorize\u0028\u0029",
+            "name": "authorize",
+            "summary": "Returns\u0020request\u0020processor\u0020when\u0020authorization\u0020is\u0020successful\nand\u0020an\u0020Unauthorized\u0020HTTP\u0020response\u0020when\u0020it\u0020is\u0020not.",
+            "url": "classes/Phpolar-Phpolar-Http-RequestAuthorizer.html#method_authorize"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\RequestAuthorizerInterface",
+            "name": "RequestAuthorizerInterface",
+            "summary": "Determines\u0020if\u0020authorization\u0020is\u0020successful\nfor\u0020a\u0020given\u0020request\u0020processor.",
+            "url": "classes/Phpolar-Phpolar-Http-RequestAuthorizerInterface.html"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Http\\RequestAuthorizerInterface\u003A\u003Aauthorize\u0028\u0029",
+            "name": "authorize",
+            "summary": "Returns\u0020the\u0020request\u0020processor\u0020when\u0020authorization\u0020is\u0020successful\nor\u0020a\u0020PSR\u002D7\u0020HTTP\u0020response\u0020when\u0020it\u0020is\u0020not.",
+            "url": "classes/Phpolar-Phpolar-Http-RequestAuthorizerInterface.html#method_authorize"
+        },                {
             "fqsen": "\\Phpolar\\Phpolar\\Http\\RequestProcessingHandler",
             "name": "RequestProcessingHandler",
             "summary": "Handles\u0020request\u0020routing\u0020for\u0020the\u0020application.",
