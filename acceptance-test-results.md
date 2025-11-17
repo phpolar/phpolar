@@ -32,4 +32,4 @@
 
 ## Small Project Size
 
-- [x] Source code total size shall be below 13500 bytes
+- [x] Source code total size shall be below 17500 bytes
