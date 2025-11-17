@@ -212,8 +212,10 @@
     </h4>
     <dl class="phpdocumentor-table-of-contents">
                     <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Phpolar-Phpolar-Auth-AbstractProtectedRoutable.html"><abbr title="\Phpolar\Phpolar\Auth\AbstractProtectedRoutable">AbstractProtectedRoutable</abbr></a></dt><dd>Represents a target object for a request route
+that requires authorization.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Phpolar-Phpolar-Auth-AbstractRestrictedAccessRequestProcessor.html"><abbr title="\Phpolar\Phpolar\Auth\AbstractRestrictedAccessRequestProcessor">AbstractRestrictedAccessRequestProcessor</abbr></a></dt><dd>Represents a target object for a request route
 that requires authorization.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Phpolar-Phpolar-Auth-Authorize.html"><abbr title="\Phpolar\Phpolar\Auth\Authorize">Authorize</abbr></a></dt><dd>Use to indicate that a route should
 only be accessed by an authorized user.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Phpolar-Phpolar-Auth-ProtectedRoutableResolver.html"><abbr title="\Phpolar\Phpolar\Auth\ProtectedRoutableResolver">ProtectedRoutableResolver</abbr></a></dt><dd>Returns either the given Routable or false when the user is not
+authenticated.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Phpolar-Phpolar-Auth-RestrictedAccessRequestProcessorResolver.html"><abbr title="\Phpolar\Phpolar\Auth\RestrictedAccessRequestProcessorResolver">RestrictedAccessRequestProcessorResolver</abbr></a></dt><dd>Returns either the given RequestProcessor or false when the user is not
 authenticated.</dd>            <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Phpolar-Phpolar-Auth-User.html"><abbr title="\Phpolar\Phpolar\Auth\User">User</abbr></a></dt><dd>Represents an authenticated user.</dd>    </dl>
 
 
@@ -262,6 +264,8 @@ authenticated.</dd>            <dt class="phpdocumentor-table-of-contents__entry
                         if (xhr.status < 400 && xhr.responseText) {
                             code.textContent = xhr.responseText;
                             Prism.highlightElement(code);
+                            d=document.getElementsByClassName("line-numbers");
+                            d[0].scrollTop = d[0].children[1].offsetTop;
                             return;
                         }
 

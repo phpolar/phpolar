@@ -221,7 +221,7 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Http/ResponseBuilder.php"><a href="files/http-responsebuilder.html"><abbr title="Http/ResponseBuilder.php">ResponseBuilder.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">13</span>
+    <span class="phpdocumentor-element-found-in__line">15</span>
 
     </aside>
 
@@ -247,6 +247,15 @@
                 <dd class="phpdocumentor-tag-list__definition">
                                                                                 
                                              
+                                    </dd>
+                                                <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">suppress</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                
+                                                 <section class="phpdocumentor-description"><p>PhanDeprecatedInterface</p>
+</section>
+
                                     </dd>
                                             </dl>
 
@@ -325,7 +334,7 @@ as the response body.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Http/ResponseBuilder.php"><a href="files/http-responsebuilder.html"><abbr title="Http/ResponseBuilder.php">ResponseBuilder.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">15</span>
+    <span class="phpdocumentor-element-found-in__line">17</span>
 
     </aside>
 
@@ -376,7 +385,7 @@ as the response body.</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="Http/ResponseBuilder.php"><a href="files/http-responsebuilder.html"><abbr title="Http/ResponseBuilder.php">ResponseBuilder.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">20</span>
+    <span class="phpdocumentor-element-found-in__line">22</span>
 
     </aside>
 
@@ -451,6 +460,8 @@ as the response body.</p>
                         if (xhr.status < 400 && xhr.responseText) {
                             code.textContent = xhr.responseText;
                             Prism.highlightElement(code);
+                            d=document.getElementsByClassName("line-numbers");
+                            d[0].scrollTop = d[0].children[1].offsetTop;
                             return;
                         }
 

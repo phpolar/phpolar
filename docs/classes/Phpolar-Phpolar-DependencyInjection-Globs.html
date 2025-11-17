@@ -221,14 +221,12 @@
             <p class="phpdocumentor-summary">Contains all pathname patterns
 used for dependency injection.</p>
 
+        
+        
+        
 
 
-
-
-
-
-
-
+        
 <h3 id="toc">
     Table of Contents
     <a href="classes/Phpolar-Phpolar-DependencyInjection-Globs.html#toc" class=""><i class="fas fa-link"></i></a>
@@ -277,7 +275,6 @@ is located in the source files of the framework.</dd>
 </dt>
 
     </dl>
-
 
 
 
@@ -440,6 +437,8 @@ set up in the application using the framework.</p>
                         if (xhr.status < 400 && xhr.responseText) {
                             code.textContent = xhr.responseText;
                             Prism.highlightElement(code);
+                            d=document.getElementsByClassName("line-numbers");
+                            d[0].scrollTop = d[0].children[1].offsetTop;
                             return;
                         }
 

@@ -194,14 +194,12 @@
         <h2 class="phpdocumentor-content__title">Forbidden.php</h2>
 
         
+        
+        
+        
 
 
-
-
-
-
-
-
+        
 <h3 id="toc">
     Table of Contents
     <a href="files/http-status-clienterror-forbidden.html#toc" class=""><i class="fas fa-link"></i></a>
@@ -218,7 +216,6 @@
     </h4>
     <dl class="phpdocumentor-table-of-contents">
                     <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Phpolar-Phpolar-Http-Status-ClientError-Forbidden.html"><abbr title="\Phpolar\Phpolar\Http\Status\ClientError\Forbidden">Forbidden</abbr></a></dt><dd>Indicates that the origin server understood the request but refuses to authorize it.</dd>    </dl>
-
 
 
 
@@ -267,6 +264,8 @@
                         if (xhr.status < 400 && xhr.responseText) {
                             code.textContent = xhr.responseText;
                             Prism.highlightElement(code);
+                            d=document.getElementsByClassName("line-numbers");
+                            d[0].scrollTop = d[0].children[1].offsetTop;
                             return;
                         }
 

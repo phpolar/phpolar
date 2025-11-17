@@ -51,6 +51,21 @@ Search.appendIndex(
             "summary": "Contains\u0020credentials\u0020for\u0020an\u0020authenticated\u0020user",
             "url": "classes/Phpolar-Phpolar-Auth-AbstractProtectedRoutable.html#property_user"
         },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Auth\\AbstractRestrictedAccessRequestProcessor",
+            "name": "AbstractRestrictedAccessRequestProcessor",
+            "summary": "Represents\u0020a\u0020target\u0020object\u0020for\u0020a\u0020request\u0020route\nthat\u0020requires\u0020authorization.",
+            "url": "classes/Phpolar-Phpolar-Auth-AbstractRestrictedAccessRequestProcessor.html"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Auth\\AbstractRestrictedAccessRequestProcessor\u003A\u003AwithUser\u0028\u0029",
+            "name": "withUser",
+            "summary": "Create\u0020a\u0020\u0060User\u0060\u0020from\u0020the\u0020given\u0020user\u0020object\nand\u0020assign\u0020it\u0020to\u0020the\u0020user\u0020property.",
+            "url": "classes/Phpolar-Phpolar-Auth-AbstractRestrictedAccessRequestProcessor.html#method_withUser"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Auth\\AbstractRestrictedAccessRequestProcessor\u003A\u003A\u0024user",
+            "name": "user",
+            "summary": "Contains\u0020credentials\u0020for\u0020an\u0020authenticated\u0020user",
+            "url": "classes/Phpolar-Phpolar-Auth-AbstractRestrictedAccessRequestProcessor.html#property_user"
+        },                {
             "fqsen": "\\Phpolar\\Phpolar\\Auth\\Authorize",
             "name": "Authorize",
             "summary": "Use\u0020to\u0020indicate\u0020that\u0020a\u0020route\u0020should\nonly\u0020be\u0020accessed\u0020by\u0020an\u0020authorized\u0020user.",
@@ -75,6 +90,21 @@ Search.appendIndex(
             "name": "resolve",
             "summary": "",
             "url": "classes/Phpolar-Phpolar-Auth-ProtectedRoutableResolver.html#method_resolve"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Auth\\RestrictedAccessRequestProcessorResolver",
+            "name": "RestrictedAccessRequestProcessorResolver",
+            "summary": "Returns\u0020either\u0020the\u0020given\u0020RequestProcessor\u0020or\u0020false\u0020when\u0020the\u0020user\u0020is\u0020not\nauthenticated.",
+            "url": "classes/Phpolar-Phpolar-Auth-RestrictedAccessRequestProcessorResolver.html"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Auth\\RestrictedAccessRequestProcessorResolver\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/Phpolar-Phpolar-Auth-RestrictedAccessRequestProcessorResolver.html#method___construct"
+        },                {
+            "fqsen": "\\Phpolar\\Phpolar\\Auth\\RestrictedAccessRequestProcessorResolver\u003A\u003Aresolve\u0028\u0029",
+            "name": "resolve",
+            "summary": "",
+            "url": "classes/Phpolar-Phpolar-Auth-RestrictedAccessRequestProcessorResolver.html#method_resolve"
         },                {
             "fqsen": "\\Phpolar\\Phpolar\\Auth\\User",
             "name": "User",

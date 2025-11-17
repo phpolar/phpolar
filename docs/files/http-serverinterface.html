@@ -194,14 +194,12 @@
         <h2 class="phpdocumentor-content__title">ServerInterface.php</h2>
 
         
+        
+        
+        
 
 
-
-
-
-
-
-
+        
 <h3 id="toc">
     Table of Contents
     <a href="files/http-serverinterface.html#toc" class=""><i class="fas fa-link"></i></a>
@@ -217,7 +215,6 @@
     </h4>
     <dl class="phpdocumentor-table-of-contents">
                     <dt class="phpdocumentor-table-of-contents__entry -interface"><a href="classes/Phpolar-Phpolar-Http-ServerInterface.html"><abbr title="\Phpolar\Phpolar\Http\ServerInterface">ServerInterface</abbr></a></dt><dd>Declares the capabilities of the resource server.</dd>    </dl>
-
 
 
 
@@ -267,6 +264,8 @@
                         if (xhr.status < 400 && xhr.responseText) {
                             code.textContent = xhr.responseText;
                             Prism.highlightElement(code);
+                            d=document.getElementsByClassName("line-numbers");
+                            d[0].scrollTop = d[0].children[1].offsetTop;
                             return;
                         }
 

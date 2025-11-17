@@ -194,14 +194,12 @@
         <h2 class="phpdocumentor-content__title">Globs.php</h2>
 
         
+        
+        
+        
 
 
-
-
-
-
-
-
+        
 <h3 id="toc">
     Table of Contents
     <a href="files/dependencyinjection-globs.html#toc" class=""><i class="fas fa-link"></i></a>
@@ -221,7 +219,6 @@
     <dl class="phpdocumentor-table-of-contents">
             <dt class="phpdocumentor-table-of-contents__entry -enum"><a href="classes/Phpolar-Phpolar-DependencyInjection-Globs.html"><abbr title="\Phpolar\Phpolar\DependencyInjection\Globs">Globs</abbr></a></dt><dd>Contains all pathname patterns
 used for dependency injection.</dd></dl>phpdocumentor-green
-
 
 
 
@@ -268,6 +265,8 @@ used for dependency injection.</dd></dl>phpdocumentor-green
                         if (xhr.status < 400 && xhr.responseText) {
                             code.textContent = xhr.responseText;
                             Prism.highlightElement(code);
+                            d=document.getElementsByClassName("line-numbers");
+                            d[0].scrollTop = d[0].children[1].offsetTop;
                             return;
                         }
 

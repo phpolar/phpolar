@@ -188,51 +188,213 @@
         <div role="document">
                         <section>
                                 <ul class="phpdocumentor-breadcrumbs">
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/phpolar.html">Phpolar</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/phpolar-phpolar.html">Phpolar</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/phpolar-phpolar-auth.html">Auth</a></li>
     </ul>
 
-    <article class="phpdocumentor-element -file">
-        <h2 class="phpdocumentor-content__title">ContainerLoader.php</h2>
+    <article class="phpdocumentor-element -class">
+        <h2 class="phpdocumentor-content__title">
+    RestrictedAccessRequestProcessorResolver
 
-        
-        
-        
-        
+    
+            <div class="phpdocumentor-element__package">
+            in package
+            <ul class="phpdocumentor-breadcrumbs">
+                                    <li class="phpdocumentor-breadcrumb"><a href="packages/Phpolar.html">Phpolar</a></li>
+                            </ul>
+        </div>
+    
+            <span class="phpdocumentor-element__implements">
+            implements
+                            <abbr title="\Phpolar\HttpRequestProcessor\RequestProcessorResolverInterface">RequestProcessorResolverInterface</abbr>                    </span>
+    
+    </h2>
+
+<div class="phpdocumentor-label-line">
+    <div class="phpdocumentor-label phpdocumentor-label--success"><span>Read only</span><span>Yes</span></div>
 
 
-        
+    <div class="phpdocumentor-label phpdocumentor-label--success"><span>Final</span><span>Yes</span></div>
+
+
+</div>
+
+        <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="Auth/RestrictedAccessRequestProcessorResolver.php"><a href="files/auth-restrictedaccessrequestprocessorresolver.html"><abbr title="Auth/RestrictedAccessRequestProcessorResolver.php">RestrictedAccessRequestProcessorResolver.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">21</span>
+
+    </aside>
+
+            <p class="phpdocumentor-summary">Returns either the given RequestProcessor or false when the user is not
+authenticated.</p>
+
+
+    <section class="phpdocumentor-description"><p>Authorization is <em>opt-in</em>.  Therefore, the given RequestProcessor
+will be returned if it is not configured with
+an Authorize attribute.</p>
+</section>
+
+
+
+
+
+
+
 <h3 id="toc">
     Table of Contents
-    <a href="files/dependencyinjection-containerloader.html#toc" class=""><i class="fas fa-link"></i></a>
+    <a href="classes/Phpolar-Phpolar-Auth-RestrictedAccessRequestProcessorResolver.html#toc" class=""><i class="fas fa-link"></i></a>
 
 </h3>
 
 
 
-
-    <h4 id="toc-classes">
-        Classes
-        <a href="files/dependencyinjection-containerloader.html#toc-classes" class=""><i class="fas fa-link"></i></a>
+    <h4 id="toc-interfaces">
+        Interfaces
+        <a href="classes/Phpolar-Phpolar-Auth-RestrictedAccessRequestProcessorResolver.html#toc-interfaces" class=""><i class="fas fa-link"></i></a>
 
     </h4>
     <dl class="phpdocumentor-table-of-contents">
-                    <dt class="phpdocumentor-table-of-contents__entry -class"><a href="classes/Phpolar-Phpolar-DependencyInjection-ContainerLoader.html"><abbr title="\Phpolar\Phpolar\DependencyInjection\ContainerLoader">ContainerLoader</abbr></a></dt><dd>Configures a dependency injection container.</dd>    </dl>
+                    <dt class="phpdocumentor-table-of-contents__entry -interface"><abbr title="\Phpolar\HttpRequestProcessor\RequestProcessorResolverInterface">RequestProcessorResolverInterface</abbr></dt>    </dl>
 
 
 
 
 
 
+
+<h4 id="toc-methods">
+    Methods
+    <a href="classes/Phpolar-Phpolar-Auth-RestrictedAccessRequestProcessorResolver.html#toc-methods" class=""><i class="fas fa-link"></i></a>
+
+</h4>
+<dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/Phpolar-Phpolar-Auth-RestrictedAccessRequestProcessorResolver.html#method___construct">__construct()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/Phpolar-Phpolar-Auth-RestrictedAccessRequestProcessorResolver.html#method_resolve">resolve()</a>
+    <span>
+                                &nbsp;: <abbr title="\Phpolar\HttpRequestProcessor\RequestProcessorInterface">RequestProcessorInterface</abbr>|false    </span>
+</dt>
+
+    </dl>
 
 
 
         
 
         
+
+            <section class="phpdocumentor-methods">
+        <h3 class="phpdocumentor-elements__header" id="methods">
+            Methods
+            <a href="classes/Phpolar-Phpolar-Auth-RestrictedAccessRequestProcessorResolver.html#methods" class=""><i class="fas fa-link"></i></a>
+
+        </h3>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method___construct">
+        __construct()
+        <a href="classes/Phpolar-Phpolar-Auth-RestrictedAccessRequestProcessorResolver.html#method___construct" class=""><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="Auth/RestrictedAccessRequestProcessorResolver.php"><a href="files/auth-restrictedaccessrequestprocessorresolver.html"><abbr title="Auth/RestrictedAccessRequestProcessorResolver.php">RestrictedAccessRequestProcessorResolver.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">25</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\PhpContrib\Authenticator\AuthenticatorInterface">AuthenticatorInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$authenticator</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$authenticator</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\PhpContrib\Authenticator\AuthenticatorInterface">AuthenticatorInterface</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_resolve">
+        resolve()
+        <a href="classes/Phpolar-Phpolar-Auth-RestrictedAccessRequestProcessorResolver.html#method_resolve" class=""><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="Auth/RestrictedAccessRequestProcessorResolver.php"><a href="files/auth-restrictedaccessrequestprocessorresolver.html"><abbr title="Auth/RestrictedAccessRequestProcessorResolver.php">RestrictedAccessRequestProcessorResolver.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">27</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">resolve</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Phpolar\HttpRequestProcessor\RequestProcessorInterface">RequestProcessorInterface</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$target</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\Phpolar\HttpRequestProcessor\RequestProcessorInterface">RequestProcessorInterface</abbr>|false</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$target</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Phpolar\HttpRequestProcessor\RequestProcessorInterface">RequestProcessorInterface</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\Phpolar\HttpRequestProcessor\RequestProcessorInterface">RequestProcessorInterface</abbr>|false</span>
+            </section>
+
+</article>
+            </section>
+
         <div class="phpdocumentor-modal" id="source-view">
     <div class="phpdocumentor-modal-bg" data-exit-button></div>
     <div class="phpdocumentor-modal-container">
         <div class="phpdocumentor-modal-content">
-            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/DependencyInjection/ContainerLoader.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
+            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/Auth/RestrictedAccessRequestProcessorResolver.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
         </div>
         <button data-exit-button class="phpdocumentor-modal__close">&times;</button>
     </div>
@@ -325,7 +487,7 @@
     </article>
                         </section>
             <section class="phpdocumentor-on-this-page__sidebar">
-                        
+                            
     <section class="phpdocumentor-on-this-page__content">
         <strong class="phpdocumentor-on-this-page__title">On this page</strong>
 
@@ -333,11 +495,18 @@
             <li class="phpdocumentor-on-this-page-section__title">Table Of Contents</li>
             <li>
                 <ul class="phpdocumentor-list -clean">
-                                                                                                        <li><a href="files/dependencyinjection-containerloader.html#toc-classes">Classes</a></li>
-                                                                                                                    </ul>
+                                                                                <li><a href="classes/Phpolar-Phpolar-Auth-RestrictedAccessRequestProcessorResolver.html#toc-methods">Methods</a></li>
+                                    </ul>
             </li>
-
             
+            
+                        <li class="phpdocumentor-on-this-page-section__title">Methods</li>
+            <li>
+                <ul class="phpdocumentor-list -clean">
+                                            <li class=""><a href="classes/Phpolar-Phpolar-Auth-RestrictedAccessRequestProcessorResolver.html#method___construct">__construct()</a></li>
+                                            <li class=""><a href="classes/Phpolar-Phpolar-Auth-RestrictedAccessRequestProcessorResolver.html#method_resolve">resolve()</a></li>
+                                    </ul>
+            </li>
                     </ul>
     </section>
 
@@ -354,7 +523,7 @@
         </section>
     </section>
 </section>
-        <a href="files/dependencyinjection-containerloader.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+        <a href="classes/Phpolar-Phpolar-Auth-RestrictedAccessRequestProcessorResolver.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
     </main>
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/prism.min.js"></script>
