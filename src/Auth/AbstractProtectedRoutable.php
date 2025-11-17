@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Phpolar\Phpolar\Auth;
 
-use Deprecated;
 use Phpolar\HttpRequestProcessor\RequestProcessorInterface;
 
 /**
@@ -15,6 +14,7 @@ use Phpolar\HttpRequestProcessor\RequestProcessorInterface;
  * to metadata associated with the authenticated
  * user.  Route target objects that require
  * authorization should extend this class.
+ * @codeCoverageIgnore
  *
  * @deprecated Use AbstractRestrictedAccessRequestProcessor instead.
  *

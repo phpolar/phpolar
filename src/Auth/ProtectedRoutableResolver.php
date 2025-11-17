@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Phpolar\Phpolar\Auth;
 
-use Deprecated;
 use PhpContrib\Authenticator\AuthenticatorInterface;
 use Phpolar\HttpRequestProcessor\RequestProcessorInterface;
 use Phpolar\HttpRequestProcessor\RequestProcessorResolverInterface;
@@ -19,6 +18,7 @@ use ReflectionAttribute;
  * will be returned if it is not configured with
  * an Authorize attribute.
  *
+ * @codeCoverageIgnore
  * @deprecated Use RestrictedAccessRequestProcessorResolver instead.
  */
 final class ProtectedRoutableResolver implements RequestProcessorResolverInterface
