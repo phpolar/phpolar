@@ -13,16 +13,12 @@ use Psr\Http\Server\RequestHandlerInterface;
 /**
  * Determines if authorization is successful
  * for a given request processor.
- * 
- * @codeCoverageIgnore
- * 
- * @deprecated
  */
-final class AuthorizationChecker implements AuthorizationCheckerInterface
+final readonly class RequestAuthorizer implements RequestAuthorizerInterface
 {
     public function __construct(
-        private readonly RequestProcessorResolverInterface $routableResolver,
-        private readonly RequestHandlerInterface $unauthHandler,
+        private RequestProcessorResolverInterface $routableResolver,
+        private RequestHandlerInterface $unauthHandler,
     ) {}
 
     /**

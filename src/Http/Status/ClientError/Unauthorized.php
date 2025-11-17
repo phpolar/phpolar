@@ -9,6 +9,4 @@ namespace Phpolar\Phpolar\Http\Status\ClientError;
  *
  * @link https://datatracker.ietf.org/doc/html/rfc7235#section-3.1
  */
-final class Unauthorized
-{
-}
+final readonly class Unauthorized {}

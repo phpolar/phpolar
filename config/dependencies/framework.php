@@ -24,7 +24,7 @@ use Phpolar\Phpolar\Auth\RestrictedAccessRequestProcessorResolver;
 use Phpolar\Phpolar\Http\RoutingMiddleware;
 use Phpolar\Phpolar\Http\MiddlewareQueueRequestHandler;
 use Phpolar\Phpolar\DependencyInjection\DiTokens;
-use Phpolar\Phpolar\Http\AuthorizationChecker;
+use Phpolar\Phpolar\Http\RequestAuthorizer;
 use Phpolar\Phpolar\Http\RequestProcessingHandler;
 use Phpolar\Phpolar\Http\RequestProcessorExecutor;
 use Phpolar\Phpolar\Http\ResponseCodeResolver;
@@ -60,14 +60,14 @@ return [
         };
         return new MiddlewareQueueRequestHandler($fallbackHandler);
     },
-    DiTokens::NOOP_AUTH_CHECKER => static fn(ContainerInterface $container) => new AuthorizationChecker(
+    DiTokens::NOOP_AUTH_CHECKER => static fn(ContainerInterface $container) => new RequestAuthorizer(
         routableResolver: $container->get(DiTokens::NOOP_ROUTABLE_RESOLVER),
         unauthHandler: $container->get(DiTokens::UNAUTHORIZED_HANDLER),
     ),
     DiTokens::AUTHENTICATED_ROUTING_HANDLER => static fn(ContainerInterface $container) => new RequestProcessingHandler(
         server: $container->get(ServerInterface::class),
         processorExecutor: $container->get(RequestProcessorExecutor::class),
-        authChecker: $container->get(AuthorizationChecker::class),
+        requestAuthorizer: $container->get(RequestAuthorizer::class),
         responseFactory: $container->get(ResponseFactoryInterface::class),
         streamFactory: $container->get(StreamFactoryInterface::class),
         propertyInjector: $container->get(PropertyInjectorInterface::class),
@@ -93,12 +93,12 @@ return [
         processorExecutor: $container->get(RequestProcessorExecutor::class),
         responseFactory: $container->get(ResponseFactoryInterface::class),
         streamFactory: $container->get(StreamFactoryInterface::class),
-        authChecker: $container->get(DiTokens::NOOP_AUTH_CHECKER),
+        requestAuthorizer: $container->get(DiTokens::NOOP_AUTH_CHECKER),
         propertyInjector: $container->get(PropertyInjectorInterface::class),
         modelResolver: $container->get(ModelResolverInterface::class),
         responseCodeResolver: $container->get(ResponseCodeResolver::class),
     ),
-    AuthorizationChecker::class => static fn(ContainerInterface $container) => new AuthorizationChecker(
+    RequestAuthorizer::class => static fn(ContainerInterface $container) => new RequestAuthorizer(
         routableResolver: $container->get(RequestProcessorResolverInterface::class),
         unauthHandler: $container->get(DiTokens::UNAUTHORIZED_HANDLER),
     ),

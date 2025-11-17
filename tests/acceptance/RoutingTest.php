@@ -30,7 +30,7 @@ final class RoutingTest extends TestCase
 {
     protected function getResponseFactory(): ResponseFactoryInterface
     {
-        return new class () implements ResponseFactoryInterface {
+        return new class() implements ResponseFactoryInterface {
             public function createResponse(int $code = 200, string $reasonPhrase = ''): ResponseInterface
             {
                 return new ResponseStub($code, $reasonPhrase);
@@ -40,7 +40,7 @@ final class RoutingTest extends TestCase
 
     protected function getStreamFactory(): StreamFactoryInterface
     {
-        return new class () implements StreamFactoryInterface {
+        return new class() implements StreamFactoryInterface {
             public function createStream(string $content = ''): StreamInterface
             {
                 return new MemoryStreamStub($content);
@@ -92,7 +92,7 @@ final class RoutingTest extends TestCase
             ->method("getBody")
             ->willReturn($streamStub);
 
-        $indexHandler = new class ($expectedResponse) implements RequestProcessorInterface {
+        $indexHandler = new class($expectedResponse) implements RequestProcessorInterface {
             public function __construct(private string $responseTemplate) {}
 
             public function process(): string
@@ -115,8 +115,8 @@ final class RoutingTest extends TestCase
             processorExecutor: new RequestProcessorExecutor(),
             responseFactory: $this->getResponseFactory(),
             streamFactory: $this->getStreamFactory(),
-            authChecker: new AuthorizationChecker(
-                routableResolver: new class () implements RequestProcessorResolverInterface {
+            requestAuthorizer: new RequestAuthorizer(
+                routableResolver: new class() implements RequestProcessorResolverInterface {
                     public function resolve(RequestProcessorInterface $target): RequestProcessorInterface|false
                     {
                         return $target;
@@ -159,7 +159,7 @@ final class RoutingTest extends TestCase
 
         $propertyInjector = $this->createStub(PropertyInjectorInterface::class);
         $modelResolver = $this->createStub(ModelResolverInterface::class);
-        $indexHandler = new class () implements RequestProcessorInterface {
+        $indexHandler = new class() implements RequestProcessorInterface {
             public function __construct() {}
 
             public function process(): string
@@ -183,8 +183,8 @@ final class RoutingTest extends TestCase
             ]),
             responseFactory: $this->getResponseFactory(),
             streamFactory: $this->getStreamFactory(),
-            authChecker: new AuthorizationChecker(
-                routableResolver: new class () implements RequestProcessorResolverInterface {
+            requestAuthorizer: new RequestAuthorizer(
+                routableResolver: new class() implements RequestProcessorResolverInterface {
                     public function resolve(RequestProcessorInterface $target): RequestProcessorInterface|false
                     {
                         return $target;

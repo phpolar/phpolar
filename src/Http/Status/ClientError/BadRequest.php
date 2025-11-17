@@ -10,6 +10,4 @@ namespace Phpolar\Phpolar\Http\Status\ClientError;
  *
  * @link https://datatracker.ietf.org/doc/html/rfc7231#section-6.5.1
  */
-final class BadRequest
-{
-}
+final readonly class BadRequest {}

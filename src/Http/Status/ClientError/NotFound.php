@@ -10,6 +10,4 @@ namespace Phpolar\Phpolar\Http\Status\ClientError;
  *
  * @link https://datatracker.ietf.org/doc/html/rfc7231#section-6.5.4
  */
-final class NotFound
-{
-}
+final readonly class NotFound {}

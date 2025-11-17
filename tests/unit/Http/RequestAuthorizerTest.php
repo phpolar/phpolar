@@ -10,15 +10,15 @@ use Phpolar\HttpMessageTestUtils\ResponseStub;
 use Phpolar\HttpRequestProcessor\RequestProcessorInterface;
 use Phpolar\HttpRequestProcessor\RequestProcessorResolverInterface;
 use Phpolar\Phpolar\Auth\AbstractRestrictedAccessRequestProcessor;
-use Phpolar\Phpolar\Http\AuthorizationChecker;
+use Phpolar\Phpolar\Http\RequestAuthorizer;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-#[CoversClass(AuthorizationChecker::class)]
-final class AuthorizationCheckerTest extends TestCase
+#[CoversClass(RequestAuthorizer::class)]
+final class RequestAuthorizerTest extends TestCase
 {
     #[TestDox("Shall return the decorated routable when authorization is successful")]
     public function testa()
@@ -29,7 +29,7 @@ final class AuthorizationCheckerTest extends TestCase
         $routableResolverMock->method("resolve")->willReturn($decoratedRoutable);
         $unauthHander = $this->createMock(RequestHandlerInterface::class);
         $unauthHander->method("handle")->willReturn(new ResponseStub(ResponseCode::Unauthorized->value));
-        $sut = new AuthorizationChecker($routableResolverMock, $unauthHander);
+        $sut = new RequestAuthorizer($routableResolverMock, $unauthHander);
         $result = $sut->authorize($givenRoutable, new RequestStub());
         $this->assertSame($decoratedRoutable, $result);
     }
@@ -42,7 +42,7 @@ final class AuthorizationCheckerTest extends TestCase
         $routableResolverMock->method("resolve")->willReturn(false);
         $unauthHander = $this->createMock(RequestHandlerInterface::class);
         $unauthHander->method("handle")->willReturn(new ResponseStub(ResponseCode::Unauthorized->value));
-        $sut = new AuthorizationChecker($routableResolverMock, $unauthHander);
+        $sut = new RequestAuthorizer($routableResolverMock, $unauthHander);
         $result = $sut->authorize($givenRoutable, new RequestStub());
         $this->assertInstanceOf(ResponseInterface::class, $result);
         $this->assertSame(ResponseCode::Unauthorized->value, $result->getStatusCode());

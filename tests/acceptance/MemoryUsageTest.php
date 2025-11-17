@@ -31,7 +31,7 @@ use Phpolar\Phpolar\Http\MiddlewareQueueRequestHandler;
 use Phpolar\Phpolar\App;
 use Phpolar\Phpolar\DependencyInjection\ContainerLoader;
 use Phpolar\Phpolar\DependencyInjection\DiTokens;
-use Phpolar\Phpolar\Http\AuthorizationChecker;
+use Phpolar\Phpolar\Http\RequestAuthorizer;
 use Phpolar\Phpolar\Http\Representations;
 use Phpolar\Phpolar\Http\RequestProcessingHandler;
 use Phpolar\Phpolar\Http\RequestProcessorExecutor;
@@ -65,7 +65,7 @@ final class MemoryUsageTest extends TestCase
         $config[ServerInterface::class] = $server;
         $config[RoutingMiddleware::class] = static fn(ArrayAccess $config) => new RoutingMiddleware($config[RequestProcessingHandler::class]);
         $config[ModelResolverInterface::class] = $modelResolver;
-        $config[RequestProcessorResolverInterface::class] = new class () implements RequestProcessorResolverInterface {
+        $config[RequestProcessorResolverInterface::class] = new class() implements RequestProcessorResolverInterface {
             public function resolve(RequestProcessorInterface $target): RequestProcessorInterface|false
             {
                 return $target;
@@ -77,9 +77,9 @@ final class MemoryUsageTest extends TestCase
             server: $config[ServerInterface::class],
             responseFactory: $config[ResponseFactoryInterface::class],
             streamFactory: $config[StreamFactoryInterface::class],
-            authChecker: new AuthorizationChecker(
+            requestAuthorizer: new RequestAuthorizer(
                 routableResolver: $config[RequestProcessorResolverInterface::class],
-                unauthHandler: new class () implements RequestHandlerInterface {
+                unauthHandler: new class() implements RequestHandlerInterface {
                     public function handle(ServerRequestInterface $request): ResponseInterface
                     {
                         return new ResponseStub(HttpResponseCode::Unauthorized->value, HttpResponseCode::Unauthorized->getLabel());
@@ -90,7 +90,7 @@ final class MemoryUsageTest extends TestCase
             responseCodeResolver: new ResponseCodeResolver(),
         );
         $config[MiddlewareQueueRequestHandler::class] = new MiddlewareQueueRequestHandler(
-            new class () implements RequestHandlerInterface {
+            new class() implements RequestHandlerInterface {
                 public function handle(ServerRequestInterface $request): ResponseInterface
                 {
                     return new ResponseStub(HttpResponseCode::NotFound->value, HttpResponseCode::NotFound->getLabel());
@@ -109,7 +109,7 @@ final class MemoryUsageTest extends TestCase
         $session = [REQUEST_ID_KEY => ""];
         $config[AbstractTokenStorage::class] = new SessionTokenStorage(new SessionWrapper($session));
         $config[RequestProcessorExecutor::class] = new RequestProcessorExecutor();
-        $config[PropertyInjectorInterface::class] = new class () implements PropertyInjectorInterface {
+        $config[PropertyInjectorInterface::class] = new class() implements PropertyInjectorInterface {
             public function inject(object $injectee): void
             {
                 // intentionally empty
@@ -139,7 +139,7 @@ final class MemoryUsageTest extends TestCase
                 representations: new Representations([
                     MimeType::TextHtml,
                 ]),
-                requestProcessor: new class () implements RequestProcessorInterface {
+                requestProcessor: new class() implements RequestProcessorInterface {
                     public function process(): string
                     {
                         return "content";
