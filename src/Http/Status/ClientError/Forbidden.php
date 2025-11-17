@@ -9,4 +9,6 @@ namespace Phpolar\Phpolar\Http\Status\ClientError;
  *
  * @link https://datatracker.ietf.org/doc/html/rfc7231#section-6.5.3
  */
-final readonly class Forbidden {}
+final readonly class Forbidden
+{
+}

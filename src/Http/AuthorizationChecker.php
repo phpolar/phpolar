@@ -13,9 +13,10 @@ use Psr\Http\Server\RequestHandlerInterface;
 /**
  * Determines if authorization is successful
  * for a given request processor.
- * 
+ *
  * @codeCoverageIgnore
- * 
+ *
+ * @suppress PhanDeprecatedInterface
  * @deprecated
  */
 final class AuthorizationChecker implements AuthorizationCheckerInterface

@@ -11,10 +11,10 @@ use Psr\Http\Message\ServerRequestInterface;
 /**
  * Determines if authorization is successful
  * for a given request processor.
- * 
+ *
  * @codeCoverageIgnore
- * 
- * @deprecated Use use RequestAuthorizerInterface instead 
+ *
+ * @deprecated Use use RequestAuthorizerInterface instead
  * @link RequestAuthorizerInterface
  */
 interface AuthorizationCheckerInterface
