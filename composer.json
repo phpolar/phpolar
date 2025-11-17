@@ -106,6 +106,6 @@
         "acceptance-report-checkbox": "sed -i -E 's/^ \\[/- [/' acceptance-test-results.md",
         "test:benchmark": "@test --configuration=phpunit.dev.xml --testsuite benchmark",
         "test:unit": "@test --configuration=phpunit.dev.xml --testsuite unit",
-        "test:coverage": "XDEBUG_MODE=coverage composer exec \"@test --configuration=phpunit.local-coverage.xml --coverage-text\""
+        "test:coverage": "XDEBUG_MODE=coverage phpunit -d memory_limit=512M --color=always --configuration=phpunit.local-coverage.xml --coverage-text"
     }
 }

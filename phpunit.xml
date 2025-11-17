@@ -18,5 +18,8 @@
   </testsuites>
   <php>
     <const name="Phpolar\Phpolar\Tests\ENTITY_NAME_TEST_CASE" value="FAKE NAME" />
+    <const name="SRC_GLOB" value="/src{/,/**/}*.php" />
+    <const name="Phpolar\Phpolar\Tests\PROJECT_SIZE_THRESHOLD" value="17500" />
+    <const name="Phpolar\Phpolar\Tests\PROJECT_MEMORY_USAGE_THRESHOLD" value="250000" />
   </php>
 </phpunit>

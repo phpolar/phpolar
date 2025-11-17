@@ -8,6 +8,8 @@ use Psr\Http\Message\StreamFactoryInterface;
 
 /**
  * @codeCoverageIgnore
+ * 
+ * @suppress PhanDeprecatedInterface
  * @deprecated
  */
 final class ResponseBuilder implements ResponseBuilderInterface
