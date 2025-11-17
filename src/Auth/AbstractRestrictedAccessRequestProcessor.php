@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Phpolar\Phpolar\Auth;
 
-use Deprecated;
 use Phpolar\HttpRequestProcessor\RequestProcessorInterface;
 
 /**
@@ -16,11 +15,9 @@ use Phpolar\HttpRequestProcessor\RequestProcessorInterface;
  * user.  Route target objects that require
  * authorization should extend this class.
  *
- * @deprecated Use AbstractRestrictedAccessRequestProcessor instead.
- *
  * @phan-file-suppress PhanWriteOnlyPublicProperty
  */
-abstract class AbstractProtectedRoutable implements RequestProcessorInterface
+abstract class AbstractRestrictedAccessRequestProcessor implements RequestProcessorInterface
 {
     /**
      * Contains credentials for an authenticated user

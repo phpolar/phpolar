@@ -1,3 +1,7 @@
+# PHPolar Changelog
+
+This file documents changes to the PHPolar project
+
 ## 8.1.5 (2025-11-12)
 
 ### Fix
@@ -184,7 +188,7 @@
 - remove bin folder (#237)
 - **RouteRegistry**: reindex projected array (#232)
 - retrieve the user object directly (#228)
-- **AbstractProtectedRoutable**: use session user object (#227)
+- **AbstractRestrictedAccessRequestProcessor**: use session user object (#227)
 - add support for configurable unauthorized handlers (#226)
 - **RoutingHandler**: set the user property (#225)
 - prune dist (#201)

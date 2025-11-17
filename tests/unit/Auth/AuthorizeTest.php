@@ -20,7 +20,7 @@ use ReflectionMethod;
 
 #[CoversClass(Authorize::class)]
 #[CoversClass(User::class)]
-#[UsesClass(AbstractProtectedRoutable::class)]
+#[UsesClass(AbstractRestrictedAccessRequestProcessor::class)]
 final class AuthorizeTest extends TestCase
 {
     public static function getContainerStub(): Generator
@@ -39,7 +39,7 @@ final class AuthorizeTest extends TestCase
         $authenticatorMock = $this->createMock(AuthenticatorInterface::class);
         $authenticatorMock->method("isAuthenticated")->willReturn(true);
         $authenticatorMock->method("getUser")->willReturn(["name" => "", "avatarUrl" => "", "nickname" => "", "email" => ""]);
-        $hostClass = new class ($expectedContent) extends AbstractProtectedRoutable
+        $hostClass = new class ($expectedContent) extends AbstractRestrictedAccessRequestProcessor
         {
             public function __construct(public string $content) {}
 
@@ -66,7 +66,7 @@ final class AuthorizeTest extends TestCase
     public function testb()
     {
         $expectedContent = "<h1>I AM THE FALLBACK HANDLER</h1>";
-        $targetDelegateStub = $this->createStub(AbstractProtectedRoutable::class);
+        $targetDelegateStub = $this->createStub(AbstractRestrictedAccessRequestProcessor::class);
         $targetDelegateStub->method("process")->willReturn("<h1>I AM THE TARGET HANDLER</h1>");
         $authenticatorMock = $this->createMock(AuthenticatorInterface::class);
         $authenticatorMock->method("isAuthenticated")->willReturn(false);
@@ -101,7 +101,7 @@ final class AuthorizeTest extends TestCase
         $authenticatorMock = $this->createMock(AuthenticatorInterface::class);
         $authenticatorMock->method("isAuthenticated")->willReturn(true);
         $authenticatorMock->method("getUser")->willReturn($authenticatedUser);
-        $hostClass = new class ($expectedContent) extends AbstractProtectedRoutable
+        $hostClass = new class ($expectedContent) extends AbstractRestrictedAccessRequestProcessor
         {
             public function __construct(public string $content) {}
 

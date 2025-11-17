@@ -14,7 +14,7 @@ use Phpolar\HttpMessageTestUtils\UriStub;
 use Phpolar\HttpRequestProcessor\RequestProcessorExecutorInterface;
 use Phpolar\HttpRequestProcessor\RequestProcessorInterface;
 use Phpolar\ModelResolver\ModelResolverInterface;
-use Phpolar\Phpolar\Auth\AbstractProtectedRoutable;
+use Phpolar\Phpolar\Auth\AbstractRestrictedAccessRequestProcessor;
 use Phpolar\Phpolar\Http\Status\ClientError\BadRequest;
 use Phpolar\Phpolar\Http\Status\ClientError\Forbidden;
 use Phpolar\Phpolar\Http\Status\ClientError\NotFound;
@@ -285,8 +285,8 @@ final class RequestProcessingHandlerTest extends TestCase
         $propertyInjectorStub = $this->createStub(PropertyInjectorInterface::class);
         $responseStub = $this->createStub(ResponseInterface::class);
         $responseFactoryStub = $this->createStub(ResponseFactoryInterface::class);
-        $requestProcessorStub = $this->createStub(AbstractProtectedRoutable::class);
-        $decoratedRequestProcessorStub = $this->createStub(AbstractProtectedRoutable::class)->withUser((object) $userInfo);
+        $requestProcessorStub = $this->createStub(AbstractRestrictedAccessRequestProcessor::class);
+        $decoratedRequestProcessorStub = $this->createStub(AbstractRestrictedAccessRequestProcessor::class)->withUser((object) $userInfo);
         $streamStub = $this->createStub(StreamInterface::class);
         $processorExecutorMock = $this->createMock(RequestProcessorExecutorInterface::class);
         $processorExecutorMock
@@ -359,8 +359,8 @@ final class RequestProcessingHandlerTest extends TestCase
         $propertyInjectorMock = $this->createMock(PropertyInjectorInterface::class);
         $responseStub = $this->createStub(ResponseInterface::class);
         $responseFactoryStub = $this->createStub(ResponseFactoryInterface::class);
-        $requestProcessorStub = $this->createStub(AbstractProtectedRoutable::class);
-        $decoratedRequestProcessorStub = $this->createStub(AbstractProtectedRoutable::class)->withUser((object) $userInfo);
+        $requestProcessorStub = $this->createStub(AbstractRestrictedAccessRequestProcessor::class);
+        $decoratedRequestProcessorStub = $this->createStub(AbstractRestrictedAccessRequestProcessor::class)->withUser((object) $userInfo);
         $streamStub = $this->createStub(StreamInterface::class);
         $processorExecutorStub = $this->createStub(RequestProcessorExecutorInterface::class);
         $processorExecutorStub
