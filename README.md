@@ -1,19 +1,30 @@
+# PHPolar
+
+A PHP framework for minimalists
+
+<!-- markdownlint-disable MD033-->
+<!-- markdownlint-disable MD041-->
 <p align="center">
     <img width="240" src="./phpolar.svg" alt="PHPolar logo" />
 </p>
 
-# PHPolar
+<p align="center">
+    <img src="https://coveralls.io/repos/github/phpolar/phpolar/badge.svg?branch=main" alt="Coverage Status Badge">
+    <img src="https://poser.pugx.org/phpolar/phpolar/v" alt="Latest Stable Version">
+    <img src="https://poser.pugx.org/phpolar/phpolar/downloads" alt="Total Downloads">
+    <img src="https://poser.pugx.org/phpolar/phpolar/license" alt="License">
+    <img src="https://poser.pugx.org/phpolar/phpolar/require/php" alt="PHP Version Require">
+    <img src="https://github.com/phpolar/phpolar/actions/workflows/weekly.yml/badge.svg" alt="Weekly Check">
+</p>
 
-## A PHP framework for minimalists
+<p align="center">
+    <a href="https://docs.phpolar.org/quick-start/">Quick start</a><br>
+    <a href="https://docs.phpolar.org/">Documentation</a><br>
+    <a href="https://api.phpolar.org/">API</a><br>
+    <a href="https://phpolar.org/">Website</a>
+</p>
 
-[![Coverage Status](https://coveralls.io/repos/github/phpolar/phpolar/badge.svg?branch=main)](https://coveralls.io/github/phpolar/phpolar?branch=main) [![Latest Stable Version](https://poser.pugx.org/phpolar/phpolar/v)][def] [![Total Downloads](https://poser.pugx.org/phpolar/phpolar/downloads)][def] [![License](https://poser.pugx.org/phpolar/phpolar/license)][def] [![PHP Version Require](https://poser.pugx.org/phpolar/phpolar/require/php)][def] [![Weekly Check](https://github.com/phpolar/phpolar/actions/workflows/weekly.yml/badge.svg)](https://github.com/phpolar/phpolar/actions/workflows/weekly.yml)
-
-[Quick Start](https://docs.phpolar.org/quick-start/) <br/>
-[Documentation](https://docs.phpolar.org) <br/>
-[API](https://api.phpolar.org) <br/>
-[Website](https://phpolar.org) <br/>
-
-### Quick start
+## Quick start
 
 ```bash
 # create an example application
@@ -21,7 +32,7 @@
 composer create-project phpolar/skeleton <target-directory>
 ```
 
-### Objectives
+## Objectives
 
 1. Provide [attributes](#use-attributes-to-configure-models) so that objects can be declaratively configured for clean application development.
 1. Support using [pure PHP templates](#pure-php-templates) with automatic XSS mitigation.
@@ -29,9 +40,9 @@ composer create-project phpolar/skeleton <target-directory>
 
 **Note** For more details see the [acceptance tests results](./acceptance-test-results.md)
 
-### Pure PHP Templates
+## Pure PHP Templates
 
-#### Example 1
+### Example 1
 
 ```php
 <!DOCTYPE html>
@@ -50,7 +61,7 @@ composer create-project phpolar/skeleton <target-directory>
 })($this);
 ```
 
-### Use Attributes to Configure Models
+## Use Attributes to Configure Models
 
 ```php
 use Phpolar\Phpolar\AbstractModel;
@@ -75,11 +86,11 @@ class Person extends AbstractModel
 }
 ```
 
-### Thresholds
+## Thresholds
 
 |      Module    |Source Code Size * |Memory Usage|  Required |
 |----------------|-------------------|------------|-----------|
-|     phpolar    |       13 kB       |   250 kB   |      x    |
+|     phpolar    |       17 kB       |   250 kB   |      x    |
 |  phplar/model  |       19 kB       |   108 kB   |           |
 |     **TOTAL**  |     **38 kB**     | **358 kB** |           |
 

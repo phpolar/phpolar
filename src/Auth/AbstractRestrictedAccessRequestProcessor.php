@@ -14,13 +14,10 @@ use Phpolar\HttpRequestProcessor\RequestProcessorInterface;
  * to metadata associated with the authenticated
  * user.  Route target objects that require
  * authorization should extend this class.
- * @codeCoverageIgnore
- *
- * @deprecated Use AbstractRestrictedAccessRequestProcessor instead.
  *
  * @phan-file-suppress PhanWriteOnlyPublicProperty
  */
-abstract class AbstractProtectedRoutable implements RequestProcessorInterface
+abstract class AbstractRestrictedAccessRequestProcessor implements RequestProcessorInterface
 {
     /**
      * Contains credentials for an authenticated user

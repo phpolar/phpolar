@@ -23,8 +23,8 @@ use Phpolar\HttpMessageTestUtils\ResponseStub;
 use Phpolar\HttpMessageTestUtils\StreamFactoryStub;
 use Phpolar\ModelResolver\ModelResolverInterface;
 use PhpContrib\Authenticator\AuthenticatorInterface;
-use Phpolar\Phpolar\Auth\AbstractProtectedRoutable;
-use Phpolar\Phpolar\Auth\ProtectedRoutableResolver;
+use Phpolar\Phpolar\Auth\AbstractRestrictedAccessRequestProcessor;
+use Phpolar\Phpolar\Auth\RestrictedAccessRequestProcessorResolver;
 use Phpolar\Phpolar\DependencyInjection\ContainerLoader;
 use Phpolar\Phpolar\DependencyInjection\DiTokens;
 use Phpolar\Phpolar\Http\AuthorizationChecker;
@@ -64,7 +64,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 #[UsesClass(MiddlewareQueueRequestHandler::class)]
 #[UsesClass(RequestProcessingHandler::class)]
 #[UsesClass(RoutingMiddleware::class)]
-#[UsesClass(ProtectedRoutableResolver::class)]
+#[UsesClass(RestrictedAccessRequestProcessorResolver::class)]
 #[UsesClass(AuthorizationChecker::class)]
 #[UsesClass(PathVariableBindings::class)]
 #[UsesClass(Representations::class)]
@@ -265,7 +265,7 @@ final class AppTest extends TestCase
         $config = new ContainerConfigurationStub();
         $config[ModelResolverInterface::class] = $this->createStub(ModelResolverInterface::class);
         $config[DiTokens::UNAUTHORIZED_HANDLER] = $this->createStub(RequestHandlerInterface::class);
-        $routable = $this->createStub(AbstractProtectedRoutable::class);
+        $routable = $this->createStub(AbstractRestrictedAccessRequestProcessor::class);
         $routable
             ->method("process")
             ->willReturn("");
@@ -313,7 +313,7 @@ final class AppTest extends TestCase
                     location: "/",
                     method: HttpMethodEnum::Get,
                     representations: new Representations([]),
-                    requestProcessor: $this->createStub(AbstractProtectedRoutable::class),
+                    requestProcessor: $this->createStub(AbstractRestrictedAccessRequestProcessor::class),
                 ),
             ],
         );

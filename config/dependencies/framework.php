@@ -20,7 +20,7 @@ use Phpolar\ModelResolver\ModelResolverInterface;
 use PhpContrib\Authenticator\AuthenticatorInterface;
 use Phpolar\HttpRequestProcessor\RequestProcessorInterface;
 use Phpolar\HttpRequestProcessor\RequestProcessorResolverInterface;
-use Phpolar\Phpolar\Auth\ProtectedRoutableResolver;
+use Phpolar\Phpolar\Auth\RestrictedAccessRequestProcessorResolver;
 use Phpolar\Phpolar\Http\RoutingMiddleware;
 use Phpolar\Phpolar\Http\MiddlewareQueueRequestHandler;
 use Phpolar\Phpolar\DependencyInjection\DiTokens;
@@ -39,7 +39,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 return [
     RequestProcessorExecutor::class => new RequestProcessorExecutor(),
-    RequestProcessorResolverInterface::class => static fn(ContainerInterface $container) => new ProtectedRoutableResolver($container->get(AuthenticatorInterface::class)),
+    RequestProcessorResolverInterface::class => static fn(ContainerInterface $container) => new RestrictedAccessRequestProcessorResolver($container->get(AuthenticatorInterface::class)),
     DiTokens::RESPONSE_EMITTER => new Laminas\HttpHandlerRunner\Emitter\SapiEmitter(),
     DiTokens::NOOP_ROUTABLE_RESOLVER => new class() implements RequestProcessorResolverInterface {
         public function resolve(RequestProcessorInterface $target): RequestProcessorInterface|false
