@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Phpolar\Phpolar\Auth;
 
-use Deprecated;
 use PhpContrib\Authenticator\AuthenticatorInterface;
 use Phpolar\HttpRequestProcessor\RequestProcessorInterface;
 use Phpolar\HttpRequestProcessor\RequestProcessorResolverInterface;
@@ -12,16 +11,14 @@ use ReflectionMethod;
 use ReflectionAttribute;
 
 /**
- * Returns either the given Routable or false when the user is not
+ * Returns either the given RequestProcessor or false when the user is not
  * authenticated.
  *
- * Authorization is *opt-in*.  Therefore, the given Routable
+ * Authorization is *opt-in*.  Therefore, the given RequestProcessor
  * will be returned if it is not configured with
  * an Authorize attribute.
- *
- * @deprecated Use RestrictedAccessRequestProcessorResolver instead.
  */
-final class ProtectedRoutableResolver implements RequestProcessorResolverInterface
+final readonly class RestrictedAccessRequestProcessorResolver implements RequestProcessorResolverInterface
 {
     private const ROUTABLE_METHOD_NAME = "process";
 
@@ -29,7 +26,7 @@ final class ProtectedRoutableResolver implements RequestProcessorResolverInterfa
 
     public function resolve(RequestProcessorInterface $target): RequestProcessorInterface | false
     {
-        if ($target instanceof AbstractProtectedRoutable === false) {
+        if ($target instanceof AbstractRestrictedAccessRequestProcessor === false) {
             return $target;
         }
 
@@ -60,7 +57,7 @@ final class ProtectedRoutableResolver implements RequestProcessorResolverInterfa
      */
     private function resolveRoutable(
         array $authenticateAttrs,
-        AbstractProtectedRoutable $target,
+        AbstractRestrictedAccessRequestProcessor $target,
     ): RequestProcessorInterface | false {
         /**
          * @var Authorize

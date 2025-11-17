@@ -9,7 +9,7 @@ use Phpolar\HttpMessageTestUtils\RequestStub;
 use Phpolar\HttpMessageTestUtils\ResponseStub;
 use Phpolar\HttpRequestProcessor\RequestProcessorInterface;
 use Phpolar\HttpRequestProcessor\RequestProcessorResolverInterface;
-use Phpolar\Phpolar\Auth\AbstractProtectedRoutable;
+use Phpolar\Phpolar\Auth\AbstractRestrictedAccessRequestProcessor;
 use Phpolar\Phpolar\Http\AuthorizationChecker;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\TestDox;
@@ -24,7 +24,7 @@ final class AuthorizationCheckerTest extends TestCase
     public function testa()
     {
         $givenRoutable = $this->createStub(RequestProcessorInterface::class);
-        $decoratedRoutable = $this->createStub(AbstractProtectedRoutable::class)->withUser((object)["id" => 123]);
+        $decoratedRoutable = $this->createStub(AbstractRestrictedAccessRequestProcessor::class)->withUser((object)["id" => 123]);
         $routableResolverMock = $this->createMock(RequestProcessorResolverInterface::class);
         $routableResolverMock->method("resolve")->willReturn($decoratedRoutable);
         $unauthHander = $this->createMock(RequestHandlerInterface::class);

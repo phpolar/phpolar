@@ -24,7 +24,7 @@ final class Authorize
      * the fallback Routable.
      */
     public function getResolvedRoutable(
-        AbstractProtectedRoutable $target,
+        AbstractRestrictedAccessRequestProcessor|AbstractProtectedRoutable $target,
         AuthenticatorInterface $authenticator,
     ): RequestProcessorInterface | false {
         return $authenticator->isAuthenticated() === false ? false : $target->withUser((object) $authenticator->getUser());

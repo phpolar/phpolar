@@ -6,9 +6,9 @@ namespace Phpolar\Phpolar\Http;
 
 use PhpContrib\Authenticator\AuthenticatorInterface;
 use Phpolar\HttpRequestProcessor\RequestProcessorInterface;
-use Phpolar\Phpolar\Auth\AbstractProtectedRoutable;
+use Phpolar\Phpolar\Auth\AbstractRestrictedAccessRequestProcessor;
 use Phpolar\Phpolar\Auth\Authorize;
-use Phpolar\Phpolar\Auth\ProtectedRoutableResolver;
+use Phpolar\Phpolar\Auth\RestrictedAccessRequestProcessorResolver;
 use Phpolar\Phpolar\Auth\User;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\TestDox;
@@ -16,11 +16,11 @@ use PHPUnit\Framework\Attributes\UsesClass;
 use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 
-#[CoversClass(ProtectedRoutableResolver::class)]
-#[CoversClass(AbstractProtectedRoutable::class)]
+#[CoversClass(RestrictedAccessRequestProcessorResolver::class)]
+#[CoversClass(AbstractRestrictedAccessRequestProcessor::class)]
 #[UsesClass(Authorize::class)]
 #[UsesClass(User::class)]
-final class ProtectedRoutableResolverTest extends TestCase
+final class RestrictedAccessRequestProcessorResolverTest extends TestCase
 {
     #[TestDox("Shall return the false when the authenticator returns null")]
     public function testa()
@@ -30,8 +30,8 @@ final class ProtectedRoutableResolverTest extends TestCase
          */
         $authenticatorStub = $this->createStub(AuthenticatorInterface::class);
         $authenticatorStub->method("isAuthenticated")->willReturn(false);
-        $sut = new ProtectedRoutableResolver($authenticatorStub);
-        $target = new class () extends AbstractProtectedRoutable
+        $sut = new RestrictedAccessRequestProcessorResolver($authenticatorStub);
+        $target = new class () extends AbstractRestrictedAccessRequestProcessor
         {
             #[Authorize]
             public function process(): string
@@ -52,8 +52,8 @@ final class ProtectedRoutableResolverTest extends TestCase
         $authenticatorMock = $this->createStub(AuthenticatorInterface::class);
         $authenticatorMock->method("isAuthenticated")->willReturn(true);
         $authenticatorMock->method("getUser")->willReturn(["name" => "", "nickname" => "", "email" => "", "avatarUrl" => ""]);
-        $sut = new ProtectedRoutableResolver($authenticatorMock);
-        $target = new class () extends AbstractProtectedRoutable
+        $sut = new RestrictedAccessRequestProcessorResolver($authenticatorMock);
+        $target = new class () extends AbstractRestrictedAccessRequestProcessor
         {
             #[Authorize]
             public function process(): string
@@ -73,8 +73,8 @@ final class ProtectedRoutableResolverTest extends TestCase
          */
         $authenticatorMock = $this->createStub(AuthenticatorInterface::class);
         $authenticatorMock->method("isAuthenticated")->willReturn(true);
-        $sut = new ProtectedRoutableResolver($authenticatorMock);
-        $target = new class () extends AbstractProtectedRoutable
+        $sut = new RestrictedAccessRequestProcessorResolver($authenticatorMock);
+        $target = new class () extends AbstractRestrictedAccessRequestProcessor
         {
             public function process(): string
             {
@@ -85,7 +85,7 @@ final class ProtectedRoutableResolverTest extends TestCase
         $this->assertInstanceOf($target::class, $result);
     }
 
-    #[TestDox("Shall return the target routable when it is NOT an instance of AbstractProtectedRoutable")]
+    #[TestDox("Shall return the target routable when it is NOT an instance of AbstractRestrictedAccessRequestProcessor")]
     public function testd()
     {
         /**
@@ -93,7 +93,7 @@ final class ProtectedRoutableResolverTest extends TestCase
          */
         $authenticatorMock = $this->createStub(AuthenticatorInterface::class);
         $authenticatorMock->method("isAuthenticated")->willReturn(false);
-        $sut = new ProtectedRoutableResolver($authenticatorMock);
+        $sut = new RestrictedAccessRequestProcessorResolver($authenticatorMock);
         $target = new class () implements RequestProcessorInterface
         {
             public function process(): string
