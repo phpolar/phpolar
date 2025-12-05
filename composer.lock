@@ -638,16 +638,16 @@
         },
         {
             "name": "phpolar/representations",
-            "version": "1.0.5",
+            "version": "1.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpolar/representations.git",
-                "reference": "7d486347589dd1681ab7f3a4e6c2438550e5808d"
+                "reference": "37275c73bf8de408aa4b57aaf2c8e45970de6e92"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpolar/representations/zipball/7d486347589dd1681ab7f3a4e6c2438550e5808d",
-                "reference": "7d486347589dd1681ab7f3a4e6c2438550e5808d",
+                "url": "https://api.github.com/repos/phpolar/representations/zipball/37275c73bf8de408aa4b57aaf2c8e45970de6e92",
+                "reference": "37275c73bf8de408aa4b57aaf2c8e45970de6e92",
                 "shasum": ""
             },
             "require": {
@@ -679,22 +679,22 @@
             "description": "A set of HTTP representations",
             "support": {
                 "issues": "https://github.com/phpolar/representations/issues",
-                "source": "https://github.com/phpolar/representations/tree/1.0.5"
+                "source": "https://github.com/phpolar/representations/tree/1.0.6"
             },
-            "time": "2025-12-05T00:01:25+00:00"
+            "time": "2025-12-05T00:34:38+00:00"
         },
         {
             "name": "phpolar/serializers",
-            "version": "1.0.7",
+            "version": "1.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpolar/serializers.git",
-                "reference": "63687b2f5c02abe387dc02517791d6eb27435ccf"
+                "reference": "3f1987aa671cc710e0ac214c3776a3964ac89870"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpolar/serializers/zipball/63687b2f5c02abe387dc02517791d6eb27435ccf",
-                "reference": "63687b2f5c02abe387dc02517791d6eb27435ccf",
+                "url": "https://api.github.com/repos/phpolar/serializers/zipball/3f1987aa671cc710e0ac214c3776a3964ac89870",
+                "reference": "3f1987aa671cc710e0ac214c3776a3964ac89870",
                 "shasum": ""
             },
             "require": {
@@ -725,9 +725,9 @@
             "description": "A set of serializers",
             "support": {
                 "issues": "https://github.com/phpolar/serializers/issues",
-                "source": "https://github.com/phpolar/serializers/tree/1.0.7"
+                "source": "https://github.com/phpolar/serializers/tree/1.0.8"
             },
-            "time": "2025-12-05T00:01:56+00:00"
+            "time": "2025-12-05T00:35:21+00:00"
         },
         {
             "name": "phpolar/storage-driver",
@@ -2438,16 +2438,16 @@
         },
         {
             "name": "phpolar/csrf-protection",
-            "version": "3.2.1",
+            "version": "3.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpolar/csrf-protection.git",
-                "reference": "3921f6529264f3667d44385391f3f296e24c7449"
+                "reference": "3abc3001b6842e636bff9f3d0bc9fb86c74e2063"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpolar/csrf-protection/zipball/3921f6529264f3667d44385391f3f296e24c7449",
-                "reference": "3921f6529264f3667d44385391f3f296e24c7449",
+                "url": "https://api.github.com/repos/phpolar/csrf-protection/zipball/3abc3001b6842e636bff9f3d0bc9fb86c74e2063",
+                "reference": "3abc3001b6842e636bff9f3d0bc9fb86c74e2063",
                 "shasum": ""
             },
             "require": {
@@ -2509,9 +2509,9 @@
             ],
             "support": {
                 "issues": "https://github.com/phpolar/csrf-protection/issues",
-                "source": "https://github.com/phpolar/csrf-protection/tree/3.2.1"
+                "source": "https://github.com/phpolar/csrf-protection/tree/3.2.2"
             },
-            "time": "2025-12-04T23:55:22+00:00"
+            "time": "2025-12-05T00:21:59+00:00"
         },
         {
             "name": "phpolar/http-message-test-utils",
@@ -2556,16 +2556,16 @@
         },
         {
             "name": "phpolar/model",
-            "version": "2.1.1",
+            "version": "2.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpolar/model.git",
-                "reference": "5e5a3a81269045a00eb705c397611bc4298364f8"
+                "reference": "7d5f4406593b907cf67e907eb6fe0f3ba9c8ad30"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpolar/model/zipball/5e5a3a81269045a00eb705c397611bc4298364f8",
-                "reference": "5e5a3a81269045a00eb705c397611bc4298364f8",
+                "url": "https://api.github.com/repos/phpolar/model/zipball/7d5f4406593b907cf67e907eb6fe0f3ba9c8ad30",
+                "reference": "7d5f4406593b907cf67e907eb6fe0f3ba9c8ad30",
                 "shasum": ""
             },
             "require": {
@@ -2600,9 +2600,9 @@
             "description": "Provides support for configuring the properties of an object for validation, formatting, and storage.",
             "support": {
                 "issues": "https://github.com/phpolar/model/issues",
-                "source": "https://github.com/phpolar/model/tree/2.1.1"
+                "source": "https://github.com/phpolar/model/tree/2.1.2"
             },
-            "time": "2025-12-04T23:59:37+00:00"
+            "time": "2025-12-05T00:21:41+00:00"
         },
         {
             "name": "phpolar/pure-php",
