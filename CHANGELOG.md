@@ -2,6 +2,8 @@
 
 This file documents changes to the PHPolar project
 
+## 8.2.4 (2025-12-04)
+
 ## 8.2.3 (2025-12-04)
 
 ## 8.2.2 (2025-12-04)
