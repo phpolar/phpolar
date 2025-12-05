@@ -2,6 +2,10 @@
 
 This file documents changes to the PHPolar project
 
+## 8.2.2 (2025-12-04)
+
+## 8.2.2 (2025-11-24)
+
 ## 8.2.1 (2025-11-17)
 
 ### Refactor
