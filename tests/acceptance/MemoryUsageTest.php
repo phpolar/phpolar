@@ -55,7 +55,6 @@ use Psr\Http\Message\ResponseInterface;
 use const Phpolar\CsrfProtection\REQUEST_ID_KEY;
 use const Phpolar\Phpolar\Tests\PROJECT_MEMORY_USAGE_THRESHOLD;
 
-
 #[TestDox("Low Memory Usage")]
 #[CoversNothing]
 final class MemoryUsageTest extends TestCase

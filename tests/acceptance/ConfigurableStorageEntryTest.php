@@ -28,21 +28,21 @@ final class ConfigurableStorageEntryTest extends TestCase
     #[TestDox("Shall configure column names")]
     public function criterion1()
     {
-        $model1 = new class()
+        $model1 = new class ()
         {
             use ColumnNameTrait;
 
             #[Column("test")]
             public string $someProp;
         };
-        $model2 = new class()
+        $model2 = new class ()
         {
             use ColumnNameTrait;
 
             #[Column]
             public string $someProp;
         };
-        $model3 = new class()
+        $model3 = new class ()
         {
             use ColumnNameTrait;
 
@@ -67,7 +67,7 @@ final class ConfigurableStorageEntryTest extends TestCase
     #[TestDox("Shall detect data types")]
     public function criterion2()
     {
-        $model = new class()
+        $model = new class ()
         {
             use DataTypeDetectionTrait;
 
@@ -76,11 +76,11 @@ final class ConfigurableStorageEntryTest extends TestCase
         $expectedColumnDataTypeString = <<<SQL
         VARCHAR
         SQL;
-        $storageDriverStub = new class() implements StorageDriverInterface
+        $storageDriverStub = new class () implements StorageDriverInterface
         {
             public function getDataType(TypeName $typeName): Stringable
             {
-                return new class() implements Stringable
+                return new class () implements Stringable
                 {
                     public function __toString(): string
                     {
@@ -97,7 +97,7 @@ final class ConfigurableStorageEntryTest extends TestCase
     #[TestDox("Shall allow configuration of size")]
     public function criterion3()
     {
-        $entity = new class()
+        $entity = new class ()
         {
             use SizeConfigurationTrait;
 
