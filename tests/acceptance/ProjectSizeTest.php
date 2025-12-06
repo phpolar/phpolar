@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Phpolar\Phpolar;
 
+use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
@@ -11,6 +12,7 @@ use PHPUnit\Framework\TestCase;
 use const Phpolar\Phpolar\Tests\PROJECT_SIZE_THRESHOLD;
 
 #[TestDox("Small Project Size")]
+#[CoversNothing]
 final class ProjectSizeTest extends TestCase
 {
     #[Test]

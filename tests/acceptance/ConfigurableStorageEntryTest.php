@@ -12,6 +12,7 @@ use Phpolar\Model\DataTypeDetectionTrait;
 use Phpolar\Model\SizeConfigurationTrait;
 use Phpolar\StorageDriver\StorageDriverInterface;
 use Phpolar\StorageDriver\TypeName;
+use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
@@ -20,6 +21,7 @@ use Stringable;
 use const Phpolar\Phpolar\Tests\ENTITY_NAME_TEST_CASE;
 
 #[TestDox("Configurable, Storable Object (Model)")]
+#[CoversNothing]
 final class ConfigurableStorageEntryTest extends TestCase
 {
     #[Test]
