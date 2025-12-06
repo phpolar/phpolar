@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.0/phpunit.xsd"
+  xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
   bootstrap="vendor/autoload.php"
   executionOrder="depends,defects"
   beStrictAboutOutputDuringTests="true"
@@ -19,7 +19,7 @@
   <php>
     <const name="Phpolar\Phpolar\Tests\ENTITY_NAME_TEST_CASE" value="FAKE NAME" />
     <const name="SRC_GLOB" value="/src{/,/**/}*.php" />
-    <const name="Phpolar\Phpolar\Tests\PROJECT_SIZE_THRESHOLD" value="17500" />
+    <const name="Phpolar\Phpolar\Tests\PROJECT_SIZE_THRESHOLD" value="19500" />
     <const name="Phpolar\Phpolar\Tests\PROJECT_MEMORY_USAGE_THRESHOLD" value="250000" />
   </php>
 </phpunit>

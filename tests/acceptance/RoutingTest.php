@@ -14,6 +14,7 @@ use Phpolar\HttpRequestProcessor\RequestProcessorInterface;
 use Phpolar\HttpRequestProcessor\RequestProcessorResolverInterface;
 use Phpolar\ModelResolver\ModelResolverInterface;
 use Phpolar\PropertyInjectorContract\PropertyInjectorInterface;
+use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
@@ -26,6 +27,7 @@ use Psr\Http\Message\UriInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
 #[TestDox("HTTP Request Routing")]
+#[CoversNothing]
 final class RoutingTest extends TestCase
 {
     protected function getResponseFactory(): ResponseFactoryInterface

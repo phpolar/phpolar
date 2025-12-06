@@ -7,11 +7,13 @@ namespace Phpolar\Phpolar;
 use Phpolar\PurePhp\FileRenderingStrategy;
 use Phpolar\PurePhp\HtmlSafeContext;
 use Phpolar\PurePhp\TemplateEngine;
+use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 
 #[TestDox("Automatic HTML Encoding")]
+#[CoversNothing]
 final class AutomaticHtmlEncodingTest extends TestCase
 {
     #[Test]
