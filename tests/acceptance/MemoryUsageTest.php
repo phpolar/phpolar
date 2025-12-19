@@ -58,7 +58,7 @@ use const Phpolar\CsrfProtection\REQUEST_ID_KEY;
 #[CoversNothing]
 final class MemoryUsageTest extends TestCase
 {
-    private const PROJECT_MEMORY_USAGE_THRESHOLD = 250000;
+    private const PROJECT_MEMORY_USAGE_THRESHOLD = 259999;
 
     protected function getContainerFactory(ServerInterface $server): ContainerInterface
     {

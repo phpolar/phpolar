@@ -90,7 +90,7 @@ class Person extends AbstractModel
 
 |      Module    |Source Code Size * |Memory Usage|  Required |
 |----------------|-------------------|------------|-----------|
-|     phpolar    |       19 kB       |   250 kB   |      x    |
+|     phpolar    |       20 kB       |   260 kB   |      x    |
 |  phplar/model  |       19 kB       |   108 kB   |           |
 |     **TOTAL**  |     **38 kB**     | **358 kB** |           |
 
