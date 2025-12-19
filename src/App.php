@@ -6,12 +6,13 @@ namespace Phpolar\Phpolar;
 
 use Closure;
 use Phpolar\Phpolar\DependencyInjection\DiTokens;
+use Phpolar\Phpolar\Http\EmptyResponse;
 use Phpolar\Phpolar\Http\MiddlewareQueueRequestHandler;
 use Phpolar\Phpolar\Http\RoutingMiddleware;
-use Phpolar\Phpolar\Http\ServerErrorMiddleware;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 use Throwable;
 
 /**
@@ -148,17 +149,40 @@ final class App
 
     /**
      * Configures global exception/throwable handling.
-     *
-     * @param Closure(Throwable $e): void $exceptionHandler
      */
     public function useExceptionHandler(
-        Closure $exceptionHandler
+        ExceptionHandlerInterface $exceptionHandler
     ): App {
-        /**
-         * @var \Psr\Http\Server\RequestHandlerInterface
-         */
-        $serverErrorHandler = $this->container->get(DiTokens::SERVER_ERROR_HANDLER);
-        $this->queueMiddleware(new ServerErrorMiddleware($exceptionHandler, $serverErrorHandler));
+        set_exception_handler(
+            Closure::bind(
+                function (Throwable $e) use ($exceptionHandler): void {
+                    /**
+                     * The provided exception handler may emit a response
+                     * and end execution.
+                     */
+                    $response = $exceptionHandler->handle($e);
+
+                    $serverErrorHandler = $this->container->get(DiTokens::SERVER_ERROR_HANDLER);
+                    $request = $this->container->get(ServerRequestInterface::class);
+
+                    if ($serverErrorHandler instanceof RequestHandlerInterface === false) {
+                        return;
+                    }
+
+                    if ($request instanceof ServerRequestInterface === false) {
+                        return;
+                    }
+
+                    $this->emitter->emit(
+                        match (true) {
+                            $response instanceof EmptyResponse => $serverErrorHandler->handle($request),
+                            default => $response
+                        }
+                    );
+                },
+                $this
+            ),
+        );
         return $this;
     }
 
