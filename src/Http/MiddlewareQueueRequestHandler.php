@@ -50,18 +50,14 @@ final class MiddlewareQueueRequestHandler implements RequestHandlerInterface
         if ($nextMiddleware instanceof ServerErrorMiddleware) {
             $this->serverErrorMiddleware = $nextMiddleware;
         }
-        if ($this->serverErrorMiddleware !== null && $this->serverErrorMiddleware->hasError() === true) {
+        try {
+            return $nextMiddleware->process($request, $this);
+        } catch (\Throwable) {
+            if ($this->serverErrorMiddleware === null) {
+                return $this->fallbackHandler->handle($request);
+            }
             return $this->serverErrorMiddleware->process($request, $this);
         }
-        return $nextMiddleware->process($request, $this);
-    }
-
-    public function hasError(): bool
-    {
-        if ($this->serverErrorMiddleware === null) {
-            return false;
-        }
-        return $this->serverErrorMiddleware->hasError();
     }
 
     /**
