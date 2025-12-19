@@ -27,7 +27,11 @@ final class MiddlewareQueueRequestHandler implements RequestHandlerInterface
      */
     private array $middlewareQueue = [];
 
-    public function __construct(private RequestHandlerInterface $fallbackHandler) {}
+
+    public function __construct(
+        private RequestHandlerInterface $fallbackHandler,
+        private ?ServerErrorMiddleware $serverErrorMiddleware = null,
+    ) {}
 
     /**
      * Gets the next middleware from the processing queue.
@@ -43,7 +47,21 @@ final class MiddlewareQueueRequestHandler implements RequestHandlerInterface
         if ($nextMiddleware === null) {
             return $this->fallbackHandler->handle($request);
         }
+        if ($nextMiddleware instanceof ServerErrorMiddleware) {
+            $this->serverErrorMiddleware = $nextMiddleware;
+        }
+        if ($this->serverErrorMiddleware !== null && $this->serverErrorMiddleware->hasError() === true) {
+            return $this->serverErrorMiddleware->process($request, $this);
+        }
         return $nextMiddleware->process($request, $this);
+    }
+
+    public function hasError(): bool
+    {
+        if ($this->serverErrorMiddleware === null) {
+            return false;
+        }
+        return $this->serverErrorMiddleware->hasError();
     }
 
     /**

@@ -88,6 +88,30 @@ return [
             // intentionally empty
         }
     },
+    DiTokens::SERVER_ERROR_HANDLER => static fn(ContainerInterface $container) => new class(
+        $container->get(DiTokens::SERVER_ERROR_RESPONSE_CONTENT),
+        $container->get(ResponseFactoryInterface::class),
+        $container->get(StreamFactoryInterface::class),
+    ) implements RequestHandlerInterface {
+        public function __construct(
+            private string $serverErrorResponseContent,
+            private ResponseFactoryInterface $responseFactory,
+            private StreamFactoryInterface $streamFactory,
+        ) {}
+
+        public function handle(ServerRequestInterface $request): ResponseInterface
+        {
+            return $this->responseFactory->createResponse(
+                (int) HttpResponseCode::InternalServerError->value,
+                HttpResponseCode::InternalServerError->getLabel()
+            )->withBody(
+                $this->streamFactory->createStream(
+                    $this->serverErrorResponseContent
+                )
+            );
+        }
+    },
+    DiTokens::SERVER_ERROR_RESPONSE_CONTENT => "An error occurred. We are investigating.",
     RequestProcessingHandler::class => static fn(ContainerInterface $container) => new RequestProcessingHandler(
         server: $container->get(ServerInterface::class),
         processorExecutor: $container->get(RequestProcessorExecutor::class),

@@ -24,7 +24,14 @@ final readonly class RoutingMiddleware implements MiddlewareInterface
     {
         $response = $this->requestHandler->handle($request);
         return $response->getStatusCode() === HttpResponseCode::NotFound->value
+            || $this->hasError($handler)
             ? $handler->handle($request)
             : $response;
+    }
+
+    private function hasError(RequestHandlerInterface $handler): bool
+    {
+        return $handler instanceof MiddlewareQueueRequestHandler
+            && $handler->hasError();
     }
 }

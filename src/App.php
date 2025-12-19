@@ -4,12 +4,15 @@ declare(strict_types=1);
 
 namespace Phpolar\Phpolar;
 
+use Closure;
 use Phpolar\Phpolar\DependencyInjection\DiTokens;
 use Phpolar\Phpolar\Http\MiddlewareQueueRequestHandler;
 use Phpolar\Phpolar\Http\RoutingMiddleware;
+use Phpolar\Phpolar\Http\ServerErrorMiddleware;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
+use Throwable;
 
 /**
  * Represents a web application that handles and responds to HTTP requests.
@@ -140,6 +143,22 @@ final class App
         $csrfPostRouting = $this->container->get(DiTokens::CSRF_RESPONSE_FILTER_MIDDLEWARE);
         $this->queueMiddleware($csrfPreRouting);
         $this->queueMiddleware($csrfPostRouting);
+        return $this;
+    }
+
+    /**
+     * Configures global exception/throwable handling.
+     *
+     * @param Closure(Throwable $e): void $exceptionHandler
+     */
+    public function useExceptionHandler(
+        Closure $exceptionHandler
+    ): App {
+        /**
+         * @var \Psr\Http\Server\RequestHandlerInterface
+         */
+        $serverErrorHandler = $this->container->get(DiTokens::SERVER_ERROR_HANDLER);
+        $this->queueMiddleware(new ServerErrorMiddleware($exceptionHandler, $serverErrorHandler));
         return $this;
     }
 

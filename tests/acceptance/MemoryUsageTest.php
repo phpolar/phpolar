@@ -53,12 +53,13 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
 use const Phpolar\CsrfProtection\REQUEST_ID_KEY;
-use const Phpolar\Phpolar\Tests\PROJECT_MEMORY_USAGE_THRESHOLD;
 
 #[TestDox("Low Memory Usage")]
 #[CoversNothing]
 final class MemoryUsageTest extends TestCase
 {
+    private const PROJECT_MEMORY_USAGE_THRESHOLD = 250000;
+
     protected function getContainerFactory(ServerInterface $server): ContainerInterface
     {
         $modelResolver = new ParsedBodyResolver($_REQUEST);
@@ -126,7 +127,7 @@ final class MemoryUsageTest extends TestCase
     }
 
     #[TestDox("Memory usage shall be below \$threshold bytes")]
-    public function test1(int|string $threshold = PROJECT_MEMORY_USAGE_THRESHOLD)
+    public function test1(int|string $threshold = self::PROJECT_MEMORY_USAGE_THRESHOLD)
     {
         $this->expectOutputString("content");
         $request = new RequestStub("GET", "/");
@@ -150,6 +151,7 @@ final class MemoryUsageTest extends TestCase
         ]);
 
         $containerFac = $this->getContainerFactory($server);
+        memory_reset_peak_usage();
         $totalUsed = -memory_get_usage();
         $app = App::create($this->configureContainer($containerFac, $config));
         $app->receive($request);
