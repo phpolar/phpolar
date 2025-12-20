@@ -9,15 +9,16 @@ use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 
-use const Phpolar\Phpolar\Tests\PROJECT_SIZE_THRESHOLD;
-
 #[TestDox("Small Project Size")]
 #[CoversNothing]
 final class ProjectSizeTest extends TestCase
 {
+    private const PROJECT_SIZE_THRESHOLD = 19999;
+    private const SRC_GLOB = "/src{/,/**/}*.php";
+
     #[Test]
     #[TestDox("Source code total size shall be below \$threshold bytes")]
-    public function shallBeBelowThreshold(int|string $threshold = PROJECT_SIZE_THRESHOLD)
+    public function shallBeBelowThreshold(int|string $threshold = self::PROJECT_SIZE_THRESHOLD)
     {
         $totalSize = mb_strlen(
             implode(
@@ -30,7 +31,7 @@ final class ProjectSizeTest extends TestCase
                     "",
                     array_map(
                         file_get_contents(...),
-                        glob(getcwd() . SRC_GLOB, GLOB_BRACE),
+                        glob(getcwd() . self::SRC_GLOB, GLOB_BRACE),
                     ),
                 ),
             )

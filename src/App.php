@@ -4,12 +4,16 @@ declare(strict_types=1);
 
 namespace Phpolar\Phpolar;
 
+use Closure;
 use Phpolar\Phpolar\DependencyInjection\DiTokens;
+use Phpolar\Phpolar\Http\EmptyResponse;
 use Phpolar\Phpolar\Http\MiddlewareQueueRequestHandler;
 use Phpolar\Phpolar\Http\RoutingMiddleware;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
+use Psr\Http\Server\RequestHandlerInterface;
+use Throwable;
 
 /**
  * Represents a web application that handles and responds to HTTP requests.
@@ -140,6 +144,45 @@ final class App
         $csrfPostRouting = $this->container->get(DiTokens::CSRF_RESPONSE_FILTER_MIDDLEWARE);
         $this->queueMiddleware($csrfPreRouting);
         $this->queueMiddleware($csrfPostRouting);
+        return $this;
+    }
+
+    /**
+     * Configures global exception/throwable handling.
+     */
+    public function useExceptionHandler(
+        ExceptionHandlerInterface $exceptionHandler
+    ): App {
+        set_exception_handler(
+            Closure::bind(
+                function (Throwable $e) use ($exceptionHandler): void {
+                    /**
+                     * The provided exception handler may emit a response
+                     * and end execution.
+                     */
+                    $response = $exceptionHandler->handle($e);
+
+                    $serverErrorHandler = $this->container->get(DiTokens::SERVER_ERROR_HANDLER);
+                    $request = $this->container->get(ServerRequestInterface::class);
+
+                    if ($serverErrorHandler instanceof RequestHandlerInterface === false) {
+                        return;
+                    }
+
+                    if ($request instanceof ServerRequestInterface === false) {
+                        return;
+                    }
+
+                    $this->emitter->emit(
+                        match (true) {
+                            $response instanceof EmptyResponse => $serverErrorHandler->handle($request),
+                            default => $response
+                        }
+                    );
+                },
+                $this
+            ),
+        );
         return $this;
     }
 
