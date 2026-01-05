@@ -2556,16 +2556,16 @@
         },
         {
             "name": "phpolar/model",
-            "version": "2.2.0",
+            "version": "2.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpolar/model.git",
-                "reference": "ad37db6d47661c3116324c8e4f651d10573e3e60"
+                "reference": "5744a0c5918c0c16f92b18a224fc77d99bf1ced8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpolar/model/zipball/ad37db6d47661c3116324c8e4f651d10573e3e60",
-                "reference": "ad37db6d47661c3116324c8e4f651d10573e3e60",
+                "url": "https://api.github.com/repos/phpolar/model/zipball/5744a0c5918c0c16f92b18a224fc77d99bf1ced8",
+                "reference": "5744a0c5918c0c16f92b18a224fc77d99bf1ced8",
                 "shasum": ""
             },
             "require": {
@@ -2600,9 +2600,9 @@
             "description": "Provides support for configuring the properties of an object for validation, formatting, and storage.",
             "support": {
                 "issues": "https://github.com/phpolar/model/issues",
-                "source": "https://github.com/phpolar/model/tree/2.2.0"
+                "source": "https://github.com/phpolar/model/tree/2.2.1"
             },
-            "time": "2026-01-04T01:03:46+00:00"
+            "time": "2026-01-04T01:54:47+00:00"
         },
         {
             "name": "phpolar/pure-php",
@@ -5845,5 +5845,5 @@
         "ext-ast": "*",
         "ext-openssl": "*"
     },
-    "plugin-api-version": "2.9.0"
+    "plugin-api-version": "2.6.0"
 }
