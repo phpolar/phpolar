@@ -39,7 +39,7 @@ jobs:
       run: composer create-project --no-ansi --no-interaction --prefer-dist --no-progress --no-audit --no-dev  phpolar/skeleton $PROJECT_FOLDER
 
     - name: Run E2E tests
-      uses: cypress-io/github-action@v6
+      uses: cypress-io/github-action@v7
       with:
         start: composer ci:start
         wait-on: 'http://127.0.0.1:3444'
