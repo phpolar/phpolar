@@ -49,7 +49,7 @@
     "require-dev": {
         "ext-ast": "*",
         "ext-openssl": "*",
-        "phan/phan": "^5.3",
+        "phan/phan": "^5.3 || ^6.0",
         "php-coveralls/php-coveralls": "^2.5",
         "phpmd/phpmd": "^2.13",
         "phpolar/csrf-protection": "^3.2",
