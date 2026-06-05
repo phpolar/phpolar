@@ -8,8 +8,12 @@
     }
   },
   "devDependencies": {
-    "@badeball/cypress-cucumber-preprocessor": "^22.0.0",
-    "@bahmutov/cypress-esbuild-preprocessor": "^2.2.4",
-    "cypress": "^14.0.0"
+    "@badeball/cypress-cucumber-preprocessor": "^24.0.1",
+    "@bahmutov/cypress-esbuild-preprocessor": "^2.2.8",
+    "cypress": "^15.16.0"
+  },
+  "overrides": {
+    "serialize-javascript": "7.0.5",
+    "undici": "6.24.0"
   }
 }

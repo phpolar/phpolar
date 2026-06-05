@@ -1,11 +1,9 @@
-import {Then} from '@badeball/cypress-cucumber-preprocessor';
-import {fakePerson} from "./shared/fake.person.mjs";
-
-const baseUrl = Cypress.env('baseUrl');
+import { Then } from '@badeball/cypress-cucumber-preprocessor';
+import { fakePerson } from "./shared/fake.person.mjs";
 
 Then('I should see the person in the people list', function () {
-  cy.visit(baseUrl).then(() => {
-    cy.title().should('eq',"MyApp People List");
+  cy.visit('/').then(() => {
+    cy.title().should('eq', "MyApp People List");
     cy.contains(fakePerson.firstName)
       .parent('tr')
       .within(() => {

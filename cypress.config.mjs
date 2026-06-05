@@ -24,9 +24,6 @@ export default defineConfig({
   e2e: {
     screenshotsFolder: '.cypress/screenshots',
     videosFolder: '.cypress/videos',
-    env: {
-      baseUrl,
-    },
     baseUrl,
     specPattern: 'tests/e2e/**/*.feature',
     supportFile: 'tests/e2e/support.js',

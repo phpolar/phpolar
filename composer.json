@@ -73,7 +73,8 @@
             "@smell"
         ],
         "ci:analyze": "composer exec \"@analyze\"",
-        "ci:start": "@php -S 0.0.0.0:3444 -t ./e2e-app/public 2>/dev/null",
+        "ci:start": "@php -S 0.0.0.0:3444 -t ./e2e-app/public 2>/dev/null || true",
+        "ci:stop": "lsof -ti:3444 | xargs kill -9 2>/dev/null || true",
         "ci:lint": "composer exec \"@lint\"",
         "ci:lint-fix": "composer exec \"@lint-fix\"",
         "ci:test-build": [
@@ -83,6 +84,14 @@
         "ci:generate-coverage-badge": [
             "@test --configuration=phpunit.ci.xml",
             "composer exec \"php-coveralls -v\""
+        ],
+        "create-e2e-app": "composer create-project --no-ansi --no-interaction --prefer-dist --no-progress --no-audit --no-dev phpolar/skeleton e2e-app",
+        "cypress": "docker run -it --rm -v cypress-npm:/root/.npm -v cypress-cache:/root/.cache -v .:/opt/app -w /opt/app --network host cypress/browsers npx cypress",
+        "cypress:run": [
+            "[ -d 'e2e-app' ] || composer create-e2e-app",
+            "curl --fail-early 0.0.0.0:3444 2>/dev/null || composer ci:start &",
+            "@cypress run",
+            "@ci:stop"
         ],
         "docs:generate": "composer exec \"docker run --rm -v \"$(pwd):/data\" \"phpdoc/phpdoc:3\" --setting graphs.enabled=true\"",
         "lint": "phpcs",
