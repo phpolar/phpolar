@@ -4,18 +4,13 @@ declare(strict_types=1);
 
 namespace Phpolar\Phpolar\Auth;
 
-use Generator;
-use Phpolar\Phpolar\Tests\Stubs\ConfigurableContainerStub;
-use Phpolar\Phpolar\Tests\Stubs\ContainerConfigurationStub;
 use PhpContrib\Authenticator\AuthenticatorInterface;
 use Phpolar\HttpRequestProcessor\RequestProcessorInterface;
 use PHPUnit\Framework\Attributes\CoversClass;
-use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\Attributes\UsesClass;
-use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
-use Psr\Container\ContainerInterface;
 use ReflectionMethod;
 
 #[CoversClass(Authorize::class)]
@@ -23,20 +18,14 @@ use ReflectionMethod;
 #[UsesClass(AbstractRestrictedAccessRequestProcessor::class)]
 final class AuthorizeTest extends TestCase
 {
-    public static function getContainerStub(): Generator
-    {
-        yield [new ConfigurableContainerStub(new ContainerConfigurationStub())];
-    }
-
     #[TestDox("Shall return the target delegate when the request is authenticated")]
-    #[DataProvider("getContainerStub")]
-    public function testa(ContainerInterface $container)
+    public function testa()
     {
         $expectedContent = "<h1>I AM THE TARGET HANDLER</h1>";
         /**
-         * @var AuthenticatorInterface&MockObject
+         * @var AuthenticatorInterface&Stub
          */
-        $authenticatorMock = $this->createMock(AuthenticatorInterface::class);
+        $authenticatorMock = $this->createStub(AuthenticatorInterface::class);
         $authenticatorMock->method("isAuthenticated")->willReturn(true);
         $authenticatorMock->method("getUser")->willReturn(["name" => "", "avatarUrl" => "", "nickname" => "", "email" => ""]);
         $hostClass = new class ($expectedContent) extends AbstractRestrictedAccessRequestProcessor
@@ -59,7 +48,7 @@ final class AuthorizeTest extends TestCase
          * @var RequestProcessorInterface
          */
         $result = $authenticateAttr->getResolvedRoutable(target: $hostClass, authenticator: $authenticatorMock);
-        $this->assertEquals($hostClass->process($container), $result->process($container));
+        $this->assertEquals($hostClass->process(), $result->process());
     }
 
     #[TestDox("Shall return false when the request is not authenticated")]
@@ -68,7 +57,7 @@ final class AuthorizeTest extends TestCase
         $expectedContent = "<h1>I AM THE FALLBACK HANDLER</h1>";
         $targetDelegateStub = $this->createStub(AbstractRestrictedAccessRequestProcessor::class);
         $targetDelegateStub->method("process")->willReturn("<h1>I AM THE TARGET HANDLER</h1>");
-        $authenticatorMock = $this->createMock(AuthenticatorInterface::class);
+        $authenticatorMock = $this->createStub(AuthenticatorInterface::class);
         $authenticatorMock->method("isAuthenticated")->willReturn(false);
         $hostClass = new class ($expectedContent) implements RequestProcessorInterface
         {
@@ -96,9 +85,9 @@ final class AuthorizeTest extends TestCase
         $authenticatedUser = ["name" => "FAKE NAME", "nickname" => "FAKE NICKNAME", "email" => "FAKE EMAIL", "avatarUrl" => "FAKE AVATAR URL"];
         $expectedContent = "<h1>I AM THE TARGET HANDLER</h1>";
         /**
-         * @var AuthenticatorInterface&MockObject
+         * @var AuthenticatorInterface&Stub
          */
-        $authenticatorMock = $this->createMock(AuthenticatorInterface::class);
+        $authenticatorMock = $this->createStub(AuthenticatorInterface::class);
         $authenticatorMock->method("isAuthenticated")->willReturn(true);
         $authenticatorMock->method("getUser")->willReturn($authenticatedUser);
         $hostClass = new class ($expectedContent) extends AbstractRestrictedAccessRequestProcessor

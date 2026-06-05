@@ -25,9 +25,9 @@ final class RequestAuthorizerTest extends TestCase
     {
         $givenRoutable = $this->createStub(RequestProcessorInterface::class);
         $decoratedRoutable = $this->createStub(AbstractRestrictedAccessRequestProcessor::class)->withUser((object)["id" => 123]);
-        $routableResolverMock = $this->createMock(RequestProcessorResolverInterface::class);
+        $routableResolverMock = $this->createStub(RequestProcessorResolverInterface::class);
         $routableResolverMock->method("resolve")->willReturn($decoratedRoutable);
-        $unauthHander = $this->createMock(RequestHandlerInterface::class);
+        $unauthHander = $this->createStub(RequestHandlerInterface::class);
         $unauthHander->method("handle")->willReturn(new ResponseStub(ResponseCode::Unauthorized->value));
         $sut = new RequestAuthorizer($routableResolverMock, $unauthHander);
         $result = $sut->authorize($givenRoutable, new RequestStub());
@@ -38,9 +38,9 @@ final class RequestAuthorizerTest extends TestCase
     public function testb()
     {
         $givenRoutable = $this->createStub(RequestProcessorInterface::class);
-        $routableResolverMock = $this->createMock(RequestProcessorResolverInterface::class);
+        $routableResolverMock = $this->createStub(RequestProcessorResolverInterface::class);
         $routableResolverMock->method("resolve")->willReturn(false);
-        $unauthHander = $this->createMock(RequestHandlerInterface::class);
+        $unauthHander = $this->createStub(RequestHandlerInterface::class);
         $unauthHander->method("handle")->willReturn(new ResponseStub(ResponseCode::Unauthorized->value));
         $sut = new RequestAuthorizer($routableResolverMock, $unauthHander);
         $result = $sut->authorize($givenRoutable, new RequestStub());
