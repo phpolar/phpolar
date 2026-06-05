@@ -1,10 +1,8 @@
-import {Before, Step, When} from '@badeball/cypress-cucumber-preprocessor';
-import {fakePerson} from "./fake.person.mjs";
-
-const baseUrl = Cypress.env('baseUrl');
+import { Before, Step, When } from '@badeball/cypress-cucumber-preprocessor';
+import { fakePerson } from "./fake.person.mjs";
 
 When('I add a person', function () {
-  cy.visit(baseUrl);
+  cy.visit('/');
   const addPersonLink = cy.get('a[href="/person/form"]');
   addPersonLink.click().then(() => {
     cy.title().should('eq', 'MyApp Person Form');
@@ -22,6 +20,6 @@ When('I add a person', function () {
   });
 });
 
-Before( { tags: '@addPerson'}, function () {
+Before({ tags: '@addPerson' }, function () {
   Step(this, 'I add a person');
 });
