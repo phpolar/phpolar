@@ -28,7 +28,7 @@ final class AuthorizeTest extends TestCase
         $authenticatorMock = $this->createStub(AuthenticatorInterface::class);
         $authenticatorMock->method("isAuthenticated")->willReturn(true);
         $authenticatorMock->method("getUser")->willReturn(["name" => "", "avatarUrl" => "", "nickname" => "", "email" => ""]);
-        $hostClass = new class($expectedContent) extends AbstractRestrictedAccessRequestProcessor
+        $hostClass = new class ($expectedContent) extends AbstractRestrictedAccessRequestProcessor
         {
             public function __construct(public string $content) {}
 
@@ -59,7 +59,7 @@ final class AuthorizeTest extends TestCase
         $targetDelegateStub->method("process")->willReturn("<h1>I AM THE TARGET HANDLER</h1>");
         $authenticatorMock = $this->createStub(AuthenticatorInterface::class);
         $authenticatorMock->method("isAuthenticated")->willReturn(false);
-        $hostClass = new class($expectedContent) implements RequestProcessorInterface
+        $hostClass = new class ($expectedContent) implements RequestProcessorInterface
         {
             public function __construct(public string $content) {}
 
@@ -90,7 +90,7 @@ final class AuthorizeTest extends TestCase
         $authenticatorMock = $this->createStub(AuthenticatorInterface::class);
         $authenticatorMock->method("isAuthenticated")->willReturn(true);
         $authenticatorMock->method("getUser")->willReturn($authenticatedUser);
-        $hostClass = new class($expectedContent) extends AbstractRestrictedAccessRequestProcessor
+        $hostClass = new class ($expectedContent) extends AbstractRestrictedAccessRequestProcessor
         {
             public function __construct(public string $content) {}
 
