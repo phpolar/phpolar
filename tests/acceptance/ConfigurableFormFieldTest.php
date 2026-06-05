@@ -15,12 +15,14 @@ use Phpolar\Model\FormControlTypeDetectionTrait;
 use Phpolar\Model\FormInputTypeDetectionTrait;
 use Phpolar\Model\Hidden;
 use Phpolar\Model\Label;
+use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\Attributes\TestWith;
 use PHPUnit\Framework\TestCase;
 
 #[TestDox("Configurable Form Object (Model)")]
+#[CoversNothing]
 final class ConfigurableFormFieldTest extends TestCase
 {
     #[Test]
