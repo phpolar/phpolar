@@ -57,7 +57,7 @@
         "phpolar/model": "^1.2.4 || ^2.0.0",
         "phpolar/pure-php": "^2.0 || ^3.0",
         "phpstan/phpstan": "^2.0.3",
-        "phpunit/phpunit": "^10 || ^11.4 || ^12",
+        "phpunit/phpunit": "^13.0.5",
         "picocss/pico": "^v2.1.1",
         "squizlabs/php_codesniffer": "^3.7 || ^4.0"
     },
