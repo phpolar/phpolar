@@ -95,5 +95,3 @@ class Person extends AbstractModel
 |     **TOTAL**  |     **38 kB**     | **358 kB** |           |
 
 * Note: Does not include comments.
-
-[def]: https://packagist.org/packages/phpolar/phpolar
