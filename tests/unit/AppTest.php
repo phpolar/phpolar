@@ -7,6 +7,7 @@ namespace Phpolar\Phpolar;
 use ArrayAccess;
 use Closure;
 use DateTimeImmutable;
+use Laminas\HttpHandlerRunner\Emitter\EmitterInterface;
 use Laminas\HttpHandlerRunner\Emitter\SapiEmitter;
 use PhpCommonEnums\HttpMethod\Enumeration\HttpMethodEnum;
 use PhpCommonEnums\HttpResponseCode\Enumeration\HttpResponseCodeEnum;
@@ -27,6 +28,7 @@ use Phpolar\Phpolar\Auth\AbstractRestrictedAccessRequestProcessor;
 use Phpolar\Phpolar\Auth\RestrictedAccessRequestProcessorResolver;
 use Phpolar\Phpolar\DependencyInjection\ContainerLoader;
 use Phpolar\Phpolar\DependencyInjection\DiTokens;
+use Phpolar\Phpolar\Http\EmptyResponse;
 use Phpolar\Phpolar\Http\RequestAuthorizer;
 use Phpolar\Phpolar\Http\RoutingMiddleware;
 use Phpolar\Phpolar\Tests\Stubs\ConfigurableContainerStub;
@@ -44,6 +46,7 @@ use Phpolar\PropertyInjectorContract\PropertyInjectorInterface;
 use Phpolar\PurePhp\TemplateEngine;
 use Phpolar\PurePhp\TemplatingStrategyInterface;
 use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\Attributes\UsesClass;
@@ -56,6 +59,8 @@ use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Message\UriInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use RuntimeException;
+use Throwable;
 
 #[RunTestsInSeparateProcesses]
 #[CoversClass(App::class)]
@@ -77,6 +82,19 @@ final class AppTest extends TestCase
     const HEADER_KEY = "Content-Range";
     const HEADER_VALUE = "bytes 21010-47021/47022";
     const ERROR_HANDLER_404 = "ERROR_HANDLER_404";
+
+    /**
+     * @return array<string,array{bool,bool,bool}>
+     */
+    public static function exceptionHandlerCases(): array
+    {
+        return [
+            "server error handler is unavailable" => [false, true, false],
+            "request is unavailable" => [true, false, false],
+            "empty response is replaced" => [true, true, true],
+            "response is emitted directly" => [true, true, false],
+        ];
+    }
 
     protected function getContainerFactory(
         ArrayAccess $config,
@@ -328,5 +346,57 @@ final class AppTest extends TestCase
         $sut->use($givenMiddleware);
         $sut->receive(new RequestStub());
         $this->assertSame(HttpResponseCodeEnum::ImATeapot->value, http_response_code());
+    }
+
+    #[DataProvider("exceptionHandlerCases")]
+    #[TestDox("Shall handle configured exception response paths")]
+    public function test9(
+        bool $hasServerErrorHandler,
+        bool $hasRequest,
+        bool $returnsEmptyResponse,
+    ): void {
+        $expectedResponse = new ResponseStub(self::RESPONSE_STATUS);
+        $serverErrorHandler = $this->createMock(RequestHandlerInterface::class);
+        $request = $this->createStub(ServerRequestInterface::class);
+        $exception = new RuntimeException();
+        $exceptionHandler = $this->createMock(ExceptionHandlerInterface::class);
+        $exceptionHandler
+            ->expects($this->once())
+            ->method("handle")
+            ->with($exception)
+            ->willReturn($returnsEmptyResponse ? new EmptyResponse() : $expectedResponse);
+
+        $serverErrorHandler
+            ->expects(
+                $this->exactly($hasServerErrorHandler && $hasRequest && $returnsEmptyResponse ? 1 : 0)
+            )
+            ->method("handle")
+            ->with($request)
+            ->willReturn($expectedResponse);
+
+        $emitter = $this->createMock(EmitterInterface::class);
+        $emitter
+            ->expects($this->exactly($hasServerErrorHandler && $hasRequest ? 1 : 0))
+            ->method("emit")
+            ->with($expectedResponse)
+            ->willReturn(true);
+
+        $handler = static fn(ArrayAccess $config) => new MiddlewareQueueRequestHandler($config[self::ERROR_HANDLER_404]);
+        $config = new ContainerConfigurationStub();
+        $config[RoutingMiddleware::class] = $this->createStub(MiddlewareInterface::class);
+        $config[DiTokens::SERVER_ERROR_HANDLER] = $hasServerErrorHandler ? $serverErrorHandler : new \stdClass();
+        $config[ServerRequestInterface::class] = $hasRequest ? $request : new \stdClass();
+        $container = $this->getContainerFactory($config, $handler);
+        $config[DiTokens::RESPONSE_EMITTER] = $emitter;
+
+        chdir(__DIR__);
+        $sut = App::create($this->configureContainer($container, $config));
+        $this->assertSame($sut, $sut->useExceptionHandler($exceptionHandler));
+
+        $registeredHandler = set_exception_handler(static function (Throwable $error): void {
+        });
+        restore_exception_handler();
+        $this->assertInstanceOf(Closure::class, $registeredHandler);
+        $registeredHandler($exception);
     }
 }
