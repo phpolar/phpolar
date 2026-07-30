@@ -38,7 +38,7 @@ final readonly class RestrictedAccessRequestProcessorResolver implements Request
         }
 
         return $this->resolveRoutable(
-            authenticateAttrs: $authenticateAttrs,
+            authenticateAttr: $authenticateAttrs[0],
             target: $target,
         );
     }
@@ -53,17 +53,17 @@ final readonly class RestrictedAccessRequestProcessorResolver implements Request
     }
 
     /**
-     * @param ReflectionAttribute<Authorize>[] $authenticateAttrs
+     * @param ReflectionAttribute<Authorize> $authenticateAttr
      */
     private function resolveRoutable(
-        array $authenticateAttrs,
+        ReflectionAttribute $authenticateAttr,
         AbstractRestrictedAccessRequestProcessor $target,
     ): RequestProcessorInterface | false {
         /**
          * @var Authorize
          */
-        $authenticateAttr = $authenticateAttrs[0]->newInstance();
-        return $authenticateAttr->getResolvedRoutable(
+        $authorizeInstance = $authenticateAttr->newInstance();
+        return $authorizeInstance->getResolvedRoutable(
             target: $target,
             authenticator: $this->authenticator,
         );
