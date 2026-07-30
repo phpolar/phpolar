@@ -22,7 +22,7 @@ use PHPUnit\Framework\TestCase;
 #[UsesClass(User::class)]
 final class RestrictedAccessRequestProcessorResolverTest extends TestCase
 {
-    #[TestDox("Shall return the false when the authenticator returns null")]
+    #[TestDox("Shall return false when a single Authorize attribute is present and the authenticator returns null")]
     public function testa()
     {
         /**
@@ -43,7 +43,7 @@ final class RestrictedAccessRequestProcessorResolverTest extends TestCase
         $this->assertFalse($result);
     }
 
-    #[TestDox("Shall return the target routable when the authenticator returns an object")]
+    #[TestDox("Shall return the target routable when a single Authorize attribute resolves an authenticated user")]
     public function testb()
     {
         /**
